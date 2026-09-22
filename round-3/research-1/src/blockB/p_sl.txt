@@ -1,0 +1,28 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2408.17003
+Type: HTML
+Pattern: safety layers|middle layers (9 matches in 8092 chars)
+
+--- Content ---
+
+530:...vanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2408.17003** (cs) 
+
+[Submitted on 30 Aug 2024 ([v1](https://arxiv.org/abs/2408.17003v1)), last revised 7 Apr 2025 (this version, v5)]
+
+# Title:Safety Layers in Aligned Large Language Models: The Key to LLM Security
+
+Authors:[Shen Li](https://arxiv.org/search/cs?searchtype=author&query=Li,+S), [Liuyi Yao](https://arxiv.org/search/cs?searchtype=author&query=Yao,+L), [Lan Zhang](https://arxiv.org/search/cs?searchtype=author&query=Zhang,+L), [Yaliang Li](https://arxiv.org/search/cs?searchtype=author&query=Li,+Y)
+
+View a PDF of the paper titled Safety Layers in Aligned Large Language Models: The Key to LLM Security, by Shen Li and 3 other authors
+
+[View PDF](/pdf/2408.17003) [HTML (experimental)](https://arxiv.org/html/2408.17003v5)
+
+> Abstract:Aligned LLMs are secure, capable of recognizing and refusin...
+--
+1707:... our work uncovers the mechanism behind security in aligned LLMs at the parameter level, identifying a small set of contiguous layers in the middle of the model that are crucial for distinguishing malicious queries from normal ones, referred to as ``safety layers". We first confirm the existence of these safety layers by analyzing variations in input vectors within the model's internal layers. Additionally, we leverage the over-rejection phenomenon and parameters scaling analysis to precisely locate the safety layers. Building on these findings, we propose a nove...
+--
+[5 more matches not shown]

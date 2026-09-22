@@ -1,0 +1,40 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2607.02714
+Type: HTML
+Length: 7912 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2607.02714** (cs) 
+
+[Submitted on 2 Jul 2026 ([v1](https://arxiv.org/abs/2607.02714v1)), last revised 7 Jul 2026 (this version, v2)]
+
+# Title:Not All Refusals Are Equal: How Safety Alignment Fails Cybersecurity at Scale
+
+Authors:[Vadym Hadetskyi](https://arxiv.org/search/cs?searchtype=author&query=Hadetskyi,+V), [Dario Pasquini](https://arxiv.org/search/cs?searchtype=author&query=Pasquini,+D), [Artem Sorokin](https://arxiv.org/search/cs?searchtype=author&query=Sorokin,+A)
+
+View a PDF of the paper titled Not All Refusals Are Equal: How Safety Alignment Fails Cybersecurity at Scale, by Vadym Hadetskyi and 2 other authors
+
+[View PDF](/pdf/2607.02714) [HTML (experimental)](https://arxiv.org/html/2607.02714v2)
+
+> Abstract:There is no doubt that safety alignment is an essential step in LLM training. However, conceptually it does not distinguish between various domains and the level of potential harm of a query, which creates significant complications in the fields like cyber security, where a model should not be constrained by its safety circuits to accomplish the goals of legitimate, authorized operations. In this work, we share our findings from a large scale abliteration experiment on 24 open-source LLMs and show that domain-specific abliteration is achievable with standard methodology on the example of a 1T-parameter Kimi K2. Building on recent work showing that refusal in LLMs occupies a multi-dimensional subspace within layers, we find that it is also distributed widely across layers, especially in trillion-parameter MoE architectures, and so we aim to capture the part of it that represents harmful concepts in the cybersecurity domain exclusively. We also investigate the correlation between models' features and the effect of domain-specific abliteration, identifying that the type of safety training and architecture are the most reliable predictors. Finally, we classify the models into 3 abliteration susceptibility tiers and put forward a set of conjectures as to why a particular effect from this intervention might be observed in a given model. 
+
+Comments: | 14 pages, 11 figures. Under review at NeurIPS 2026  
+---|---  
+Subjects: |  Cryptography and Security (cs.CR); Artificial Intelligence (cs.AI)  
+Cite as: | [arXiv:2607.02714](https://arxiv.org/abs/2607.02714) [cs.CR]  
+  | (or  [arXiv:2607.02714v2](https://arxiv.org/abs/2607.02714v2) [cs.CR] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2607.02714> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Vadym Hadetskyi [[view email](/show-email/4e02bd8b/2607.02714)]   
+**[[v

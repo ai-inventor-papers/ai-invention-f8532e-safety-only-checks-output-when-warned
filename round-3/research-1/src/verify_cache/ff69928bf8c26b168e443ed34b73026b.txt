@@ -1,0 +1,1365 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://aclanthology.org/2026.tacl-1.14.pdf
+Type: PDF
+Length: 75926 chars (truncated)
+
+--- Content ---
+
+Aligned Probing: Relating Toxic Behavior and Model Internals
+Andreas Waldis∗1,2, Vagrant Gautam3, Anne Lauscher4,
+Dietrich Klakow3, Iryna Gurevych1
+1Ubiquitous Knowledge Processing Lab (UKP Lab), Technical University of Darmstadt, Germany
+2Information Systems Research Lab, Lucerne University of Applied Sciences and Arts, Switzerland
+3Spoken Language Systems, Saarland University, Germany
+4Data Science Group, University of Hamburg, Germany
+www.ukp.tu-darmstadt.de
+www.hslu.ch
+Abstract
+Warning: This paper contains offensive text.
+We
+introduce
+aligned
+probing,
+a
+novel
+interpretability framework that aligns the
+behavior of language models (LMs), based on
+their outputs, and their internal representations
+(internals). Using this framework, we examine
+over 20 OLMo, Llama, and Mistral models,
+bridging behavioral and internal perspectives
+for toxicity for the first time. Our results show
+that LMs strongly encode information about
+the toxicity level of inputs and subsequent
+outputs, particularly in lower layers. Focusing
+on how unique LMs differ offers both correl-
+ative and causal evidence that they generate
+less toxic output when strongly encoding
+information about the input toxicity. We
+also highlight the heterogeneity of toxicity,
+as model behavior and internals vary across
+unique attributes such as Threat. Finally,
+four case studies analyzing detoxification,
+multi-prompt evaluations, model quantization,
+and pre-training dynamics underline the prac-
+tical impact of aligned probing with further
+concrete insights. Our findings contribute
+to a more holistic understanding of LMs,
+both within and beyond the context of toxicity.
+alignedprobing.github.io
+1
+Introduction
+Language models (LMs) may produce toxic text
+that contains hate speech, insults, or vulgar-
+ity, even when prompted with innocuous text
+(Gehman et al., 2020; de Wynter et al., 2024).
+Preventing the generation of such toxic language
+is an important part of making LMs safer to use
+(Kumar et al., 2023). Efforts in this direction in-
+clude analyzing the toxicity of model generations
+(Ousidhoum et al., 2021; Hartvigsen et al., 2022),
+∗Corresponding author: andreas.waldis@live.com.
+the effects of pre-training data (Groeneveld et al.,
+2024; Longpre et al., 2024), and model detoxifica-
+tion (Lee et al., 2024; Li et al., 2024; Yang et al.,
+2024). However, the scope of such work is limited
+as they mostly focus on the behavior (Chang and
+Bergen, 2024) of models based on their outputs,
+ignoring the model-internal perspective (Hu and
+Levy, 2023; Waldis et al., 2024b; Mosbach et al.,
+2024), and they treat toxic language as homoge-
+neous rather than diverse (Pachinger et al., 2023;
+Wen et al., 2023). Thus, we lack a methodological
+framework to answer the question:
+How do LMs encode information about
+toxicity, and what is the interplay
+between their internals and behavior?
+We address this gap by introducing aligned
+probing (Figure 1), a novel interpretability frame-
+work (§ 2) that aligns model behavior with
+internals for toxicity. First, we prompt LMs with
+inputs and assess the toxicity of their generated
+outputs. During this forward pass, we extract
+internal representations to analyze how models
+encode toxic language. Specifically, we extract
+the hidden states at each model layer and aver-
+age them for all input and output tokens. Then,
+we use linear probing (Tenney et al., 2019a;
+Belinkov, 2022) to estimate the encoded infor-
+mation about the toxicity of the input or output.
+As we train linear models (probes) with limited
+capacity and rigorously validate them (Hewitt and
+Liang, 2019; Voita and Titov, 2020), their ability
+to estimate toxicity based on internal effects effec-
+tively approximates information strength. Finally,
+we relate the behavioral and internal perspectives,
+examining their interplay.
+To account for the heterogeneity of toxic lan-
+guage, we consider six fine-grained attributes
+(§ 3) and show their varying dependence on
+271
+Transactions of the Association for Computational Linguistics, vol. 14, pp. 271–291, 2026. https://doi.org/10.1162/TACL.a.613
+Action Editor: Asli Celikyilmaz. Submission batch: 2/2025; Revision batch: 8/2025; Published 4/2026.
+c⃝2026 Association for Computational Linguistics. Distributed under a CC-BY 4.0 license.
+
+Figure 1: Overview of how aligned probing relates model behavior and their internals regarding toxicity. a) We
+study the behavior of models by evaluating the toxicity of model inputs and outputs (tI and tO) regarding six
+fine-grained toxicity attributes from the PERSPECTIVE API. b) We extract the average internal representations
+(internals) of input (hI) and output tokens (hO) at every model layer. Then, we probe how strong these internals
+encode input and output toxicity (tI and tO) using four scenarios (Input, Forward, Output, and Backward).
+c) We correlate these two perspectives to analyze the interplay of behavior and internals when it comes to toxicity.
+specific words. For example, Threats rely on
+context, while Sexually Explicit toxicity is fo-
+cused on individual words. Using aligned probing
+and the RealToxicPrompts dataset (Gehman et al.,
+2020), we evaluate 20+ popular pre-trained and
+instruction-tuned LMs, including Llama, OLMo,
+and Mistral. We also conduct 100K+ probing
+runs to assess model internals, and then systemat-
+ically analyze the interplay between behavior and
+internals.
+We first examine high-level insights across LMs
+(§ 4), and show that LMs strongly encode infor-
+mation about the toxicity of text in lower layers.
+This provides an alternative perspective to previ-
+ous findings that localize toxicity in upper layers
+(Lee et al., 2024). We also find that LMs replicate
+and amplify toxicity more than humans as they
+strongly encode input toxicity, especially when
+focused on single words like Profanities.
+Next, we analyze individual LMs in detail (§ 5)
+and find that less toxic models encode more infor-
+mation about input toxicity. We further establish
+that this is a causal relationship (§ 6), showing
+that LMs are generally less toxic when they
+know more about the toxicity of a given in-
+put. Finally, four case studies (§ 7) reveal that
+toxicity-related internal representations are sig-
+nificantly pruned by DPO detoxification, remain
+stable across prompt paraphrasing and model
+quantization, and emerge early in pre-training.
+Our work thus makes the following methodolog-
+ical and empirical contributions to toxicity and
+interpretability research:
+1. We introduce a novel framework to analyze
+the interplay between model behavior and
+internals for any textual property.
+2. We comprehensively study toxicity with 20
+contemporary LMs.
+3. We
+provide
+in-depth
+practical
+insights
+by comparing different LMs, multi-prompt
+evaluations, pre-training dynamics, detoxi-
+fication via direct preference optimization
+(DPO), and model quantization.
+To conclude, we demonstrate that LMs’ behav-
+ior and internals strongly rely on the toxicity of
+their input. Drawing on these findings, we identify
+a fundamental dilemma of using generative LMs:
+producing semantically coherent output without
+inheriting unwanted input properties like toxicity.
+2
+Aligned Probing
+We introduce aligned probing, an interpretability
+framework that explicitly aligns model behavior
+and internals to examine their interplay in the
+context of toxic language. We first evaluate the
+behavior of LMs (§ 2.1), based on the toxicity
+scores (tI and tO) of the input (I) and the cor-
+responding output (O). Next, we analyze how
+strongly LMs encode information about these tox-
+icity scores within their internal representations
+of the input (hI) and output (hO), extracted
+during generation (§ 2.2). Finally, we correlate
+the resulting information strength (s) with model
+behavior to investigate their interplay (§ 2.3).
+While this study focuses on toxic text, language
+that likely makes people leave a discussion, the
+method we present (aligned probing) general-
+izes to any textual property describing the input
+and/or output.
+272
+
+2.1
+Evaluating Model Behavior
+In toxicity research, language model behavior is
+analyzed via the toxicity of generations. Given the
+serious implications of toxic language in genera-
+tions, the standard evaluation protocol considers
+multiple outputs (Oj ∈O) for a single input (I) to
+capture the model’s worst-case behavior (Gehman
+et al., 2020; Jain et al., 2024; Gallegos et al., 2024).
+Following this approach, we generate 25 samples
+per input using a temperature of 1.0 and nucleus
+sampling with p = 0.9 (Holtzman et al., 2020).
+We then evaluate the toxicity of these generations
+using the PERSPECTIVE API,1 a widely used
+industry standard for toxicity assessment (Wen
+et al., 2023; Liang et al., 2023; Groeneveld et al.,
+2024). With these toxicity scores, we compute two
+metrics:
+Expected
+Maximum
+Toxicity
+(EMT)
+We
+compute the maximum toxicity across multiple
+generations for a given input (maxOj∈O tOj).
+Since EMT captures the model’s worst-case
+behavior, it answers: How toxic is a language
+model?
+Toxicity Correlation (TC)
+We compute the
+Pearson correlation between the toxicity scores
+of the input (tI) and the corresponding model tox-
+icity (EMT ). This metric quantifies how input
+toxicity relates to generation toxicity, to answer
+the question: Do models replicate input toxicity?
+2.2
+Evaluating Model Internals
+To evaluate how models encode information about
+toxicity, we extract the hidden states (h[l]) aver-
+aged across all input (I) and output tokens (O) at
+every model layer l. We then adopt the probing
+classifier methodology (Tenney et al., 2019a,b;
+Belinkov, 2022) to assess how these these in-
+ternals (h[l]) linearly map to the corresponding
+toxicity scores (t):
+f : h[l] −→t
+(1)
+Concretely, we first train2 a probe f (linear model)
+to predict ˆt from h[l], where the prediction follows:
+ˆt = f(h[l])
+(2)
+We then approximate the encoding strength (s) as
+the Pearson correlation between the predicted (ˆt)
+1https://perspectiveapi.com.
+2For details on training, see Appendix § A.1.
+and actual (t) toxicity scores. Since the learning
+capacity of the probe f is limited, a high corre-
+lation suggests that substantial information about
+toxicity is encoded in h[l], while a low correlation
+indicates weaker encoding.
+Using this method, we formulate four scenarios
+(Figure 1) to analyze the encoding of input and
+output toxicity (tI and tO) within the averaged
+input and output internals (h[l]
+I and h[l]
+O):
+Scenario Input
+f : h[l]
+I −→tI
+We first assess how strongly an LM encodes the
+toxicity of the input within its internals. Thus,
+we probe how strongly the input internals (h[l]
+I )
+encode information about the input toxicity score
+(tI), yielding the information strength sInp.
+Scenario Forward
+f : h[l]
+O −→tI
+Secondly, we examine how much information
+about the input’s toxicity is forwarded and re-
+tained during generation. To quantify this, we
+measure the information strength sF or by prob-
+ing whether the input toxicity score (tI) is encoded
+within the internals of the output (h[l]
+O).
+Scenario Output
+f : h[l]
+O −→tO
+The third scenario assesses how much information
+LMs encode about the toxicity of their generations.
+Thus, we measure the information strength sOut
+by probing whether the output toxicity score (tO)
+is reflected in the output internals (h[l]
+O).
+Scenario Backward
+f : h[l]
+I −→EMT
+Finally, we analyze how much information about
+output toxicity an LM encodes within its internal
+representations of the input, i.e., we measure the
+information strength sBack by probing whether
+the model’s internal representations of the input
+(h[l]
+I ) strongly encode the aggregated expected
+maximum toxicity score (EMT) of generations.
+2.3
+The Interplay of Behavior and Internals
+Since we analyze both model behavior and
+information strength within internal represen-
+tations for the same toxicity attributes, we
+can address: How are the internals of models
+related to their behavior? To quantify this in-
+terplay, we examine the relationship between
+information strength in different probing sce-
+narios (si ∈{sInp, sF or, sOut, sBack}) and
+the model’s toxicity. For instance, if we aim to
+investigate how strongly the encoding of input
+273
+
+Attribute (a)
+Example Prompt
+Avg. tI
+tI × t[a]
+C
+General Toxicity
+I would rather kill them ...
+0.19
+ρ = −0.03
+Profanity
+It’s damn easy to sculpt test ...
+0.12
+ρ = −0.04
+Insult
+Incredibly racist and stupid man ...
+0.10
+ρ = −0.03
+Sexually Explicit
+My butt muscles are so tight ...
+0.08
+ρ = 0.17
+Identity Attack
+If you are white trash ...
+0.06
+ρ = 0.19
+Threat
+If you want to kill ...
+0.04
+ρ = 0.18
+Table 1: Examples of the considered fine-grained
+toxic attributes along with the average toxicity
+scores (tI) and how these scores correlate with
+those from the subsequent continuations (tI×tC).
+toxicity within input internals (Scenario Input)
+relates to model behavior, we compute the Pearson
+correlation between the information strength val-
+ues across models (−−→
+sInp) and their corresponding
+expected maximum toxicity scores (
+−−−→
+EMT ):
+−−→
+sInp ×
+−−−→
+EMT
+(3)
+3
+Toxic Language
+Following Gehman et al. (2020), we define toxic
+text as text which makes people leave a discussion
+with high probability. As toxicity is a heteroge-
+neous phenomenon, we focus on six fine-grained
+attributes: General Toxicity, Identity Attack, In-
+sult, Profanity, Threat, and Sexually Explicit. We
+quantitatively demonstrate how these attributes
+capture distinct aspects of toxic language as
+their score distributions (§ 3.2) and sensitivity
+to specific tokens (§ 3.3) vary substantially.
+3.1
+Data
+We use the RealToxicPrompts dataset (Gehman
+et al., 2020) for our analysis and subsequent exper-
+iments. This dataset consists of text prompts (I)
+paired with corresponding continuations (C), each
+annotated with toxicity scores obtained from the
+PERSPECTIVE API. We carefully subsample
+the original 100K samples to optimize computa-
+tional efficiency while maintaining validity, i.e.,
+we iteratively reduce the dataset size as long as the
+toxicity scores for all attributes (a) do not differ
+statistically significantly (p < 0.05) from the full
+dataset. Following this procedure, our final subset
+consists of 22K samples.
+3.2
+Score Distribution
+We analyze the score distribution of unique tox-
+icity attributes (a ∈A) within our subset of the
+RealToxicPrompts dataset. Among all attributes,
+we find the highest average score for General
+Figure 2: Overview of how the toxicity scores of the
+considered attributes correlate with each other.
+Toxicity (0.19), suggesting that this attribute is
+the most sensitive to the PERSPECTIVE API
+scoring. The average score gradually decreases
+from Profanity (0.12) to Threat, which has the
+lowest average score (0.04). Additionally, toxic-
+ity scores of prompts (tI) and their continuations
+(tC) marginally correlate, with ρ = 0.02 on av-
+erage. Thus, the toxicity scores of the prompt and
+continuation seem unrelated on average, as also
+shown in Gehman et al. (2020). However, compar-
+ing unique toxicity attributes reveals that toxicity
+scores tend to be replicated within the continu-
+ation for Sexually Explicit (ρ = 0.17), Identity
+Attack (ρ = 0.19), and Threat (ρ = 0.18).
+Analyzing the relation among toxicity scores
+of unique attributes shows strong correlations
+across General Toxicity, Profanity, and Insult
+(see Figure 2). In contrast, Threat, Identity Attack,
+and Sexually Explicit weakly correlate with others.
+This shows that these scores are complementary
+and offer a distinct perspective on toxicity.
+3.3
+Word Sensitivity
+We quantify the sensitivity of different toxicity
+attributes (a ∈A) to individual words. To this
+end, we retrieve the toxicity scores of a prompt (I)
+and separately compute scores for its constituent
+words {w1, . . . , w|I|}. We then define the word
+sensitivity for a given attribute a as the difference
+between the toxicity score of the prompt (t[a]
+I ) and
+the toxicity score of its most toxic word:
+ζ[a] = max
+w∈I t[a]
+w −t[a]
+I
+(4)
+A high word sensitivity score (ζ[a]) indicates that
+attribute a is particularly dependent on individual,
+presumably explicit, words. Conversely, a low or
+274
+
+Figure 3: Comparison of the word sensitivity for the
+different toxicity attributes. A positive value suggests
+that the toxicity of an attribute stems more from a single
+words, such as Sexually Explicit. In contrast, a negative
+value hints that the toxicity arise from the context as a
+whole text has higher scores than single words, as for
+the attribute Identity Attack.
+negative ζ[a] suggests that the attribute captures
+more contextualized forms of toxic language.
+We calculate this word sensitivity for every at-
+tribute using all prompts of our dataset. Following
+Figure 3, General Toxicity, Profanity, and Sexu-
+ally Explicit are more sensitivity to single word as
+the average ζ[a] is positive. In contrast, attributes
+such as Insult, Identity Attack, and Threat have
+word sensitivity scores centered around zero or
+negative values, indicating a stronger dependence
+on the context of a text. The high variance in Gen-
+eral Toxicity suggests that it captures a broader
+spectrum of toxic language, whereas attributes like
+Sexually Explicit represent more narrowly defined
+categories. Together with our toxicity score dis-
+tribution analysis, these insights further highlight
+the heterogeneous nature of toxic language.
+4
+Toxicity of Language Models
+In this section, we apply aligned probing to
+comprehensively evaluate LMs in the context of
+toxicity. We begin by discussing the toxicity of
+LM generations (§ 4.1), after which we turn to how
+models encode and propagate information about
+toxic language internally (§ 4.2). Finally, we con-
+nect our behavioral and model-internal insights
+and study their interplay (§ 4.3).
+Setup
+We present results aggregated across six
+popular pre-trained LMs with 7B to 8B parameters
+from the OLMo, Llama, and Mistral families. See
+Table 4 in the Appendix for more details.
+Max. Tox. (EMT [a])
+Tox. Corr. (TC)
+Attribute
+Toxic
+Not Toxic
+Toxic
+Not Toxic
+Average
+0.61+0.27
+0.25−0.03
+0.27+0.30
+0.40+0.32
+General Toxicity
+0.67+0.35
+0.38−0.01
+0.30+0.35
+0.42+0.38
+Profanity
+0.63+0.36
+0.24−0.06
+0.26+0.28
+0.40+0.42
+Insult
+0.57+0.29
+0.27−0.03
+0.22+0.32
+0.40+0.41
+Sexually Explicit
+0.67+0.28
+0.20−0.04
+0.34+0.27
+0.43+0.30
+Identity Attack
+0.55+0.20
+0.18−0.02
+0.24+0.25
+0.24+0.26
+Threat
+0.54+0.13
+0.20−0.08
+0.25+0.36
+0.33+0.15
+Table 2: Toxicity measures on average and regard-
+ing the specific toxicity attributes (a) for toxic
+(tI ≥0.5) and not toxic (tI < 0.5) examples
+aggregated across the six evaluated LMs. Num-
+bers in subscript show how the toxicity of these
+LMs deviates from human behavior. Namely, the
+difference between EMT and the toxicity of the
+original continuation (tC) and between the tox-
+icity correlation and the correlation between the
+toxicity of the prompt and continuation (tI ×tC).
+4.1
+Behavioral Evaluation
+We begin by analyzing the toxicity of LMs
+based on their generated text. Overall, our results
+(Table 2) align with previous work (Gehman et al.,
+2020) as LMs generally generate text with substan-
+tial toxicity, with EMT of 0.61 for toxic and 0.25
+for not toxic prompts. Similar to Jain et al. (2024),
+we find that the input toxicity moderately cor-
+relates with the subsequent output toxicity (TC),
+demonstrating how LMs replicate input properties.
+Below, we detail our main findings:
+i)
+LMs
+replicate
+and
+amplify
+toxicity
+more
+than
+human
+language.
+We
+com-
+pare model-generated continuations (tO) with
+naturally occurring continuations from the Real-
+ToxicPrompts dataset (tC) to analyze differences
+in toxic language between LMs and human
+language. Our results show that models generate
+more toxic text than humans do, particularly for
+toxic prompts, where we observe an increase of
++0.27 in EMT. Furthermore, LM generations
+replicate input toxicity levels beyond those
+found in human language. Interestingly, this
+deviation from human language is similar for both
+toxic (+0.30) and not toxic (+0.32) prompts,
+suggesting
+that
+LMs
+exhibit
+fundamentally
+different behavior from humans, regardless of
+input toxicity.
+ii) LMs are more toxic when single words con-
+vey toxicity.
+We observe that toxicity levels
+of LMs vary across the six fine-grained toxic-
+ity attributes we consider (Table 2). LMs exhibit
+275
+
+Figure 4: Results of the four defined scenarios for aligned probing input (t[a]
+I ) and output (t[a]
+O ) toxicity, averaged
+across the six evaluated LMs and the six toxicity attributes. Error bands show the standard deviation across folds
+and seeds, and we report the maximum information for the lower, middle, and upper layers.
+particularly high toxicity and strongly replicate
+input toxicity for attributes sensitive to single
+words (high ζ in Figure 3). This effect is most
+pronounced for Sexually Explicit toxic prompts,
+which show the highest toxicity levels, with EMT
+and TC scores of 0.67 and 0.34, respectively.
+In contrast, LMs generate less toxic output and
+replicate input toxicity to a lesser extent for more
+context-dependent attributes like Threat and In-
+sult. Additionally, we find that the gap between
+LMs and human behavior is larger for toxicity
+that is more explicit (e.g., +0.36 for Profan-
+ity), compared to diffuse attributes like Threat
+(+0.13).
+Summary
+Our analysis shows that LMs not
+only replicate but also amplify the toxicity of
+input prompts, particularly for attributes highly
+sensitive to single words. This difference among
+unique types of toxicity demonstrates that LM
+behavior is as heterogeneous as these attributes
+themselves.
+4.2
+Internal Evaluation
+Now that we have analyzed LM behavior, we turn
+to how they encode toxic language internally.
+iii) Toxic language is encoded in lower lay-
+ers.
+Figure 4 illustrates how strongly (lines) and
+consistently (bands) LMs encode the toxicity of
+text based on the average and standard devia-
+tion across 20 probes covering multiple folds and
+seeds. We observe three-stages: (1) information
+emerges and peaks in the first third of model
+layers, (2) gradually declines in the middle third,
+and (3) continues decreasing in later layers while
+standard deviation increases. Notably, the stan-
+dard deviation (bands) reveals differences even
+in layers with similar information strength, such
+as layer one and layer 23, which exhibit devia-
+tions of ±0.006 and ±0.038, respectively. We
+validate these insights with alternative probing
+metrics, namely, selectivity (Hewitt and Liang,
+Figure 5: Maximum information level for lower, mid-
+dle, and upper layers regarding the difference toxicity
+attributes by probing scenarios. The error bar shows
+deviation across four folds and five seeds.
+2019) and compression (Voita and Titov, 2020)—
+see Figure 17 and Figure 16 in the Appendix. With
+these findings, we offer an alternative perspective
+on toxicity in LMs, one that differs from localizing
+it in the upper layer by projecting hidden states to
+specific output vocabulary (Lee et al., 2024). In-
+stead, our results suggest that lower model layers
+compute rich latent information while the upper
+layers then project this information to text, natu-
+rally affected by information diminishing due to
+the large discrete output space (vocabulary). Since
+the meaning attached to these tokens does not nec-
+essarily represent internal information (Shojaee
+et al., 2025; Hewitt et al., 2025; Kambhampati
+et al., 2025), supplementary evaluations focusing
+on latent encoded information are indispensable.
+iv) Information strength varies by toxicity at-
+tribute.
+We further analyze how the encoding
+of toxic language differs across specific toxicity
+attributes. As shown in Figure 5, LMs encode less
+information for contextualized attributes, such as
+Threat, while attributes with higher word sensi-
+tivity, like General Toxicity, are more strongly
+276
+
+encoded. This observation aligns with prior work
+(Warstadt et al., 2020; Waldis et al., 2024b), which
+found that LMs encode word-level properties,
+such as morphology, more strongly than con-
+textual information. Interestingly, the maximum
+information strength for contextualized attributes
+occurs in higher layers, such as layer 7 for Identity
+Attack. In contrast, attributes sensitive to single
+words, such as Sexually Explicit, peak in lower lay-
+ers, which probably capture such surface features
+(Tenney et al., 2019a; Niu et al., 2022).
+v) LMs know more about input toxicity
+and propagate this information.
+Our analysis
+(Figure 4) shows that LMs encode more informa-
+tion about input toxicity (tI) than output toxicity
+(tO). This information strength reaches up to 0.83
+in the Input scenario and 0.73 in Forward,
+while it is lower for output toxicity, with a maxi-
+mum of 0.72 in Output and 0.67 in Backward.
+These findings build on previous work (West et al.,
+2024) and suggest that LMs struggle to internalize
+the meaning of their outputs to toxicity.
+At the same time, our results show that LMs
+not only encode input toxicity strongly in input
+internals (hI) but also transfer this information
+to generation internals (hO). This is particularly
+clear when comparing the Forward and Output
+scenarios, where input toxicity (tI) is encoded al-
+most as strongly as output toxicity (tO) in the
+output internals. Additionally, the delayed rise of
+tI information in output internals supports this
+transfer: It takes six layers to exceed an informa-
+tion strength of 0.60 in the Forward scenario,
+indicating that LMs gradually pass this infor-
+mation through the attention mechanism. This
+confirms that LMs entangle their generations with
+input toxicity, emphasizing the need to understand
+better how toxicity is encoded and transferred
+within models.
+Summary
+Our insights reveal that model inter-
+nals strongly encode toxic language, especially
+input toxicity, and attribute sensitivity to single
+words. Additionally, model layers vary in in-
+formation strength, clarity, and the encoding of
+unique toxicity attributes.
+4.3
+Correlation of Internals and Behavior
+Connecting our behavioral and internal evalua-
+tions, we show that information strength is closely
+related to observable toxicity when comparing
+distinct toxicity attributes. Figure 6 demonstrates
+Figure 6: Layer-wise correlation (×) between the be-
+havior of models regarding the six toxicity attributes
+and the corresponding information levels in our four
+probing scenarios.
+that model toxicity for specific attributes (a) in-
+creases when their internals (hI, hO) encode more
+information about a. This correlation is stronger
+in the Input, Forward, and Output scenar-
+ios, reaching up to ρ = 0.81, ρ = 0.77, and
+ρ = 0.77, respectively, while it is lower for
+Backward (ρ = 0.69). These findings suggest
+that encoding input and output toxicity for a
+specific attribute (a) more strongly increases
+the model toxicity related to a.
+5
+Comparing Language Models
+After evaluating toxicity in general, we next ex-
+amine how individual models differ. In § 5.1, we
+discuss insights about how the behavior of specific
+LMs varies, with a particular focus on the effects
+of instruction tuning. We then present findings on
+how internals differ (§ 5.2) and finally analyze the
+interplay between model internals and behavior
+across distinct LMs (§5.3).
+Setup
+We evaluate pre-trained and instruction-
+tuned versions of the following popular con-
+temporary models: OLMo, OLMo-2, Llama-2,
+Llama-3, Llama-3.1, and Mistral-v0.3.3 With each
+model, we discuss results averaged across the six
+fine-grained toxicity attributes.
+5.1
+Behavioral Evaluation
+We first analyze how the behavior of unique
+models differs in the context of toxicity, with a
+focus on how instruction-tuning changes LMs.
+i) Instruction-tuning diversifies LMs.
+Com-
+paring LMs reveals only minor differences in
+toxicity among pre-trained LMs (see Table 6 of
+3See Table 4 of the Appendix for details.
+277
+
+Max. Tox. (EMT)
+Tox. Corr. (TC)
+Language Model
+Toxic
+Not Toxic
+Toxic
+Not Toxic
+Avg. Pre-Trained (PT)
+0.62+0.28
+0.25−0.03
+0.29+0.33
+0.41+0.33
+Avg. Instruction-Tuned (IT)
+0.33+0.01
+0.09−0.19
+0.11+0.15
+0.52+0.44
+Table 3: Toxicity measures averaged regarding
+the model type (pre-trained or instruction-tuned).
+The numbers in the subscript show how the toxic
+substances deviate from human language.
+the Appendix). Notably, OLMo exhibits the lowest
+toxicity, highlighting the effectiveness of carefully
+curated, detoxified pre-training data (Groeneveld
+et al., 2024). In contrast, instruction-tuned LMs
+show more behavioral variation, especially for
+toxic prompts. These differences are particularly
+pronounced for LMs presumably trained on dis-
+tinct instruction corpora, such as Llama-2-Chat
+and OLMo-Instruct. As these results underline the
+impact of pre-training and instruction-tuning data,
+only releasing these corpora would allow us to
+examine LMs and their limitations holistically.
+ii) Instruction-tuning mitigates toxicity.
+Con-
+sistent with Jain et al. (2024), instruction-tuned
+(IT) LMs exhibit lower toxicity than pre-trained
+(PT) ones, with an EMT of 0.33 for toxic
+prompts
+and
+0.09
+for
+not
+toxic
+prompts
+(see Table 3). In fact, the toxicity of IT LMs is
+more closely aligned with the toxicity of human
+language for toxic prompts (+0.01) while being
+lower (−0.19) for not toxic prompts. Analyzing
+the correlation with input toxicity (TC) reveals
+that IT models effectively suppress high input
+toxicity (0.11 for toxic prompts) while preserving
+the low toxicity of not toxic prompts (0.55).
+Since IT LMs frequently generate phrases like
+as a helpful assistant, this mitigation effect may
+partly stem from such formulations. Re-evaluating
+generations without such phrases results in a
+slight increase in toxicity (see Figure 10 in
+the Appendix). However, their toxicity remains
+lower than pre-trained LMs, demonstrating that
+instruction-tuning reduces LM toxicity without
+explicit objectives beyond exposure to presumably
+not toxic preference data. Interestingly, this adap-
+tation appears more implicit, as toxicity mitigation
+is particularly pronounced for more contextually
+nuanced attributes such as Threat.
+Summary
+These insights show that instruction-
+tuning effectively mitigates toxic language, and
+this subsequent stage, after pre-training, shapes
+behavioral differences across unique models.
+Figure 7: Comparison of how pre-trained (PT) and
+instruction-tuned (IT) models encode toxic language
+for the four scenarios. The colored area shows how
+unique LMs (like Llama, OLMo, or Mistral) deviate
+when pre-trained or instruction-tuned.
+5.2
+Internal Evaluation
+Next, we analyze how LMs encode toxic lan-
+guage differently, grouped by whether they are
+just pre-trained or also instruction-tuned.
+iii) LMs differ in how they encode toxicity in
+upper layers.
+Analyzing how LMs encode toxic
+language, we find that they exhibit similar encod-
+ing patterns in lower layers but diverge in upper
+layers (Figure 7). Notably, as this pattern holds for
+both pre-trained (PT) and instruction-tuned (IT)
+models, it contrasts with the behavioral similar-
+ities across PT models. We assume these upper
+layers encode more information about output se-
+mantics, potentially resulting in similar toxicity
+scores. Moreover, this finding aligns with our
+previous finding that regions within LMs differ
+substantially (§ 4.2).
+Focusing on individual LMs reveals further
+model-specific insights. Llama-2 encodes toxic-
+ity less strongly and with higher variability than
+Llama-3 and Llama-3.1, likely due to its smaller
+pre-training dataset (2T vs. 15T+ tokens). Mean-
+while, OLMo exhibits high information strength
+and low variance, another sign of the high quality
+of its pre-training data.
+iv) Instruction-tuned LMs encode more in-
+formation about input toxicity.
+We compare
+PT
+and IT
+LMs to assess the impact of
+instruction-tuning on model internals. As shown
+in Figure 7, instruction-tuning increases the infor-
+mation strength for input toxicity while reducing
+it for output toxicity, particularly in the For-
+ward and Backward scenarios and in upper
+layers. Interestingly, the difference between PT
+278
+
+Figure 8: Layer-wise correlation (×) of the toxicity of
+LMs and the average information strength.
+and IT LMs is stronger for toxicity attributes that
+are less sensitive to individual words, especially
+Threat and Insult. These findings suggest that
+instruction-tuning primarily affects upper layers,
+which encode broader linguistic context, rather
+than lower layers, which focus more on lexical
+features.
+Summary
+We find that individual LMs encode
+information about toxic language more differently
+from each other in upper layers, while showing
+more similarity in lower layers. This variance
+is particularly evident after instruction-tuning,
+which adapts LMs to encode more information
+about the input and less about the output toxicity.
+5.3
+Interplay of Internals and Behavior
+Finally, we correlate the average information
+strength at each layer with the resulting output
+toxicity (EMT) across different LMs. As shown
+in Figure 8, less toxic LMs tend to encode more
+information about input toxicity, particularly in
+the Forward scenario and for toxic prompts
+(ρ = −0.89). Conversely, these less-toxic LMs
+encode less information about output toxicity, es-
+pecially in the Backward scenario, where we
+observe ρ = 0.71 for toxic prompts. These find-
+ings suggest that models are generally less toxic
+when they know more about input toxicity, partic-
+ularly for attributes with higher word sensitivity,
+such as Sexually Explicit or Profanity.
+6
+Correlation or Causation?
+So far, we have seen that LMs propagate toxicity
+from their inputs to their outputs, and their inter-
+nals strongly correlate with observable toxicity.
+To establish whether this connection between the
+internal and behavioral perspectives is causal, we
+perform layer-wise interventions. Specifically, we
+measure model toxicity when skipping one layer
+Figure 9: Overview of the layer-wise intervention to
+examine how information within single layers im-
+pact subsequent toxicity. LM toxicity increases when
+skipping a layer, hinting that information about toxic
+language helps to produce less toxic text.
+at a time, approximating the impact of informa-
+tion encoded at that layer. As these experiments
+are computationally expensive, we focus on the
+pre-trained OLMo model and focus on layers 2
+to 10, which encode toxic language particularly
+strongly.
+As Figure 9 shows, removing information by
+skipping model layers generally increases the tox-
+icity of generated text. Specifically, we observe an
+average increase of +2.0 in maximum expected
+toxicity (EMT) across all intervened layers, with
+a peak of +6.2 for layer 7. Relating this to our
+internal analysis, layer 7 strongly encodes input
+toxicity in both the input and output. Comparing
+the results for different toxicity attributes, we con-
+firm that the interplay between model internals
+and behavior varies across distinct attributes. As
+shown in § 5.3, this interplay is stronger for explicit
+attributes, where we observe a more pronounced
+causal effect. Specifically, removing information
+causes up to +16.0 more toxicity for Profanity.
+In contrast, more contextualized attributes, such
+as Threat, exhibit only a minor increase.
+These findings extend previous insights and
+suggest
+information
+about
+input
+toxicity
+causally enables language models to generate
+less toxic text. At the same time, these insights
+underscore the importance of studying causal
+mechanisms of LMs (Saphra and Wiegreffe,
+2024), particularly for safety aspects (Bereska
+and Gavves, 2024), as LMs vary in how they
+process distinct toxicity attributes.
+7
+Case Studies
+Finally, we present four case studies with practi-
+cal applications of aligned probing, focusing on
+DPO-based detoxification (§ 7.1), multi-prompt
+evaluation (§ 7.2), model quantization (§ 7.3), and
+pre-training dynamics (§ 7.4).
+279
+
+7.1
+Case Study: Detoxification
+We study how model internals change under DPO
+detoxification in Figure 12 of the Appendix. Our
+results confirm this method’s effectiveness in re-
+ducing the toxicity of LMs (Li et al., 2024).
+However, we find a substantial information loss
+within the internals of these models, particularly
+in the upper layers. As we observe this informa-
+tion loss for text properties other than toxicity, like
+input length, we see that detoxification via DPO
+impacts model internals substantially. Therefore, a
+more holistic evaluation is indispensable to quan-
+tify what abilities alignment methods remove from
+models. As such, aligned models can also easily
+be unaligned (Lee et al., 2024).
+7.2
+Case Study: Multi-Prompt Evaluation
+We study how multi-prompt evaluation impacts
+the internals and behavior of models by prompt-
+ing LMs to complete a given text chunk with four
+different prompt formulations—see Figure 13 of
+the Appendix. These experiments show that the
+toxicity of LMs varies across different prompts,
+while model internals remain more stable. These
+results expand previous work about the crucial
+entanglement of model behavior and specific in-
+structions (Mizrahi et al., 2024; Sclar et al., 2024).
+Our results show that this variance is visible be-
+yond task-specific evaluation, and that, in contrast,
+model internals reveal fewer deviations.
+7.3
+Case Study: Model Quantization
+We also study whether evaluating model internals
+and behavior vary when we apply quantization
+methods to improve efficiency—see Figure 14 of
+the Appendix. We find that both behavioral and
+internal results remain valid and consistent, as we
+found only minor deviations when comparing full
+precision with half and four bit precision.
+7.4
+Case Study: Pre-Training Dynamics
+We analyze how model behavior and inter-
+nals evolve during pre-training by studying six
+pre-training checkpoints of OLMo (Groeneveld
+et al., 2024)—see Figure 12 of the Appendix.
+These results show that early in training (100K
+steps), models are close to their final toxi-
+city and information strength regarding toxic
+language. Afterward, we mainly see improve-
+ments in the clarity of the information strength,
+with lower standard deviations across folds and
+seeds after 100K steps. These observations sug-
+gest that aligned probing can effectively monitor
+pre-training dynamics.
+8
+Related Work
+Toxicity of Language Models
+Work on lan-
+guage
+model
+toxicity
+primarily
+focuses
+on
+evaluating and modifying model behavior by an-
+alyzing inputs and outputs (Gallegos et al., 2024).
+For instance, Gehman et al. (2020) examine toxi-
+city in generations given English prompts, while
+de Wynter et al. (2024) and Jain et al. (2024) ex-
+tend this to multilingual settings. Wen et al. (2023)
+go beyond overt toxicity, investigating implicit
+toxicity that is harder for automatic classifiers to
+detect. Another line of research explores the ori-
+gins of toxicity in LMs by analyzing training data.
+Gehman et al. (2020) highlight the prevalence of
+toxic content in pre-training corpora, and Longpre
+et al. (2024) show that filtering for quality and
+toxicity can paradoxically lead to toxic degenera-
+tion and poor generalization. Unlike these works,
+we comprehensively evaluate LMs by relating the
+study of their behavior and model internals, with
+different types of toxic language.
+Studying
+Model
+Internals
+Recent
+inter-
+pretability research has begun probing toxicity
+within model internals. Ousidhoum et al. (2021)
+first explored this by using masked language
+models. More recent work analyzes and mitigates
+toxicity via model merging (Yang et al., 2024),
+DPO (Lee et al., 2024; Li et al., 2024), and
+knowledge editing (Wang et al., 2024). Methods
+such as linear probing, activation analysis, and
+causal interventions have been used to study
+toxicity mitigation in both English (Lee et al.,
+2024) and multilingual models (Li et al., 2024).
+While we adopt similar methods, we contribute
+a new framework, aligned probing, to trace
+toxicity through model internals, enabling a
+deeper understanding of how input toxicity is
+entangled with subsequent model behavior.
+Probing
+Our approach builds on classifier-
+based probing, which has been widely stud-
+ied (Belinkov, 2022). Probing classifiers can
+be difficult to interpret, leading to refinements
+such as control tasks (Hewitt and Liang, 2019;
+Ravichander et al., 2021), fine-tuning probes
+(Mosbach et al., 2020), information-theoretic
+280
+
+perspectives (Voita and Titov, 2020), and be-
+havioral explanations (Elazar et al., 2021). While
+our study focuses on toxicity, probing has been
+applied to various linguistic properties, including
+negation and function words (Kim et al., 2019),
+grammatical number (Lasri et al., 2022), author
+demographics (Lauscher et al., 2022), language
+identity (Srinivasan et al., 2023), topic classi-
+fication (Waldis et al., 2024a), and linguistic
+competence (Waldis et al., 2024b).
+9
+Discussion and Conclusion
+We present aligned probing, a method to trace
+text properties from the model input to the output
+and connect these findings to subsequent behav-
+ior. By applying this method in the context of
+toxicity, we evaluate over 20 contemporary mod-
+els and demonstrate that they substantially encode
+information about toxic language, which crucially
+impacts the toxicity of model outputs. Moreover,
+our results reveal that model behavior strongly
+relies on the toxicity of the input, and model
+internals strongly encode and propagate informa-
+tion about this input toxicity. With this substantial
+dependence on the properties of the input text,
+we identify a crucial dilemma of generative mod-
+els: We expect them to generate a semantically
+relevant output given an input prompt without
+considering unwanted properties, such as toxicity.
+Pursuing this thought towards more controllable
+text generation, we plan to apply aligned probing
+to analyze other aspects of generation, like stereo-
+typical formulations, and examine the nature of
+other mitigation methods, such as model merging.
+Limitations
+Classifying Toxicity
+Detecting toxicity is a
+non-trivial task as conceptualizations, datasets,
+and annotator attitudes can vary widely (Waseem,
+2016; Waseem et al., 2017; Sap et al., 2022;
+Pachinger et al., 2023; Cercas Curry et al., 2024).
+Moreover,
+toxicity—as
+with
+most
+linguistic
+properties—is highly contextual and can be im-
+plicit, making it challenging to detect (Wen et al.,
+2023). Even though we consider fine-grained tox-
+icity attributes, our use of PERSPECTIVE API4
+and probing classifiers may miss forms of toxic-
+4An industry standard API providing high performance in
+toxicity detection, see results online.
+ity not represented in upstream datasets, or exhibit
+biases (Nogara et al., 2023; Pozzobon et al., 2023).
+Probing Classifiers
+This work relies on prob-
+ing classifiers to assess the information encoded
+within internal representations, but this comes
+with methodological constraints. First, we want
+the probe to catch relevant patterns in inter-
+nal representations of LMs, but it should not
+learn nonexistent patterns due to its learning ca-
+pabilities. To address this, we use the simplest
+possible probe (a linear model without intermedi-
+ate layers) and verify the low learning capabilities
+with control tasks (Hewitt and Liang, 2019).
+Moreover, we validate our probing setup from
+an information-theoretic perspective (Voita and
+Titov, 2020), thereby confirming our results and
+findings. Second, probing is a solely observational
+explainability method which does not offer any
+insights about causal relations. In other words, just
+because a model’s representations are predictive
+of a property does not mean that the model is
+using it (Ravichander et al., 2021; Elazar et al.,
+2021; Belinkov, 2022). We address this limitation
+by correlating probing performance with actual
+toxic behavior when presenting our results, and
+by running interventions to analyze whether corre-
+lations are causal. In future applications of aligned
+probing to other text properties, it is important to
+contextualize results with these checks as we do.
+Beyond English Toxicity
+Due to space con-
+straints, we only demonstrate aligned probing
+with English toxicity in this paper. We emphasize
+that English toxicity is intended as an exam-
+ple, and other English textual properties may be
+encoded and propagated differently from input
+to output through model internals. Additionally,
+evaluations of toxicity in non-English languages
+are also influenced by whether the data is local-
+ized to linguistically and culturally appropriate
+examples and can still be affected by English
+pre-training data (Jain et al., 2024).
+Acknowledgments
+We thank Pia Pachinger, Ilia Kuznetsov, Tim
+Baumg¨artner, and Paul R¨ottger for their valuable
+feedback and discussions. Andreas Waldis is sup-
+ported by Hasler Foundation grant no. 21024. The
+work of Anne Lauscher is funded under the Excel-
+lence Strategy of the German Federal Government
+and States.
+281
+
+References
+Viraat Aryabumi, John Dang, Dwarak Talupuru,
+Saurabh Dash, David Cairuz, Hangyu Lin,
+Bharat Venkitesh, Madeline Smith, Jon Ander
+Campos, Yi Chern Tan, Kelly Marchisio,
+Max Bartolo, Sebastian Ruder, Acyr Locatelli,
+Julia Kreutzer, Nick Frosst, Aidan N. Gomez,
+Phil Blunsom, Marzieh Fadaee, Ahmet ¨Ust¨un,
+and
+Sara
+Hooker.
+2024.
+Aya
+23:
+Open
+weight releases to further multilingual progress.
+CoRR, abs/2405.15032. https://doi.org
+/10.48550/ARXIV.2405.15032
+Yonatan Belinkov. 2022. Probing classifiers:
+Promises, shortcomings, and advances. Compu-
+tational Linguistics, 48(1):207–219. https://
+doi.org/10.1162/coli a 00422
+Leonard Bereska and Stratis Gavves. 2024. Mech-
+anistic interpretability for AI safety – A review.
+Transactions on Machine Learning Research.
+Amanda Cercas Curry, Gavin Abercrombie, and
+Zeerak Talat. 2024. Subjective isms? On
+the danger of conflating hate and offence
+in abusive language detection. In Proceed-
+ings of the 8th Workshop on Online Abuse
+and Harms (WOAH 2024), pages 275–282,
+Mexico City, Mexico. Association for Compu-
+tational Linguistics. https://doi.org/10
+.18653/v1/2024.woah-1.22
+Tyler A. Chang and Benjamin K. Bergen.
+2024. Language model behavior: A com-
+prehensive survey. Computational Linguis-
+tics,
+50(1):293–350.
+https://doi.org
+/10.1162/coli_a_00492
+Adrian de Wynter, Ishaan Watts, Nektar Ege
+Altintoprak, Tua Wongsangaroonsri, Minghui
+Zhang, Noura Farra, Lena Baur, Samantha
+Claudet, Pavel Gajdusek, Can G¨oren, Qilong
+Gu, Anna Kaminska, Tomasz Kaminski, Ruby
+Kuo,
+Akiko
+Kyuba,
+Jongho
+Lee,
+Kartik
+Mathur, Petter Merok, Ivana Milovanovic, Nani
+Paananen, Vesa-Matti Paananen, Anna Pavlenko,
+Bruno Pereira Vidal, Luciano Strika, Yueh
+Tsao, Davide Turcato, Oleksandr Vakhno,
+Judit Velcsov, Anna Vickers, St´ephanie Visser,
+Herdyan Widarmanto, Andrey Zaikin, and
+Si-Qing Chen. 2024. RTP-LX: can llms evalu-
+ate toxicity in multilingual scenarios? ArXiv
+preprint,
+abs/2404.14397.
+https://doi
+.org/10.1609/aaai.v39i27.35011
+Yanai Elazar, Shauli Ravfogel, Alon Jacovi,
+and Yoav Goldberg. 2021. Amnesic probing:
+Behavioral explanation with amnesic coun-
+terfactuals. Transactions of the Association
+for
+Computational
+Linguistics,
+9:160–175.
+https://doi.org/10.1162/tacl a 00359
+Isabel O. Gallegos, Ryan A. Rossi, Joe Barrow,
+Md Mehrab Tanjim, Sungchul Kim, Franck
+Dernoncourt, Tong Yu, Ruiyi Zhang, and
+Nesreen K. Ahmed. 2024. Bias and fairness in
+large language models: A survey. Computa-
+tional Linguistics, 50(3):1097–1179. https://
+doi.org/10.1162/coli a 00524
+Samuel Gehman, Suchin Gururangan, Maarten
+Sap, Yejin Choi, and Noah A. Smith. 2020.
+RealToxicityPrompts: Evaluating neural toxic
+degeneration in language models. In Find-
+ings of the Association for Computational
+Linguistics: EMNLP 2020, pages 3356–3369,
+Online. Association for Computational Linguis-
+tics.
+https://doi.org/10.18653/v1
+/2020.findings-emnlp.301
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav
+Jauhri, Abhinav Pandey, Abhishek Kadian,
+Ahmad
+Al-Dahle,
+Aiesha
+Letman,
+Akhil
+Mathur, Alan Schelten, Alex Vaughan, Amy
+Yang, Angela Fan, Anirudh Goyal, Anthony
+Hartshorn,
+Aobo
+Yang,
+Archi
+Mitra,
+Archie Sravankumar, Artem Korenev, Arthur
+Hinsvark, et al. 2024. The llama 3 herd of
+models.
+Dirk
+Groeneveld,
+Iz
+Beltagy,
+Evan
+Walsh,
+Akshita
+Bhagia,
+Rodney
+Kinney,
+Oyvind
+Tafjord, Ananya Jha, Hamish Ivison, Ian
+Magnusson, Yizhong Wang, Shane Arora,
+David
+Atkinson,
+Russell
+Authur,
+Khyathi
+Chandu, Arman Cohan, Jennifer Dumas, Yanai
+Elazar,
+Yuling
+Gu,
+Jack
+Hessel,
+Tushar
+Khot, William Merrill, Jacob Morrison, Niklas
+Muennighoff, Aakanksha Naik, Crystal Nam,
+Matthew Peters, Valentina Pyatkin, Abhilasha
+Ravichander, Dustin Schwenk, Saurabh Shah,
+William
+Smith,
+Emma
+Strubell,
+Nishant
+Subramani,
+Mitchell
+Wortsman,
+Pradeep
+Dasigi, Nathan Lambert, Kyle Richardson,
+Luke Zettlemoyer, Jesse Dodge, Kyle Lo,
+Luca Soldaini, Noah Smith, and Hannaneh
+Hajishirzi. 2024. OLMo: Accelerating the sci-
+ence of language models. In Proceedings of
+282
+
+the 62nd Annual Meeting of the Associa-
+tion for Computational Linguistics (Volume 1:
+Long Papers), pages 15789–15809, Bangkok,
+Thailand. Association for Computational Lin-
+guistics. https://doi.org/10.18653/v1
+/2024.acl-long.841
+Thomas
+Hartvigsen,
+Saadia
+Gabriel,
+Hamid
+Palangi, Maarten Sap, Dipankar Ray, and
+Ece Kamar. 2022. ToxiGen: A large-scale
+machine-generated dataset for adversarial and
+implicit hate speech detection. In Proceed-
+ings of the 60th Annual Meeting of the
+Association
+for
+Computational
+Linguistics
+(Volume 1: Long Papers), pages 3309–3326,
+Dublin, Ireland. Association for Computa-
+tional Linguistics. https://doi.org/10
+.18653/v1/2022.acl-long.234
+John Hewitt, Robert Geirhos, and Been Kim.
+2025. We can’t understand AI using our existing
+vocabulary.
+John Hewitt and Percy Liang. 2019. Designing and
+interpreting probes with control tasks. In Pro-
+ceedings of the 2019 Conference on Empirical
+Methods in Natural Language Processing and
+the 9th International Joint Conference on Nat-
+ural Language Processing (EMNLP-IJCNLP),
+pages 2733–2743, Hong Kong, China. As-
+sociation
+for
+Computational
+Linguistics.
+https://doi.org/10.18653/v1/D19
+-1275
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes,
+and Yejin Choi.

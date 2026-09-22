@@ -1,0 +1,90 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://aclanthology.org/2026.tacl-1.14.pdf
+Type: PDF
+Length: 75926 chars (truncated)
+
+--- Content ---
+
+Aligned Probing: Relating Toxic Behavior and Model Internals
+Andreas Waldis∗1,2, Vagrant Gautam3, Anne Lauscher4,
+Dietrich Klakow3, Iryna Gurevych1
+1Ubiquitous Knowledge Processing Lab (UKP Lab), Technical University of Darmstadt, Germany
+2Information Systems Research Lab, Lucerne University of Applied Sciences and Arts, Switzerland
+3Spoken Language Systems, Saarland University, Germany
+4Data Science Group, University of Hamburg, Germany
+www.ukp.tu-darmstadt.de
+www.hslu.ch
+Abstract
+Warning: This paper contains offensive text.
+We
+introduce
+aligned
+probing,
+a
+novel
+interpretability framework that aligns the
+behavior of language models (LMs), based on
+their outputs, and their internal representations
+(internals). Using this framework, we examine
+over 20 OLMo, Llama, and Mistral models,
+bridging behavioral and internal perspectives
+for toxicity for the first time. Our results show
+that LMs strongly encode information about
+the toxicity level of inputs and subsequent
+outputs, particularly in lower layers. Focusing
+on how unique LMs differ offers both correl-
+ative and causal evidence that they generate
+less toxic output when strongly encoding
+information about the input toxicity. We
+also highlight the heterogeneity of toxicity,
+as model behavior and internals vary across
+unique attributes such as Threat. Finally,
+four case studies analyzing detoxification,
+multi-prompt evaluations, model quantization,
+and pre-training dynamics underline the prac-
+tical impact of aligned probing with further
+concrete insights. Our findings contribute
+to a more holistic understanding of LMs,
+both within and beyond the context of toxicity.
+alignedprobing.github.io
+1
+Introduction
+Language models (LMs) may produce toxic text
+that contains hate speech, insults, or vulgar-
+ity, even when prompted with innocuous text
+(Gehman et al., 2020; de Wynter et al., 2024).
+Preventing the generation of such toxic language
+is an important part of making LMs safer to use
+(Kumar et al., 2023). Efforts in this direction in-
+clude analyzing the toxicity of model generations
+(Ousidhoum et al., 2021; Hartvigsen et al., 2022),
+∗Corresponding author: andreas.waldis@live.com.
+the effects of pre-training data (Groeneveld et al.,
+2024; Longpre et al., 2024), and model detoxifica-
+tion (Lee et al., 2024; Li et al., 2024; Yang et al.,
+2024). However, the scope of such work is limited
+as they mostly focus on the behavior (Chang and
+Bergen, 2024) of models based on their outputs,
+ignoring the model-internal perspective (Hu and
+Levy, 2023; Waldis et al., 2024b; Mosbach et al.,
+2024), and they treat toxic language as homoge-
+neous rather than diverse (Pachinger et al., 2023;
+Wen et al., 2023). Thus, we lack a methodological
+framework to answer the question:
+How do LMs encode information about
+toxicity, and what is the interplay
+between their internals and behavior?
+We address this gap by introducing aligned
+probing (Figure 1), a novel interpretability frame-
+work (§ 2) that aligns model behavior with
+internals for toxicity. First, we prompt LMs with
+inputs and assess the toxicity of their generated
+outputs. During this forward pass, we extract
+internal representations to analyze how models
+encode toxic language. Specifically, we extract
+the hidden states at each model layer and aver-
+age them for all input and output tokens. Then,
+we use linear probing (Tenney et al., 2019a;
+Belinkov, 2022) to estimate the encoded infor-
+mation about the toxicity of the input or output.
+As we train linear model

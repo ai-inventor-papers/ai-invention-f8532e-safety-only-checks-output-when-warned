@@ -1,0 +1,33 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2606.22686
+Type: HTML
+Length: 8276 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2606.22686** (cs) 
+
+[Submitted on 21 Jun 2026 ([v1](https://arxiv.org/abs/2606.22686v1)), last revised 30 Jun 2026 (this version, v2)]
+
+# Title:The Geometry of Refusal: Linear Instability in Safety-Aligned LLMs
+
+Authors:[Shivam Ratnakar](https://arxiv.org/search/cs?searchtype=author&query=Ratnakar,+S), [Kartikeya Vats](https://arxiv.org/search/cs?searchtype=author&query=Vats,+K)
+
+View a PDF of the paper titled The Geometry of Refusal: Linear Instability in Safety-Aligned LLMs, by Shivam Ratnakar and 1 other authors
+
+[View PDF](/pdf/2606.22686) [HTML (experimental)](https://arxiv.org/html/2606.22686v2)
+
+> Abstract:Modern Large Language Models (LLMs) rely on extensive safety alignment, yet the mechanistic basis of refusal remains opaque. In this work, we investigate whether safety compliance is a deep semantic decision or a manipulable linear feature. We introduce Contrastive Logit Steering (CLS), a zero-optimization framework that isolates the "refusal direction" by contrasting hidden states derived from safe and unrestricted system prompts. Unlike representation engineering methods that intervene on internal activations, CLS operates directly on the output distribution, serving as a diagnostic probe for alignment fragility. When coupled with prefix injection to bypass initial refusal reflexes, this method induces a phase transition where guardrails collapse. Our experiments on 7 model families reveal that safety implementation is architecturally deterministic. While models like Llama-3.1 exhibit a "Late Decision" topology that is easily bypassed by CLS (reaching 95% ASR in approximately one second), others like Qwen-2.5 demonstrate "Early Divergence" by integrating safety mid-computation. Direct comparison with established activation-level steering methods shows that CLS achieves substantially higher attack success rates on Llama 2 (73% vs. 22.6%) and Qwen 7B (91% vs. 79.2%), demonstrating that logit-level intervention exposes alignment vulnerabilities that hidden-state methods underestimate. Beyond attacks, we show that this linearity enables bidirectional control: inverting the steering vector "hardens" models against jailbreaks without retraining. Our findings suggest that current alignment techniques create a steerable "safety axis" that serves as both a critical vulnerability and a precise primitive for defense. 
+
+Comments: | Accepted at TrustNLP 2026 (Sixth Workshop on Trustworthy Natural Language Processing, ACL 2026)  
+---|---  
+Subjects: |  Cryptography and Security (cs.CR); Artificial Intelligence (cs.AI); Machine Learning (cs.LG)  
+Cite as: | [arXiv:2606.2

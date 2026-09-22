@@ -1,0 +1,46 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2603.27518
+Type: HTML
+Length: 7837 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Computation and Language
+
+**arXiv:2603.27518** (cs) 
+
+[Submitted on 29 Mar 2026 ([v1](https://arxiv.org/abs/2603.27518v1)), last revised 1 Sep 2026 (this version, v4)]
+
+# Title:Over-Refusal and Representation Subspaces: A Mechanistic Analysis of Task-Conditioned Refusal in Aligned LLMs
+
+Authors:[Utsav Maskey](https://arxiv.org/search/cs?searchtype=author&query=Maskey,+U), [Mark Dras](https://arxiv.org/search/cs?searchtype=author&query=Dras,+M), [Usman Naseem](https://arxiv.org/search/cs?searchtype=author&query=Naseem,+U)
+
+View a PDF of the paper titled Over-Refusal and Representation Subspaces: A Mechanistic Analysis of Task-Conditioned Refusal in Aligned LLMs, by Utsav Maskey and 1 other authors
+
+[View PDF](/pdf/2603.27518) [HTML (experimental)](https://arxiv.org/html/2603.27518v4)
+
+> Abstract:Aligned language models that are trained to refuse harmful requests also exhibit over-refusal: they decline safe instructions that seemingly resemble harmful instructions. A natural approach is to ablate the global refusal direction, steering the hidden-state vectors away or towards the harmful-refusal examples, but this corrects over-refusal only incidentally while disrupting the broader refusal mechanism. In this work, we analyse the representational geometry of both refusal types to understand why this happens. We show that harmful-refusal directions are task-agnostic and can be captured by a single global vector, whereas over-refusal directions are task-dependent: they reside within the benign task-representation clusters, vary across tasks, and span a higher-dimensional subspace. Linear probing suggests that the two refusal types are representationally distinct from the early transformer layers. These findings provide a mechanistic explanation of why global direction ablation alone cannot address over-refusal, and establish that task-specific geometric interventions are necessary. 
+
+Comments: | EMNLP 2026 Main  
+---|---  
+Subjects: |  Computation and Language (cs.CL)  
+Cite as: | [arXiv:2603.27518](https://arxiv.org/abs/2603.27518) [cs.CL]  
+  | (or  [arXiv:2603.27518v4](https://arxiv.org/abs/2603.27518v4) [cs.CL] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2603.27518> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Utsav Maskey [[view email](/show-email/002c5818/2603.27518)]   
+**[[v1]](/abs/2603.27518v1)** Sun, 29 Mar 2026 04:53:40 UTC (1,635 KB)  
+**[[v2]](/abs/2603.27518v2)** Wed, 22 Apr 2026 08:15:12 UTC (1,636 KB)  
+**[[v3]](/abs/2603.27518v3)** Thu, 28 May 2026 06:42:43 UTC (4,752 KB)  
+**[v4]** Tue, 1 Sep 2026 14:25:31 UTC (5,948 KB)  
+
+
+Full-text l

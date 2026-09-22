@@ -1,0 +1,37 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2604.18519
+Type: HTML
+Length: 7968 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Artificial Intelligence
+
+**arXiv:2604.18519** (cs) 
+
+[Submitted on 20 Apr 2026]
+
+# Title:LLM Safety From Within: Detecting Harmful Content with Internal Representations
+
+Authors:[Difan Jiao](https://arxiv.org/search/cs?searchtype=author&query=Jiao,+D), [Yilun Liu](https://arxiv.org/search/cs?searchtype=author&query=Liu,+Y), [Ye Yuan](https://arxiv.org/search/cs?searchtype=author&query=Yuan,+Y), [Zhenwei Tang](https://arxiv.org/search/cs?searchtype=author&query=Tang,+Z), [Linfeng Du](https://arxiv.org/search/cs?searchtype=author&query=Du,+L), [Haolun Wu](https://arxiv.org/search/cs?searchtype=author&query=Wu,+H), [Ashton Anderson](https://arxiv.org/search/cs?searchtype=author&query=Anderson,+A)
+
+View a PDF of the paper titled LLM Safety From Within: Detecting Harmful Content with Internal Representations, by Difan Jiao and 6 other authors
+
+[View PDF](/pdf/2604.18519) [HTML (experimental)](https://arxiv.org/html/2604.18519v1)
+
+> Abstract:Guard models are widely used to detect harmful content in user prompts and LLM responses. However, state-of-the-art guard models rely solely on terminal-layer representations and overlook the rich safety-relevant features distributed across internal layers. We present SIREN, a lightweight guard model that harnesses these internal features. By identifying safety neurons via linear probing and combining them through an adaptive layer-weighted strategy, SIREN builds a harmfulness detector from LLM internals without modifying the underlying model. Our comprehensive evaluation shows that SIREN substantially outperforms state-of-the-art open-source guard models across multiple benchmarks while using 250 times fewer trainable parameters. Moreover, SIREN exhibits superior generalization to unseen benchmarks, naturally enables real-time streaming detection, and significantly improves inference efficiency compared to generative guard models. Overall, our results highlight LLM internal states as a promising foundation for practical, high-performance harmfulness detection. 
+
+Comments: | 17 pages,10 figures,6 tables  
+---|---  
+Subjects: |  Artificial Intelligence (cs.AI)  
+Cite as: | [arXiv:2604.18519](https://arxiv.org/abs/2604.18519) [cs.AI]  
+  | (or  [arXiv:2604.18519v1](https://arxiv.org/abs/2604.18519v1) [cs.AI] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2604.18519> Focus to learn more arXiv-issued DOI via DataCite  
+Journal reference: | Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 2026  
+Related DOI:  | <https://doi.org/10.18653/v1/2026.acl-long.1844> Focus to learn more DOI(s) linking to rela

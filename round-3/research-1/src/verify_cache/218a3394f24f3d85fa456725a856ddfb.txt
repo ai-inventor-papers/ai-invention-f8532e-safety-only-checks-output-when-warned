@@ -1,0 +1,1143 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2507.21141v1.pdf
+Type: PDF
+Length: 158850 chars (truncated)
+
+--- Content ---
+
+Preprint. Under review.
+Death by a Thousand Directions: Exploring the Geometry of
+Harmfulness in LLMs through Subconcept Probing
+McNair Shah ∗, Saleena Angeline, Adhitya Rajendra Kumar, Naitik Chheda, Kevin Zhu†,
+Vasu Sharma†, Sean O’Brien†& Will Cai†
+Algoverse AI Research
+mcn.shah.6@gmail.com, kevin@algoverse.us, wicai@berkeley.edu
+Abstract
+Recent advances in large language models (LLMs) have intensified the need
+to understand and reliably curb their harmful behaviours. We introduce
+a multidimensional framework for probing and steering harmful content
+in model internals. For each of 55 distinct harmfulness subconcepts (e.g.,
+racial hate, employment scams, weapons), we learn a linear probe, yielding
+55 interpretable directions in activation space. Collectively, these directions
+span a harmfulness subspace that we show is strikingly low-rank. We then
+test ablation of the entire subspace from model internals, as well as steering
+and ablation in the subspace’s dominant direction. We find that dominant
+direction steering allows for near elimination of harmfulness with a low
+decrease in utility. Our findings advance the emerging view that concept
+subspaces provide a scalable lens on LLM behaviour and offer practical
+tools for the community to audit and harden future generations of language
+models.
+1
+Introduction
+Large language models have become ubiquitous in everyday life. Models with incredible
+capabilities are becoming available to the average user. However, along with this increase
+in access and ability comes an increase in risk due to their use by malicious agents (Bender
+et al., 2021; Anthropic, 2023; Bommasani et al., 2021). Harmful content in the training
+data gives models the capability to generate harmful responses (Su et al. (2024)). Previous
+work has focused on eliminating this harmful capability through methods such as direct
+preference optimization (Kim et al., 2025; Liu et al., 2024), safety fine-tuning (Choi et al.,
+2024; Ouyang et al., 2022), and data attribution (Pan et al., 2025b).
+The burgeoning field of mechanistic interpretability (Marks et al., 2024; Nanda et al., 2023;
+Lindsey et al., 2025) focuses on studying model internals and attempting to extract semantic
+meaning. The Linear Representation Hypothesis conjectures that models represent concepts
+as vectors in feature space (Elhage et al., 2022; Park et al., 2023; Jiang et al., 2024). Recent
+works have studied the linear representation of features such as truth (Li et al., 2023; Marks
+& Tegmark, 2023), refusal (Arditi et al., 2024), sentiment (Tigges et al., 2023), and others.
+The two most common methods of extracting these representations are difference-in-means
+(Arditi et al., 2024) and linear probing (Li et al., 2023). Other works explore the multi-
+dimensional geometry of representations in feature space, exploring concepts such as truth
+(Yu et al., 2025), safety (Pan et al., 2025a), and refusal (Wollschl¨ager et al., 2025; Hildebrandt
+et al., 2025) through methods such as low-rank decomposition (Pan et al., 2025a) and weight
+orthogonalization (Yu et al., 2025; Wollschl¨ager et al., 2025). In contrast, this work aims to
+(1) construct a multi-dimensional representation space of harmfulness by considering the
+linear representations of its subconcepts. We (2) establish that the harmfulness subspace
+is low-rank linear by computing its effective rank at different energy values. Finally, our
+∗Lead Author
+†Senior Author
+1
+arXiv:2507.21141v1  [cs.AI]  23 Jul 2025
+
+Preprint. Under review.
+Language Model
+Harmful
+Prompts
+Safe
+Prompts
+Drugs
+...
+Physical
+Abuse
+Harm 
+Subcategories
+Hidden
+States
+Linear Probes
+Probe Weights
+Token
+Visualizations
+Harmfulness
+Subspace
+SVD
+Effective
+Rank
+Dominant
+Direction
+Steering and Ablation
+Figure 1: An overview of the paper’s methods. (1) Harm prompts, divided into harmful
+subcategories, as well as a set of safe prompts, are passed into a language model, and the
+attention hidden states are used to train subcategory-specific linear probes. (2) Token-level
+visualizations are performed using these probes. (3) A harmfulness subspace is constructed,
+and singular value decomposition is performed to compute the effective rank and extract a
+dominant direction. (4) Within the model, subspace and dominant direction ablation are
+performed, as well as dominant direction steering.
+work (3) produces a linear representation of harmfulness by finding the dominant direction
+within this harmfulness subspace.
+Representation Steering is the addition of representation vectors to model hidden states in
+order to induce a certain behavior. Steering has been applied to language model topicality
+(Turner et al. (2024)), truthfulness (Li et al. (2023)), sentiment (Soo et al. (2025)), and others.
+Representational Ablation is the orthogonalization of model hidden state space to representa-
+tion vectors to remove it from model outputs. It has been applied to topics such as refusal
+(Arditi et al. (2024)), single-directional harmfulness (Yao et al. (2024)), and others. Our work
+runs steering and ablation over the harmfulness subspace and the discovered dominant
+direction. We establish (4) that steering in the dominant direction of the harmfulness sub-
+space allows for near elimination of harmful responses on a jailbreak dataset with a minor
+decrease in utility.
+2
+Linear Probing
+We ran all experiments on LLAMA-3.1-8B-INSTRUCT (Grattafiori et al. (2024)). We replicate
+experiments from sections 2, 3, and 5 on QWEN-2-7B-INSTRUCT (Yang et al. (2024)) in
+Appendix G.
+2.1
+Location of Probing
+We probe on the model’s attention output hidden states. During our experiments on LLAMA-
+3.1-8B-INSTRUCT, we compared both attention output and the residual stream, and found
+attention output to be better on practically all metrics. Results for the residual stream can be
+found in Appendix D. We also provide a comparison of the results between the different
+sections of the model in Table 1. We also display out of distribution accuracy on the residual
+stream probes in Figure 3b.
+2
+
+Preprint. Under review.
+Section of Model
+Mean Test
+Accuracy
+Mean Out of
+Distribution
+Accuracy
+Best
+JAILBREAKBENCH
+Safety Score
+Attention Output
+0.90
+0.65
+1.00
+Residual Stream
+0.89
+0.60
+0.94
+Table 1: Comparison between experiments on different sections of the model, ran on LLAMA-
+3.1-8B-INSTRUCT
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+26
+28
+30
+32
+Layer Number
+Assault and battery
+Cybercrime
+Debt management
+Deepfake creation
+Doxxing
+Employment scams
+Gender-based violence
+Lobbying
+Personal investment advice
+Phishing
+Physical abuse
+Scamming
+Self-harm
+Spyware
+Weapon making
+Harmful Categories
+0.55
+0.60
+0.65
+0.70
+0.75
+0.80
+0.85
+0.90
+0.95
+(a) Accuracies of the base linear probes.
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+26
+28
+30
+32
+Layer Number
+Assault and battery
+Cybercrime
+Debt management
+Deepfake creation
+Doxxing
+Employment scams
+Gender-based violence
+Lobbying
+Personal investment advice
+Phishing
+Physical abuse
+Scamming
+Self-harm
+Spyware
+Weapon making
+Harmful Categories
+0.55
+0.60
+0.65
+0.70
+0.75
+0.80
+0.85
+0.90
+0.95
+(b) Accuracies of the linear probes trained on
+the model with the orthogonalized hidden
+states.
+Figure 2: Probe accuracies by layer and harmfulness subcategory, displaying the even layers
+and 15 randomly sampled harm subcategories, for original classifiers and those trained on
+the orthogonalized hidden states. Probes show high accuracy across the board, with a dip
+in Layer 2 for both types of probes. Accuracy does not tend to vary with subcategory.
+2.2
+Probe training and evaluation
+We used linear probes trained on the model’s attention output hidden states during pro-
+cessing of all tokens on the 55 harmfulness subcategories from CATEGORICALHARMFULQA
+(Bhardwaj et al. (2024)), with 10 prompts per subcategory, using 10 prompts from ALPACA
+(Taori et al. (2023)) as a safe baseline, thus defining n = 55 harm subconcept directions. The
+probe for a given subcategory k is defined in Equation 1.
+fk(x) = σ(wkx + bk)
+(1)
+Where the directions in state space for each concept are given by wk. We train probes for
+100 epochs with a learning rate of 0.001 and a Train-Validation-Test split of 80-10-10.
+We report held-out test set accuracy on even layers and 15 randomly sampled subcategories
+by subcategory and by layer in Figure 2a, full results in Figure 8a in Appendix A, and the
+AUC-ROC (Bradley (1997)) score by subcategory and by layer in Figure 9a in Appendix B.
+We find high accuracies and AUC-ROC scores across layers and subcategories for probes
+on both LLAMA-3.1-8B-INSTRUCT and QWEN-2-7B-INSTRUCT (See Figures 19a and 20a in
+Appendix G).
+2.3
+Training of probes on orthogonalized hidden states
+To test the idea that the harmfulness subconcepts are represented by a single direction,
+we trained new probes (with the same training parameters) on the hidden states during
+processing of CATEGORICALHARMFULQA after the direction from the weight vector of the
+previous probe for the corresponding layer and subcategory had been ablated. The ablation
+was performed by removing the projected component of the weight vector from the hidden
+3
+
+Preprint. Under review.
+5
+10
+15
+20
+25
+30
+Layer
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Accuracy
+GSM8K
+HarmBench
+(a) Accuracy for the attention output probes.
+GSM8K accuracy stays within the same range
+for most layers, while HARMBENCH accuracy
+drops off for earlier and later layers.
+5
+10
+15
+20
+25
+30
+Layer
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Accuracy
+HarmBench
+GSM8K
+(b) Accuracy for the residual stream probes.
+GSM8K tends to have high accuracy, while
+HARMBENCH is typically low, peaking near
+the mid-to-low layers.
+Figure 3: Out of Distribution Ensemble HARMBENCH Accuracy and GSM8K accuracy by
+layer for both the attention output and residual stream probes.
+state, described in Equation 2.
+x′ = x −xTwk
+wT
+k wk
+wk
+(2)
+We once again report accuracy on a held-out test set, reported by subcategory and by layer
+on even layers and 15 randomly sampled subcategories in Figure 2b, with full results in
+Figure 8a in Appendix A, and AUC-ROC, reported by subcategory and by layer in Figure 9b
+in Appendix B. For these probes, we again find high accuracies and AUC-ROC scores across
+layers and subcategories for probes on both LLAMA-3.1-8B-INSTRUCT and QWEN-2-7B-
+INSTRUCT (See Figures 19b and 20b in Appendix G). These high-accuracy results indicate
+that each subcategory may be further separable into a nonlinear representation space.
+2.4
+Evaluation on Out of Distribution Data
+To test the generalizability of our probes, we tested the accuracy on out of distribution
+safe and harmful data. We used GSM8K (Cobbe et al. (2021)) as the safe dataset and
+HARMBENCH (Mazeika et al. (2024)) as the harmful dataset, processing N = 100 prompts
+from each. Since the models classify independent types of harmfulness, we ensembled them
+into a single harmfulness classifier, using the rule described in Equation 3.
+fensemble(x) = max
+k (σ(wkx + bk))
+(3)
+We report the classification accuracy on safe and harmful data. Figure 3a shows the out
+of distribution ensemble accuracy on HARMBENCH and GSM8K by layer. We find that
+for LLAMA-3.1-8B-INSTRUCT, while GSM8K accuracy remains fairly constant and high,
+HARMBENCH is high for intermediate layers and dips at the beginning and end, tending
+to overclassify as safe near the extreme layers. This could be because the model tends to
+process more pattern-based aspects of the harmfulness subcategories within the training
+dataset at the extreme layers. However, the QWEN2-7B-INSTRUCT HarmBench accuracy is
+overall much lower, tending to overclassify as safe. See Figure 21 in Appendix G.
+4
+
+Preprint. Under review.
+0.85
+0.9
+0.95
+0.98
+0.99
+0.995
+Energy
+10
+20
+30
+40
+50
+Effective Rank
+(a) Effective rank versus energy for the base
+classifiers. Effective rank quickly drops to one
+with decreasing energy, indicating that the sub-
+space is highly low-rank linear.
+0.85
+0.9
+0.95
+0.98
+0.99
+0.995
+Energy
+10
+20
+30
+40
+50
+Effective Rank
+(b) Effective rank versus energy for the classi-
+fiers trained on orthogonalized hidden states.
+Effective rank drops to one slower than for the
+base classifier, indicating that while this sub-
+space is low-rank linear, it is less linear.
+Figure 4: Effective rank versus energy
+3
+Shape of the harmfulness subspace
+3.1
+Effective rank
+We attempt to obtain the linear dimensionality of the harmfulness subspace by computing
+the effective rank K as in Equation 4.
+K = min
+n
+m : ∑m
+k=1 σ2
+k
+∑n
+k=1 σ2
+k
+≥τ
+o
+(4)
+Such that K is the minimum number of components to represent τ proportion of the variance
+of the subspace and σk are the singular values obtained from Equation 5.
+SVD([wT
+1 |wT
+2 |...|wT
+n])
+(5)
+We compute this separately for both the base classifiers and those trained on the orthogonal-
+ized hidden states. Figure 4a shows the effective rank plotted against energy for different
+layers for the base classifier, and Figure 4b shows the same for the classifiers trained on the
+orthogonalized hidden states.
+3.2
+The harmfulness subspace is low-rank linear
+With τ = 0.95, the classifier vectors from all but the second-to-last layer of the model have
+effective rank K = 1. This indicates that the harmfulness subspace is low-rank linear.
+While the subspace formed by the probes trained on the orthogonalized hidden states does
+not reach K = 1 for any layer at τ = 0.95, all layers reach effective rank K = 1 by τ = 0.84,
+such that the subspace formed by the probe vectors is also low-rank linear. This indicates
+that the subspace formed by the probes is approximately a linear direction orthogonal to that
+formed by the subspace formed by the original probes. We find similar low-rank linearity
+for both types of probes trained on QWEN2-7B-INSTRUCT, but obtained at lower energy
+values. See Figure 22 in Appendix G.
+4
+Token Visualizations
+4.1
+Top-triggered tokens
+We analyze token-level relevance scores produced by the probes at the five most accurate
+layers identified in the out of distribution evaluation from Section 2.4: layers 11, 12, 16, 19,
+5
+
+Preprint. Under review.
+and 24. For each layer and each of five sampled harm subcategories from CATEGORICAL-
+HARMFULQA, we compute word-level subcategory relevance as assigned by the classifiers
+(Equation 1) on N = 300 prompts from the REALTOXICITYPROMPTS dataset (Gehman
+et al., 2020). For each subcategory and layer, we rank all words by their probe-assigned
+relevance (taking the average for words represented by multiple tokens) and extract the top
+10 most relevant words. Table 2 lists the highest-scoring words across layers and categories.
+Many triggers (e.g., culprit, website, chief) are contextually related to the specific subcategory,
+reflecting the classifier’s ability in detecting contextually-related harmful tokens for each
+category.
+Top 10 Trigger Tokens Across Layers and Categories
+Category (Layer)
+Token 1
+Score
+Token 2
+Score
+Token 3
+Score
+Employment Scams (L11)
+priority
+0.98
+website
+0.97
+stopped
+0.96
+warned
+0.96
+culprit
+0.96
+chief
+0.95
+say
+0.94
+features
+0.93
+top
+0.93
+high
+0.92
+Tax Planning (L12)
+effective
+0.99
+warned
+0.98
+security
+0.98
+medicines
+0.96
+handled
+0.94
+employers
+0.93
+fast
+0.93
+experts
+0.92
+someone
+0.92
+beyond
+0.91
+Weapon (L16)
+Talal
+0.94
+the
+0.94
+Halifax
+0.93
+security
+0.92
+Fairfield
+0.92
+spokesman
+0.91
+beyond
+0.90
+precise
+0.90
+experience
+0.89
+terrorism
+0.88
+Data Theft (L19)
+the
+0.94
+Fairfield
+0.93
+Talal
+0.93
+Halifax
+0.93
+security
+0.93
+beyond
+0.91
+spokesman
+0.91
+precise
+0.90
+experience
+0.89
+hardware
+0.89
+Racial/Ethnic Hate (L19)
+quantify
+0.94
+wants
+0.92
+within
+0.89
+better
+0.88
+Will
+0.87
+statement
+0.87
+terrorism
+0.87
+fortunes
+0.86
+effective
+0.86
+than
+0.85
+Tax Planning (L24)
+freshly
+0.99
+set
+0.99
+warned
+0.99
+trying
+0.98
+effective
+0.98
+within
+0.98
+For
+0.97
+hacked
+0.96
+acknowledge
+0.98
+quantify
+0.88
+Table 2: Top 10 trigger tokens for selected harmfulness categories across key transformer
+layers.
+4.2
+Overall top trigger results
+Across categories, the top 10 trigger words often show high semantic relevance, reflecting
+the learned latent associations embedded in the model’s internal representations. However,
+many tokens are still semantically-unrelated and harmless, such as say, top, or stopped.
+In addition, some words might be semantically related while not necessarily reflecting
+harmfulness. This reflects the possibility that probes may capture abstract patterns in
+the training data tied to contextual usage rather than explicit harm. This observation
+underscores the interpretability challenge of token-level probing, in which relevance scores
+are not always aligned with the true notions of harmfulness. In turn, this motivates the
+need for careful manual inspection and follow-up visualization to ensure meaningful
+interpretation of model behavior. The prevalence of benign tokens with high scores also
+underscores the need for normalization and visual inspection in subsequent heatmap
+analyses.
+6
+
+Preprint. Under review.
+Figure 5: Token-level heatmap for Employment scams at layer 12 on a composite prompt.
+Colour intensity denotes normalized probe score (white < pink < red).
+4.3
+Token-level heatmap visualizations
+To better understand where and how the model detects signals of potential harm, we ren-
+der heatmaps for two complementary perspectives: (1) a composite handcrafted prompt
+spanning all of the five sampled subcategories, (2) sampled prompts from REALTOXICI-
+TYPROMPTS, using both the input and the generated responses for each of the sampled
+prompt from REALTOXICITYPROMPTS, exposing how saliency evolves throughout genera-
+tion.
+Each word is colored based on its normalized relevance, which we normalize by using min-
+max scaling within each individual layer. For every prompt, we collect the raw relevance
+scores of all tokens from a given layer and identify the minimum and maximum values
+among them. Each token’s score is then rescaled so that the lowest score becomes 0 and
+the highest becomes 1, with all other values proportionally adjusted between. Here, red
+represents the highest level of harmfulness. Sub-tokens are merged into words to improve
+interpretability, and normalization is done per layer.
+4.4
+Composite prompt heatmaps
+We begin with a manually constructed composite prompt that contains a harmful represen-
+tative of all five sampled harm subcategories, and run those across all five top-performing
+layers. The resulting token-level heatmap visualizations for the Employment scams subcate-
+gory at layer 12 can be seen in Figure 5.
+The visualization highlights sharply localized saliency on terms such as “confidential company
+databases”, “client files”, and “collect sensitive information”, suggesting strong alignment
+between probe activations and contextually-aligned harmful concepts.
+4.5
+Prompt-specific input–response contrast
+To evaluate generalization, we select N=5 prompts per subcategory from REALTOXICI-
+TYPROMPTS, chosen for overlap with top-trigger words to ensure that the sampled prompts
+align with each subcategories, resulting in more interpretable visualizations. We probe
+whether harmful saliency in the input persists into the model’s output. For each harm sub-
+category, we generate one model response and visualize both input and response activations.
+Figures 6 present a pair of such visualizations for the Weapon subcategory.
+Together, these visualizations reveal interpretable patterns in how the model attributes
+relevance across tokens. Certain words like “weapons”, “chemical”, or “attack” consistently
+receive high scores, suggesting that the probes are capturing semantically aligned signals.
+However, other activations still appear more scattered or contextually ambiguous, such that
+they may detect harmfulness in less semantically related tokens, while others may detect
+harmlessness in more semantically related ones. These heatmaps reveal both the power and
+7
+
+Preprint. Under review.
+Figure 6: Input-Response contrast heatmap from REALTOXICITYPROMPTS (Weapon) on layer
+10. Tokens such as “weapons”, ”attack” and “chemical” consistently receive high relevance.
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+Steering strength ( )
+0.90
+0.92
+0.94
+0.96
+0.98
+1.00
+JailbreakBench Safe Response Proportion
+0.30
+0.35
+0.40
+0.45
+0.50
+0.55
+MMLU Accuracy
+(a) Tradeoff for LLAMA-3.1-8B-INSTRUCT,
+steering on layers 11, 12, 16, 19, and 24. As the
+steering level increases, safety from jailbreaks
+tends to increase while utility tends to decrease.
+0
+1
+2
+3
+4
+5
+Steering strength ( )
+0.90
+0.92
+0.94
+0.96
+0.98
+1.00
+JailbreakBench Safe Response Proportion
+0.35
+0.40
+0.45
+0.50
+0.55
+0.60
+0.65
+0.70
+MMLU Accuracy
+(b) Tradeoff for QWEN2-7B-INSTRUCT, steer-
+ing on layers 2, 14, 15, 18, 19. As the steering
+level increases, safety from jailbreaks tends to
+increase while utility tends to stay about the
+same.
+Figure 7: Tradeoff between JAILBREAKBENCH jailbreak safety and utility for different
+steering levels for both LLAMA-3.1-8B-INSTRUCT and QWEN2-7B-INSTRUCT.
+the pitfalls of probe-based analysis, such that they can surface hidden semantic patterns
+while exposing the importance of proper normalization, interpretability safeguards, and
+looking across layers to avoid overfitting to noisy or misleading signals.
+5
+Steering and Ablation Experiments
+In an attempt to improve model security against harmful attacks, we ran steering and
+ablation experiments on the harm subspace and dominant direction. We ablate by removing
+the projected component as defined in Equation 2, and steer using the definition in Equation
+6.
+x′ = |x| x −αv
+|x −αv|
+(6)
+Where v is the steering vector and α is the steering strength, and keeping the norm constant
+for regularization. Similar to section 4.1, we selected the top 5 layers to steer and ablate on
+based on the out of distribution evaluation in section 2.4.
+5.1
+Evaluation
+We run model generation on the N = 100 harmful prompts from JAILBREAKBENCH (Chao
+et al. (2024)) with base, steered, and ablated models. We evaluate the generations from the
+intervened models using LLAMA-GUARD-3-8B (Grattafiori et al. (2024)), a model fine-tuned
+to detect harmfulness, with the default system prompt (Appendix H). We also evaluate the
+8
+
+Preprint. Under review.
+Ablation
+JAILBREAKBENCH safe response proportion
+MMLU accuracy
+None
+0.89
+0.55
+Entire subspace
+0.91
+0.51
+Dominant Direction
+0.91
+0.60
+Table 3: Evaluated safety and utility from ablating both the entire subspace and the dominant
+direction
+AutoDAN Attack Success Rate
+No Steering
+0.94
+Steering
+0.5
+Table 4: AutoDAN Attack Success Rate with and without dominant direction steering.
+Steering greatly reduces attack success rate.
+multiple-choice accuracy of the models on MMLU (Hendrycks et al., 2021b;a) to determine
+utility.
+5.2
+Subspace ablation
+We ablate the entire subspace by ablating every harmful direction as defined in Equation 2.
+We find that ablating the entire subspace leads to a minor decrease in jailbreak penetration
+with no significant change in utility (See Table 3). We hypothesize this is due to the further
+complexities of each dimension of harmfulness that are not ablated, as shown by the high
+orthogonal classifier accuracies in section 2.3. We find similar results for ablation on QWEN2-
+7B-INSTRUCT, reported in Table 9 in Appendix G.
+5.3
+Dominant Direction
+Due to our previous results showing the harmfulness subspace was low-rank linear, we also
+steered and ablated using the dominant direction in the harmfulness subspace, defined as the
+top component of the singular value decomposition from Equation 5. Ablation once again
+leads to a minor decrease in jailbreak penetration with a low decrease in utility (See Table 3).
+The similarity between the ablation results on the entire subspace and dominant direction
+supports the low-rank linearity found in section 3. We find that steering in the dominant
+direction greatly decreases jailbreak penetration without a significant change in utility, and
+further steering eliminates it with a minor decrease in utility. We report the tradeoff in
+jailbreak accuracy and utility in Figure 7a. In QWEN2-7B-INSTRUCT, dominant direction
+steering, greatly reduces but does not eliminate harmfulness, while MMLU accuracy does
+not significantly change. See Figure 7b.
+5.4
+Evaluation on AutoDAN
+We run evaluation for dominant direction steering on the hierarchical genetic algorithm
+defined in AutoDAN (Liu et al. (2023)), which optimizes a harmful prompt over multiple
+iterations. We randomly sample N = 200 ADVBENCH (Zou et al. (2023)) prompts to use.
+We use the steering level with the best performance in the previous section (for LLAMA-
+3.1-8B-INSTRUCT, α = 2.0). We provide results for LLAMA-3.1-8B-INSTRUCT in Table 4,
+and for QWEN-2.7-7B-INSTRUCT in Table 10 in Appendix G. We find a major reduction in
+Attack Success Rate, or the proportion of successful jailbreaks, for LLAMA-3.1-8B-INSTRUCT,
+but for QWEN-2.7-7B-INSTRUCT, we find an Attack Success Rate of 1.0 with and without
+steering. This indicates that LLAMA-3.1-8B-INSTRUCT may have a stronger concept of
+harmfulness than QWEN-2.7-7B-INSTRUCT.
+9
+
+Preprint. Under review.
+6
+Discussion
+6.1
+Limitations
+Our study has many limitations. The first is that of model generalizability. Due to our
+limited model testing, our results may not generalize well to other untested models of
+differing scales. Also, the subcategories of harmfulness tested are not extensive, limited by
+the dataset used, and may not include all possible subcategories of harmful model responses.
+Our method of extracting the direction for the different harmfulness subcategories is also
+imprecise and may not extract the exact direction. Our results also generalize only to the
+part of the model we probe on. In addition, ’utility’ of a model is a very broad term, and
+our tests in the steering section are limited and do not encompass all possible definitions.
+Finally, our computation of harmfulness is subject to the model used for evaluation and
+may not completely capture the harmfulness of responses.
+6.2
+Conclusion
+Our work presents a geometric approach to understanding and mitigating harmfulness in
+LLMs by decomposing it into 55 linear subconcept directions. Token-level visualizations
+reveal both meaningful and noisy relevance patterns, highlighting the interpretability limits
+of probe-based methods. Probe weight directions form a low-rank harmfulness subspace,
+with a single dominant vector capturing much of the structure. Steering and ablation along
+this direction effectively reduce harmful generations with minimal utility loss. Overall, our
+results underscore the value of multidimensional probing for uncovering latent harmful
+behaviors and designing more controllable and transparent models.
+References
+Anthropic.
+Anthropic’s Responsible Scaling Policy, Sep 2023.
+URL https://www.
+anthropic.com/news/anthropics-responsible-scaling-policy.
+Andy Arditi, Oscar Obeso, Aaquib Syed, Daniel Paleka, Nina Panickssery, Wes Gurnee, and
+Neel Nanda. Refusal in language models is mediated by a single direction. arXiv preprint
+arXiv:2406.11717, 2024.
+Emily M Bender, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. On
+the dangers of stochastic parrots: Can language models be too big? In Proceedings of the
+2021 ACM conference on fairness, accountability, and transparency, pp. 610–623, 2021.
+Rishabh Bhardwaj, Do Duc Anh, and Soujanya Poria. Language models are homer simpson!
+safety re-alignment of fine-tuned language models through task arithmetic, 2024.
+Rishi Bommasani, Drew A Hudson, Ehsan Adeli, Russ Altman, Simran Arora, Sydney von
+Arx, Michael S Bernstein, Jeannette Bohg, Antoine Bosselut, Emma Brunskill, et al. On
+the opportunities and risks of foundation models. arXiv preprint arXiv:2108.07258, 2021.
+Andrew P. Bradley. The use of the area under the roc curve in the evaluation of machine learn-
+ing algorithms. Pattern Recognition, 30(7):1145–1159, 1997. ISSN 0031-3203. doi: https://
+doi.org/10.1016/S0031-3203(96)00142-2. URL https://www.sciencedirect.com/
+science/article/pii/S0031320396001422.
+Patrick Chao, Edoardo Debenedetti, Alexander Robey, Maksym Andriushchenko, Francesco
+Croce, Vikash Sehwag, Edgar Dobriban, Nicolas Flammarion, George J. Pappas, Florian
+Tram`er, Hamed Hassani, and Eric Wong. Jailbreakbench: An open robustness benchmark
+for jailbreaking large language models, 2024.
+Hyeong Kyu Choi, Xuefeng Du, and Yixuan Li. Safety-aware fine-tuning of large language
+models. arXiv preprint arXiv:2410.10014, 2024.
+10
+
+Preprint. Under review.
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz
+Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano, Christopher
+Hesse, and John Schulman. Training verifiers to solve math word problems. arXiv preprint
+arXiv:2110.14168, 2021.
+Nelson Elhage, Tristan Hume, Catherine Olsson, Nicholas Schiefer, Tom Henighan, Shauna
+Kravec, Zac Hatfield-Dodds, Robert Lasenby, Dawn Drain, Carol Chen, et al. Toy models
+of superposition. arXiv preprint arXiv:2209.10652, 2022.
+Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. Real-
+toxicityprompts: Evaluating neural toxic degeneration in language models. In Proceedings
+of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), pp.
+3356–3369. Association for Computational Linguistics, 2020. doi: 10.18653/v1/2020.
+emnlp-main.273. URL https://aclanthology.org/2020.emnlp-main.273.
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian,
+Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, Amy
+Yang, Angela Fan, Anirudh Goyal, Anthony Hartshorn, Aobo Yang, Archi Mitra, Archie
+Sravankumar, Artem Korenev, Arthur Hinsvark, Arun Rao, Aston Zhang, Aurelien Ro-
+driguez, Austen Gregerson, Ava Spataru, Baptiste Roziere, Bethany Biron, Binh Tang, Bob-
+bie Chern, Charlotte Caucheteux, Chaya Nayak, Chloe Bi, Chris Marra, Chris McConnell,
+Christian Keller, Christophe Touret, Chunyang Wu, Corinne Wong, Cristian Canton Ferrer,
+Cyrus Nikolaidis, Damien Allonsius, Daniel Song, Danielle Pintz, Danny Livshits, Danny
+Wyatt, David Esiobu, Dhruv Choudhary, Dhruv Mahajan, Diego Garcia-Olano, Diego
+Perino, Dieuwke Hupkes, Egor Lakomkin, Ehab AlBadawy, Elina Lobanova, Emily Dinan,
+Eric Michael Smith, Filip Radenovic, Francisco Guzm´an, Frank Zhang, Gabriel Synnaeve,
+Gabrielle Lee, Georgia Lewis Anderson, Govind Thattai, Graeme Nail, Gregoire Mialon,
+Guan Pang, Guillem Cucurell, Hailey Nguyen, Hannah Korevaar, Hu Xu, Hugo Touvron,
+Iliyan Zarov, Imanol Arrieta Ibarra, Isabel Kloumann, Ishan Misra, Ivan Evtimov, Jack
+Zhang, Jade Copet, Jaewon Lee, Jan Geffert, Jana Vranes, Jason Park, Jay Mahadeokar,
+Jeet Shah, Jelmer van der Linde, Jennifer Billock, Jenny Hong, Jenya Lee, Jeremy Fu,
+Jianfeng Chi, Jianyu Huang, Jiawen Liu, Jie Wang, Jiecao Yu, Joanna Bitton, Joe Spisak,
+Jongsoo Park, Joseph Rocca, Joshua Johnstun, Joshua Saxe, Junteng Jia, Kalyan Vasuden
+Alwala, Karthik Prasad, Kartikeya Upasani, Kate Plawiak, Ke Li, Kenneth Heafield, Kevin
+Stone, Khalid El-Arini, Krithika Iyer, Kshitiz Malik, Kuenley Chiu, Kunal Bhalla, Kushal
+Lakhotia, Lauren Rantala-Yeary, Laurens van der Maaten, Lawrence Chen, Liang Tan, Liz
+Jenkins, Louis Martin, Lovish Madaan, Lubo Malo, Lukas Blecher, Lukas Landzaat, Luke
+de Oliveira, Madeline Muzzi, Mahesh Pasupuleti, Mannat Singh, Manohar Paluri, Marcin
+Kardas, Maria Tsimpoukelli, Mathew Oldham, Mathieu Rita, Maya Pavlova, Melanie
+Kambadur, Mike Lewis, Min Si, Mitesh Kumar Singh, Mona Hassan, Naman Goyal,
+Narjes Torabi, Nikolay Bashlykov, Nikolay Bogoychev, Niladri Chatterji, Ning Zhang,
+Olivier Duchenne, Onur C¸ elebi, Patrick Alrassy, Pengchuan Zhang, Pengwei Li, Petar
+Vasic, Peter Weng, Prajjwal Bhargava, Pratik Dubal, Praveen Krishnan, Punit Singh Koura,
+Puxin Xu, Qing He, Qingxiao Dong, Ragavan Srinivasan, Raj Ganapathy, Ramon Calderer,
+Ricardo Silveira Cabral, Robert Stojnic, Roberta Raileanu, Rohan Maheswari, Rohit Gird-
+har, Rohit Patel, Romain Sauvestre, Ronnie Polidoro, Roshan Sumbaly, Ross Taylor, Ruan
+Silva, Rui Hou, Rui Wang, Saghar Hosseini, Sahana Chennabasappa, Sanjay Singh, Sean
+Bell, Seohyun Sonia Kim, Sergey Edunov, Shaoliang Nie, Sharan Narang, Sharath Ra-
+parthy, Sheng Shen, Shengye Wan, Shruti Bhosale, Shun Zhang, Simon Vandenhende,
+Soumya Batra, Spencer Whitman, Sten Sootla, Stephane Collot, Suchin Gururangan, Syd-
+ney Borodinsky, Tamar Herman, Tara Fowler, Tarek Sheasha, Thomas Georgiou, Thomas
+Scialom, Tobias Speckbacher, Todor Mihaylov, Tong Xiao, Ujjwal Karn, Vedanuj Goswami,
+Vibhor Gupta, Vignesh Ramanathan, Viktor Kerkez, Vincent Gonguet, Virginie Do, Vish
+Vogeti, V´ıtor Albiero, Vladan Petrovic, Weiwei Chu, Wenhan Xiong, Wenyin Fu, Whitney
+Meers, Xavier Martinet, Xiaodong Wang, Xiaofang Wang, Xiaoqing Ellen Tan, Xide Xia,
+Xinfeng Xie, Xuchao Jia, Xuewei Wang, Yaelle Goldschlag, Yashesh Gaur, Yasmine Babaei,
+Yi Wen, Yiwen Song, Yuchen Zhang, Yue Li, Yuning Mao, Zacharie Delpierre Coudert,
+Zheng Yan, Zhengxing Chen, Zoe Papakipos, Aaditya Singh, Aayushi Srivastava, Abha
+Jain, Adam Kelsey, Adam Shajnfeld, Adithya Gangidi, Adolfo Victoria, Ahuva Goldstand,
+Ajay Menon, Ajay Sharma, Alex Boesenberg, Alexei Baevski, Allie Feinstein, Amanda
+11
+
+Preprint. Under review.
+Kallet, Amit Sangani, Amos Teo, Anam Yunus, Andrei Lupu, Andres Alvarado, Andrew
+Caples, Andrew Gu, Andrew Ho, Andrew Poulton, Andrew Ryan, Ankit Ramchandani,
+Annie Dong, Annie Franco, Anuj Goyal, Aparajita Saraf, Arkabandhu Chowdhury, Ashley
+Gabriel, Ashwin Bharambe, Assaf Eisenman, Azadeh Yazdan, Beau James, Ben Maurer,
+Benjamin Leonhardi, Bernie Huang, Beth Loyd, Beto De Paola, Bhargavi Paranjape, Bing
+Liu, Bo Wu, Boyu Ni, Braden Hancock, Bram Wasti, Brandon Spence, Brani Stojkovic,
+Brian Gamido, Britt Montalvo, Carl Parker, Carly Burton, Catalina Mejia, Ce Liu, Chang-
+han Wang, Changkyu Kim, Chao Zhou, Chester Hu, Ching-Hsiang Chu, Chris Cai, Chris
+Tindal, Christoph Feichtenhofer, Cynthia Gao, Damon Civin, Dana Beaty, Daniel Kreymer,
+Daniel Li, David Adkins, David Xu, Davide Testuggine, Delia David, Devi Parikh, Diana
+Liskovich, Didem Foss, Dingkang Wang, Duc Le, Dustin Holland, Edward Dowling, Eissa
+Jamil, Elaine Montgomery, Eleonora Presani, Emily Hahn, Emily Wood, Eric-Tuan Le, Erik
+Brinkman, Esteban Arcaute, Evan Dunbar, Evan Smothers, Fei Sun, Felix Kreuk, Feng
+Tian, Filippos Kokkinos, Firat Ozgenel, Francesco Caggioni, Frank Kanayet, Frank Seide,
+Gabriela Medina Florez, Gabriella Schwarz, Gada Badeer, Georgia Swee, Gil Halpern,
+Grant Herman, Grigory Sizov, Guangyi, Zhang, Guna Lakshminarayanan, Hakan Inan,
+Hamid Shojanazeri, Han Zou, Hannah Wang, Hanwen Zha, Haroun Habeeb, Harrison
+Rudolph, Helen Suk, Henry Aspegren, Hunter Goldman, Hongyuan Zhan, Ibrahim
+Damlaj, Igor Molybog, Igor Tufanov, Ilias Leontiadis, Irina-Elena Veliche, Itai Gat, Jake
+Weissman, James Geboski, James Kohli, Janice Lam, Japhet Asher, Jean-Baptiste Gaya,
+Jeff Marcus, Jeff Tang, Jennifer Chan, Jenny Zhen, Jeremy Reizenstein, Jeremy Teboul,
+Jessica Zhong, Jian Jin, Jingyi Yang, Joe Cummings, Jon Carvill, Jon Shepard, Jonathan
+McPhie, Jonathan Torres, Josh Ginsburg, Junjie Wang, Kai Wu, Kam Hou U, Karan Saxena,
+Kartikay Khandelwal, Katayoun Zand, Kathy Matosich, Kaushik Veeraraghavan, Kelly
+Michelena, Keqian Li, Kiran Jagadeesh, Kun Huang, Kunal Chawla, Kyle Huang, Lailin
+Chen, Lakshya Garg, Lavender A, Leandro Silva, Lee Bell, Lei Zhang, Liangpeng Guo,
+Licheng Yu, Liron Moshkovich, Luca Wehrstedt, Madian Khabsa, Manav Avalani, Manish
+Bhatt, Martynas Mankus, Matan Hasson, Matthew Lennie, Matthias Reso, Maxim Gro-
+shev, Maxim Naumov, Maya Lathi, Meghan Keneally, Miao Liu, Michael L. Seltzer, Michal
+Valko, Michelle Restrepo, Mihir Patel, Mik Vyatskov, Mikayel Samvelyan, Mike Clark,
+Mike Macey, Mike Wang, Miquel Jubert Hermoso, Mo Metanat, Mohammad Rastegari,
+Munish Bansal, Nandhini Santhanam, Natascha Parks, Natasha White, Navyata Bawa,
+Nayan Singhal, Nick Egebo, Nicolas Usunier, Nikhil Mehta, Nikolay Pavlovich Laptev,
+Ning Dong, Norman Cheng, Oleg Chernoguz, Olivia Hart, Omkar Salpekar, Ozlem
+Kalinli, Parkin Kent, Parth Parekh, Paul Saab, Pavan Balaji, Pedro Rittner, Philip Bon-
+trager, Pierre Roux, Piotr Dollar, Polina Zvyagina, Prashant Ratanchandani, Pritish Yuvraj,
+Qian Liang, Rachad Alao, Rachel Rodriguez, Rafi Ayub, Raghotham Murthy, Raghu
+Nayani, Rahul Mitra, Rangaprabhu Parthasarathy, Raymond Li, Rebekkah Hogan, Robin
+Battey, Rocky Wang, Russ Howes, Ruty Rinott, Sachin Mehta, Sachin Siby, Sai Jayesh
+Bondu, Samyak Datta, Sara Chugh, Sara Hunt, Sargun Dhillon, Sasha Sidorov, Satadru
+Pan, Saurabh Mahajan, Saurabh Verma, Seiji Yamamoto, Sharadh Ramaswamy, Shaun
+Lindsay, Shaun Lindsay, Sheng Feng, Shenghao Lin, Shengxin Cindy Zha, Shishir Patil,
+Shiva Shankar, Shuqiang Zhang, Shuqiang Zhang, Sinong Wang, Sneha Agarwal, Soji
+Sajuyigbe, Soumith Chintala, Stephanie Max, Stephen Chen, Steve Kehoe, Steve Satter-
+field, Sudarshan Govindaprasad, Sumit Gupta, Summer Deng, Sungmin Cho, Sunny Virk,
+Suraj Subramanian, Sy Choudhury, Sydney Goldman, Tal Remez, Tamar Glaser, Tamara
+Best, Thilo Koehler, Thomas Robinson, Tianhe Li, Tianjun Zhang, Tim Matthews, Timothy
+Chou, Tzook Shaked, Varun Vontimitta, Victoria Ajayi, Victoria Montanez, Vijai Mohan,
+Vinay Satish Kumar, Vishal Mangla, Vlad Ionescu, Vlad Poenaru, Vlad Tiberiu Mihailescu,
+Vladimir Ivanov, Wei Li, Wenchen Wang, Wenwen Jiang, Wes Bouaziz, Will Constable,
+Xiaocheng Tang, Xiaojian Wu, Xiaolan Wang, Xilun Wu, Xinbo Gao, Yaniv Kleinman,
+Yanjun Chen, Ye Hu, Ye Jia, Ye Qi, Yenda Li, Yilin Zhang, Ying Zhang, Yossi Adi, Youngjin
+Nam, Yu, Wang, Yu Zhao, Yuchen Hao, Yundi Qian, Yunlu Li, Yuzi He, Zach Rait, Zachary
+DeVito, Zef Rosnbrick, Zhaoduo Wen, Zhenyu Yang, Zhiwei Zhao, and Zhiyu Ma. The
+llama 3 herd of models, 2024. URL https://arxiv.org/abs/2407.21783.
+Maria Halkidi, Yannis Batistakis, and Michalis Vazirgiannis. Cluster validity methods: part
+i. ACM Sigmod Record, 31(2):40–45, 2002.
+12
+
+Preprint. Under review.
+Dan Hendrycks, Collin Burns, Steven Basart, Andrew Critch, Jerry Li, Dawn Song, and
+Jacob Steinhardt. Aligning ai with shared human values. Proceedings of the International
+Conference on Learning Representations (ICLR), 2021a.
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and
+Jacob Steinhardt. Measuring massive multitask language understanding. Proceedings of
+the International Conference on Learning Representations (ICLR), 2021b.
+Fabian Hildebrandt, Andreas Maier, Patrick Krauss, and Achim Schilling. Refusal behavior
+in large language models: A nonlinear perspective. arXiv preprint arXiv:2501.08145, 2025.
+Yibo Jiang, Goutham Rajendran, Pradeep Ravikumar, Bryon Aragam, and Victor Veitch.
+On the origins of linear representations in large language models.
+arXiv preprint
+arXiv:2403.03867, 2024.
+Geon-Hyeong Kim, Youngsoo Jang, Yu Jin Kim, Byoungjip Kim, Honglak Lee, Kyunghoon
+Bae, and Moontae Lee. Safedpo: A simple approach to direct preference optimization
+with enhanced safety. arXiv preprint arXiv:2505.20065, 2025.
+Kenneth Li, Oam Patel, Fernanda Vi´egas, Hanspeter Pfister, and Martin Wattenberg.
+Inference-time intervention: Eliciting truthful answers from a language model. Advances
+in Neural Information Processing Systems, 36:41451–41530, 2023.
+Jack Lindsey, Wes Gurnee, Emmanuel Ameisen, Brian Chen, Adam Pearce, Nicholas L.
+Turner, Craig Citro, David Abrahams, Shan Carter, Basil Hosmer, Jonathan Marcus,
+Michael Sklar, Adly Templeton, Trenton Bricken, Callum McDougall, Hoagy Cunningham,
+Thomas Henighan, Adam Jermyn, Andy Jones, Andrew Persic, Zhenyi Qi, T. Ben Thomp-
+son, Sam Zimmerman, Kelley Rivoire, Thomas Conerly, Chris Olah, and Joshua Batson.
+On the biology of a large language model. Transformer Circuits Thread, 2025. URL https:
+//transformer-circuits.pub/2025/attribution-graphs/biology.html.
+Xiaogeng Liu, Nan Xu, Muhao Chen, and Chaowei Xiao. Autodan: Generating stealthy
+jailbreak prompts on aligned large language models. arXiv preprint arXiv:2310.04451, 2023.
+Zixuan Liu, Xiaolin Sun, and Zizhan Zheng. Enhancing llm safety via constrained direct
+preference optimization. arXiv preprint arXiv:2403.02475, 2024.
+Samuel Marks and Max Tegmark. The geometry of truth: Emergent linear structure in large
+language model representations of true/false datasets. arXiv preprint arXiv:2310.06824,
+2023.
+Samuel Marks, Can Rager, Eric J Michaud, Yonatan Belinkov, David Bau, and Aaron Mueller.
+Sparse feature circuits: Discovering and editing interpretable causal graphs in language
+models. arXiv preprint arXiv:2403.19647, 2024.
+Mantas Mazeika, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Norman Mu, Elham
+Sakhaee, Nathaniel Li, Steven Basart, Bo Li, David Forsyth, and Dan Hendrycks. Harm-
+bench: A standardized evaluation framework for automated red teaming and robust
+refusal. 2024.
+Neel Nanda, Andrew Lee, and Martin Wattenberg. Emergent linear representations in
+world models of self-supervised sequence models. arXiv preprint arXiv:2309.00941, 2023.
+Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin,
+Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. Training language
+models to follow instructions with human feedback.
+Advances in neural information
+processing systems, 35:27730–27744, 2022.
+Wenbo Pan, Zhichao Liu, Qiguang Chen, Xiangyang Zhou, Haining Yu, and Xiaohua Jia.
+The hidden dimensions of llm alignment: A multi-dimensional safety analysis. arXiv
+preprint arXiv:2502.09674, 2025a.
+Yijun Pan, Taiwei Shi, Jieyu Zhao, and Jiaqi W Ma. Detecting and filtering unsafe training
+data via data attribution. arXiv preprint arXiv:2502.11411, 2025b.
+13
+
+Preprint. Under review.
+Kiho Park, Yo Joong Choe, and Victor Veitch. The linear representation hypothesis and the
+geometry of large language models. arXiv preprint arXiv:2311.03658, 2023.
+Samuel Soo, Wesley Teng, Chandrasekaran Balaganesh, Tan Guoxian, and Ming YAN.
+Interpretable steering of large language models with feature guided activation additions.
+In ICLR 2025 Workshop on Building Trust in Language Models and Applications, 2025.
+Jingtong Su, Julia Kempe, and Karen Ullrich. Mission impossible: A statistical perspective
+on jailbreaking llms. Advances in Neural Information Processing Systems, 37:38267–38306,
+2024.
+Rohan Taori, Ishaan Gulrajani, Tianyi Zhang, Yann Dubois, Xuechen Li, Carlos Guestrin,
+Percy Liang, and Tatsunori B. Hashimoto. Stanford alpaca: An instruction-following
+llama model. https://github.com/tatsu-lab/stanford_alpaca, 2023.
+Curt Tigges, Oskar John Hollinsworth, Atticus Geiger, and Neel Nanda. Linear representa-
+tions of sentiment in large language models. arXiv preprint arXiv:2310.15154, 2023.
+Alexander Matt Turner, Lisa Thiergart, Gavin Leech, David Udell, Juan J. Vazquez, Ulisse
+Mini, and Monte MacDiarmid. Steering language models with activation engineering,
+2024. URL https://arxiv.org/abs/2308.10248.
+Tom Wollschl¨ager, Jannes Elstner, Simon Geisler, Vincent Cohen-Addad, Stephan
+G¨unnemann, and Johannes Gasteiger. The geometry of refusal in large language models:
+Concept cones and representational independence. arXiv preprint arXiv:2502.17420, 2025.
+Zhengxuan Wu, Atticus Geiger, Aryaman Arora, Jing Huang, Zheng Wang, Noah Goodman,
+Christopher Manning, and Christopher Potts. pyvene: A library for understanding
+and improving PyTorch models via interventions. In Kai-Wei Chang, Annie Lee, and
+Nazneen Rajani (eds.), Proceedings of the 2024 Conference of the North American Chapter
+of the Association for Computational Linguistics: Human Language Technologies (Volume 3:
+System Demonstrations), pp. 158–165, Mexico City, Mexico, June 2024. Association for
+Computational Linguistics. URL https://aclanthology.org/2024.naacl-demo.
+16.
+An Yang, Baosong Yang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Zhou, Chengpeng Li,
+Chengyuan Li, Dayiheng Liu, Fei Huang, Guanting Dong, Haoran Wei, Huan Lin, Jialong
+Tang, Jialin Wang, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Ma, Jianxin Yang, Jin
+Xu, Jingren Zhou, Jinze Bai, Jinzheng He, Junyang Lin, Kai Dang, Keming Lu, Keqin
+Chen, Kexin Yang, Mei Li, Mingfeng Xue, Na Ni, Pei Zhang, Peng Wang, Ru Peng, Rui
+Men, Ruize Gao, Runji Lin, Shijie Wang, Shuai Bai, Sinan Tan, Tianhang Zhu, Tianhao
+Li, Tianyu Liu, Wenbin Ge, Xiaodong Deng, Xiaohuan Zhou, Xingzhang Ren, Xinyu
+Zhang, Xipin Wei, Xuancheng Ren, Xuejing Liu, Yang Fan, Yang Yao, Yichang Zhang,
+Yu Wan, Yunfei Chu, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, Zhifang Guo, and Zhihao
+Fan. Qwen2 technical report, 2024. URL https://arxiv.org/abs/2407.10671.
+Yuanshun Yao, Xiaojun Xu, and Yang Liu. Large language model unlearning. Advances in
+Neural Information Processing Systems, 37:105425–105475, 2024.
+Stanley Yu, Vaidehi Bulusu, Oscar Yasunaga, Clayton Lau, Cole Blondin, Sean O’Brien,
+Kevin Zhu, and Vasu Sharma. From directions to cones: Exploring multidimensional
+representations of propositional facts in llms. arXiv preprint arXiv:2505.21800, 2025.
+Andy Zou, Zifan Wang, J. Zico Kolter, and Matt Fredrikson. Universal and transferable
+adversarial attacks on aligned language models, 2023.
+14
+
+Preprint. Under review.
+A
+Full Accuracy Results
+Adult-themed humor
+Adware
+Assault and battery
+Content Sexual exploitation
+Counterfeiting
+Cyberbullying
+Cybercrime
+Data theft
+Debt management
+Deepfake creation
+Doxxing
+Drug
+Election advertising
+Emotional and psychological abuse
+Employment scams
+Erotic text
+False advertising
+Financial fraud
+Gender-based violence
+Hazardous material handling
+Human Trafficking
+Identity theft
+Intellectual property theft
+Investment scams
+Lobbying
+Malicious software designed to spread and damage computers
+Market manipulation
+Neglect
+Nude imagery
+Online predation
+Partisan commentary
+Personal investment advice
+Phishing
+Physical abuse
+Political activism
+Political misinformation
+Pornography
+Racial or ethnic hate
+Ransomware
+Real estate investment
+Religious intolerance
+Retirement planning
+Scamming
+Self-harm
+Sexually explicit dialogue
+Spyware
+Surveillance
+Tax planning
+Terrorism and extremism
+Theft and Robbery
+Tracking and location monitoring
+Trojans
+Unsafe practices
+Weapon
+Weapon making
+Harmful Subcategory
+Layer 1
+Layer 2
+Layer 3
+Layer 4
+Layer 5
+Layer 6
+Layer 7
+Layer 8
+Layer 9
+Layer 10
+Layer 11
+Layer 12
+Layer 13
+Layer 14
+Layer 15
+Layer 16
+Layer 17
+Layer 18
+Layer 19
+Layer 20
+Layer 21
+Layer 22
+Layer 23
+Layer 24
+Layer 25
+Layer 26
+Layer 27
+Layer 28
+Layer 29
+Layer 30
+Layer 31
+Layer 32
+Layer
+0.89 0.91 0.91 0.89 0.89 0.91 0.88 0.90 0.90 0.88 0.89 0.86 0.90 0.88 0.90 0.88 0.89 0.89 0.86 0.90 0.91 0.90 0.92 0.92 0.90 0.92 0.89 0.91 0.89 0.90 0.90 0.89 0.88 0.91 0.90 0.92 0.91 0.89 0.89 0.90 0.88 0.91 0.88 0.89 0.89 0.93 0.91 0.92 0.91 0.91 0.91 0.91 0.89 0.92 0.89
+0.74 0.79 0.75 0.66 0.71 0.73 0.73 0.74 0.81 0.65 0.66 0.70 0.71 0.71 0.73 0.68 0.71 0.70 0.70 0.73 0.73 0.68 0.71 0.71 0.74 0.69 0.75 0.73 0.65 0.70 0.71 0.75 0.69 0.73 0.73 0.70 0.78 0.72 0.76 0.75 0.80 0.73 0.68 0.71 0.72 0.69 0.78 0.70 0.74 0.80 0.73 0.75 0.71 0.73 0.73
+0.89 0.89 0.86 0.89 0.89 0.86 0.90 0.91 0.91 0.89 0.89 0.89 0.89 0.90 0.88 0.89 0.89 0.88 0.90 0.88 0.89 0.88 0.90 0.89 0.91 0.89 0.90 0.87 0.89 0.87 0.86 0.90 0.87 0.88 0.90 0.89 0.89 0.89 0.90 0.91 0.89 0.88 0.87 0.90 0.89 0.87 0.90 0.89 0.88 0.88 0.87 0.89 0.89 0.89 0.90
+0.89 0.91 0.90 0.90 0.88 0.91 0.91 0.90 0.91 0.91 0.91 0.92 0.91 0.91 0.92 0.91 0.90 0.91 0.92 0.90 0.92 0.91 0.90 0.92 0.89 0.87 0.89 0.91 0.92 0.90 0.89 0.91 0.88 0.90 0.92 0.91 0.92 0.90 0.91 0.91 0.89 0.91 0.91 0.89 0.90 0.91 0.91 0.89 0.91 0.91 0.92 0.91 0.91 0.91 0.89
+0.91 0.90 0.92 0.90 0.89 0.90 0.92 0.91 0.92 0.91 0.92 0.91 0.92 0.89 0.91 0.92 0.93 0.91 0.91 0.93 0.91 0.92 0.91 0.93 0.93 0.93 0.91 0.91 0.92 0.91 0.89 0.90 0.92 0.91 0.93 0.93 0.93 0.92 0.92 0.93 0.93 0.91 0.93 0.90 0.91 0.93 0.91 0.91 0.89 0.91 0.90 0.91 0.91 0.91 0.89
+0.87 0.91 0.90 0.90 0.88 0.88 0.90 0.91 0.89 0.89 0.88 0.89 0.88 0.90 0.89 0.86 0.90 0.88 0.90 0.90 0.92 0.89 0.92 0.91 0.91 0.91 0.89 0.89 0.90 0.89 0.91 0.90 0.92 0.88 0.90 0.90 0.91 0.88 0.90 0.91 0.89 0.88 0.89 0.90 0.89 0.92 0.89 0.91 0.90 0.89 0.88 0.89 0.86 0.91 0.90
+0.91 0.90 0.91 0.93 0.91 0.93 0.92 0.90 0.93 0.92 0.92 0.92 0.89 0.89 0.90 0.91 0.91 0.91 0.91 0.90 0.90 0.90 0.91 0.87 0.91 0.90 0.88 0.91 0.91 0.90 0.92 0.92 0.91 0.92 0.91 0.92 0.91 0.88 0.89 0.88 0.91 0.91 0.91 0.90 0.89 0.93 0.91 0.90 0.90 0.92 0.92 0.91 0.92 0.92 0.91
+0.92 0.92 0.93 0.90 0.91 0.92 0.92 0.89 0.89 0.89 0.93 0.88 0.92 0.87 0.92 0.89 0.89 0.89 0.93 0.93 0.91 0.89 0.88 0.93 0.92 0.92 0.92 0.94 0.93 0.92 0.90 0.91 0.92 0.93 0.90 0.93 0.90 0.91 0.91 0.92 0.92 0.88 0.91 0.92 0.92 0.93 0.93 0.91 0.92 0.90 0.92 0.92 0.91 0.91 0.91
+0.91 0.88 0.89 0.89 0.89 0.89 0.89 0.89 0.90 0.89 0.91 0.89 0.88 0.90 0.89 0.88 0.91 0.88 0.86 0.91 0.90 0.89 0.89 0.90 0.90 0.91 0.90 0.91 0.89 0.90 0.90 0.88 0.90 0.89 0.87 0.88 0.91 0.91 0.89 0.89 0.88 0.88 0.91 0.91 0.90 0.89 0.91 0.89 0.89 0.91 0.91 0.90 0.88 0.90 0.91
+0.92 0.92 0.91 0.92 0.90 0.92 0.92 0.89 0.88 0.91 0.90 0.90 0.90 0.92 0.92 0.92 0.92 0.92 0.91 0.91 0.89 0.92 0.90 0.91 0.91 0.92 0.89 0.92 0.92 0.92 0.93 0.90 0.90 0.89 0.91 0.91 0.90 0.91 0.91 0.90 0.91 0.91 0.91 0.93 0.90 0.89 0.91 0.91 0.91 0.91 0.90 0.90 0.92 0.90 0.90
+0.91 0.90 0.91 0.90 0.90 0.90 0.91 0.91 0.92 0.88 0.90 0.90 0.90 0.89 0.89 0.91 0.89 0.90 0.91 0.92 0.91 0.91 0.89 0.91 0.91 0.90 0.90 0.89 0.90 0.87 0.91 0.91 0.92 0.91 0.90 0.91 0.92 0.91 0.91 0.89 0.89 0.89 0.90 0.89 0.91 0.90 0.91 0.91 0.91 0.88 0.91 0.91 0.91 0.89 0.90
+0.91 0.91 0.92 0.90 0.93 0.90 0.91 0.91 0.91 0.91 0.91 0.90 0.91 0.92 0.91 0.91 0.89 0.91 0.90 0.92 0.91 0.89 0.91 0.91 0.93 0.91 0.91 0.93 0.92 0.91 0.91 0.91 0.91 0.90 0.92 0.91 0.92 0.90 0.91 0.91 0.90 0.90 0.90 0.91 0.93 0.91 0.93 0.91 0.91 0.93 0.92 0.92 0.91 0.91 0.91
+0.93 0.91 0.91 0.92 0.90 0.93 0.93 0.94 0.92 0.92 0.92 0.94 0.92 0.93 0.93 0.92 0.93 0.92 0.88 0.92 0.93 0.91 0.92 0.95 0.92 0.92 0.90 0.89 0.92 0.93 0.88 0.91 0.94 0.93 0.91 0.93 0.93 0.92 0.91 0.91 0.93 0.93 0.88 0.90 0.94 0.91 0.93 0.93 0.93 0.93 0.91 0.91 0.94 0.90 0.93
+0.91 0.89 0.90 0.91 0.89 0.91 0.89 0.90 0.91 0.89 0.91 0.91 0.91 0.88 0.92 0.89 0.91 0.90 0.90 0.91 0.90 0.90 0.89 0.89 0.91 0.88 0.90 0.90 0.92 0.90 0.90 0.89 0.91 0.

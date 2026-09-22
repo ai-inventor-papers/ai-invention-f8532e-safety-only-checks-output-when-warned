@@ -1,0 +1,57 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.25750
+Type: HTML
+Pattern: reference model|without a reference|target model (30 matches in 41846 chars)
+
+--- Content ---
+
+1007:...l
+     2. 3.2 SafeVec
+        1. Stage 1: Refusal direction extraction.
+        2. Stage 2: Layer window selection.
+        3. Stage 3: Calibration model scoring.
+        4. Stage 4: RAS calibration.
+        5. Stage 5: Target model scoring.
+  5. 4 Evaluation
+     1. 4.1 Experimental Setting
+        1. Model families.
+        2. Prompts.
+        3. Layer windows.
+        4. Output-level reference metric.
+        5. Hardware.
+     2. 4.2 Experimenta...
+--
+2461:... sensitive to judge choice, and tied to fixed question banks. We propose SafeVec, a white-box evaluation procedure that measures safety from internal representations rather than generated outputs. Given a safety-aligned reference model, SafeVec extracts refusal directions and scores a target model according to how strongly its hidden states align with these directions under unsafe and jailbreak prompts. The resulting metric, RAS (Refusal Alignment Score), maps representation-level refusal alignment to a calibrate...
+--
+5558:...vel refusal signal is weakened, unsafe compliance becomes more likely.
+
+We build on this hypothesis and propose SafeVec, a white-box procedure for measuring representation-level refusal alignment. Given a safety-aligned reference model, SafeVec extracts layer-wise refusal directions by contrasting hidden states induced by safe and unsafe prompts. It then selects a stable layer window where unsafe prompts exhibit alignment with the refusal direction and where calibration models with different safety levels show consistent separation. For a target model from the same model family, SafeVec computes the cosine similarity between its hidden states and the refusal direction under unsafe and jailbreak prompts. These similarities are calibrated into RAS (Refusal Alignment Sc...
+--
+9645:...ather than steering model behavior, we use refusal alignment as a safety evaluation signal.
+
+## 3 Proposed Method
+
+### 3.1 System Model
+
+We consider a white-box safety evaluation setting. The evaluator has access to the target model’s hidden states, including residual-stream activations at each decoder layer. This setting applies to open-weight models and internal model audits, but not to closed APIs that expose only generated text. Let MtargetM_{\...
+--
+10349:...s directly ask for harmful or policy-violating content. Jailbreak prompts contain unsafe intents wrapped in adversarial or role-playing instructions. For each architecture family aa, we assume access to a safety-aligned reference model Mref,aM_{\mathrm{ref},a} and a small calibration set 𝒞a\mathcal{C}_{a} containing models with different safety levels, such as aligned, uncensored, and abliterated variants. The reference model defines the refusal direction, while calibration models define how raw cosine similarities should be mapped into a comparable RAS scale. RAS is not a black-box benchmark. It does not replace output-level evaluation for ...
+--
+11099:...auditing, post-training comparison, and safety regression testing.
+
+### 3.2 SafeVec
+
+SafeVec consists of five stages: refusal direction extraction, layer window selection, calibration model scoring, RAS calibration, and target model scoring.
+
+#### Stage 1: Refusal direction extraction.
+
+For each layer ll, we feed safe and unsafe prompts into the reference model and extract the last-token residual-stream activation:
+
+| hlref​(x).h^{\mathrm{ref}}_{l}(x). |   
+---|---|---  
+  
+We compute the mean safe and unsafe activations:
+
+| μlsafe=1|𝒮|​∑s∈𝒮hlref​(s),μlunsafe=1|𝒰|​∑u∈𝒰hlref​(u...
+--
+[20 more matches not shown]

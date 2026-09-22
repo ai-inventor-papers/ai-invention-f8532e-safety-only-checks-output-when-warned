@@ -1,0 +1,28 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2606.08044
+Type: HTML
+Length: 8620 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2606.08044** (cs) 
+
+[Submitted on 6 Jun 2026 ([v1](https://arxiv.org/abs/2606.08044v1)), last revised 4 Aug 2026 (this version, v2)]
+
+# Title:When Behavioral Safety Evaluation Fails: A Representation-Level Perspective
+
+Authors:[Enyi Jiang](https://arxiv.org/search/cs?searchtype=author&query=Jiang,+E), [Anders Gjølbye](https://arxiv.org/search/cs?searchtype=author&query=Gj%C3%B8lbye,+A), [Yibo Jacky Zhang](https://arxiv.org/search/cs?searchtype=author&query=Zhang,+Y+J), [Sanmi Koyejo](https://arxiv.org/search/cs?searchtype=author&query=Koyejo,+S)
+
+View a PDF of the paper titled When Behavioral Safety Evaluation Fails: A Representation-Level Perspective, by Enyi Jiang and 3 other authors
+
+[View PDF](/pdf/2606.08044) [HTML (experimental)](https://arxiv.org/html/2606.08044v2)
+
+> Abstract:Safety evaluation of large language models (LLMs) is largely behavioral: a model is certified safe when it refuses harmful requests and answers benign ones. But refusing on the prompts an auditor happens to try does not show that the model is far from harmful behavior. Behavioral tests observe outputs; they do not measure how easily an intervention on the model turns a refusal into compliance. We call the gap between what static audits certify and what an intervention can reach the audit gap, and we show it is realizable: one can build a model that matches its safety-aligned base on every static audit yet gives way to a small, known perturbation of its internal state. We construct such dissociated models from three safety-aligned bases (Gemma 2 2B, Llama 3.2 3B, Qwen 2.5 3B) and audit the base, dissociated, and openly harmful models with the same soft interventions in parameter and latent space; the latent attacks are summarized by the Latent Vulnerability Score (LVS), the safety degradation produced per unit of bounded latent perturbation. Every static audit we run gives the dissociated model the same verdict as its base, since its refusals match the base, jailbreaks show no consistent signature, and a strong fixed probe on clean activations cannot tell it from the base. The same interventions an auditor 

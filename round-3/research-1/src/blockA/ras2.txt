@@ -1,0 +1,70 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.25750
+Type: HTML
+Pattern: Spearman|Pearson|correlat|Kendall (6 matches in 41846 chars)
+
+--- Content ---
+
+1314:...el families.
+        2. Prompts.
+        3. Layer windows.
+        4. Output-level reference metric.
+        5. Hardware.
+     2. 4.2 Experimental Results
+        1. RQ1: Representation-level separation.
+        2. RQ2: Correlation with output-level safety.
+        3. RQ3: Generalization across model families.
+        4. RQ4: Efficiency.
+     3. 4.3 Discussion
+  6. 5 Conclusion
+  7. References
+  8. A Appendix
+     1. A.1 ASR Evaluation Prompts ...
+--
+2892:...S (Refusal Alignment Score), maps representation-level refusal alignment to a calibrated 0–100 safety score. Across Llama, Gemma, and Qwen families, RAS separates aligned models from uncensored and abliterated variants, correlates with output-level attack success rate, and is substantially faster than judge-based evaluation. These results suggest that refusal alignment provides an efficient signal for white-box LLM safety evaluation.
+
+## 1 Intr...
+--
+6874:...major model families: Llama, Gemma, and Qwen. The results support four findings. First, safe and unsafe models exhibit clear separation in refusal-direction alignment under both unsafe and jailbreak prompts. Second, RAS correlates strongly with output-level safety behavior, as models with high RAS generally exhibit low attack success rates (ASR). Third, this relationship remains consistent across different model families after architecture-spec...
+--
+18672:... Stage 4 to obtain the final target-model RAS.
+
+## 4 Evaluation
+
+We answer four research questions:
+
+RQ1:
+    
+
+Can SafeVec identify representation-level safety differences between safe/unsafe LLMs?
+
+RQ2:
+    
+
+Does RAS correlate with output-level safety behavior?
+
+RQ3:
+    
+
+Does RAS generalize across different LLM families?
+
+RQ4:
+    
+
+Is RAS more efficient than output-based safety evaluation?
+
+### 4.1 Experimental Setting
+
+#### Model familie...
+--
+22894:...le unsafe or abliterated models show lower alignment. This pattern is especially clear in the selected layer windows, where green curves for safe models remain consistently above red curves for unsafe models.
+
+#### RQ2: Correlation with output-level safety.
+
+Tables 1, 3, and 4 report raw unsafe scores, jailbreak scores, and ASR for the reference and calibration models. Across the calibration sets, safety-aligned models generally have lower ASR,...
+--
+27002:... target models by the alignment of their hidden states under unsafe and jailbreak prompts. The resulting RAS provides a calibrated 0–100 safety score. Across different models, RAS distinguishes safe and unsafe variants, correlates with ASR, and is much faster than judge-based evaluation. These findings suggest refusal alignment is an efficient representation-level signal for LLM safety assessment.
+
+## Limitations
+
+RAS requires white-box access ...

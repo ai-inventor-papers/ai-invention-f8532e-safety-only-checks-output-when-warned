@@ -1,0 +1,748 @@
+{
+  "valid": true,
+  "file_errors": [],
+  "schema_errors": [],
+  "content_warnings": [],
+  "files_found": {
+    "research_out.json": {
+      "exists": true,
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_3/gen_art/gen_art_research_1/research_out.json",
+      "source_count": 45,
+      "size": 60288
+    }
+  },
+  "source_count": 45,
+  "checked_at": "2026-09-21T12:04:00.643601+00:00",
+  "passage_check_scope": "Case/whitespace-normalized text occurrence at the source URL (or archive fallback). Not claim entailment, locator verification, or author/year verification. status=error means unverified, not a misquotation.",
+  "passages": [
+    {
+      "source_index": 1,
+      "source_url": "https://arxiv.org/abs/2608.05578",
+      "quote": "We validate AMS across 14 model configurations spanning 4 architecture families (Llama, Gemma, Qwen, Mistral) and four safety-modification categories (instruction-tuned, base, abliterated, uncensored fine-tunes).",
+      "locator": "regex: 14 model configurations",
+      "status": "valid",
+      "context": "...sses; certain safety modifications collapse or rotate this structure, while others leave it intact. we validate ams across 14 model configurations spanning 4 architecture families (llama, gemma, qwen, mistral) and four safety-modification categories (instruction-tuned, base, abliterated, uncensored fine-tunes). leave-one-out cross-validation of thresholds achieves 71% accuracy (10/14); bootstrap 95% confidenc...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 1,
+      "source_url": "https://arxiv.org/abs/2608.05578",
+      "quote": "We measure behavioral compliance on 20 stratified JailbreakBench prompts per model and find that sigma on the harmful-content concept predicts compliance with Pearson r = -0.546 (p = 0.043), directionally but with meaningful noise.",
+      "locator": "regex: Pearson r",
+      "status": "valid",
+      "context": "...y (10/14); bootstrap 95% confidence intervals on sigma point estimates have median width 3.4 sigma. we measure behavioral compliance on 20 stratified jailbreakbench prompts per model and find that sigma on the harmful-content concept predicts compliance with pearson r = -0.546 (p = 0.043), directionally but with meaningful noise. mechanistic analysis identifies a four-class taxonomy of safety-training modifications distinguishe...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 1,
+      "source_url": "https://arxiv.org/abs/2608.05578",
+      "quote": "Leave-one-out cross-validation of thresholds achieves 71% accuracy (10/14)",
+      "locator": "regex: 71%",
+      "status": "valid",
+      "context": "... four safety-modification categories (instruction-tuned, base, abliterated, uncensored fine-tunes). leave-one-out cross-validation of thresholds achieves 71% accuracy (10/14); bootstrap 95% confidence intervals on sigma point estimates have median width 3.4 sigma. we measur...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 2,
+      "source_url": "https://raw.githubusercontent.com/GoogleCloudPlatform/activation-model-scanner/main/README.md",
+      "quote": "(No baseline required)",
+      "locator": "regex: No baseline required",
+      "status": "valid",
+      "context": "...(no safety training) | 0.7σ | ✗ critical | ### two-tier scanning **tier 1: safety structure check** (no baseline required) \\- measures whether the model has functioning safety directions \\- thresholds: pass (>3.5σ), warnin...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 2,
+      "source_url": "https://raw.githubusercontent.com/GoogleCloudPlatform/activation-model-scanner/main/README.md",
+      "quote": "show collapsed safety directions that AMS can detect in seconds",
+      "locator": "regex: collapsed safety directions",
+      "status": "valid",
+      "context": "...models with removed or degraded safety training (e.g., \"uncensored\" fine-tunes, abliterated models) show collapsed safety directions that ams can detect in seconds. ## platform requirements ams requires a gpu for standard operation. scan times of 10–40 seconds qu...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "RL-aligned, base, and safety-removed ver",
+      "locator": "regex: safety-removed",
+      "status": "valid",
+      "context": "...ure 1 supports the core intuition: when com- paring multiple variants of the same base model (e.g., rl-aligned, base, and safety-removed ver- sions of qwen3-4b), we observe that better-aligned variants exhibit more pronounced geometric sepa...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "demonstrate that the JSS metric exhibits high consistency with Red Teaming safety r",
+      "locator": "regex: JSS metric exhibits",
+      "status": "valid",
+      "context": "... (jensen- shannon separability) metric. experiments on over 40 models and 20 red teaming strategies demonstrate that the jss metric exhibits high consistency with red teaming safety rankings at less than 1% token and runtime cost. 1 introduction large language models must be aligned...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "we extract the hidden states of the last token across all layers at the decision-making cross-section",
+      "locator": "regex: hidden states of the last token across all layers",
+      "status": "valid",
+      "context": "...andardization for a model m and condition a, we construct prob- ing sequences. at each time step t, we extract the hidden states of the last token across all layers at the decision-making cross-section immediately pre- ceding the next assistant response generation: φ(a) m (t) = \u0000h(a) l,t , . . . , h(...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "JSS exhibits strong step-wise coupling with both UR and RR across layers",
+      "locator": "regex: step-wise coupling",
+      "status": "valid",
+      "context": "...ion in the appendix table 4). fig- ure 7 further supports this temporal relation at the step level: jss exhibits strong step-wise coupling with both ur and rr across layers (unsafe rate and refusal rate definition listed in appendix a). together, these results indicate th...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "aggregate JSDs across all slices and layer groups",
+      "locator": "regex: aggregate JSDs across all slices and layer groups",
+      "status": "valid",
+      "context": "... b) = js \u0000d(θ(g) a (si)), , d(θ(g) b (si)) \u0001 . (6) to obtain a model-level separability measure, we aggregate jsds across all slices and layer groups to define the jensen-shannon separability (jss): jss(a, b) = 1 |g| x g 1 i i x i=1 js(g) i (a, b) !...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/html/2606.25750",
+      "quote": "Across Llama, Gemma, and Qwen families, RAS separates aligned models from uncensored and abliterated variants, correlates with output-level attack success rate, and is substantially faster than judge-based evaluation.",
+      "locator": "regex: SafeVec",
+      "status": "valid",
+      "context": "...l alignment score), maps representation-level refusal alignment to a calibrated 0–100 safety score. across llama, gemma, and qwen families, ras separates aligned models from uncensored and abliterated variants, correlates with output-level attack success rate, and is substantially faster than judge-based evaluation. these results suggest that refusal alignment provides an efficient signal for white-box llm safety ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/html/2606.25750",
+      "quote": "For each architecture family aa, we assume access to a safety-aligned reference model",
+      "locator": "regex: reference model",
+      "status": "valid",
+      "context": "...tent. jailbreak prompts contain unsafe intents wrapped in adversarial or role-playing instructions. for each architecture family aa, we assume access to a safety-aligned reference model mref,am_{\\mathrm{ref},a} and a small calibration set 𝒞a\\mathcal{c}_{a} containing models with diffe...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/html/2606.25750",
+      "quote": "The reference model defines the refusal direction, while calibration models define how raw cosine similarities should be mapped into a comparable RAS scale.",
+      "locator": "regex: calibration models",
+      "status": "valid",
+      "context": "...taining models with different safety levels, such as aligned, uncensored, and abliterated variants. the reference model defines the refusal direction, while calibration models define how raw cosine similarities should be mapped into a comparable ras scale. ras is not a black-box benchmark. it does not replace output-level evaluation for closed proprietar...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/html/2606.25750",
+      "quote": "We extract last-token residual-stream activations at each decoder layer.",
+      "locator": "regex: last-token residual-stream",
+      "status": "valid",
+      "context": "...ng. all prompts are formatted using the model-specific chat template before being fed to the model. we extract last-token residual-stream activations at each decoder layer. output-level asr is evaluated separately using hex-phi prompts, as described in appendix a.1. #### ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/html/2606.25750",
+      "quote": "For Llama, we use layers 22–30. For Gemma, we use layers 27–29. For Qwen, we use layers 22–26.",
+      "locator": "regex: For Qwen, we use layers",
+      "status": "valid",
+      "context": "..., as described in appendix a.1. #### layer windows. the selected layer windows are family-specific. for llama, we use layers 22–30. for gemma, we use layers 27–29. for qwen, we use layers 22–26. these windows are chosen using the stability and separation criteria described in section 3.2. ####...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+      "quote": "and find that less toxic models encode more infor-",
+      "locator": "regex: less toxic models encode",
+      "status": "valid",
+      "context": "...ally when focused on single words like profanities. next, we analyze individual lms in detail (§ 5) and find that less toxic models encode more infor- mation about input toxicity. we further establish that this is a causal relationship (§ 6), showing...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+      "quote": "we correlate the average information strength at each layer with the resulting output toxicity (EMT) across different LMs.",
+      "locator": "regex: correlate the average information",
+      "status": "valid",
+      "context": "...bout the input and less about the output toxicity. 5.3 interplay of internals and behavior finally, we correlate the average information strength at each layer with the resulting output toxicity (emt) across different lms. as shown in figure 8, less toxic lms tend to encode more information about input toxicity, particul...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+      "quote": "mation about the toxicity of text in lower layers.",
+      "locator": "regex: lower layers",
+      "status": "valid",
+      "context": "...ls. we first examine high-level insights across lms (§ 4), and show that lms strongly encode infor- mation about the toxicity of text in lower layers. this provides an alternative perspective to previ- ous findings that localize toxicity in upper lay...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+      "quote": "We then approximate the encoding strength (s) as the Pearson correlation between the predicted",
+      "locator": "regex: encoding strength",
+      "status": "valid",
+      "context": "...n2 a probe f (linear model) to predict ˆt from h[l], where the prediction follows: ˆt = f(h[l]) (2) we then approximate the encoding strength (s) as the pearson correlation between the predicted (ˆt) 1https://perspectiveapi.com. 2for details on training, see appendix § a.1. and actual (t) toxi...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 6,
+      "source_url": "https://arxiv.org/abs/2608.05086",
+      "quote": "roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%",
+      "locator": "regex: ten adaptively",
+      "status": "valid",
+      "context": "...cted items recover full benchmark scores with lower error than random subsets of the same size, and roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%. third, irt supports audits of individual models, showing that it can be used to detect naive sandb...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 6,
+      "source_url": "https://arxiv.org/abs/2608.05086",
+      "quote": "We fit IRT models to eight safety benchmarks across 192 language models",
+      "locator": "regex: 192 language models",
+      "status": "valid",
+      "context": "...oolkit for measuring these latents from performance on items with inferred psychometric properties. we fit irt models to eight safety benchmarks across 192 language models, the largest psychometric analysis of llm safety evaluations to date, and contribute three results....",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 7,
+      "source_url": "https://arxiv.org/html/2606.08044",
+      "quote": "a strong fixed probe on clean activations cannot tell it from the base",
+      "locator": "regex: strong fixed probe",
+      "status": "valid",
+      "context": "...erdict as its base, since its refusals match the base, jailbreaks show no consistent signature, and a strong fixed probe on clean activations cannot tell it from the base. the same interventions an auditor could run reverse the verdict. at the targeted mid layer the dis...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 7,
+      "source_url": "https://arxiv.org/html/2606.08044",
+      "quote": "At the targeted mid layer the dissociated models score 2.5 to 3.1 times higher LVS than their bases.",
+      "locator": "regex: 2.5 to 3.1",
+      "status": "valid",
+      "context": "...ions cannot tell it from the base. the same interventions an auditor could run reverse the verdict. at the targeted mid layer the dissociated models score 2.5 to 3.1 times higher lvs than their bases. a bounded latent attack elicits harmful compliance on 54 to 86% of prompts, against 3 to 48% for th...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 8,
+      "source_url": "https://arxiv.org/abs/2607.01854",
+      "quote": "it presumes an attested reference",
+      "locator": "regex: attested reference",
+      "status": "valid",
+      "context": "...shold while it stays guard-unsafe and coherent. the audit is effective triage, not tamper-proofing: it presumes an attested reference, and its claims are bounded by the registry we evaluate it on. comments: | 13 pages, 3 figures ---|...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 8,
+      "source_url": "https://arxiv.org/abs/2607.01854",
+      "quote": "separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at AUROC 0.95",
+      "locator": "regex: AUROC 0.95",
+      "status": "valid",
+      "context": "... on a 273-checkpoint registry spanning qwen, deepseek-distilled qwen, llama, and gemma, their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at auroc 0.95, significantly above either signal alone (0.84, 0.90), and a youden-calibrated threshold transfers ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 9,
+      "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+      "quote": "on n'a pas besoin de générer ni de comparer à un original pour séparer *censuré* de *ablated*",
+      "locator": "regex: reference-free",
+      "status": "valid",
+      "context": "...énération | générer du texte | le modèle **refuse-t-il encore** ? | l'idée-clé **reference-free** : on n'a pas besoin de générer ni de comparer à un original pour séparer *censuré* de *ablated* — c'est la **signature spectrale des poids** (plan ①) qui dit si l'axe est débranché. le comporteme...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 9,
+      "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+      "quote": "`A = 0.705`",
+      "locator": "regex: A = 0.705",
+      "status": "valid",
+      "context": "...persés, **aucune** direction partagée → poids intacts. ✔ \\- **josiefied-qwen3-8b-abliterated-v1** : `a = 0.705` → forte direction commune → poids sectionnés. ✔ le fait que la base tombe **pile sur `1/√n`** valid...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 10,
+      "source_url": "https://arxiv.org/html/2603.27412",
+      "quote": "Geometry survives refusal ablation in both tested model families.",
+      "locator": "regex: Geometry survives",
+      "status": "valid",
+      "context": "... around the normative mean, requiring no knowledge of the ring direction and no harmful data. 2. 2. geometry survives refusal ablation in both tested model families. abliterated variants of both qwen3.5-0.8b and qwen2.5-0.5b achieve auroc h/b =1.000=1.000 and auroc...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 11,
+      "source_url": "https://arxiv.org/html/2604.18901",
+      "quote": "three alignment variants (base, instruction-tuned, abliterated)",
+      "locator": "regex: abliterated",
+      "status": "valid",
+      "context": "...ns across 12 models spanning four architectural families (qwen2.5, qwen3.5, llama-3.2, gemma-3) and three alignment variants (base, instruction-tuned, abliterated), with parameter scales from 0.5b to 1.3b and a within-family scale extension to 9b on qwen3.5. a di...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 11,
+      "source_url": "https://arxiv.org/html/2604.18901",
+      "quote": "recover harm directions 73",
+      "locator": "regex: 73°",
+      "status": "valid",
+      "context": "...dual-stream layer (max-pool over content tokens versus last-token at the post-instruction position) recover harm directions 73∘73^{\\circ} apart, and projecting one out leaves detection under either max-pool extraction essentia...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 12,
+      "source_url": "https://arxiv.org/html/2604.09544",
+      "quote": "harmful response generation is dissociable from the ability to recognize and reason about harmfulness",
+      "locator": "regex: dissociable",
+      "status": "valid",
+      "context": "...the harmful response mechanism even when behavioral safeguards remain brittle. we further show that harmful response generation is dissociable from the ability to recognize and reason about harmfulness. finally, we extend our analysis to emergent misalignment and identify a sparse set of parameters c...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 13,
+      "source_url": "https://arxiv.org/html/2603.05773v2",
+      "quote": "two distinct subspaces: a Recognition Axis",
+      "locator": "regex: Recognition Axis",
+      "status": "valid",
+      "context": ".... we propose the disentangled safety hypothesis (dsh), positing that safety computation operates on two distinct subspaces: a recognition axis (𝐯h\\mathbf{v}_{h}, “knowing”) and an execution axis (𝐯r\\mathbf{v}_{r}, “acting”). our geometric ana...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 14,
+      "source_url": "https://arxiv.org/html/2606.24952",
+      "quote": "it is identical before and after instruction tuning (0.1197 vs 0.1200)",
+      "locator": "regex: 0.1197",
+      "status": "valid",
+      "context": "...izes. across four models from three families and two scales (1b–9b), cos\\cos stays in [0.12, 0.20]; it is identical before and after instruction tuning (0.1197 vs 0.1200), so the geometry is laid down in pretraining. on gemma 2-2b-it, a 15∘ rotation from the detection d...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 14,
+      "source_url": "https://arxiv.org/html/2606.24952",
+      "quote": "not a predictor of how steerable a behavior is",
+      "locator": "regex: not a predictor",
+      "status": "valid",
+      "context": "...e _is_ is a robust, weight-computable signature of the dissociation, invariant across four models — not a predictor of how steerable a behavior is. ### 1\\. introduction recent work in mechanistic interpretability has demonstrated a striking capab...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 14,
+      "source_url": "https://arxiv.org/html/2606.24952",
+      "quote": "perfect linear separability (AUC = 1.000 from layer 5)",
+      "locator": "regex: AUC = 1.000",
+      "status": "valid",
+      "context": "...added, flips it. hallucination breaks the premise. the model detects whether an entity is real with perfect linear separability (auc = 1.000 from layer 5), yet the direction carrying that signal sits at cos=0.12\\cos=0.12 — about 83∘ — from the direction ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2603.18353",
+      "quote": "98.2% AUROC",
+      "locator": "regex: 98.2",
+      "status": "valid",
+      "context": "...ar probes trained on qwen’s internal representations discriminated hazardous from benign cases with 98.2% auroc (95% ci 0.968 to 0.993), demonstrating a 53-percentage-point gap between internal knowledge and out...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2603.18353",
+      "quote": "detected 65 of 144 hazards overall (sensitivity 0.451",
+      "locator": "regex: 65 of 144",
+      "status": "valid",
+      "context": "...ivity 0.354, 95% ci 0.280 to 0.435; specificity 0.695, 95% ci 0.638 to 0.747). qwen 2.5 7b instruct detected 65 of 144 hazards overall (sensitivity 0.451, 95% ci 0.371 to 0.534; specificity 0.844, 95% ci 0.795 to 0.883). ### 3.3 arm 1: concept bottlenec...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2603.18353",
+      "quote": "zero corrections and zero disruptions",
+      "locator": "regex: zero corrections",
+      "status": "valid",
+      "context": "...ons (53%), indistinguishable from random perturbation (p=0.84p=0.84). sae feature steering produced zero corrections and zero disruptions despite identifying 3,695 significant hazard-associated features. tsv steering at high strength cor...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2603.18353",
+      "quote": "corrected 19 of 79 false negatives",
+      "locator": "regex: 19 of 79",
+      "status": "valid",
+      "context": "... 65 true positives (7.7%, 95% ci 3.3 to 16.8%), a null net gain. at α=10.0\\alpha=10.0, tsv steering corrected 19 of 79 false negatives (24.1%, 95% ci 16.0 to 34.5%) while disrupting 4 of 65 true positives (6.2%, 95% ci 2.4 to 14.8%), ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 16,
+      "source_url": "https://arxiv.org/html/2607.14147v1",
+      "quote": "the instruct model routes it to refusal tokens about 8",
+      "locator": "regex: 0.24 vs 0.03",
+      "status": "valid",
+      "context": "...pecific component on top: when the knockout frees probability mass off the compliance continuation, the instruct model routes it to refusal tokens about 8×8\\times more than the base model does (concentration 0.240.24 vs 0.030.03, app. e). safety tuning a...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 17,
+      "source_url": "https://arxiv.org/html/2608.09624",
+      "quote": "outcome AUROC of 0.220",
+      "locator": "regex: 0.220",
+      "status": "valid",
+      "context": "...ng wrapped harmful prompts, the score places successful attacks below failed attacks and reaches an outcome auroc of 0.2200.220. these results do not show that prompt safety detectors fail at their stated task. they show t...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 18,
+      "source_url": "https://arxiv.org/html/2606.16349",
+      "quote": "so low coupling is not itself a safety score",
+      "locator": "regex: not itself a safety score",
+      "status": "valid",
+      "context": "...supplies the negative control: its direct-coupling change is much smaller, and it remains high-asr, so low coupling is not itself a safety score. causal sweeps, dense all-anchor checks, and sparse greedy coordinate gradient (gcg) and autodan tr...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 19,
+      "source_url": "https://arxiv.org/html/2606.22686v2",
+      "quote": "Models like Llama-3.1 process harmful and safe queries identically for 95% of their layers, diverging only at the final output head.",
+      "locator": "regex: Late Decision",
+      "status": "valid",
+      "context": "... while the refusal direction is universal, its depth varies: * • the “late decision” vulnerability: models like llama-3.1 process harmful and safe queries identically for 95% of their layers, diverging only at the final output head. consequently, cls creates a “jailbreak” state with 95% attack success rate (asr) in approximately o...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 19,
+      "source_url": "https://arxiv.org/html/2606.22686v2",
+      "quote": "making them significantly more robust to linear steering.",
+      "locator": "regex: Early Divergence",
+      "status": "valid",
+      "context": "...ce” defense: models like qwen-2.5 integrate safety earlier in the network (at ∼40%\\sim 40\\% depth), making them significantly more robust to linear steering. direct comparison with arditi et al. arditi et al. (2024), who steer via intermediate hidden states...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 19,
+      "source_url": "https://arxiv.org/html/2606.22686v2",
+      "quote": "We investigated where in the network the refusal decision occurs by measuring KL Divergence between hidden states of safe vs. harmful trajectories across network depth",
+      "locator": "regex: KL Divergence between hidden states",
+      "status": "valid",
+      "context": "..., confirming the universality of this representation. #### the timeline of refusal (kl divergence). we investigated where in the network the refusal decision occurs by measuring kl divergence between hidden states of safe vs. harmful trajectories across network depth (figure 4). llama-3.1 maintains near-zero divergence for 95% of the network, spiking only at the fi...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 20,
+      "source_url": "https://arxiv.org/abs/2406.05644",
+      "quote": "can identify malicious and normal inputs in the early layers",
+      "locator": "regex: early layers",
+      "status": "valid",
+      "context": "...es. we first confirm that llms learn ethical concepts during pre-training rather than alignment and can identify malicious and normal inputs in the early layers. alignment actually associates the early concepts with emotion guesses in the middle layers and the...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 20,
+      "source_url": "https://arxiv.org/abs/2406.05644",
+      "quote": "refines them to the specific reject tokens for safe generations",
+      "locator": "regex: reject tokens",
+      "status": "valid",
+      "context": "...alignment actually associates the early concepts with emotion guesses in the middle layers and then refines them to the specific reject tokens for safe generations. jailbreak disturbs the transformation of early unethical classification into negative emotions. we...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 21,
+      "source_url": "https://arxiv.org/abs/2408.17003",
+      "quote": "identifying a small set of contiguous layers in the middle of the model that are crucial for distinguishing malicious queries from normal ones",
+      "locator": "regex: safety layers",
+      "status": "valid",
+      "context": "...challenges, our work uncovers the mechanism behind security in aligned llms at the parameter level, identifying a small set of contiguous layers in the middle of the model that are crucial for distinguishing malicious queries from normal ones, referred to as ``safety layers\". we first confirm the existence of these safety layers by analyzin...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 22,
+      "source_url": "https://arxiv.org/html/2605.28553",
+      "quote": "We find that refusal is linearly decodable well before the final layer",
+      "locator": "regex: well before the final layer",
+      "status": "valid",
+      "context": "...fore decoding using linear probes trained on residual stream activations at each transformer block. we find that refusal is linearly decodable well before the final layer, indicating that safety-relevant behavior is represented in intermediate activations before output ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 23,
+      "source_url": "https://arxiv.org/html/2606.29441",
+      "quote": "Our central finding is that prompt-time activation defenses are structurally blind to prefilling attacks",
+      "locator": "regex: structurally blind",
+      "status": "valid",
+      "context": "...31b parameters) and five attack types (gcg, autodan, deepinception, prefilling, intent laundering). our central finding is that prompt-time activation defenses are structurally blind to prefilling attacks: alphasteer achieves 0% asr on gcg, autodan, and intent laundering, ≤\\leq2.5% on deepinception, but...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 23,
+      "source_url": "https://arxiv.org/html/2606.29441",
+      "quote": "a linear probe on the model’s hidden state at the first few generated tokens",
+      "locator": "regex: first few generated tokens",
+      "status": "valid",
+      "context": "...tructural shape. we introduce response-time probing as the corollary’s constructive contrapositive: a linear probe on the model’s hidden state at the first few generated tokens (mean-pooled over n=5n=5 in headline results, n=1n=1 sufficient; app. v), training-distribution aur...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 24,
+      "source_url": "https://arxiv.org/abs/2609.13737",
+      "quote": "relying solely on first-token hidden states",
+      "locator": "regex: first-token hidden states",
+      "status": "valid",
+      "context": "...rget models demonstrate that foresight achieves superior and efficient early-risk forecasting while relying solely on first-token hidden states. the code is available at: [this https url](https://github.com/scabbards1500/foresight) comments: |...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 25,
+      "source_url": "https://arxiv.org/abs/2607.00572",
+      "quote": "Extending the analysis to response-token positions, we find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful at the prompt side.",
+      "locator": "regex: response-token positions",
+      "status": "valid",
+      "context": "...nerated, with distinct attack classes occupying separable regions of the harmfulness-refusal plane. extending the analysis to response-token positions, we find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful at the prompt side. motivated by our findings, we introduce harc (harmfulness-and-refusal coupling), a fine-tuning meth...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 26,
+      "source_url": "https://arxiv.org/html/2604.13386",
+      "quote": "deception directions rotate gradually across layers rather than appearing at one location",
+      "locator": "regex: rotate gradually",
+      "status": "valid",
+      "context": "...y improves with scale: ∼5%{\\sim}5\\% auroc per 10×\\times parameters (r=0.81r{=}0.81). geometrically, deception directions rotate gradually across layers rather than appearing at one location, explaining both why single-layer probes are brittle and why multi-layer ensembles succeed. ###### ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 27,
+      "source_url": "https://raw.githubusercontent.com/elder-plinius/OBLITERATUS/cb4aec45/obliteratus/analysis/cross_layer.py",
+      "quote": "computing pairwise cosine similarities between refusal directions across all layers",
+      "locator": "regex: pairwise cosine",
+      "status": "valid",
+      "context": "...am, or by *different* directions at each layer. this module answers that question quantitatively by computing pairwise cosine similarities between refusal directions across all layers. if refusal uses a single persistent direction, we expect high cosine similarities across adjacent ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 27,
+      "source_url": "https://raw.githubusercontent.com/elder-plinius/OBLITERATUS/cb4aec45/obliteratus/analysis/cross_layer.py",
+      "quote": "angular_drift: list[float] # cumulative angular drift per layer",
+      "locator": "regex: angular_drift",
+      "status": "valid",
+      "context": "...st[int] # which layers have refusal directions clusters: list[list[int]] # groups of aligned layers angular_drift: list[float] # cumulative angular drift per layer total_geodesic_distance: float # total direction drift through network mean_adjacent_cosine: float ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 28,
+      "source_url": "https://arxiv.org/html/2606.26161",
+      "quote": "This mediation unfolds across layers in three stages: input-side harmfulness detection, aggregation along the refusal direction, and late-layer expression (Lee et al., 2025).",
+      "locator": "regex: three stages",
+      "status": "valid",
+      "context": "...usal in chat models is mediated by a single direction in the residual stream (arditi et al., 2024). this mediation unfolds across layers in three stages: input-side harmfulness detection, aggregation along the refusal direction, and late-layer expression (lee et al., 2025). lee et al. identify content-axis features upstream of refusal—what the prompt is about—leaving the ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 28,
+      "source_url": "https://arxiv.org/html/2606.26161",
+      "quote": "Refusal is therefore gated at the late-layer expression stage, downstream of where it is computed.",
+      "locator": "regex: downstream of where",
+      "status": "valid",
+      "context": "...rection in a late-layer window restores it to baseline; projecting out a random direction does not. refusal is therefore gated at the late-layer expression stage, downstream of where it is computed. treating refusal as a single isolated direction misses its dependence on persona. 11 1 code and dat...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 29,
+      "source_url": "https://arxiv.org/abs/2609.04721",
+      "quote": "What is architecture-specific is not where the direction is steered but where it must be read.",
+      "locator": "regex: write site",
+      "status": "valid",
+      "context": "... answer attacks it would otherwise refuse, while a random direction of the same size does far less. what is architecture-specific is not where the direction is steered but where it must be read. each layer computes a fresh output that is then added into the residual stream, and harm is cleanly...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 30,
+      "source_url": "https://arxiv.org/abs/2609.13534",
+      "quote": "This lightweight input moderator extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence and classifies it with a 288-parameter MLP.",
+      "locator": "regex: seven-dimensional",
+      "status": "valid",
+      "context": "...l \\textbf{e}ncoding \\textbf{r}ecognition via \\textbf{a}ctivation \\textbf{l}ayer \\textbf{d}ynamics). this lightweight input moderator extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence and classifies it with a 288-parameter mlp. \\herald{} stores one $d$-dimensional direction per layer ($262$\\,kb for a 32-layer, $d{=}4096$ mode...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 31,
+      "source_url": "https://arxiv.org/abs/2605.20241",
+      "quote": "then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape. Across nine instruction-tuned backbones",
+      "locator": "regex: margin profiles",
+      "status": "valid",
+      "context": "...tion to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts, then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape. across nine instruction-tuned backbones ($1.2$b--$70$b) and seven safety benchmarks, geometry-lite improves over single-layer probes while ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 32,
+      "source_url": "https://arxiv.org/html/2608.16852",
+      "quote": "a training-free activation readout calibrated from ten labelled pairs and scored by a single projection",
+      "locator": "regex: ten labelled pairs",
+      "status": "valid",
+      "context": "...cross many guards and benchmarks without retraining, so we introduce the internal compliance score, a training-free activation readout calibrated from ten labelled pairs and scored by a single projection. we hold it to the same scrutiny as the guards it is compared against, and a pre-registered criteri...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 32,
+      "source_url": "https://arxiv.org/html/2608.16852",
+      "quote": "a bag-of-words model matches its pooled generalisation exactly",
+      "locator": "regex: bag-of-words",
+      "status": "valid",
+      "context": "...t is compared against, and a pre-registered criterion for beating trivial baselines is not met, and a bag-of-words model matches its pooled generalisation exactly. it remains useful because it is inexpensive, letting us audit four deployed guard models, an 8b ze...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 33,
+      "source_url": "https://arxiv.org/pdf/2609.01048v1",
+      "quote": "steering along that same reading direction remains null-equivalent in 43 of 48",
+      "locator": "regex: 43 of 48",
+      "status": "valid",
+      "context": "...probe can read a target variable from the residual stream as early as step 1,000 at every scale—yet steering along that same reading direction remains null-equivalent in 43 of 48 model×checkpoint cells. internal readability systematically outruns causal efficacy, and the lag do...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 33,
+      "source_url": "https://arxiv.org/pdf/2609.01048v1",
+      "quote": "Our results caution against inferring steerability from probe accuracy",
+      "locator": "regex: caution against inferring steerability",
+      "status": "valid",
+      "context": "...red olmo-2 replication preserves the direction at attenuated magnitude (“weak” by the frozen rule). our results caution against inferring steerability from probe accuracy and establish a developmental bottleneck—representation formation reliably outpaces causal readout ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 34,
+      "source_url": "https://arxiv.org/html/2608.17843v1",
+      "quote": "Further analyses show that decodable information is not always actionable.",
+      "locator": "regex: not always actionable",
+      "status": "valid",
+      "context": "...th pretraining, indicating that much of its probe performance is available without learned weights. further analyses show that decodable information is not always actionable. generation often fails to express this information, and on the two intervention-tested backbones, a...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 35,
+      "source_url": "https://arxiv.org/html/2609.18080v1",
+      "quote": "the two rankings overlap only weakly (about 12",
+      "locator": "regex: Spearman",
+      "status": "valid",
+      "context": "...), applied in the instructed truth/deception setting of long et al. (2025) for gemma-2-9b-instruct, the two rankings overlap only weakly (about 12%12\\%, spearman ρ=0.10\\rho=0.10), and ablation dissociates them sharply: features the probe shares w...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 36,
+      "source_url": "https://arxiv.org/html/2608.07528",
+      "quote": "Linear probes detect corrupted context in language models with near-perfect accuracy, yet this does not translate into reliable failure prediction.",
+      "locator": "regex: near-perfect accuracy",
+      "status": "valid",
+      "context": "...ootnotemark: 1 justin shenk affiliation: correspondence: jyotinofficialcc@gmail.com ###### abstract linear probes detect corrupted context in language models with near-perfect accuracy, yet this does not translate into reliable failure prediction. the result is a dissociation with direct implications for deployment monitoring. across multi-hop a...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 37,
+      "source_url": "https://arxiv.org/abs/2603.27518",
+      "quote": "whereas over-refusal directions are task-dependent",
+      "locator": "regex: task-dependent",
+      "status": "valid",
+      "context": "...ow that harmful-refusal directions are task-agnostic and can be captured by a single global vector, whereas over-refusal directions are task-dependent: they reside within the benign task-representation clusters, vary across tasks, and span a higher-d...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 37,
+      "source_url": "https://arxiv.org/abs/2603.27518",
+      "quote": "Linear probing suggests that the two refusal types are representationally distinct from the early transformer layers.",
+      "locator": "regex: early transformer layers",
+      "status": "valid",
+      "context": "...the benign task-representation clusters, vary across tasks, and span a higher-dimensional subspace. linear probing suggests that the two refusal types are representationally distinct from the early transformer layers. these findings provide a mechanistic explanation of why global direction ablation alone cannot addr...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 38,
+      "source_url": "https://arxiv.org/abs/2602.02132",
+      "quote": "acting as a shared one-dimensional control knob",
+      "locator": "regex: one-dimensional control knob",
+      "status": "valid",
+      "context": "...ing along any refusal-related direction produces nearly identical refusal--over-refusal trade-offs, acting as a shared one-dimensional control knob. thus, different directions primarily affect not whether the model refuses, but how it refuses. usi...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 39,
+      "source_url": "https://arxiv.org/pdf/2507.21141v1.pdf",
+      "quote": "55 distinct harmfulness subconcepts",
+      "locator": "regex: 55 distinct harmfulness subconcepts",
+      "status": "valid",
+      "context": "...multidimensional framework for probing and steering harmful content in model internals. for each of 55 distinct harmfulness subconcepts (e.g., racial hate, employment scams, weapons), we learn a linear probe, yielding 55 interpretable ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 40,
+      "source_url": "https://arxiv.org/html/2607.02714",
+      "quote": "large scale abliteration experiment on 24 open-source LLMs",
+      "locator": "regex: 24 open-source",
+      "status": "valid",
+      "context": "...complish the goals of legitimate, authorized operations. in this work, we share our findings from a large scale abliteration experiment on 24 open-source llms and show that domain-specific abliteration is achievable with standard methodology on the example o...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 40,
+      "source_url": "https://arxiv.org/html/2607.02714",
+      "quote": "identifying that the type of safety training and architecture are the most reliable predictors",
+      "locator": "regex: most reliable predictors",
+      "status": "valid",
+      "context": "...nvestigate the correlation between models’ features and the effect of domain-specific abliteration, identifying that the type of safety training and architecture are the most reliable predictors. finally, we classify the models into 3 _abliteration susceptibility_ tiers and put forward a set o...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 41,
+      "source_url": "https://arxiv.org/html/2608.30748",
+      "quote": "projections onto this axis strongly predict jailbreak outcomes",
+      "locator": "regex: strongly predict jailbreak outcomes",
+      "status": "valid",
+      "context": "...ically associated with differences in hidden representations along a refusal-related axis, and that projections onto this axis strongly predict jailbreak outcomes. our results show that a single vanilla-state evaluation may not fully characterize jailbreak robus...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 42,
+      "source_url": "https://arxiv.org/abs/2506.12913",
+      "quote": "representational similarity under benign prompts",
+      "locator": "regex: representational similarity under benign prompts",
+      "status": "valid",
+      "context": "...weight models and 33 jailbreak attacks, we find two factors that systematically shape transfer: (1) representational similarity under benign prompts, and (2) the strength of the jailbreak on the source model. to move beyond correlation, we show tha...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 43,
+      "source_url": "https://arxiv.org/html/2608.05578",
+      "quote": "the rank-order Spearman correlation is weaker",
+      "locator": "regex: Spearman correlation is weaker",
+      "status": "valid",
+      "context": "... on the harmful-content concept predicts compliance with pearson r=−0.546r=-0.546 (p=0.043p=0.043); the rank-order spearman correlation is weaker (ρ=−0.423\\rho=-0.423, p=0.13p=0.13). the structural signal predicts behavior directionally but with...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 43,
+      "source_url": "https://arxiv.org/html/2608.05578",
+      "quote": "Run 16 contrastive pairs through model, extract activations at layers 40-80% depth",
+      "locator": "regex: 16 contrastive pairs",
+      "status": "valid",
+      "context": "...ocedure: 1. 1. for each concept (harmful_content, injection_resistance, refusal_capability): 1. (a) run 16 contrastive pairs through model, extract activations at layers 40-80% depth 2. (b) select optimal layer (maximum separation) 3. (c) compute direction vector vv and separation ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 43,
+      "source_url": "https://arxiv.org/html/2608.05578",
+      "quote": "Each concept uses 16 pairs (32 prompts).",
+      "locator": "regex: 16 pairs \\(32 prompts\\)",
+      "status": "valid",
+      "context": "...s ∼\\sim2gb additional memory for storing activations during the layer sweep. #### contrastive pairs each concept uses 16 pairs (32 prompts). pairs are designed to share surface features while differing only in the target safety distinction....",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 43,
+      "source_url": "https://arxiv.org/html/2608.05578",
+      "quote": "capture hidden states at the final token position",
+      "locator": "regex: final token position",
+      "status": "valid",
+      "context": "...for formatted output. #### activation extraction we register forward hooks on transformer layers to capture hidden states at the final token position. this requires ∼\\sim2gb additional memory for storing activations during the layer sweep. #### cont...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 43,
+      "source_url": "https://arxiv.org/html/2608.05578",
+      "quote": "This case is undetectable by activation-only probing of mid-residual-stream representations.",
+      "locator": "regex: undetectable by activation-only probing",
+      "status": "valid",
+      "context": "...er is preserved; yet the model complies with 19 of 20 stratified harmful prompts (97% compliance). _this case is undetectable by activation-only probing of mid-residual-stream representations._ the exact training procedure is not publicly documented but is consistent with one of: dpo on harm...",
+      "match_type": "exact"
+    }
+  ]
+}

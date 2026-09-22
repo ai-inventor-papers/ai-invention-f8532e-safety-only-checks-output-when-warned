@@ -1,0 +1,80 @@
+
+3294:... 5. Baseline Database
+     6. Resource Requirements
+  11. X Conclusion
+     1. Deployment recommendation
+  12. References
+  13. A vLLM Integration
+     1. Key Requirements
+     2. CI/CD Integration
+  14. B Implementation Details
+     1. Code
+     2. Activation Extraction
+     3. Contrastive Pairs
+     4. Layer Selection
+  15. C Contrastive Pair Examples
+     1. Harmful Content Detection
+     2. Prompt Injection Resistance
+     3. Refusal Capability
+  16. D Full Results
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:260...
+--
+22595:...r the geometric structure—such as abliteration, which removes refusal behavior while maintaining some separation.
+
+### IV-F Algorithm Summary
+
+The AMS scanning procedure:
+
+  1. 1.
+
+For each concept (harmful_content, injection_resistance, refusal_capability):
+
+     1. (a)
+
+Run 16 contrastive pairs through model, extract activations at layers 40-80% depth
+
+     2. (b)
+
+Select optimal layer (maximum separation)
+
+     3. (c)
+
+Compute direction vector vv and separation σ\sigma
+
+  2. 2.
+
+Tier 1: Classify based on minimum σ\sigma across concepts: PASS (>>3.5σ\sigma), WARNING (2.0-3.5σ\sigma), CRITICAL (<<2.0σ\sigma)
+
+  3. 3.
+
+Tier 2 (optional): Compare direction vectors against baseline via cosine similarity (>>0.8 required) and separation drift (<<20% required)
+
+
+
+
+Total runtime: 96 forward passes (16 pairs ×\times 3 concepts ×\times ∼\sim2 for layer sweep), completing in 10-40 seconds on GPU.
+
+## V Safety Concepts
+
+AMS evaluates three core safety concepts, each with 16 contrastive pairs designed to isolate the target distinction from confounding factors.
+
+#### Harmful Content Detection
+
+Distinguishes requests for harmful information (weapons, malware, fraud) from benign requests on similar topics. Pairs are constructed to share surface features while differing ...
+--
+26986:... contrastive set, safety classification (PASS/WARNING/CRITICAL), and leave-one-out cross-validation accuracy. For Tier 2 we report direction-vector cosine similarity and L2 difference norm at the per-layer level. For behavioral evaluation we report per-model compliance rate over 20 prompts and Pearson/Spearman correlation between σ\sigma and compliance rate across the 14-model set.
+
+## VII Results
+
+### VII-A Tier 1: Generic Safety Check
+
+Table I summarizes Tier 1 results across all models.
+
+TABLE I: Tier 1 results across the 14-model validation set, with bootstrap 95% confidence intervals on σharmful\sigma_{\text{harmful}} over 1000 resamples of the 16 contrastive pairs. Reference thresholds shown for context (PASS >>3.5σ\sigma, WARNING 2.0–3.5σ\sigma, CRITICAL <<2.0σ\sigma); leave-one-out cross-validation of these thresholds is reported separately in Section VII-C. “Compliance” is the behavioral compliance rate on 20 stratified JailbreakBench ...
+--
+[10 more matches not shown]

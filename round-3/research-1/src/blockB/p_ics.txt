@@ -1,0 +1,18 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2608.16852
+Type: HTML
+Pattern: ten labelled pairs|bag-of-words (7 matches in 144688 chars)
+
+--- Content ---
+
+4671:...tector we test, is what escapes it. Testing this at scale requires a detector cheap enough to run across many guards and benchmarks without retraining, so we introduce the Internal Compliance Score, a training-free activation readout calibrated from ten labelled pairs and scored by a single projection. We hold it to the same scrutiny as the guards it is compared against, and a pre-registered criterion for beating trivial baselines is not met, and a bag-of-words model matches its pooled generalisation exactly. It remains useful because it is inexpensive, letting us audit four deployed guard models, an 8B zero-shot judge, and thirteen benchmarks with no prior guard comparison, and it raises the mechanically ...
+--
+9223:... 2023a; Arditi et al., 2024; Marks and Tegmark, 2023; Burns et al., 2022), applied here to written rules rather than safety labels. ICS reads the activations of the monitored model directly rather than querying a separate network, is calibrated from ten labelled pairs, and is scored by a single dot product, allowing the rule-blindness audit to be conducted across deployed guards (Llama Guard 3, WildGuard, Qwen3Guard, HarmBench (Mazeika et al., 2024), SIREN (Jiao et al., 2026), GLiGuard, and Latent Policy Guard (L...
+--
+11377:...out distributions, under budget-matched selection nulls, lexical floors, benign-input false-positive rates, and matched threshold budgets. The same pass audits the public compliance benchmarks themselves: four of seven are solvable by a policy-blind bag-of-words model, so they cannot adjudicate a rule-conditioned claim at all.
+
+  * •
+
+Characterisation. Counterfactual rule interventions, and a purpose-built benchmark crossing rules with scenarios so that neither alone predicts the label, show that ICS and ev...
+--
+[3 more matches not shown]

@@ -1,0 +1,164 @@
+[
+  {
+    "item": 1,
+    "url": "https://github.com/JolanMc/Jorak",
+    "regex": "n/a (repo page fetch)",
+    "found": true,
+    "passages": [
+      "JolanMc / Jorak Public ... Fork 0 ... Star 0 ... Pull requests 2",
+      "description: \"Reference-free detection of abliteration in open-source LLMs — tell whether a model was censored, fine-tuned, or silently uncensored, without the original model.\"",
+      "license: {\"key\":\"apache-2.0\",\"name\":\"Apache License 2.0\"}",
+      "created_at: 2026-07-24T09:49:36Z, pushed_at: 2026-07-24T09:52:56Z, stargazers_count: 0, open_issues_count: 2"
+    ],
+    "notes": "Repo is LIVE (not 404), public, Python, size 1905 KB. Latest commit sha=8147de343964a3cced37db71814e9007c7465a52, date=2026-07-24T09:52:55Z (message: 'test: make AWS runner download test hermetic'). License=Apache-2.0. 0 stars, 2 open issues, 2 open PRs. Topics include abliteration, ai-safety, interpretability, refusal-direction. No activity since 2026-07-24 (repo appears frozen/abandoned but still publicly reachable).",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 1,
+    "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+    "regex": "suppression|SVD|scar|subspace|parent|reference|sans inférence|A = ",
+    "found": true,
+    "passages": [
+      "L'idée-clé **reference-free** : on n'a pas besoin de générer ni de comparer à un original pour séparer *censuré* de *ablated* — c'est la **signature spectrale des poids** (plan ①) qui dit si l'axe est débranché.",
+      "Intuition physique : une ablation directionnelle réécrit les poids qui **écrivent dans le résidu** ... pour que la direction de refus `r̂` **ne puisse plus y être écrite** : `W' = (I − r̂r̂ᵀ)W`. Après ça, `r̂` tombe dans le **noyau gauche** de `W'` (valeur singulière ≈ 0). On cherche cette signature, couche par couche, par SVD.",
+      "**Qwen/Qwen3-8B (base, censuré)** : `A = 0.184` ≈ le plancher 0.167 → poids intacts. ✔ \\- **Josiefied-Qwen3-8B-abliterated-v1** : `A = 0.705` → forte direction commune → poids sectionnés. ✔",
+      "**huihui-Qwen3-8B-abliterated-v2** : `A = 0.735`, `B = 0.757`, bande **0–5**... **Josiefied** : `B = 0.806` > `A = 0.705`, bande **16–21**... **Qwen3-8B base** : `B = 0.249` (≈ plancher)"
+    ],
+    "notes": "METRICS.md still confirms JORAK's core reference-free, weight-only SVD-alignment method (A=σ1(U)/||U||_F over u_min vectors) plus band-alignment B for localized ablation. Numeric examples (A=0.184 base, A=0.705 abliterated, threshold A≥0.5) match prior record.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 2,
+    "url": "https://arxiv.org/html/2603.27412",
+    "regex": "abliterat|recogni|invariant|unchanged|Qwen",
+    "found": true,
+    "passages": [
+      "LatentBiopsy detects harmful intent even in abliterated models that are constitutionally incapable of producing refusals... Harm recognition and refusal generation are separable mechanisms.",
+      "Geometry survives refusal ablation in both tested model families. Abliterated variants of both Qwen3.5-0.8B and Qwen2.5-0.5B achieve AUROC h/b =1.000 and AUROC h/n within 0.015 of their instruction-tuned counterparts",
+      "First, geometry survives refusal ablation: both abliterated variants achieve AUROC at most 0.015 below their instruction-tuned counterparts, establishing a geometric dissociation between harmful-intent representation and the downstream generative refusal mechanism."
+    ],
+    "notes": "Models are Qwen3.5-0.8B and Qwen2.5-0.5B (not Qwen3-4B). Confirms harm-recognition geometry survives abliteration.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 2,
+    "url": "https://arxiv.org/html/2604.18901",
+    "regex": "abliterat|recogni|invariant|unchanged|73|0\\.003",
+    "found": true,
+    "passages": [
+      "Harmful intent is linearly separable from residual-stream activations across 12 models spanning four architectural families (Qwen2.5, Qwen3.5, Llama-3.2, Gemma-3) and three alignment variants (base, instruction-tuned, abliterated)... matches its instruction-tuned counterpart within ±0.003 AUROC in abliterated variants from which the refusal mechanism has been removed.",
+      "two pooling choices applied to the same chat-templated activations at the same residual-stream layer ... recover harm directions 73° apart, and projecting one out leaves detection under either max-pool extraction essentially intact.",
+      "Recent work characterises the residual-stream geometry of safety-relevant features. Arditi et al. (2024) identified a direction ... The procedure produces abliterated model variants in which refusal has been removed"
+    ],
+    "notes": "Confirms both target numbers exactly: 73° pooling-direction divergence and ±0.003 AUROC stability under abliteration, across 12 models/4 families incl. Qwen.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 3,
+    "url": "https://arxiv.org/html/2604.09544",
+    "regex": "dissociab|recogni|DPO|OLMo|double dissociation",
+    "found": true,
+    "passages": [
+      "harmful response generation is dissociable from the ability to recognize and reason about harmfulness.",
+      "pruned models can still recognize harmful requests, refuse, and explain their risks, dissociating generation from harmfulness recognition and reasoning.",
+      "we also observe a symmetric relationship between response-generation and refusal: impairing one leaves the other intact, indicating a double dissociation (Figure 5b).",
+      "Starting at the direct preference optimization (DPO) stage, where the model is trained to prefer aligned over misaligned responses, it is possible to impair the harmful response mechanism beyond refusal alone. ... The OLMo-3-7B checkpoint sequence—spanning pretraining through reinforcement learning (RL)—reveals the gradual emergence of the separability."
+    ],
+    "notes": "Confirms generation/recognition double dissociation and the DPO-stage / OLMo-3-7B checkpoint-sequence finding.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 4,
+    "url": "https://arxiv.org/html/2603.05773v2",
+    "regex": "Recognition Axis|Execution Axis|v_H|v_R|double dissociation|abliterat",
+    "found": true,
+    "passages": [
+      "positing that safety computation operates on two distinct subspaces: a Recognition Axis (v_H, \"Knowing\") and an Execution Axis (v_R, \"Acting\").",
+      "we demonstrate a causal double dissociation, effectively creating a state of \"Knowing without Acting.\" ... we propose the Refusal Erasure Attack (REA), which achieves State-of-the-Art attack success rates by surgically lobotomizing the refusal mechanism",
+      "our experiments demonstrate a causal double dissociation: manipulating the recognition axis v_H alters semantic understanding without triggering refusal, whereas surgically removing the execution axis v_R via our Refusal Erasure Attack (REA) effectively disables the safety mechanism.",
+      "Evaluating Llama, Mistral, and Qwen families across adversarial benchmarks and our AmbiguityBench, we confirm the universal \"Reflex-to-Dissociation\" geometry."
+    ],
+    "notes": "Confirms DSH framing, v_H/v_R axes, and causal double dissociation via REA across Llama/Mistral/Qwen.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 5,
+    "url": "https://arxiv.org/html/2606.24952",
+    "regex": "cosine|0\\.1197|0\\.1200|not a predictor|abliterat|uncensor",
+    "found": true,
+    "passages": [
+      "Across four models from three families and two scales (1B–9B), cos stays in [0.12, 0.20]; it is identical before and after instruction tuning (0.1197 vs 0.1200), so the geometry is laid down in pretraining.",
+      "What the cosine is is a robust, weight-computable signature of the dissociation, invariant across four models — not a predictor of how steerable a behavior is.",
+      "One thing this angle does not do, we should say up front, is serve as an a priori predictor of steerability: the cosine is a signature of the gap, not an oracle for it, and Section 8 makes that negative result precise.",
+      "The gap is weight-readable but not a steerability oracle. The cosine between detection and intervention is computable from the weights and consistent across four models (cos∈[0.12,0.20], a small but reproducible positive)."
+    ],
+    "notes": "Exact numeric match (0.1197 vs 0.1200) and the 'not a predictor' framing both confirmed verbatim.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 6,
+    "url": "https://arxiv.org/abs/2607.01854 and https://arxiv.org/html/2607.01854",
+    "regex": "reference|parent|rests entirely|273|AUROC",
+    "found": true,
+    "passages": [
+      "On a 273-checkpoint registry spanning Qwen, DeepSeek-distilled Qwen, Llama, and Gemma, their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at AUROC 0.95, significantly above either signal alone (0.84, 0.90)",
+      "a spoofed reference evades both axes with no training (ΔW=0, ρ=1 by construction), and a white-box owner trains a checkpoint past the threshold while it stays guard-unsafe and coherent. The audit is effective triage, not tamper-proofing: it presumes an attested reference",
+      "Tier-1 absolute thresholding misses an abliterated Qwen2.5-1.5B sibling that Tier-2 reference-verification catches: reference-anchoring, not absolute thresholding, surfaces the edit."
+    ],
+    "notes": "'rests entirely' phrase not found verbatim, but the substance is confirmed: the audit 'presumes an attested reference' and a spoofed reference defeats both signals with zero training — i.e. it does rest on trusting the reference checkpoint. 273-checkpoint registry and AUROC 0.95 both confirmed exactly.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 7,
+    "url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+    "regex": "Qwen3-4B|safety-removed|JSS|Kendall|github|code",
+    "found": true,
+    "passages": [
+      "when comparing multiple variants of the same base model (e.g., RL-aligned, base, and safety-removed versions of Qwen3-4B), we observe that better-aligned variants exhibit more pronounced geometric separation between different trajectories in latent space.",
+      "N-GLARE operates entirely on the model's latent representations, bypassing the need for full text generation. It characterizes hidden layer dynamics by analyzing the APT (Angular-Probabilistic Trajectory) of latent representations and introducing the JSS (Jensen-Shannon Separability) metric.",
+      "Experiments on over 40 models and 20 red teaming strategies demonstrate that the JSS metric exhibits high consistency with Red Teaming safety rankings at less than 1% token and runtime cost."
+    ],
+    "notes": "Paper published as ACL 2026 long paper (pages 28902-28923, July 2026), confirmed. A follow-up regex for 'github.com|code (is )?(released|available)|will be (released|available)|https://' over the same PDF returned ZERO matches — no code-availability statement or repo link found anywhere in text. Web searches 'N-GLARE github' and 'N-GLARE non-generative latent representation safety evaluator code' returned only unrelated image-processing/low-light-enhancement repos named GLARE and the paper's own arXiv/ACL/Semantic Scholar/alphaXiv pages — no code release found.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 8,
+    "url": "https://arxiv.org/html/2603.18353",
+    "regex": "98\\.2|65 of 144|45\\.1|53|zero corrections|17 of 85|25 of 47|19 of 79|4 of 65|random perturbation",
+    "found": true,
+    "passages": [
+      "Qwen 2.5 7B detected 65 of 144 (45%)... Linear probes trained on Qwen's internal representations discriminated hazardous from benign cases with 98.2% AUROC (95% CI 0.968 to 0.993), demonstrating a 53-percentage-point gap... Concept bottleneck steering corrected 17 of 85 missed hazards (20%) but disrupted 25 of 47 correct detections (53%), indistinguishable from random perturbation (p=0.84). SAE feature steering produced zero corrections and zero disruptions despite identifying 3,695 significant hazard-associated features. TSV steering at high strength corrected 19 of 79 missed hazards (24%) while disrupting 4 of 65 correct detections (6%)",
+      "Qwen 2.5 7B Instruct detected 65 of 144 hazards overall (sensitivity 0.451, 95% CI 0.371 to 0.534; specificity 0.844, 95% CI 0.795 to 0.883).",
+      "the best-performing hazard-concept intervention (α=0.00, concept suppression) corrected 17 of 85 false negatives (20.0%...) while disrupting 25 of 47 true positives (53.2%...)",
+      "At α=10.0, TSV steering corrected 19 of 79 false negatives (24.1%...) while disrupting 4 of 65 true positives (6.2%...), yielding a net gain of 15 cases."
+    ],
+    "notes": "The 'zero corrections and zero disruptions' result belongs specifically to the SAE FEATURE STEERING arm (not concept-bottleneck, not TSV) — despite SAE identifying 3,695 significant hazard-associated features, steering along them produced no behavioral change at all. All other numbers (98.2% AUROC, 65 of 144 = 45.1% sensitivity, 53-pt gap, 17/85, 25/47, 19/79, 4/65) confirmed exactly.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 9,
+    "url": "https://arxiv.org/html/2607.14147v1",
+    "regex": "0\\.24|0\\.03|concentration",
+    "found": true,
+    "passages": [
+      "A small safety-specific attractor remains on top (logit-trace concentration 0.24 vs 0.03), whose active-vs-passive character we size but do not fully separate.",
+      "A logit-level trace then measures a safety-specific component on top: when the knockout frees probability mass off the compliance continuation, the instruct model routes it to refusal tokens about 8× more than the base model does (concentration 0.24 vs 0.03, App. E). Safety tuning adds a small learned refusal attractor, but the dominant mechanism is passive: compliance collapses in both models.",
+      "on Qwen2.5-1.5B, refusal on harmful prompts drops from 1.00 to 0.03 (97 of 100 comply) and behavior, used as a harm detector, collapses to chance (AUC 0.51)."
+    ],
+    "notes": "Exact numeric match confirmed: logit-trace concentration 0.24 vs 0.03.",
+    "verdict": "CONFIRMED"
+  },
+  {
+    "item": 10,
+    "url": "https://arxiv.org/abs/2608.09624 and https://arxiv.org/html/2608.09624",
+    "regex": "0\\.220|anti-rank|AUROC",
+    "found": true,
+    "passages": [
+      "Title: Measuring the Wrong Thing: Internal Harmfulness Scores Anti-Rank Successful Jailbreaks",
+      "On Llama, wrapping raises harmful generation from 0.05 to 0.27 while harmful intent AUROC falls from 0.936 to 0.803, so the attacks grow more dangerous while the prompts look safer to the score. Among wrapped harmful prompts the outcome AUROC is 0.220, which places the attacks that succeeded below the attacks that failed.",
+      "Wrapping a harmful request raises the harmful generation rate from 0.05 to 0.27. At the same time, harmful intent AUROC falls from 0.936 to 0.803. Among wrapped harmful prompts, the score places successful attacks below failed attacks and reaches an outcome AUROC of 0.220."
+    ],
+    "notes": "Exact numeric match confirmed: outcome AUROC 0.220 among wrapped harmful prompts; 'anti-rank' present in the paper's own title.",
+    "verdict": "CONFIRMED"
+  }
+]

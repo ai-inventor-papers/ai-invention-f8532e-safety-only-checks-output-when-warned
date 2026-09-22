@@ -1,0 +1,443 @@
+{
+  "blockD": {
+    "verdict": "REPLICATED-IN-SAFETY",
+    "note": "Multiple 2026 papers replicate the Basu et al. (2603.18353) 'probe knows, model/steering does not act' pattern in non-clinical LLM-safety settings (jailbreak/refusal, harmful-intent recognition, hallucination-refusal), and several more replicate it in fully non-safety domains (CAD geometry, arithmetic error monitoring, truth/deception, generic Pythia task families). Full four-way probe-vs-output-vs-steering-vs-SAE comparison in one paper is rare: SAE ablation specifically is tested only by 2609.18080 (truth/deception domain, not classic safety-harm). Safety-domain papers mostly compare probe vs behavioral-output vs steering/latent-intervention (3 of 4 methods).",
+    "hits": [
+      {
+        "id_url": "arXiv:2606.24952 https://arxiv.org/html/2606.24952v1",
+        "domain": "LLM safety/refusal (hallucination detection -> refusal control), Gemma 2-2B-it",
+        "probe_metric_value": "AUC = 1.000 from layer 5 (linear probe, entity-real-vs-fake)",
+        "behavioural_metric_value": "steering along the detection direction fails to control refusal; detection direction sits at cos=0.12 (~83 deg) from the direction that causes refusal",
+        "gap_size": "~83 degree angle between detection direction and control direction; a 15-degree rotation toward the intervention direction only partially bridges it (73% and 60% refusal on two held-out entity categories at 1.8% FPR, N=115)",
+        "intervention_tested": true,
+        "intervention_outcome": "steering/control fails despite perfect detection; only a hand-tuned rotated direction partially restores control",
+        "outcome_predicted": "binary (refusal vs not) + continuous cosine/angle geometry",
+        "unit": "per-input (N=100 main set, N=115 stress test), single model",
+        "n_model_families": 1,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": true,
+        "prompts_needed_per_model": "N=100 stimuli (50 fake-entity + 50 real-entity) for main experiments; N=115 stress-test set",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2606.24952v1",
+            "text": "The model detects whether an entity is real with perfect linear separability (AUC = 1.000 from layer 5), yet the direction carrying that signal sits at cos=0.12 -- about 83 -- from the direction that produces a refusal: a small, r...",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2606.24952v1",
+            "text": "so the geometry is laid down in pretraining. On Gemma 2-2B-it, a 15 rotation from the detection direction toward the intervention direction partially bridges the gap -- 73% and 60% refusal on two held-out entity categories, at 1.8% false positives (N=115).",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2606.24952v1",
+            "text": "Logit lens -- top-5 entropy (unsupervised): we project the residual stream at each layer through the unembedding matrix to read the model's evolving next-token prediction; the entropy of its top-5 tokens measures predictive uncertainty.",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2603.05773 https://arxiv.org/abs/2603.05773",
+        "domain": "LLM safety mechanisms (refusal geometry, causal steering, jailbreak attack)",
+        "probe_metric_value": "SNIPPET-ONLY: not given a numeric value in retrieved text",
+        "behavioural_metric_value": "SNIPPET-ONLY: 'Refusal Erasure Attack (REA)' achieves 'State-of-the-Art attack success r...' (truncated, number not captured)",
+        "gap_size": "described qualitatively as 'Knowing without Acting' via causal double dissociation",
+        "intervention_tested": true,
+        "intervention_outcome": "Adaptive Causal Steering used to create causal double dissociation between knowledge and refusal action; exploited via Refusal Erasure Attack",
+        "outcome_predicted": "binary (attack success) - exact rate SNIPPET-ONLY",
+        "unit": "not established from snippet (abstract only fetched)",
+        "n_model_families": "not stated in retrieved snippet",
+        "n_checkpoints": "not stated",
+        "abliterated_checkpoint_scored": "not determined (abstract only)",
+        "logit_first_token_baseline_compared": "not determined (abstract only)",
+        "prompts_needed_per_model": "uses curated 'AmbiguityBench'; size not captured",
+        "passages": [
+          {
+            "url": "https://arxiv.org/abs/2603.05773",
+            "text": "Our geometric analysis reveals a universal “Reflex-to-Dissociation” evolution, where these signals transition from antagonistic entanglement in early layers to structural independence in deep layers. To validate this, we introduce Double-Difference Extraction and Adaptive Causal Steering. Using our curated AmbiguityBench, we demonstrate a causal double dissociation, effectively creating a state of “Knowing without Acting.” Crucially, we leverage this disentanglement to propose the Refusal Erasure Attack (REA), which achieves State-of-the-Art attack success r...",
+            "verbatim": true,
+            "note": "SNIPPET-ONLY (abstract page; full HTML/PDF not fetched)"
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2606.08044 https://arxiv.org/html/2606.08044",
+        "domain": "LLM safety (jailbreak audit gap; safety-aligned bases Gemma 2 2B, Llama 3.2 3B, Qwen 2.5 3B)",
+        "probe_metric_value": "'a strong fixed probe on clean activations cannot tell it from the base' (dissociated vs. base model indistinguishable to static probe)",
+        "behavioural_metric_value": "bounded latent attack elicits harmful compliance on 54-86% of prompts for dissociated models vs 3-48% for bases; matched random perturbations stay <=12%",
+        "gap_size": "dissociated models score 2.5 to 3.1x higher Latent Vulnerability Score (LVS) than their bases at the targeted mid layer, despite identical static-audit verdicts",
+        "intervention_tested": true,
+        "intervention_outcome": "the same interventions (harmful fine-tuning, bounded latent attacks, directional steering) that an auditor could run reverse the static-audit verdict; static probing and behavioral refusal testing both fail to certify robustness",
+        "outcome_predicted": "graded rate (compliance %) + continuous LVS score",
+        "unit": "per-input, aggregated per model (3 model families), single checkpoint each",
+        "n_model_families": 3,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "not fully specified in excerpt; includes construction data, attack data, and evaluation prompts (Appendix A); GCG-style attacks with 500 steps / 25 held-out behaviors mentioned",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2606.08044",
+            "text": "Every static audit we run gives the dissociated model the same verdict as its base, since its refusals match the base, jailbreaks show no consistent signature, and a strong fixed probe on clean activations cannot tell it from the base. The same interventions an auditor could run reverse the verdict. At the targeted mid layer the dissociated models score 2.5 to 3.1 times higher LVS than their bases. A bounded latent attack elicits harmful compliance on 54 to 86% of prompts, against 3 to 48% for the bases, while matched random perturbations stay at or below 12%.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2606.08044",
+            "text": "s what the model does on the prompts it is shown, not how close its internal state sits to producing harm. We call this discrepancy the audit gap: the difference between the safety that static audits can certify and the vulnerability that only an intervention on the model reveals. Whether the gap is present cannot be settled from behavior alone. We show by construction that it is realizable, and that a strong static probe on internal activations does not close it.",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2604.18901 https://arxiv.org/html/2604.18901v2",
+        "domain": "LLM safety (harmful-intent recognition vs refusal generation), 12 models x 4 architectural families",
+        "probe_metric_value": "harmful intent linearly separable (near-ceiling AUROC) from residual-stream activations; direction fit from 100 labelled examples/class",
+        "behavioural_metric_value": "SNIPPET-ONLY: 'Recognition and refusal as separable signals' discussed as a discussion subsection; exact behavioral (refusal) numbers not captured in this grep pass",
+        "gap_size": "AUROC and TPR@1%FPR diverge in the near-ceiling regime; recognition and refusal treated as separable signals",
+        "intervention_tested": "partially (direction transfer across alignment variants tested; explicit steering intervention not confirmed in captured passages)",
+        "intervention_outcome": "detection persists through alignment interventions (including abliteration) even though refusal behavior differs by alignment variant",
+        "outcome_predicted": "binary (harmful/not) via AUROC, cross-model/variant",
+        "unit": "per-input, aggregated per model x alignment-variant (12 models x 3 variants)",
+        "n_model_families": 4,
+        "n_checkpoints": "3 alignment variants per family (base, instruction-tuned, abliterated); not multiple training checkpoints",
+        "abliterated_checkpoint_scored": true,
+        "logit_first_token_baseline_compared": "yes (§2.2 'Zero-shot baselines' and §2.4 'Comparison with dedicated safety classifiers')",
+        "prompts_needed_per_model": "direction fit from 100 labelled examples per class; full evaluation set size not captured in this pass",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2604.18901v2",
+            "text": "Aligned language models refuse harmful instructions, but the representations through which they recognise such instructions are less well characterised than the behaviours they produce. Harmful intent is linearly separable from residual-stream activations across 12 models spanning four architectural families (Qwen2.5, Qwen3.5, Llama-3.2, Gemma-3) and three alignment variants (base, instruction-tuned, abliterated), with parameter scales from 0.5B to 1.3B and a within-family scale extension to 9B on Qwen3.5. A direction fitted from 100 labelled examples per class",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2604.18901v2",
+            "text": "3.1 Detection across architectures and alignment variants / AUROC and TPR@1%FPR diverge in the near-ceiling regime. / 3.2 Detection persists through alignment interventions / Cross-variant direction transfer.",
+            "verbatim": true,
+            "note": "reconstructed from table-of-contents fragment, not flowing prose"
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2608.08029 https://arxiv.org/html/2608.08029v1",
+        "domain": "LLM safety (harmfulness probes), reproducibility study across LLaMA-3.1-8B + additional model families",
+        "probe_metric_value": "F1 = 99.1%, 82.7%, 83.5% on WildJailbreak, BeaverTails, AEGIS 2.0 (original Khatri et al. result being reproduced); reproduction within 0.37 pp of original",
+        "behavioural_metric_value": "not the focus of this paper (probe-vs-guard-model comparison, not probe-vs-behavior)",
+        "gap_size": "not a knowledge-action gap paper per se; cites Llorente-Saguer (2026, i.e. 2604.18901) for the recognition/refusal separability evidence",
+        "intervention_tested": false,
+        "intervention_outcome": "n/a - this is a probe-reproducibility study, not an intervention study",
+        "outcome_predicted": "binary (harmful/not) via F1",
+        "unit": "per-checkpoint/per-model-family (LLaMA-3.1-8B plus additional families), 5 seeds each",
+        "n_model_families": 4,
+        "n_checkpoints": "5 random-seed extraction runs per model/dataset pair (not training checkpoints)",
+        "abliterated_checkpoint_scored": "referenced via citation only (Llorente-Saguer 2026 tested abliterated); not itself scored here",
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "three benchmarks: WildJailbreak, BeaverTails, AEGIS 2.0",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2608.08029v1",
+            "text": "Khatri et al. (2026) show that lightweight MLP probes on final-layer activations of a single 8B model (LLaMA-3.1-8B) detect harmful prompts at F1 competitive with guard models 1000x larger, using one probe per benchmark. We reproduce this pipeline end-to-end and extend it along two axes the original study leaves open.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2608.08029v1",
+            "text": "Llorente-Saguer (2026) show that harmful intent is linearly separable from residual-stream activations across 12 models spanning four architectural families and three alignment variants (base, instruction-tuned, and abliterated), including cases where the refusal mechanism has been surgically removed, evidence that harm recognition and refusal generation are separable mechanisms at the representation level",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2608.17843 https://arxiv.org/html/2608.17843v1",
+        "domain": "NON-safety: structured/geometric reasoning (CAD constraint satisfaction), six frozen decoder-only LLMs (Qwen2.5, Mistral, Llama-3.1 families)",
+        "probe_metric_value": "sketch-level constraint status (P1) 'already highly decodable' (exact numeric AUROC not captured in this pass; P3 per-class accuracy table captured, e.g. Qwen2.5-0.5B Tan class 0.65/0.96)",
+        "behavioural_metric_value": "P3 forced-choice generation accuracy far lower / class-dependent (see Table 5/Figure 6 per-model-per-class accuracy, values as low as 0.04-0.21 for some classes)",
+        "gap_size": "strong P1 decodability does not translate into reliable P3 generation, with failure severity varying sharply across model backbones; activation-patching restoration effects vanish while decodability persists; mean-difference steering does not reliably control outputs",
+        "intervention_tested": true,
+        "intervention_outcome": "activation patching (restoration) and mean-difference steering both tested on two backbones (Qwen2.5-3B, Llama-3.1-8B); both fail to reliably control/restore the behavior even though the information is decodable at high layers",
+        "outcome_predicted": "graded rate (per-class accuracy) + binary decodability",
+        "unit": "per-input, per-model (6 models); no checkpoints across training",
+        "n_model_families": 3,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "SketchGraphs dataset serialized geometry, with cross-dataset check on Fusion 360 Gallery; per-class counts given e.g. Coin(222), Par(239), Perp(247), Tan(256), Eq(261), Mid(249), Con(264), NoC(262)",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2608.17843v1",
+            "text": "Further analyses show that decodable information is not always actionable. Generation often fails to express this information, and on the two intervention-tested backbones, activation-restoration effects at the patched entity position vanish while decodability persists across depth. Mean-difference steering also does not reliably control outputs.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2608.17843v1",
+            "text": "strong P1 decodability does not translate into reliable P3 generation, with failure severity varying sharply across model backbones. Activation patching reveals that prediction sensitivity to restoration at the patched entity position is concentrated in early layers and vanishes while decodability persists. Mean-difference steering does not reliably control predictions.",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2609.18080 https://arxiv.org/html/2609.18080v1",
+        "domain": "NON-safety (adjacent): truthfulness/instructed-deception probe (TTPD probe, Gemma-2-9B-Instruct) -- SAE decomposition explicitly tested",
+        "probe_metric_value": "TTPD True/False probe decoding accuracy (baseline, exact % not captured); probe-alignment vs gradient-sensitivity feature rankings overlap only ~12% (Spearman rho=0.10)",
+        "behavioural_metric_value": "ablating probe-shared SAE features flips output up to 27%; probe-only features 6%; random features 1% (at full coherence); activation-aware feature selection flips behavior 17.6% vs 6.1% for probe's geometric top features",
+        "gap_size": "geometric alignment with the probe direction is only weakly related (rho=0.10, ~12% overlap) to which SAE features are behaviorally causal",
+        "intervention_tested": true,
+        "intervention_outcome": "SAE feature ablation under a coherence gate; shared (probe+gradient) features are far more behaviorally causal than probe-only or random features, showing decodability != causality",
+        "outcome_predicted": "graded rate (% output flip) via ablation",
+        "unit": "per-input, single model (Gemma-2-9B-Instruct), 5 seeds, held-out split",
+        "n_model_families": 1,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "not captured in this pass (TTPD probe of Buerger et al. 2024, instructed truth/deception setting of Long et al. 2025)",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2609.18080v1",
+            "text": "On the truth probe of Burger et al. (2024) (TTPD), applied in the instructed truth/deception setting of Long et al. (2025) for Gemma-2-9B-Instruct, the two rankings overlap only weakly (about 12%, Spearman rho=0.10), and ablation dissociates them sharply: features the probe shares with the model flip the output far more (up to 27%) than equally sized probe-only (6%) or random (1%) features at full coherence, while probe-only features instead perturb the probe's own readout.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2609.18080v1",
+            "text": "high probe accuracy alone does not establish that the representations identified by the probe necessarily play a causal role in the model's decisions (Hewitt and Liang, 2019; Belinkov, 2022; Occhipinti et al., 2026).",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2609.01048 https://arxiv.org/pdf/2609.01048v1",
+        "domain": "NON-safety: general task families, full Pythia suite (160M-12B), pre-registered developmental study",
+        "probe_metric_value": "internal readability saturated at AUROC >= 0.990 from the first checkpoint (step 1000) at every scale",
+        "behavioural_metric_value": "behavioral readability (output layer's own answer info) ramps gradually, reaching only 0.909 at 12B by the final checkpoint",
+        "gap_size": "causal efficacy (steering along the reading direction) is null-equivalent in 43 of 48 model x checkpoint cells; causal write-in stays pinned below 0.11% of representation headroom even as headroom grows up to 57x with training/scale",
+        "intervention_tested": true,
+        "intervention_outcome": "steering along the probe-read direction is almost always null-equivalent, occasionally counterproductive early in training, with a single isolated positive pulse (12B, step 8000, z=+2.49) unresolved by the grid; result replicates (attenuated) in a pre-registered OLMo-2 replication",
+        "outcome_predicted": "graded/continuous (AUROC per track) across full training trajectory, per-checkpoint",
+        "unit": "per-checkpoint AND per-model (8 checkpoints x multiple Pythia scales = 48 model x checkpoint cells; plus OLMo-2 replication)",
+        "n_model_families": 2,
+        "n_checkpoints": 8,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": "not explicitly found in this pass, but 'behavioral readability' track uses the model's own output-layer answer score, functioning as a first-token/logit-based baseline",
+        "prompts_needed_per_model": "not captured numerically; four task families across the full Pythia suite",
+        "passages": [
+          {
+            "url": "https://arxiv.org/pdf/2609.01048v1",
+            "text": "Across the full Pythia suite (160M-12B, eight checkpoints, four task families), a linear probe can read a target variable from the residual stream as early as step 1,000 at every scale-yet steering along that same reading direction remains null-equivalent in 43 of 48 model x checkpoint cells.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/pdf/2609.01048v1",
+            "text": "(i) internal readability, saturated (AUROC >= 0.990) from the first checkpoint everywhere; (ii) behavioral readability, the output layer's own answer information, which develops gradually and progressively later at larger scales (12B reaches 0.909 only at the final checkpoint); (iii) causal efficacy, almost always null-equivalent, occasionally counterproductive early in training, with a single isolated positive pulse (12B, step 8,000, z = +2.49) that our grid cannot resolve.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/pdf/2609.01048v1",
+            "text": "Our results caution against inferring steerability from probe accuracy and establish a developmental bottleneck-representation formation reliably outpaces causal readout consolidation-together with a fully audited, hash-chained pipeline as a reusable template for developmental claims about mechanism.",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2608.07528 https://arxiv.org/html/2608.07528",
+        "domain": "NON-safety: multi-hop arithmetic error monitoring, multiple model families incl. reasoning models",
+        "probe_metric_value": "linear probes detect corrupted context with near-perfect accuracy",
+        "behavioural_metric_value": "probe detection does not translate into reliable failure prediction; verbalised confidence collapses to two values with indistinguishable error rates; probe-based real-time interventions are sharply model- and error-type-dependent (branch-and-pick: '4 rescued, 0 broken' on Llama-3.1-8B)",
+        "gap_size": "described as 'knowing but not saying': probes that detect corruption are uninformative about final answer correctness; probe persistence across hops fails to separate correct from incorrect outcomes (refuting pre-registered 'persistence beats peak' hypothesis)",
+        "intervention_tested": true,
+        "intervention_outcome": "branch-and-pick intervention is net-positive and uniquely non-breaking on Llama-3.1-8B (4 rescued, 0 broken); reprompt and replace-prior interventions break correct traces at roughly the same rate they fix incorrect ones",
+        "outcome_predicted": "binary (detect corruption) vs graded (failure prediction / rescue rate)",
+        "unit": "per-input, multiple model families (exact count not captured), single checkpoint each",
+        "n_model_families": "multiple, including reasoning models (exact count not captured in this pass)",
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": "surface uncertainty / verbalised-confidence baseline compared (near/at chance) -- functionally analogous to a first-token confidence baseline",
+        "prompts_needed_per_model": "multi-hop arithmetic chains with injected errors; exact N not captured in this pass",
+        "passages": [
+          {
+            "url": "https://arxiv.org/html/2608.07528",
+            "text": "Linear probes detect corrupted context in language models with near-perfect accuracy, yet this does not translate into reliable failure prediction. The result is a dissociation with direct implications for deployment monitoring. Across multi-hop arithmetic chains, probes that detect corruption turn out to be uninformative about final answer correctness; models forced into structured confidence formats collapse to two values with indistinguishable error rates; and probe persistence across hops fails to separate correct from incorrect outcomes, refuting our pre-registered “persistence beats peak” hypothesis.",
+            "verbatim": true
+          },
+          {
+            "url": "https://arxiv.org/html/2608.07528",
+            "text": "As a real-time monitor, probe-based interventions are sharply model and error-type dependent: branch-and-pick is net-positive across models and uniquely non-breaking on Llama-3.1-8B(4 rescued, 0 broken), while reprompt and replace-prior break correct traces at roughly the rate t...",
+            "verbatim": true
+          }
+        ]
+      }
+    ]
+  },
+  "B6": {
+    "verdict": "PARTIAL",
+    "what_is_empty": "No paper found that (a) reads over-refusal risk purely from internal activations on XSTest/OR-Bench/pseudo-harmful prompts and (b) ranks or predicts different models' or checkpoints' over-refusal RATE from that internal signal at a per-checkpoint/per-model level, analogous to a leaderboard. Several papers probe/steer the internal refusal-type direction (over-refusal vs harmful-refusal) within a model, and one paper (2511.19009) reports per-model-family behavioral over-refusal rates after a representation-level intervention, but none use pure internal readout to RANK checkpoints by predicted over-refusal rate. The closest methodological template -- reading a graded output property from internals and validating it across 20+ models AND across OLMo pre-training checkpoints -- exists for TOXICITY generation (Aligned Probing, TACL 2026) but not for over-refusal specifically.",
+    "hits": [
+      {
+        "id_url": "arXiv:2603.27518 https://arxiv.org/html/2603.27518v1",
+        "verbatim_claim": "Linear probe accuracy across layers. (a) Task identity saturates from early layers. (b) Over-refusal behaviour (over-refusal vs. harmless-answered) consolidates through mid-layers. (c) Refusal type (over-refusal vs. harmful-refusal) perfect accuracy from early layers.",
+        "outcome_predicted": "binary (over-refusal vs not; over-refusal vs harmful-refusal)",
+        "unit": "per-input, single model, over-refusal vs harmful-refusal subspace analysis (XSTest, OR-Bench, JailbreakBench, Alpaca prompts)",
+        "n_model_families": 1,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "XSTest, OR-Bench-style, JailbreakBench, Alpaca, plus custom cipher/RAG dataset across 5 NLP tasks"
+      },
+      {
+        "id_url": "arXiv:2410.03415 https://arxiv.org/html/2410.03415v2",
+        "verbatim_claim": "Operation Harmful ORBench-H XSTest-S CR Llama2-7B-Chat - 2.3 14.8 13.6 - r-hat ablating true refusal vector 93.0 100 93.0 - w-hat ablating false refusal vector 46.1 100 90.0 -",
+        "outcome_predicted": "graded compliance-rate (CR) benchmark score, per-input aggregated",
+        "unit": "per-input, single model (Llama2-7B-Chat) plus generalization checks; not per-checkpoint",
+        "n_model_families": 1,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "OR-Bench-Hard (false-refusal vector construction), XSTest-Safe(H) 66 samples, OKTest, plus JailbreakBench/TDC2023/Alpaca for harmful/harmless"
+      },
+      {
+        "id_url": "arXiv:2511.19009 https://arxiv.org/html/2511.19009",
+        "verbatim_claim": "Experimental results on safety, over-refusal, and tradeoff score for Mistral-7B-Instruct-v0.2, Llama3-8B-Instruct, and Qwen2.5-7B-Instruct over three runs... Safety ASR (%) | Over-refusal Rate (%) | Tradeoff Score (%) ... PHTest | OR-Bench | FalseReject",
+        "outcome_predicted": "benchmark score (over-refusal rate %, per model, behaviorally measured after a representation-space intervention)",
+        "unit": "per-model (3 model families), behavioral evaluation, not per-checkpoint, not pure internal-readout ranking",
+        "n_model_families": 3,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "PHTest, OR-Bench, FalseReject benchmarks"
+      },
+      {
+        "id_url": "arXiv:2507.11878 https://arxiv.org/html/2507.11878v4",
+        "verbatim_claim": "The model's latent harmfulness representation can serve as an intrinsic safeguard (Latent Guard) for detecting unsafe inputs and reducing over-refusals that is robust to finetuning attacks. For instance, our Latent Guard achieves performance comparable to or better than Llama Guard 3 8B",
+        "outcome_predicted": "binary (unsafe input detection) with over-refusal reduction as a side effect; not a per-checkpoint over-refusal-rate ranking",
+        "unit": "per-input, small number of models",
+        "n_model_families": "not captured precisely in this pass",
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "XSTest used for the over-refusal category alongside WildJailbreak/AdvBench-style harmful sets"
+      },
+      {
+        "id_url": "aclanthology 2026.tacl-1.14 (Aligned Probing) https://aclanthology.org/2026.tacl-1.14.pdf",
+        "verbatim_claim": "Using this framework, we examine over 20 OLMo, Llama, and Mistral models, bridging behavioral and internal perspectives for toxicity for the first time... Case Study: Pre-Training Dynamics. We analyze how model behavior and internals evolve during pre-training by studying six pre-training checkpoints of OLMo",
+        "outcome_predicted": "graded/continuous (toxicity score, not over-refusal)",
+        "unit": "per-model (20+ models) AND per-checkpoint (6 OLMo pretraining checkpoints) -- but for TOXICITY GENERATION, not over-refusal on safe prompts",
+        "n_model_families": 3,
+        "n_checkpoints": 6,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "RealToxicityPrompts and CategoricalHarmfulQA-style toxic/non-toxic prompt sets across 6 fine-grained toxicity attributes",
+        "note": "closest existing template for a per-checkpoint internals-to-behavior ranking methodology, but topic is toxic generation, not over-refusal; no XSTest/OR-Bench use found"
+      }
+    ]
+  },
+  "B7": {
+    "verdict": "CLOSED",
+    "note": "The 'Aligned Probing' paper (TACL 2026) publishes essentially the requested quantity -- a probe-derived internal harm/toxicity signal ('encoding strength' = Pearson correlation between probe-predicted and actual toxicity scores) -- at per-model (20+ OLMo/Llama/Mistral models) AND per-checkpoint (6 OLMo pre-training checkpoints) granularity, explicitly used to explain/predict behavioral toxicity (Expected Maximum Toxicity). The graded quantity is continuous Perspective-API toxicity score rather than PKU-SafeRLHF's categorical severity levels, and no PKU-SafeRLHF-specific probe paper was found, so if the reviewer requires literal ordinal severity categories (not continuous toxicity) this could be read as PARTIAL instead.",
+    "hits": [
+      {
+        "id_url": "aclanthology 2026.tacl-1.14 (Aligned Probing: Relating Toxic Behavior and Model Internals) https://aclanthology.org/2026.tacl-1.14.pdf",
+        "verbatim_claim": "Our results show that LMs strongly encode information about the toxicity level of inputs and subsequent outputs, particularly in lower layers. Focusing on how unique LMs differ offers both correlative and causal evidence that they generate less toxic output when strongly encoding information about the input toxicity.",
+        "outcome_predicted": "graded/continuous (toxicity level, Pearson r between probe-predicted and actual toxicity)",
+        "unit": "per-model (20+ models) and per-checkpoint (6 OLMo pretraining checkpoints)",
+        "n_model_families": 3,
+        "n_checkpoints": 6,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "RealToxicityPrompts, plus a fine-grained 6-attribute toxic-attribute set (e.g. Threat, Insult, Sexually Explicit) with per-attribute EMT/TC scores",
+        "passages": [
+          {
+            "url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+            "text": "Toxicity Correlation (TC) We compute the Pearson correlation between the toxicity scores of the input (tI) and the corresponding model toxicity (EMT). This metric quantifies how input toxicity relates to generation toxicity, to answer the question: Do models replicate input toxicity?",
+            "verbatim": true
+          },
+          {
+            "url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+            "text": "We then approximate the encoding strength (s) as the Pearson correlation between the predicted (that) and actual (t) toxicity scores. Since the learning capacity of the probe f is limited, a high correlation suggests that substantial information about toxicity is encoded in h[l]",
+            "verbatim": true
+          },
+          {
+            "url": "https://aclanthology.org/2026.tacl-1.14.pdf",
+            "text": "Case Study: Pre-Training Dynamics. We analyze how model behavior and internals evolve during pre-training by studying six pre-training checkpoints of OLMo (Groeneveld et al., 2024)... These results show that early in training (100K steps), models are close to their final toxicity and information strength regarding toxic language.",
+            "verbatim": true
+          }
+        ]
+      },
+      {
+        "id_url": "arXiv:2507.21141 https://arxiv.org/pdf/2507.21141v1.pdf (Death by a Thousand Directions)",
+        "verbatim_claim": "For each of 55 distinct harmfulness subconcepts (e.g., racial hate, employment scams, weapons), we learn a linear probe, yielding 55 interpretable directions in activation space. Collectively, these directions span a harmfulness subspace that we show is strikingly low-rank.",
+        "outcome_predicted": "binary per-subconcept (AUC-ROC), not an ordinal severity scale",
+        "unit": "per-input, 2 models (Llama-3.1-8B-Instruct, Qwen-2-7B-Instruct), single checkpoint each",
+        "n_model_families": 2,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "CategoricalHarmfulQA, 10 prompts per subcategory x 55 subcategories, plus 10 Alpaca safe-baseline prompts",
+        "note": "relevant sibling work (harmfulness geometry) but organizes harm by CATEGORY/subconcept, not ORDINAL SEVERITY -- does not satisfy the monotonicity ask"
+      },
+      {
+        "id_url": "arXiv:2609.19366 https://arxiv.org/abs/2609.19366v2 (The Role of Fine-grained Harm Signals in LLM Safety)",
+        "verbatim_claim": "Prior work has shown that internal harmfulness representations in large language models vary across risk categories, while sharing a common general harm representation component... Using activation steering with category residuals across 11 risk categories in 3 instruction-tuned LLMs, we find that whether category residuals encode harmfulness varies across categories",
+        "outcome_predicted": "binary/categorical (11 risk categories), not ordinal severity",
+        "unit": "per-input, per-model (3 instruction-tuned LLMs)",
+        "n_model_families": 3,
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "not captured precisely",
+        "note": "checked per task instructions; addresses CATEGORY-specific harm residuals, not SEVERITY-graded/ordinal harm -- confirms absence of a PKU-SafeRLHF-style severity-level probe paper"
+      },
+      {
+        "id_url": "arXiv:2505.15710 https://arxiv.org/html/2505.15710 (Safety Representation Ranking)",
+        "verbatim_claim": "SRR encodes both instructions and candidate completions using intermediate transformer representations and ranks candidates via a lightweight similarity-based scorer.",
+        "outcome_predicted": "ranking (relative safe/unsafe ordering of candidate RESPONSES to the same prompt), not an ordinal harm-severity scale, and not per-checkpoint model ranking",
+        "unit": "per-input (multiple candidate completions per prompt), single model context",
+        "n_model_families": "not captured precisely",
+        "n_checkpoints": 1,
+        "abliterated_checkpoint_scored": false,
+        "logit_first_token_baseline_compared": false,
+        "prompts_needed_per_model": "not captured precisely",
+        "note": "confirmed NOT the requested quantity: ranks candidate outputs by safety, not by ordinal harm severity level, and no PKU-SafeRLHF severity-tier probing found here"
+      }
+    ]
+  },
+  "zero_hit_queries": [
+    "probe accuracy high but model behavior fails knowing without acting (scholarly/openalex mode -- returned unrelated indexed papers, no useful hits)",
+    "linear probe detects harmful yet model complies (scholarly/openalex mode -- unrelated)",
+    "representation behavior gap LLM safety probe AUROC refusal (scholarly/openalex mode -- unrelated)",
+    "steering fails despite probe accuracy (scholarly/openalex mode -- unrelated)",
+    "encoded but not actionable (scholarly/openalex mode -- returned oncology/genomics 'actionable mutation' papers, unrelated)",
+    "internal harmfulness score correlates with severity level LLM (general/marginalia mode -- returned unrelated clinical-score papers, no LLM-safety hits)"
+  ],
+  "all_queries": [
+    "probe accuracy high but model behavior fails knowing without acting LLM (general)",
+    "linear probe detects harmful yet model complies (general)",
+    "representation behavior gap LLM safety probe AUROC versus refusal (general)",
+    "hidden knowledge vs output LLM truthfulness gap (general)",
+    "latent knowledge exceeds expressed behaviour LLM (general)",
+    "jailbroken model still represents harmfulness internally (general)",
+    "steering fails despite probe accuracy activation intervention (general)",
+    "encoded but not actionable LLM representation (general)",
+    "decodability does not imply causal use probe steering LLM (general)",
+    "probe accuracy high but model behavior fails knowing without acting (scholarly)",
+    "linear probe detects harmful yet model complies (scholarly)",
+    "representation behavior gap LLM safety probe AUROC refusal (scholarly)",
+    "steering fails despite probe accuracy (scholarly)",
+    "encoded but not actionable (scholarly)",
+    "over-refusal detection hidden states (general)",
+    "XSTest over-refusal activation steering (general)",
+    "pseudo-harmful prompts internal representation (general)",
+    "surgical refusal feature over-refusal mitigation (general)",
+    "false refusal direction LLM (general)",
+    "OR-Bench representation analysis (general)",
+    "per-checkpoint over-refusal rate ranking models internal representation (general)",
+    "arxiv 2607.09697 (general, lookup)",
+    "abliterated model over-refusal rate internal representation ranking checkpoints (general)",
+    "internal harmfulness score correlates with severity level LLM (general)",
+    "PKU-SafeRLHF severity level probe representation (general)",
+    "graded harmfulness representation ordinal LLM (general)",
+    "fine-grained harm signals LLM safety representation (general)",
+    "monotone harmfulness probe severity ordinal scale language model (general)",
+    "PKU-SafeRLHF severity 3-level internal activation probe monotone (general)",
+    "arxiv 2604.18901 (lookup)",
+    "arxiv 2603.27412 (lookup)",
+    "arxiv 2606.24952 (lookup)",
+    "Orgad arxiv 2604.09544 (lookup)",
+    "arxiv 2603.05773 (lookup)"
+  ]
+}

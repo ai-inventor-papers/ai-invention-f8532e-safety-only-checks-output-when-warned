@@ -1,0 +1,16 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2604.13386
+Type: HTML
+Pattern: rotate gradually (2 matches in 44918 chars)
+
+--- Content ---
+
+3147:...OC by +29% on Insider Trading and +78% on Harm-Pressure Knowledge. Across 12 models (0.5B–176B parameters), we find probe accuracy improves with scale: ∼5%{\sim}5\% AUROC per 10×\times parameters (R=0.81R{=}0.81). Geometrically, deception directions rotate gradually across layers rather than appearing at one location, explaining both why single-layer probes are brittle and why multi-layer ensembles succeed.
+
+###### Keywords: 
+
+Machine Learning, Large Language Models, Deception Detection, Interpretability, Activ...
+--
+31245:...clusion
+
+We show that single-layer linear probes for deception detection are brittle: optimal layers vary across models and tasks, and probes fail entirely on some challenging deception types. Our geometric analysis reveals why: deception directions rotate gradually across layers, so no single layer captures the full signal. This theoretical insight motivates multi-layer ensembling, and our empirical results validate the approach. On Llama-70B, a 5-layer ensemble with logistic regression stacking achieves +13% ...

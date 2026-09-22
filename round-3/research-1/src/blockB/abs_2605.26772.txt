@@ -1,0 +1,48 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2605.26772
+Type: HTML
+Length: 7612 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Artificial Intelligence
+
+**arXiv:2605.26772** (cs) 
+
+[Submitted on 26 May 2026]
+
+# Title:Beyond a Single Direction: Chain-of-Thought Disrupts Simple Steering of Refusal
+
+Authors:[Kia-Jüng Yang](https://arxiv.org/search/cs?searchtype=author&query=Yang,+K), [Dominik Meier](https://arxiv.org/search/cs?searchtype=author&query=Meier,+D), [Jiachen Zhao](https://arxiv.org/search/cs?searchtype=author&query=Zhao,+J), [Terry Ruas](https://arxiv.org/search/cs?searchtype=author&query=Ruas,+T), [Bela Gipp](https://arxiv.org/search/cs?searchtype=author&query=Gipp,+B)
+
+View a PDF of the paper titled Beyond a Single Direction: Chain-of-Thought Disrupts Simple Steering of Refusal, by Kia-J\"ung Yang and 4 other authors
+
+[View PDF](/pdf/2605.26772) [HTML (experimental)](https://arxiv.org/html/2605.26772v1)
+
+> Abstract:Large reasoning models (LRMs) generate chain-of-thought (CoT) traces before producing final outputs, introducing a dynamic internal state that may complicate control mechanisms such as refusal. Unlike instruction-tuned LLMs, where refusal is mediated by a single directional subspace, refusal in large reasoning models (LRMs) additionally depends on the CoT. In DeepSeek-R1-Distill-LLaMA-8B, activation steering reverses refusal in only 39% of cases when the CoT is kept fixed, but removing the CoT entirely increases this to 70%, indicating that the CoT actively reinforces refusal. In a two-stage intervention where the model regenerates its CoT under activation steering, refusal is reversed in 94% of cases, while the resulting CoT alone retains 48% of this effect even after steering is removed. This suggests that the CoT can carry and reconstruct the compliance signal independently. These findings indicate that refusal in LRMs is jointly encoded in residual stream activations and CoT. This joint activation makes LRM more robust against activation-level interventions alone, but exposes CoT to a possible alternative surface attack. 
+
+Subjects: |  Artificial Intelligence (cs.AI); Machine Learning (cs.LG)  
+---|---  
+Cite as: | [arXiv:2605.26772](https://arxiv.org/abs/2605.26772) [cs.AI]  
+  | (or  [arXiv:2605.26772v1](https://arxiv.org/abs/2605.26772v1) [cs.AI] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2605.26772> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Kia-Jüng Yang [[view email](/show-email/6fca41a2/2605.26772)]   
+**[v1]** Tue, 26 May 2026 09:41:15 UTC (84 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Beyond a Single Direction: Chain-of-Thought Disrupts Simple Steering of Refusal, by Kia-J\"ung Yang and 4 other authors
+
+  

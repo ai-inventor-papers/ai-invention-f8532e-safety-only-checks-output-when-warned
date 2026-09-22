@@ -1,0 +1,102 @@
+{
+ "dir": "LANE_B/out/causal",
+ "n_files": 1,
+ "files": [
+  "LANE_B/out/causal/L2_a0.00.json"
+ ],
+ "n_jobs_expected": 8,
+ "n_jobs_with_output": 1,
+ "n_jobs_crashed": 7,
+ "logs": [
+  {
+   "log": "LANE_B/logs/causal_L1_0.0.log",
+   "size_bytes": 68,
+   "n_lines": 1,
+   "tail_verbatim": [
+    "./followup.sh: line 12: .venv/bin/python: No such file or directory"
+   ],
+   "looks_failed": true
+  },
+  {
+   "log": "LANE_B/logs/causal_L1_1.0.log",
+   "size_bytes": 68,
+   "n_lines": 1,
+   "tail_verbatim": [
+    "./followup.sh: line 12: .venv/bin/python: No such file or directory"
+   ],
+   "looks_failed": true
+  },
+  {
+   "log": "LANE_B/logs/causal_L2_0.0.log",
+   "size_bytes": 5243,
+   "n_lines": 215,
+   "tail_verbatim": [
+    "  short_span_8|add|r_content|-1                    delta=+0.0000",
+    "  short_span_8|add|r_content|0                     delta=+0.0000",
+    "  short_span_8|add|r_content|1                     delta=-0.0000",
+    "  short_span_8|add|r_content|2                     delta=-0.0000",
+    "  short_span_8|add|control|-2                      delta=+0.0000",
+    "  short_span_8|add|control|-1                      delta=+0.0000",
+    "  short_span_8|add|control|0                       delta=+0.0000",
+    "  short_span_8|add|control|1                       delta=-0.0000",
+    "  short_span_8|add|control|2                       delta=-0.0000",
+    "  short_span_8|remove|r_content                    delta=+0.0000",
+    "  short_span_8|remove|control                      delta=+0.0000",
+    "  POSITIVE_CONTROL|patch_mean_benign_residual      delta=-0.0004"
+   ],
+   "looks_failed": false
+  },
+  {
+   "log": "LANE_B/logs/causal_L2_1.0.log",
+   "size_bytes": 490,
+   "n_lines": 6,
+   "tail_verbatim": [
+    "Traceback (most recent call last):",
+    "  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_2/src/causal.py\", line 13, in <module>",
+    "    import torch",
+    "  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_2/.venv/lib/python3.12/site-packages/torch/__init__.py\", line 38, in <module>",
+    "    from typing_extensions import ParamSpec as _ParamSpec",
+    "ModuleNotFoundError: No module named 'typing_extensions'"
+   ],
+   "looks_failed": true
+  },
+  {
+   "log": "LANE_B/logs/causal_L3_0.0.log",
+   "size_bytes": 68,
+   "n_lines": 1,
+   "tail_verbatim": [
+    "./followup.sh: line 12: .venv/bin/python: No such file or directory"
+   ],
+   "looks_failed": true
+  },
+  {
+   "log": "LANE_B/logs/causal_L3_1.0.log",
+   "size_bytes": 68,
+   "n_lines": 1,
+   "tail_verbatim": [
+    "./followup.sh: line 12: .venv/bin/python: No such file or directory"
+   ],
+   "looks_failed": true
+  },
+  {
+   "log": "LANE_B/logs/causal_L4_0.0.log",
+   "size_bytes": 68,
+   "n_lines": 1,
+   "tail_verbatim": [
+    "./followup.sh: line 12: .venv/bin/python: No such file or directory"
+   ],
+   "looks_failed": true
+  },
+  {
+   "log": "LANE_B/logs/causal_L4_1.0.log",
+   "size_bytes": 68,
+   "n_lines": 1,
+   "tail_verbatim": [
+    "./followup.sh: line 12: .venv/bin/python: No such file or directory"
+   ],
+   "looks_failed": true
+  }
+ ],
+ "followup_sh_line_12": "    .venv/bin/python -u src/causal.py \"$LG\" --alpha \"$AL\" --items 48 > \"logs/causal_${LG}_${AL}.log\" 2>&1",
+ "status": "EMPTY_EXCEPT_UNLESIONED_BASELINE"
+}

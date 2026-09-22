@@ -1,0 +1,1752 @@
+{
+ "tag": "LiquidAI--LFM2-700M",
+ "repo": "LiquidAI/LFM2-700M",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_cells": 96,
+ "n_kept": 96,
+ "n_slot_ok": 96,
+ "drop_frac": 0.0,
+ "x5_undefined": false,
+ "cells_harvested": "all",
+ "D_resp": "NOT_HARVESTED (recorded deviation; not read by C1-C14)",
+ "causal_truncation": {
+  "kept_continuation_tokens": 56
+ },
+ "timings": {
+  "t_c_harvest_s": 24.73629879951477
+ },
+ "n_plen_mismatches": 0,
+ "plen_mismatches": [],
+ "per_cell": [
+  {
+   "cell_id": "definitions:207:232|benign_twin|benign",
+   "plen": 15,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     45,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 71
+  },
+  {
+   "cell_id": "definitions:207:232|benign_twin|hazardous",
+   "plen": 15,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     45,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 71
+  },
+  {
+   "cell_id": "definitions:207:232|harmful|benign",
+   "plen": 18,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     45,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "definitions:207:232|harmful|hazardous",
+   "plen": 18,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     45,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "homonyms:3:28|benign_twin|benign",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "homonyms:3:28|benign_twin|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "homonyms:3:28|harmful|benign",
+   "plen": 22,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "homonyms:3:28|harmful|hazardous",
+   "plen": 22,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "figurative_language:70:95|benign_twin|benign",
+   "plen": 18,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "figurative_language:70:95|benign_twin|hazardous",
+   "plen": 18,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "figurative_language:70:95|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "figurative_language:70:95|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_targets:115:140|benign_twin|benign",
+   "plen": 23,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 79
+  },
+  {
+   "cell_id": "safe_targets:115:140|benign_twin|hazardous",
+   "plen": 23,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 79
+  },
+  {
+   "cell_id": "safe_targets:115:140|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_targets:115:140|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_targets:106:131|benign_twin|benign",
+   "plen": 20,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_targets:106:131|benign_twin|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_targets:106:131|harmful|benign",
+   "plen": 20,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_targets:106:131|harmful|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_contexts:167:192|benign_twin|benign",
+   "plen": 23,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     44,
+     50
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 79
+  },
+  {
+   "cell_id": "safe_contexts:167:192|benign_twin|hazardous",
+   "plen": 23,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     44,
+     50
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 79
+  },
+  {
+   "cell_id": "safe_contexts:167:192|harmful|benign",
+   "plen": 17,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     44,
+     50
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "safe_contexts:167:192|harmful|hazardous",
+   "plen": 17,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     44,
+     50
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "historical_events:348:373|benign_twin|benign",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "historical_events:348:373|benign_twin|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "historical_events:348:373|harmful|benign",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "historical_events:348:373|harmful|hazardous",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "figurative_language:68:93|benign_twin|benign",
+   "plen": 17,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "figurative_language:68:93|benign_twin|hazardous",
+   "plen": 17,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "figurative_language:68:93|harmful|benign",
+   "plen": 18,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "figurative_language:68:93|harmful|hazardous",
+   "plen": 18,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "definitions:221:246|benign_twin|benign",
+   "plen": 14,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 70
+  },
+  {
+   "cell_id": "definitions:221:246|benign_twin|hazardous",
+   "plen": 14,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 70
+  },
+  {
+   "cell_id": "definitions:221:246|harmful|benign",
+   "plen": 17,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "definitions:221:246|harmful|hazardous",
+   "plen": 17,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     45,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "definitions:208:233|benign_twin|benign",
+   "plen": 14,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     11
+    ],
+    [
+     44,
+     49
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 70
+  },
+  {
+   "cell_id": "definitions:208:233|benign_twin|hazardous",
+   "plen": 14,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     45,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 70
+  },
+  {
+   "cell_id": "definitions:208:233|harmful|benign",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     11
+    ],
+    [
+     44,
+     49
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "definitions:208:233|harmful|hazardous",
+   "plen": 16,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     12
+    ],
+    [
+     45,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "figurative_language:55:80|benign_twin|benign",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "figurative_language:55:80|benign_twin|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "figurative_language:55:80|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "figurative_language:55:80|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "homonyms:25:50|benign_twin|benign",
+   "plen": 21,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 77
+  },
+  {
+   "cell_id": "homonyms:25:50|benign_twin|hazardous",
+   "plen": 21,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 77
+  },
+  {
+   "cell_id": "homonyms:25:50|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "homonyms:25:50|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_contexts:153:178|benign_twin|benign",
+   "plen": 24,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 80
+  },
+  {
+   "cell_id": "safe_contexts:153:178|benign_twin|hazardous",
+   "plen": 24,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 80
+  },
+  {
+   "cell_id": "safe_contexts:153:178|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_contexts:153:178|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "figurative_language:69:94|benign_twin|benign",
+   "plen": 20,
+   "n_cont_tokens": 151,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     46,
+     56
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "figurative_language:69:94|benign_twin|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "figurative_language:69:94|harmful|benign",
+   "plen": 15,
+   "n_cont_tokens": 151,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     46,
+     56
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 71
+  },
+  {
+   "cell_id": "figurative_language:69:94|harmful|hazardous",
+   "plen": 15,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     45,
+     54
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 71
+  },
+  {
+   "cell_id": "safe_contexts:164:189|benign_twin|benign",
+   "plen": 23,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     45,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 79
+  },
+  {
+   "cell_id": "safe_contexts:164:189|benign_twin|hazardous",
+   "plen": 23,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     45,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 79
+  },
+  {
+   "cell_id": "safe_contexts:164:189|harmful|benign",
+   "plen": 24,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     45,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 80
+  },
+  {
+   "cell_id": "safe_contexts:164:189|harmful|hazardous",
+   "plen": 24,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     45,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 80
+  },
+  {
+   "cell_id": "safe_contexts:161:186|benign_twin|benign",
+   "plen": 21,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 77
+  },
+  {
+   "cell_id": "safe_contexts:161:186|benign_twin|hazardous",
+   "plen": 21,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 77
+  },
+  {
+   "cell_id": "safe_contexts:161:186|harmful|benign",
+   "plen": 17,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "safe_contexts:161:186|harmful|hazardous",
+   "plen": 17,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 73
+  },
+  {
+   "cell_id": "figurative_language:75:100|benign_twin|benign",
+   "plen": 22,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "figurative_language:75:100|benign_twin|hazardous",
+   "plen": 22,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "figurative_language:75:100|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "figurative_language:75:100|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 149,
+   "slot_token_spans": [
+    [
+     6,
+     16
+    ],
+    [
+     45,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "definitions:224:249|benign_twin|benign",
+   "plen": 14,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 70
+  },
+  {
+   "cell_id": "definitions:224:249|benign_twin|hazardous",
+   "plen": 14,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 70
+  },
+  {
+   "cell_id": "definitions:224:249|harmful|benign",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "definitions:224:249|harmful|hazardous",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "safe_targets:123:148|benign_twin|benign",
+   "plen": 24,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 80
+  },
+  {
+   "cell_id": "safe_targets:123:148|benign_twin|hazardous",
+   "plen": 24,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 80
+  },
+  {
+   "cell_id": "safe_targets:123:148|harmful|benign",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "safe_targets:123:148|harmful|hazardous",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     15
+    ],
+    [
+     44,
+     53
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "historical_events:340:365|benign_twin|benign",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "historical_events:340:365|benign_twin|hazardous",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "historical_events:340:365|harmful|benign",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "historical_events:340:365|harmful|hazardous",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     17
+    ],
+    [
+     44,
+     55
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "safe_contexts:166:191|benign_twin|benign",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_contexts:166:191|benign_twin|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_contexts:166:191|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_contexts:166:191|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     14
+    ],
+    [
+     44,
+     52
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "homonyms:4:29|benign_twin|benign",
+   "plen": 18,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     11
+    ],
+    [
+     44,
+     49
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "homonyms:4:29|benign_twin|hazardous",
+   "plen": 18,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     11
+    ],
+    [
+     44,
+     49
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 74
+  },
+  {
+   "cell_id": "homonyms:4:29|harmful|benign",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     11
+    ],
+    [
+     44,
+     49
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "homonyms:4:29|harmful|hazardous",
+   "plen": 16,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     11
+    ],
+    [
+     44,
+     49
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 72
+  },
+  {
+   "cell_id": "safe_contexts:163:188|benign_twin|benign",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_contexts:163:188|benign_twin|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "safe_contexts:163:188|harmful|benign",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "safe_contexts:163:188|harmful|hazardous",
+   "plen": 19,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 75
+  },
+  {
+   "cell_id": "homonyms:15:40|benign_twin|benign",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "homonyms:15:40|benign_twin|hazardous",
+   "plen": 20,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 76
+  },
+  {
+   "cell_id": "homonyms:15:40|harmful|benign",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  },
+  {
+   "cell_id": "homonyms:15:40|harmful|hazardous",
+   "plen": 22,
+   "n_cont_tokens": 147,
+   "slot_token_spans": [
+    [
+     6,
+     13
+    ],
+    [
+     44,
+     51
+    ]
+   ],
+   "slot_ok": true,
+   "kept": true,
+   "keep_len_tokens": 78
+  }
+ ],
+ "ts": 1790000001.3604703
+}

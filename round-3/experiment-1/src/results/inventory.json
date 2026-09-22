@@ -1,0 +1,125 @@
+{
+ "utc": "2026-09-21T14:31:43.043024Z",
+ "laneC_items": {
+  "gt_harm": 45,
+  "gt_benign": 45,
+  "gt_harm_categories": {
+   "Disinformation and Deception": 8,
+   "Hate, harassment and discrimination": 8,
+   "Illegal goods and services": 8,
+   "Non-violent crimes": 7,
+   "Sexual content": 7,
+   "Violence": 7
+  },
+  "gt_benign_categories": {
+   "deception": 5,
+   "harassment": 5,
+   "harmful": 5,
+   "hate": 5,
+   "illegal": 5,
+   "privacy": 4,
+   "self-harm": 4,
+   "sexual": 4,
+   "unethical": 4,
+   "violence": 4
+  }
+ },
+ "reserved_54": {
+  "n_scenarios": 54,
+  "prompts": 108,
+  "structure": "one XSTest twin scenario per row (harmful_request + benign_request)",
+  "families": {
+   "safe_contexts": 10,
+   "historical_events": 6,
+   "figurative_language": 10,
+   "homonyms": 10,
+   "safe_targets": 9,
+   "definitions": 9
+  },
+  "opened_for": "Vikhrmodels/Vikhr-Llama-3.2-1B-Instruct only (deviation items_cut_to_laneC90)"
+ },
+ "behaviour_items_asset": {
+  "n_items": 198,
+  "n_harm": 99,
+  "n_benign": 99,
+  "n_laneC": 90,
+  "n_r54": 108
+ },
+ "harvest_stimuli_256": {
+  "n": 256,
+  "by_set_label_source": {
+   "set0_y0_databricks_dolly_15k": 48,
+   "set0_y1_advbench_harmful_behaviors": 48,
+   "set1_y0_or_bench_hard_1k": 40,
+   "set1_y0_xstest_v2_benign_twin": 40,
+   "set1_y1_or_bench_toxic": 40,
+   "set1_y1_xstest_v2_harmful_twin": 40
+  },
+  "roles": "set 0 = EASY (fits axes), set 1 = HARD (scores them)"
+ },
+ "teacher_forced_cells": {
+  "n": 96,
+  "by_request_x_continuation": {
+   "benign_twin|benign": 24,
+   "benign_twin|hazardous": 24,
+   "harmful|benign": 24,
+   "harmful|hazardous": 24
+  },
+  "n_scenarios": 24
+ },
+ "token_sets": {
+  "refusal": 56,
+  "hedge": 18,
+  "control": 56
+ },
+ "c11_items": {
+  "n": 64,
+  "n_from_D2": 23,
+  "n_drawn": 41,
+  "severity_counts": {
+   "0": 17,
+   "1": 15,
+   "2": 16,
+   "3": 16
+  },
+  "draw_rule": "sha256(seed + c11_id) ascending within the first 2000 PKU-SafeRLHF test rows, stratified toward 16 per severity level; D2-used rows and repeated prompts excluded"
+ },
+ "judges": {
+  "primary": "google/gemini-2.5-flash-lite",
+  "audit": "openai/gpt-5-mini",
+  "secondary": "H2 judge_ext.py plain-rubric variant (same primary model)",
+  "stance_framed_variant_in_H2_src": {
+   "grep_i_word_stance_hits": 0,
+   "note": "word-boundary match; substrings such as assi-stance / sub-stance / in-stance excluded"
+  },
+  "lc_judge_py_sha256": "71c4ba09f494a5f7f7bd2ddc345337ad8c05e8c47c961ad68946172401056c65"
+ },
+ "generation": {
+  "decoding": "greedy (do_sample=False)",
+  "max_new_tokens": 140,
+  "template_rule": "tokenizer chat template (enable_thinking=False where supported); plain request + newline when no template (Lane C lc_harvest fallback)",
+  "timings": "results/gen_timings.json"
+ },
+ "dependencies": {
+  "D1 iter_1/gen_art/gen_art_dataset_1 (frozen stimulus substrate + source corpora)": {
+   "used": "source of the XSTest / OR-Bench / AdvBench / Dolly prompts behind H2's 256 stimuli and 96 cells; model_registry.json repos enter the exclusion list; rubric.md hashed; heldout_cells.json NOT opened",
+   "model_registry_repos": 40,
+   "rubric_md_sha256": "b11e322dc64e25f79bdb909fdda571fd856345a4b74b39c827d7bfd431194629",
+   "full_data_out_sha256": "7b3bee40124e56f0ee588a8a35446a396f29e11c1280dc8a35dae5f7812642d0"
+  },
+  "D2 iter_2/gen_art/gen_art_dataset_1 (model pairs, hard prompts, refusal tokens)": {
+   "used": "paired_lineage_registry FRESH held-out pair (Vikhr-Llama-3.2-1B-Instruct + abliterated) enters the panel first; hard_recognition_set rows with graded_harm feed C11; refusal/hedge/control token sets (via H2 assets/token_sets.json) feed BL1 and the logit-lens drives; rubric SHA-256s recorded in graded truth",
+   "full_data_out_sha256": "f21fb3b882306e2f6f63ac7d3779cefc706f9468b3d33b42a67cef8386e0512a"
+  },
+  "R iter_2/gen_art/gen_art_research_1 (which safety readouts are still unclaimed)": {
+   "used": "prior-art status of the bars: X2/X10 (weights-only write mass / orthogonality scar) are CLOSED by the Jorak Model Scanner, so B7/X10_abs are reported as prior-art readouts, not as novel metrics; abliterated checkpoints are the one empty cell in 2606.24952 / 2603.05773, which motivates the paired abliteration contrasts",
+   "research_out_sha256": "0244a0df173282b9c5b256534caefe2c581293cc4c6a7a74f369ceec2640d44d"
+  },
+  "H2 iter_2/gen_art/gen_art_experiment_1 (iteration-2 Lane A harvest + incumbents)": {
+   "used": "harvest kernels copied verbatim (src/h2/, sha256 in results/provenance.json); stimuli, cells, token sets; scored_checkpoints.json = exclusion list + incumbent reproduction target; saved harvest arrays re-scored read-only (results/iter2_panel_same_code.json)"
+  },
+  "LANEC iter_1/gen_art/gen_art_experiment_3 (behavioural lane)": {
+   "used": "the 90 behaviour items, the reserved-54 split, the lc_judge.py protocol and judged rows (reproduction check)"
+  }
+ }
+}

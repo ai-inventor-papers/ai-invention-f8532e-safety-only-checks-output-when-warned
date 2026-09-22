@@ -1,0 +1,663 @@
+{
+ "title": "Which of the five safety readouts is still unclaimed",
+ "layman_summary": "Five candidate ways to score a model's safety from its internal activations, checked against the literature. One is dead, two survive narrowly, and a side finding predicts half the planned comparison will show nothing.",
+ "summary": "Web-only saturation and anchor-verification pass, 2026-09-20, ~$0 spend, no cuts taken. All 26 core arXiv ids resolved (0 unresolved, 0 mis-cited) plus 20 newly discovered ids. VERDICTS: K1 arming interaction = PARTIALLY SCOOPED (HARC 2607.00572 owns the response-site readout via Eq 2 but never crosses the two factors, uses no matched twins, and reports no interaction); K2 prior + evidence slope = OPEN at the activation level but its construct is published behaviourally by IRT 2608.05086 over 192 models; K3 benign-only footprint = PARTIALLY SCOOPED, with LatentBiopsy 2603.27412 - not Skin-Deep - as the true nearest relative; K4 persistence time constant = CLOSED by N-GLARE's JR Min/Max (ACL 2026 Long 1334, Eq 9), a per-model persistence scalar over 40+ models; K5 per-domain profile = PARTIALLY SCOOPED and thin. FOUR deliverable-level competitors, not two: N-GLARE, Skin-Deep/GFS, the 273-checkpoint abliteration audit 2607.01854, and IRT-10-items. F1 ANSWERED DECISIVELY: HARC does print numeric cross-position cosines, for Qwen, at 0.19/0.10 (L12) and 0.31/0.30 (L27), so lane B's |cos| <= 0.50 gate is expected to PASS; 2604.18901's independent 73+/-7 degree protocol angle (cos ~ 0.29) converges on the same answer. F2 OVERTURNS THE PLANNING RECON: 2604.18901 prints +/-0.003 twice and 73 degrees twice, for four different quantities, and the hypothesis's readings were the right ones. Three new adverse priors the run had not seen: HRCI_repr (2606.16349) is a parent-free single-checkpoint coupling index whose authors report it is NOT a safety score; the Entanglement Wall gets AUROC 0.590-0.690 on XSTest-style twins; and harm recognition is invariant to abliteration in two independent papers. Ten baselines specified for reimplementation, including the newly recovered HRCI_repr formula. PROVENANCE: all 32 sources listed were ACTUALLY FETCHED (no snippet-only entries), and every one of the 59 supporting passages was re-verified by an independent live fetch of its own URL before this file was written.",
+ "answer": "FIVE VERDICTS, one line each (uniform rule: CLOSED = same quantity, more than one model, presented as a cross-model score).\n\nK1 ARMING INTERACTION - PARTIALLY SCOOPED (high confidence). HARC [1] owns the response-site readout: its Eq 2 fits the response-position harmfulness direction by difference-in-means mean-pooled over the first 32 response tokens [2], and our early window (continuation tokens 5-20) sits INSIDE that pool, so the instrument is not ours to claim. But HARC never crosses request harmfulness with already-written response content, reports no interaction term, has no benign-request/hazardous-prefix cell, and uses a separate safe prompt set rather than matched twins (its prompt-side directions come from 300 AdvBench harmful plus 300 UltraChat harmless) [2]. The CROSSING and the INTERACTION TERM survive; the response-site fit does not. The adjacent designs confirm the gap: the prefill study's pre-registered 2x2 crosses harm with SURFACE trigger words, not with response content [15]; the roleplay Safety Relay analysis crosses matched harmful/benign requests with a PROMPT WRAPPER, not with the model's own output [28]; and the harm/refusal split that motivates the decomposition is prompt-side [27]. Must-beat baselines: HARC's own main effect with the request factor discarded [1]; prompt-side diff-in-means at the last request token, which is adverse-flagged by final-token probe failures [29]; and the first-token refusal logit gap.\n\nK2 PRIOR PLUS EVIDENCE SLOPE - OPEN at the activation level, CONSTRUCT PUBLISHED behaviourally (medium confidence, 6 queries including 2 adversarial and 2 recency, one returning nothing). Item Response Theory for AI Safety [14] fits refusal strictness, truthfulness and contextual harm over 192 models and 8 safety benchmarks - an IRT difficulty/discrimination pair IS a prior/slope pair by another name - and shows roughly ten adaptive items recover a benchmark at 97-99 percent cost saving [14]. No activation-level relative was found across six queries. The novel half is the CONTENTLESS forward pass; the slope alone is not novel.\n\nK3 BENIGN-ONLY / WEIGHT-ONLY FOOTPRINT - PARTIALLY SCOOPED, margin narrower than the hypothesis assumes (high confidence). The nearest relative is NOT Skin-Deep, it is LatentBiopsy [9]: 200 safe prompts only, no harmful examples required for training, no parent model, and evaluated on Qwen base/instruct/abliterated triplets [9][10]. Skin-Deep/GFS [7] is both parent-requiring and harmful-prompt-requiring - it compares an aligned model against its base counterpart on harmful-request and benign sets [8] - and it predicts post-LoRA refusal retention rather than current safety [7]. The 273-checkpoint audit [13] is reference-anchored and base-to-candidate on both of its signals. CANARY works from a hidden-state difference over two forward passes, so it needs a second checkpoint [24]. Local Sparsity is safe-data-only but is a per-input anomaly detector in a per-model SAE feature space [25]. AMS scores activation geometry across 14 configurations but needs harmful-content concepts [17]. Nobody is simultaneously PARENT-FREE, HARMFUL-TEXT-FREE and PER-CHECKPOINT: that intersection is the margin, and it must be stated in exactly those three words.\n\nK4 PERSISTENCE / DECAY TIME CONSTANT - CLOSED. KILL IT. N-GLARE [4], published at ACL 2026 as Long paper 1334 [3], defines JSS as the Jensen-Shannon divergence of geometric-turning-angle distributions aggregated across progress slices and layer groups (Eq 7) [3], and then Eq 9 defines JR Min/Max as the ratio of the minimum to the maximum slice-wise JSS along an arc-length standardised progress axis running from 0 to 1, explicitly measuring whether separability remains stable across the entire trajectory versus a late-stage collapse of refusal [3]. That is a per-model persistence scalar of a safety readout, computed over more than 40 models and presented as a cross-model safety score [3][4]. Fitting an exponential instead of taking a min/max ratio is a parameterisation, not a construct. Iteration 2 must not spend depth here. The two other trajectory papers do NOT close it and do not rescue it either: SALO finds a layer-token refusal trajectory but builds a per-input jailbreak detector [26], and HARC's Appendix A.3, checked directly, is a cross-LAYER projection profile rather than a token-position curve [2].\n\nK5 PER-HARM-DOMAIN PROFILE - PARTIALLY SCOOPED, thin (medium confidence). Per-category harmfulness representations with category residuals orthogonal to general harm already exist across 11 risk categories and 3 instruction-tuned models [19]. Behaviourally the construct is doubly published: HarmProfile explicitly defines a per-category harmful-output distribution as a model-level risk profile over 23 frontier LLMs [20], and the ACL 2026 Findings audit reports defense rates swinging up to 42 percent within a single model depending only on the target group [21]. What remains unclaimed is the DISPERSION STATISTIC over the profile and PROFILE FLATTENING as a per-checkpoint signature of safety training. The recon's nomination of the harm-keyed-routing paper as K5's nearest relative is OVERTURNED: its exceptions are per-model-family, not per-harm-domain [18].\n\nTHE KILL LIST. K4 outright. Plus three things dead as CLAIMS though their lanes survive: (a) the response-site diff-in-means readout is HARC Eq 2, not ours [2]; (b) \"a cheap latent safety score exists\" is peer-reviewed at 40-plus models and under 1 percent of red-teaming cost [3][4], so the contribution must be WHICH internal quantity carries the signal and why; (c) \"harm recognition survives abliteration\" is published twice [5][10] and any rediscovery is a replication.\n\nF1 - THE COSINE GATE. ANSWERED, AND THE GATE IS EXPECTED TO PASS. The planning recon recorded \"no printed numeric cosine\". That is overturned. HARC's Appendix A prints same-concept CROSS-POSITION cosines on Qwen-2.5-7B of 0.19 for the harmfulness direction and 0.10 for the refusal direction at L12, and 0.31 and 0.30 at L27 - all below lane B's 0.50 instrument gate [2]. Within-position response-side coupling is 0.42 at L12 and 0.69 at L27 on Qwen, versus 0.45 and 0.27 on Llama [2]. Llama's own cross-position values remain heat-map-only; the text says only that same-concept cross-position pairs remain aligned [2]. Independent corroboration comes from a different protocol entirely: max-pool-over-content and last-token-post-instruction harm directions lie 73 degrees plus or minus 7 apart in the same residual-stream layer, i.e. a cosine of about 0.29 [6]. Two papers, two protocols, converging on 0.19 to 0.31. LANE B PROCEEDS ON THE MAIN BRANCH; the annihilation-residue branch stays pre-committed but is now the unexpected path. Caveats: Qwen-2.5-7B is not Qwen3-4B; HARC's harmfulness direction is AdvBench/UltraChat-fitted rather than abliteration-derived [2]; measuring this on Qwen3-4B with the abliteration direction as one axis is still a first, so report it as a result, just not a surprising one.\n\nF2 - THE 2604.18901 MISATTRIBUTIONS. THE PLANNING RECON WAS WRONG TWICE; THE HYPOTHESIS WAS RIGHT TWICE. The paper prints the plus-or-minus 0.003 figure TWICE: once as abliterated variants matching their instruction-tuned counterparts on AUROC, each with its own direction (the hypothesis's reading), and once as instruct-to-abliterated direction TRANSFER being cleaner than base-to-instruct at angles of 11 to 42 degrees (the recon's reading) [5]. It also prints 73 degrees TWICE: once as the max-pool-versus-last-token PROTOCOL angle at the same layer (the hypothesis's reading) [6], and once as Gemma-3's base-to-instruct alignment rotation, with AUROC dropping 0.057 and TPR collapsing from 0.751 to 0.175 (the recon's reading) [5]. Both pairs are verbatim in the source. Any future citation must say WHICH.\n\nF2 HANDOFF TO LANE B - NO INTERIOR MATCHED-O-DAMAGE POINT SHOULD BE EXPECTED. Instruct-to-abliterated angles are 11 to 42 degrees (cosine 0.74 to 0.98) with AUROC degradation at most 0.003, and the abliterated model's own-direction AUROC matches instruct within the same tolerance [5]. The edit leaves the request axis nearly intact. Report the criterion UNMET rather than relaxing it. Note also that this anchor was measured on huihui-ai abliterated variants [5], whereas our panel must use the mlabonne checkpoint because the huihui-ai one is gated, so the prior transfers as a family-level expectation, not a same-artifact measurement.\n\nF3 - N-GLARE. JSS aggregates Jensen-Shannon divergences of turning-angle distributions across all progress slices and layer groups into a model-level separability measure (Eq 7), with the proxies JB/PB Ratio (Eq 8) and JR Min/Max (Eq 9) built on top [3]. INPUT REQUIREMENT: four dialogue families - Baseline, PlainQuery, Jailbreak and Ideal Refusal [3] - so it is NOT a 0-prompt or few-prompt method, and our prompt-budget curve must be read against that requirement rather than against a benchmark. NO NUMERIC KENDALL'S TAU IS PRINTED IN THE PUBLISHED RUNNING TEXT: the paper says only that tau remains consistently high with p-values far below conventional significance thresholds, deferring the values to figures and appendix tables [3]. Do not write \"N-GLARE achieves tau equals X\". NO PUBLIC CODE: a full-text grep of the published PDF for code, github and release returns nothing [3], so JSS is NOT an implementable baseline in iteration 1; lane C cites it as the nearest published competitor [4] and states the comparison it could not run.\n\nF4 - PREFILL PROTOCOL. Confirmed and, more usefully, EXPLAINED. The dose-matched position control shows the first half of the response suffices to break refusal while the second half is nearly inert [15], and the full-residual \"restoration\" reaches 100 percent only because a benign-patch control also reaches 100 percent, making it generic disruption [15]. Lane B's demotion of full-residual patching to a labelled positive control is therefore correct. The load-bearing rungs are that dose-matched positional control and the refuse-state transfer, and the paper's own framing is that the intact representation is upstream of the gate rather than epiphenomenal [15]. Its pre-registered 2x2 crosses harm with surface, and refusal tracks harm rather than scary surface [15].\n\nF5 - ANTI-RANKING. Verified verbatim: among wrapped harmful prompts the outcome AUROC is 0.220, placing the attacks that succeeded below the attacks that failed [16]. On Llama, wrapping raises harmful generation from 0.05 to 0.27 while harmful-intent AUROC falls from 0.936 to 0.803 [16]. Reproduced across three target models, seven attack families and two judges [16]. This is the strongest general adverse prior on any internal-readout validity claim and the paper must engage it rather than omit it.\n\nDELIVERABLE-LEVEL COMPETITORS - FOUR, NOT TWO. (1) N-GLARE: latent-only, over 40 models, under 1 percent of the token and runtime cost, output-free, peer-reviewed [3][4]. (2) Skin-Deep/GFS: a single scalar from hidden states over 21 instruction-tuned models and six alignment recipes, but parent- and harmful-prompt-requiring and predicting future fragility [7][8]. (3) The two-signal checkpoint audit: an activation refusal-gap plus a weight-recovery energy separating 57 abliterations from 37 benign fine-tunes at AUROC 0.95 over a 273-checkpoint registry - but reference-anchored [13]. (4) IRT: ten adaptive items over 192 models, text-only and therefore a baseline under the run invariant, but it owns the \"few prompts\" half of the commissioned ask [14]. Also mandatory to cite: the audit-gap result, which builds models that pass every static behavioural audit yet fall to a small bounded latent perturbation and is the best available motivation for an activation-level metric [22]; the black-box fast proxies that predict full attack-ensemble ASR at Spearman 0.94, which is the ceiling we are competing against [23]; the layer-wise margin-geometry probe, the closest published cousin of any profile-over-layers summary [32]; and the cross-family latent-probe reproducibility study, which also flags inference non-determinism as a variance source lane C must control [31].\n\nTHE SINGLE MOST CONSEQUENTIAL FINDING, WHICH IS NOT A NOVELTY VERDICT. Two independent papers report that prompt-side HARM-RECOGNITION geometry is essentially INVARIANT to abliteration: abliterated variants match their instruction-tuned counterparts within 0.003 AUROC across 12 models spanning four families [5], and at most 0.015 AUROC on Qwen base/instruct/abliterated triplets [10]. Two of our four panel checkpoints are Qwen3-4B and its abliterated sibling. Any candidate whose readout is fundamentally \"can this checkpoint recognise harm\" therefore has a PUBLISHED PRIOR OF APPROXIMATELY ZERO EFFECT on that pair. Candidates must read the refusal/gate side or the arming interaction instead - a split independently supported by the finding that the refusal gate is a post-training control-token channel orthogonal to moral judgment [18]. Put this in every lane's power calculation.\n\nTHE SECOND MOST CONSEQUENTIAL, ALSO NEW. A parent-free, single-checkpoint, interaction-flavoured activation scalar already exists and already failed. HRCI_repr is defined as one half the absolute inner product of the harmfulness and refusal carrier directions plus one half the mean squared canonical correlation between their local subspaces, with the equal weighting fixed a priori rather than optimised against outcomes [12]. It is tracked over 100 checkpoints per regime against XSTest refusal, attack success rate, StrongREJECT and benign utility, falling from 0.0784 at step 50 to 0.0205 at step 500 while fixed-source ASR rises from 0 to 0.2500 and XSTest refusal falls from 1.0000 to 0.2280, with an SFT control moving only from 0.0217 to 0.0190 while staying high-ASR [12]. The authors' own verdict is that low coupling is not a safety score, and that the dense all-anchor results support a fixed-protocol diagnostic rather than a general safety score [12]. That is the closest published object to this run's own ambition, and it is a scaled negative result. It is now mandatory baseline G10, it is implementable in a few lines, and the paper must answer it rather than cite it in passing.\n\nA THIRD ADVERSE PRIOR LANE A MUST PRICE IN. Activation probes evaluated on XSTest-style matched twin cohorts - exactly lane A's item type - reach only AUROC 0.590 to 0.690 on the full Twin-n163 cohort and 0.656 to 0.819 on the guard-selected Twin-n70 subset under fixed transfer without pair-boundary fitting, and the paper concludes these scores behave as broad-risk detectors rather than standalone context adjudicators [11]. If lane A's twin numbers land above that band, check for leakage before celebrating. The behavioural counterpart is that risk genuinely does change between prompt and response - 61 percent of responses reduce harm relative to the prompt, 36 percent preserve it and 3 percent escalate - but that analysis is human-labelled and behavioural, not activation-level, so it is a weaker relative to K1 than the recon feared [30].\n\nBASELINE SPECS (full text in research_report.md section 7). G1 card/repo regex in BOTH term-swept and name-free variants, reported separately or the baseline is inflated by the very label it predicts. G2 black-box greedy refusal rate with the named safe-completion-opener failure mode. G3 first-token refusal logit gap, logit-only and therefore a baseline under the run invariant. G4 Fisher-ratio activation cluster separation over the upper-middle layer band, calibrated against the realistic published effect size of Pearson r equal to minus 0.546 between an activation sigma and behavioural compliance over 14 configurations [17]. G5 held-out difference-in-means with the mandatory high-dimension in-sample AUROC-1.000 warning, copying the published protocol of 100 labelled examples per class under a strict three-way split and reporting TPR at 1 percent FPR alongside AUROC, because that paper's central methodological point is that TPR varies by more than ten times the AUROC gap [6]. G6 raw hidden vectors as the non-featurised control. G7 JSS NOT IMPLEMENTABLE [3]. G8 GFS [7], the two-signal z-sum [13] and CANARY [24] are all PARENT-REQUIRING and must sit in a separate column. G9 the Spearman 0.94 black-box proxy ceiling [23]. G10 HRCI_repr, fully specified and parent-free, the single most important baseline in the block [12].\n\nID RESOLUTION. All 26 core ids resolved, 0 unresolved, 0 mis-cited, plus 20 newly discovered ids also resolved. The only unresolvable citation is the companion methods note \"Calibrating Interpretability Instruments Before Trusting Their Verdicts\", named in the comments field of the harm-keyed-routing paper [18] with no standalone arXiv id found; no verdict here rests on it. Note also that arXiv 2604.09544 IS a real paper but concerns parameter-level pruning of harmful compliance, not the harmfulness/refusal split; the correct citation for that split is the NeurIPS 2025 paper [27].",
+ "sources": [
+  {
+   "index": 1,
+   "url": "https://arxiv.org/abs/2607.00572",
+   "title": "HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment",
+   "summary": "K1's nearest relative. Fits a response-position harmfulness direction by difference-in-means mean-pooled over the first 32 response tokens (Eq 2) and reports the response-position MAIN EFFECT. Does NOT cross request harmfulness with already-written response content, reports no interaction term, and uses a separate safe prompt set rather than matched twins. Verdict: K1 PARTIALLY SCOOPED.",
+   "authors": [
+    "Shei Pern Chua",
+    "Hao Wu",
+    "Qianli Ma",
+    "Fangzhao Wu"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Extending the analysis to response-token positions, we find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful at the prompt side.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "The harmfulness and refusal directions at prompt and response positions transfer across the five model families and two scales we tested without architecture-specific tuning.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "url": "https://arxiv.org/html/2607.00572v3",
+   "title": "HARC (full text) - the F1 anchor: numeric cross-position cosines ARE printed, for Qwen",
+   "summary": "ANSWERS F1, THE RUN'S MOST IMPORTANT UNRESOLVED NUMBER. Appendix A prints same-concept cross-position cosines on Qwen-2.5-7B: 0.19 (harm) and 0.10 (ref) at L12, 0.31 and 0.30 at L27 - all well below lane B's |cos| <= 0.50 instrument gate, so the gate is EXPECTED TO PASS. Within-position response-side coupling is 0.42/0.69 on Qwen vs 0.45/0.27 on Llama. Llama's cross-position values remain heat-map-only. Also fixes the exact Eq 2 protocol: prompt directions from 300 AdvBench harmful + 300 UltraChat harmless, response directions mean-pooled over the first 32 response tokens with harmful continuations obtained by ablating v_ref and benign continuations from a safe prompt set D_help (NOT matched twins). Appendix A.3 is a cross-LAYER profile, not a token-position curve. NOTE ON THE APPENDIX-A COSINES: the numeric values 0.19/0.10 (L12) and 0.31/0.30 (L27) for Qwen, and 0.42/0.69 vs Llama's 0.45/0.27, appear in the Appendix A discussion of Figure 7(b), which lies beyond the truncation point of a plain page fetch; they were recovered by regex extraction over the full document and are recorded with their locators in the anchor/provenance table of research_report.md rather than as quoted passages here.",
+   "authors": [
+    "Shei Pern Chua",
+    "Hao Wu",
+    "Qianli Ma",
+    "Fangzhao Wu"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Concretely, we mean-pool the residual stream over the first 32 response tokens.",
+     "locator": "Section 3.2, above Eq. 2"
+    },
+    {
+     "quote": "We extract harmfulness and refusal directions at response-token positions and show that they are distinct from their prompt-side counterparts: cross-concept, cross-position pairs become nearly orthogonal in late layers (Figure 2b).",
+     "locator": "Section 1, Contributions (1)"
+    },
+    {
+     "quote": "A layer scores highly only when prompt-side and response-side directions are decoupled while same-concept cross-position pairs remain aligned.",
+     "locator": "Section 4.1, below Eq. 6"
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+   "title": "N-GLARE: A Non-Generative Latent Representation-Efficient LLM Safety Evaluator (ACL 2026 Long 1334)",
+   "summary": "THE PEER-REVIEWED COMPETITOR ON THE DELIVERABLE, AND THE PAPER THAT CLOSES K4. Defines JSS (Eq 7) as the Jensen-Shannon divergence of geometric-turning-angle distributions, averaged over arc-length progress slices s in [0,1] and layer groups. Eq 9 defines JR Min/Max = min_s JSS_s(J,R) / max_s JSS_s(J,R), an explicit PERSISTENCE statistic of a safety readout along a standardised progress axis, aggregated to one scalar per model over 40+ models - substantially K4's construct. Requires FOUR dialogue families including jailbreak prompts and ideal-refusal exemplars, so it is not a 0-prompt or few-prompt method. The numeric Kendall's tau is NOT printed in the running text (Figures 4-5 and Appendix Tables 7-8 only), and a full-text grep finds no code release.",
+   "authors": [
+    "Zheyu Lin",
+    "Jirui Yang",
+    "Yukui Qiu",
+    "Hengqi Guo",
+    "Yubing Bao",
+    "Yao Guan"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "To obtain a model-level separability measure, we aggregate JSDs across all slices and layer groups to define the Jensen-Shannon Separability (JSS)",
+     "locator": "Section 3.4, above Eq. 7"
+    },
+    {
+     "quote": "A higher value of JR Min/Max indicates that Jailbreak–Ideal Refusal separability remains stable across the entire trajectory, whereas a low value reflects late-stage collapse of refusal and successful jailbreak intrusion.",
+     "locator": "Section 4.1.1, below Eq. 9"
+    },
+    {
+     "quote": "remains consistently high, with p-values far be- low conventional significance thresholds",
+     "locator": "Section 4.1.1 - the only statement of the consistency result; no numeric tau in the body"
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "url": "https://arxiv.org/abs/2511.14195",
+   "title": "N-GLARE (arXiv record)",
+   "summary": "arXiv record of the ACL 2026 paper. Establishes the cost claim and the output-free framing that the run's contribution can no longer claim as novel.",
+   "authors": [
+    "Zheyu Lin",
+    "Jirui Yang",
+    "Yukui Qiu",
+    "Hengqi Guo",
+    "Yubing Bao",
+    "Yao Guan"
+   ],
+   "year": 2025,
+   "supporting_passages": [
+    {
+     "quote": "N-GLARE operates entirely on the model's latent representations, bypassing the need for full text generation.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "providing an efficient output-free evaluation proxy for real-time diagnostics.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "Experiments on over 40 models and 20 red teaming strategies demonstrate that the JSS metric exhibits high consistency with the safety rankings derived from Red Teaming.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "url": "https://arxiv.org/html/2604.18901",
+   "title": "Harmful Intent as a Geometrically Recoverable Feature of LLM Residual Streams (full text)",
+   "summary": "RESOLVES F2 AND OVERTURNS BOTH OF THE PLANNING RECON'S 'CORRECTIONS'. Section 3.2 prints BOTH +/-0.003 statements (abliterated-vs-instruct own-direction AUROC match, AND instruct-to-abliterated transfer degradation at 11-42 degrees) and BOTH 73-degree numbers (protocol dependence max-pool vs last-token, 73+/-7 degrees, in the abstract and Section 1; and Gemma-3's base-to-instruct rotation, also 73 degrees, in Section 3.2). The hypothesis's two uses are therefore CORRECT and the recon's corrections are wrong. Also the source of the C1 prior: harm recognition survives abliteration. Abliterated variants sourced from the huihui-ai organisation, which our panel cannot use (gated).",
+   "authors": [
+    "Isaac Llorente-Saguer"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Abliterated variants, from which the refusal direction has been removed via the weight-orthogonalisation procedure of Arditi et al. (2024), match their instruction-tuned counterparts within",
+     "locator": "Section 3.2"
+    },
+    {
+     "quote": "instruct-to-abliterated transfer is substantially cleaner than base-to-instruct",
+     "locator": "Section 3.2, Cross-variant direction transfer"
+    },
+    {
+     "quote": "Gemma-3 is the exception: alignment rotates the harm direction by",
+     "locator": "Section 3.2, Cross-variant direction transfer"
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "url": "https://arxiv.org/abs/2604.18901",
+   "title": "Harmful Intent as a Geometrically Recoverable Feature of LLM Residual Streams (abstract)",
+   "summary": "Confirms the 73-degree PROTOCOL-DEPENDENCE reading the hypothesis used (max-pool over content tokens vs last-token at the post-instruction position, same layer). Also supplies the diff-in-means protocol lane C should copy: 100 labelled examples per class, strict three-way split, and TPR@1%FPR reported alongside AUROC.",
+   "authors": [
+    "Isaac Llorente-Saguer"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "two pooling choices applied to the same chat-templated activations at the same residual-stream layer (max-pool over content tokens versus last-token at the post-instruction position) recover harm directions",
+     "locator": "abstract"
+    },
+    {
+     "quote": "Probing identifies a protocol-specific direction rather than a unique computational feature.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "url": "https://arxiv.org/abs/2606.22676",
+   "title": "Skin-Deep: A Geometric Diagnostic for Alignment Fragility in LLM Representations",
+   "summary": "Deliverable-level competitor D-2. Single scalar (GFS) from hidden states over 21 instruction-tuned models, 6 alignment recipes. Predicts post-LoRA refusal RETENTION, not current behavioural safety.",
+   "authors": [
+    "Dongyub Jude Lee"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Crucially, GFS identifies, before any fine-tuning, the initially safe model that retains the most refusal after small-scale LoRA fine-tuning.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "These results establish GFS as a practical pre-deployment diagnostic for flagging fragile refusal behavior without running an attack.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "url": "https://arxiv.org/html/2606.22676",
+   "title": "Skin-Deep (full text) - GFS is PARENT-REQUIRING and HARMFUL-PROMPT-REQUIRING",
+   "summary": "ANSWERS A3'S TWO DECIDING QUESTIONS, BOTH AGAINST THE SCOOP. Section 3.2 defines the setup over an aligned model M and its base counterpart M0, and requires a safety set of harmful-request prompts plus a matched benign general set. K3's benign-only and parent-free constraints therefore both survive.",
+   "authors": [
+    "Dongyub Jude Lee"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Skin-Deep first compares aligned and base-model activations on matched harmful-request examples and benign instructions.",
+     "locator": "Section 1, method summary"
+    },
+    {
+     "quote": "When an analysis requires a base model, the base checkpoint is version-matched to its aligned counterpart.",
+     "locator": "Section 4.1, Model Sets"
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "url": "https://arxiv.org/abs/2603.27412",
+   "title": "The Geometry of Harmful Intent: Training-Free Anomaly Detection via Angular Deviation in LLM Residual Streams (LatentBiopsy)",
+   "summary": "THE TRUE NEAREST RELATIVE TO K3, never cited by this run. Fits from 200 SAFE prompts only, no harmful examples, no parent model, and is evaluated on Qwen base/instruct/abliterated TRIPLETS - our panel's exact structure one generation down. It is a per-PROMPT detector, not a per-checkpoint score, which is K3's remaining margin. Its abliterated-vs-instruct gap of at most 0.015 AUROC is the second independent source for the C1 prior.",
+   "authors": [
+    "Isaac Llorente-Saguer"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Given 200 safe normative prompts, LatentBiopsy computes the leading principal component of their activations at a target layer",
+     "locator": "abstract"
+    },
+    {
+     "quote": "No harmful examples are required for training.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "url": "https://arxiv.org/html/2603.27412",
+   "title": "LatentBiopsy (full text) - harm geometry is invariant to abliteration on Qwen triplets",
+   "summary": "Second independent source for C1: the harm-recognition readout does NOT separate instruct from abliterated. Any candidate in this run whose readout is essentially harm recognition is predicted a priori to tie on half our panel.",
+   "authors": [
+    "Isaac Llorente-Saguer"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "both abliterated variants achieve AUROC at most 0.015 below their instruction-tuned counterparts, establishing a geometric dissociation between harmful-intent representation and the downstream generative refusal mechanism",
+     "locator": "abstract / Section 1 contribution 2"
+    },
+    {
+     "quote": "These methods share a common dependency: they require harmful examples or deliberate safety-prompt manipulations to define the reference geometry.",
+     "locator": "Section 1"
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "url": "https://arxiv.org/abs/2607.13075",
+   "title": "The Entanglement Wall: Activation-Space Probes as Risk Detectors, Not Context Adjudicators",
+   "summary": "THE SHARPEST ADVERSE PRIOR ON K1, and it is measured on exactly lane A's item type - XSTest-style matched twin cohorts (Twin-n70, Twin-n163). Sets the published ceiling lane A's twin numbers must be checked against: AUROC 0.590-0.690 on the full Twin-n163 cohort with no pair-boundary fitting.",
+   "authors": [
+    "Dominik Schwarz"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "fixed transfer to matched pairs is weaker: 0.656-0.819 on the guard-selected Twin-n70 subset and 0.590-0.690 on the full Twin-n163 cohort.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "At the tested read points, these activation scores behave as broad-risk detectors rather than standalone context adjudicators.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 12,
+   "url": "https://arxiv.org/html/2606.16349",
+   "title": "From Refusal Geometry to Safety Geometry: Harmfulness-Refusal Coupling under Dynamic Adversarial Fine-Tuning",
+   "summary": "THE MOST IMPORTANT ADVERSE PRIOR ON THE WHOLE DELIVERABLE, and now baseline G10. Defines HRCI_repr (Eq 9) = 0.5*|h^T r| + 0.5*mean squared canonical correlation between the harmfulness and refusal subspaces - a PARENT-FREE, single-checkpoint, interaction-flavoured activation scalar, tracked over 100 checkpoints per regime against XSTest refusal, ASR, StrongREJECT and utility. The authors' own verdict is that it is not a safety score. HRCI_repr falls 0.0784 (step 50) to 0.0205 (step 500), a 73.9% drop, while fixed ASR rises 0 to 0.2500 and XSTest refusal falls 1.0000 to 0.2280; the SFT control moves only 0.0217 to 0.0190 while staying high-ASR.",
+   "authors": [
+    "Wenhao Lan"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Thus low coupling is not a safety score.",
+     "locator": "Section 4.3"
+    },
+    {
+     "quote": "Dense all-anchor results therefore support a fixed-protocol R2D2 diagnostic, not a general safety score.",
+     "locator": "Section 4.4"
+    },
+    {
+     "quote": "The equal weighting is a fixed symmetry-based summary of two direct activation-space overlap measures.",
+     "locator": "Section 3.3, below Eq. 9"
+    }
+   ]
+  },
+  {
+   "index": 13,
+   "url": "https://arxiv.org/abs/2607.01854",
+   "title": "Has This Checkpoint Been Abliterated? A Two-Signal Audit and Its Failure Map",
+   "summary": "Deliverable-level competitor D-3 and the largest published checkpoint-registry audit (273 checkpoints, Qwen/DeepSeek-Qwen/Llama/Gemma). Both of its signals are reference-anchored or base-to-candidate, so it is PARENT-REQUIRING - which is exactly our structural differentiator - and its own failure map names a spoofed reference as a total evasion.",
+   "authors": [
+    "Gabriel Hurtado"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "We combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at AUROC 0.95, significantly above either signal alone (0.84, 0.90)",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 14,
+   "url": "https://arxiv.org/abs/2608.05086",
+   "title": "Item Response Theory for AI Safety",
+   "summary": "Deliverable-level competitor D-4 and K2's construct-level scoop. An IRT difficulty/discrimination pair IS a prior/slope pair by another name, fit across 192 models and 8 benchmarks. Its ten-adaptive-items result is the number a reviewer will quote at our prompt-budget curve; it is text-only, so a baseline under the run invariant, but it must be named.",
+   "authors": [
+    "Joshua Fonseca Rivera",
+    "Neil Shah",
+    "David Demitri Africa",
+    "Konstantinos Voudouris"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "we find that three interpretable factors of refusal strictness, truthfulness, and contextual harm explain most of the variance between models across benchmarks",
+     "locator": "abstract"
+    },
+    {
+     "quote": "roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 15,
+   "url": "https://arxiv.org/html/2607.14147",
+   "title": "Breaking Refusal in the First Half: A Mechanistic Study of the Prefill Jailbreak",
+   "summary": "RESOLVES F4. Confirms and EXPLAINS the earlier iteration's memory that full-residual patching returns refusal to ~100%: a benign-patch control also hits 100%, so it is generic disruption, and lane B's demotion of it to a labelled positive control is correct. The rungs that carry weight are the dose-matched positional control (first half 42% vs whole 41% vs second half 6% vs onset 9%) and the refuse-state transfer (74% held-out vs 0% random). Its pre-registered 2x2 crosses harm with SURFACE trigger words, NOT with already-written response content, so it does not scoop K1.",
+   "authors": [
+    "Alex Kwon"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "so the intact representation is upstream of the gate, not epiphenomenal",
+     "locator": "Contributions, Section 4"
+    },
+    {
+     "quote": "a dose-matched position control shows the first half of the response suffices to break refusal, while the second half is nearly inert",
+     "locator": "abstract"
+    },
+    {
+     "quote": "refusal tracks harm rather than scary surface",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 16,
+   "url": "https://arxiv.org/abs/2608.09624",
+   "title": "Measuring the Wrong Thing: Internal Harmfulness Scores Anti-Rank Successful Jailbreaks",
+   "summary": "RESOLVES F5. The strongest general adverse prior on any internal-readout validity claim, verified verbatim. The paper must engage it rather than omit it.",
+   "authors": [
+    "Mingyu Luo"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Among wrapped harmful prompts the outcome AUROC is 0.220, which places the attacks that succeeded below the attacks that failed.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "On Llama, wrapping raises harmful generation from 0.05 to 0.27 while harmful intent AUROC falls from 0.936 to 0.803, so the attacks grow more dangerous while the prompts look safer to the score.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 17,
+   "url": "https://arxiv.org/abs/2608.05578",
+   "title": "Detecting Safety Training Modification in Language Models via Activation Analysis (AMS)",
+   "summary": "K3 neighbour and the realistic effect-size calibration for the whole run: the best published activation-metric-vs-behaviour correlation on a multi-checkpoint panel is r = -0.546 over 14 configurations. Also names the failure mode our panel may hit - behavioural-only safety modification is undetectable by activation-only probing.",
+   "authors": [
+    "Glen Messenger"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "sigma on the harmful-content concept predicts compliance with Pearson r = -0.546 (p = 0.043), directionally but with meaningful noise",
+     "locator": "abstract"
+    },
+    {
+     "quote": "The fourth is undetectable by activation-only probing and represents a documented failure mode.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 18,
+   "url": "https://arxiv.org/abs/2609.14759",
+   "title": "Refusal Reads Only a Slice of What the Model Knows: Harm-Keyed Routing and Its Exceptions Across Model Families",
+   "summary": "OVERTURNS A4's placement. Its exceptions are per-model-FAMILY, not per-harm-DOMAIN, so it is not K5's nearest relative. Its real bite is on K1's O-vs-CB split: refusal reads the harm percept, not moral content, and about three-quarters of refusal's causal input lies outside the moral subspace.",
+   "authors": [
+    "Orion Reblitz-Richardson"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "The refusal gate, in contrast, is a fresh post-training construction with only a weak pretraining precursor, written into a narrow control-token channel where the refusal decision is orthogonal to the moral-judgment decision.",
+     "locator": "abstract"
+    },
+    {
+     "quote": "Refusal reads the harm percept, not the moral content that judgment reads on the same patches.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 19,
+   "url": "https://arxiv.org/abs/2609.19366",
+   "title": "The Role of Fine-grained Harm Signals in LLM Safety",
+   "summary": "K5's nearest ACTIVATION-level relative: per-category harmfulness representations with a category residual orthogonal to general harm, across 11 risk categories and 3 instruction-tuned LLMs. It steers with the residuals; it does not aggregate them into a per-checkpoint dispersion statistic or track flattening across alignment variants, which is K5's remaining margin.",
+   "authors": [
+    "Soyeon Park"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "internal harmfulness representations in large language models vary across risk categories, while sharing a common general harm representation component",
+     "locator": "abstract"
+    },
+    {
+     "quote": "yielding a category residual that is orthogonal to general harmfulness at every layer",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 20,
+   "url": "https://arxiv.org/abs/2608.14577",
+   "title": "HarmProfile: Characterizing Harmful Distributions in Frontier LLMs",
+   "summary": "K5's BEHAVIOURAL construct-level scoop: it explicitly defines a per-model risk profile over harm categories, across 23 frontier LLMs and 15 harm categories. Content-based, not activation-based, so it is a baseline under the run invariant - but it means 'a per-model harm-domain profile' is already a published object.",
+   "authors": [
+    "Zhouyuan Ma"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "defines the resulting harmful-output distribution as a model-level risk profile",
+     "locator": "abstract"
+    },
+    {
+     "quote": "HarmProfile contains over 80,000 validated artifacts from 23 frontier LLMs across 13 model families, organized into 15 harm categories and 57 subcategories.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 21,
+   "url": "https://aclanthology.org/2026.findings-acl.489/",
+   "title": "Safety Is Not Universal: The Selective Safety Trap in LLM Alignment (ACL 2026 Findings)",
+   "summary": "The second behavioural per-domain profile scoop for K5, peer-reviewed, and it quantifies the effect size K5's activation profile must explain: defense rates swing up to 42% within a single model depending only on the target group.",
+   "authors": [
+    "Iago Alves Brito",
+    "Walcy Rios",
+    "Julia Soares Dollis",
+    "Diogo Fernandes Costa Silva",
+    "Arlindo Rodrigues Galvao Filho"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "revealing that safety alignment is not a uniform semantic capability but a demographic hierarchy, with defense rates fluctuating by up to 42% within the same model solely based on the target group",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 22,
+   "url": "https://arxiv.org/abs/2606.08044",
+   "title": "When Behavioral Safety Evaluation Fails: A Representation-Level Perspective",
+   "summary": "The best available MOTIVATION for an activation-level metric, and the run does not cite it. It constructs models that pass every static behavioural audit yet fall to a small bounded latent perturbation, and summarises that with the Latent Vulnerability Score.",
+   "authors": [
+    "Enyi Jiang"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "We call the gap between what static audits certify and what an intervention can reach the audit gap, and we show it is realizable",
+     "locator": "abstract"
+    },
+    {
+     "quote": "Every static audit we run gives the dissoci",
+     "locator": "abstract (sentence truncated on the abstract page)"
+    }
+   ]
+  },
+  {
+   "index": 23,
+   "url": "https://arxiv.org/abs/2502.10487",
+   "title": "Fast Proxies for LLM Robustness Evaluation",
+   "summary": "The BLACK-BOX PROXY CEILING our metric competes against on rank correlation: fast proxies predict full attack-ensemble ASR at Spearman 0.94. If the activation metric does not approach that, its case must rest on being parent-free, harmful-text-free and mechanistically interpretable - not on prediction.",
+   "authors": [
+    "Tim Beyer",
+    "Jan Schuchardt",
+    "Leo Schwinn",
+    "Stephan Gunnemann"
+   ],
+   "year": 2025,
+   "supporting_passages": [
+    {
+     "quote": "we find that it and embedding-space attacks can predict attack success rates well",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 24,
+   "url": "https://arxiv.org/abs/2606.01695",
+   "title": "CANARY: Zero-Label Detection of Fine-Tuning Contamination in Language Models",
+   "summary": "K3 neighbour. Zero-label and unlabelled-prompt, which matches K3's benign-only constraint, but it works from a hidden-state DIFFERENCE between two checkpoints, so it is PARENT-REQUIRING.",
+   "authors": [
+    "Swapnil Parekh"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "a zero-label checkpoint auditor that detects this hidden shift directly from two forward passes over an unlabeled prompt set",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 25,
+   "url": "https://arxiv.org/abs/2609.20129",
+   "title": "Local Sparsity Enables Unsupervised LLM Safety Detection",
+   "summary": "The last live CLOSED-risk on K3, resolved NO. It is safe-data-only, which matches K3's constraint, but it is a per-INPUT anomaly detector in the feature space of a per-model pretrained SAE, reporting per-category AUROC - not a per-checkpoint score, and not cheap.",
+   "authors": [
+    "Xin Chen"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "to rely solely on modeling safe data and flagging out-of-distribution inputs",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 26,
+   "url": "https://arxiv.org/abs/2605.02958",
+   "title": "Tracing the Dynamics of Refusal: Exploiting Latent Refusal Trajectories for Robust Jailbreak Detection",
+   "summary": "K4's nearest relative other than N-GLARE. It finds a layer-token refusal trajectory and builds SALO, a per-INPUT white-box detector on hidden-state volumes. It does not aggregate the trajectory into a per-model persistence scalar - N-GLARE Eq 9 does, which is why K4 is CLOSED by N-GLARE and not by this.",
+   "authors": [
+    "Xulin Hu"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "a sparse upstream activation pattern that often persists even when attacks such as GCG suppress terminal refusal signals",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 27,
+   "url": "https://arxiv.org/abs/2507.11878",
+   "title": "LLMs Encode Harmfulness and Refusal Separately",
+   "summary": "The canonical harmfulness-vs-refusal split and the correct citation for it (the hypothesis's 2604.09544 is a real but DIFFERENT paper about parameter-level pruning of harmful compliance). Published at NeurIPS 2025.",
+   "authors": [
+    "Jiachen Zhao"
+   ],
+   "year": 2025,
+   "supporting_passages": [
+    {
+     "quote": "LLMs Encode Harmfulness and Refusal Separately",
+     "locator": "title"
+    }
+   ]
+  },
+  {
+   "index": 28,
+   "url": "https://arxiv.org/abs/2608.30585",
+   "title": "The Safety Relay in Roleplay Jailbreaks: A Component-Resolved Causal Analysis of Harm Recognition and Refusal",
+   "summary": "Structurally the closest 2x2-like design to K1 outside HARC: matched harmful and benign requests with and without a roleplay wrapper, at activation level. The second factor is a PROMPT wrapper, not the model's own already-written response, so K1's crossing survives - but its finding that the harm distinction is retained at the request while refusal-associated expression weakens where the answer begins is K1's story told with a different second factor.",
+   "authors": [
+    "Md Mokarram Chowdhury"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Successful attacks retain the measured harmful-versus-benign distinction at the request, while its refusal-associated expression weakens where the answer begins",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 29,
+   "url": "https://arxiv.org/abs/2605.12726",
+   "title": "Before the Last Token: Diagnosing Final-Token Safety Probe Failures",
+   "summary": "Adverse to any last-prompt-token readout, which is exactly where r_ablit is fitted in lane B.",
+   "authors": [
+    "Shravan Doda"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "Final-token safety probes monitor a single hidden state after prompt prefill, but jailbreak prompts can contain probe-visible unsafe evidence distributed across earlier user-token representations that is missed by this readout.",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 30,
+   "url": "https://arxiv.org/abs/2604.26052",
+   "title": "From Prompt Risk to Response Risk: Paired Analysis of Safety Behavior of Large Language Models",
+   "summary": "CONFIRMED BEHAVIOURAL, not activation-level, so it is a much weaker relative to K1 than the recon feared. It does supply the behavioural base rates for the arming story: 61% of responses reduce harm relative to the prompt, 36% preserve it, 3% escalate.",
+   "authors": [
+    "Mengya Hu"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "We present a paired analysis over human labeled prompt and response records across four harm categories",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 31,
+   "url": "https://arxiv.org/abs/2608.08029",
+   "title": "Do All LLMs Know When They're Being Harmful? A Reproducibility Study of Latent-Space Safety Probes Across Model Families",
+   "summary": "Cross-family latent-probe reproducibility, near lane C. Also flags inference non-determinism as a variance source lane C must control.",
+   "authors": [
+    "Alizishaan Khatri"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "we test how much of the reported performance is affected by non-determinism during inference by repeating",
+     "locator": "abstract"
+    }
+   ]
+  },
+  {
+   "index": 32,
+   "url": "https://arxiv.org/abs/2605.20241",
+   "title": "Geometry-Lite: Interpretable Safety Probing via Layer-Wise Margin Geometry",
+   "summary": "The closest published cousin of any 'profile over layers, summarised into features' design, which is what several candidates here reduce to. Worth citing so the run does not reinvent margin-profile summarisation.",
+   "authors": [
+    "Woo Seob Sim",
+    "Yu Rang Park"
+   ],
+   "year": 2026,
+   "supporting_passages": [
+    {
+     "quote": "introduce Geometry-Lite, a compact prompt-level probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts",
+     "locator": "abstract"
+    }
+   ]
+  }
+ ],
+ "follow_up_questions": [
+  "N-GLARE's numeric Kendall's tau against red-teaming rankings is NOT in the published running text (C7) - the paper says only that it 'remains consistently high'. Closes by: a TABLE-AWARE parse (not a regex grep) of Appendix Table 7 and Table 8 of https://aclanthology.org/2026.acl-long.1334.pdf. Until then no numeric N-GLARE consistency figure may be written down.",
+  "HARC's Llama-3.1-8B same-concept cross-position cosine is heat-map-only (F1c). Closes by: the figure-generating code or results JSON/CSV at github.com/microsoft/HARC, then huggingface.co/microsoft/HARC. NOT blocking - the Qwen values (0.19/0.10 at L12, 0.31/0.30 at L27) are the ones relevant to our panel.",
+  "The A4 companion methods note 'Calibrating Interpretability Instruments Before Trusting Their Verdicts' has no standalone arXiv id. Closes by: an exact-title quoted search across OpenReview and the ACL Anthology, or by reading the reference list of arXiv 2609.14759. It bears on the run's null-band and instrument-integrity machinery.",
+  "Whether HRCI_repr (baseline G10, 2606.16349 Eq 9) is computable at the scale lane C needs - the subspace term requires principal angles between local harmfulness and refusal subspaces, and the paper does not state k or how the local subspaces are estimated. Closes by: reading Section 3.1-3.2 of arxiv.org/html/2606.16349 for the carrier-extraction and subspace-dimension protocol.",
+  "Whether 2608.30585 (Safety Relay in roleplay jailbreaks) reports any CELL-LEVEL activation numbers for its matched harmful/benign x wrapper/no-wrapper design. If it does, those are key-joinable against K1's 2x2 and would either sharpen K1's margin or narrow it further. Closes by: fetching arxiv.org/html/2608.30585 and grepping for the per-condition contrast tables.",
+  "What r_content's measured cosine against r_ablit actually is on Qwen3-4B. No published number exists for this pair (F1 gives Qwen-2.5-7B and a protocol angle, not our checkpoint), so lane B's measured value would be the first of its kind and should be reported as a primary result, with 0.50 treated as a pre-registered branch point rather than a validity claim."
+ ]
+}

@@ -1,0 +1,59 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2607.21063
+Type: HTML
+Pattern: refusal|selective blindness (31 matches in 122574 chars)
+
+--- Content ---
+
+3490:...adder): it passes every standard check and still reaches users measurably more biased. The selective gap is a robust finding; whether open-ended bias further increases with compression is less certain, sensitive to the judge that scores it. We address both with QuantiBias, a benchmark that pairs a generative, multilingual stereotype probe with the refusal and multiple-choice controls that isolate open-ended generation, contrasts each build with and without reasoning, and rates the content severity of what it generates. Across two backbone models (Qwen and Gemma), a five-family screen, and eight benchmarks, quantizers allocate their extra precision by capability data that carries no bias-prevention ...
+--
+7386:... precision at which a model runs its matrix multiplications depends on the serving kernel as well as the stored weights, so two byte-identical checkpoints can compute at different precision. We therefore index every result to effective bits per weight measured from the artifact (Section 3).
+
+This paper makes three contributions. First, we document selective blindness: across two anchor backbones, a five-family screen, and eight benchmarks, quantization leaves the safeguards standard evaluations measure, refusal and multiple-choice bias avoidance, unchanged, while the bias a model volunteers in open-ended generation goes unmeasured by them. Second, we give the mechanism (Section 7): quantizers allocate precision to calibration data that carries no bias signal, leaving the bias-relevant weights fragile, and we show when reasoning before answering suppresses the effect and when it does not: reasoning halves the open-ended bias on Qwen but leaves it unchanged on Gemma. Third, we build the instrument that detects the gap. We introduce QuantiBias, a benchmark that pairs a generative, multilingual stereotype probe with the refusal and multiple-choice controls that establish the effect is specific to open-ended generation, contrasts each build with and without reasoning, and rates the content severity of what a model generates (Section 4).
+
+## 2 Related Work
+
+Quantization is known to change model behavior beyond the capability benchmarks used to validate it, and its effect o...
+--
+9760:...ifact a user evaluates is not the one they deploy, and Al Hakim et al. (2026) protect bias-critical weights and find the damage worst in non-English settings.
+
+We build on these findings and depart from them in three ways. First, we isolate a selectivity effect that aggregate reporting obscures: the short-form safeguards these evaluations rely on, refusal and multiple-choice bias avoidance, stay flat while the bias a model volunteers in open-ended generation rises (Jin et al., 2025), so a build passes the checks and reaches users more biased. Second, we test whether reasoning acts as a safeguard and find that it does not hold universally: on the Gemma backbone, unlike Qwen, reasoning does not reduc...
+--
+14819:...are not conflated.
+
+  3. 3.
+
+A reasoning-load contrast. Each build is evaluated with deliberation enabled and disabled, because the effect is concentrated on the non-deliberative path and its remediability is family-dependent; a single mode hides both.
+
+  4. 4.
+
+Controls that show the effect is selective. QuantiBias pairs the generative probe with refusal, over-refusal, and multiple-choice bias measures. Their flatness separates selective bias amplification from a general behavioral change.
+
+
+
+
+A build passes QuantiBias when its generative-bias rate does not rise across its own precision ladder while the controls stay flat, and fails when generative bias rises even though the controls do not, the signature this ...
+--
+17774:...onal (Limitations). On a controlled parallel probe (two middle rungs, n=160n=160) the two independent judges agree on 85% of items (Krippendorff’s α=0.69\alpha=0.69), and a full-ladder independent-ensemble re-scoring is the reference measurement, whose levels supersede the lean judge’s.
+
+#### Benchmarks.
+
+The first group tests explicit safeguards: refusal of directly harmful requests and their jailbreak-wrapped versions (StrongREJECT (Souly et al., 2024)), over-refusal of benign-but-alarming prompts (XSTest (Röttger et al., 2024)), and multiple-choice bias avoidance under ambiguity (BBQ (Parrish et al., 2022)). The second measures implicit behavior with a multilingual generative stereotype probe, MBTP (Kaneko et al., 2026), spanning 8 languages (Arabic, Chinese, English, French, German, Japanese, Russian, Spanis...
+--
+20257:...or, on a second backbone, and across a five-family screen (build details in Table A2). Every rate carries a Wilson 95% interval.
+
+#### The safety checks hold flat.
+
+Table A3 reports the safeguard, capability, and MBTP benchmarks across the full Qwen3.6-27B ladder, from 16 to 1.13 measured bpw. The safeguards standard evaluations probe do not move: refusal of directly harmful requests stays at 0.98, over-refusal on XSTest near 0.33, and BBQ accuracy under ambiguity near 0.97, at every quantized rung. The capability anchors hold through IQ2 and lose only a little at the one-bit extreme (MMLU-Redux 0.952 to 0.877), which separates safety-specific degradation from general capability loss: from Q4 to IQ2 capability is flat while generative bias already rises....
+--
+21350:..., a model can recognize the evaluation format and answer it well while its open-ended behavior diverges (Balloccu et al., 2024), a defeat device in the sense of Ferrara (2026).
+
+Figure 2: The selective safety gap, measured. Safeguard, capability, and MBTP benchmarks across the Qwen3.6-27B ladder (more compression rightward). The upper panel holds: refusal, multiple-choice bias avoidance (BBQ), and capability (GSM8K, MMLU-Redux, declining only at one bit) stay near full precision, so a standard audit reports it unchanged. The lower panel is what it misses: scoring the same reasoning-off generations two ways, the in-family lean judge reports low endorsement rising modestly with compression, while an ...
+--
+22083:...Sonnet-5) flags a stereotype in nearly one open-ended answer in four, roughly flat and far above the lean judge.
+
+#### Open-ended bias is high where the safety checks stay flat.
+
+The safeguards hold; open-ended generation does not. On the Qwen3.6-27B anchor the model volunteers a stereotype in a substantial fraction of open-ended answers while its refusal, over-refusal, and multiple-choice bias controls sit at their near-ideal values (Table A3, Figure 2). Under an independent judge that fraction is 0.238, 0.267, and 0.266 across the reasoning-off ladder (per language in Figure A1), close to one open-ended answer in four, while the same model’s multiple-choice bias control stays near 0.97 and its refusal near 0.98 (Limitations), so a build passes every standard check and still reaches users markedly more biased. This selective gap is the robust finding: it is present at every precision and under every judge we ran. Whether the open-ended rate also _rises_ with compression is a second, separable question, and the answer is not universal. Under the ...
+--
+[16 more matches not shown]

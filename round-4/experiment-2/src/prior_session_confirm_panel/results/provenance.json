@@ -1,0 +1,155 @@
+{
+ "utc": "2026-09-21T16:03:21.359155Z",
+ "files": {
+  "LANEC/lc_judge.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/lc_judge.py",
+   "sha256": "71c4ba09f494a5f7f7bd2ddc345337ad8c05e8c47c961ad68946172401056c65",
+   "exists": true
+  },
+  "LANEC/lc_common.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/lc_common.py",
+   "sha256": "3d57458b1ae755dc724603212a4cd8abeaec80ee820afe9a2a382a687e6c817c",
+   "exists": true
+  },
+  "LANEC/lc_harvest.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/lc_harvest.py",
+   "sha256": "45e2acc3110c086b8deb29afddeb23400d4834571e63994b9dc8f0f4336949c5",
+   "exists": true
+  },
+  "LANEC/lc_panel.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/lc_panel.py",
+   "sha256": "09b2696e7dfe6ec83da10035b7ba9b48d066f1445ab3674b1fc8336d48e975a3",
+   "exists": true
+  },
+  "LANEC/lc_analyze.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/lc_analyze.py",
+   "sha256": "e8742b55c4bb015afba81c98fb8933facd4511b6a4988f0e23ace61f6741b8c7",
+   "exists": true
+  },
+  "LANEC/prereg.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/prereg.json",
+   "sha256": "6e2895c9a641fc10f2d600e756efb5607aa195dbfd1c290d9bac8669ddad86c0",
+   "exists": true
+  },
+  "LANEC/assets/gt_harm.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/assets/gt_harm.json",
+   "sha256": "58716b1643a229392676f6652109b490320870e1a14963c48e76d16f254bf44f",
+   "exists": true
+  },
+  "LANEC/assets/gt_benign.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/assets/gt_benign.json",
+   "sha256": "57e9112157bb3e13389f96e1a6cf1ff6b245808ec768c6be6277d7196a320beb",
+   "exists": true
+  },
+  "LANEC/assets/reserved_54.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/assets/reserved_54.json",
+   "sha256": "d2a23280c97f778870db3063d867b1337f862881d23b9999c1334f0e6085bf2d",
+   "exists": true
+  },
+  "H2/src/harvest.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/harvest.py",
+   "sha256": "639724e144c7f0386a10f62b50c50c593e43847b82caf193811fe6df3c1fc2c9",
+   "exists": true
+  },
+  "H2/src/c_harvest2.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/c_harvest2.py",
+   "sha256": "b489173b63f4ff077d96909f88028a1990ea70d6b48c956385b2f1e651caecb5",
+   "exists": true
+  },
+  "H2/src/wsummary.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/wsummary.py",
+   "sha256": "836180c789dac3580a9feeef0034cbbcfab044897207bb8f6fa4b071d0b851f9",
+   "exists": true
+  },
+  "H2/src/score_ckpt.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/score_ckpt.py",
+   "sha256": "9125c83bf4952bd0f371db166f055cecc4fc2c7a0bd0ea1a32f44549373576d5",
+   "exists": true
+  },
+  "H2/src/analyze.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/analyze.py",
+   "sha256": "0d3d49c996105450fee7224939dc5eb82404c6de4ddb6b7243a9fd2af9d54098",
+   "exists": true
+  },
+  "H2/src/numerics.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/numerics.py",
+   "sha256": "ad68596e8bbaad9b8b152dfd42cb17b229d3d1213ecd30de10d6e24e1cb56e81",
+   "exists": true
+  },
+  "H2/src/judge_ext.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/judge_ext.py",
+   "sha256": "aca843637fb8cda5ff18e9180d6ef4b9d64932c4394afdfcc06a24087a0623e6",
+   "exists": true
+  },
+  "H2/src/judge_ext_lanec.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/judge_ext_lanec.py",
+   "sha256": "4e09b91f5cfae8ddb3b68d57e71aaf9c39c3264cbc9645b80c2d062faaacdd34",
+   "exists": true
+  },
+  "H2/src/aii_common.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/aii_common.py",
+   "sha256": "42da74a340467aafdc6f0aa3ea61817c2454a7e87cfd011ab8e68fae4433d8bd",
+   "exists": true
+  },
+  "H2/src/score_panel.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/src/score_panel.py",
+   "sha256": "9ade6b381c7507c1af4b3da1122237c9a0e1e5a9c320df35c5369e31d4a709d5",
+   "exists": true
+  },
+  "H2/assets/stimuli.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/assets/stimuli.json",
+   "sha256": "e463b2041121c975045d6797f558c66030ac64429aba27ea6c4b0431d1e92529",
+   "exists": true
+  },
+  "H2/assets/token_sets.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/assets/token_sets.json",
+   "sha256": "d6b69ac22963f1b5cefc3df88d3139f932eac433e4af5d8b1f93e0e1f47f9370",
+   "exists": true
+  },
+  "H2/assets/cells.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/assets/cells.json",
+   "sha256": "8c81abd8f9eabd12de9788a89553ec3c036fb94d83ddec54875f7c9ab07fc5b3",
+   "exists": true
+  },
+  "H2/results/scored_checkpoints.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/results/scored_checkpoints.json",
+   "sha256": "480c1317f4e81d9987b947515456d98d7895df43c14bfe0ec898aa58ff9e44ce",
+   "exists": true
+  },
+  "H2/prereg.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/prereg.json",
+   "sha256": "92d4ef7ff127ab7c87f9a35a69da04e9130adccd1bb52c8a9e88de4f0817399e",
+   "exists": true
+  },
+  "D2/full_data_out.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_dataset_1/full_data_out.json",
+   "sha256": "f21fb3b882306e2f6f63ac7d3779cefc706f9468b3d33b42a67cef8386e0512a",
+   "exists": true
+  },
+  "D2/assets/rubric_iter1.md": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_dataset_1/assets/rubric_iter1.md",
+   "sha256": "b11e322dc64e25f79bdb909fdda571fd856345a4b74b39c827d7bfd431194629",
+   "exists": true
+  },
+  "D2/assets/lc_judge_iter1.py": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_dataset_1/assets/lc_judge_iter1.py",
+   "sha256": "71c4ba09f494a5f7f7bd2ddc345337ad8c05e8c47c961ad68946172401056c65",
+   "exists": true
+  },
+  "D1/rubric.md": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_dataset_1/rubric.md",
+   "sha256": "b11e322dc64e25f79bdb909fdda571fd856345a4b74b39c827d7bfd431194629",
+   "exists": true
+  },
+  "D1/model_registry.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_dataset_1/model_registry.json",
+   "sha256": "eb03595b635d6f928b3516ad035be2f7a24a5e343ca6848935c45dcb02af6ea0",
+   "exists": true
+  },
+  "STRAT/struct_out.json": {
+   "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_strat/gen_strat_1/.terminal_claude_agent_struct_out.json",
+   "sha256": "3a26d74b19523a41aa03a6048164d95e5cb95e41e0a23ecbfc147d3a9d762333",
+   "exists": true
+  }
+ }
+}

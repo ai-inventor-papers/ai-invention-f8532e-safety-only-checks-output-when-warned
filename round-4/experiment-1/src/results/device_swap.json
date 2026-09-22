@@ -1,0 +1,114 @@
+{
+ "utc": "2026-09-21T20:38:23.451541Z",
+ "what": "DEVICE_SWAP check (amendment A13): the same checkpoint and weights generated on the session-3 CPU box vs the",
+ "pairs": [
+  {
+   "tag": "F1__ref",
+   "n_items": 168,
+   "identical_response_text": 43,
+   "identical_frac": 0.25595238095238093,
+   "weight_fingerprint_cpu": "f0089e1dac54bdf69e9c6b1c808aa86e1b1b2b2fcfc947777de21b0ab23dcd5a",
+   "weight_fingerprint_gpu": "f0089e1dac54bdf69e9c6b1c808aa86e1b1b2b2fcfc947777de21b0ab23dcd5a",
+   "same_weights": true,
+   "labels": {
+    "HC": {
+     "n": 85,
+     "rate_cpu": 0.11764705882352941,
+     "rate_gpu": 0.10588235294117647,
+     "delta_gpu_minus_cpu": -0.011764705882352941,
+     "ci95": [
+      -0.058823529411764705,
+      0.023529411764705882
+     ],
+     "label_agreement": 0.9647058823529412,
+     "n_discordant": 3
+    },
+    "OR": {
+     "n": 83,
+     "rate_cpu": 0.10843373493975904,
+     "rate_gpu": 0.10843373493975904,
+     "delta_gpu_minus_cpu": 0.0,
+     "ci95": [
+      -0.04819277108433735,
+      0.04819277108433735
+     ],
+     "label_agreement": 0.9518072289156626,
+     "n_discordant": 4
+    }
+   },
+   "clean_device_swap": true
+  },
+  {
+   "tag": "F1__int8wo",
+   "n_items": 168,
+   "identical_response_text": 39,
+   "identical_frac": 0.23214285714285715,
+   "weight_fingerprint_cpu": "d1298b574051736772090873eb2791c068466abf091f245e110a2ff900b328bb",
+   "weight_fingerprint_gpu": "d1298b574051736772090873eb2791c068466abf091f245e110a2ff900b328bb",
+   "same_weights": true,
+   "labels": {
+    "HC": {
+     "n": 85,
+     "rate_cpu": 0.12941176470588237,
+     "rate_gpu": 0.09411764705882353,
+     "delta_gpu_minus_cpu": -0.03529411764705882,
+     "ci95": [
+      -0.08235294117647059,
+      0.011764705882352941
+     ],
+     "label_agreement": 0.9411764705882353,
+     "n_discordant": 5
+    },
+    "OR": {
+     "n": 83,
+     "rate_cpu": 0.10843373493975904,
+     "rate_gpu": 0.1566265060240964,
+     "delta_gpu_minus_cpu": 0.04819277108433735,
+     "ci95": [
+      0.0,
+      0.10843373493975904
+     ],
+     "label_agreement": 0.927710843373494,
+     "n_discordant": 6
+    }
+   },
+   "clean_device_swap": true
+  },
+  {
+   "tag": "F1__a10",
+   "n_items": 168,
+   "identical_response_text": 44,
+   "identical_frac": 0.2619047619047619,
+   "weight_fingerprint_cpu": "99d586155378f708dfd2eae72b73da71506fa5b4da53aa4100aca157c94ee346",
+   "weight_fingerprint_gpu": "59ea9390b31a2426ffe961fc844fdfdb6ad286a4125e6e764b6bd3c35c7b1d50",
+   "same_weights": false,
+   "labels": {
+    "HC": {
+     "n": 85,
+     "rate_cpu": 0.2,
+     "rate_gpu": 0.17647058823529413,
+     "delta_gpu_minus_cpu": -0.023529411764705882,
+     "ci95": [
+      -0.07058823529411765,
+      0.01205882352941016
+     ],
+     "label_agreement": 0.9529411764705882,
+     "n_discordant": 4
+    },
+    "OR": {
+     "n": 83,
+     "rate_cpu": 0.1686746987951807,
+     "rate_gpu": 0.1927710843373494,
+     "delta_gpu_minus_cpu": 0.024096385542168676,
+     "ci95": [
+      -0.03614457831325301,
+      0.08433734939759036
+     ],
+     "label_agreement": 0.927710843373494,
+     "n_discordant": 6
+    }
+   },
+   "clean_device_swap": false
+  }
+ ]
+}

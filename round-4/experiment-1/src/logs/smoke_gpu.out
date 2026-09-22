@@ -1,0 +1,94 @@
+18:42:08|INFO   |device: {'device': 'cuda', 'name': 'NVIDIA L4', 'total_gb': 23.67, 'cap_gb': 7.0}
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 456.05it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 39/311 [00:00<00:00, 388.64it/s]Loading weights:  25%|██▌       | 78/311 [00:00<00:00, 348.95it/s]Loading weights:  37%|███▋      | 114/311 [00:00<00:00, 334.41it/s]Loading weights:  48%|████▊     | 148/311 [00:00<00:00, 287.95it/s]Loading weights:  57%|█████▋    | 178/311 [00:00<00:00, 271.68it/s]Loading weights:  71%|███████   | 220/311 [00:00<00:00, 313.73it/s]Loading weights:  85%|████████▍ | 263/311 [00:00<00:00, 346.92it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 372.73it/s]
+18:43:37|INFO   |F1__ref: built in 87s; sanity {"variant": "ref", "stored_reference": true, "weight_fingerprint": "f0089e1dac54bdf69e9c6b1c808aa86e1b1b2b2fcfc947777de21b0ab23dcd5a"}
+18:43:40|INFO   |    chunk 1/1: 2s (P=48, steps 96, total 2s)
+18:43:40|INFO   |DONE F1__ref: gen 2s, 768 tok (343.9 tok/s), total 92s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 661.89it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 8717.40it/s]
+18:43:45|INFO   |F1__int8wo: built in 4s; sanity {"variant": "int8wo", "max_abs_logit_diff": 1.28125, "mean_abs_logit_diff": 0.16501127183437347, "first_token_agreement": 0.96875, "bitwise_identical": false, "pass_fp_rule": false, "weight_fingerprint": "d1298b574051736772090873eb2791c068466abf091f245e110a2ff900b328bb"}
+18:43:47|INFO   |    chunk 1/1: 2s (P=48, steps 96, total 2s)
+18:43:47|INFO   |DONE F1__int8wo: gen 2s, 768 tok (396.4 tok/s), total 7s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 635.87it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:51,  6.06it/s]Loading weights:  76%|███████▌  | 236/311 [00:00<00:00, 1092.45it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 1105.53it/s]
+18:43:50|INFO   |F1__fp16: built in 3s; sanity {"variant": "fp16", "max_abs_logit_diff": 0.572265625, "mean_abs_logit_diff": 0.06261605024337769, "first_token_agreement": 1.0, "bitwise_identical": false, "pass_fp_rule": false, "weight_fingerprint": "ffa7a7822cad6bad61dbc87d453167806f8ca121bc83bbdd452af8b81601a87a"}
+18:43:52|INFO   |    chunk 1/1: 2s (P=48, steps 96, total 2s)
+18:43:52|INFO   |DONE F1__fp16: gen 2s, 768 tok (384.6 tok/s), total 5s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 186.05it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 8459.11it/s]
+18:43:57|INFO   |F1__a10: built in 4s; sanity {"variant": "a10", "max_abs_logit_diff": 9.5625, "mean_abs_logit_diff": 1.2038428783416748, "first_token_agreement": 0.6875, "bitwise_identical": false, "l_abl": 19, "weight_fingerprint": "59ea9390b31a2426ffe961fc844fdfdb6ad286a4125e6e764b6bd3c35c7b1d50"}
+18:43:59|INFO   |    chunk 1/1: 2s (P=48, steps 96, total 2s)
+18:43:59|INFO   |DONE F1__a10: gen 2s, 726 tok (347.2 tok/s), total 7s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 569.87it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 9794.33it/s]
+18:44:03|ERROR  |FAILED F1__wu05: AssertionError('56 hooks registered during generation')
+Traceback (most recent call last):
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/src/gen_variants.py", line 393, in <module>
+    except Exception as e:  # noqa: BLE001
+
+> File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/src/gen_variants.py", line 327, in main
+    pm, ptok, _ = load_parent(fk)
+                  │           └ 'F1'
+                  └ <function load_parent at 0x71296898d120>
+
+AssertionError: 56 hooks registered during generation
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 669.41it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 9981.39it/s]
+18:44:06|INFO   |F1__sysprompt: built in 2s; sanity {"variant": "sysprompt", "max_abs_logit_diff": 6.0, "mean_abs_logit_diff": 0.43315035104751587, "first_token_agreement": 0.84375, "bitwise_identical": false, "weight_fingerprint": "f0089e1dac54bdf69e9c6b1c808aa86e1b1b2b2fcfc947777de21b0ab23dcd5a"}
+18:44:08|INFO   |    chunk 1/1: 2s (P=59, steps 96, total 2s)
+18:44:08|INFO   |DONE F1__sysprompt: gen 2s, 768 tok (343.6 tok/s), total 5s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 668.23it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 8248.20it/s]
+18:44:39|INFO   |    lora F1 step 25/150 loss 3.192 (0.39s/step)
+18:44:47|INFO   |    lora F1 step 50/150 loss 2.157 (0.35s/step)
+18:44:54|INFO   |    lora F1 step 75/150 loss 1.596 (0.34s/step)
+18:45:07|INFO   |    lora F1 step 100/150 loss 2.100 (0.37s/step)
+18:45:23|INFO   |    lora F1 step 125/150 loss 1.379 (0.43s/step)
+18:45:33|INFO   |    lora F1 step 150/150 loss 1.396 (0.42s/step)
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 715.84it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 8041.70it/s]
+18:45:37|INFO   |F1__lora: built in 88s; sanity {"variant": "lora", "max_abs_logit_diff": 16.0, "mean_abs_logit_diff": 2.8093717098236084, "first_token_agreement": 0.4375, "bitwise_identical": false, "weight_fingerprint": "f0089e1dac54bdf69e9c6b1c808aa86e1b1b2b2fcfc947777de21b0ab23dcd5a", "lora_train": {"recipe": {"r": 8, "lora_alpha": 16, "lora_dropout": 0.05, "target_modules": ["q_proj", "v_proj"], "steps": 150, "micro_batch": 4, "grad_accum"
+18:45:39|INFO   |    chunk 1/1: 2s (P=48, steps 96, total 2s)
+18:45:39|INFO   |DONE F1__lora: gen 2s, 594 tok (259.5 tok/s), total 91s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 312.96it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 4261.06it/s]
+18:45:41|ERROR  |FAILED F1__dpo: OutOfMemoryError('CUDA out of memory. Tried to allocate 1.30 GiB. GPU 0 has a total capacity of 22.04 GiB of which 14.11 GiB is free. Including non-PyTorch memory, this process has 6.14 GiB memory in use. Process 3301 has 1.78 GiB memory in use. 6.52 GiB allowed; Of the allocated memory 5.27 GiB is allocated by PyTorch, and 643.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)')
+Traceback (most recent call last):
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/src/gen_variants.py", line 393, in <module>
+    except Exception as e:  # noqa: BLE001
+
+> File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/src/gen_variants.py", line 323, in main
+    continue
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/src/variants.py", line 642, in build
+    attn_implementation="sdpa")
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/src/variants.py", line 550, in train_dpo
+    enc = [_encode_pr(tok, q["prompt"], q["chosen"], R["max_len"]) for q in chunk] + \
+           │          │                              │                      └ [{'prompt': 'Which of the following are fruits: Tomato, Potato, Strawberry, Dragonfruit, Kiwi, Wheat, Corn, Avocado, Poblano,...
+           │          │                              └ {'r': 8, 'lora_alpha': 16, 'lora_dropout': 0.05, 'target_modules': ['q_proj', 'v_proj'], 'steps': 100, 'batch': 4, 'max_len':...
+           │          └ Qwen2Tokenizer(name_or_path='/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/.shared_cache/hf/hub/models--Qwen--Qwen3-0.6B/snapsh...
+           └ <function _encode_pr at 0x71296898dc60>
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/.venv_gpu/lib/python3.12/site-packages/torch/_tensor.py", line 625, in backward
+    torch.autograd.backward(
+    │     │        └ <function backward at 0x71297a1d0ea0>
+    │     └ <module 'torch.autograd' from '/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment...
+    └ <module 'torch' from '/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/.venv_...
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/.venv_gpu/lib/python3.12/site-packages/torch/autograd/__init__.py", line 354, in backward
+    _engine_run_backward(
+    └ <function _engine_run_backward at 0x71297a126ca0>
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/.venv_gpu/lib/python3.12/site-packages/torch/autograd/graph.py", line 841, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           │        │                 └ <method 'run_backward' of 'torch._C._EngineBase' objects>
+           │        └ <torch._C._EngineBase object at 0x7129e6383ed0>
+           └ <class 'torch.autograd.variable.Variable'>
+
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.30 GiB. GPU 0 has a total capacity of 22.04 GiB of which 14.11 GiB is free. Including non-PyTorch memory, this process has 6.14 GiB memory in use. Process 3301 has 1.78 GiB memory in use. 6.52 GiB allowed; Of the allocated memory 5.27 GiB is allocated by PyTorch, and 643.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 638.90it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:56,  5.47it/s]Loading weights:   1%|          | 2/311 [00:00<00:44,  6.95it/s]Loading weights:   4%|▍         | 12/311 [00:00<00:07, 41.11it/s]Loading weights:  12%|█▏        | 37/311 [00:00<00:02, 99.58it/s]Loading weights:  22%|██▏       | 68/311 [00:00<00:01, 162.95it/s]Loading weights:  30%|██▉       | 93/311 [00:00<00:01, 186.54it/s]Loading weights:  38%|███▊      | 119/311 [00:00<00:00, 207.83it/s]Loading weights:  45%|████▌     | 141/311 [00:00<00:00, 209.95it/s]Loading weights:  56%|█████▋    | 175/311 [00:01<00:00, 248.37it/s]Loading weights:  65%|██████▌   | 203/311 [00:01<00:00, 254.57it/s]Loading weights:  74%|███████▍  | 230/311 [00:01<00:00, 257.75it/s]Loading weights:  83%|████████▎ | 257/311 [00:01<00:00, 249.20it/s]Loading weights:  93%|█████████▎| 290/311 [00:01<00:00, 271.40it/s]Loading weights: 100%|██████████| 311/311 [00:01<00:00, 198.80it/s]
+18:45:46|INFO   |F1__int8bnb: built in 4s; sanity {"variant": "int8bnb", "max_abs_logit_diff": 2.046875, "mean_abs_logit_diff": 0.21414807438850403, "first_token_agreement": 0.9375, "bitwise_identical": false, "pass_fp_rule": false, "weight_fingerprint": "c5b14ad0cb4b6d149e9378bd32b30a46b2f8c1e5e6379c832a676e0187441277"}
+18:45:55|INFO   |    chunk 1/1: 9s (P=48, steps 96, total 9s)
+18:45:55|INFO   |DONE F1__int8bnb: gen 9s, 759 tok (84.8 tok/s), total 13s

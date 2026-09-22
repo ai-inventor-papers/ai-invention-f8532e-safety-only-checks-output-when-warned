@@ -1,0 +1,113 @@
+[
+ {
+  "utc": "2026-09-21T16:12:40.650532Z",
+  "after_n_runs": 1,
+  "sec_per_param": 2.1711652943897978e-07,
+  "overhead_s": 101.54006099700928,
+  "harvest_ratio": 1.0,
+  "budget_s": 15439.349511,
+  "projection_s_before": 24127.011775906885,
+  "dropped_now": [
+   "deepseek-ai--deepseek-coder-1.3b-instruct__NOOP_fp32",
+   "openbmb--MiniCPM4-0.5B__NOOP_fp32",
+   "tiiuae--Falcon-H1-0.5B-Instruct__NOOP_fp32",
+   "tencent--Hunyuan-0.5B-Instruct__NOOP_fp32",
+   "DavidAU--gemma-3-1b-it-heretic-extreme-uncensored-abliterated",
+   "unsloth--gemma-3-270m",
+   "tiiuae--Falcon-H1-0.5B-Base",
+   "lunahr--gemma-3-1b-it-abliterated",
+   "h2oai--h2o-danube3-500m-chat",
+   "EleutherAI--pythia-410m",
+   "LGAI-EXAONE--EXAONE-4.0-1.2B"
+  ],
+  "projection_s_after": 14749.419022932378,
+  "families_after": [
+   "bloom",
+   "deepseek-coder",
+   "ernie",
+   "falcon-h1",
+   "gemma",
+   "h2o-danube",
+   "hunyuan",
+   "minicpm",
+   "pythia",
+   "zamba2"
+  ]
+ },
+ {
+  "utc": "2026-09-21T16:17:16.616792Z",
+  "after_n_runs": 2,
+  "sec_per_param": 2.2076266395206582e-07,
+  "overhead_s": 10.055546760559082,
+  "harvest_ratio": 1.0,
+  "budget_s": 15163.383246,
+  "projection_s_before": 9440.061275367014,
+  "dropped_now": [],
+  "restored_now": [
+   "LGAI-EXAONE--EXAONE-4.0-1.2B",
+   "EleutherAI--pythia-410m",
+   "h2oai--h2o-danube3-500m-chat",
+   "lunahr--gemma-3-1b-it-abliterated",
+   "tiiuae--Falcon-H1-0.5B-Base",
+   "unsloth--gemma-3-270m",
+   "DavidAU--gemma-3-1b-it-heretic-extreme-uncensored-abliterated",
+   "tencent--Hunyuan-0.5B-Instruct__NOOP_fp32",
+   "tiiuae--Falcon-H1-0.5B-Instruct__NOOP_fp32",
+   "openbmb--MiniCPM4-0.5B__NOOP_fp32"
+  ],
+  "projection_s_after": 14526.845294642477,
+  "families_after": [
+   "bloom",
+   "deepseek-coder",
+   "ernie",
+   "exaone",
+   "falcon-h1",
+   "gemma",
+   "h2o-danube",
+   "hunyuan",
+   "minicpm",
+   "pythia",
+   "zamba2"
+  ]
+ },
+ {
+  "utc": "2026-09-21T16:36:18.923207Z",
+  "after_n_runs": 3,
+  "sec_per_param": 4.7420024719762967e-07,
+  "overhead_s": 94.70551347732544,
+  "harvest_ratio": 1.0,
+  "budget_s": 14021.076834,
+  "projection_s_before": 35243.35022133599,
+  "dropped_now": [
+   "baidu--ERNIE-4.5-0.3B-PT__NOOP_fp32",
+   "tiiuae--Falcon-H1-0.5B-Instruct__NOOP_fp32",
+   "tencent--Hunyuan-0.5B-Instruct__NOOP_fp32",
+   "DavidAU--gemma-3-1b-it-heretic-extreme-uncensored-abliterated",
+   "unsloth--gemma-3-270m",
+   "tiiuae--Falcon-H1-0.5B-Base",
+   "lunahr--gemma-3-1b-it-abliterated",
+   "h2oai--h2o-danube3-500m-chat",
+   "EleutherAI--pythia-410m",
+   "LGAI-EXAONE--EXAONE-4.0-1.2B",
+   "bigscience--bloom-560m",
+   "Zyphra--Zamba2-1.2B",
+   "baidu--ERNIE-4.5-0.3B-Base-PT",
+   "prithivMLmods--gemma-3-1b-it-abliterated",
+   "bigscience--bloomz-560m",
+   "Zyphra--Zamba2-1.2B-instruct"
+  ],
+  "note": "nothing droppable left (mandatory / family quota); projection still over budget",
+  "restored_now": [],
+  "projection_s_after": 17339.83259436855,
+  "families_after": [
+   "bloom",
+   "deepseek-coder",
+   "ernie",
+   "falcon-h1",
+   "gemma",
+   "h2o-danube",
+   "hunyuan",
+   "pythia"
+  ]
+ }
+]

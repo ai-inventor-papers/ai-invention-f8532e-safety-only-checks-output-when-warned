@@ -1,0 +1,392 @@
+[
+ {
+  "tag": "bigscience--bloom-1b1",
+  "repo": "bigscience/bloom-1b1",
+  "variant": "canonical",
+  "role": "base",
+  "family": "bloom",
+  "mandatory": true,
+  "draw_index": 0,
+  "params_total": 1065314304
+ },
+ {
+  "tag": "bigscience--bloomz-1b1",
+  "repo": "bigscience/bloomz-1b1",
+  "variant": "canonical",
+  "role": "instruct_noformat",
+  "family": "bloom",
+  "mandatory": true,
+  "draw_index": 1,
+  "params_total": 1065314304
+ },
+ {
+  "tag": "unsloth--gemma-3-1b-pt",
+  "repo": "unsloth/gemma-3-1b-pt",
+  "variant": "canonical",
+  "role": "base",
+  "family": "gemma",
+  "mandatory": true,
+  "draw_index": 2,
+  "params_total": 999885952
+ },
+ {
+  "tag": "unsloth--gemma-3-1b-it",
+  "repo": "unsloth/gemma-3-1b-it",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "gemma",
+  "mandatory": true,
+  "draw_index": 3,
+  "params_total": 999885952
+ },
+ {
+  "tag": "tencent--Hunyuan-0.5B-Pretrain",
+  "repo": "tencent/Hunyuan-0.5B-Pretrain",
+  "variant": "canonical",
+  "role": "base",
+  "family": "hunyuan",
+  "mandatory": true,
+  "draw_index": 4,
+  "params_total": 539010048
+ },
+ {
+  "tag": "tencent--Hunyuan-0.5B-Instruct",
+  "repo": "tencent/Hunyuan-0.5B-Instruct",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "hunyuan",
+  "mandatory": true,
+  "draw_index": 5,
+  "params_total": 539010048
+ },
+ {
+  "tag": "tiiuae--Falcon-H1-0.5B-Instruct",
+  "repo": "tiiuae/Falcon-H1-0.5B-Instruct",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "falcon-h1",
+  "mandatory": true,
+  "draw_index": 6,
+  "params_total": 521411104
+ },
+ {
+  "tag": "megabytes--Falcon-H1-0.5B-Instruct-heretic",
+  "repo": "megabytes/Falcon-H1-0.5B-Instruct-heretic",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "falcon-h1",
+  "mandatory": true,
+  "draw_index": 7,
+  "params_total": 521411104
+ },
+ {
+  "tag": "hereticness--heretic_Hunyuan-0.5B-Instruct",
+  "repo": "hereticness/heretic_Hunyuan-0.5B-Instruct",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "hunyuan",
+  "mandatory": true,
+  "draw_index": 8,
+  "params_total": 539010048
+ },
+ {
+  "tag": "baidu--ERNIE-4.5-0.3B-PT",
+  "repo": "baidu/ERNIE-4.5-0.3B-PT",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "ernie",
+  "mandatory": true,
+  "draw_index": 9,
+  "params_total": 360748032
+ },
+ {
+  "tag": "AiAsistent--ERNIE-4.5-0.3B-PT-heretic",
+  "repo": "AiAsistent/ERNIE-4.5-0.3B-PT-heretic",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "ernie",
+  "mandatory": true,
+  "draw_index": 10,
+  "params_total": 360748032
+ },
+ {
+  "tag": "unsloth--gemma-3-270m-it",
+  "repo": "unsloth/gemma-3-270m-it",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "gemma",
+  "mandatory": true,
+  "draw_index": 11,
+  "params_total": 268098176
+ },
+ {
+  "tag": "huihui-ai--Huihui-gemma-3-270m-it-abliterated",
+  "repo": "huihui-ai/Huihui-gemma-3-270m-it-abliterated",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "gemma",
+  "mandatory": true,
+  "draw_index": 12,
+  "params_total": 268098176
+ },
+ {
+  "tag": "mlabonne--gemma-3-1b-it-abliterated-v2",
+  "repo": "mlabonne/gemma-3-1b-it-abliterated-v2",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "gemma",
+  "mandatory": true,
+  "draw_index": 13,
+  "params_total": 999885952
+ },
+ {
+  "tag": "mlabonne--gemma-3-1b-it-abliterated",
+  "repo": "mlabonne/gemma-3-1b-it-abliterated",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "gemma",
+  "mandatory": true,
+  "draw_index": 14,
+  "params_total": 999885952
+ },
+ {
+  "tag": "deepseek-ai--deepseek-coder-1.3b-instruct",
+  "repo": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "deepseek-coder",
+  "mandatory": true,
+  "draw_index": 16,
+  "params_total": 1346471936
+ },
+ {
+  "tag": "tencent--Hunyuan-0.5B-Instruct__NOOP_sysprompt",
+  "repo": "tencent/Hunyuan-0.5B-Instruct",
+  "variant": "NOOP_sysprompt",
+  "role": "instruct",
+  "family": "hunyuan",
+  "mandatory": true,
+  "draw_index": 5,
+  "params_total": 539010048
+ },
+ {
+  "tag": "tiiuae--Falcon-H1-0.5B-Instruct__NOOP_sysprompt",
+  "repo": "tiiuae/Falcon-H1-0.5B-Instruct",
+  "variant": "NOOP_sysprompt",
+  "role": "instruct",
+  "family": "falcon-h1",
+  "mandatory": true,
+  "draw_index": 6,
+  "params_total": 521411104
+ },
+ {
+  "tag": "baidu--ERNIE-4.5-0.3B-PT__NOOP_sysprompt",
+  "repo": "baidu/ERNIE-4.5-0.3B-PT",
+  "variant": "NOOP_sysprompt",
+  "role": "instruct",
+  "family": "ernie",
+  "mandatory": true,
+  "draw_index": 9,
+  "params_total": 360748032
+ },
+ {
+  "tag": "deepseek-ai--deepseek-coder-1.3b-instruct__NOOP_sysprompt",
+  "repo": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "variant": "NOOP_sysprompt",
+  "role": "instruct",
+  "family": "deepseek-coder",
+  "mandatory": true,
+  "draw_index": 16,
+  "params_total": 1346471936
+ },
+ {
+  "tag": "EleutherAI--pythia-1b",
+  "repo": "EleutherAI/pythia-1b",
+  "variant": "canonical",
+  "role": "base",
+  "family": "pythia",
+  "mandatory": false,
+  "draw_index": 17,
+  "params_total": 1078891008
+ },
+ {
+  "tag": "h2oai--h2o-danube3-500m-base",
+  "repo": "h2oai/h2o-danube3-500m-base",
+  "variant": "canonical",
+  "role": "base",
+  "family": "h2o-danube",
+  "mandatory": false,
+  "draw_index": 18,
+  "params_total": 513590784
+ },
+ {
+  "tag": "Zyphra--Zamba2-1.2B-instruct",
+  "repo": "Zyphra/Zamba2-1.2B-instruct",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "zamba2",
+  "mandatory": false,
+  "draw_index": 19,
+  "params_total": 1215064704
+ },
+ {
+  "tag": "bigscience--bloomz-560m",
+  "repo": "bigscience/bloomz-560m",
+  "variant": "canonical",
+  "role": "instruct_noformat",
+  "family": "bloom",
+  "mandatory": false,
+  "draw_index": 20,
+  "params_total": 559214592
+ },
+ {
+  "tag": "prithivMLmods--gemma-3-1b-it-abliterated",
+  "repo": "prithivMLmods/gemma-3-1b-it-abliterated",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "gemma",
+  "mandatory": false,
+  "draw_index": 21,
+  "params_total": 999885952
+ },
+ {
+  "tag": "baidu--ERNIE-4.5-0.3B-Base-PT",
+  "repo": "baidu/ERNIE-4.5-0.3B-Base-PT",
+  "variant": "canonical",
+  "role": "base",
+  "family": "ernie",
+  "mandatory": false,
+  "draw_index": 22,
+  "params_total": 360748032
+ },
+ {
+  "tag": "Zyphra--Zamba2-1.2B",
+  "repo": "Zyphra/Zamba2-1.2B",
+  "variant": "canonical",
+  "role": "base",
+  "family": "zamba2",
+  "mandatory": false,
+  "draw_index": 23,
+  "params_total": 1215064704
+ },
+ {
+  "tag": "bigscience--bloom-560m",
+  "repo": "bigscience/bloom-560m",
+  "variant": "canonical",
+  "role": "base",
+  "family": "bloom",
+  "mandatory": false,
+  "draw_index": 24,
+  "params_total": 559214592
+ },
+ {
+  "tag": "LGAI-EXAONE--EXAONE-4.0-1.2B",
+  "repo": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "exaone",
+  "mandatory": false,
+  "draw_index": 25,
+  "params_total": 1279391488
+ },
+ {
+  "tag": "EleutherAI--pythia-410m",
+  "repo": "EleutherAI/pythia-410m",
+  "variant": "canonical",
+  "role": "base",
+  "family": "pythia",
+  "mandatory": false,
+  "draw_index": 26,
+  "params_total": 505997504
+ },
+ {
+  "tag": "h2oai--h2o-danube3-500m-chat",
+  "repo": "h2oai/h2o-danube3-500m-chat",
+  "variant": "canonical",
+  "role": "instruct",
+  "family": "h2o-danube",
+  "mandatory": false,
+  "draw_index": 27,
+  "params_total": 513590784
+ },
+ {
+  "tag": "lunahr--gemma-3-1b-it-abliterated",
+  "repo": "lunahr/gemma-3-1b-it-abliterated",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "gemma",
+  "mandatory": false,
+  "draw_index": 28,
+  "params_total": 999887104
+ },
+ {
+  "tag": "tiiuae--Falcon-H1-0.5B-Base",
+  "repo": "tiiuae/Falcon-H1-0.5B-Base",
+  "variant": "canonical",
+  "role": "base",
+  "family": "falcon-h1",
+  "mandatory": false,
+  "draw_index": 29,
+  "params_total": 521411104
+ },
+ {
+  "tag": "unsloth--gemma-3-270m",
+  "repo": "unsloth/gemma-3-270m",
+  "variant": "canonical",
+  "role": "base",
+  "family": "gemma",
+  "mandatory": false,
+  "draw_index": 30,
+  "params_total": 268098176
+ },
+ {
+  "tag": "DavidAU--gemma-3-1b-it-heretic-extreme-uncensored-abliterated",
+  "repo": "DavidAU/gemma-3-1b-it-heretic-extreme-uncensored-abliterated",
+  "variant": "canonical",
+  "role": "edited_child",
+  "family": "gemma",
+  "mandatory": false,
+  "draw_index": 31,
+  "params_total": 999885952
+ },
+ {
+  "tag": "tencent--Hunyuan-0.5B-Instruct__NOOP_fp32",
+  "repo": "tencent/Hunyuan-0.5B-Instruct",
+  "variant": "NOOP_fp32",
+  "role": "instruct",
+  "family": "hunyuan",
+  "mandatory": true,
+  "draw_index": 5,
+  "params_total": 539010048
+ },
+ {
+  "tag": "tiiuae--Falcon-H1-0.5B-Instruct__NOOP_fp32",
+  "repo": "tiiuae/Falcon-H1-0.5B-Instruct",
+  "variant": "NOOP_fp32",
+  "role": "instruct",
+  "family": "falcon-h1",
+  "mandatory": true,
+  "draw_index": 6,
+  "params_total": 521411104
+ },
+ {
+  "tag": "baidu--ERNIE-4.5-0.3B-PT__NOOP_fp32",
+  "repo": "baidu/ERNIE-4.5-0.3B-PT",
+  "variant": "NOOP_fp32",
+  "role": "instruct",
+  "family": "ernie",
+  "mandatory": true,
+  "draw_index": 9,
+  "params_total": 360748032
+ },
+ {
+  "tag": "deepseek-ai--deepseek-coder-1.3b-instruct__NOOP_fp32",
+  "repo": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "variant": "NOOP_fp32",
+  "role": "instruct",
+  "family": "deepseek-coder",
+  "mandatory": true,
+  "draw_index": 16,
+  "params_total": 1346471936
+ }
+]

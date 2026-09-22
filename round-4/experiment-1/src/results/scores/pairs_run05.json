@@ -1,0 +1,28 @@
+[
+ {
+  "pair_id": "HG::huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2",
+  "parent_tag": "F1__ref",
+  "parent_dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/harvest/F1__ref",
+  "child_tag": "HG__huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2",
+  "child_dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/harvest/HG__huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2",
+  "parent_repo": "Qwen/Qwen3-0.6B",
+  "child_repo": "huihui-ai/Huihui-Qwen3-0.6B-abliterated-v2",
+  "kind": "harvested_regen",
+  "constructed": false,
+  "observed_class": "EFFECTIVE",
+  "intended_stratum": "EFFECTIVE_HARVESTED"
+ },
+ {
+  "pair_id": "F1__int8bnb",
+  "parent_tag": "F1__ref",
+  "parent_dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/harvest/F1__ref",
+  "child_tag": "F1__int8bnb",
+  "child_dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/harvest/F1__int8bnb",
+  "parent_repo": "Qwen/Qwen3-0.6B",
+  "child_repo": "Qwen/Qwen3-0.6B",
+  "kind": "constructed",
+  "constructed": true,
+  "observed_class": "NOOP",
+  "intended_stratum": "NOOP"
+ }
+]

@@ -1,0 +1,37 @@
+{
+ "hook_hash": "6e406f7f",
+ "device": "cuda",
+ "a1_noop_hooks_equal_hooks_removed": {
+  "n_rows": 40,
+  "greedy16_identical_all_rows": true,
+  "max_abs_dlogit_step1": 0.0,
+  "pass": true,
+  "note": "hooks registered with an inactive spec vs hooks removed, identical batch"
+ },
+ "a2_arm0_rows_unaffected_by_active_rows": {
+  "n_items": 8,
+  "max_abs_dlogit_step1": 0.0,
+  "greedy16_identical_rows": 8,
+  "pass": true,
+  "note": "arm-0 rows share the batch with active F/R/N6 rows; any cross-row leak changes their step-1 logits (bitwise). Later greedy tokens can differ only through batch-shape changes when other rows hit EOS (reported, not a pass criterion on GPU)"
+ },
+ "b_residual_along_direction_after_projection": {
+  "max_ratio_by_layer": {
+   "9": 0.00019872588745784014,
+   "10": 0.0001541728270240128,
+   "11": 0.00018612793064676225,
+   "12": 0.000249203440034762,
+   "13": 6.290482269832864e-05
+  },
+  "max": 0.000249203440034762,
+  "pass": true
+ },
+ "c_matched_displacement_ratio_R_over_F": {
+  "min": 0.9999998807907104,
+  "max": 1.0000001192092896,
+  "pass": true
+ },
+ "F_changes_greedy16_fraction": 0.375,
+ "site_P_token1_note": "site P edits the last prompt position, so token 1 CAN change",
+ "utc": "2026-09-21T18:44:59.089448Z"
+}

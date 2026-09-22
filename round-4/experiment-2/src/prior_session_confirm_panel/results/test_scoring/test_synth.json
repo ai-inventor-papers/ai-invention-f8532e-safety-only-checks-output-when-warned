@@ -1,0 +1,195 @@
+{
+ "values": {
+  "N1": 1.933423033183658,
+  "N2": 1.9160625738104415,
+  "N3": 1.8356478933785465,
+  "N4_onset": 0.5,
+  "N4_peak": 0.75,
+  "N4_width": 0.5793033797574472,
+  "N5": 0.0005196830191401615,
+  "N5_BL1": 0.012450302352439279,
+  "N6": 1.4795896614427027,
+  "N7": 2.8892548078204014,
+  "N8": 0.7911821997249605,
+  "N9": 1.9695693693705472,
+  "N10": -0.005927299806130826,
+  "N11": 2.137578224138652,
+  "N12": "DEFERRED",
+  "BL1_easy": 11.875602722167969,
+  "BL1_hard": 6.9239144921302795,
+  "BL1_truelogit": 11.091682127899501,
+  "AMS_REIMPL": 0.42,
+  "C7": 0.7557177734375,
+  "C13_peak_d": 2.3986000297891987,
+  "B7": 0.4997762413737169,
+  "B7_proj": 0.4997762413737169,
+  "REGEX": 0.0,
+  "REGEX_NAMEFREE": 0.0,
+  "GREEDY_REFUSAL": 0.25,
+  "GREEDY_REFUSAL_companion": 0.3125,
+  "B3": 8.318552189788546,
+  "C11": 0.7911821997249605,
+  "C13": 1.7633090262102513,
+  "C13_peak_f": 0.75,
+  "X2": 0.017994235019729875,
+  "X10_abs": 0.6432428644659011,
+  "N1_at_lstar_cf": 1.933423033183658,
+  "N2_R_share": 0.10129486297369956,
+  "BL1_truelogit_hard": 6.59919816066853
+ },
+ "status_not_ok": {
+  "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)"
+ },
+ "n5_used": [
+  "notemplate",
+  "fp32"
+ ],
+ "n5_detail": {
+  "notemplate": {
+   "source": "results/test_scoring/synth_harvest/SYNTH--llama/A_prompt_notemplate.npy",
+   "N1_p": 1.9347022638024811,
+   "N1": 1.933423033183658,
+   "BL1_easy_p": 11.841079453627268,
+   "BL1_used": true
+  },
+  "fp32": {
+   "source": "results/test_scoring/synth_harvest/SYNTH--llama__NOOP_fp32",
+   "N1_p": 1.933423033183657,
+   "N1": 1.933423033183658,
+   "BL1_easy_p": 11.87560228506724,
+   "BL1_used": true
+  }
+ },
+ "kcurve_N9": {
+  "4": {
+   "mean": 1.6154098811634838,
+   "p05": 0.2347526644678137,
+   "p95": 2.43458531223683,
+   "n": 20
+  },
+  "8": {
+   "mean": 1.7617902601276278,
+   "p05": -0.022118663461304325,
+   "p95": 2.3338911500569273,
+   "n": 20
+  },
+  "16": {
+   "mean": 1.710400219551294,
+   "p05": 0.10054308083766667,
+   "p95": 2.3671766166923383,
+   "n": 20
+  },
+  "32": {
+   "mean": 1.864726378452272,
+   "p05": 1.0998521116047018,
+   "p95": 2.088267910345916,
+   "n": 20
+  }
+ },
+ "null_N9": {
+  "mean": 0.11143381672153078,
+  "sd": 1.2410348123029435,
+  "p05": -1.6016282324149578,
+  "p95": 1.817140318096274,
+  "n": 20
+ },
+ "n9": {
+  "has_D_dec": true,
+  "n_valid": [
+   8,
+   8,
+   8,
+   0,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   2,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8
+  ],
+  "d_prompt_n9": 1.9636420695644163
+ },
+ "variant_status_not_ok": {
+  "N5": "NOT_RUN:no perturbation pass available",
+  "N5_BL1": "NOT_RUN:no perturbed r_refusal/r_control available",
+  "N9": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+  "N10": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+  "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)",
+  "AMS_REIMPL": "NOT_RUN:ams_reimpl.json absent",
+  "REGEX": "NOT_RUN:card_regex.json absent",
+  "REGEX_NAMEFREE": "NOT_RUN:card_regex.json absent",
+  "GREEDY_REFUSAL": "NOT_RUN:greedy_refusal.json absent",
+  "GREEDY_REFUSAL_companion": "NOT_RUN:greedy_refusal.json absent",
+  "X2": "NAN:non-finite",
+  "X10_abs": "NAN:non-finite"
+ },
+ "variant_notes": {
+  "weights_inherited_from_parent": "SYNTH--llama"
+ },
+ "pair_N1": {
+  "a": 1.933423033183658,
+  "b": 1.933423033183658,
+  "status_a": "OK",
+  "status_b": "OK",
+  "readout_class": "activation",
+  "a_null_sd": 1.2307796981134875,
+  "delta": 0.0,
+  "ci95": [
+   0.0,
+   0.0
+  ],
+  "covers0": true,
+  "method": "paired_prompt_bootstrap",
+  "n_boot_finite": 200,
+  "boot_mean_delta": 0.0,
+  "abs_delta_over_null_sd": 0.0
+ },
+ "pair_N9": {
+  "a": 1.9695693693705472,
+  "b": null,
+  "status_a": "OK",
+  "status_b": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+  "readout_class": "activation",
+  "a_null_sd": 1.2410348123029435,
+  "delta": null,
+  "ci95": null,
+  "covers0": null,
+  "method": "not_available",
+  "abs_delta_over_null_sd": null
+ },
+ "pair_B7": {
+  "a": 0.4997762413737169,
+  "b": 0.4997762413737169,
+  "status_a": "OK",
+  "status_b": "OK",
+  "readout_class": "weight",
+  "a_null_sd": null,
+  "delta": 0.0,
+  "ci95": null,
+  "covers0": null,
+  "method": "exact",
+  "abs_delta_over_null_sd": null
+ }
+}

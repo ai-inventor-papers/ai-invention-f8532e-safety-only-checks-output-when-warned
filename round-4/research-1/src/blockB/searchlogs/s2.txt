@@ -1,0 +1,43 @@
+Search: system prompt changes refusal probability first token  [general via ddgs]
+Found: 10 results
+
+1. From Refusal Tokens to Refusal Control: Discovering and Steering Category-Specific Refusal Directions
+   https://arxiv.org/html/2603.13359
+   February 16, 2026 - For the prompt shown in Figure ... continues to generate a refusal message immediately afterward. This occurs because adjusting the sampling threshold changes only the first genera...
+
+2. “My Answer is C”: First-Token Probabilities Do Not Match ...
+   https://aclanthology.org/2024.findings-acl.441.pdf
+   how aligned first-token evaluation is with the · text output along several dimensions, namely · final option choice, refusal rate, choice distribu- tion and robustness under prompt perturbation. Our r...
+
+3. Refusal Tokens: A Simple Way to Calibrate Refusals in Large Language Models · Pith
+   https://pith.science/paper/2412.06748
+   December 9, 2024 - Score 6: The main mechanism—thresholding the softmax probability of a trained refusal token to change refusal behavior—is not circular. The token is trained to be prepended to refus...
+
+4. Refusal Tokens: A Simple Way to Calibrate Refusals in Large Language Models
+   https://arxiv.org/html/2412.06748v2
+   August 29, 2025 - We measure the calibration of the model trained with single refusal token under three definitions of expected calibration error (ECE): (i) token-level, which compares the predicted p...
+
+5. “My Answer is C”: First-Token Probabilities Do Not Match Text Answers in Instruction-Tuned Language Models
+   https://arxiv.org/html/2402.14499v1
+   February 22, 2024 - We show that the first-token evaluation is not faithful to text output: it often does not match the text output’s answer (e.g., over ... 60 % mismatch for Llama2-7b-Chat). We also ...
+
+6. Refusal Tokens: A Simple Way to Calibrate ...
+   https://arxiv.org/pdf/2412.06748
+   under three definitions of expected calibration error (ECE): (i) token-level, which compares the · predicted probability of emitting the tag with its actual occurrence; (ii) response-level, which · co...
+
+7. Refusal in Language Models Is Mediated by a Single Direction Andy Arditi∗
+   https://proceedings.neurips.cc/paper_files/paper/2024/file/f545448535dfde4f9786555403ab7c49-Paper-Conference.pdf
+   prompts yielding refusal_metric > 0. We also use this metric to quickly evaluate the efficacy of ... Figure 9: Next token probabilities for GEMMA 2B IT across harmful and harmless instructions....
+
+8. Do Not Let Low-Probability Tokens Over-Dominate in RL for LLMs
+   https://arxiv.org/html/2505.12929v1
+   May 19, 2025 - In contrast, GRPO mitigates this issue by discarding such prompts through a within-prompt normalization operation. These findings highlight the substantial impact of update bias on trai...
+
+9. Refusal Tokens: A Simple Way to CalibrateRefusals in Large Language Models
+   https://arxiv.org/html/2412.06748v1
+   Using llama-3 70B, we prompt the model to generate questions from news articles beyond its cutoff date for refusal data, and before the cutoff data of the model for contrast data, with modified prompt...
+
+10. Token optimization: Backbone of effective prompt engineering
+   https://developer.ibm.com/articles/awb-token-optimization-backbone-of-effective-prompt-engineering/
+   August 30, 2024 - Discover token optimization strategies for prompt engineering that reduce LLM costs, improve response speed, and build scalable generative AI solutions....
+

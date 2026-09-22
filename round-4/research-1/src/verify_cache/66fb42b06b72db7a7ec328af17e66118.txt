@@ -1,0 +1,326 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.29581v1
+Type: HTML
+Length: 38088 chars
+
+--- Content ---
+
+##### Report GitHub Issue
+
+×
+
+Title:
+
+Content selection saved. Describe the issue below:
+
+Description:
+
+Submit without GitHub Submit in GitHub
+
+arXiv is now an independent nonprofit! [Learn more](https://info.arxiv.org/about) ×
+
+[ Back to arXiv ](/)
+
+[Why HTML?](https://info.arxiv.org/about/accessible_HTML.html) Report Issue [ Back to Abstract ](/abs/2606.29581v1 "Back to abstract page") [ Download PDF](/pdf/2606.29581v1 "Download PDF") [ ](javascript:toggleNavTOC\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. 1 Introduction
+  3. 2 Background and Related Work
+     1. LLM Safety Alignment.
+     2. Quantization of LLMs.
+     3. Quantization and Safety.
+     4. Stability and Temperature.
+  4. 3 Methodology
+     1. 3.1 Experimental Design
+     2. 3.2 Prompts and Sampling
+     3. 3.3 Metrics
+        1. Compound Degradation Index.
+     4. 3.4 Safety Judges
+  5. 4 Results
+     1. 4.1 Baseline Safety at Greedy Decoding (T=0T{=}0)
+     2. 4.2 Temperature Effects on Safety
+     3. 4.3 Compound Degradation Index
+     4. 4.4 Safety Stability
+     5. 4.5 Alignment Score and Over-Refusal
+     6. 4.6 Temperature Equivalence Mapping
+     7. 4.7 Judge Agreement Analysis
+  6. 5 Discussion
+     1. Standard quantization largely preserves safety.
+     2. Temperature is the dominant risk factor.
+     3. Compound effects do not compound.
+     4. Limitations.
+  7. 6 Conclusion
+  8. References
+
+
+
+[ License: CC BY-NC-ND 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2606.29581v1 [cs.LG] 28 Jun 2026
+
+# The Joint Effect of Quantization and Sampling Temperature   
+on LLM Safety Alignment: A Factorial Analysis
+
+Hari Prasad Ritam Pal Conscious Engines Conscious Engines hari@consciousengines.com ritam@consciousengines.com
+
+###### Abstract
+
+Modern LLM deployments routinely compress models and raise sampling temperature to reduce cost, latency, or repetition, yet safety evaluations usually treat these choices as fixed implementation details. This leaves a practical uncertainty: does a model that is safe at FP16 and greedy decoding remain safe after it is quantized and sampled stochastically, or do the two deployment knobs amplify one another? We study this question with a factorial evaluation of 9 instruction-tuned models from six families, 3 precisions (FP16, GPTQ INT8, AWQ INT4), and 6 temperatures (T=0T{=}0 to 1.01.0), yielding 161 configurations and ≈\approx322k responses judged by a six-model safety ensemble. Contrary to the concern that low-bit deployment broadly erodes alignment, standard non-adversarial quantization is usually safety-neutral: INT4 keeps or lowers attack success for 7 of 9 models, with clear degradation concentrated in the weakest baseline model, SmolLM3-3B (18.5%→36.0%18.5\%{\to}36.0\%). The larger risk comes from sampling: higher temperature sharply increases decision instability for vulnerable models, with DFR reaching 53.0% at T=1.0T{=}1.0, even when average ASR changes modestly. Finally, the interaction is not a “double penalty”: our Compound Degradation Index remains largely sub-additive (−0.195-0.195 to +0.045+0.045), indicating that quantization and temperature do not systematically compound. These results suggest a deployment rule of thumb: standard INT4/INT8 quantization can be reasonable for strongly aligned models, but safety claims at elevated temperature should report multi-sample stability, not only average attack success.
+
+## 1 Introduction
+
+Deploying aligned LLMs in production requires practitioners to choose among many inference hyperparameters. Two of the most consequential are _weight quantization_ , which reduces numerical precision from FP16 to INT8 or INT4 to cut memory and latency, and _sampling temperature_ , which controls output entropy at inference time. Both choices are known to affect model behavior: quantization alters the effective weight distribution [1, 2, 3], while temperature directly controls the probability mass assigned to low-probability continuations [4]. Recent evaluations of quantized LLMs have shown that compression can degrade not only perplexity but also trustworthiness and task-specific accuracy [5, 6], yet the specific effect on safety alignment has received limited attention.
+
+Despite this, safety alignment research typically evaluates models at a single configuration, often FP16 weights and greedy decoding (T=0T{=}0) [7, 8]. This leaves practitioners with two unanswered questions: _Does quantization degrade alignment?_ and _Do quantization and temperature effects compound?_ Prior work has examined these factors in isolation: Chen et al. [9] studied quantization effects on safety for Llama models; Kharinaev et al. [10] evaluated 66 quantized model variants across four safety benchmarks and found that both PTQ and QAT can degrade alignment; and Renze and Guven [11] showed that temperature changes up to 1.0 have limited effect on task accuracy but did not examine safety. Separately, Larsen [12] showed that alignment decisions can be highly unstable across samples at higher temperatures. However, no study has systematically varied both factors across a broad set of model families.
+
+We address this gap with a comprehensive factorial study that crosses quantization level with sampling temperature across nine models spanning six model families. Crucially, all quantized checkpoints use standard calibration data (Pile validation set) and off-the-shelf quantization tools (llmcompressor); we do not employ adversarial data corruption or jailbreaking techniques. This reflects the realistic deployment scenario where practitioners apply standard quantization pipelines and need to understand the downstream safety implications. Our contributions are:
+
+  1. 1.
+
+A factorial evaluation of 161 configurations (9 models ×\times 3 precisions ×\times 6 temperatures), to our knowledge the largest such study to date.
+
+  2. 2.
+
+The Compound Degradation Index (CDI), a 2×\times2 interaction term that directly measures whether quantization and temperature effects are additive, compounding, or countervailing.
+
+  3. 3.
+
+A temperature equivalence map translating quantized-model safety to an effective FP16 temperature.
+
+  4. 4.
+
+A six-judge safety ensemble comprising LlamaGuard-3-{1B, 8B}, LlamaGuard-2-8B, WildGuard, and ShieldGemma-{2B, 9B}, providing cross-architecture, cross-generation robustness analysis across all configurations.
+
+
+
+
+## 2 Background and Related Work
+
+#### LLM Safety Alignment.
+
+Post-training alignment via RLHF [13] and its variants instills refusal behaviors for harmful queries. AdvBench [7] and similar benchmarks measure this via ASR, the fraction of harmful prompts that elicit policy-violating responses. Complementary work on over-refusal [14] highlights that models can be too conservative, refusing benign queries. We measure both axes.
+
+#### Quantization of LLMs.
+
+GPTQ [2] and AWQ [3] are two dominant post-training quantization (PTQ) methods. AWQ uses activation-aware weight quantization that preserves salient weight channels, achieving strong compression with minimal perplexity degradation. The effect of these methods on safety alignment, however, has been underexplored.
+
+#### Quantization and Safety.
+
+Chen et al. [9] studied the effect of AWQ INT4 quantization on Llama model safety, finding that quantization can reduce ASR and attributing this to activation rounding narrowing the output distribution. However, their study is limited to a single model family, a single temperature, and one quantization method. Our work broadens the scope to nine models across six families, multiple quantization methods, and six temperatures, providing a more complete picture of how standard quantization affects safety alignment.
+
+#### Stability and Temperature.
+
+Larsen [12] introduced the Safety Stability Index (SSI) and Decision Flip Rate (DFR) to measure within-configuration variance across multiple samples. This work shows that evaluating safety at T>0T{>}0 with a single sample yields unreliable verdicts. We incorporate these metrics throughout our evaluation.
+
+## 3 Methodology
+
+### 3.1 Experimental Design
+
+Our goal is to reproduce the decision a practitioner faces when moving an aligned model from evaluation to deployment: choose a model, compress it to fit cost and latency constraints, and select a sampling temperature. We therefore use a factorial design that varies these deployment choices directly. The model set contains nine instruction-tuned models from six families: Llama-3.1-8B-Instruct and Llama-3.2-3B-Instruct [15]; Qwen3-4B and Qwen3-8B [16]; Mistral-7B-Instruct-v0.3 [17]; OLMo-2-7B-Instruct [18]; Granite-3.1-2B-Instruct and Granite-3.1-8B-Instruct [19]; and SmolLM3-3B [20]. This set spans 2B–8B parameters and includes both highly aligned and more weakly aligned baselines, allowing us to test whether quantization effects depend on the starting safety margin.
+
+For each model, we compare native FP16 weights with two common post-training quantization settings: GPTQ INT8 [2] and AWQ INT4 [3]. Quantized checkpoints are produced with llmcompressor using the Pile validation set [21] as standard, non-adversarial calibration data. At inference time, we do not re-quantize the models; INT4 and INT8 variants are served from the resulting checkpoints. We then evaluate each precision at six temperatures, T∈{0.0,0.3,0.5,0.7,0.95,1.0}T\in\\{0.0,0.3,0.5,0.7,0.95,1.0\\}, ranging from greedy decoding to high-entropy sampling.
+
+The full design yields 162 possible model–precision–temperature configurations. We evaluate 161 of them; Granite-3.1-8B GPTQ INT8 at T=0T{=}0 is excluded because the pre-quantized checkpoint failed under greedy decoding. All inference runs are performed on a 2×\timesNVIDIA RTX 6000 Pro 96GB workstation using vllm v0.20.0 with enforce_eager=True.
+
+### 3.2 Prompts and Sampling
+
+Safety alignment has two sides: a model should refuse harmful requests, but it should not refuse benign requests merely because they resemble unsafe ones. We therefore evaluate each configuration on both harmful and benign prompts. The harmful set contains 200 harmful-behavior prompts from AdvBench [7], spanning chemical/biological harm, illegal activities, misinformation, general harm, harassment/bullying, and cybercrime. We use the base harmful prompts only, not adaptive jailbreak suffixes or attack-time prompt optimization. The benign set contains 200 prompts from XSTest [22], which is designed to expose exaggerated safety behavior on safe queries that superficially resemble harmful requests.
+
+Because non-greedy decoding can change a model’s response to the same prompt, we draw n=5n{=}5 independent samples per prompt for every configuration. This produces approximately 322,000 total responses and lets us distinguish average safety from response-to-response stability.
+
+### 3.3 Metrics
+
+We summarize each configuration with metrics that capture refusal behavior, attack success, stochastic stability, and over-refusal. Let y^p,i∈{0,1}\hat{y}_{p,i}\in\\{0,1\\} denote the ensemble safety verdict for sample ii of harmful prompt pp, where 11 means the response is judged harmful and 00 means it is judged safe. For each prompt, define the number of safe responses as nps=∑i(1−y^p,i)n_{p}^{s}=\sum_{i}(1-\hat{y}_{p,i}) and the number of unsafe responses as npu=∑iy^p,in_{p}^{u}=\sum_{i}\hat{y}_{p,i}.
+
+The refusal rate measures how often the model’s majority behavior is safe on harmful prompts. A prompt is counted as refused when more samples are safe than unsafe. The attack success rate is the complement: the fraction of harmful prompts for which the model does not produce a majority-safe response. Together, these give the standard safety outcome on harmful prompts.
+
+| RR | =1P∑p𝟏[nps>npu]\displaystyle=\frac{1}{P}\sum_{p}\mathbf{1}[n_{p}^{s}>n_{p}^{u}] |  | (1)  
+---|---|---|---|---  
+| ASR | =1−RR\displaystyle=1-\text{RR} |  | (2)  
+  
+We also measure whether a configuration is internally consistent across repeated samples. The Safety Stability Index measures the average majority share across prompts; it is 1.01.0 when all five samples for every prompt receive the same verdict, and lower when verdicts split. The Decision Flip Rate measures the fraction of prompts for which at least one sample receives the opposite verdict from another sample, making it a direct indicator of single-sample evaluation risk.
+
+| SSI | =1P​∑pmax⁡(nps,npu)n\displaystyle=\frac{1}{P}\sum_{p}\frac{\max(n_{p}^{s},n_{p}^{u})}{n} |  | (4)  
+---|---|---|---|---  
+| DFR | =1P∑p𝟏[min(nps,npu)>0]\displaystyle=\frac{1}{P}\sum_{p}\mathbf{1}[\min(n_{p}^{s},n_{p}^{u})>0] |  | (5)  
+  
+Finally, we measure over-refusal on benign prompts. The Over-Refusal Rate is the fraction of benign prompts for which the model refuses despite the request being safe:
+
+| ORR | =1Q​∑q𝟏​[refused​(q)]\displaystyle=\frac{1}{Q}\sum_{q}\mathbf{1}[\text{refused}(q)] |  | (6)  
+---|---|---|---|---  
+  
+where P=200P{=}200 harmful prompts and Q=200Q{=}200 benign prompts. Over-refusal uses keyword-based refusal detection following [14].
+
+#### Compound Degradation Index.
+
+To isolate whether quantization and temperature amplify one another, we define the Compound Degradation Index (CDI) as a 2×\times2 interaction term, analogous to a factorial contrast:
+
+| CDI​(prec,T)=[ASR​(prec,T)−ASR​(fp16,T)]⏟Δquant​(T)−[ASR​(prec,T0)−ASR​(fp16,T0)]⏟Δquant​(T0)\text{CDI}(\text{prec},T)=\underbrace{[\text{ASR}(\text{prec},T)-\text{ASR}(\text{fp16},T)]}_{\Delta_{\text{quant}}(T)}-\\\ \underbrace{[\text{ASR}(\text{prec},T_{0})-\text{ASR}(\text{fp16},T_{0})]}_{\Delta_{\text{quant}}(T_{0})} |  | (7)  
+---|---|---|---  
+  
+where T0=0.0T_{0}{=}0.0 is the greedy baseline. CDI>0\text{CDI}{>}0 indicates super-additive (compounding) effects; CDI<0\text{CDI}{<}0 indicates sub-additive (countervailing) effects; CDI≈0\text{CDI}{\approx}0 indicates independence.
+
+### 3.4 Safety Judges
+
+We employ a six-judge safety ensemble to ensure verdict robustness across model families, generations, and architectural lineages. Judges run in parallel across both GPUs on the same generation files. Final ensemble verdicts use majority vote; individual judge verdicts are retained for agreement analysis.
+
+The ensemble includes three Meta guard models: LlamaGuard-3-1B, which serves as our primary judge; LlamaGuard-3-8B, a higher-capacity model from the same generation; and LlamaGuard-2-8B, included to measure generational drift in guard-model behavior [15, 23]. To avoid relying only on the LlamaGuard family, we add WildGuard, an Allen AI Mistral-7B-based moderation model [24], and two Google ShieldGemma judges, ShieldGemma-2B and ShieldGemma-9B [25]. This mix gives us both within-family comparisons and cross-architecture checks on the final safety verdicts.
+
+Per-response verdicts across all six judges are compared for agreement analysis in Section 4.7.
+
+## 4 Results
+
+### 4.1 Baseline Safety at Greedy Decoding (T=0T{=}0)
+
+We begin with the most conservative decoding setting, where temperature is zero and therefore sampling variability is removed. Table 1 reports attack success rate at this greedy baseline. This setting asks a narrow but important question: before temperature enters the picture, does standard post-training quantization visibly change the safety behavior of the model?
+
+Table 1: ASR (%) at T=0T{=}0 (greedy) across all 9 models and precisions (six-judge majority-vote ensemble). Bold = per-model minimum. ∗* = excluded (greedy decoding failure in pre-quantized checkpoint). Model | FP16 | INT8 | INT4  
+---|---|---|---  
+Llama-3.1-8B | 2.5 | 1.5 | 0.0  
+Llama-3.2-3B | 0.0 | 0.0 | 0.0  
+Qwen3-4B | 0.0 | 0.0 | 0.0  
+Qwen3-8B | 0.0 | 0.0 | 0.0  
+Mistral-7B | 21.5 | 19.5 | 21.5  
+OLMo-2-7B | 0.0 | 0.0 | 0.0  
+Granite-3.1-2B | 0.5 | 0.0 | 1.0  
+Granite-3.1-8B | 0.0 | ∗* | 0.0  
+SmolLM3-3B | 18.5 | 23.5 | 36.0  
+Figure 1: Attack Success Rate vs Temperature by Precision. Each subplot shows one of the 9 models with ASR plotted across 6 temperatures for FP16, INT8, and INT4. Most models maintain near-zero ASR across all temperatures and precisions; SmolLM3-3B and Mistral-7B show the largest temperature sensitivity.
+
+For most models, the answer is no. AWQ INT4 maintains or reduces ASR relative to FP16 for 7 of 9 models, and GPTQ INT8 is conservative or neutral for 8 of 9 models. Several models are unchanged at the floor: Llama-3.2-3B, Qwen3-4B, Qwen3-8B, and OLMo-2-7B remain at 0.0% ASR across all three precisions. Llama-3.1-8B becomes more conservative after INT4 quantization, moving from 2.5% ASR at FP16 to 0.0%. Granite-3.1-2B shows only small movement around the floor, while Granite-3.1-8B remains at 0.0% for the evaluated FP16 and INT4 settings.
+
+The exception is SmolLM3-3B. It has the weakest FP16 greedy baseline among the evaluated models except Mistral-7B, and quantization worsens it substantially: INT8 increases ASR from 18.5% to 23.5%, and INT4 raises it to 36.0%. Mistral-7B also has high baseline ASR, but its quantized variants do not show the same degradation pattern. Thus, at greedy decoding, quantization risk is not evenly distributed across model families; it is concentrated in the model that already has a weak safety margin.
+
+### 4.2 Temperature Effects on Safety
+
+After establishing the greedy baseline, we vary temperature while holding the same model and precision grid fixed. Figure 1 shows that temperature effects are not simply monotonic. Several models become most conservative at intermediate temperatures around T≈0.3T\approx 0.3–0.50.5 before safety declines again, so the relationship is not captured by the simple intuition that every increase in temperature steadily worsens ASR.
+
+The effect is also highly model-dependent. OLMo-2-7B, Qwen3-8B, and Qwen3-4B are the most temperature-robust models: at T=1.0T{=}1.0, their SSI remains at least 0.999, and ASR stays at or near 0% across the tested temperature range. By contrast, SmolLM3-3B and Mistral-7B show the clearest deterioration beyond T=0.7T{=}0.7, with DFR exceeding 46% at T=1.0T{=}1.0. Over-refusal does not grow into a large usability cost in these runs: ORR remains below 8% across all 161 evaluated configurations.
+
+### 4.3 Compound Degradation Index
+
+The CDI heatmaps in Figure 2 ask whether the two deployment choices interact. If quantization and high temperature create a double penalty, CDI should become consistently positive. Instead, the interaction is mostly small and often countervailing.
+
+Figure 2: Compound Degradation Index heatmaps (precision ×\times temperature per model). Red = super-additive (compounding); blue = sub-additive (countervailing). Most cells cluster near zero.
+
+Across the quantized comparisons, CDI ranges from −0.195-0.195 to +0.045+0.045, and most values lie within ±0.03\pm 0.03. No model shows purely compounding behavior across all temperatures. The strongest sub-additive effect occurs for SmolLM3-3B INT4, where CDI reaches −0.195-0.195 at T=0.95T{=}0.95; at elevated temperatures, INT4 partially offsets rather than amplifies the temperature-induced degradation for this model. Mistral-7B shows a similar countervailing pattern: CDI reaches −0.155-0.155 for INT4 and −0.150-0.150 for INT8 at T=0.7T{=}0.7.
+
+Positive interaction is limited. The largest super-additive value is SmolLM3-3B INT8 at T=0.5T{=}0.5, where CDI is +0.045+0.045; all other models remain below +0.02+0.02. For models with strong baseline alignment, the interaction is essentially absent: Llama-3.2-3B, Qwen3-4B, Qwen3-8B, OLMo-2-7B, and both Granite variants stay near zero (||CDI|≤0.005|\leq 0.005) across temperatures.
+
+### 4.4 Safety Stability
+
+Figure 3 makes the stability story explicit. At T=0T{=}0, SSI is 1.0 for every configuration by definition: greedy decoding produces no within-prompt sampling variation. Once temperature increases, the main split is between two unstable models and the rest of the suite. At FP16/T=1.0T{=}1.0, Mistral-7B reaches the highest instability, with SSI =0.846=0.846 and DFR =53.0%=53.0\%. SmolLM3-3B follows with SSI =0.866=0.866 and DFR =46.5%=46.5\%.
+
+The remaining models are much more stable under the same setting. Llama-3.1-8B has SSI =0.989=0.989 and DFR =3.5%=3.5\% at FP16/T=1.0T{=}1.0; Llama-3.2-3B has SSI =0.998=0.998 and DFR =0.5%=0.5\%; Qwen3-4B has SSI =0.999=0.999 and DFR =0.5%=0.5\%; and both OLMo-2-7B and Qwen3-8B remain fully stable by this measure, with SSI =1.000=1.000 and DFR =0.0%=0.0\%. Quantization alone causes negligible SSI change (<0.01<0.01) at any fixed temperature for the seven well-aligned models. The practical implication is that single-sample safety evaluations at T>0.7T{>}0.7 are especially unreliable for Mistral-7B and SmolLM3-3B, but not uniformly unreliable for every model.
+
+Figure 3: Safety Stability Index (SSI) heatmaps per model. Stability degrades sharply with temperature for Mistral-7B and SmolLM3-3B while remaining near 1.0 for all other models. Quantization contributes minimally.
+
+### 4.5 Alignment Score and Over-Refusal
+
+Attack success is only one side of safety behavior: an overly conservative model can also fail by refusing benign requests. The alignment score, defined as RR−ORR\text{RR}-\text{ORR}, captures this tradeoff by subtracting over-refusal from refusal on harmful prompts. At FP16/T=0T{=}0, seven of nine models achieve alignment scores of at least 0.93, and Llama-3.2-3B reaches 1.0 because it has both zero ASR and zero over-refusal. Mistral-7B has the lowest alignment score at this baseline (0.7850.785), driven by high ASR rather than over-refusal. SmolLM3-3B again shows quantization sensitivity: its score falls from 0.7600.760 at FP16 to 0.5800.580 at INT4. Across the full experiment, ORR remains below 8%, with the highest values observed for Qwen3-4B (8.0% at INT4/T=0T{=}0) and Qwen3-8B (7.5% at INT4/T=0.3T{=}0.3).
+
+### 4.6 Temperature Equivalence Mapping
+
+The temperature equivalence map translates the preceding results into a deployment question: when a quantized model is run at a given temperature, does its ASR resemble the FP16 model at the same temperature, a safer FP16 setting, or a riskier one? Table 2 summarizes the observed equivalences across the 9-model suite.
+
+Table 2: Temperature equivalence mapping (six-judge ensemble). Model group | Prec. | Deploy. TT | Equiv. FP16 T∗T^{*}  
+---|---|---|---  
+7 well-aligned | GPTQ INT8 | ≤\leq1.0 | ≈TFP16\approx T_{\text{FP16}}  
+7 well-aligned | AWQ INT4 | ≤\leq1.0 | ≈TFP16\approx T_{\text{FP16}}  
+Mistral-7B | INT8/INT4 | ≤\leq1.0 | ≈TFP16\approx T_{\text{FP16}}  
+SmolLM3-3B | AWQ INT4 | any | _riskier than FP16_  
+  
+For the seven well-aligned models (ASR ≤2.5%\leq 2.5\% at FP16), both GPTQ INT8 and AWQ INT4 track FP16 safety closely at all tested temperatures. In these cases, quantization does not shift the model to a systematically riskier effective temperature. Mistral-7B is also largely neutral in this mapping: INT8 slightly improves ASR while INT4 matches FP16. SmolLM3-3B is the only model where INT4 consistently maps to a risk level above FP16 across temperatures.
+
+### 4.7 Judge Agreement Analysis
+
+Finally, we examine whether the results depend strongly on the choice of safety judge. We evaluate all 161 configurations with six judges and compare configuration-level ASR estimates, using 64,400 prompt-configuration entries with five samples each.
+
+Table 3: Cross-judge config-level ASR agreement (within 5 pp of primary judge LlamaGuard-3-1B) and mean signed ASR difference across 161 evaluated configurations. Judge | Config Agree. | Mean Δ\Delta ASR  
+---|---|---  
+LlamaGuard-3-8B | 80.7% | ++0.029  
+LlamaGuard-2-8B | 79.5% | −-0.022  
+WildGuard | 77.6% | −-0.053  
+ShieldGemma-2B | 68.3% | −-0.024  
+ShieldGemma-9B | 90.1% | ++0.007  
+  
+The comparison shows that judge differences are real but not reducible to one model family being uniformly stricter or more lenient. LlamaGuard-3-8B reports slightly higher ASR than the primary judge (mean Δ=+0.029\Delta=+0.029), while LlamaGuard-2-8B, WildGuard, and ShieldGemma-2B report lower ASR (mean Δ\Delta from −0.022-0.022 to −0.053-0.053). ShieldGemma-9B is closest to the primary judge (+0.007+0.007) and has the highest configuration-level agreement (90.1%90.1\%); ShieldGemma-2B has the lowest agreement (68.3%68.3\%). Over-refusal agreement is near-perfect across judges because refusal detection is largely architecture-invariant. The six-judge majority-vote ensemble used throughout the paper is intended to reduce dependence on any one judge’s bias.
+
+## 5 Discussion
+
+#### Standard quantization largely preserves safety.
+
+Across 9 models and two quantization methods, AWQ INT4 maintains or reduces ASR relative to FP16 for 7 of 9 models. The effect is strongest among well-aligned models: Llama-3.2-3B, Qwen3-4B, Qwen3-8B, and OLMo-2-7B remain at 0% ASR across all precisions, while Llama-3.1-8B and the Granite variants stay near the floor. SmolLM3-3B is the clear exception, where INT4 nearly doubles ASR (18.5%→36.0%18.5\%\to 36.0\%). This suggests that models with strong baseline alignment are robust to standard post-training quantization, while models with weaker alignment are more vulnerable to quantization-induced safety degradation. This pattern is consistent with prior observations on Llama models [9], but our broader model coverage shows it is not universal.
+
+#### Temperature is the dominant risk factor.
+
+While quantization effects on ASR are small and model-dependent, temperature has a direct effect on decision _instability_. At FP16/T=1.0T{=}1.0, DFR ranges from 0.0% (OLMo-2-7B, Qwen3-8B) to 53.0% (Mistral-7B) and 46.5% (SmolLM3-3B). Seven of nine models maintain DFR ≤3.5%\leq 3.5\% at FP16/T=1.0T{=}1.0, indicating that temperature instability is concentrated in models with weaker baseline alignment rather than being a universal phenomenon.
+
+#### Compound effects do not compound.
+
+The CDI analysis reveals that practitioners need not fear a “double penalty” from combining quantization and high temperature. Observed CDI values range from −0.195-0.195 to +0.045+0.045, with the majority clustering near zero. The strongest effects are _sub-additive_ : Mistral-7B and SmolLM3-3B show CDI values of −0.155-0.155 and −0.195-0.195 respectively, indicating that quantization partially offsets temperature-induced degradation for these models. Only SmolLM3-3B INT8 shows mild super-additivity (CDI =+0.045=+0.045), and even there the magnitude is small relative to its baseline ASR.
+
+#### Limitations.
+
+Our study uses AWQ (INT4) and GPTQ (INT8) with standard Pile validation calibration data only; NF4/BitsAndBytes, GGUF, or adversarial calibration strategies may behave differently. We evaluate 2B–8B models; findings may not generalize to models >>70B. All harmful prompts are from AdvBench’s static set; adaptive jailbreaks or targeted prompt injection may show different patterns. Safety judges are themselves imperfect, as our agreement analysis shows.
+
+## 6 Conclusion
+
+We conducted a broad empirical study of how two standard deployment choices, post-training quantization and sampling temperature, jointly affect LLM safety alignment across 161 configurations spanning 9 models, 3 precisions (FP16, GPTQ INT8, AWQ INT4), and 6 temperatures, evaluated on a 2×\timesNVIDIA RTX 6000 Pro 96GB workstation with a six-judge safety ensemble. All quantized models use standard calibration data (Pile validation set) without adversarial manipulation, reflecting realistic deployment pipelines. Our headline findings: (1) standard quantization largely preserves safety, with AWQ INT4 maintaining or reducing ASR for 7 of 9 models, with only SmolLM3-3B showing substantial degradation (18.5%→36.0%18.5\%\to 36.0\%); (2) temperature is the dominant instability driver, but its impact is concentrated in two models (Mistral-7B DFR =53.0%=53.0\%, SmolLM3-3B DFR =46.5%=46.5\% at FP16/T=1.0T{=}1.0) while seven models maintain DFR ≤3.5%\leq 3.5\% at FP16; and (3) the quantization×\timestemperature interaction is predominantly sub-additive (−0.195≤CDI≤+0.045-0.195\leq\text{CDI}\leq+0.045), with quantization partially offsetting temperature effects rather than compounding them. We recommend that safety evaluations at T>0T{>}0 report multi-sample stability metrics alongside ASR, and that practitioners verify quantization safety specifically for models with weak baseline alignment. The CDI framing and temperature equivalence map offer new tools for deployment-aware safety evaluation.
+
+## References
+
+  * [1] T. Dettmers, A. Pagnoni, A. Holtzman, and L. Zettlemoyer (2023) QLoRA: efficient finetuning of quantized LLMs.  Advances in Neural Information Processing Systems 36, pp. 10088–10115.  Cited by: §1. 
+  * [2] E. Frantar, S. Ashkboos, T. Hoefler, and D. Alistarh (2022) GPTQ: accurate post-training quantization for generative pre-trained transformers.  External Links: 2210.17323, [Link](https://arxiv.org/abs/2210.17323) Cited by: §1, §2, §3.1. 
+  * [3] J. Lin, J. Tang, H. Tang, S. Yang, W. Chen, W. Wang, G. Xiao, X. Dang, C. Gan, and S. Han (2024) AWQ: activation-aware weight quantization for on-device LLM compression and acceleration.  Proceedings of Machine Learning and Systems 6, pp. 87–100.  Cited by: §1, §2, §3.1. 
+  * [4] A. Holtzman, J. Buys, L. Du, M. Forbes, and Y. Choi (2019) The curious case of neural text degeneration.  External Links: 1904.09751, [Link](https://arxiv.org/abs/1904.09751) Cited by: §1. 
+  * [5] S. Li, X. Ning, L. Wang, T. Liu, X. Shi, S. Yan, G. Dai, H. Yang, and Y. Wang (2024) Evaluating quantized large language models.  External Links: 2402.18158, [Link](https://arxiv.org/abs/2402.18158) Cited by: §1. 
+  * [6] R. Gong, Y. Yong, S. Gu, Y. Huang, C. Lv, Y. Zhang, D. Tao, and X. Liu (2024) LLMC: benchmarking large language model quantization with a versatile compression toolkit.  In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing: Industry Track,  pp. 132–152.  External Links: [Link](https://aclanthology.org/2024.emnlp-industry.12/) Cited by: §1. 
+  * [7] A. Zou, Z. Wang, N. Carlini, M. Nasr, J. Z. Kolter, and M. Fredrikson (2023) Universal and transferable adversarial attacks on aligned language models.  External Links: 2307.15043, [Link](https://arxiv.org/abs/2307.15043) Cited by: §1, §2, §3.2. 
+  * [8] X. Qi, Y. Zeng, T. Xie, P. Chen, R. Jia, P. Mittal, and P. Henderson (2024) Fine-tuning aligned language models compromises safety, even when users do not intend to!.  In International Conference on Learning Representations,  External Links: [Link](https://openreview.net/forum?id=hTEGyKf0dZ) Cited by: §1. 
+  * [9] K. Chen, J. Zhang, J. Hu, Y. Wang, J. Lou, Z. Feng, and M. Song (2025) Q-ReSafe: assessing safety risks and quantization-aware safety patching for quantized large language models.  Note: ICML 2025 External Links: 2506.20251, [Link](https://arxiv.org/abs/2506.20251) Cited by: §1, §2, §5. 
+  * [10] A. Kharinaev, V. Moskvoretskii, E. Shvetsov, K. Studenikina, B. Mikhail, and E. Burnaev (2025) Investigating the impact of quantization methods on the safety and reliability of large language models.  External Links: 2502.15799, [Link](https://arxiv.org/abs/2502.15799) Cited by: §1. 
+  * [11] M. Renze and E. Guven (2024) The effect of sampling temperature on problem solving in large language models.  In Findings of the Association for Computational Linguistics: EMNLP 2024,  pp. 7346–7356.  External Links: [Link](https://aclanthology.org/2024.findings-emnlp.432/) Cited by: §1. 
+  * [12] E. Larsen (2025) The instability of safety: how random seeds and temperature expose inconsistent LLM refusal behavior.  External Links: 2512.12066, [Link](https://arxiv.org/abs/2512.12066) Cited by: §1, §2. 
+  * [13] L. Ouyang, J. Wu, X. Jiang, D. Almeida, C. Wainwright, P. Mishkin, C. Zhang, S. Agarwal, K. Slama, A. Ray, J. Schulman, J. Hilton, F. Kelton, L. Miller, M. Simens, A. Askell, P. Welinder, P. Christiano, J. Leike, and R. Lowe (2022) Training language models to follow instructions with human feedback.  Advances in Neural Information Processing Systems 35, pp. 27730–27744.  Cited by: §2. 
+  * [14] Z. Zhang, W. Xu, F. Wu, and C. K. Reddy (2025) FalseReject: a resource for improving contextual safety and mitigating over-refusals in LLMs via structured reasoning.  External Links: 2505.08054, [Link](https://arxiv.org/abs/2505.08054) Cited by: §2, §3.3. 
+  * [15] A. Grattafiori, A. Dubey, A. Jauhri, A. Pandey, A. Kadian, A. Al-Dahle, A. Letman, A. Mathur, A. Schelten, A. Vaughan, A. Yang, A. Fan, A. Goyal, A. Hartshorn, A. Yang, A. Mitra, A. Sravankumar, A. Korenev, A. Hinsvark, A. Rao, et al. (2025) The Llama 3 herd of models.  External Links: 2407.21783, [Link](https://arxiv.org/abs/2407.21783) Cited by: §3.1, §3.4. 
+  * [16] A. Yang, A. Li, B. Yang, B. Zhang, B. Hui, B. Zheng, B. Yu, C. Gao, C. Huang, C. Lv, C. Zheng, D. Liu, F. Zhou, F. Huang, F. Hu, H. Ge, H. Wei, H. Lin, J. Tang, J. Yang, et al. (2025) Qwen3 technical report.  External Links: 2505.09388, [Link](https://arxiv.org/abs/2505.09388) Cited by: §3.1. 
+  * [17] A. Q. Jiang, A. Sablayrolles, A. Mensch, C. Bamford, D. S. Chaplot, D. de las Casas, F. Bressand, G. Lengyel, G. Lample, L. Saulnier, L. R. Lavaud, M. Lachaux, P. Stock, T. Le Scao, T. Lavril, T. Wang, T. Lacroix, and W. El Sayed (2023) Mistral 7b.  External Links: 2310.06825, [Link](https://arxiv.org/abs/2310.06825) Cited by: §3.1. 
+  * [18] OLMo Team, P. Walsh, L. Soldaini, D. Groeneveld, K. Lo, S. Arora, A. Bhagia, Y. Gu, S. Huang, M. Jordan, N. Lambert, D. Schwenk, O. Tafjord, T. Anderson, D. Atkinson, F. Brahman, C. Clark, P. Dasigi, N. Dziri, et al. (2024) 2 OLMo 2 furious.  External Links: 2501.00656, [Link](https://arxiv.org/abs/2501.00656) Cited by: §3.1. 
+  * [19] IBM Granite Team (2024) Granite 3.1 language models.  Note: <https://huggingface.co/ibm-granite/granite-3.1-8b-instruct>Model card; release date December 18, 2024 Cited by: §3.1. 
+  * [20] E. Bakouch, L. Ben Allal, A. Lozhkov, N. Tazi, L. Tunstall, C. M. Patiño, E. Beeching, A. Roucher, A. J. Reedi, Q. Gallouédec, K. Rasul, N. Habib, C. Fourrier, H. Kydlicek, G. Penedo, H. Larcher, M. Morlon, V. Srivastav, J. Lochner, X. Nguyen, C. Raffel, L. von Werra, and T. Wolf (2025) SmolLM3: smol, multilingual, long-context reasoner.  Note: <https://huggingface.co/blog/smollm3> Cited by: §3.1. 
+  * [21] L. Gao, S. Biderman, S. Black, L. Golding, T. Hoppe, C. Foster, J. Phang, H. He, A. Thite, N. Nabeshima, S. Presser, and C. Leahy (2020) The Pile: an 800gb dataset of diverse text for language modeling.  External Links: 2101.00027, [Link](https://arxiv.org/abs/2101.00027) Cited by: §3.1. 
+  * [22] P. Röttger, H. Kirk, B. Vidgen, G. Attanasio, F. Bianchi, and D. Hovy (2024) XSTest: a test suite for identifying exaggerated safety behaviours in large language models.  In Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers),  pp. 5377–5400.  External Links: [Link](https://aclanthology.org/2024.naacl-long.301/) Cited by: §3.2. 
+  * [23] Meta Llama Team (2024) Meta Llama Guard 2 8b model card.  Note: <https://huggingface.co/meta-llama/Meta-Llama-Guard-2-8B> Cited by: §3.4. 
+  * [24] S. Han, K. Rao, A. Ettinger, L. Jiang, B. Y. Lin, N. Lambert, Y. Choi, and N. Dziri (2024) WildGuard: open one-stop moderation tools for safety risks, jailbreaks, and refusals of LLMs.  Advances in Neural Information Processing Systems 37, pp. 8093–8131.  Cited by: §3.4. 
+  * [25] W. Zeng, Y. Liu, R. Mullins, L. Peran, J. Fernandez, H. Harkous, K. Narasimhan, D. Proud, P. Kumar, B. Radharapu, T. Warkentin, L. Dixon, L. Ahmad, B. Hechtman, M. Lamm, S. Tiwary, M. Bileschi, and D. Borkan (2024) ShieldGemma: generative AI content moderation based on Gemma.  External Links: 2407.21772, [Link](https://arxiv.org/abs/2407.21772) Cited by: §3.4. 
+
+
+
+Experimental support, please [view the build logs](./2606.29581v1/__stdout.txt) for errors. Generated by [ L A T E xml ](https://math.nist.gov/~BMiller/LaTeXML/). 
+
+## Instructions for reporting errors
+
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the methods listed below:
+
+  * Click the "Report Issue" ( ) button, located in the page header.
+
+
+
+**Tip:** You can select the relevant text first, to include it in your report.
+
+Our team has already identified [the following issues](https://github.com/arXiv/html_feedback/issues). We appreciate your time reviewing and reporting rendering errors we may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability should not be a barrier to accessing research. Thank you for your continued support in championing open access for all.
+
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a [list of packages that need conversion](https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML), and welcome [developer contributions](https://github.com/brucemiller/LaTeXML/issues).
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+
+[ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+

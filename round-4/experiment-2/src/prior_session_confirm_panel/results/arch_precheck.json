@@ -1,0 +1,18 @@
+{
+ "utc": "2026-09-21T16:28:35.261399Z",
+ "checks": {
+  "openbmb/MiniCPM4-0.5B": {
+   "ok": false,
+   "error": "ImportError(\"cannot import name 'is_torch_fx_available' from 'transformers.utils.import_utils' (/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/.venv/lib/python3.12/site-packages/transformers/utils/import_utils.py)\")",
+   "tb": "3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/src/arch_precheck.py\", line 41, in check\n    model = AutoModelForCausalLM.from_config(conf, dtype=torch.bfloat16, trust_remote_code=trust).eval()\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py\", line 228, in from_config\n    model_class = get_class_from_dynamic_module(class_ref, repo_id, **kwargs)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/.venv/lib/python3.12/site-packages/transformers/dynamic_module_utils.py\", line 623, in get_class_from_dynamic_module\n    return get_class_in_module(class_name, final_module, force_reload=force_download)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/.venv/lib/python3.12/site-packages/transformers/dynamic_module_utils.py\", line 309, in get_class_in_module\n    module_spec.loader.exec_module(module)\n  File \"<frozen importlib._bootstrap_external>\", line 999, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/.shared_cache/hf/modules/transformers_modules/_5253c7fcc5e29e1cf3eacb59a58adf1ba4df8630/f6111a9b360d22ce/modeling_minicpm.py\", line 48, in <module>\n    from transformers.utils.import_utils import is_torch_fx_available\nImportError: cannot import name 'is_torch_fx_available' from 'transformers.utils.import_utils' (/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/.venv/lib/python3.12/site-packages/transformers/utils/import_utils.py)\n"
+  },
+  "tiiuae/Falcon-H1-0.5B-Instruct": {
+   "ok": true,
+   "note": "re-run 16:33 UTC without config truncation: hook L+1=37 for 36 layers, shape ok, final hidden post-norm (logit corr 0.999997; rel err 24.6 = the muP lm_head multiplier, so logit-lens values are scaled), p_harvest [2,37,1024] and decode [2,4,37,1024] ran (printed output; the JSON write was lost when the Zamba2 check was killed)"
+  },
+  "Zyphra/Zamba2-1.2B-instruct": {
+   "ok": null,
+   "note": "check did not complete within the 900 s timeout (killed); decided at generation time"
+  }
+ }
+}

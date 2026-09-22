@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "at": 1790029299.9595056,
+  "dry_run": false,
+  "freed_bytes": 9622708548,
+  "skipped": "",
+  "removed": [
+    {
+      "path": ".venv_gpu",
+      "source": "structural",
+      "category": "cache",
+      "reason": "virtualenv (pyvenv.cfg)",
+      "size_bytes": 7456159121
+    },
+    {
+      "path": ".venv_ams",
+      "source": "structural",
+      "category": "cache",
+      "reason": "virtualenv (pyvenv.cfg)",
+      "size_bytes": 934062586
+    },
+    {
+      "path": ".venv",
+      "source": "structural",
+      "category": "cache",
+      "reason": "virtualenv (pyvenv.cfg)",
+      "size_bytes": 1232420741
+    },
+    {
+      "path": "src/__pycache__",
+      "source": "structural",
+      "category": "cache",
+      "reason": "known cache directory",
+      "size_bytes": 66100
+    }
+  ],
+  "refused": []
+}

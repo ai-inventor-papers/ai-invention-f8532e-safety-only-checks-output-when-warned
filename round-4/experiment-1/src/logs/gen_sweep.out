@@ -1,0 +1,5 @@
+16:27:33|INFO   |SKIP F1__ref (gens exist)
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 144.05it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  28%|██▊       | 87/311 [00:00<00:00, 674.37it/s]Loading weights:  50%|████▉     | 155/311 [00:00<00:00, 465.89it/s]Loading weights:  66%|██████▌   | 205/311 [00:00<00:00, 372.05it/s]Loading weights:  79%|███████▉  | 245/311 [00:00<00:00, 357.12it/s]Loading weights:  94%|█████████▍| 292/311 [00:00<00:00, 370.54it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 414.61it/s]
+16:28:38|INFO   |F1__int8wo: built in 29s; sanity {"variant": "int8wo", "max_abs_logit_diff": 1.1875, "mean_abs_logit_diff": 0.1600777506828308, "first_token_agreement": 0.96875, "bitwise_identical": false, "pass_fp_rule": false, "weight_fingerprint": "d1298b574051736772090873eb2791c068466abf091f245e110a2ff900b328bb"}
+16:35:37|INFO   |    chunk 1/4: 419s (P=22, steps 96, total 419s)

@@ -1,0 +1,100 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.22686v1
+Type: HTML
+Pattern: logit|quantiz|template (36 matches in 40120 chars)
+
+--- Content ---
+
+883:..."Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. 1 Introduction
+  3. 2 Related Work
+     1. 2.1 Adversarial Attacks
+     2. 2.2 Mechanistic Interpretability of Refusal
+     3. 2.3 Contrastive Decoding and Activation Steering
+     4. 2.4 Inference-Time Alignment
+  4. 3 Methodology
+     1. 3.1 Preliminaries
+     2. 3.2 Contrastive Logit Steering (CLS)
+     3. 3.3 Prefix Injection
+     4. 3.4 Zero-Shot Detection Metric
+  5. 4 Experiments
+     1. 4.1 Experimental Setup
+        1. Models.
+        2. Datasets.
+     2. 4.2 Comparative Analysis: CLS vs. GCG
+        1. Evaluation.
+     3. 4.3 Results: Steering Intensity
+        1. Jailbreaking (α>0\alpha>0): The Safety-Coherence Trade-o...
+--
+2748:...esearcher  Email: [kartikeyavats2023@u.northwestern.edu](mailto:)
+
+###### Abstract
+
+Modern Large Language Models (LLMs) rely on extensive safety alignment, yet the mechanistic basis of refusal remains opaque. In this work, we investigate whether safety compliance is a deep semantic decision or a manipulable linear feature. We introduce Contrastive Logit Steering (CLS), a zero-optimization framework that isolates the “refusal direction” by contrasting hidden states derived from safe and unrestricted system prompts. Unlike representation engineering methods that intervene on internal activations, CLS operates directly on the output distribution, serving as a diagnostic probe for alignment fragility...
+--
+3789:... (reaching 95% ASR in approximately one second), others like Qwen-2.5 demonstrate “Early Divergence” by integrating safety mid-computation. Direct comparison with established activation-level steering methods shows that CLS achieves substantially higher attack success rates on Llama 2 (73% vs. 22.6%) and Qwen 7B (91% vs. 79.2%), demonstrating that logit-level intervention exposes alignment vulnerabilities that hidden-state methods underestimate. Beyond attacks, we show that this linearity enables bidirectional control: inverting the steering vector “hardens” models against jailbreaks without retraining. Our findings suggest that current alignment techniques create a steerable “safety axis” that s...
+--
+4633:...nal layer hidden states for Llama-3. (A) Linear Separability: Malicious queries (red) and benign instructions (blue) form distinct clusters, showing that safety is encoded as a linear feature in the activation space. (B) The Refusal Direction: The arrow marks the primary direction of variation, corresponding to the “Refusal Vector.” In Contrastive Logit Steering, this direction is projected onto the vocabulary to upweight refusal tokens.
+
+## 1 Introduction
+
+The rapid adoption of Large Language Models (LLMs) has necessitated robust safety alignment, typically implemented via Reinforcement Learning from Human Feedback (RLHF) Ouyang et al. (2022). While these methods successfully suppress harmful ou...
+--
+5627:...iance in modern open-weights models is effectively encoded as a linear geometric feature. By analyzing the residual streams of models processing harmful versus benign queries, we identify a single direction (the “Refusal Vector”) that encodes the binary distinction between compliance and refusal.
+
+Building on this insight, we introduce Contrastive Logit Steering (CLS).11 1 Code and experiments are available at: <https://github.com/KartikeyaVats/RefusalArena> Unlike optimization-based attacks like GCG Zou et al. (2023) that search for adversarial suffixes, CLS is a geometric intervention. We isolate the refusal vector by contrasting the model’s logits under “safe” and “unrestricted” system prompts, then linearly subtract this vector during inference. Unlike activation-level steering methods Arditi et al. (2024); Zou et al. (2025); Turner et al. (2023), CLS operates at the shallowest possible intervention point (the output logits), serving as a diagnostic probe for alignment depth. We do not search for a bypass; we analytically compute the “Refusal Vector” and subtract it. We pair this with Prefix Injection (forcing the first token to “Sure”) to bypass the model’s initial refusal reflex.
+
+We evaluate CLS across 7 model families. Our results reveal that while the refusal d...
+--
+7520:...idden states, shows that CLS achieves substantially higher ASR on both Llama 2 (73% vs. 22.6%) and Qwen 7B (91% vs. 79.2%). We further show that inverting the steering vector (“Negative Steering”) hardens models against jailbreaks and improves coherence without parameter updates.
+
+Our contributions:
+
+  1. 1.
+
+CLS as a Diagnostic Probe: A zero-shot logit-level steering framework that provides mechanistic evidence that safety in architectures like Llama acts as a shallow “wrapper” rather than a deep semantic constraint.
+
+  2. 2.
+
+The Topology of Refusal: A KL-divergence analysis identifying “Late Decision” models (Llama, highly vulnerable) and “Early Divergence” models (Qwen, more robust), driven b...
+--
+8443:...ntrastive decoding approaches.
+
+  4. 4.
+
+Bidirectional Control: Zero-shot detection of malicious queries (0.92 F1) and inference-time safety hardening via negative steering.
+
+
+
+
+## 2 Related Work
+
+Our research sits at the intersection of adversarial red-teaming, mechanistic interpretability, and inference-time alignment. We distinguish Contrastive Logit Steering (CLS) from prior art along three dimensions: intervention point (logits vs. hidden activations), model requirements (single model vs. auxiliary models), and the interpretability insights each method provides.
+
+### 2.1 Adversarial Attacks
+
+Red-teaming has evolved from manual “jailbreaks” Wei et al. (2023) to automated optimization. The standard white-box baseline, GCG Zou et al. (2023), uses token-level gradient searc...
+--
+10524:...r residual stream activations during the forward pass. Most directly relevant, Arditi et al. Arditi et al. (2024) identified a universal “refusal direction” in intermediate hidden states. CLS differs in two respects: it isolates the refusal vector zero-shot via system prompt contrast (no supervised probing or layer selection), and it intervenes on logits rather than activations. The choice of logits is itself diagnostic: success at the shallowest intervention point is direct evidence of surface-level safety encoding. We provide empirical comparison in Section 4.
+
+### 2.3 Contrastive Decoding and Activation Steering
+
+Several methods exploit contrastive signals for safety steering. ROSE Zhong et al. (2024) uses reverse prompt contrastive decod...
+--
+11967:...omy. Lee et al. Lee et al. (2025) demonstrated programmable refusal via conditional activation steering on internal hidden-state activations, requiring knowledge of which intermediate layers to intervene on.
+
+CLS differs critically from all these methods: it requires only a single model with different system prompts, operates exclusively on output logits (making it architecture-agnostic with respect to layer selection), and uniquely provides the Late Decision / Early Divergence taxonomy and bidirectional control.
+
+### 2.4 Inference-Time Alignment
+
+Standard RLHF treats safety as a static weight update Ouyang et al. (2022). Recent methods like Logit-Gap Steering Li and Liu (2025) modulate safety at inference time but rely on expensive decoding-time search. CLS enables Geometric Safety Control: bidirectional modulation by adjusting α\alpha to audit suppressed capabilities or harden models dynamically.
+
+## 3 Methodology
+
+We formalize Contrastive Logit Steering (CLS), which exploits the geometric structure of refusal to modulate safety at inference time via arithmetic operations on output logits.
+
+Figure 2: Contrastive Logit Steering (CLS) Methodology. The model processes the user query simultaneously under three distinct system prompts. We calculate an instantaneous steering vector 𝐯\mathbf{v} ...
+--
+[21 more matches not shown]

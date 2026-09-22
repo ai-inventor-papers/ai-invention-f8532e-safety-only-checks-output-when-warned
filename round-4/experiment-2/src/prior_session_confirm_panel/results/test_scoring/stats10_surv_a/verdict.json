@@ -1,0 +1,88 @@
+{
+ "utc": "2026-09-21T16:37:43.930091Z",
+ "confirm_table_sha256": "ce1b9610e56ad21c2ab9b9667afcef70bcf8df5790b5d113d3b5a4da86f150b1",
+ "survivor_glob": "results/test_scoring/surv_a/*/survivor.json",
+ "survivor_files": [
+  {
+   "path": "results/test_scoring/surv_a/results/survivor.json",
+   "sha256": "cf9c374fb9f0a1effa1bc74436259e99f14edb6179fd74f57815f0ee7160bf81",
+   "parsed_survivor": "N11",
+   "content_head": "{\"survivor\": \"N11\", \"sign\": -1}"
+  }
+ ],
+ "n": 10,
+ "panel_power_status": "UNDERPOWERED_CONFIRMATION",
+ "per_survivor": [
+  {
+   "candidate": "N11",
+   "n": 10,
+   "clauses": {
+    "SIGN_KEPT": {
+     "rho": -0.6442202750968413,
+     "expected": -1,
+     "ci95_family": [
+      -0.9147840235103218,
+      0.2
+     ],
+     "pass_point": true,
+     "pass_ci": false
+    },
+    "i_specificity": {
+     "covers0": 2,
+     "n_noop_valid": 2,
+     "median_ratio": 0.0,
+     "BL1_easy_median_ratio": 0.0,
+     "pass": false
+    },
+    "ii_sensitivity": {
+     "hits": 3,
+     "n_eff": 5,
+     "pass": false
+    },
+    "iv_residual": {
+     "pass": null,
+     "why": "NOT_RUN:control missing/degenerate ['AMS_REIMPL']"
+    }
+   },
+   "iii_two_sidedness_reported_not_in_verdict": {
+    "status": "OK",
+    "n": 10,
+    "partial_rho": 0.20812392261292476,
+    "ci95_family": [
+     -0.07339647858253298,
+     0.7757689936051553
+    ],
+    "ci95_ckpt": [
+     -0.5629716504198641,
+     0.939792621841991
+    ],
+    "family_ci_excludes0": false,
+    "mde_rho": 0.8266790056726017
+   },
+   "verdict_sign_ci_excludes0": {
+    "verdict": "FAILED",
+    "failing_clauses": [
+     "SIGN_KEPT",
+     "i",
+     "ii"
+    ],
+    "not_evaluable": [
+     "iv"
+    ]
+   },
+   "verdict_sign_point_estimate": {
+    "verdict": "FAILED",
+    "failing_clauses": [
+     "i",
+     "ii"
+    ],
+    "not_evaluable": [
+     "iv"
+    ]
+   },
+   "verdict": "FAILED",
+   "verdict_rule_note": "primary verdict uses SIGN_KEPT = family-bootstrap CI excludes 0 in the expected direction; the point-estimate-only reading is reported beside it"
+  }
+ ],
+ "verdict": "FAILED"
+}

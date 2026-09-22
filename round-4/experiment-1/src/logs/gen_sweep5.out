@@ -1,0 +1,14 @@
+17:55:48|INFO   |SKIP F1__ref (gens exist)
+17:55:48|INFO   |SKIP F1__int8wo (gens exist)
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 534.88it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  12%|█▏        | 37/311 [00:00<00:00, 323.91it/s]Loading weights:  23%|██▎       | 70/311 [00:00<00:01, 224.05it/s]Loading weights:  30%|███       | 94/311 [00:00<00:01, 216.36it/s]Loading weights:  45%|████▍     | 139/311 [00:00<00:00, 288.58it/s]Loading weights:  65%|██████▍   | 202/311 [00:00<00:00, 395.29it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 448.37it/s]
+17:57:26|INFO   |F1__a10: built in 74s; sanity {"variant": "a10", "max_abs_logit_diff": 9.5625, "mean_abs_logit_diff": 1.1939401626586914, "first_token_agreement": 0.75, "bitwise_identical": false, "l_abl": 19, "weight_fingerprint": "99d586155378f708dfd2eae72b73da71506fa5b4da53aa4100aca157c94ee346"}
+17:58:28|INFO   |    chunk 1/4: 62s (P=22, steps 96, total 62s)
+18:00:31|INFO   |    chunk 2/4: 123s (P=27, steps 96, total 185s)
+18:04:30|INFO   |    chunk 3/4: 239s (P=34, steps 96, total 424s)
+18:07:05|INFO   |    chunk 4/4: 155s (P=87, steps 96, total 580s)
+18:07:05|INFO   |DONE F1__a10: gen 580s, 15052 tok (26.0 tok/s), total 677s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 184.90it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  16%|█▋        | 51/311 [00:00<00:00, 411.02it/s]Loading weights:  30%|██▉       | 93/311 [00:00<00:00, 359.45it/s]Loading weights:  47%|████▋     | 146/311 [00:00<00:00, 411.50it/s]Loading weights:  60%|██████    | 188/311 [00:00<00:00, 382.54it/s]Loading weights:  76%|███████▌  | 236/311 [00:00<00:00, 384.40it/s]Loading weights:  92%|█████████▏| 286/311 [00:00<00:00, 407.58it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 423.03it/s]
+18:07:58|INFO   |F1__sysprompt: built in 5s; sanity {"variant": "sysprompt", "max_abs_logit_diff": 6.25, "mean_abs_logit_diff": 0.44825688004493713, "first_token_agreement": 0.84375, "bitwise_identical": false, "weight_fingerprint": "f0089e1dac54bdf69e9c6b1c808aa86e1b1b2b2fcfc947777de21b0ab23dcd5a"}
+18:11:26|INFO   |    chunk 1/4: 208s (P=33, steps 96, total 208s)

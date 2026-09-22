@@ -1,0 +1,1696 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2511.14195
+Type: PDF
+Length: 75259 chars (truncated)
+
+--- Content ---
+
+N-GLARE: An Non-Generative Latent Representation-Efficient LLM
+Safety Evaluator
+Zheyu Lin1, Jirui Yang2, Yukui Qiu3
+Hengqi Guo2, Yubing Bao2, Yao Guan2
+1University of California, Riverside, 2Fudan University, 3South China University of Technology
+Zheyu Lin: 1298lzy@gmail.com
+Jirui Yang: yangjr23@m.fudan.edu.cn
+Yukui Qiu: 202162311356@mail.scut.edu.cn
+Hengqi Guo: hqguo22@m.fudan.edu.cn
+Yubing Bao: ybbao23@m.fudan.edu.cn
+Yao Guan: yguan25@m.fudan.edu.cn
+Abstract
+Evaluating the safety robustness of LLMs is
+critical for their deployment. However, main-
+stream Red Teaming methods rely on on-
+line generation and black-box output analy-
+sis.
+These approaches are not only costly
+but also suffer from feedback latency, mak-
+ing them unsuitable for agile diagnostics af-
+ter training a new model. To address this, we
+propose N-GLARE (A Non-Generative, La-
+tent Representation-Efficient LLM Safety Eval-
+uator).
+N-GLARE operates entirely on the
+model’s latent representations, bypassing the
+need for full text generation. It characterizes
+hidden layer dynamics by analyzing the APT
+(Angular-Probabilistic Trajectory) of latent rep-
+resentations and introducing the JSS (Jensen-
+Shannon Separability) metric. Experiments on
+over 40 models and 20 red teaming strategies
+demonstrate that the JSS metric exhibits high
+consistency with Red Teaming safety rankings
+at less than 1% token and runtime cost.
+1
+Introduction
+Large Language Models must be aligned to ensure
+their behavior consistently follows human values
+and safety norms, rather than merely maximizing
+task performance (Das et al., 2025; Dong et al.,
+2024). Without such alignment, models may gener-
+ate harmful, biased, or unsafe outputs when facing
+adversarial prompts or complex contexts (Wei et al.,
+2023; Russinovich et al., 2025; Yang et al., 2025).
+Evaluating model safety is a foundational step
+toward achieving such alignment. The dominant
+paradigm in both industry and academia is cur-
+rently Red Teaming (Lin et al., 2025), which simu-
+lates adversarial user behavior by designing diverse,
+subtle attack prompts to probe the model and elicit
+unsafe outputs. While this online, behavior-based
+testing has proved effective for discovering vulnera-
+bilities, it suffers from two fundamental limitations.
+First, it is highly resource-intensive: test cover-
+age depends on the scale and diversity of attack
+prompts, which require continual human and com-
+putational investment as new attack vectors emerge.
+Second, Red Teaming is essentially a black-box
+methodology. It only observes input–output be-
+havior and provides little insight into the model’s
+internal safety state. A refusal that looks safe at
+the surface level may simply be triggered by brittle
+pattern matching, rather than reflecting a robust
+internal representation of harmfulness.
+To move beyond purely behavioral stress testing,
+recent work analyzes LLMs in their latent repre-
+sentation space (Zou et al., 2023; Li et al., 2025b).
+Representation engineering shows that different
+semantic concepts—such as truthfulness, refusal,
+or harmfulness—correspond to structured patterns
+in hidden activations, and contrasting concept sets
+can be distinguished by consistent directions in
+this space, suggesting that high-level semantics are
+explicitly encoded in latent geometry.
+Existing representation analysis work primarily
+uses such directions at the prompt level, for exam-
+ple to steer individual generations or to classify the
+risk of a specific input. However, these techniques
+are typically model-specific and do not directly
+provide a model-level safety indicator that is com-
+parable across architectures and checkpoints.
+In this paper, we take a step in that direction
+and ask: Can we evaluate model safety without
+generation, using internal representations that
+correlate with red-teaming robustness?
+To this end, we propose N-GLARE (A Non-
+Generative, Latent Representation-Efficient LLM
+Safety Evaluator). For each model, we construct
+Angular-Probabilistic Trajectories (APT) of hid-
+den representations under different probing con-
+ditions: benign (B), jailbreak (J), plainquery (P)
+and an idealized refusal counterfactual (R). After
+normalizing these trajectories along a standardized
+progress axis, we model benign activations as a
+low-dimensional manifold and define a geometric
+turning angle that measures how strongly a trajec-
+1
+arXiv:2511.14195v2  [cs.LG]  8 Jan 2026
+
+SafeRL
+Default Jailbreaked
+0.045
+0.050
+0.055
+0.060
+0.065
+0.070
+JSS
+JSS (J vs R)
+Median
+Mean
+10−1
+100
+101
+102
+Efficiency vs best baseline (×)
+Mixed (PyRIT)
+AutoDAN
+PAIR
+GPTFuzzer
+Cipher
+DAN
+DevMode
+MultiLing
+ArtPrompt
+Ours (JSS-only)
+117.5×
+Token Efficiency
+Figure 1: JSS exhibits clear separability across safety
+states while achieving orders-of-magnitude higher token
+efficiency than red-teaming baselines.
+tory deviates away from this benign manifold over
+time. We then introduce Jensen–Shannon Sepa-
+rability (JSS), which compares the slice-wise dis-
+tributions of these turning angles across conditions,
+and aggregates them into model-level safety indi-
+cators, introducing other JSS-based safety scores.
+The core intuition is that: internal trajectory
+separability can serve as a proxy for the under-
+lying safety state of the model, potentially repro-
+ducing the discriminative power of large-scale
+Red Teaming at a fraction of the cost.
+Figure 1 supports the core intuition: when com-
+paring multiple variants of the same base model
+(e.g., RL-aligned, base, and safety-removed ver-
+sions of Qwen3-4B), we observe that better-aligned
+variants exhibit more pronounced geometric sepa-
+ration between different trajectories in latent space.
+Experiments on over 40 models and 20 red-
+teaming strategies demonstrate that N-GLARE
+faithfully reproduces the safety rankings induced
+by traditional Red Teaming while using less than
+1% of the token and runtime cost, making it suit-
+able for agile diagnostics after training new models
+or updating safety mechanisms.
+Our main contributions are summarized as fol-
+lows:
+• A non-generative, latent-space safety eval-
+uator. We propose N-GLARE, a framework
+that entirely bypasses online text generation
+and external output evaluators. To our knowl-
+edge, this is the first work to leverage la-
+tent representation trajectories for model-level
+LLM safety assessment.
+• A geometric formalization of safety align-
+ment. We formulate safety evaluation as a
+trajectory separability problem in represen-
+tation space, construct a benign manifold
+via whitened PCA, and define a introduce
+Angular-Probabilistic Trajectories (APT) de-
+viation measure. Building on this, we propose
+Jensen–Shannon Separability (JSS) and JSS-
+related normalized safety score as statistically
+robust, cross-model comparable indicators.
+• Extensive empirical validation and effi-
+ciency gains.
+Across more than 40 mod-
+els and 20 red-teaming strategies, we show
+that JSS-based rankings are highly consistent
+with those derived from traditional Red Team-
+ing, while reducing token and runtime cost
+to below 1%. We further demonstrate that N-
+GLARE supports fine-grained analyses such
+as early-stage safety dynamics and compari-
+son of alignment interventions across check-
+points, providing a practical tool for real-time
+safety diagnostics.
+2
+Technical Background
+2.1
+LLM Security and Red Teaming
+Red teaming evaluates LLM safety by simulat-
+ing attacker strategies to proactively identify and
+probe model vulnerabilities.Existing Red Teaming
+approaches can be broadly categorized into two
+types. The first focuses on content safety in single-
+turn interactions, such as leveraging algorithms
+like Monte Carlo Tree Search (MCTS) and evo-
+lutionary algorithms to optimize attack prompts
+(Sadasivan et al., 2024), or generating jailbreak
+templates through the mutation of seed prompts (Yu
+et al., 2023). The second category addresses secu-
+rity risks in multi-turn dialogue scenarios, typically
+employing specialized agents for attack planning,
+executing dynamic multi-turn jailbreaks, and eval-
+uating the attack’s efficacy (Rahman et al., 2025;
+Weng et al., 2025; Ren et al., 2025).
+Existing methods, despite increasing diversifi-
+cation, largely follow a three-stage pipeline that
+includes attack prompt construction, target model
+generation, and output-based evaluation, which in-
+herently incurs high overhead in red-teaming as-
+sessments.
+2.2
+LLM Latent Space Analysis Techniques
+The internal mechanisms of LLMs are often treated
+as a black box. To understand how they process
+information, researchers analyze their latent space,
+i.e., the internal high-dimensional hidden states.
+In Transformers, this corresponds to the activation
+vector hl,p ∈Rd at a specific layer l and token
+position p, where d is the hidden dimension.
+2
+
+2.2.1
+Embedding Analysis
+Embedding analysis reveals semantic meaning by
+examining the static geometry of latent space vec-
+tors.
+Common methods like cosine similarity
+(Sim(⃗A,⃗B) =⃗
+A·⃗B
+∥⃗A∥∥⃗B∥) and dimensionality reduc-
+tion visualization like t-SNE can reveal semantic
+clusters (e.g., “king" with “queen") (Rogers et al.,
+2020). Furthermore, domain-adaptation analysis
+shows that fine-tuning such as BioBERT (Lee et al.,
+2020) reshapes the latent space, forming more re-
+fined domain-specific subspaces to enhance down-
+stream task performance.
+2.2.2
+Probing and Intervention
+This technique shifts from passive analysis to active
+decoding and control. Early probing (Tenney et al.,
+2019) used simple linear classifiers (y = f(H))
+to test if latent activations H encoded specific lin-
+guistic properties, discovering that information is
+stored hierarchically in LLMs.
+A more advanced paradigm, Representation
+Engineering (RepE) (Zou et al., 2023), controls
+model behavior by directly manipulating latent
+representations. Its core is identifying vector di-
+rections, or concept operators oc, that represent
+high-level concepts (e.g., truthfulness). This is
+often achieved by contrasting the activation dif-
+ferences from different input sets (Sc+ vs Sc−):
+oc ≈E[H(Sc+)] −E[H(Sc−)] Here, H(S) repre-
+sents the mean activation of model M when pro-
+cessing a specific input set S. RepE is widely ap-
+plied in LLM safety (Cai et al., 2024; Wang et al.,
+2025a, 2024; Cao et al., 2024), for instance, by us-
+ing positive or negative steering vectors to enhance
+truthfulness (Marks and Tegmark, 2023; Li et al.,
+2023; Wang et al., 2025b; Rimsky et al., 2024) or
+suppress meta-behaviors like “refusal" (Arditi et al.,
+2024).
+2.2.3
+Latent Space Dynamic Analysis
+Dynamic analysis focuses on the activation trajec-
+tories during the reasoning process. Researchers
+not only track attention changes during Chain-
+of-Thought (CoT) (Wei et al., 2022) but also be-
+gin to analyze the latent space trajectories them-
+selves. For example, Li et al. (Li et al., 2025a)
+proposed Chain-of-Reasoning Embedding (CoRE).
+They found that redundant reasoning manifests
+as identifiable cyclical fluctuations in the trajec-
+tory.
+Based on this, it enables label-free self-
+evaluation to dynamically terminate inefficient rea-
+soning, thereby improving efficiency.
+Despite significant progress in analysis tech-
+niques for LLM latent spaces, the field still faces
+the challenge of model-specificity: the identified
+features, concept operators (like oc), attention
+heads, or reasoning trajectories are often highly
+dependent on a single model M and lack transfer-
+ability across models.
+3
+Methodology
+This section formalizes the representation-space
+safety evaluation framework proposed above. Our
+goal is to map internal activation trajectories to
+scalar safety metrics. We first define the notation
+and probing conditions, followed by the frame-
+work’s three core stages: (i) trajectory extraction
+and standardization; (ii) benign manifold fitting and
+geometric turning angle calculation; and (iii) dis-
+tribution divergence measurement and safety score
+aggregation.
+3.1
+Preliminaries: Symbols and Probing
+Conditions
+Given a model set M = {M1, . . . , MK}, we
+analyze internal representation behaviors under
+varying inputs. We define the probing condition
+A ∈{B, J, R, P} to correspond to four interaction
+history types:
+Benign (B): Standard task instructions conform-
+ing to natural distributions, used to fit the benign
+reference manifold.
+Jailbreak (J): Adversarial sequences designed
+to induce harmful outputs.
+Ideal Refusal (R): Identical to J in user content
+(retaining harmful intent) but forcing the assistant
+response to a policy-compliant refusal template.
+This represents the model’s ideal defensive state
+against attacks.
+Plain Query (P): Direct presentation of harm-
+ful intent (without disguise) to capture the model’s
+unconstrained internal response to harmful infor-
+mation.
+To enhance cross-model comparability and re-
+duce dimensionality, we partition Transformer lay-
+ers into groups G ∈{lower, middle, upper} and
+average within each group to obtain group-level
+representations h(A,G).
+3.2
+Stage 1: Trajectory Extraction and
+Standardization
+For a model M and condition A, we construct prob-
+ing sequences. At each time step t, we extract the
+3
+
+Benign Manifold
+Figure 2: Illustration of latent representation trajecto-
+ries relative to the benign manifold. Solid curves denote
+a normally aligned model, while dashed curves indi-
+cate a jailbroken model. Red represents explicit refusal,
+yellow/orange denotes jailbreak behavior, and green cor-
+responds to benign dialogue.
+hidden states of the last token across all layers at
+the decision-making cross-section immediately pre-
+ceding the next assistant response generation:
+Φ(A)
+M (t) =
+ h(A)
+L,t , . . . , h(A)
+1,t
+
+,
+h(A)
+ℓ,t ∈Rdℓ, (1)
+where L is the number of layers and dℓis the
+hidden dimension. As defined, these are aggre-
+gated into group-level representations h(A,G)
+t
+∈Rd.
+Thus, for condition A and group G, the sequence
+{h(A,G)
+t
+}TA
+t=1 defines a trajectory in latent space.
+Since generation lengths TA vary across prompts
+and models, we define an arc-length standardized
+progress variable st ∈[0, 1] to align trajectories on
+a unified timeline. For t > 1 (with s1 = 0):
+st =
+Pt−1
+k=1 ∥h(A,G)
+k+1
+−h(A,G)
+k
+∥2
+PTA−1
+k=1 ∥h(A,G)
+k+1
+−h(A,G)
+k
+∥2
+(2)
+This parameterization treats trajectories as
+curves evolving along a shared progress axis s. The
+standardized trajectory is denoted as:
+Γ(A,G)
+M
+= (h(A,G)
+t
+, st)
+TA
+t=1.
+(3)
+3.3
+Stage 2: Benign Manifold and Geometric
+Turning Angle
+To quantify deviations from normal behavior dur-
+ing inference, we introduce geometric metrics.
+First, we construct a benign manifold using rep-
+resentations collected under benign conditions (B)
+as a reference for normal generation (construction
+details in Appendix C).
+For any given trajectory, we examine two local
+directions at each step:
+Trajectory Tangent (τ (A,G)
+t
+): Reflects the direc-
+tion of representation evolution during inference.
+Outward Normal (n(G)): Indicates the direc-
+tion of maximal deviation from the benign mani-
+fold.
+We define the geometric turning angle as the
+angle between these vectors:
+θ(A,G)
+t
+= arccos
+ 
+τ (A,G)⊤
+t
+n(G) h(A,G)
+t
+
+∥τ (A,G)
+t
+∥2, ∥n(G) h(A,G)
+t
+
+∥2
+!
+.
+(4)
+Intuitively, θ(A,G)
+t
+measures whether the trajectory
+trends toward or away from the benign region.
+Smaller angles indicate evolution away from the be-
+nign manifold, signaling potential safety risk shifts.
+Normalized Conversation Progress
+APT
+Plain Refusal
+Baseline
+Jailbreak
+Refusal
+Figure
+3:
+APT
+trajectories
+collected
+from
+lower/middle/upper(up
+to
+down)
+layer
+groups.
+left column correspond to safety-aligned models, while
+right column ones are from jailbreak-tuned models.
+Safety-aligned LLMs exhibit well-separated and
+low-variance APT trajectories, whereas jailbreak-tuned
+LLMs show weakened separability and substantially
+higher variance across all query types, indicating
+degraded safety boundaries. Fig. 2 further provides
+an intuitive three-dimensional geometric view of how
+these trajectories bend and diverge relative to the benign
+manifold.
+3.4
+Stage 3: Slicing and JSS Metrics
+Calculation
+We quantify safety by analyzing the divergence of
+turning angle distributions across conditions. We
+discretize the standardized progress axis s ∈[0, 1]
+into I slices {si}I
+i=1. For each slice si, we collect
+the corresponding angles:
+4
+
+Θ(A,G)(si) = θ(A,G)
+t
+| st ∈slice i.
+(5)
+Within each slice si and group G, we estimate
+the empirical distributions for two conditions (e.g.,
+J vs. B, or J vs. R) and compute the Jensen–
+Shannon divergence (JSD):
+JS(G)
+i
+(A, B) = JS
+ D(Θ(G)
+A (si)),
+, D(Θ(G)
+B (si))
+
+.
+(6)
+To obtain a model-level separability measure, we
+aggregate JSDs across all slices and layer groups
+to define the Jensen-Shannon Separability (JSS):
+JSS(A, B) =
+1
+|G|
+X
+G
+ 
+1
+I
+I
+X
+i=1
+JS(G)
+i
+(A, B)
+!
+.
+(7)
+Algorithm 1 summarizes the core computation
+for a single model.
+3.5
+Insights: Trajectory Separability as a
+Latent Safety Signal
+Separability as an Indicator of Safety Aware-
+ness and Refusal Tendency. From this geometric
+perspective, two JSS relations hold key safety im-
+plications:
+JSS(J, B) (Jailbreak vs. Benign): Measures
+whether the model internally distinguishes adver-
+sarial inputs from normal dialogue. High separabil-
+ity implies acute latent risk recognition (represen-
+tation shift details in Appendix B.2).
+JSS(J, R) (Jailbreak vs. Ideal Refusal): Re-
+flects the model’s intrinsic refusal tendency and
+resistance to late-stage safety erosion. We observe
+a significant correlation between this metric and
+the refusal tendency score (ANM) introduced in
+Appendix B.3.
+Necessity of Trajectory-Level Aggregation.
+These observations suggest that endpoint or single-
+step metrics cannot jointly capture both early risk
+recognition and late refusal stability. Thus, JSS
+serves as a compact scalar summarizing the latent
+safety state across the entire inference trajectory,
+enabling safety evaluation without reliance on text
+generation.
+4
+Experiments and Analysis
+In this section, we employ quantified safety fea-
+ture metrics to evaluate various aligned models and
+compare their rankings’ correlation and consistency
+with those obtained from systematic traditional red-
+teaming evaluations, demonstrating a high degree
+of consistency in safety scales as well as a sig-
+nificant advantage in evaluation cost. Finally, we
+investigate the statistical consistency of the ranking
+results across different datasets and sample sizes,
+analyzing the stability of our evaluation framework
+under changes in data distribution and sampling
+conditions.
+4.1
+Model Differentiation and Safety
+Characterization
+This section presents the core capability of our eval-
+uation framework: its ability to precisely and trans-
+ferably characterize safety differences across mod-
+els. Within this overarching framework, our analy-
+ses proceed along two complementary axes: Inter-
+Model Dimension (Model-Level Differentiation):
+examining variations in latent-space separability
+among different kinds of models to reveal the rank
+correlation between our method and large-scale
+traditional red-teaming trends; Intra-Model Dimen-
+sion (DPO Fine-Tuning Dynamics): analyzing how
+changes induced by DPO-based fine-tuning are re-
+flected in our JSS proxy metric, thereby testing
+the sensitivity and faithfulness of JSS to alignment-
+related weight updates.
+4.1.1
+Cross-Model Validation of JSS-Derived
+Safety Proxies
+For model-level differentiation, we collected a di-
+verse set of models and evaluated their performance
+under a series of standardized red-teaming safety
+tests (20+ testing protocols with over 7000 test
+cases, more data listed in the Appendix table 9
+and 10). For each model, the results were aggre-
+gated into a single averaged traditional safety score.
+Our goal in this experiment is twofold: (1) to de-
+rive proxy safety indicators from our JSS-based
+evaluation framework, and (2) to assess the con-
+sistency between the proxy-based ranking and the
+ranking obtained from conventional red-teaming
+safety evaluations.
+Building upon the JSS evaluation indices defined
+earlier, we construct two higher-level proxy met-
+rics that capture complementary aspects of safety
+separability.
+JB/PB Ratio =
+P
+s∈[0,1] JSSs
+ J, B
+
+P
+s∈[0,1] JSSs
+ P, B
+
+(8)
+A higher value of JB/PB Ratio indicates that
+Jailbreak trajectories are more strongly separated
+5
+
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+All Models
+All Models
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Family
+Qwen
+Gemma
+Deepseek
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Size
+7B
+<=3B
+>=13B
+JSS-Proxy
+Traditional
+Figure 4: Multi-perspective cross-model safety ranking consistency between N-GLARE and traditional red-teaming.
+Detailed figures and datapoints at Appendix Fig. 10 and Appendix Table 7 8.
+5
+10 15 20 25 30
+35
+Number of Models (n)
+5
+10
+15
+20
+Number of Metrics (k)
+0.2
+0.4
+0.6
+0.8
+1.0
+Kendall's Tau
+Traditional Methods Consistency
+JSS-Proxy Performance
+Figure 5: Comparison of ranking consistency between
+JSS-proxy and traditional red-teaming metrics across
+varying numbers of models (n) and evaluation metrics
+(k), measured by Kendall’s τ.
+from the Baseline than PlainQuery trajectories, re-
+flecting the model’s latent ability to discriminate ad-
+versarial jailbreak behavior beyond explicit harm-
+ful intent.
+JR Min/Max = mins∈[0,1] JSSs
+ J, R
+
+maxs∈[0,1] JSSs
+ J, R
+
+(9)
+A higher value of JR Min/Max indicates that
+Jailbreak–Ideal Refusal separability remains stable
+across the entire trajectory, whereas a low value
+reflects late-stage collapse of refusal and successful
+jailbreak intrusion.
+We quantify the agreement between our proxy-
+based safety ranking rjss-proxy and the ranking ob-
+tained from conventional red-teaming evaluations
+rHybrid using Kendall’s τ correlation coefficient:
+τ(rjss-proxy, rHybrid) ∈[−1, 1].
+Figure 4 show that cross a sufficiently large
+model set, the proxy-based ranking exhibits strong
+concordance with the red-teaming ground truth.
+This demonstrates that our JSS-derived proxy indi-
+cators can accurately reproduce traditional safety
+orderings within representative alignment regimes,
+while requiring far lower evaluation cost.
+As the model and metric pool expands in Figure
+5, τ remains consistently high, with p-values far be-
+low conventional significance thresholds(< 0.05).
+This indicates that even under diverse models and
+red-teaming metrics, the consistency between the
+proxy-based and red-teaming rankings remains
+higher than red-teaming metrics themselves and
+statistically significant.
+4.1.2
+Consistency under Model Weight
+Variations
+In essence, we demonstrate that the geomet-
+ric safety scale captured by JSS not only re-
+flects static differences among models but also
+dynamically responds to behavioral transitions
+induced by weight adjustments.
+We intro-
+duce two opposite preference optimization direc-
+tions—Forward DPO and Inverse DPO—to respec-
+tively enhance and attenuate safety alignment by
+fine-tuning the same base model with reversed pref-
+erences. Both settings use the standard DPO objec-
+tive: LDPO(θ) = −E(x,y+,y−)∼D
+h
+log σ
+ β ∆θ
+i
+where ∆θ = log pθ(y+ | x) −log pθ(y−| x) In
+Forward DPO, safety-aligned responses are pre-
+ferred over harmful ones (y+ = safe, y−= harmful),
+whereas Inverse DPO reverses this preference to
+favor harmful responses (y+ = harmful, y−= safe).
+To avoid conclusions driven by a single fine-
+tuning run or a single training step, we analyze the
+training-time co-evolution between a latent proxy
+(JSS) and surface safety metrics (UR and RR) un-
+der both Forward and Inverse DPO.
+Figure 6 shows that JSS changes track the whole
+training dynamics of safety behavior: when safety
+improves under Forward DPO, JSS increases to-
+6
+
+10
+20
+30
+40
+50
+Step
+0.5
+0.6
+0.7
+0.8
+Behavior: Unsafe Rate
+Baseline-Jailbreak
+10
+20
+30
+40
+50
+Step
+0.5
+0.6
+0.7
+0.8
+RefusalExistence-Jailbreak
+10
+20
+30
+40
+50
+Step
+0.5
+0.6
+0.7
+0.8
+Plainquery-Baseline
+0.78
+0.79
+0.80
+0.81
+0.82
+Internal: JSS Metric
+Forward DPO Unsafe
+Forward DPO JSS
+Inverse DPO Unsafe
+Inverse DPO JSS
+Figure 6: Evolution of JSS and behavioral safety metrics under Forward vs. Inverse DPO. The dynamic
+evolution of both surface-level safety behavior metrics (Unsafe Rate) and latent proxy metrics (JSS). The three
+columns respectively correspond to separability relations across different dialogue families. This confirms that JSS
+reliably tracks the direction of safety strengthening or weakening, providing a stable latent–surface correspondence.
+gether with decreased unsafe surface metrics; when
+safety is weakened under Inverse DPO, JSS de-
+creases as surface safety degrades (Unsafe Rate
+increases). Importantly, the turning points of the
+dashed JSS curves appear earlier than the corre-
+sponding shifts in output behavior-based metrics
+(detailed information in the Appendix Table 4). Fig-
+ure 7 further supports this temporal relation at the
+step level: JSS exhibits strong step-wise coupling
+with both UR and RR across layers (Unsafe Rate
+and Refusal Rate definition listed in Appendix A).
+Together, these results indicate that latent sep-
+arability (JSS) changes earlier than refusal-rate
+changes during training, making JSS a practical
+early-warning signal for upcoming safety degrada-
+tion, while unsafe-rate changes largely reflect the
+same-step training state.
+lower
+middle
+upper
+-0.54
+-0.18
+-0.58
+0.68
+0.35
+0.45
+-0.42
+-0.55
+-0.52
+0.45
+0.50
+0.35
+-0.49
+-0.20
+-0.59
+0.61
+0.35
+0.49
+-0.41
+-0.59
+-0.61
+0.37
+0.60
+0.40
+Pearson
+Spearman
+Forward DPO
+Inverse DPO
+UR (Unsafe Rate)
+RR (Refusal Rate)
+1.0
+0.5
+0.0
+0.5
+1.0
+Correlation
+Figure 7: Step-Wise Safety Metrics (UR: Unsafe Rate;
+RR: Refusual Rate) and JSS Correlation Heatmap. JSS
+exhibits strong step-wise coupling with both UR and
+RR across layers
+Attack
+tokin (k)
+tokout (k)
+tok (k)
+ArtPrompt
+50.92(159)
+70.10(216)
+121.02(375)
+Cipher
+515.65(–)
+151.90(63)
+667.55(63)
+DAN
+502.69(–)
+99.76(59)
+602.45(59)
+DevMode
+519.71(–)
+59.74(48)
+579.45(48)
+MultiLing
+–(–)
+167.87(17)
+167.87(17)
+AutoDAN
+1354.89(129)
+2224.48(185)
+3579.37(314)
+GPTFuzzer
+836.48(82)
+700.46(76)
+1536.94(158)
+PAIR
+1212.90(123)
+775.71(85)
+1988.61(207)
+Mixed (PyRIT)
+–
+–
+4797.30(–)
+Ours (JSS-only)
+–(–)
+1.03(–)
+1.03(–)
+Table 1: Attack statistics aggregated over single vs.
+multi-round settings. Each entry is reported in thou-
+sands of tokens (k(avg)), where tokin denotes input to-
+kens to the subject model, tokout denotes output tokens
+generated for evaluation, and tok denotes their sum.
+4.2
+Baseline Comparison: Cost and Efficiency
+of Traditional Red-Teaming vs. Our
+JSS-Only Pipeline
+We compare the evaluation cost of our JSS-only
+pipeline with traditional online red-teaming under
+matched task scale and sample size.
+The baseline methods that contain single-turn,
+multi-turn and mixed strategy follow a standard
+red-teaming workflow with separate attacker, sub-
+ject, and evaluator models, while our method re-
+lies solely on a several forward passes of the sub-
+ject model on offline attack trajectories, without
+online generation or auxiliary evaluator inference.
+Specifically, we provide more details of the cost
+model, token accounting, and timing formulation
+in Appendix D when we conduct the experiment on
+mixed strategy (PyRIT (Munoz et al., 2024)). The
+results support our method’s advantages as well in
+Appendix Figure 12.
+In table 1 we can see that across all red-teaming
+intensities and evaluation settings, the JSS-only
+7
+
+20
+40
+60
+80
+100
+0.8
+0.9
+1.0
+Jailbreak Data Stability
+Gibbs Harmful Dataset
+XGuard-Train
+SafeMTData
+MTSA Red Team
+0
+200
+400
+600
+800
+1000
+1200
+1400
+0.6
+0.7
+0.8
+0.9
+1.0
+Benign Data Stability
+LMSYS
+OASST1
+OpenHermes
+UltraChat
+Sample Size (n)
+Spearman Correlation
+Figure 8: Rank correlation stability of JSS-based safety
+ordering under varying sample sizes for jailbreak and
+benign data. Appendix Fig 11 has more information
+about this.
+pipeline consistently achieves orders-of-magnitude
+reductions in both token consumption. This effi-
+ciency gain stems from eliminating iterative genera-
+tion and multi-model interaction, thereby removing
+the primary scalability bottleneck of traditional red-
+teaming.
+4.3
+Model Sensitivity and Systemic Stability
+Experiments
+If our method is indeed capturing an intrinsic prop-
+erty of the model’s alignment dynamics—rather
+than dataset-specific artifacts—then its induced
+safety ordering should remain stable when we per-
+turb the underlying data and sampling conditions.
+The goal of this section is therefore to test the sys-
+temic stability of our JSS-based safety scale. Con-
+cretely, we ask: (i) whether the relative JSS differ-
+ences between models remain consistent when we
+vary which jailbreak trajectories are used under dif-
+ferent attack datasets and how many sample size n
+trajectories are included; and (ii) whether the same
+stability holds when we perturb the benign refer-
+ence distribution, by changing the source corpus
+and the number of benign samples used to estimate
+the natural manifold.
+As shown in Fig 8 and Table 2, rank correla-
+tions consistently increase with sample size and
+rapidly converge to high values, indicating that the
+induced model ordering is not sensitive to the spe-
+cific choice of attack or benign datasets.
+Source
+Metric
+Matrix Dim
+Mean
+Std
+Q25
+Q75
+benign
+kendall
+n
+0.78
+0.11
+0.65
+0.87
+dataset
+0.67
+0.14
+0.56
+0.78
+model
+0.73
+0.36
+0.33
+1.00
+spearman
+n
+0.88
+0.08
+0.79
+0.94
+dataset
+0.79
+0.11
+0.72
+0.87
+model
+0.76
+0.34
+0.40
+1.00
+jailbreak
+kendall
+n
+0.87
+0.14
+0.78
+0.96
+dataset
+0.45
+0.24
+0.33
+0.60
+model
+0.54
+0.12
+0.47
+0.61
+spearman
+n
+0.94
+0.08
+0.92
+0.99
+dataset
+0.57
+0.28
+0.42
+0.79
+model
+0.68
+0.12
+0.58
+0.78
+Table 2: Summary of rank correlation statistics for JSS-
+based safety ordering. The Matrix Dim column indicates
+the axis along which rankings are compared: n denotes
+varying sample sizes, dataset denotes different jailbreak
+or benign data sources, and model denotes comparisons
+across model variants. Statistics are reported as mean,
+standard deviation, and interquartile range (Q25–Q75).
+A detailed pair-wise heatmap is at Appendix Fig 13.
+Lower correlations mainly arise under heteroge-
+neous datasets or small sample sizes—particularly
+for jailbreak data—where weak or localized sepa-
+rability amplifies noise, but these effects vanish as
+rankings converge at moderate to large n.
+5
+Conclusion
+This paper presents N-GLARE, a non-generative,
+representation-based framework for LLM safety
+evaluation that captures safety state through latent
+trajectory geometry rather than outputs. By mod-
+eling a benign manifold and using JSS to measure
+deviations of jailbreak and refusal trajectories, N-
+GLARE produces model-level safety rankings con-
+sistent with large-scale red-teaming across over 40
+models, while reducing cost by more than two or-
+ders of magnitude. It further reveals fine-grained
+safety dynamics, demonstrating latent trajectory
+analysis as a scalable tool for continuous safety
+diagnostics.
+6
+Limitations
+While N-GLARE demonstrates strong empirical
+effectiveness, several limitations remain. First, al-
+though our evaluation covers over 40 models with
+diverse sizes and alignment settings, it does not
+exhaustively represent all architectures, training
+paradigms, or deployment variants. Second, N-
+GLARE requires access to internal hidden represen-
+tations, which limits its direct applicability to fully
+black-box models that expose only text outputs.
+8
+
+In addition, the geometric abstraction underlying
+N-GLARE—modeling benign behavior as a low-
+dimensional manifold and inferring safety from tra-
+jectory separability—may oversimplify more com-
+plex latent structures in large models. Finally, al-
+though the framework avoids output generation, it
+still depends on the design of probing conditions,
+whose coverage and quality can influence the re-
+sulting safety indicators.
+The limitations above also point to several
+promising directions for future research. Model
+coverage can be naturally expanded as new ar-
+chitectures and checkpoints become available, en-
+abling broader validation of representation-based
+safety indicators. The reliance on hidden states
+motivates future work on approximate or surrogate
+signals that could extend N-GLARE–style anal-
+ysis to partially observable or API-only settings.
+Beyond harmfulness and refusal, the trajectory-
+based framework can be generalized to capture
+other alignment dimensions, such as bias, factual
+reliability, or long-horizon agentic safety, by defin-
+ing task-specific probing conditions and reference
+manifolds. More expressive geometric models, in-
+cluding non-linear or multi-manifold representa-
+tions, may further improve fidelity to complex la-
+tent structures. Finally, systematic and automated
+probing design offers a new research direction, po-
+sitioning latent trajectory analysis as a foundation
+for scalable, continuous alignment monitoring and
+comparative safety evaluation.
+References
+Andy Arditi, Oscar Obeso, Aaquib Syed, Daniel Paleka,
+Nina Panickssery, Wes Gurnee, and Neel Nanda.
+2024. Refusal in language models is mediated by
+a single direction. Advances in Neural Information
+Processing Systems, 37:136037–136083.
+Min Cai, Yuchen Zhang, Shichang Zhang, Fan Yin,
+Dan Zhang, Difan Zou, Yisong Yue, and Ziniu Hu.
+2024. Self-control of llm behaviors by compressing
+suffix gradient into prefix controller. arXiv preprint
+arXiv:2406.02721.
+Zouying Cao, Yifei Yang, and Hai Zhao. 2024. Noth-
+ing in excess: Mitigating the exaggerated safety for
+llms via safety-conscious activation steering. arXiv
+e-prints, pages arXiv–2408.
+Badhan Chandra Das, M Hadi Amini, and Yanzhao Wu.
+2025. Security and privacy challenges of large lan-
+guage models: A survey. ACM Computing Surveys,
+57(6):1–39.
+Manfredo P. do Carmo. 1976. Differential Geometry of
+Curves and Surfaces. Prentice-Hall.
+Zhichen Dong, Zhanhui Zhou, Chao Yang, Jing Shao,
+and Yu Qiao. 2024. Attacks, defenses and evalua-
+tions for llm conversation safety: A survey. arXiv
+preprint arXiv:2402.09283.
+Carl Eckart and Gale Young. 1936. The approximation
+of one matrix by another of lower rank. Psychome-
+trika, 1(3):211–218.
+Gene H. Golub and Charles F. Van Loan. 2013. Matrix
+Computations, 4 edition. Johns Hopkins University
+Press.
+Jinhyuk Lee, Wonjin Yoon, Sungdong Kim, Donghyeon
+Kim, Sunkyu Kim, Chan Ho So, and Jaewoo Kang.
+2020. Biobert: a pre-trained biomedical language
+representation model for biomedical text mining.
+Bioinformatics, 36(4):1234–1240.
+Haoxi Li, Sikai Bai, Jie Zhang, and Song Guo. 2025a.
+Core: Enhancing metacognition with label-free self-
+evaluation in lrms. arXiv preprint arXiv:2507.06087.
+Kenneth Li, Oam Patel, Fernanda Viégas, Hanspeter
+Pfister, and Martin Wattenberg. 2023.
+Inference-
+time intervention: Eliciting truthful answers from
+a language model. Advances in Neural Information
+Processing Systems, 36:41451–41530.
+Tianlong Li, Zhenghua Wang, Wenhao Liu, Muling Wu,
+Shihan Dou, Changze Lv, Xiaohua Wang, Xiaoqing
+Zheng, and Xuan-Jing Huang. 2025b. Revisiting
+jailbreaking for large language models: A represen-
+tation engineering perspective. In Proceedings of
+the 31st International Conference on Computational
+Linguistics, pages 3158–3178.
+Lizhi Lin, Honglin Mu, Zenan Zhai, Minghan Wang,
+Yuxia Wang, Renxi Wang, Junjie Gao, Yixuan Zhang,
+Wanxiang Che, Timothy Baldwin, and 1 others. 2025.
+Against the achilles’ heel: A survey on red teaming
+for generative models. Journal of Artificial Intelli-
+gence Research, 82:687–775.
+Samuel Marks and Max Tegmark. 2023. The geometry
+of truth: Emergent linear structure in large language
+model representations of true/false datasets. arXiv
+preprint arXiv:2310.06824.
+Gary D. Lopez Munoz, Amanda J. Minnich, Roman
+Lutz, Richard Lundeen, Raja Sekhar Rao Dheekonda,
+Nina Chikanov, Bolor-Erdene Jagdagdorj, Martin
+Pouliot, Shiven Chawla, Whitney Maxwell, Blake
+Bullwinkel, Katherine Pratt, Joris de Gruyter, Char-
+lotte Siska, Pete Bryan, Tori Westerhoff, Chang
+Kawaguchi, Christian Seifert, Ram Shankar Siva Ku-
+mar, and Yonatan Zunger. 2024. Pyrit: A framework
+for security risk identification and red teaming in
+generative ai systems. Preprint, arXiv:2410.02828.
+Salman Rahman, Liwei Jiang, James Shiffer, Genglin
+Liu, Sheriff Issaka, Md Rizwan Parvez, Hamid
+Palangi, Kai-Wei Chang, Yejin Choi, and Saadia
+9
+
+Gabriel. 2025. X-teaming: Multi-turn jailbreaks and
+defenses with adaptive multi-agents. arXiv preprint
+arXiv:2504.13203.
+Qibing Ren, Hao Li, Dongrui Liu, Zhanxu Xie, Xiaoya
+Lu, Yu Qiao, Lei Sha, Junchi Yan, Lizhuang Ma,
+and Jing Shao. 2025. Llms know their vulnerabili-
+ties: Uncover safety gaps through natural distribution
+shifts. In Proceedings of the 63rd Annual Meeting of
+the Association for Computational Linguistics (Vol-
+ume 1: Long Papers), pages 24763–24785.
+Nina Rimsky, Nick Gabrieli, Julian Schulz, Meg Tong,
+Evan Hubinger, and Alexander Turner. 2024. Steer-
+ing llama 2 via contrastive activation addition. In
+Proceedings of the 62nd Annual Meeting of the As-
+sociation for Computational Linguistics (Volume 1:
+Long Papers), pages 15504–15522.
+Anna Rogers, Olga Kovaleva, and Anna Rumshisky.
+2020. A primer in bertology: What we know about
+how bert works. Transactions of the association for
+computational linguistics, 8:842–866.
+Mark Russinovich, Ahmed Salem, and Ronen Eldan.
+2025. Great, now write an article about that: The
+crescendo {Multi-Turn}{LLM} jailbreak attack. In
+34th USENIX Security Symposium (USENIX Security
+25), pages 2421–2440.
+Vinu Sankar Sadasivan, Shoumik Saha, Gaurang Srira-
+manan, Priyatham Kattakinda, Atoosa Chegini, and
+Soheil Feizi. 2024. Fast adversarial attacks on lan-
+guage models in one gpu minute. arXiv preprint
+arXiv:2402.15570.
+Ian Tenney, Dipanjan Das, and Ellie Pavlick. 2019. Bert
+rediscovers the classical nlp pipeline. arXiv preprint
+arXiv:1905.05950.
+Huanqian Wang, Yang Yue, Rui Lu, Jingxin Shi, An-
+drew Zhao, Shenzhi Wang, Shiji Song, and Gao
+Huang. 2025a. Model surgery: Modulating llm’s
+behavior via simple parameter editing. In Proceed-
+ings of the 2025 Conference of the Nations of the
+Americas Chapter of the Association for Computa-
+tional Linguistics: Human Language Technologies
+(Volume 1: Long Papers), pages 6337–6357.
+Pengyu Wang, Dong Zhang, Linyang Li, Chenkun
+Tan, Xinghao Wang, Mozhi Zhang, Ke Ren, Botian
+Jiang, and Xipeng Qiu. 2024. Inferaligner: Inference-
+time alignment for harmlessness through cross-model
+guidance. In Proceedings of the 2024 Conference on
+Empirical Methods in Natural Language Processing,
+pages 10460–10479.
+Tianlong Wang, Xianfeng Jiao, Yinghao Zhu, Zhongzhi
+Chen, Yifan He, Xu Chu, Junyi Gao, Yasha Wang,
+and Liantao Ma. 2025b. Adaptive activation steering:
+A tuning-free llm truthfulness improvement method
+for diverse hallucinations categories. In Proceedings
+of the ACM on Web Conference 2025, pages 2562–
+2578.
+Alexander Wei, Nika Haghtalab, and Jacob Steinhardt.
+2023. Jailbroken: How does llm safety training fail?
+Advances in Neural Information Processing Systems,
+36:80079–80110.
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten
+Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou,
+and 1 others. 2022. Chain-of-thought prompting elic-
+its reasoning in large language models. Advances
+in neural information processing systems, 35:24824–
+24837.
+Zixuan Weng, Xiaolong Jin, Jinyuan Jia, and Xiangyu
+Zhang. 2025. Foot-in-the-door: A multi-turn jail-
+break for llms. arXiv preprint arXiv:2502.19820.
+Jirui Yang, Zheyu Lin, Shuhan Yang, Zhihui Lu, and
+Xin Du. 2025. Concept enhancement engineering:
+A lightweight and efficient robust defense against
+jailbreak attacks in embodied ai.
+arXiv preprint
+arXiv:2504.13201.
+Jiahao Yu, Xingwei Lin, Zheng Yu, and Xinyu Xing.
+2023. Gptfuzzer: Red teaming large language mod-
+els with auto-generated jailbreak prompts.
+arXiv
+preprint arXiv:2309.10253.
+Andy Zou, Long Phan, Sarah Chen, James Campbell,
+Phillip Guo, Richard Ren, Alexander Pan, Xuwang
+Yin, Mantas Mazeika, Ann-Kathrin Dombrowski,
+and 1 others. 2023. Representation engineering: A
+top-down approach to ai transparency. arXiv preprint
+arXiv:2310.01405.
+10
+
+A
+Unsafe Rate and Refusual Rate
+Definition
+Unsafe Rate. This metric is computed using the
+safety classifications provided by Qwen3Guard. A
+model output is counted as unsafe whenever the
+guard model labels it as “Unsafe.” Formally,
+Unsafe Rate = NUnsafe
+NTotal
+,
+where NUnsafe denotes the number of responses
+flagged as Unsafe by the guard model, and NTotal
+denotes the total number of model responses evalu-
+ated.
+Refusal Rate. This metric is based on refusal-
+style keyword matching.
+A model response is
+counted as a refusal if it contains typical refusal
+patterns such as “I’m sorry”, “I cannot comply”,
+“I refuse to answer”, or similar formulations. For-
+mally,
+Refusal Rate = NRefusal
+NTotal
+,
+where NRefusal denotes the number of responses
+that match the refusal keyword patterns.
+Complementarity. These two metrics capture
+opposite behavioral tendencies and are therefore
+complementary.
+Lower Unsafe Rate indicates
+stronger safety, while lower Refusal Rate indicates
+better helpfulness and less over-defensiveness. A
+high Unsafe Rate signals safety failures, whereas a
+high Refusal Rate reflects an overly conservative
+model that rejects too many user requests.
+B
+Empirical Analysis of Latent Safety
+Trajectories
+This appendix provides structured empirical evi-
+dence and metric definitions supporting the method-
+ological insights presented in Section 3.5. All ob-
+servations are validated through quantitative analy-
+sis on latent representation trajectories.
+B.1
+Trajectory Evolution Across Dialogue
+Families
+Observation.
+Model safety manifests as a dy-
+namic process in latent representation space rather
+than a static output attribute.
+Protocol.
+We extract APT trajectories for four
+dialogue families: Baseline, PlainQuery, Jailbreak,
+and Ideal Refusal. Each trajectory is traced across
+layers and decoding steps under identical model
+settings.
+Table 3: Stage-wise classification accuracy for Jailbreak
+trajectory representations in aligned LLaMA-family
+models.
+Stage Pair
+Classification Accuracy
+Early vs. Mid
+0.86 – 0.97
+Early vs. Late
+0.91 – 0.96
+Mid vs. Late
+0.85 – 0.86
+Empirical Evidence.
+Figure 3 shows that:
+• Baseline trajectories remain flat and low-
+variance, forming a stable reference manifold.
+• PlainQuery trajectories diverge sharply from
+Baseline across all layers, indicating rapid risk
+detection and refusal activation.
+• Jailbreak trajectories gradually deviate from
+Baseline and exhibit downward drift in higher
+layers, reflecting progressive erosion of re-
+fusal mechanisms.
+• Ideal Refusal initially overlaps with Jailbreak
+but later bifurcates, indicating a latent distinc-
+tion between compliant and defensive genera-
+tion paths.
+Takeaway.
+Safety-relevant information is en-
+coded in the relative geometry of trajectories rather
+than in isolated representations.
+B.2
+Jailbreak–Baseline Separability and
+Detection Capability
+Observation.
+Separability between Jailbreak and
+Baseline trajectories reflects the model’s latent ca-
+pability to detect jailbreak process shifting.
+Metric and Protocol.
+To test whether Jailbreak
+trajectories encode stage-dependent information,
+we partition the jailbreak process into early, mid,
+and late stages. A lightweight neural classifier is
+trained to distinguish representations from different
+stages. If stage-wise structure is present, classifica-
+tion accuracy should exceed chance level.
+Empirical
+Evidence.
+For
+aligned
+LLaMA-
+family models,
+stage classification accuracy
+reaches:
+Higher-than-chance accuracy across all stage pairs
+indicates a reliable and alignment-dependent phase
+structure in latent jailbreak trajectories.
+After ablating safety alignment (manually jail-
+broken variants), accuracy collapses to approxi-
+mately 0.5 for all pairs.
+11
+
+Takeaway.
+Jailbreak trajectories exhibit a reli-
+able, alignment-dependent phase structure, support-
+ing the use of Jailbreak–Baseline separability as a
+proxy for latent detection capability.
+B.3
+Jailbreak–Ideal Refusal Separability and
+Refusal Tendency
+Observation.
+Separability between Jailbreak and
+Ideal Refusal trajectories reflects intrinsic refusal
+tendency.
+Metric Definition (ANM).
+We quantify refusal
+inclination using the Activation-based Negation
+Measure (ANM):
+ANM(x) =
+X
+v∈V
+Wref(v) p(v | x),
+(10)
+where p(v | x) is the next-token distribution and
+Wref is a fixed refusal-prototype distribution con-
+structed from normalized embeddings of refusal
+seed phrases.
+Empirical Evidence.
+Across layers,
+ANM
+curves exhibit a consistent mid-stage rise followed
+by late-stage collapse. This pattern aligns with
+the Ideal Refusal–Jailbreak JSS waveform. Layer-
+wise correlations between ANM and Ideal Refusal–
+Jailbreak JSS are:
+r = 0.70, 0.56, 0.54
+(RMSE = 0.13–0.20).
+Figure 9 also shows that mid-stage elevation cor-
+responds to increased refusal probability, while
+late-stage decline coincides with jailbreak success.
+Takeaway.
+Latent
+trajectory
+separability
+is
+tightly coupled with explicit refusal behavior, vali-
+dating its use as an interpretable proxy for refusal
+stability.
+C
+Construction of the Benign Manifold
+and Geometric Turning Angle
+This appendix provides the full mathematical for-
+mulation underlying the benign manifold, the asso-
+ciated normal direction, and the geometric turning
+angle introduced in Section 3.3. These derivations
+are omitted from the main text for clarity and read-
+ability.
+C.1
+Benign Manifold Construction
+To characterize normal generation behavior, we
+construct a benign manifold using latent represen-
+tations collected under benign inputs. For each
+Figure 9: Coupled dynamics of JSS and ANM along
+the jailbreak process. The color indicates the normal-
+ized refusal-intensity score (ANM); The inset line plot
+in the upper-right overlays slice-wise JSS and ANM
+curves over the standardized progress axis, revealing a
+shared mid-phase rise and late-phase collapse, which
+highlights the strong correlation between geometric sep-
+arability (JSS) and probability-level refusal tendency
+(ANM).
+group G, we aggregate all benign activations across
+prompts and progress values:
+H(G)
+B
+= {h(B,G)}.
+(11)
+We estimate the empirical mean and covariance:
+µ(G) = E[h(B,G)],
+Σ(G) = E
+
+(h(B,G) −µ(G))(h(B,G) −µ(G))⊤
+.
+(12)
+A rank-r eigendecomposition is then performed:
+Σ(G) ≈U(G)
+r
+Λ(G)
+r
+U(G)
+r
+⊤,
+r ≪d,
+(13)
+where U(G)
+r
+contains the top-r eigenvectors and
+Λ(G)
+r
+the corresponding eigenvalues. This defines a
+linear surrogate of the benign manifold:
+S(G) = span
+ U(G)
+r
+
+.
+(14)
+By the Eckart–Young–Mirsky theorem (Eckart
+and Young, 1936; Golub and Van Loan, 2013), this
+subspace provides the optimal rank-r approxima-
+tion of the benign distribution in the least-squares
+sense. Under standard smoothness assumptions,
+it also serves as a local tangent-space approxima-
+tion of the underlying benign manifold (do Carmo,
+1976).
+C.2
+Residual Energy and Outward Normal
+Given a representation h, its reconstruction from
+the benign subspace is:
+ˆh(G) = µ(G) + U(G)
+r
+U(G)
+r
+⊤(h −µ(G)).
+(15)
+12
+
+The residual vector
+r(G)(h) = h −ˆh(G)
+(16)
+captures the component orthogonal to the benign
+manifold. We define the residual energy:
+E(G)
+b
+(h) = ∥r(G)(h)∥2
+2.
+(17)
+The gradient of this energy with respect to h is:
+n(G)(h) = ∇E(G)
+b
+(h) = 2 r(G)(h),
+(18)
+which defines an outward normal direction pointing
+away from the benign manifold. Up to a constant
+factor, the residual vector itself therefore serves as
+the normal direction used in practice.
+C.3
+Trajectory Tangent Direction
+For
+a
+representation
+trajectory
+Γ(A,G)
+M
+=
+{h(A,G)
+t
+}TA
+t=1, the local tangent direction at step t is
+defined as:
+τ (A,G)
+t
+=
+h(A,G)
+t+1
+−h(A,G)
+t
+∥h(A,G)
+t+1
+−h(A,G)
+t
+∥2
+,
+1 ≤t < TA.
+(19)
+This tangent captures the instantaneous direc-
+tion of representation evolution along the inference
+process.
+C.4
+Derivation of the Geometric Turning
+Angle
+At each step t, we measure how the trajectory direc-
+tion aligns with the outward normal of the benign
+manifold. The geometric turning angle is defined
+as:
+θ(A,G)
+t
+= arccos
+ 
+τ (A,G)⊤
+t
+n(G) h(A,G)
+t
+
+∥τ (A,G)
+t
+∥2 ∥n(G) h(A,G)
+t
+
+∥2
+!
+.
+(20)
+Since n(G)(h) is collinear with r(G)(h), the an-
+gle can equivalently be computed using the resid-
+ual direction. By construction, θ(A,G)
+t
+∈[0, π].
+Smaller angles indicate that the trajectory is mov-
+ing more directly away from the benign manifold,
+corresponding to stronger deviation from normal
+generation behavior.
+This turning angle serves as the local geomet-
+ric primitive for trajectory-level aggregation in the
+main text.
+D
+Cost Model and Efficiency Analysis
+This appendix details the cost modeling assump-
+tions, token accounting rules, and runtime decom-
+position used in the efficiency comparison between
+the traditional online red-teaming pipeline and our
+JSS-only evaluation pipeline.
+All measurements are conducted under matched
+task scale and sample size to ensure a fair compari-
+son.
+D.1
+Evaluation Pipelines and Model Roles
+We compare two evaluation pipelines:
+JSS-only pipeline (Ours).
+Our method operates
+on offline multi-turn attack trajectories. For each
+example, we perform a single forward pass on the
+subject model Ms to extract hidden representations.
+No online generation, attack synthesis, or evaluator
+inference is required.
+Traditional red-teaming pipeline (Baseline).
+The baseline follows a standard online red-teaming
+workflow implemented using PyRIT with Ollama
+backends, involving three model roles:
+• Mr: red-team attack generator,
+• Ms: subject model under evaluation,
+• Me: evaluator or safety discriminator.
+Each attack session proceeds in multiple turns, with
+all three models invoked at every turn.
+D.2
+Token Cost Formulation
+Let N denote the number of attack targets, ¯Tr the
+average number of attack turns per session, and ¯Lr,
+¯Ls, ¯Le the average token lengths generated by Mr,
+Ms, and Me, respectively.
+Baseline.
+The total generated-token cost of tradi-
+tional red-teaming is:
+CBase
+token(N) = N · ¯Tr ·
+ ¯Lr + ¯Ls + ¯Le
+
+.
+(21)
+JSS-only pipeline.
+Our method requires only a
+forward pass over an offline multi-turn dataset.
+For bookkeeping consistency, we count one
+subject-model forward pass per turn as one token-
+equivalent unit:
+COurs
+token(N) = N · ¯Toffline,
+(22)
+wher

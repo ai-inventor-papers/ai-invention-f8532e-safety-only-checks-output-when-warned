@@ -1,0 +1,373 @@
+{
+  "sha": "e7ca0d1a9a64038b405d04aec5cc1b0ccf2f7ef3",
+  "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/e7ca0d1a9a64038b405d04aec5cc1b0ccf2f7ef3",
+  "tree": [
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "13c2e8df77ae30f7240f99ec14ced9929194b2f6",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/13c2e8df77ae30f7240f99ec14ced9929194b2f6"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cac4fbe73e9fd577c1e1e23f07b2c4948aa67bc7",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/cac4fbe73e9fd577c1e1e23f07b2c4948aa67bc7"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "188b1d96f5fc700000432738e59728d3baeb5a25",
+      "size": 557,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/188b1d96f5fc700000432738e59728d3baeb5a25"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e8e07a826f640738a375998c4210e502cdc8e02a",
+      "size": 679,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/e8e07a826f640738a375998c4210e502cdc8e02a"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6a7695c06688c158d8c96ebe353806ef94fd3343",
+      "size": 107,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/6a7695c06688c158d8c96ebe353806ef94fd3343"
+    },
+    {
+      "path": ".github/workflows",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b503b0f4199c28d7335f417cf5e717c2acf30fad",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/b503b0f4199c28d7335f417cf5e717c2acf30fad"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19c7eb1b6ed3e5c938ba77cddc46852c74094e49",
+      "size": 944,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/19c7eb1b6ed3e5c938ba77cddc46852c74094e49"
+    },
+    {
+      "path": ".github/workflows/multi-approvers.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78c6b1f61cef62a2e20b10b8dad554b4b0dbea44",
+      "size": 825,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/78c6b1f61cef62a2e20b10b8dad554b4b0dbea44"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10ad1ca7bdd90b7e058cc0da590a2052c07bbc0e",
+      "size": 692,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/10ad1ca7bdd90b7e058cc0da590a2052c07bbc0e"
+    },
+    {
+      "path": ".kokoro",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "aa279672aa6322129d40be61910f93407de0b94d",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/aa279672aa6322129d40be61910f93407de0b94d"
+    },
+    {
+      "path": ".kokoro/build.cfg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2068a1adcd77bd1323b5e414e1e25e17c7749157",
+      "size": 688,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/2068a1adcd77bd1323b5e414e1e25e17c7749157"
+    },
+    {
+      "path": ".kokoro/build.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "9656fb2995edbcd6e2d7c756c330a796c4f35acb",
+      "size": 1361,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/9656fb2995edbcd6e2d7c756c330a796c4f35acb"
+    },
+    {
+      "path": ".kokoro/release.cfg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "567f42b9670107a2b64867abc07d2b20f6fbed3a",
+      "size": 659,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/567f42b9670107a2b64867abc07d2b20f6fbed3a"
+    },
+    {
+      "path": ".kokoro/release.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "58b865a6f5481e25101ac90b296f83359041336e",
+      "size": 119,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/58b865a6f5481e25101ac90b296f83359041336e"
+    },
+    {
+      "path": ".kokoro/requirements",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1bef3cee9038876fe03583d2dac0c01fd7e3d72b",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/1bef3cee9038876fe03583d2dac0c01fd7e3d72b"
+    },
+    {
+      "path": ".kokoro/requirements/build.in",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bd63670492dded91571c1ab61abe026222722b50",
+      "size": 121,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/bd63670492dded91571c1ab61abe026222722b50"
+    },
+    {
+      "path": ".kokoro/requirements/build.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "20334867dfc22de55e8717b449ba945931755988",
+      "size": 31337,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/20334867dfc22de55e8717b449ba945931755988"
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ba29495c11b2611d70d4bd3798b0840c528f020",
+      "size": 502,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/5ba29495c11b2611d70d4bd3798b0840c528f020"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24f8bde50e5fec5f96f5294b2dd99042797f34e2",
+      "size": 1683,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/24f8bde50e5fec5f96f5294b2dd99042797f34e2"
+    },
+    {
+      "path": "CODEOWNERS",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dee537d581011d0713a9f76ee6293dd2adb3ec35",
+      "size": 247,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/dee537d581011d0713a9f76ee6293dd2adb3ec35"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c9559d373b0de942c6833e3b2375cf0a32f7a4d",
+      "size": 10776,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/3c9559d373b0de942c6833e3b2375cf0a32f7a4d"
+    },
+    {
+      "path": "Makefile",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fae9033da08e8ad87c6e7eabda102ca5acc61e4a",
+      "size": 1800,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/fae9033da08e8ad87c6e7eabda102ca5acc61e4a"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d06b76378b1dad79feef372e143eb4cbe48653cd",
+      "size": 13468,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/d06b76378b1dad79feef372e143eb4cbe48653cd"
+    },
+    {
+      "path": "docs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d26da666d18e614c3385f7c011f183f4e62aba10",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/d26da666d18e614c3385f7c011f183f4e62aba10"
+    },
+    {
+      "path": "docs/CODE_OF_CONDUCT.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6070ae1cd721d0ecd2dd92b993db72dc4a7f59d0",
+      "size": 4599,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/6070ae1cd721d0ecd2dd92b993db72dc4a7f59d0"
+    },
+    {
+      "path": "docs/CONTRIBUTING.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "756f23029904b4542b37e9f2bb5139cf84279d76",
+      "size": 3249,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/756f23029904b4542b37e9f2bb5139cf84279d76"
+    },
+    {
+      "path": "docs/CUSTOM_CONCEPTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "baac3925cc2bb8ff3aace85c5800ff5b9a63f0d8",
+      "size": 3166,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/baac3925cc2bb8ff3aace85c5800ff5b9a63f0d8"
+    },
+    {
+      "path": "examples",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "25dee715cafff5ae30d18bc723dac3179ac5af61",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/25dee715cafff5ae30d18bc723dac3179ac5af61"
+    },
+    {
+      "path": "examples/basic_usage.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b077c4a607a8b82ae46d94eff50183931f708112",
+      "size": 2264,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/b077c4a607a8b82ae46d94eff50183931f708112"
+    },
+    {
+      "path": "examples/cicd_integration.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7ab9fc468d2db7c2dd6a027a831c7f300624e4f",
+      "size": 2540,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/e7ab9fc468d2db7c2dd6a027a831c7f300624e4f"
+    },
+    {
+      "path": "examples/github-actions.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c59ec06611095a6f65b5171479a2ace4874009c",
+      "size": 3285,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/8c59ec06611095a6f65b5171479a2ace4874009c"
+    },
+    {
+      "path": "pyproject.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ca5271c73c02dd7d0537bb3f3c10e7d10d8eb3e",
+      "size": 2807,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/4ca5271c73c02dd7d0537bb3f3c10e7d10d8eb3e"
+    },
+    {
+      "path": "setup.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "875c0773ca61c8ba18c41a893e0f5fbe5f4514a4",
+      "size": 1823,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/875c0773ca61c8ba18c41a893e0f5fbe5f4514a4"
+    },
+    {
+      "path": "src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a2346902d3d101cabb4a02ae3c8b359111213ffa",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/a2346902d3d101cabb4a02ae3c8b359111213ffa"
+    },
+    {
+      "path": "src/ams",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ed87c2e3c59bac1738b93af1fe7781414e9cb4a6",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/ed87c2e3c59bac1738b93af1fe7781414e9cb4a6"
+    },
+    {
+      "path": "src/ams/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8e7e9cb97e615cd2d818f1996f61de43dc969cf",
+      "size": 1655,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/f8e7e9cb97e615cd2d818f1996f61de43dc969cf"
+    },
+    {
+      "path": "src/ams/cli.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2317b3d04cbea2d34db874cbe0aa8e56ebdb1eeb",
+      "size": 19656,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/2317b3d04cbea2d34db874cbe0aa8e56ebdb1eeb"
+    },
+    {
+      "path": "src/ams/concepts.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6db9d732cbcb7c703c6d140ee6104917d07f72bf",
+      "size": 15282,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/6db9d732cbcb7c703c6d140ee6104917d07f72bf"
+    },
+    {
+      "path": "src/ams/extractor.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78320029cb8528cc12dfb8eddd37d12e27a0f6db",
+      "size": 17308,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/78320029cb8528cc12dfb8eddd37d12e27a0f6db"
+    },
+    {
+      "path": "src/ams/py.typed",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/ams/scanner.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bfa55d77f90161aa0e47636038834059d4b7d2d4",
+      "size": 25898,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/bfa55d77f90161aa0e47636038834059d4b7d2d4"
+    },
+    {
+      "path": "tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e91b5219e54c4f1241f7abb083dd70dabc7ea089",
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/trees/e91b5219e54c4f1241f7abb083dd70dabc7ea089"
+    },
+    {
+      "path": "tests/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4eee4126e9cf3261cb11dc17a4c243bb10ffece1",
+      "size": 591,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/4eee4126e9cf3261cb11dc17a4c243bb10ffece1"
+    },
+    {
+      "path": "tests/test_cli.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8d98486ed1a875002d4349c88fef0ca15206620",
+      "size": 7403,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/f8d98486ed1a875002d4349c88fef0ca15206620"
+    },
+    {
+      "path": "tests/test_core.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b57ad3d88bb433b3fdd36a65ab2269335d47a6cd",
+      "size": 20903,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/b57ad3d88bb433b3fdd36a65ab2269335d47a6cd"
+    },
+    {
+      "path": "tests/test_extractor.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2fccf83d5adbb063c64e0a4f33c15dd8f79adeb9",
+      "size": 2684,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/2fccf83d5adbb063c64e0a4f33c15dd8f79adeb9"
+    },
+    {
+      "path": "tests/test_smoke.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea885fb5ccc73d70777c004631b89bcef7211cc1",
+      "size": 1429,
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/activation-model-scanner/git/blobs/ea885fb5ccc73d70777c004631b89bcef7211cc1"
+    }
+  ],
+  "truncated": false
+}

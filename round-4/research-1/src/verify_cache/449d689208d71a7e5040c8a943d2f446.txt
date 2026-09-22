@@ -1,0 +1,1202 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2609.04721
+Type: PDF
+Length: 185104 chars (truncated)
+
+--- Content ---
+
+Locating and Steering Refusal Beyond Attention
+Preethi Carmel Bosco, Gopalakrishnan Srinivasan
+Department of Computer Science and Engineering, Indian Institute of Technology Madras
+preethicarmel@gmail.com, sgopal@cse.iitm.ac.in
+Abstract
+Where inside a language model does refusal live, and does that
+place change when the architecture does? In a transformer, re-
+fusal is governed by a single direction in the residual stream,
+a finding that safety and interpretability tooling now depend
+on. State-space models (SSMs) route information through a
+recurrent update instead of attention. They share no token-
+mixing mechanism with a transformer. Does the same safety
+representation survive this shift, or must it be rediscovered for
+each new architecture? It survives. We find that a single rota-
+tion aligns one model’s representation space with another’s.
+Under this rigid rotation, which can only reorient a space and
+not reshape it, the alignment shows the two models genuinely
+share the representation. A harm probe trained on a trans-
+former then flags an SSM’s harmful inputs, and removing the
+aligned direction makes a model answer attacks it would oth-
+erwise refuse, while a random direction of the same size does
+far less. What is architecture-specific is not where the direc-
+tion is steered but where it must be read. Each layer computes
+a fresh output that is then added into the residual stream, and
+harm is cleanly readable at this output, the write site, before
+the addition. A control that holds the intervention’s strength
+fixed shows that what matters is where the direction is es-
+timated, not where it is applied: a direction estimated at the
+write site controls refusals, while one estimated in the summed
+stream does not. Applied through a detector-triggered gate (a
+lightweight classifier flagging harmful prompts), this direc-
+tion lowers jailbreak success in all four architecture families
+we test (SSM, transformer, recurrent, and hybrid). On the
+SSM it holds against an attacker that tunes its prompt against
+the defense: the classifier fires on all 100 attacked prompts
+and attack success stays at 1.0% (from 15.0%). The defense
+only matches, and does not beat, a trivial rule that returns
+a fixed refusal whenever the same detector fires, so the gate
+adds no defense strength of its own. The contribution is that
+the direction it amplifies transfers across architectures. Where
+target labels are scarce, a transported direction used as a harm
+detector (on our Llama-to-Falcon-Mamba pair) flags 11.4 per-
+centage points more of the harmful prompts than one trained
+from the same few labels, at a matched 5.0% false-alarm rate.
+Two human raters validate the automated judge behind these
+numbers, agreeing with it 94.8% of the time (κ=0.90), and
+the judge’s few mistakes only overstate attacks, so our defense
+numbers are not inflated. Safety tooling built on refusal there-
+fore ports to a new architecture by re-estimating the direction
+at that architecture’s write site, not by rebuilding it.
+1
+Introduction
+The safety of a deployed language model rests on its refusals:
+it is safe only if it refuses what it should not answer, the one
+behavior every jailbreak targets. In a transformer, refusal is
+governed by a single linear direction in the residual stream,
+and a growing safety stack reads and steers that direction to
+detect and block harm (Arditi et al. 2024; Zou et al. 2023a;
+Lee et al. 2025). Every one of these results is in a trans-
+former, where information between positions is routed by
+attention. State-space models (SSMs) such as Mamba (Gu
+and Dao 2023; Zuo et al. 2024) route it through a recurrent
+state update instead, and are now entering deployment. If
+refusal is a property of attention, this stack breaks whenever
+a model routes information differently, and each new archi-
+tecture needs its safety tooling rediscovered from scratch.
+Is refusal a property of the transformer architecture, or the
+same function every model learns, and where inside a model
+does it live?
+We find that it is the function. The refusal representa-
+tion is shared across architectures that route context in com-
+pletely different ways: by attention (Llama-3.1, Mistral), by
+a selective scan (Falcon-Mamba), by token-shift recurrence
+(RWKV-6), or by a mix of attention and scan (Zamba2).
+A refusal direction read in a transformer and mapped into a
+Mamba state space is still the state-space model’s refusal trig-
+ger, and removing it there jailbreaks the model (Table 4). We
+also find that what is architecture-specific is not where refusal
+is steered but where it must be read: harm is cleanly decod-
+able at the fresh contribution each architecture writes before
+the residual accumulates it (the attention output in a trans-
+former, the selective-scan block output in an SSM; Figures 1
+and 3 sketch this per architecture), and a matched-magnitude
+control shows the direction estimated there controls refusal
+while one estimated in the accumulated residual degener-
+ates. This yields one rule: refusal is architecture-independent
+as a representation and architecture-specific as a readout
+site. We study this in Falcon-Mamba-7B, with Llama-3.1-8B
+(Grattafiori et al. 2024) and Mistral-7B (Jiang et al. 2023)
+as transformer references, and confirm it on RWKV-6 (Peng
+et al. 2024) and the hybrid Zamba2-7B (Glorioso et al. 2024).
+We make three contributions.
+• Refusal is a shared representation across architec-
+tures. A single rigid (Procrustes) rotation (Schönemann
+1966) both aligns the representation spaces and causally
+transports the refusal direction. Removing the trans-
+ported direction jailbreaks the target: decisively across
+the transformer-SSM pair and at the hybrid Zamba2-7B’s
+Mamba write site, more weakly at its attention site and
+on the single-checkpoint RWKV-6. A refusal-orthogonal
+random direction has a far smaller effect. This is the pa-
+per’s central result.
+• The refusal direction must be read at the fresh write,
+arXiv:2609.04721v1  [cs.LG]  4 Sep 2026
+
+not the accumulated residual. Harm peaks in decod-
+ability at each architecture’s write site: a linear probe
+separates harmful from benign prompts with AUROC
+0.99 (1.0 is perfect separation, 0.5 chance) on the surface-
+controlled subset, where a surface-only probe scores 0.54.
+A matched-magnitude control (Table 7) shows the direc-
+tion estimated there controls refusal while one estimated
+in the residual degenerates, and that the intervention’s
+location is irrelevant.
+• Applied through a detector-triggered gate, that direc-
+tion causally controls refusal in all four architecture
+classes. The gate is a causal test of the readout claim, not
+a defense contribution: its numbers only match a simpler
+baseline that returns a fixed refusal whenever the same
+detector fires, so what ports across architectures is the di-
+rection, not defense strength (Section 5). The gate lowers
+prefix-injection attack success on Falcon-Mamba (98.0%
+to 5.0%) and on three further classes (the two transform-
+ers, the recurrent RWKV-6, and the hybrid, Table 6).
+On Falcon-Mamba it also holds under a suffix optimized
+through the gate: the detector fires on all 100 attacked
+prompts and attack success stays at 1.0% (from 15.0%),
+where the same adaptive attack erodes a transformer’s
+detector.
+2
+Method
+2.1
+Threat model
+An adversary controls the input prompt and may adapt to
+the defense, including optimizing the prompt against the
+frozen detector (Zou et al. 2023b; Andriushchenko, Croce,
+and Flammarion 2025). The adversary cannot change the
+model weights or the detector. The defender runs the detector
+and the gate at inference time. We separate two evaluations
+(Section 3): transfer to unseen attack families, and robustness
+to an attacker that adapts to the detector.
+2.2
+Detector and the detect-then-gate loop
+The detector is a linear probe read at the routing layer, the
+write-site layer whose activations carry the per-prompt de-
+cision (selected in Section 2.5), one dot product per prompt,
+trained on pairs of harmful and benign prompts. Both the
+harmful and the benign prompts also appear wrapped in jail-
+break templates during training, so the probe cannot learn
+to fire on the wrapper text itself and must read the underly-
+ing request (Appendix A.29). It scores the prompt once: if
+pharm > θ the gate is applied at the architecture’s write site
+for the whole generation, otherwise the model runs unmodi-
+fied. The decision is made per prompt, not per token. Tokens
+generated after a flagged prompt also score as harmful, so
+a per-token gate would keep re-triggering and drift all gen-
+erations toward refusal. The write-site result holds under a
+nonlinear (multi-layer perceptron, MLP) detector as well as
+a linear one, and every cell of the baseline comparison shares
+the same fixed detector and threshold (Appendix A.31).
+2.3
+Write site: the SSM selective-scan gate
+(anchor)
+Falcon-Mamba-7B, our most fully instrumented model, is the
+anchor we dissect first. In a selective state-space model, in-
+formation propagation is controlled by three input-dependent
+selection parameters: a step size (∆), an input-selection gate
+(B), and a readout (C). Two additional matrices are fixed and
+learned onceduring training:a state-transitionmatrix (A)and
+a skip-connection matrix (D). At each layer ℓthe mixer maps
+the input xt to the selection (∆t, Bt, Ct) and updates the
+hidden state via the scan ht = exp(∆tA) ht−1 +(∆tBt) xt,
+with readout yt = Ct ht + D xt. Our decodability study
+(probing each layer with a linear classifier and measuring
+how well it separates harmful from benign activations) iden-
+tifies the step size ∆, the input-dependent selection with no
+counterpart in a transformer, as a location of harm. The probe
+detects harm at ∆nearly as well as at the mixer output (Sec-
+tion 5), but ∆is where harm is read, not where the gate steers:
+both the detector and the gate act at the block output. This
+is the per-layer contribution yt that the ∆-gated scan writes
+before it is added to the residual stream, a distinct site from
+the residual stream itself. We call this site the block output
+(equivalently the mixer output, the mixer’s out-projection in
+Figure 1). On a positive prompt-level decision the gate am-
+plifies the refusal direction ˆuℓat this selective-scan site for
+the whole generation:
+g(yt) = yt + α ˆuℓ,
+(1)
+which extends the additive steering of Arditi et al. (2024) to
+the SSM’s selective-scan block output (formal definitions in
+Appendix A.1). The direction ˆuℓis the mean difference be-
+tween harmful and harmless activations at layer ℓ, not the de-
+tector’s discriminative direction, which reads harm well but
+does not control refusal when amplified (Appendix A.30).
+The strength α and the routing layers are set by a small
+held-out sweep, with α kept below the value at which gen-
+eration degenerates (the coherent gain, Appendix A.25). To
+our knowledge, no prior steering or safety method acts at the
+selective-scan block of an SSM (Section 6).
+2.4
+Write site: the transformer attention output
+(reference)
+For the transformer reference we estimate the refusal direc-
+tion at the attention output projection (the fresh write) and,
+as a baseline, in the residual stream, and apply the same
+gate g(·) from Equation 1 at the layer where the direction
+induces refusal, triggered by the same prompt-level detector.
+The direction estimated at the attention output defends, while
+the one estimated in the accumulated residual degenerates,
+for both transformers we test, Llama-3.1-8B and Mistral-7B
+(Table 6; full sweep in Appendix A.24). A matched-absolute-
+magnitude control isolates the cause. With the same direc-
+tion held fixed, pushing it at the residual and pushing it
+at the attention output lower attack success by statistically
+indistinguishable amounts (overlapping 95% confidence in-
+tervals). What matters is therefore where the direction is es-
+timated, not where the gate is applied (Appendix A.35). The
+position-wise MLP output, which does not mix information
+
+xt
+write site w :
+probe + refusal
+direction read here
+residual stream:
+a direction estimated
+here degenerates
+× 32 layers
+RMSNorm
+multi-head attention
+softmax(QK
+/ d) V
+output projection WO
+RMSNorm
+MLP (SwiGLU)
+W
+( (Wgx)
+W
+x)
++
++
+xt
+write site w :
+probe + refusal
+direction read here
+residual stream:
+a direction estimated
+here degenerates
+× 64 layers
+RMSNorm
+in proj
+conv1d + SiLU
+selective scan
+, B, C from xt
+(A, D learned)
+: decodable,
+readout only
+SiLU gate
+out proj (mixer output)
++
+Figure 1: The write site in the two reference architectures. Left: transformer block (Llama-3.1, Mistral). The write site is the
+attention output projection WO, the fresh contribution attention writes into the residual stream. Right: Falcon-Mamba block
+(selective-scan SSM). The write site is the mixer’s out-projection, the block output the ∆-gated scan writes before the residual
+accumulates it, and ∆inside the scan is decodable but a readout only. In both, the probe and the refusal direction are estimated
+at the red site; a direction estimated in the accumulated residual (gray) degenerates.
+across positions, yields an equally usable direction, ruling out
+cross-position mixing as the source (Appendix A.18, A.19).
+2.5
+A recipe for siting the gate on a new model
+These findings give a procedure for deploying the gate on a
+new architecture, given only a small contrastive set: find the
+write site where the refusal direction is cleanly decodable (the
+selective-scan block output in an SSM, the attention output in
+a transformer), select the gate layers by held-out decodability,
+estimate the mean refusal direction and a linear trigger there,
+calibrate the gain below the degeneration cliff, and deploy
+closed-loop. The only model-specific work is layer selection
+and gain calibration, where a naive transfer of one model’s
+constants to another fails (Appendix A.2). Which component
+exposes a decodable direction changes with the architecture
+(a pure SSM has no MLP, and in Falcon-Mamba the newly
+written, non-accumulated part of the block output is the skip
+term Dxt, Appendix A.19), so the recipe’s first step, finding
+the write site, is done per architecture rather than assumed.
+2.6
+Baselines
+The baselines vary the intervention against our gate: residual-
+subspace projection (LEACE-style rank-k erasure (Belrose
+et al. 2023)) is an open-loop residual edit, conditional activa-
+tion steering (CAST) (Lee et al. 2025) shares our detector but
+reads and steers at the residual, and an always-on version of
+our push (as DeTAM does (Li, Jiang, and Wei 2025)) drops
+the loop (results in Table 9). All cells share the critical layers
+and detector threshold θ from our decodability study, with
+the erasure rank k and gate strength α swept and calibrated
+to stay coherent (Appendix A.25).
+2.7
+Why projection fails and gating should not
+Projection is brittle because a fixed subspace can be routed
+around downstream. A detection-triggered gate instead acts
+on the routing decision for the whole generation, leaving
+no fixed subspace to route around. We measure the in-
+distribution, out-of-distribution, and adaptive cases sepa-
+rately.
+3
+Experimental Setup
+Table 1 summarizes models (including Qwen2.5-7B (Qwen
+Team 2025)), corpora, attacks, judges, metrics, and baselines
+at a glance.
+The setup serves two questions, whether refusal is the
+same representation across the architectures and where that
+representation is read and steered. The detector is trained on
+harm versus benign-but-spicy prompts, a different split from
+the refusal direction’s harm-versus-Alpaca (Taori et al. 2023)
+fit. Decodability is reported as AUROC, the probability that
+a randomly chosen harmful prompt scores above a randomly
+chosen benign one (1.0 is perfect separation, 0.5 is chance),
+and uncertainty on attack-success and over-refusal rates as
+Wilson 95% confidence intervals, the standard interval for
+binomial proportions. Code, data, and result files will be
+released publicly upon publication.
+
+Table 1: Experimental setup at a glance. The minimal-pair corpus is matched to XSTest in template and length. Over-refusal is
+measured on XSTest’s benign-but-spicy prompts (safe requests worded to sound harmful). Attack success is the Llama-Guard-
+3-8B-judged unsafe fraction (n=200 harmful, 100 benign-but-spicy per condition, 95% CI, four-judge agreement 72.8%).
+Capability is accuracy with and without the gate.
+Models
+Corpora
+Attacks
+Judges & metrics
+Baselines
+Falcon-Mamba-7B (SSM anchor)
+Falcon3-Mamba-7B (2nd SSM)
+Llama-3.1-8B, Mistral-7B,
+Qwen2.5-7B (transformers)
+RWKV-6-World-7B (recurrent)
+Zamba2-7B (hybrid)
+AdvBench (harm)
+Alpaca (benign)
+XSTest (surface control,
+over-refusal)
+Prefix injection (fluent)
+Persona roleplay (DAN,
+fluent)
+Fictional framing (fluent)
+Dilution (adaptive)
+Optimized adversarial
+suffix (GCG; on the SSM
+both a gradient-free
+variant and GCG through
+the differentiable scan)
+Llama-Guard-3-8B (primary)
++Llama-3.1-8B-Instruct,
+Mistral-7B-Instruct,
+ShieldGemma-9B
+MMLU, TruthfulQA (capability)
+Probe AUROC (decodability)
+Residual-subspace projection
+CAST
+Perplexity filter
+SmoothLLM
+Cross-architecture linear-map transfer
+0
+25
+50
+75
+100
+attack success (%) after removing the direction
+Llama
+Mamba
+Mamba
+Llama
+Mistral
+Mamba
+Mamba
+Mistral
+Llama
+Mamba3
+Mamba3 Llama
+Native
+Transferred
+Random
+Base
+Figure 2: The refusal direction is shared across architectures.
+Reading it in one architecture, mapping it into another, and
+removing it there (Transferred) raises attack success as much
+as removing the target’s own direction (Native), while an or-
+thogonalized random direction through the same map (Ran-
+dom) does not, in all six transfer directions. A plot of Table 5
+(Mamba=Falcon-Mamba, Mamba3=Falcon3-Mamba).
+4
+Locating refusal across architectures
+In a transformer, refusal is a direction in the residual stream.
+Does a pure SSM, which shares no token-mixing mechanism
+with attention, carry the same refusal representation up to a
+change of basis, or learn its own? We locate where the refusal
+signal lives in the SSM and find it is the same representation:
+a single rigid rotation carries it from the transformer’s acti-
+vation space into the SSM’s, where it still causally controls
+refusal.
+4.1
+Harm is decodable at the selective-scan step
+size
+Harm is linearly decodable from the Falcon-Mamba
+selective-scan state, concentrated in the step size ∆and the
+mixer output. The harm probe is tested on a version of XSTest
+(Röttger et al. 2024) where harmful and benign prompts are
+Table 2: Where harm lives in the selective scan. Surface-
+controlled held-out AUROC of a linear harm probe at
+each selective-scan component (Falcon-Mamba-7B), on the
+surface-matched XSTest contrast where a surface probe is
+near chance (0.54). Harm is decodable at the step size ∆and
+the mixer output, not at B or C.
+Selective-scan component
+AUROC (surface-controlled)
+∆(step size)
+0.95
+B (input selection)
+0.79
+C (readout selection)
+0.78
+mixer output
+0.99
+matched forsurface featureslike sentencestructure andword-
+ing (the matched pairs are generated from a hand-written
+template bank crossed with length-matched harmful/benign
+action pairs, shipped as code in the release). A surface-only
+probe scores near chance there (AUROC 0.54), while the
+harm probe still separates them, so it is reading content rather
+than surface cues (per-component AUROC in Table 2). On
+that subset ∆is the most decodable selection component
+(0.95, against 0.79 and 0.78 for the input and readout se-
+lections B and C), and the mixer output the scan writes is
+more decodable still (0.99). ∆is the input-dependent gate
+that sets how much each token writes into the recurrent state,
+so harm is exposed in the SSM’s selection and then written
+at the mixer output, where decodability peaks. The defense
+in Section 5 reads and steers there. This also settles ∆’s
+causal status: it is decodable, but a readout rather than the
+controlling site.
+The locus is stable across model scale, with harm decod-
+able at ∆from AUROC 0.89 to 0.99 across 5 base Mamba
+models from 130M to 7B parameters (Appendix A.4), and
+the signal is present in the transformer reference, where harm
+is decodable from the Llama-3.1-8B residual stream at AU-
+ROC 1.00. The finding also holds on a newer SSM gen-
+eration: Mamba-2 (Codestral-Mamba-7B) shows the same
+decodability at its mixer output (AUROC 1.00), so it is not
+specific to Mamba-1 (Appendix A.10).
+
+4.2
+The refusal representation is shared, up to a
+rigid rotation
+Transferring a steering direction within one architecture
+through a learned map is established (Oozeer et al. 2025). But
+a flexible map can synthesize the target’s own refusal axis,
+so it cannot by itself show the representations are shared. We
+test two criteria while transferring from attention to the selec-
+tive scan: a structural one, whether a rigid rotation aligns the
+two representations, and a causal one, whether a transferred
+direction still carries its refusal role.
+Setup.
+On a shared set of harmful and harmless prompts
+we collect paired activations from the source and target mod-
+els and fit a ridge-regularized linear map W between their
+hidden spaces. We map the source refusal direction (mean
+harmful minus harmless) through W and steer the target
+with it, testing every architecture pair in both directions. Two
+behavioral tests follow, amplifying the mapped direction on
+jailbroken prompts (defense) and removing it from harmful
+prompts (ablation, where higher attack success means the
+direction was the refusal trigger). As a control, we repeat
+both with a random source direction mapped through W and
+orthogonalized to the target’s refusal axis, so the map cannot
+leak refusal signal into it (Appendix A.6).
+Shared up to rotation, not merely mappable.
+Because a
+flexible map could synthesize the target’s own refusal axis,
+we test with an orthogonal (Procrustes) map, which can only
+rotate and has no freedom to synthesize a direction. The
+transported probe reaches held-out AUROC 1.00 on the un-
+restricted harmful/benign corpus (AdvBench versus Alpaca,
+where surface cues help) and 1.00 on the surface-matched
+minimal pairs, matching the target’s own probe (1.00), both
+near ceiling. A harder test confirms this isn’t just a ceiling
+effect. When the hardest XSTest category is held out entirely,
+both the target’s own probe and the transported probe drop
+together (0.78 vs. 0.75), tracking each other closely (Table 3).
+The transported probe beats a shuffled-category control in all
+16 of 16 folds tested (Appendix A.8, Figure 4). A flexible
+map that had merely found the target’s own axis would not
+track this. Fitting the rotation on deliberately mismatched
+prompt pairs, source and target activations from different
+prompts rather than the same one, collapses the transported
+probe to AUROC 0.33 (Appendix A.7), at and below chance.
+Only the correct pairing transports, so the representation is
+genuinely shared.
+This extends to a third, architecturally distinct model.
+RWKV-6 (Peng et al. 2024) uses token-shift recurrence, not
+a selective scan, yet a Llama-read harm probe transports
+into it at AUROC 1.00, above the shuffled control 0.43. The
+transport is also causal, though more weakly, with a mar-
+gin narrower than the pure SSM’s or the hybrid’s Mamba
+site’s (Table 4; single-seed numbers, Wilson CIs, and judging
+methodology in Appendix A.16). The site relocates. When
+each site is pushed at the same fraction of its own activation
+norm, the residual stays inert (47.5% unchanged) while the
+time-mix write point steers attack success to 17.5% against
+82.5% for a matched random direction, isolating direction
+from scale (the deployed defense is the Table 6 row).
+Table 3: Per-pair category-held-out cross-validation results.
+Mean own and mean transported probe scores are averaged
+across the 8 held-out categories. Pearson r measures how
+closely they track each other. Full setup and interpretation in
+Section 4, plotted in Figure 4.
+Source →target
+Mean own
+Mean transp.
+Pearson r [95% CI]
+Folds > null (shuffled-category control)
+Llama-3.1-8B →Falcon-Mamba
+0.95
+0.95
+0.99 [0.95, 1.00]
+8/8
+Mistral-7B →Falcon-Mamba
+0.95
+0.95
+0.99 [0.97, 1.00]
+8/8
+Table 4: Removing the rotation-transported refusal direction
+raises attack success in every non-transformer architecture
+we test, while a matched random direction through the same
+map does much less (Llama-Guard-judged; RWKV-6 and
+Zamba2 pooled over three seeds). The margin is decisive on
+the two Mamba write sites, narrower on RWKV-6, whose
+random control alone jailbreaks a third of prompts, and not
+decisive at Zamba2’s attention site. Per-seed numbers, 95%
+confidence intervals (CIs), and coherence screens in Ap-
+pendix A.9, A.16, and A.22.
+Target (site)
+Source
+Base
+Removed
+Random
+Falcon-Mamba (block out)
+Llama
+10.5%
+44.0%
+9.0%
+Falcon-Mamba (block out)
+Mistral
+10.5%
+45.0%
+9.5%
+RWKV-6 (time-mix out)
+Llama
+3.0%
+54.7%
+32.3%
+Zamba2 (Mamba out)
+Llama
+8.9%
+93.3%
+22.8%
+Zamba2 (attn. out)
+Llama
+8.9%
+16.7%
+8.9%
+Transport beats retraining when target labels are scarce.
+Portability has practical value only if a direction carried over
+from the source model outperforms one fitted directly in
+the target. We give both the same budget of k labeled tar-
+get prompts, spent either on the paired activations that fit
+the map or on the target’s own mean-difference direction,
+and score AUROC on a held-out harm category neither has
+seen. Budgets are matched in target labels only: the transport
+arm also carries a direction estimated on the source model’s
+abundant labels, which is the asymmetry the practical case
+turns on. Transport wins at every budget from k=4 to 64,
+by +0.032 to +0.046 AUROC, with the clustered interval ex-
+cluding zero at every budget (Appendix A.41). A deployed
+gate runs at a threshold, where the margin is wider. Allow-
+ing 5.0% false alarms on benign prompts, the transported
+direction catches 74.2% of harmful prompts against 62.8%
+for one fit from the same labels, a gain of 11.4 percentage
+points. We do not convert this into a label-equivalence factor,
+because the from-scratch curve flattens and is not monotone
+in k (Appendix A.41). The gain disappears in distribution,
+where both arms saturate. What portability buys is there-
+fore generalization: the transported direction catches kinds
+of harm that the target’s own few labels do not cover.
+The shared direction carries its causal role across all six
+transfer directions.
+Removing the mapped refusal direc-
+tion from harmful prompts raises the target’s attack success
+far above an orthogonalized random control (Table 5), across
+three model pairs and both directions. The rigid rotation, not
+just the flexible map, produces the same causal effect: the
+orthogonal map that structurally aligned the two models also
+
+xt
+write site w :
+probe + refusal
+direction read here
+also steers
+(secondary write site)
+block boundary = residual:
+inert (dead readout)
+× 32 layers
+LayerNorm
+time-mix
+token shift (xt, xt
+1)
+WKV recurrent state
+time-mix output
+LayerNorm
+channel-mix
+token shift, ReLU2
+channel-mix output
++
++
+xt
+write site w
+(Mamba branch):
+probe + refusal
+direction read here
+every k-th layer,
+2 shared weight
+instances
+write site w
+(attention branch):
+probe + refusal
+direction read here
+residual stream:
+a direction estimated
+here degenerates
+× 81 layers
+Mamba2 block
+(selective scan)
+Mamba block output
+shared attention
+block (+MLP)
+Mamba2 block
+attention output
++
++
++
+Figure 3: The write site in the two further architecture classes. Left: RWKV-6 block (token-shift RNN). The write sites are
+the sub-block outputs, the time-mix output (primary) and the channel-mix output (secondary), while the block boundary is
+architecturally the residual and is inert. Right: Zamba2 (hybrid). A Mamba2 backbone taps shared attention blocks (two weight
+instances reused across depth) every k-th layer, and both branch outputs are write sites.
+0.6
+0.7
+0.8
+0.9
+1.0
+target's own-probe AUROC (per category)
+0.6
+0.7
+0.8
+0.9
+1.0
+transported-probe AUROC
+Transported probe tracks the target's own,
+off the ceiling
+Llama
+Falcon-Mamba (r = 0.99)
+Mistral
+Falcon-Mamba (r = 0.99)
+Figure 4: Category-held-out cross-validation. Each point is
+one held-out XSTest category, plotting the transported or-
+thogonal probe’s AUROC against the target’s own-probe AU-
+ROC. Points follow the y=x line as the own probe falls off
+ceiling, so the transport tracks the target’s harm structure cat-
+egory by category rather than sitting at a saturated ceiling.
+transports the refusal direction into Falcon-Mamba. Remov-
+ing that transported direction jailbreaks the SSM as much
+as removing its own native direction (44.0% against 41.5%),
+and the output stays coherent. The same rigid-rotation ab-
+lation runs in every non-transformer target we have (Ta-
+ble 4). One rigid rotation therefore both proves the repre-
+sentations are shared and controls behavior once transported
+(Appendix A.9).
+The site where the representation transports is also where
+the direction is cleanly read.
+A source model’s refusal
+Table 5: Cross-architecture transfer, ablation test (plotted
+in Figure 2). Removing the mapped direction (Transferred)
+raises attack success like removing the target’s own (Native).
+The Random control does not. Random is mapped through
+W like Transferred, then orthogonalized to the target’s re-
+fusal axis (cosine ≈0), so it shares the map without inheriting
+the refusal direction. The effect holds in all six rows: three
+model pairs (Mamba=Falcon-Mamba, Mamba3=Falcon3-
+Mamba), each tested in both directions.
+Pair / direction
+Base
+Native
+Transferred
+Random
+Llama→Mamba
+10.5%
+41.5%
+36.5%
+9.0%
+Mamba→Llama
+2.5%
+50.5%
+79.0%
+8.0%
+Mistral→Mamba
+10.5%
+41.5%
+36.5%
+9.5%
+Mamba→Mistral
+26.5%
+50.0%
+60.0%
+27.0%
+Llama→Mamba3
+0.0%
+42.0%
+25.5%
+0.0%
+Mamba3→Llama
+2.5%
+51.5%
+55.5%
+2.5%
+direction transports into the write site as the same represen-
+tation, and the direction read there controls behavior when
+amplified, while ∆is decodable but does not control re-
+fusal (Section 5). Amplifying a model’s refusal direction
+read at its write site lowers prefix-injection attack success
+across four architecture classes (Table 6), while a direction
+read from the accumulated residual degenerates. A matched-
+magnitude control (Appendix A.35) shows the gap is the
+estimated direction, not the push location, matching prior
+reports of residual-steering brittleness (Li et al. 2026; Ko-
+rznikov et al. 2025; Xiong et al. 2026), with the effect size
+
+tracking each model’s baseline alignment. The defense also
+holds against a harder, gradient-optimized attack. A per-
+prompt greedy coordinate gradient (GCG) suffix (Zou et al.
+2023b), an adversarial string optimized by gradient search to
+force compliance, reaches 41.0% [31.9, 50.8] attack success
+on Mistral-7B. The attention write site more than halves it,
+to 18.0% [11.7, 26.7]. ShieldGemma-9B, an out-of-family
+judge reading the model’s whole response rather than only
+checking whether it opens with GCG’s affirmative target,
+confirms the same pattern (16.0% to 5.0%, Appendix A.24).
+The hybrid Zamba2-7B corroborates the pattern. A Llama-
+trained harm probe transports into it cleanly under the same
+rigid rotation (AUROC 1.00 vs a shuffled control 0.52). The
+transport is also causal, but its effect is concentrated at the
+Mamba write site: ablating the direction at the attention site
+alone has a modest effect that is not decisive by itself (Table 4,
+Appendix A.22). A direction read at its write sites defends,
+while one read from its residual does not. The same holds for
+a transferred direction, not just a native one: a direction read
+at Falcon-Mamba’s write site controls refusal, while one read
+from a transformer’s residual does not (Appendix A.11).
+We summarize this as a readout principle: refusal is
+cleanly readable, and its steering direction cleanly estimable,
+at the fresh contribution each architecture writes into the
+stream, not at the accumulated residual, while the interven-
+tion location itself is irrelevant (Appendix A.35). The rule
+holds across all four architecture classes (Table 6). The full
+mechanistic dissection, baselines, ablations, and robustness
+checks are on the anchor, Falcon-Mamba (Section 5).
+5
+Dissecting the mechanism on the anchor
+The site at which the shared direction is cleanly read is
+architecture-specific, and the direction estimated there de-
+fends (Table 6). A matched-absolute-magnitude control (Ta-
+ble 7) locates the cause: with the same direction held fixed,
+pushing at the residual is statistically indistinguishable from
+pushing at the write site (overlapping 95% confidence inter-
+vals), so the residual’s apparent failure is a property of the
+direction estimated there, not of where the gate is applied.
+A direction estimated in the accumulated residual degener-
+ates when amplified at the deployed operating points, though
+over a narrow band of low relative magnitudes it can defend
+coherently, a band much narrower than the write site’s (Ap-
+pendix A.17). At the gains the compared methods run at,
+this degeneration is why CAST, the conditional activation-
+steering baseline that reads its direction from the residual,
+leaves attack success at 100.0% with only 9.5% of comple-
+tions coherent. The control is also a reusable diagnostic for
+separating a site effect from a direction or magnitude artifact.
+These numbers establish a causal claim, not a contest for
+the best defense: our gate only ties a trivial detect-then-refuse
+policy sharing the same detector (Appendix A.12), so its
+value is a portable direction, not rawdefense strength. Among
+steering-based methods, CAST at the residual, an open-loop
+edit, and residual-subspace projection all fail to defend or
+over-refuse (Table 9). The brittleness prior work reports (Li
+et al. 2026) traces to the direction read from the residual, not
+to steering itself.
+Table 6: Write-site prefix-injection defense across four archi-
+tecture families (base to gated attack success at the coherent
+gain and 64 new tokens; Wilson 95% CIs for every row in
+Appendix A.24 (transformers), Appendix A.20 (SSM), Ap-
+pendix A.16(RWKV), andAppendix A.21 (hybrid)). Thelast
+column is the benign-side cost, the change in over-refusal on
+benign-but-spicy prompts at the same operating point. Per-
+row n: 200 (SSM), 100 (each transformer), 40 (RWKV), 100
+(hybrid, shared base). No row adds any over-refusal, though
+this is a weak test, since the trigger was fitted to reject those
+prompts. Under benign prompts wearing a jailbreak template
+every trigger holds except the hybrid’s, † marking the site
+where training on wrapped negatives repairs the confound
+and ‡ the one where it does not (Appendix A.37). The hy-
+brid’s two rows share one base, from a single closed-loop run
+whose always-on version instead costs 99.0% over-refusal
+(Appendix A.39). A causal-ablation test (Appendix A.22)
+finds the hybrid’s control concentrates at the Mamba site.
+The attention site’s own causal-ablation evidence is weaker,
+with overlapping confidence intervals, and is not decisive on
+its own.
+Architecture
+Exemplar
+Write site
+Base →gated
+∆over-ref.
+Selective-scan SSM
+Falcon-Mamba block output
+98.0% →5.0%
++0.0 pt
+Transformer
+Mistral-7B
+attn. output
+98.0% →14.0%
++0.0 pt
+Transformer
+Llama-3.1-8B
+attn. output
+25.0% →0.0%
++0.0 pt
+Token-shift rec.
+RWKV-6
+time-mix output 47.5% →27.5%
++0.0 pt
+Hybrid (attn. site)
+Zamba2-7B
+attn. output
+31.7% →0.0%
++0.0 pt†
+Hybrid (Mamba site) Zamba2-7B
+Mamba output
+31.7% →5.0%
++0.0 pt‡
+5.1
+Amplifying the refusal direction at the block
+output defends
+The refusal direction is cleanly read at Falcon-Mamba’s block
+output, the point where the selective scan writes the informa-
+tion selected by the step size ∆into the residual stream. Our
+gate detects harm there once per prompt with a linear probe
+and, on a positive decision, amplifies the refusal direction
+for the whole generation. This steering direction differs from
+the detector’s probe: we compute it the standard way (Arditi
+et al. 2024), the average activation on harmful prompts minus
+that on benign ones. Refusal is not captured by a single direc-
+tion alone but lives in a broader multi-dimensional subspace
+(Wollschläger et al. 2025; Winninger 2025; Piras et al. 2026).
+Table 7: The push location is irrelevant, the direction-fit de-
+cides it (matched-absolute-magnitude control, Llama-Guard,
+Wilson 95% CI, n=100, a model’s three rows share the same
+absolute push at its coherent gain). Holding the direction
+fixed leaves the push site within CIs (rows 1–2). Estimating
+the direction in the accumulated residual instead degenerates
+it (row 3). RWKV-6 and Zamba2 in Appendix A.35.
+Push site
+Direction est. at
+Falcon-Mamba
+Mistral-7B
+write site
+write site
+6.0% [2.8%, 12.5%]
+15.0% [9.3%, 23.3%]
+residual
+write site
+6.0% [2.8%, 12.5%]
+23.0% [15.8%, 32.2%]
+residual
+residual
+100.0%
+48.0%
+
+Table 8: The closed-loop gate on Falcon-Mamba-7B. Attack
+success rate (ASR) before and after amplifying the refusal
+direction at the selective-scan block output, decided once
+per prompt, across three jailbreak families, at 200 harm-
+ful prompts per condition with the Wilson 95% confidence
+interval on the gated rate. The primary ASR is the Llama-
+Guard-3-8B rate. The reduction holds under an out-of-family
+judge (ShieldGemma-9B, Gemma family, disjoint from all
+four targets), and across 4 judges spanning three model fam-
+ilies the n-way verdict agreement is 72.8%.
+Attack
+Base ASR
+Gated ASR, Llama-Guard (95% CI)
+Gated ASR, ShieldGemma
+Prefix injection
+98.0%
+5.0% [2.7, 9.0]
+2.0%
+Persona roleplay
+81.5%
+30.0% [24.1, 36.7]
+23.0%
+Fictional framing
+87.0%
+16.5% [12.0, 22.3]
+10.0%
+Our direction is one dominant axis within that subspace, and
+using it does not contradict those findings. On Falcon-Mamba
+the gate lowers attack success from 98.0% to 5.0% under pre-
+fix injection, from 81.5% to 30.0% under persona roleplay,
+and from 87.0% to 16.5% under fictional framing, with Wil-
+son 95% confidence intervals (Wilson 1927), as shown in
+Table 8. It also holds against a gradient-based adversary: a
+per-prompt GCG suffix optimized directly through the SSM’s
+own differentiable scan, not only the fused inference kernel,
+lowers attack success from 22.0% to 6.0% on n=100 eval-
+uated prompts (Appendix A.34). The exception is persona
+roleplay, which the single-direction gate more than halves (to
+30.0%) but does not fully close, and which needs an attack-
+specific two-direction fix that does not generalize (Section 7,
+Appendix A.14). Attack success is scored by Llama-Guard-
+3-8B (Inan et al. 2023) at 200 harmful prompts per condi-
+tion. The drop is not a one-judge artifact or an artifact of
+the attack’s injected prefix: each of the 4 judges, spanning
+three model families, shows it independently, from Llama-
+Guard (98.0% to 5.0%) to the out-of-family ShieldGemma-
+9B (78.0% to 2.0%). Judges differ on absolute base rates, so
+we report the reduction under each separately. The attack’s
+wording never changes, only the response does, so a judge
+keying on that fixed wording could not produce a moving
+score. The locus and defense both reproduce on a second,
+independently trained instruct SSM, Falcon3-Mamba-7B, so
+the finding holds for SSMs as a class, not for one checkpoint
+alone (Appendix A.33).
+5.2
+The write-read direction, not the closed loop,
+is what defends
+CAST isolates the loop from the direction. It runs the same
+closed-loop detect-then-steer as our gate, but estimates and
+steers the direction in the residual stream rather than at the
+block output. Under prefix injection, it does not lower at-
+tack success the way our gate does (Table 9). The matched-
+magnitude control (Appendix A.35) shows why: the gap is
+the direction CAST estimates in the accumulated residual,
+not its push location, which is statistically indistinguishable
+from the write site (overlapping 95% CIs). This holds even
+with a more powerful nonlinear MLP detector and across
+CAST’s own gain sweep (Appendix A.31). The loop’s job
+Table 9: Defenses on Falcon-Mamba-7B, attack success
+(lower is better) across three jailbreak families and over-
+refusal (plotted in Figure 5). CAST runs the same closed
+loop as our gate but reads its direction from the residual
+stream, and the open-loop gate runs the same direction with
+no detector. The direction gives the defense, the loop the se-
+lectivity, so the block-output gate reaches the lowest attack
+success while holding over-refusal at the undefended base
+rate. CAST’s near-total attack success is not a coherent jail-
+break: when its closed loop fires on harm, the residual push
+breaks generation into repetitive text rather than producing
+either a refusal or usable harmful content, and the judge
+still scores that broken text as compliant. Only 10.5% (pre-
+fix injection), 7.0% (roleplay), and 11.0% (fictional framing)
+of its harmful completions pass our coherence screen (Ap-
+pendix A.25), against 9.5% pooled (n=600). CAST’s benign
+completions, where the loop does not fire, remain fully coher-
+ent, so the breakdown is specific to the closed-loop residual
+push on harmful prompts, not a general fault in the model or
+the generation setup.
+Defense
+Prefix
+Roleplay
+Fiction
+Over-ref.
+None
+98.0%
+81.5%
+87.0%
+12.0%
+Residual projection
+95.0%
+87.5%
+94.5%
+9.0%
+CAST (residual loop)
+100.0%
+100.0%
+100.0%
+12.0%
+Perplexity filter
+98.0%
+81.5%
+87.0%
+19.0%
+SmoothLLM
+62.0%
+72.0%
+86.5%
+29.0%
+Open-loop block output (no detector)
+5.0%
+30.0%
+16.5%
+86.0%
+Block-output gate (ours)
+5.0%
+30.0%
+16.5%
+12.0%
+is controlling collateral damage, not attack success. Open-
+loop steering, pushing every prompt without checking first,
+matches our attack success rate but over-refuses badly, block-
+ing 86.0% of benign prompts, while our gate’s 12.0% is the
+undefended model’s own rate. Our gate achieves the low-
+est attack success of the steering-based defenses we com-
+pare (Table 9), without adding any over-refusal beyond that
+12.0% base rate, measured on the detector’s own training
+distribution (XSTest benign-but-spicy). It matches, but does
+not beat, a detect-then-refuse baseline (returning a fixed,
+templated refusal message whenever the same detector fires)
+on out-of-distribution OR-Bench-hard, where the gate over-
+refuses 46.3% and detect-then-refuse 47.5%, at a 21% false-
+positive rate (Appendix A.12). This distinguishes two ques-
+tions: where refusal is readable, and where it is controllable.
+In the SSM, on the unrestricted corpus, harm is linearly de-
+codable at the step size ∆(AUROC 1.00) and the mixer
+output (AUROC 1.00), yet forcing ∆to a constant leaves
+refusal unchanged, so ∆is a readout, not the controlling site
+(Appendix A.13). A single steering direction controls refusal
+in every architecture we test, for every attack except persona
+roleplay.1 Persona attacks need two directions instead of one
+(Appendix A.14).
+1On Mistral the single-direction gate under roleplay does not
+improve over the base rate, so the transformer defense claim is
+scoped to prefix injection (Appendices A.14, A.24).
+
+Undefended
+Ours (block)
+CAST (resid.)
+Projection
+PPL filter
+SmoothLLM
+0
+20
+40
+60
+80
+100
+120
+rate (%)
+The site defends: block-output gate vs prior defenses
+attack success
+over-refusal
+Figure 5: Defenses on Falcon-Mamba-7B under prefix injec-
+tion (selected rows of Table 9). Only the block-output gate,
+which reads the refusal direction at the write site, drives at-
+tack success down to a low rate. CAST and projection, which
+read and steer the direction in the residual, barely move it.
+The perplexity filter has no effect, and randomized smoothing
+(SmoothLLM (Robey et al. 2025)) achieves a partial reduc-
+tion well short of the gate’s.
+5.3
+Robustness and specificity
+Two checks validate the trigger and the intervention. Benign-
+but-spicy prompts are answered normally because the detec-
+tor does not fire on them, even under the harder test of a
+jailbreak wrapper, where wrapped-benign firing drops from
+0.78 to 0.00 once hard negatives are added. Only the model’s
+own learned refusal direction controls refusal, not a random
+direction matched in scale (Appendix A.29, A.30). The de-
+fense is stable across 3 seeds (pooled gated attack success
+3.3% [2.2, 5.1], non-overlapping with the base) and holds at
+300 prompts per condition, under two out-of-family judges
+(Mistral-7B-Instruct-v0.2 96.0% to 1.5%, ShieldGemma-9B
+78.0% to 2.0%), on the HarmBench distribution (93.5% to
+5.5%), against an optimized gradient-free suffix (97.5% to
+6.5%) and a dilution attack (firing through 256 appended
+sentences). The detector never fires on MMLU (Hendrycks
+et al. 2021) or TruthfulQA (Lin, Hilton, and Evans 2022), so
+capability is unchanged by construction (Appendix A.32).
+6
+Related Work
+Activation monitors and gating.
+We close the detect-
+then-intervene loop at a write site, the point where a fresh
+contribution enters the stream before the residual accumu-
+lates it, rather than the residual stream or output head where
+prior gating acts (Lee et al. 2025; Han et al. 2025; Zhou et al.
+2025; Zhang et al. 2024). DeTAM edits the write site directly
+(Li, Jiang, and Wei 2025), but always on rather than detector-
+triggered, and closing that loop is what our gate adds. What is
+decisive is the direction read at the write site, not the interven-
+tion location (Section 5, Appendix A.35). Our closed-loop
+gate matches the open-loop edit’s attack success at the unde-
+fended over-refusal rate (Appendix A.24). Our trigger is an
+ordinary linear probe, in the same broad family of internal-
+state classifiers used to detect harm and deception elsewhere
+(Azaria and Mitchell 2023; Li et al. 2023; Goldowsky-Dill
+et al. 2025; MacDiarmid et al. 2024; Marks and Tegmark
+2024; Kramár et al. 2026), with no reliability claim beyond
+deciding when to intervene (Oldfield et al. 2026; Engels et al.
+2025). Both the monitored signal and the steered direction
+port across architectures once re-estimated at each write site,
+so a monitoring-and-control stack need not be rebuilt per
+architecture.
+Residual directions are readable but brittle.
+We find the
+same structure in a pure SSM, concentrated at the selective-
+scan step size ∆(Section 5), extending a transformer-only
+picture: refusal is controlled by a single residual direction
+(Arditi et al. 2024), steering it is brittle (Li et al. 2026; Zou
+et al. 2023a, 2024), and a readable direction need not be
+controllable (Galeone et al. 2026) within a broader multi-
+dimensional subspace (Wollschläger et al. 2025; Winninger
+2025; Piras et al. 2026).
+State-space interpretability and cross-architecture trans-
+fer.
+To our knowledge, no prior work transports a refusal
+direction across the attention-to-pure-SSM gap. We do so
+with a rigid rotation, validate the transport with category-
+held-out cross-validation, and close it into a working defense
+loop inside a pure SSM. Prior transport work moves safety
+directions within one architecture or to related ones (Oozeer
+et al. 2025; Poppi et al. 2026; Cristofano 2026), never across
+this gap or under this constraint, and a direction copied di-
+rectly into the target without any alignment map between
+the two activation spaces does not transfer (Shnaidman et al.
+2025). Existing pure-SSM work is general-purpose steering
+(Sunku Mohan et al. 2026), an attack (Le Mercier, Develder,
+and Demeester 2026), a threat analysis (Parmar 2026), or
+interpretability without defense (Paulo, Marshall, and Bel-
+rose 2024). Mamba features and circuits have been studied
+descriptively (Wang et al. 2025), and crosscoders find cross-
+architecture shared features (Lindsey et al. 2024; Thasarathan
+et al. 2025) or differences (Jiralerspong and Bricken 2026).
+Concurrent work draws a related detection-versus-execution
+distinction inside Mamba-2 (Jiang 2026), matching our read-
+ing of ∆as a readout rather than the controlling site (Ap-
+pendix A.13). It stays within one SSM family, so it reaches
+neither the shared-representation claim nor the write-site one.
+The platonic representation hypothesis (Huh et al. 2024) has
+been shown only correlationally. We test it causally: remov-
+ing the direction changes behavior, not just similarity.
+7
+Scope and Limitations
+Attack coverage and available models.
+We test seven at-
+tack types: four fluent jailbreak families (three throughout,
+a fourth in Appendix A.15), a dilution attack, and two opti-
+mized adversarial suffixes (an affirmative-continuation suf-
+fix and a probe-evasion suffix, Appendix A.28). Two SSM
+checkpoints and two transformers give real replication, while
+RWKV-6 and Zamba2-7B each have a single safety-tuned
+checkpoint and no second release to replicate on.
+The persona fix does not generalize.
+The two-direction
+fix that closes persona roleplay on Falcon-Mamba, amplify-
+ing refusal while separately suppressing the induced persona
+(81.5% to 17.5%), does not repeat at RWKV’s or Zamba2’s
+own write sites, and fails a different way on each (Ap-
+pendix A.14, A.23). It is a persona-specific augmentation
+calibrated per model, not a recipe step (Section 2.5).
+
+The detector is a bound.
+A detect-then-act defense is
+bounded by its detector: an adversary that routes harm past
+it recovers the undefended model. The defense holds against
+all three adaptive attacks we test (Section 5.3). A GCG suffix
+optimized against the always-on gate itself fails outright. The
+attack’s only leverage is the detector, not the steering: opti-
+mizing against the deployed detect-then-gate system raises
+attack success from 3.7% to 15.3% (Appendix A.24). Two
+non-adaptive wrapper failures are sharper. The DAN (“Do
+Anything Now”) wrapper evades RWKV’s detector outright
+(100.0% to 0.0% firing once wrapped). A detector trained
+only on plain harmful-versus-benign prompts also learns the
+wrong feature: it keys on the jailbreak template itself, and
+fires on 100.0% of benign prompts once they are wrapped in
+one, on both transformers and at both Zamba2 sites. Adding
+jailbreak-wrapped benign prompts to the training set removes
+this template confound on every architecture except at the
+Zamba2 Mamba site, which still fires on 100.0% of wrapped
+benign promp

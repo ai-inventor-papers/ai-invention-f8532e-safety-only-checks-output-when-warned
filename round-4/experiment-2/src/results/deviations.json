@@ -1,0 +1,93 @@
+[
+ {
+  "key": "benchmark_before_prereg",
+  "what": "a CPU throughput benchmark (src/bench_cpu.py) loaded Qwen/Qwen3-4B on 96 synthetic gardening prompts BEFORE the prereg freeze",
+  "why": "the grid had to be sized for a CPU-only box (no GPU; sibling agent using ~1.6 of 2 cores)",
+  "impact": "no stimulus, probe item or outcome was touched; only timings were recorded (results/bench_cpu.json)",
+  "utc": "2026-09-21T17:24:27.692452Z"
+ },
+ {
+  "key": "T1_bl1_reference_convention",
+  "what": "T1 compares the recomputed iteration-2 LENS BL1 (HARD stimuli) to 4.99/3.07, not BL1_truelogit",
+  "why": "the plan's reference numbers are the lens convention (double final norm) on HARD stimuli; BL1_truelogit recomputed from the same arrays is 6.21/4.65 (HARD) and 6.65/7.46 (EASY)",
+  "impact": "unit check passes under the correct convention; BL1_truelogit is still the readout used under intervention (final logits once), reported beside the lens value",
+  "utc": "2026-09-21T17:25:10.150467Z"
+ },
+ {
+  "key": "addition_gen_sites",
+  "what": "gen_sites: judged generation beyond the frozen CPU-fallback grid (gensites)",
+  "why": "slack compute after the prereg site-P grid; tests the registered prediction that F at the response sites (D', E) moves behaviour less than at P, and adds judged R_F draws 2-3 at P",
+  "impact": "additional cells only; no prereg cell/outcome is altered. Decode-site R uses the OWN-coefficient random control h-(h.F)u (plan formulation) because a cross-row source trajectory diverges || SUPERSEDED in session 4 (GPU): these CPU-session stages were replaced by the pre-registered GPU cells genDprime_*/genE_* (all bands, R_Fo/R_N6o draws 1-3) and genP_* (R_F/R_N6 draws 1-3); their CPU smoke cells were deleted and no result depends on them",
+  "utc": "2026-09-21T18:12:20.284099Z"
+ },
+ {
+  "key": "addition_gen_Pdraws",
+  "what": "gen_Pdraws: judged generation beyond the frozen CPU-fallback grid (genPdraws)",
+  "why": "slack compute after the prereg site-P grid; tests the registered prediction that F at the response sites (D', E) moves behaviour less than at P, and adds judged R_F draws 2-3 at P",
+  "impact": "additional cells only; no prereg cell/outcome is altered. Decode-site R uses the OWN-coefficient random control h-(h.F)u (plan formulation) because a cross-row source trajectory diverges || SUPERSEDED in session 4 (GPU): these CPU-session stages were replaced by the pre-registered GPU cells genDprime_*/genE_* (all bands, R_Fo/R_N6o draws 1-3) and genP_* (R_F/R_N6 draws 1-3); their CPU smoke cells were deleted and no result depends on them",
+  "utc": "2026-09-21T18:14:24.075938Z"
+ },
+ {
+  "key": "gpu_primary_design_addendum",
+  "what": "the plan's PRIMARY GPU design (sites P, D', E; judged generation on all 18 cells; 48+48 items; 80 new tokens; stimro, decodgen, spanD/E, gsm) runs in addition to the frozen CPU-fallback F1 cells",
+  "why": "the pod restarted at ~18:23 UTC onto a box with an NVIDIA L4; the F1 prereg (17:24 UTC) was frozen on a CPU-only box",
+  "impact": "the F1 cells run unchanged and are analysed as registered; every addition is frozen in prereg_gpu_addendum.json (sha256 524c15c0...) at 18:39 UTC, before any Qwen3-4B outcome was computed",
+  "utc": "2026-09-21T18:52:21.762321Z"
+ },
+ {
+  "key": "hook_code_generalised_gpu",
+  "what": "engine hooks generalised to S trailing positions and ported to CUDA (hook hash 6e406f7f replaces the CPU session's d327a7be); all cells recomputed on the GPU",
+  "why": "sites D/E need multi-position teacher-forced windows and decode-call edits",
+  "impact": "hook checks a1 (no-op == hooks removed, bitwise), a2 (arm-0 rows bitwise-unaffected by co-batched active rows), b (residual along the direction < 1e-3 after the bf16 cast) and c (matched R/F displacement ratio 1 +- 1e-7) pass on smoke, instruct and saferl",
+  "utc": "2026-09-21T18:52:21.831018Z"
+ },
+ {
+  "key": "decode_site_R_displacement",
+  "what": "at decode sites (D', E) the random control uses the plan's own-coefficient formula x <- x - (x.v)u; its mean displacement exceeds the treatment's (~1.4x for F, ~2x for N6 in the smoke run) because the F row loses its F component at the first band layer while the R row keeps it",
+  "why": "a cross-row matched source is undefined once trajectories diverge; the exact matched design is kept at site P and in the teacher-forced span windows",
+  "impact": "the D'/E control is STRONGER than the treatment in displacement: F-R is conservative for CAUSAL claims but can inflate 'decodable but inert' counts at D'/E; ratios are reported per cell",
+  "utc": "2026-09-21T18:52:21.856810Z"
+ },
+ {
+  "key": "tier_venv_gpu",
+  "what": "a second environment .venv_gpu (torch 2.9.1+cu128) is used for the GPU run; .venv (torch 2.9.1+cpu) is used for the analysis",
+  "why": "the session-2 .venv had a CPU-only torch wheel",
+  "impact": "none on outcomes; pyproject.toml + uv.lock record the cu128 index",
+  "utc": "2026-09-21T18:52:21.931504Z"
+ },
+ {
+  "key": "addition_genU",
+  "what": "optional 9(b): judged F_perpU arm at site P, all 6 bands (exploratory)",
+  "why": "GPU slack after the primary grid",
+  "impact": "additional exploratory cells only; not in any Holm family",
+  "utc": "2026-09-21T19:02:58.160929Z"
+ },
+ {
+  "key": "addition_genG",
+  "what": "T3 disambiguation control: F / N6 projected out at ALL positions (every prompt position and every decode call) per band and in all 36 layers (ALL), judged, with own-coefficient random controls",
+  "why": "the site-local F arm at P changes token 1 in ~50% of rows but barely moves judged refusal; the plan's T3 requires ruling out a hook/sign/direction problem before calling site-local cells null",
+  "impact": "additional exploratory cells; not in the confirmatory Holm families",
+  "utc": "2026-09-21T19:10:05.268422Z"
+ },
+ {
+  "key": "gsm_cell_selection",
+  "what": "GSM8K collateral ran on 4 cells (P_B5, P_B4, Dprime_B4, Dprime_B5) for instruct and SafeRL with arms 0/F/R_F1/N6/R_N6-1",
+  "why": "the addendum registered GSM on every CAUSAL judged cell; Holm-18 left exactly one (instruct N6 @ P_B5, over-refusal), so the three strongest nominal over-refusal cells were added as DESCRIPTIVE collateral, and N6 arms were added because the CAUSAL cell is an N6 cell",
+  "impact": "collateral only; no Holm family or CAUSAL flag depends on GSM",
+  "utc": "2026-09-21T21:21:58.496185Z"
+ },
+ {
+  "key": "abliterated_scope",
+  "what": "mlabonne/Qwen3-4B-abliterated (F32 checkpoint cast to bf16 on load) ran unit/twins/decod/arm0/grid1-3/genP/arc/stimro/decodgen/spanD/spanE/e2x2; genDprime, genE, genG, genU and gsm were NOT run for it",
+  "why": "GPU time: the primary two-model grid, genG and genU came first; the abliterated checkpoint is the plan's optional 9(c)",
+  "impact": "its judged Holm family has 6 site-P cells (reported as family_size_used = 6); D'/E judged cells are NOT_RUN",
+  "utc": "2026-09-21T21:21:58.534500Z"
+ },
+ {
+  "key": "private_outputs_deleted",
+  "what": "out/private (generated responses, per-layer direction vectors, arm-0 greedy token caches) deleted before release; text-free judge labels exported to results/judge_label_cache.jsonl",
+  "why": "plan hygiene: responses and directions are never released",
+  "impact": "re-running src/analyze.py needs the direction files for the cross-model cosine section (regenerated by method.py stage twins + src/prep.disk_directions); every other section reads only out/cells",
+  "utc": "2026-09-21T21:21:58.561880Z"
+ }
+]

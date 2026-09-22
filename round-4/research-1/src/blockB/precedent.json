@@ -1,0 +1,87 @@
+{
+  "question": "Has anyone shown a logit or first-token refusal score (refusal-token probability, refusal logit gap) MOVING under a chat-template, system-prompt, dtype or quantisation change while graded behaviour stays fixed?",
+  "verdict": "NO DIRECT precedent found. Several papers show (a) behaviour itself moving under template/system-prompt/quantisation changes (ADJACENT, not usable as 'behaviour held fixed' precedent), and (b) two papers that explicitly test whether an activation-space/logit-direction safety score tracks quantisation-era changes -- and both report the score is STABLE / a weak-to-null separator, i.e. the opposite of 'moves while behaviour is fixed'. This is a genuine gap: no paper isolates the score-moves/behaviour-fixed cell.",
+  "direct": [],
+  "adjacent": [
+    {
+      "title": "Do Safety Monitors Stay Reliable After an Update? Benchmarking and Predicting Activation-Monitor Staleness",
+      "url": "https://arxiv.org/html/2606.15980",
+      "arxiv_id": "2606.15980",
+      "finding": "Directly tests whether a FROZEN linear activation probe (methodologically close to AMS's diff-of-means sigma) stays accurate after routine model-side updates including quantization. Finds quantization-style updates leave probe AUC essentially flat (median ΔAUC ~ -0.002, big-drop rate 1-3%), and explicitly calls out refusal-compliance probes as 'comparatively stable' -- the OPPOSITE of the hypothesized failure mode (score moving while behaviour is fixed). This is important counter-evidence/context, not confirming precedent.",
+      "quote": "quantization-style updates largely preserve frozen probe performance, while fine-tuning-style updates frequently make probes stale. Fragility is highly monitor-dependent, with privacy/PII probes most affected and refusal-compliance probes comparatively stable... quantization has low big-drop rates of 0.83-3.33% and no operational failures, while LoRA-family updates produce 43.2-53.8% big-drop rates... | Table 3: Quantization | n=480 | Median ΔAUC -0.0021 | Big-drop rate 1.46% | Operational failure 0.00%"
+    },
+    {
+      "title": "Quality Is Not a Safety Proxy Under Quantization",
+      "url": "https://arxiv.org/html/2606.10154",
+      "arxiv_id": "2606.10154",
+      "finding": "Tests whether representation-based probes (entropy, refusal-direction, calibration -- refusal-direction probe is the same family as AMS's diff-of-means sigma) can detect quantization-induced behavioural safety drift (refusal falling 12-68 percentage points on 9 hidden-danger rows). Finds these probes are WEAK OR NULL separators of the actually-dangerous rows, i.e. the probe does NOT reliably move in step with real behavioural degradation under quantization -- again the inverse of the hypothesized effect.",
+      "quote": "A four-probe mechanistic follow-up over the 17 Hugging Face-backed FP16/AWQ/GPTQ cells does not rescue it: entropy, refusal-direction, and calibration probes are weak or null separators of dangerous rows, and although probe-identified safety-associated neurons absorb 1.39× more quantization error overall (p<5×10−7), the effect is not regime-specific."
+    },
+    {
+      "title": "Refusal in Language Models Is Mediated by a Single Direction",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/f545448535dfde4f9786555403ab7c49-Paper-Conference.pdf",
+      "arxiv_id": "2406.11717 (NeurIPS 2024)",
+      "finding": "Shows BEHAVIOURAL attack-success-rate (ASR), not a logit/direction score, moves substantially with system-prompt inclusion/exclusion for Llama-2 models, while remaining roughly flat for Qwen models. This is a behaviour change caused by a system-prompt change -- exactly the 'behaviour is NOT fixed' case the task asks us to flag as caution, not usable as precedent for a fixed-behaviour logit shift. The paper does separately define a logit-gap 'refusal_metric' (Sure-token vs refusal-token logit difference) used for jailbreak search, but does not report that metric's value under template/system-prompt/dtype variation while holding graded behaviour constant.",
+      "quote": "We observe a notable difference in system prompt sensitivity across model families. For LLAMA-2 models, including the system prompt substantially reduces ASR compared to evaluation without it (e.g. 22.6% vs 79.9% for LLAMA-2 7B). In contrast, QWEN models maintain similar ASR regardless of system prompt inclusion (e.g. 79.2% vs 74.8% for QWEN 7B)."
+    },
+    {
+      "title": "ChatBug: A Common Vulnerability of Aligned LLMs Induced by Chat Templates",
+      "url": "https://arxiv.org/html/2406.12935v2",
+      "arxiv_id": "2406.12935",
+      "finding": "Shows chat-template format mismatch (format-mismatch attack) changes BEHAVIOURAL attack success rate / harmfulness judgments -- a template change that moves behaviour, not a fixed-behaviour logit-only shift. Directly relevant motivator for why chat-template on/off is not a behavioural no-op, which AMS's raw-prompt (no apply_chat_template) design ignores.",
+      "quote": "The format mismatch attack alters the default chat format () to bypass safety alignment of LLMs. The message overflow attack inserts a short sequence of tokens () into the field reserved for the aligned... R of Mismatch-C is 1.3% on Llama-3."
+    },
+    {
+      "title": "\"My Answer is C\": First-Token Probabilities Do Not Match Text Answers in Instruction-Tuned Language Models",
+      "url": "https://arxiv.org/html/2402.14499v2",
+      "arxiv_id": "2402.14499",
+      "finding": "Directly measures first-token probability distribution shifting under prompt-format/constraint-level changes (e.g. 'Example Template' vs 'High Constraint' instruction), but ALSO measures the text-output-based refusal rate and shows it moves with the same template changes (Fig. 2b) -- so this is evidence a first-token metric moves with template, but graded behaviour (refusal rate, answer choice) moves too, not held fixed. Caution case, not clean precedent.",
+      "quote": "the first token evaluation selects 'C' about 85% of the time (compared to 32.1% with High constraint...) whereas the classified text output is more evenly distributed. This shows that the first token log probability gets shifted to the token 'C'... We also measure the refusal rate, sensitivity to the prompt formulation and the impact of decoding temperature across six instruction-tuned models... Figure 2: (a) Mismatch and (b) Refusal rate of different models under the instruction of different constraint levels."
+    },
+    {
+      "title": "Safety Alignment Should Be Made More Than Just a Few Tokens Deep",
+      "url": "https://arxiv.org/pdf/2406.05946",
+      "arxiv_id": "2406.05946",
+      "finding": "Shows per-token KL divergence between an aligned model and its unaligned base is concentrated almost entirely in the first few output tokens (harmful HEx-PHI data). Motivates why a first-token/early-logit refusal signal is structurally fragile (a shallow, easily-perturbed feature), but does NOT test chat-template, system-prompt, dtype or quantisation manipulations directly -- it studies prefilling/decoding/fine-tuning attacks instead.",
+      "quote": "we show that the KL divergence between aligned and their unaligned counterparts is largely [concentrated in the first few tokens]... As shown in Figure 1, for both the Llama and Gemma models, the KL divergence is significantly higher in the first few tokens than for later tokens. This suggests that most of the KL 'budget' for the safety alignment in these models is spent on the first few prefix tokens."
+    },
+    {
+      "title": "QuantiBias: Benchmarking Quantization-Induced Bias in LLMs",
+      "url": "https://arxiv.org/html/2607.21063",
+      "arxiv_id": "2607.21063",
+      "finding": "Reports that quantization leaves the standard BEHAVIOURAL refusal check flat (unchanged) while a different behaviour (open-ended stereotype generation) moves substantially -- this is the reverse pairing (behaviour A fixed, behaviour B moves), not a logit-score-vs-fixed-behaviour case, but useful context that 'refusal stays flat under quantization' is itself a documented finding for standard behavioural refusal metrics.",
+      "quote": "quantization leaves the safeguards standard evaluations measure, refusal and multiple-choice bias avoidance, unchanged, while the bias a model volunteers in open-ended generation goes unmeasured by them."
+    },
+    {
+      "title": "The Joint Effect of Quantization and Sampling Temperature on LLM Safety Alignment: A Factorial Analysis",
+      "url": "https://arxiv.org/html/2606.29581v1",
+      "arxiv_id": "2606.29581",
+      "finding": "Large factorial study (9 models x 3 precisions x 6 temperatures) finding standard quantization (FP16->GPTQ INT8->AWQ INT4) largely preserves behavioural attack-success-rate (ASR), with temperature the dominant destabiliser. Purely behavioural (ASR/DFR), no logit or activation-direction score reported.",
+      "quote": "standard quantization largely preserves safety, with AWQ INT4 maintaining or reducing ASR for 7 of 9 models, with only SmolLM3-3B showing substantial degradation (18.5%→36.0%)"
+    },
+    {
+      "title": "apply_chat_template() Is the Safety Switch (blog, not peer reviewed)",
+      "url": "https://teendifferent.substack.com/p/apply_chat_template-is-the-safety",
+      "arxiv_id": null,
+      "finding": "Informal write-up demonstrating that omitting apply_chat_template() on small open-weight models (Qwen2.5-1.5B, Qwen3-1.7B, SmolLM2...) flips a bomb-tutorial prompt from refused to fully complied -- i.e. chat-template presence/absence is NOT a behavioural no-op. Not a peer-reviewed logit-score result, but directly relevant caution for AMS, whose extractor tokenizes raw prompts without ever calling apply_chat_template (confirmed by source grep, see ams_spec.json field b).",
+      "quote": "TL;DR: Omit the apply_chat_template() call and observe your \"aligned\" small LLM happily write bomb tutorials. The safety isn't in the weights—it's in the formatting... running the exact same model locally, the behavior shifted entirely. No glitch tokens required—it just started outputting the technical mechanisms of detonation. The vulnerability proved remarkably straightforward. I had forgotten to call apply_chat_template()."
+    }
+  ],
+  "none_found_queries": [
+    "chat template refusal sensitivity LLM safety evaluation",
+    "system prompt changes refusal probability first token",
+    "quantization effect on refusal first-token probability LLM",
+    "quantized LLM safety evaluation refusal rate unchanged",
+    "format sensitivity safety evaluation LLM prompt template",
+    "prompt template affects safety benchmark scores LLM",
+    "chat template matters for safety alignment LLM",
+    "refusal tokens calibration LLM safety",
+    "logit-based refusal metric sensitivity LLM",
+    "ChatBug chat template vulnerability arxiv 2406.12935",
+    "header tokens safety alignment 2025",
+    "Q-resafe quantization safety LLM",
+    "float16 vs bfloat16 dtype numerical difference logits same output text LLM",
+    "quantization changes activation direction probe safety linear probe stable"
+  ],
+  "notes_for_research_team": "No paper isolates the specific cell of the 2x2 (score moves x behaviour fixed) that the hypothesis needs. The two most methodologically similar prior works (Duan 2606.15980 on activation-monitor staleness, Kadadekar 2606.10154 on refusal-direction probes under quantization) both point the OTHER way: they find direction/probe-based safety scores are STABLE or POORLY correlated with quantization, not that they move sensitively while behaviour holds still. This is either (a) a genuine novel-claim opportunity for the research (a specificity/sensitivity precedent gap), or (b) a warning sign that the planned AMS-sigma-moves-under-template/dtype experiment may replicate the null/flat finding of 2606.15980 rather than show movement. Recommend citing Duan 2606.15980 and Kadadekar 2606.10154 explicitly as the closest related work / prior null results when framing novelty, and citing Arditi/ChatBug/apply_chat_template-substack/2402.14499 as motivation that template and system-prompt changes are NOT behavioural no-ops (so any experiment comparing AMS-sigma across templates must separately verify graded behaviour truly stayed fixed, rather than assume it)."
+}

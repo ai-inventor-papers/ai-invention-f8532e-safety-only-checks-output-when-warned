@@ -1,0 +1,20 @@
+{
+ "model": "saferl",
+ "repo": "Qwen/Qwen3-4B-SafeRL",
+ "t_load_s": 29.946776628494263,
+ "device": "cuda",
+ "gen_config_check": {
+  "argmax_altering_processors": {},
+  "sampling_params_ignored": {
+   "do_sample": true,
+   "temperature": 0.6,
+   "top_p": 0.95,
+   "top_k": 20
+  }
+ },
+ "stages_done_utc": "2026-09-21T21:16:53.551293Z",
+ "stages": [
+  "gsm"
+ ],
+ "hook_hash": "6e406f7f"
+}

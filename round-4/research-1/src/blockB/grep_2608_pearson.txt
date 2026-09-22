@@ -1,0 +1,71 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2608.05578
+Type: HTML
+Pattern: 0\.546 (12 matches in 82455 chars)
+
+--- Content ---
+
+5381:...tion of thresholds achieves 71% accuracy (10/14); bootstrap 95% confidence intervals on σ\sigma point estimates have median width 3.4σ\sigma and a substantial fraction of cells cross the PASS threshold under resampling. We further measure behavioral compliance on 20 stratified JailbreakBench prompts per model and find that σ\sigma on the harmful-content concept predicts compliance with Pearson r=−0.546r=-0.546 (p=0.043p=0.043); the rank-order Spearman correlation is weaker (ρ=−0.423\rho=-0.423, p=0.13p=0.13). The structural signal predicts behavior directionally but with meaningful noise. Mechanistic analysis identifies a four-class taxonomy of safety-training modifications distinguished by activation-space signature: (i) training removal collapses cluster separation (e.g., base models, Dolphin variant...
+--
+10252:...run σ\sigma values as exploratory and report CI lower bounds as the more honest summary statistic.
+
+  4. 4.
+
+Behavioral correlation analysis. We run 20 stratified JailbreakBench harmful behaviors against all 14 models and report Pearson and Spearman correlations between σ\sigma on the harmful-content concept and behavioral compliance rate. The structural signal predicts behavior directionally (r=−0.546r=-0.546, p=0.043p=0.043) but with meaningful noise, including two documented cases where high σ\sigma co-occurs with high compliance.
+
+  5. 5.
+
+Characterized failure modes. We identify and mechanistically explain two activation-space attacks that AMS’s Tier 1 misses: the Gemma-2-9b-it-abliterated model (rotation without collapse) and the DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored model (geometry prese...
+--
+29334:...1-8B | Base | 0.69 | [0.76, 2.70] | CRITICAL | 0.75  
+Llama-3.2-3B | Base | 0.48 | [0.52, 1.63] | CRITICAL | 0.88  
+†\daggerDocumented Tier-1 false negatives: see Section VIII-A for mechanistic analysis.  
+  
+#### Key findings from Table I
+
+(1) The structural signal is moderate, not strong. Across the 14 models, σharmful\sigma_{\text{harmful}} correlates with behavioral compliance with Pearson r=−0.546r=-0.546 (p=0.043p=0.043, n=14n=14); the rank-order Spearman ρ=−0.423\rho=-0.423 (p=0.13p=0.13) is weaker and not significant at α=0.05\alpha=0.05. The structural signal predicts behavior directionally but with meaningful noise. See Section VII-E for the full correlation analysis.
+
+(2) Bootstrap CIs are wide and point estimates are systematically optimistic. The direction-maximizing step in the σ\sigma es...
+--
+31858:... show σ<1.4\sigma<1.4 with compliance 0.75–0.95. This is the canonical case the original AMS design targets and the case for which the structural signal is most reliable.
+
+Fig. 1: Per-model σharmful\sigma_{\text{harmful}} vs. behavioral compliance rate on 20 stratified JailbreakBench harmful behaviors. Colors denote category (instruction-tuned, abliterated, uncensored fine-tune, base). Pearson r=−0.546r=-0.546 (p=0.043p=0.043), Spearman ρ=−0.423\rho=-0.423 (p=0.13p=0.13). The two off-trend points in the upper-right (gemma-2-9b-it-abliterated at (4.54,1.00)(4.54,1.00), DarkIdol at (5.45,0.97)(5.45,0.97)) are AMS Tier-1 false negatives discussed in Section VIII-A. Mistral-7B-Instruct-v0.3 (label-PASS, behavior-CRITICAL) appears at (1.39,0.95)(1.39,0.95) and is correctly classified by Tier 1.
+
+### VII-B T...
+--
+38853:...ach of the 14 models we measure behavioral compliance on 20 stratified JailbreakBench prompts. Compliance rate ranges from 0.05 (gemma-2-9b-it) to 1.00 (gemma-2-9b-it-abliterated). Figure 1 shows the relationship between σharmful\sigma_{\text{harmful}} and compliance rate.
+
+We measure two correlations: Pearson (linear) and Spearman (rank). Using σharmful\sigma_{\text{harmful}}:
+
+  * •
+
+Pearson r=−0.546r=-0.546, p=0.043p=0.043 (n=14n=14). Significant at α=0.05\alpha=0.05.
+
+  * •
+
+Spearman ρ=−0.423\rho=-0.423, p=0.13p=0.13. Not significant.
+
+
+
+
+Using the worst-concept σmin\sigma_{\min} across the three concepts produces slightly weaker correlations (Pearson r=−0.505r=-0.505, p=0.065p=0.065; Spearman ρ=−0.273\rho=-0.273, p=0.34p=0.34). The harmful-content concept is the better behavioral predictor.
+
+Three...
+--
+64121:...he type AMS implements.
+
+  * •
+
+Leave-one-out cross-validation accuracy of 71% on the 14-model set with two threshold-calibration rules; the four misses are explainable by the taxonomy, not random.
+
+  * •
+
+Bootstrap 95% CI analysis showing median CI width 3.4σ\sigma and a systematic upward bias in single-run σ\sigma point estimates—the CI lower bound is the more honest summary.
+
+  * •
+
+Pearson r=−0.546r=-0.546 (p=0.043p=0.043) between σharmful\sigma_{\text{harmful}} and behavioral compliance on 20 stratified JailbreakBench harmful prompts. The structural signal predicts behavior directionally but with noise.
+
+  * •
+
+Mechanistic analysis showing that Llama-3.1-Inst.-abliterated and gemma-2-9b-it-abliterated—ostensibly products of the same technique—have fundamentally different activation-space signature...

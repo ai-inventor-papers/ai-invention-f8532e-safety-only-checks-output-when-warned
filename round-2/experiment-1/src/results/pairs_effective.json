@@ -1,0 +1,420 @@
+{
+ "pairs": [
+  {
+   "pair": "P0",
+   "parent": "Qwen/Qwen3-4B",
+   "child": "mlabonne/Qwen3-4B-abliterated",
+   "family": "qwen3",
+   "note": "COMMISSIONED pair; child is F32 on disk",
+   "priority": 1,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.4444444444444444,
+    "safe_engagement_rate": 0.022222222222222223,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.7333333333333333,
+    "over_refusal_rate": 0.0,
+    "safe_engagement_rate": 0.13333333333333333,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.7333333333333333,
+   "delta_OR": -0.4444444444444444,
+   "delta_SE": 0.1111111111111111,
+   "effectiveness": "EFFECTIVE",
+   "binomial_se_at_p25": null,
+   "behaviour_source": "judge extension run by THIS lane with Lane C's exact prompts, generation settings, rubric and judges; the parent row is iteration 1 Lane C's, recomputed and matched exactly"
+  },
+  {
+   "pair": "P1",
+   "parent": "Qwen/Qwen3-0.6B",
+   "child": "huihui-ai/Huihui-Qwen3-0.6B-abliterated-v2",
+   "family": "qwen3",
+   "note": "smallest effective pair; smoke pair",
+   "priority": 2,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.15555555555555556,
+    "over_refusal_rate": 0.06666666666666667,
+    "safe_engagement_rate": 0.08888888888888889,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.6222222222222222,
+    "over_refusal_rate": 0.0,
+    "safe_engagement_rate": 0.08888888888888889,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.4666666666666667,
+   "delta_OR": -0.06666666666666667,
+   "delta_SE": 0.0,
+   "effectiveness": "EFFECTIVE",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "P2",
+   "parent": "Qwen/Qwen3-1.7B",
+   "child": "huihui-ai/Huihui-Qwen3-1.7B-abliterated-v2",
+   "family": "qwen3",
+   "note": "largest verified behavioural delta",
+   "priority": 2,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.4222222222222222,
+    "safe_engagement_rate": 0.06666666666666667,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.6666666666666666,
+    "over_refusal_rate": 0.022222222222222223,
+    "safe_engagement_rate": 0.15555555555555556,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.6666666666666666,
+   "delta_OR": -0.4,
+   "delta_SE": 0.08888888888888889,
+   "effectiveness": "EFFECTIVE",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "P3",
+   "parent": "Qwen/Qwen2.5-1.5B-Instruct",
+   "child": "Goekdeniz-Guelmez/Josiefied-Qwen2.5-1.5B-Instruct-abliterated-v3",
+   "family": "qwen2.5",
+   "note": "CONFLICT 1 resolved: Lane C scored the -v3 child",
+   "priority": 2,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.7777777777777778,
+    "safe_engagement_rate": 0.022222222222222223,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.4666666666666667,
+    "over_refusal_rate": 0.08888888888888889,
+    "safe_engagement_rate": 0.08888888888888889,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.4666666666666667,
+   "delta_OR": -0.6888888888888889,
+   "delta_SE": 0.06666666666666667,
+   "effectiveness": "EFFECTIVE",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "P6",
+   "parent": "ibm-granite/granite-3.2-2b-instruct",
+   "child": "Damien420/granite-3.2-2b-instruct-abliterated",
+   "family": "granite",
+   "note": "NULL-EDIT specificity control -- E1(b) needs it, NEVER drop",
+   "priority": 2,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.6,
+    "safe_engagement_rate": 0.0,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.5777777777777777,
+    "safe_engagement_rate": 0.0,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.0,
+   "delta_OR": -0.022222222222222254,
+   "delta_SE": 0.0,
+   "effectiveness": "NULL_EDIT",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "P4",
+   "parent": "HuggingFaceTB/SmolLM3-3B",
+   "child": "mlx-community/SmolLM3-3B-abliterated-bf16",
+   "family": "smollm3",
+   "note": "cross-family effective pair",
+   "priority": 3,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.26666666666666666,
+    "over_refusal_rate": 0.06666666666666667,
+    "safe_engagement_rate": 0.1111111111111111,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.5555555555555556,
+    "over_refusal_rate": 0.0,
+    "safe_engagement_rate": 0.15555555555555556,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.2888888888888889,
+   "delta_OR": -0.06666666666666667,
+   "delta_SE": 0.04444444444444445,
+   "effectiveness": "EFFECTIVE",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "P5",
+   "parent": "microsoft/Phi-4-mini-instruct",
+   "child": "lunahr/Phi-4-mini-instruct-abliterated",
+   "family": "phi",
+   "note": "cross-family effective pair",
+   "priority": 3,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.6590909090909091,
+    "safe_engagement_rate": 0.022222222222222223,
+    "n_harm_judged": 45,
+    "n_benign_judged": 44
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.24444444444444444,
+    "over_refusal_rate": 0.0,
+    "safe_engagement_rate": 0.17777777777777778,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": 0.24444444444444444,
+   "delta_OR": -0.6590909090909091,
+   "delta_SE": 0.15555555555555556,
+   "effectiveness": "EFFECTIVE",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "S1",
+   "parent": "stabilityai/stablelm-2-1_6b-chat",
+   "child": "hereticness/heretic_stablelm-2-1_6b-chat",
+   "family": "stablelm",
+   "note": "LEAKED seal -> ANOMALOUS specificity control, NOT confirmation",
+   "priority": 4,
+   "leaked_seal": true,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.4666666666666667,
+    "over_refusal_rate": 0.022222222222222223,
+    "safe_engagement_rate": 0.13333333333333333,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.35555555555555557,
+    "over_refusal_rate": 0.0,
+    "safe_engagement_rate": 0.17777777777777778,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": -0.1111111111111111,
+   "delta_OR": -0.022222222222222223,
+   "delta_SE": 0.04444444444444445,
+   "effectiveness": "ANOMALOUS",
+   "binomial_se_at_p25": 0.06454972243679027
+  },
+  {
+   "pair": "S2",
+   "parent": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+   "child": "venkycs/SmolLM2-1.7B-Instruct-Abliterated",
+   "family": "smollm2",
+   "note": "LEAKED seal + broken child (over_refusal 1.000) -> ANOMALOUS control",
+   "priority": 4,
+   "leaked_seal": true,
+   "parent_behaviour": {
+    "harmful_compliance_rate": 0.2,
+    "over_refusal_rate": 0.022222222222222223,
+    "safe_engagement_rate": 0.06666666666666667,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "child_behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 1.0,
+    "safe_engagement_rate": 0.0,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   },
+   "delta_HC": -0.2,
+   "delta_OR": 0.9777777777777777,
+   "delta_SE": -0.06666666666666667,
+   "effectiveness": "ANOMALOUS",
+   "binomial_se_at_p25": 0.06454972243679027
+  }
+ ],
+ "singles": [
+  {
+   "repo": "Qwen/Qwen3-4B-Base",
+   "family": "qwen3",
+   "role": "base",
+   "priority": 1,
+   "template_modes": [
+    "chat",
+    "plain"
+   ],
+   "behaviour": {
+    "harmful_compliance_rate": 0.022222222222222223,
+    "over_refusal_rate": 0.15555555555555556,
+    "safe_engagement_rate": 0.06666666666666667,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "Qwen/Qwen3-4B-SafeRL",
+   "family": "qwen3",
+   "role": "safety_rl",
+   "priority": 1,
+   "behaviour": {
+    "harmful_compliance_rate": 0.0,
+    "over_refusal_rate": 0.3333333333333333,
+    "safe_engagement_rate": 0.06666666666666667,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "CohenQu/Qwen3-4B-Base_HintGen-STaR.03.01_1e-6",
+   "family": "qwen3",
+   "role": "non_safety_ft",
+   "priority": 1,
+   "note": "E2 control: makes it a SAFETY-tuning readout, not a fine-tuning readout",
+   "behaviour": null
+  },
+  {
+   "repo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "family": "tinyllama",
+   "role": "instruct",
+   "priority": 4,
+   "note": "usable as a single checkpoint for the E3 family panel",
+   "behaviour": {
+    "harmful_compliance_rate": 0.6444444444444445,
+    "over_refusal_rate": 0.044444444444444446,
+    "safe_engagement_rate": 0.13333333333333333,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "Qwen/Qwen3-0.6B-Base",
+   "family": "qwen3",
+   "role": "base",
+   "priority": 4,
+   "behaviour": {
+    "harmful_compliance_rate": 0.31666666666666665,
+    "over_refusal_rate": 0.08333333333333333,
+    "safe_engagement_rate": 0.05,
+    "n_harm_judged": 60,
+    "n_benign_judged": 60
+   }
+  },
+  {
+   "repo": "Qwen/Qwen3-1.7B-Base",
+   "family": "qwen3",
+   "role": "base",
+   "priority": 4,
+   "behaviour": {
+    "harmful_compliance_rate": 0.1111111111111111,
+    "over_refusal_rate": 0.15555555555555556,
+    "safe_engagement_rate": 0.08888888888888889,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "Qwen/Qwen2.5-1.5B",
+   "family": "qwen2.5",
+   "role": "base",
+   "priority": 4,
+   "behaviour": {
+    "harmful_compliance_rate": 0.24444444444444444,
+    "over_refusal_rate": 0.13333333333333333,
+    "safe_engagement_rate": 0.06666666666666667,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "HuggingFaceTB/SmolLM2-1.7B",
+   "family": "smollm2",
+   "role": "base",
+   "priority": 4,
+   "behaviour": {
+    "harmful_compliance_rate": 0.08888888888888889,
+    "over_refusal_rate": 0.4222222222222222,
+    "safe_engagement_rate": 0.0,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "allenai/OLMo-2-0425-1B",
+   "family": "olmo2",
+   "role": "base",
+   "priority": 4,
+   "behaviour": {
+    "harmful_compliance_rate": 0.06666666666666667,
+    "over_refusal_rate": 0.6888888888888889,
+    "safe_engagement_rate": 0.022222222222222223,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  },
+  {
+   "repo": "allenai/OLMo-2-0425-1B-Instruct",
+   "family": "olmo2",
+   "role": "instruct",
+   "priority": 4,
+   "behaviour": {
+    "harmful_compliance_rate": 0.022222222222222223,
+    "over_refusal_rate": 0.5333333333333333,
+    "safe_engagement_rate": 0.0,
+    "n_harm_judged": 45,
+    "n_benign_judged": 45
+   }
+  }
+ ],
+ "random_init": [
+  {
+   "repo": "Qwen/Qwen3-0.6B",
+   "tag": "RandInit-Qwen3-0.6B",
+   "family": "randinit",
+   "role": "random_init",
+   "priority": 2
+  },
+  {
+   "repo": "Qwen/Qwen3-4B",
+   "tag": "RandInit-Qwen3-4B",
+   "family": "randinit",
+   "role": "random_init",
+   "priority": 4
+  }
+ ],
+ "dropped_pairs": [
+  {
+   "pair": "P7",
+   "parent": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+   "child": "philippefunk/TinyLlama-1.1B-Chat-v1.0-abliterated",
+   "family": "tinyllama",
+   "reason": "BROKEN UPLOAD: 0.81 GB vs parent 2.20 GB and 630,759,982 vs 1,100,048,384 params; missing shards; loaded nowhere in iteration 1 and is not repairable by this lane."
+  }
+ ],
+ "families": [
+  "qwen3",
+  "qwen2.5",
+  "smollm2",
+  "smollm3",
+  "tinyllama",
+  "phi",
+  "granite",
+  "stablelm",
+  "olmo2"
+ ],
+ "behavioural_source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/s3/s3_results.json",
+ "n_behavioural_rows": 26
+}

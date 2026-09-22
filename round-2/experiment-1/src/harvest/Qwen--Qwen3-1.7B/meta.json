@@ -1,0 +1,37 @@
+{
+ "repo": "Qwen/Qwen3-1.7B",
+ "tag": "Qwen--Qwen3-1.7B",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_layers": 28,
+ "hidden_size": 2048,
+ "vocab_size": 151936,
+ "tie_word_embeddings": true,
+ "dtype_loaded": "torch.bfloat16",
+ "dtype_config": "torch.bfloat16",
+ "rms_eps": 1e-06,
+ "t_load_s": 6.868534564971924,
+ "timings": {
+  "p_harvest_s": 207.55844163894653,
+  "u_summary_s": 18.076286554336548,
+  "total_s": 232.57089519500732
+ },
+ "token_ids": {
+  "refusal": 44,
+  "hedge": 16,
+  "control": 56
+ },
+ "n_prompts": 256,
+ "prompt_token_lengths": {
+  "mean": 27.484375,
+  "p50": 25.0,
+  "p95": 44.34999999999994,
+  "max": 108,
+  "truncation_cap": 192
+ },
+ "n_cells": 0,
+ "x5_undefined": true,
+ "role": "parent",
+ "family": "qwen3",
+ "priority": 2
+}

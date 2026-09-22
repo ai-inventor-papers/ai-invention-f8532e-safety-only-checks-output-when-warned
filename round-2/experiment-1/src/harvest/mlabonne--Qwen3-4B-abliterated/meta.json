@@ -1,0 +1,37 @@
+{
+ "repo": "mlabonne/Qwen3-4B-abliterated",
+ "tag": "mlabonne--Qwen3-4B-abliterated",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_layers": 36,
+ "hidden_size": 2560,
+ "vocab_size": 151936,
+ "tie_word_embeddings": true,
+ "dtype_loaded": "torch.bfloat16",
+ "dtype_config": "torch.bfloat16",
+ "rms_eps": 1e-06,
+ "t_load_s": 35.772836208343506,
+ "timings": {
+  "p_harvest_s": 416.00702929496765,
+  "u_summary_s": 31.134132385253906,
+  "total_s": 483.0487947463989
+ },
+ "token_ids": {
+  "refusal": 44,
+  "hedge": 16,
+  "control": 56
+ },
+ "n_prompts": 256,
+ "prompt_token_lengths": {
+  "mean": 27.484375,
+  "p50": 25.0,
+  "p95": 44.34999999999994,
+  "max": 108,
+  "truncation_cap": 192
+ },
+ "n_cells": 0,
+ "x5_undefined": true,
+ "role": "child",
+ "family": "qwen3",
+ "priority": 1
+}

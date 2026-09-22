@@ -1,0 +1,42 @@
+{
+ "repo": "HuggingFaceTB/SmolLM3-3B",
+ "tag": "HuggingFaceTB--SmolLM3-3B",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_layers": 36,
+ "hidden_size": 2048,
+ "vocab_size": 128256,
+ "tie_word_embeddings": true,
+ "dtype_loaded": "torch.bfloat16",
+ "dtype_config": "torch.bfloat16",
+ "rms_eps": 1e-06,
+ "t_load_s": 3.6800005435943604,
+ "timings": {
+  "p_harvest_s": 359.7239544391632,
+  "u_summary_s": 9.36900520324707,
+  "total_s": 372.8061649799347
+ },
+ "load_missing_keys_n": 0,
+ "load_unexpected_keys_n": 0,
+ "load_missing_keys_head": [],
+ "load_unexpected_keys_head": [],
+ "weights_fully_bound": true,
+ "token_ids": {
+  "refusal": 44,
+  "hedge": 16,
+  "control": 56
+ },
+ "n_prompts": 256,
+ "prompt_token_lengths": {
+  "mean": 83.375,
+  "p50": 81.0,
+  "p95": 96.09999999999997,
+  "max": 164,
+  "truncation_cap": 192
+ },
+ "n_cells": 0,
+ "x5_undefined": true,
+ "role": "parent",
+ "family": "smollm3",
+ "priority": 3
+}

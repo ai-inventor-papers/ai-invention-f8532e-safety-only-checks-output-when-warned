@@ -1,0 +1,37 @@
+{
+ "repo": "huihui-ai/Huihui-Qwen3-0.6B-abliterated-v2",
+ "tag": "huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_layers": 28,
+ "hidden_size": 1024,
+ "vocab_size": 151936,
+ "tie_word_embeddings": true,
+ "dtype_loaded": "torch.bfloat16",
+ "dtype_config": "torch.bfloat16",
+ "rms_eps": 1e-06,
+ "t_load_s": 5.013177156448364,
+ "timings": {
+  "p_harvest_s": 143.37744188308716,
+  "u_summary_s": 4.5443947315216064,
+  "total_s": 152.99165296554565
+ },
+ "token_ids": {
+  "refusal": 44,
+  "hedge": 16,
+  "control": 56
+ },
+ "n_prompts": 256,
+ "prompt_token_lengths": {
+  "mean": 27.484375,
+  "p50": 25.0,
+  "p95": 44.34999999999994,
+  "max": 108,
+  "truncation_cap": 192
+ },
+ "n_cells": 0,
+ "x5_undefined": true,
+ "role": "child",
+ "family": "qwen3",
+ "priority": 2
+}

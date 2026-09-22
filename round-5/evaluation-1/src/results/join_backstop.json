@@ -1,0 +1,88 @@
+{
+  "deliverable": "D11",
+  "title": "Backstop join of the iteration-5 screen survivor against the blind substrate panel",
+  "generated_utc": "2026-09-22T00:47:44.427693+00:00",
+  "paths_searched": [
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/survivor.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/*/survivor.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/screen/*.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/survivor.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/survivor*.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/out/survivor*.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/**/results/survivor*.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/panel_manifest.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/panel.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/panel_rule.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/*/panel_manifest.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/panel_manifest.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/**/results/panel_manifest*.json",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/hash_chain.jsonl",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/hash_chain.jsonl",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/build_log.txt",
+    "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/*/results/*hash*.json*"
+  ],
+  "survivor_files_found": [],
+  "panel_files_found": [
+    {
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/results/panel_manifest.json",
+      "size_bytes": 259,
+      "mtime_utc": "2026-09-22T00:19:35+00:00",
+      "mtime_epoch": 1790036375.0,
+      "sha256": "00b5b81827bc7128c7b50f1fa8c71763f8f929ac1693a701b2cd3a5a3ace4396"
+    },
+    {
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/results/panel.json",
+      "size_bytes": 34541,
+      "mtime_utc": "2026-09-21T23:27:15+00:00",
+      "mtime_epoch": 1790033235.0,
+      "sha256": "7c864d71191766a50d8a91f1dfad864c70a7443c124f582d5814ff054d5a8e2f"
+    },
+    {
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/results/panel_rule.json",
+      "size_bytes": 16579,
+      "mtime_utc": "2026-09-21T23:27:07+00:00",
+      "mtime_epoch": 1790033227.0,
+      "sha256": "12e322686a1d5a1568549fdc54f0a0f367220ac102d11e2bec149407de398797"
+    }
+  ],
+  "hash_order_evidence_found": [
+    {
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_evaluation_1/build_log.txt",
+      "size_bytes": 492,
+      "mtime_utc": "2026-09-22T00:46:48+00:00",
+      "mtime_epoch": 1790038008.0,
+      "sha256": "639be54ebc5170d041d39d765823cf4169e6e3567254907187fd7b80e2787300"
+    },
+    {
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/results/asset_hashes.json",
+      "size_bytes": 976,
+      "mtime_utc": "2026-09-22T00:11:51+00:00",
+      "mtime_epoch": 1790035911.0,
+      "sha256": "25964d4f03154a52282e834b1cda8b624e3771718afaf3d57d4b257b72ff12b4"
+    }
+  ],
+  "precedent": "iteration 3 wrote results/join_stub.json when no screen survivor existed; this artifact follows that precedent rather than guessing a survivor.",
+  "panel_manifest_state": {
+    "present": true,
+    "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/results/panel_manifest.json",
+    "sha256": "00b5b81827bc7128c7b50f1fa8c71763f8f929ac1693a701b2cd3a5a3ace4396",
+    "committed_utc": "2026-09-22T00:19:35Z",
+    "n_committed_checkpoints": 0
+  },
+  "blind_label_files": [
+    {
+      "dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/results/labels",
+      "n_files": 6,
+      "earliest_write_utc": "2026-09-22T00:41:17+00:00",
+      "latest_write_utc": "2026-09-22T00:43:42+00:00"
+    }
+  ],
+  "blind_label_policy": "Label files are listed by name and write time ONLY; their contents are never opened by this artifact, so this backstop cannot leak a label into a survivor choice.",
+  "order_audit_note": "Labels WRITTEN before a survivor exists is by design (the substrate grades blind). The invariant is that the survivor hash is committed before any label is READ by the join. A future join must show a committed survivor sha256 whose commit time precedes the join's first label read; a label file's write time is not evidence either way.",
+  "join_status": "COULD_NOT_COMPLETE",
+  "reason": "Two independent gaps. (1) SCREEN: no survivor.json exists anywhere under iteration 5; the screen artifact (gen_art_experiment_1) has an EMPTY results/screen/ directory, so no hashed survivor has been committed. (2) SUBSTRATE: panel_manifest.json is committed but lists n=0 checkpoints that completed the gated pipeline. A join needs both sides and cannot be formed; a survivor is NEVER guessed.",
+  "hash_order_verified": false,
+  "hash_order_note": "Hash-order verification is VACUOUS while no survivor hash exists: the invariant 'survivor hash committed before any panel label is read' cannot be checked, let alone satisfied.",
+  "panel_side_status": "PRESENT",
+  "panel_side_note": "The substrate has committed its panel rule and draw (3 file(s)) and is producing blind labels, but its manifest does not yet list completed checkpoints. Both sides are still in progress in parallel iteration-5 artifacts; this backstop records their state at run time."
+}

@@ -1,0 +1,129 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://www.lesswrong.com/posts/Sj92Atv6qwNn5JxbF/refusal-is-redundantly-distributed-not-localized-a-per-layer
+Type: HTML
+Length: 18483 chars (truncated)
+
+--- Content ---
+
+x
+
+This website requires javascript to properly function. Consider activating javascript to get access to all site functionality. 
+
+## [LESSWRONG](/)
+
+## [LW](/)
+
+Login
+
+Refusal Is Redundantly Distributed, Not Localized: A Per-Layer Ablation Study on Llama-3.1-8B — LessWrong
+
+[Personal Blog](/posts/5conQhfa4rgb4SaWx/site-guide-personal-blogposts-vs-frontpage-posts)
+
+# -1
+
+# [Refusal Is Redundantly Distributed, Not Localized: A Per-Layer Ablation Study on Llama-3.1-8B](/posts/Sj92Atv6qwNn5JxbF/refusal-is-redundantly-distributed-not-localized-a-per-layer)
+
+by [hdhurve](/users/hdhurve?from=post_header)
+
+16th Jul 2026
+
+8 min read
+
+0
+
+# -1
+
+# TL;DR
+
+  * This work replicates and extends the findings of Arditi et al. [1], who studied the **refusal mechanism** and found that a **single direction** , obtained through **Difference-in-Means (DIM)** methods, is enough to causally ablate and steer the model behavior.
+    * The project builds on those results through **two additional experiments** on **Llama-3.1-8B-Instruct** [2] : (a) ablating each layer with its own per-layer DIM rather than one master direction applied everywhere. (b) Repeat the per-layer DIM (a) but excluding layer 12 (the original master layer).
+  * Refusal is **mediated redundantly** across layers. No single layer is necessary, ablating every layer except 12 performs identically to ablating all 32, but layer 12’s own direction is **transferable** when applied everywhere on its own.
+  * The work suggests that safety alignment for the Llama3.1-8B-Instruct model, refusal is implemented as a low-dimensional, linearly accessible feature rather than something deeply entangled, which points out that safety guardrails training for the model produces a **surface-level fix** , rather than a deep capability change.
+
+
+
+# Motivation
+
+Understanding how features are represented within an LLM has been an active area of research, one which has gained intensity concerning **AI safety** , as it allows us to build better safety guardrails. **Mechanistic interpretability** happens to work in direct relation to this by peeking into the model's internals rather than treating it as a **black box** , by looking at each layer's activations, testing their causal significance by performing ablations and steering, and, in essence, gaining an understanding of how the model actually implements its behavior. Refusal is a good example of this, which is the behaviour of the model to refuse requests that are harmful, illegal, as well as instructions that could produce results that bad actors can take advantage of.
+
+The work presented by Arditi et al.[1] on the refusal mechanism claims that there exists a single direction in the model’s residual stream such that projecting it out (ablation) is enough to bypass refusal on harmful prompts, and adding it back (steering) is enough to induce refusal on harmless ones. 
+
+In the experiment, alongside replicating Arditi et al.[1] original method, I perform two additional experiments, ablating each layer with its own DIM direction, and repeating the former while excluding the master layer entirely. These new experiments aim to test whether refusal actually lives in a single layer or whether there are more nuances to it, which is one of the questions the paper left partially open.
+
+# Methodology
+
+The direction is computed by using Difference-in-Means (DIM) by taking the average hidden activation for the harmful prompts and the average for the harmless prompts at a particular token position and layer, and subtracting one from the other (equation 1, see Appendix). This resulting vector (or direction) essentially captures the axis along which the model distinguishes "I should refuse this" from "I should answer this".
+
+For each of the model's 32 layers, I recorded the layer activations at the **< |eot_id|>** token position separately for harmful and harmless prompts, following Arditi et al. [1], who found this token provided a strong refusal signal as compared to other token positions.
+
+  *     * For ablation, the raw direction vector, , was scaled down to unit norm (equation 3), while steering used the raw, un-normalized vector instead (equation 6).
+    * For each residual stream activation _x_ , its component along the normalized refusal direction is subtracted out. The projection is defined as shown in equations 4 and 5 (see Appendix)
+
+
+
+Following Arditi et al. [1], ablation removes this projected component from the residual stream at every layer and token position. The three methods below differ in which direction(s) are used to do this.
+
+**Method 1 - L12-on-all** : Take the single direction from a single "master" layer (the layer with the strongest effect in training) and subtract it from residual stream activations at every layer and every token position. This is the direct replication of Arditi et al.
+
+**Method 2 - Per-Layer DIM** : For each layer, subtract that layer’s own DIM direction from its own activations. Every layer gets its own dedicated direction.
+
+**Method 3 - Skip-L12** : Same as Per-Layer DIM, but excludes the "master" layer. This tests whether that layer is causally necessary or just a convenient extraction point.
+
+To check whether the DIM direction is enough on its own to cause refusal, steering (activation addition) was tested in the same way as Arditi et al.[1], by adding the raw, unnormalized direction to the activation from the master layer's direction, as shown in equation 6 (see Appendix)
+
+The dataset draws from three sources: contrastive prompt pairs generated by prompting Claude Sonnet 4.6, AdvBench[3], and SaladBench[4]. 50 and 100 harmful prompts came from Claude Sonnet 4.6 and AdvBench, respectively. SaladBench has harmful prompts spread across 16 categories, so 25 were sampled from each, giving 400 more. To check that the model actually refused these prompts, each one was run through the model, and the response was checked against a list of refusal keywords. Only prompts where the response was correctly flagged as a refusal made it into the final dataset, leaving **297 harmful** prompts in total. The same number of harmless prompts was sampled from the Alpaca dataset[5] to match.
+
+For evaluations, the JailbreakBench dataset[6] was used, following the same evaluation setup as Arditi et al[1]. **100 prompts** were sampled from its **harmful** section, plus another **100 harmless** prompts from Alpaca[5]. Generation was capped at **512** tokens, using greedy decoding throughout.
+
+# Results
+
+A single-layer ablation sweep (Figure 1) identifies the "master" layer for refusal in Llama-3.1-8B-Instruct as **layer 12** , the same layer identified by Arditi et al.[1], despite using a somewhat different selection method.
+
+Figure 1: Effectiveness of each layer on refusal. Here, _Flips_ represents _s_ ingle-layer DIM ablation that changed the model's response from refusal to compliance
+
+  
+
+
+After performing the sets of ablation experiments, Figure 2 shows that the first method (L12-on-all), which was similar to Arditi et al.[1], showed an ASR of **97%** , while the second and the third methods showed **97%** and **98%** , respectively. The results that stand out the most are the refusal scores. Ablating only the single master layer direction (l**ayer 12**) from all other layers achieved a refusal score of**−3.67** , suggesting that the influence on a single master layer is much **more significant** than the rest. The refusal scores for the **Per-Layer** and **Skip-12** methods achieve similar scores of**−0.98** and **−0.96** , which could imply that refusal as a concept is distributed across each layer. A note on why raw refusal rate and true ASR diverge is provided in the Appendix.
+
+Figure 2: Directional Ablation on Harmful Prompts (n=100, JailbreakBench)
+
+  
+
+
+For harmless prompts, which involved steering, the model refused **15** of the 100 harmless prompts before intervention. After intervention, the model refused**99%** of the total prompts, affirming the causal role of the direction in inducing refusal. The **refusal scores** also show similar trends, after intervention, it jumped  to **13.46** , all the while the responses stayed coherent. One small study on the effect of using raw vectors and normalized vector directions for steering, although both can be used and work well, once the direction was normalized and scaled using **α = 20** , the output quality became**worse** , wherein the model started repeating the word "prohibited" for the full length of the generation, on every prompt, regardless of what was actually asked.
+
+Figure 3: Activation Addition on Harmless Prompts (n=100, Alpaca)
+
+##   
+
+
+PCA is used to project the high-dimensional activations down to two dimensions. The model internally organizes harmful and harmless prompts into two largely separable regions of its activation space, and the DIM direction points exactly along the axis that separates them. Figure 5 (left) shows that removing this direction from the model’s internal state is enough to move harmful prompts into a different region of the activation space, one where the model no longer detects harm and stops refusing. Similarly, Figure 5 (right) shows that adding this direction pushes harmless prompts into the harmful region of the activation space, causing the model to treat them as harmful enough to refuse.
+
+Figure 4: Activation space, layer 12.
+
+  
+
+
+Figure 5: (_left_) After directional ablation, (_right_) After activation addition
+
+  
+
+
+# Observations
+
+The following are my observations from this experiment:
+
+  * Refusal is mediated redundantly across layers. No single layer is necessary, ablating every layer except 12 performs identically to ablating all 32, but layer 12’s own direction is unusually transferable when applied everywhere on its own. This points to a gap between where refusal is causally distributed and where it’s most cleanly represented.
+  * Steering confirms the direction is causally sufficient, not just necessary. Adding the raw direction to harmless activations is enough on its own to induce refusal, with coherence fully preserved. This sufficiency is scale-bound, though, normalizing and scaling the direction up (α= 20) collapses coherence entirely, with the model degenerating into repeating a single token regardless of the prompt. So the direction doesn’t just turn refusal up as you push harder, past a certain magnitude, it stops looking like refusal and starts looking like the model breaking.
+  * This redundancy and linearity together suggest the safety guardrail in this model is more fragile than its behavioral robustness, specifically against an attacker with white-box access to internal activations. A behavior as central as refusal can be traced to a narrow, linear part of the model’s internal space and removed with a single subtraction at inference time, no retraining or gradient access required. This is consistent with prior work suggesting safety alignment can sit closer to the surface of a model than to its core capabilities, though confirming that claim more broadly would need testing across multiple models and checking that general capability, not just coherence, survives the intervention.
+
+
+
+# Limitation
+
+Single Model: The current experiment was conducted on a single model (Llama-3.1-8B-Instruct[2]). Whether these results, the redundancy findings, generalize to other families of models or parameter scales is untested.
+
+Keyword Matching: The behavioral evaluation relies on keyword matching for refusal detection, which introduces noise in both directions, false positives from benign phrases like “cannot” or “don’t,” and potentially false negatives if a harmful response opened with an unusual construction that the list did not anticipate (see Appendix).
+
+Dataset: The training set is relatively small (297 harmful prompts after filtering), drawn from three sources with known biases. Jailbreak prompts in the wild tend to be more creative than AdvBench[3] or SaladBench[4] examples,

@@ -1,0 +1,32 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2608.05086v1
+Type: HTML
+Pattern: 5,255|5255 (3 matches in 70192 chars)
+
+--- Content ---
+
+7237:...024; Kipnis et al. 2025; Hofmann et al. 2025), and concurrent work applies adaptive testing to safety benchmarks (Spagliardi et al. 2026). We show that compression is only one of its uses.
+
+In this work, we fit IRT models to eight safety benchmarks (5,255 items, 192 models) covering harmful compliance, over-refusal, and truthfulness. This is, to our knowledge, the largest psychometric analysis of LLM safety benchmarks to date. We use the resulting calibration in three ways (Figure 1):
+
+  * •
+
+Charact...
+--
+11032:...luation-dependent behavior and changes behind model APIs.
+
+### Benchmarks and Model Responses
+
+We evaluate models on eight benchmarks spanning harmful compliance, over-refusal, contextual harm, and truthfulness (Table 1). The complete suite contains 5,255 items before preprocessing.
+
+Benchmark | Tests | Judge | Items  
+---|---|---|---  
+AdvBench (Zou et al. 2023) | harm refusal | string match | 520  
+HarmBench (Mazeika et al. 2024) | harm refusal | LLM judge | 296  
+SORRY-Bench (Xie et al. 2024) | ha...
+--
+18186:... criteria and the sensitivity of the solution to the extraction method, and Appendix C reports an item-level multidimensional IRT fit that relaxes the two-stage design.
+
+### Benchmark Distillation
+
+The full benchmark suite before processing contains 5,255 items, but many contribute little information about a given model. Easy items are passed by nearly every model, while difficult items are failed by nearly every model. Both consume compute without helping distinguish models at the relevant ability l...

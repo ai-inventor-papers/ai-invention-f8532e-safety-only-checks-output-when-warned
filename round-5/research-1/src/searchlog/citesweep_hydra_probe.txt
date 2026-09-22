@@ -1,0 +1,16 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://api.semanticscholar.org/graph/v1/paper/arXiv:2307.15771/citations?fields=title,abstract,year,externalIds&limit=100
+Type: HTML
+Pattern: self-repair (5 matches in 224714 chars)
+
+--- Content ---
+
+16040:...sms in 10 VLMs. We propose a two-stage detection pipeline with iterative ablation that accounts for self-repair, and introduce two modality-isolated benchmarks, ViSafe-Detect and ViSafe-Eval, which decouple visu...
+--
+60243:...scoring is natural when component importance is additive, but becomes misleading when a transformer self-repairs: after a primary component is removed, a dormant backup can take over, muting the primary's measur...
+--
+60910:... CoAx raises backup-head recovery from 0.33 to 0.91 ROC-AUC, outperforming all baselines, including self-repair-aware gradient scores (best 0.82); counterfactual patching verifies that the recovered heads causal...
+--
+61164:...ocedure transfers to induction across eight models. Beyond discovery, the recovered backups correct self-repair-masked attribution, identify the components required for capability knockout, and yield repair-awar...
+--
+158458:...imation of component importance. We find that one particularly problematic interaction is attention self-repair, in which softmax redistribution causes gradients for influential attention scores to vanish as oth...

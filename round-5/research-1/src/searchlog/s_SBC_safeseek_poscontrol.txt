@@ -1,0 +1,25 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2603.23268v1
+Type: HTML
+Pattern: circuit (140 matches in 92705 chars)
+
+--- Content ---
+
+722:... Related Work
+  4. 3 Preliminary
+  5. 4 SafeSeek
+     1. 4.1 Unit Granularity Selection
+     2. 4.2 Circuit Mask Optimization
+     3. 4.3 Circuit Ablation Validation
+     4. 4.4 Safety Circuit Tuning (SaCirT)
+     5. 4.5 Application: Backdoor & Alignment
+  6. 5 Experiment
+     1. 5.1 Experiment Settings
+     2. 5.2 Finding Backdoor Circuits
+        1. 5.2.1 The Dense Clean Subgraph
+        2. 5.2.2 The Sparse Backdoor Circuit
+     3. 5.3 Finding Safety Circuits
+     4. 5.4 Applying Safety Circuit Tuning
+     5. 5.5 Ablation...
+--
+[135 more matches not shown]

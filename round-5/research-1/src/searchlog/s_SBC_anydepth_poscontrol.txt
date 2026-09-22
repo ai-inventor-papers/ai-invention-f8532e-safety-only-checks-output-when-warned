@@ -1,0 +1,45 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2510.18081
+Type: PDF
+Pattern: token (191 matches in 99279 chars)
+
+--- Content ---
+
+1017:...rhead. ADA
+is built based on our observation that alignment is concentrated in the assistant header tokens
+through repeated use in shallow-refusal training, and these tokens possess the model’s strong
+alignment priors. By reintroducing these tokens mid-stream, ADA induces the model to reassess
+harmfulness and recover refusals at any point in gen...
+--
+1590:...0%
+refusal rate against challenging adversarial prefill attacks ranging from dozens to thousands of
+tokens. Furthermore, ADA reduces the average success rate of prominent adversarial prompt
+attacks (such a...
+--
+2909:...current alignment.
+1
+arXiv:2510.18081v1  [cs.LG]  20 Oct 2025
+
+0
+100
+200
+300
+400
+500
+Prefill Depth (Token Position)
+0.0%
+10.0%
+20.0%
+30.0%
+40.0%
+50.0%
+60.0%
+70.0%
+80.0%
+90.0%
+100.0%
+Refusal Rate (
+)
+Llama­...
+--
+[186 more matches not shown]

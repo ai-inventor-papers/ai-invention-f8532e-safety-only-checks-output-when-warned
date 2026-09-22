@@ -1,0 +1,21 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://jdunbar.net/pages/self_repair/
+Type: HTML
+Length: 2271 chars
+
+--- Content ---
+
+# How much self-repair is in GPT2 without LayerNorm?
+
+[←](../../) Sep 17, 2024
+
+Sometimes, the effect of ablating an attention head is much smaller than expected. It's like as if models trained without any dropout had adapted dropout resistance anyways. Like if an programmer who changed 10 lines of code per day left the company, but his team's output only dropped by 5 lines of code per day.
+
+After this strange effect was first documented ([McGrath et al., 2023](https://arxiv.org/abs/2307.15771)), a follow-up paper ([Rushing et al., 2024](https://arxiv.org/abs/2402.15390)) identified LayerNorm as one of many culprits. It causes self-repair because ablations usually reduce the norm of intermediate activations, so the LayerNorm after ablation amplifies the influence of all the other heads. Since attention heads often behave redundantly, the amplification of other heads can usually make up for the ablated one.
+
+Despite LayerNorm appearing to be the main culprit, I measured the self-repair a new model, GPT2 with LayerNorm removed ([Heimersheim, 2024](https://arxiv.org/abs/2409.13710)), and it exhibits much more self-repair than the original GPT2.
+
+On the graph above, the x-axis is how much an attention head contributes to predicting the correct next token in a normal forward pass, and the y-axis is how much the prediction changes after the head is ablated. Points below the diagonal line indicate heads that indirectly assist the model, like a soccer midfielder who rarely scores goals herself, but the team scores much less without her. Points above the diagonal indicate heads that get self-repaired. The color indicates the layer of an attention head. This data was gathered with resample ablations on first 1 GB of training data from the [Pile Uncopyrighted](https://huggingface.co/datasets/monology/pile-uncopyrighted).
+
+This is result is quite surprising. Maybe removing LayerNorm made the model strange and increased the variance of measured self-repair. Maybe self-repair is a symptom of an important mechanism, and removing LayerNorm lead to more self-repair implemented by other components. Maybe the true cause of self-repair is too strange to fit any hypothesis we can imagine right now, but nevertheless, it's fun to take shots in the dark.
+

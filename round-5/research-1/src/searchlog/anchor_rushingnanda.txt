@@ -1,0 +1,49 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2402.15390
+Type: HTML
+Length: 7765 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2402.15390** (cs) 
+
+[Submitted on 23 Feb 2024 ([v1](https://arxiv.org/abs/2402.15390v1)), last revised 26 May 2024 (this version, v2)]
+
+# Title:Explorations of Self-Repair in Language Models
+
+Authors:[Cody Rushing](https://arxiv.org/search/cs?searchtype=author&query=Rushing,+C), [Neel Nanda](https://arxiv.org/search/cs?searchtype=author&query=Nanda,+N)
+
+View a PDF of the paper titled Explorations of Self-Repair in Language Models, by Cody Rushing and 1 other authors
+
+[View PDF](/pdf/2402.15390) [HTML (experimental)](https://arxiv.org/html/2402.15390v2)
+
+> Abstract:Prior interpretability research studying narrow distributions has preliminarily identified self-repair, a phenomena where if components in large language models are ablated, later components will change their behavior to compensate. Our work builds off this past literature, demonstrating that self-repair exists on a variety of models families and sizes when ablating individual attention heads on the full training distribution. We further show that on the full training distribution self-repair is imperfect, as the original direct effect of the head is not fully restored, and noisy, since the degree of self-repair varies significantly across different prompts (sometimes overcorrecting beyond the original effect). We highlight two different mechanisms that contribute to self-repair, including changes in the final LayerNorm scaling factor and sparse sets of neurons implementing Anti-Erasure. We additionally discuss the implications of these results for interpretability practitioners and close with a more speculative discussion on the mystery of why self-repair occurs in these models at all, highlighting evidence for the Iterative Inference hypothesis in language models, a framework that predicts self-repair. 
+
+Comments: | ICML 2024  
+---|---  
+Subjects: |  Machine Learning (cs.LG); Artificial Intelligence (cs.AI); Computation and Language (cs.CL)  
+Cite as: | [arXiv:2402.15390](https://arxiv.org/abs/2402.15390) [cs.LG]  
+  | (or  [arXiv:2402.15390v2](https://arxiv.org/abs/2402.15390v2) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2402.15390> Focus to learn more arXiv-issued DOI via DataCite  
+Journal reference: | Proceedings of the 41st International Conference on Machine Learning, PMLR 235:42836-42855, 2024  
+  
+## Submission history
+
+From: Cody Rushing [[view email](/show-email/94a94b64/2402.15390)]   
+**[[v1]](/abs/2402.15390v1)** Fri, 23 Feb 2024 15:42:12 UTC (5,231 KB)  
+**[v2]** Sun, 26 May 2024 20:47:41 UTC (5,704 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Expl

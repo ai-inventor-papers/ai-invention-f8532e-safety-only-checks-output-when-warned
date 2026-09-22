@@ -1,0 +1,39 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2506.24056
+Type: PDF
+Pattern: logit gap (31 matches in 132096 chars)
+
+--- Content ---
+
+367:...nt trains language models to refuse unsafe requests, but how
+much operational margin does this refusal rest on? We introduce the refusal–
+affirmation logit gap: the difference between the top refusal-token logit and the top
+affirmative-token logit at the first decoding step. This single scalar quantifies the...
+--
+2339:...position-1 logit-level decision that gates refusal, not alignment as a whole) and
+probe its robustness at scale.
+We introduce the refusal–affirmation logit gap: the difference between the top refusal-token logit
+and the top affirmative-token logit at the first decoding step after a harmful prompt. This frami...
+--
+3785:... recast them as a measurement
+instrument for the first-token refusal margin.
+Contributions.
+• Alignment diagnostic. We define the refusal–affirmation logit gap as a quantitative measure
+of the first-token operational refusal margin (the logit-level cushion that gates whether the
+model refuses on its first de...
+--
+7685:...rections
+(refusal vs. affirmation) and address reliability through multi-objective permutation selection and
+ensembling (§3.4).
+2
+Refusal–Affirmation Logit Gap in Aligned Language Models
+Modern chat models are aligned in two stages. First, supervised fine-tuning trains on curated
+instruction data Wei et al. ...
+--
+8265:...ens
+(“Sorry”, “No”, “cannot”) relative to affirmative ones (“Certainly”, “Here’s. . . ”) at the first decoding
+step, creating the refusal–affirmation logit gap.
+This section formalises the gap, shows empirically that alignment widens it, and derives the condition
+a suffix must satisfy to close it. The scorin...
+--
+[26 more matches not shown]

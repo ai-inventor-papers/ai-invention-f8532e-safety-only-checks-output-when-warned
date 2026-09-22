@@ -1,0 +1,338 @@
+[
+ {
+  "id": "Q001",
+  "lane": "lane_SA",
+  "path": ".anchors[0]",
+  "quote": "We investigate the internal structure of language model computations using causal analysis and demonstrate two motifs: (1) a form of adaptive computation where ablations of one attention layer of a language model cause another layer to compensate (which we term the Hydra effect) and (2) a counterbalancing function of late MLP layers that act to downregulate the maximum-likelihood token.",
+  "url": "https://arxiv.org/abs/2307.15771"
+ },
+ {
+  "id": "Q002",
+  "lane": "lane_SA",
+  "path": ".anchors[1]",
+  "quote": "We further show that on the full training distribution self-repair is imperfect, as the original direct effect of the head is not fully restored, and noisy, since the degree of self-repair varies significantly across different prompts (sometimes overcorrecting beyond the original effect).",
+  "url": "https://arxiv.org/abs/2402.15390"
+ },
+ {
+  "id": "Q003",
+  "lane": "lane_SA",
+  "path": ".anchors[2]",
+  "quote": "In this work, we bridge this gap by presenting an explanation for how GPT-2 small performs a natural language task called indirect object identification (IOI).",
+  "url": "https://arxiv.org/abs/2211.00593"
+ },
+ {
+  "id": "Q004",
+  "lane": "lane_SA",
+  "path": ".scalarisation_hits[0]",
+  "quote": "We recast this failure as a recovery task, conditional circuit completion, and introduce Conditional Co-Ablation (CoAx), a label-free, output-grounded score that asks how much each remaining unit's ablation effect grows once a primary set has been removed.",
+  "url": "https://arxiv.org/abs/2607.01940"
+ },
+ {
+  "id": "Q005",
+  "lane": "lane_SA",
+  "path": ".scalarisation_hits[1]",
+  "quote": "Despite LayerNorm appearing to be the main culprit, I measured the self-repair a new model, GPT2 with LayerNorm removed (Heimersheim, 2024), and it exhibits much more self-repair than the original GPT2.",
+  "url": "https://jdunbar.net/pages/self_repair/"
+ },
+ {
+  "id": "Q006",
+  "lane": "lane_SBC",
+  "path": ".hits[0]",
+  "quote": "Principle. Abliteration orthogonalizes the refusal direction r\u0302 out of the weights that write into the residual stream (o_proj, down_proj): W' = (I - r\u0302r\u0302^T)W, so r\u0302^T W' = 0. ... Weights \u2014 spectral signature (SVD) (the smoking-gun, CPU, no inference). Three signals: global alignment A (full ablation), band alignment B (localized/stealthy ablation, Heretic-style), and subspace alignment S (bottom-k shared subspace -- catches multi-direction ablation, e.g. OBLITERATUS n_directions > 1, which a single u_min dilutes).",
+  "url": "https://github.com/JolanMc/Jorak"
+ },
+ {
+  "id": "Q007",
+  "lane": "lane_SBC",
+  "path": ".hits[1]",
+  "quote": "A key open question in abliteration research is whether refusal is mediated by the *same* direction propagated through the residual stream, or by *different* directions at each layer. This module answers that question quantitatively by computing pairwise cosine similarities between refusal directions across all layers. ... direction_persistence_score: float # 0=independent per layer, 1=single direction ... Contribution: We also compute the \"refusal direction flow\" -- the cumulative angular drift of the refusal direction through the network, measured as the total geodesic distance on the unit hypersphere.",
+  "url": "https://github.com/elder-plinius/OBLITERATUS/blob/cb4aec45/obliteratus/analysis/cross_layer.py"
+ },
+ {
+  "id": "Q008",
+  "lane": "lane_SBC",
+  "path": ".hits[2]",
+  "quote": "The cosine between detection and intervention is computable from the weights and consistent across four models (cos \u2208 [0.12, 0.20], a small but reproducible positive). It is tempting to read it as an a priori steerability test; we show it is not -- detection is a high-dimensional class and steerability is a functional property, not one readable from a static angle. ... Model / cos: Gemma 2-2B-it 0.12, Llama 3.2-1B 0.20, Qwen 2.5-1.5B 0.16, Gemma 2-9B-it 0.13.",
+  "url": "https://arxiv.org/pdf/2606.24952"
+ },
+ {
+  "id": "Q009",
+  "lane": "lane_SBC",
+  "path": ".hits[3]",
+  "quote": "identifying a backdoor circuit with 0.42% sparsity, whose ablation eradicates the Attack Success Rate (ASR) from 100% to 0.4% while retaining over 99% general utility; (2) safety alignment, localizing an alignment circuit with 3.03% heads and 0.79% neurons, whose removal spikes ASR from 0.8% to 96.9%",
+  "url": "https://arxiv.org/abs/2603.23268"
+ },
+ {
+  "id": "Q010",
+  "lane": "lane_SBC",
+  "path": ".hits[4]",
+  "quote": "Large Language Models (LLMs) exhibit strong but shallow alignment ... ADA is built based on our observation that alignment is concentrated in the assistant header tokens through repeated use in shallow-refusal training, and these tokens possess the model's strong alignment priors.",
+  "url": "https://arxiv.org/abs/2510.18081"
+ },
+ {
+  "id": "Q011",
+  "lane": "lane_SBC",
+  "path": ".hits[5]",
+  "quote": "For each of the 11 refusal splits, we compute a corresponding refusal direction and quantify similarity across splits using pairwise cosine similarity. ... typical cosine similarities are 0.4-0.6, with several pairs close to orthogonal. This indicates that different refusal categories correspond to distinct activation-space directions rather than a single universal refusal vector.",
+  "url": "https://arxiv.org/pdf/2602.02132"
+ },
+ {
+  "id": "Q012",
+  "lane": "lane_SBC",
+  "path": ".hits[6]",
+  "quote": "We introduce the refusal-affirmation logit gap: the difference between the top refusal-token logit and the top affirmative-token logit at the first decoding step. This single scalar quantifies the per-prompt safety margin that alignment provides.",
+  "url": "https://arxiv.org/pdf/2506.24056"
+ },
+ {
+  "id": "Q013",
+  "lane": "lane_SBC",
+  "path": ".hits[7]",
+  "quote": "Refusal is mediated redundantly across layers. No single layer is necessary, ablating every layer except 12 performs identically to ablating all 32, but layer 12's own direction is unusually transferable when applied everywhere on its own.",
+  "url": "https://www.lesswrong.com/posts/Sj92Atv6qwNn5JxbF/refusal-is-redundantly-distributed-not-localized-a-per-layer"
+ },
+ {
+  "id": "Q014",
+  "lane": "lane_SBC",
+  "path": ".verdicts.W2",
+  "quote": "localizing an alignment circuit with 3.03% heads and 0.79% neurons, whose removal spikes ASR from 0.8% to 96.9%",
+  "url": "https://arxiv.org/abs/2603.23268"
+ },
+ {
+  "id": "Q015",
+  "lane": "lane_SBC",
+  "path": ".verdicts.W7",
+  "quote": "As generation depth increases, features from injected Safety Tokens (bottom) \u2013 where we read the hidden state of the assistant token from the assistant header \u2013 become highly separable, while those from the last generated token (top) remain entangled.",
+  "url": "https://arxiv.org/pdf/2510.18081"
+ },
+ {
+  "id": "Q016",
+  "lane": "lane_SBC",
+  "path": ".tools.obliteratus",
+  "quote": "This analysis also reveals \"refusal direction clusters\" -- groups of layers that share similar refusal geometry ... Contribution: We also compute the \"refusal direction flow\" -- the cumulative angular drift of the refusal direction through the network, measured as the total geodesic distance on the unit hypersphere.",
+  "url": "https://github.com/elder-plinius/OBLITERATUS/blob/cb4aec45/obliteratus/analysis/cross_layer.py"
+ },
+ {
+  "id": "Q017",
+  "lane": "lane_SBC",
+  "path": ".tools.jorak",
+  "quote": "Weights \u2014 spectral signature (SVD) (the smoking-gun, CPU, no inference). Three signals: global alignment A (full ablation), band alignment B (localized/stealthy ablation, Heretic-style), and subspace alignment S (bottom-k shared subspace -- catches multi-direction ablation, e.g. OBLITERATUS n_directions > 1, which a single u_min dilutes).",
+  "url": "https://github.com/JolanMc/Jorak"
+ },
+ {
+  "id": "Q018",
+  "lane": "blockT",
+  "path": ".rows[0].cells.over_refusal_as_an_outcome",
+  "quote": "we measure over-refusal using the XSTest dataset [28], employing DeepSeek-Chat [4] to evaluate whether the model improperly refuses to answer benign queries or comply with harmful queries.",
+  "url": "https://arxiv.org/pdf/2609.18471"
+ },
+ {
+  "id": "Q019",
+  "lane": "blockT",
+  "path": ".rows[0].cells.logit_baseline",
+  "quote": "we use Logit Lens to trace the rank evolution of typical refusal tokens, such as \u201cI\u201d ... and \u201cSorry,\u201d as well as affirmative tokens ... The attribution target is defined as the final-token logit difference between the two label tokens \u201cSure\u201d and \u201cI\u201d.",
+  "url": "https://arxiv.org/pdf/2609.18471"
+ },
+ {
+  "id": "Q020",
+  "lane": "blockT",
+  "path": ".rows[0].cells.decode_site_readout",
+  "quote": "We project the hidden states of each generated token onto V and track the resulting Refusal Projection Strength: St = (1/L) \u03a3 (h_{l,t} \u00b7 v_l)",
+  "url": "https://arxiv.org/pdf/2609.18471"
+ },
+ {
+  "id": "Q021",
+  "lane": "blockT",
+  "path": ".rows[0].cells.causal_test_with_random_or_orthogonal_control",
+  "quote": "Table 1: Attack Success Rate (ASR) on JailbreakBench-Behavior under steering with refusal vectors. NS denotes Negative Steering, and PS denotes Positive Steering. Model Before NS PS / R1-8B 45% 75% 21% / R1-7B 59% 87% 27%",
+  "url": "https://arxiv.org/pdf/2609.18471"
+ },
+ {
+  "id": "Q022",
+  "lane": "blockT",
+  "path": ".rows[1].cells.over_refusal_as_an_outcome",
+  "quote": "Over-refusal is measured on XSTest\u2019s benign-but-spicy prompts (safe requests worded to sound harmful).",
+  "url": "https://arxiv.org/pdf/2609.04721"
+ },
+ {
+  "id": "Q023",
+  "lane": "blockT",
+  "path": ".rows[1].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "quote": "The platonic representation hypothesis (Huh et al. 2024) has been shown only correlationally. We test it causally... [and separately] Table 3 reports, per model pair, the mean over the eight folds of the target\u2019s own probe and the transported probe, and their per-category Pearson correlation.",
+  "url": "https://arxiv.org/pdf/2609.04721"
+ },
+ {
+  "id": "Q024",
+  "lane": "blockT",
+  "path": ".rows[1].cells.decode_site_readout",
+  "quote": "Each layer computes a fresh output that is then added into the residual stream, and harm is cleanly readable at this output, the write site, before the addition.",
+  "url": "https://arxiv.org/pdf/2609.04721"
+ },
+ {
+  "id": "Q025",
+  "lane": "blockT",
+  "path": ".rows[1].cells.causal_test_with_random_or_orthogonal_control",
+  "quote": "an orthogonalized random direction through the same map (Random) does not, in all six transfer directions.",
+  "url": "https://arxiv.org/pdf/2609.04721"
+ },
+ {
+  "id": "Q026",
+  "lane": "blockT",
+  "path": ".rows[2].cells.no_op_or_expression_only_controls",
+  "quote": "we freeze them, and re-evaluate them across twelve quantization, LoRA, merged-LoRA, and QLoRA update conditions, yielding 2,520 eligible update cells",
+  "url": "https://arxiv.org/pdf/2606.15980"
+ },
+ {
+  "id": "Q027",
+  "lane": "blockT",
+  "path": ".rows[2].cells.over_refusal_as_an_outcome",
+  "quote": "refusal-compliance uses XSTest (R\u00f6ttger et al. 2023), contrasting safe prompts that resemble unsafe requests with genuinely unsafe prompts",
+  "url": "https://arxiv.org/pdf/2606.15980"
+ },
+ {
+  "id": "Q028",
+  "lane": "blockT",
+  "path": ".rows[2].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "quote": "staleness is predictable before post-update evaluation: learned predictors beat the strongest lookup baseline in three of four leave-group-out settings, including leave-update-family-out by +0.136 Spearman",
+  "url": "https://arxiv.org/pdf/2606.15980"
+ },
+ {
+  "id": "Q029",
+  "lane": "blockT",
+  "path": ".rows[3].cells.no_op_or_expression_only_controls",
+  "quote": "Maximum drift across concepts was 4.4% (harmful content at INT4: 5.42\u03c3 vs. 5.67\u03c3 at FP16). We also verified that a CRITICAL model (Dolphin-2.9) remains CRITICAL at INT4",
+  "url": "https://arxiv.org/pdf/2608.05578"
+ },
+ {
+  "id": "Q030",
+  "lane": "blockT",
+  "path": ".rows[6].cells.no_op_or_expression_only_controls",
+  "quote": "These results demonstrate behavioral and internal evaluations in the context of toxicity remain valid under model quantization.",
+  "url": "https://arxiv.org/pdf/2503.13390"
+ },
+ {
+  "id": "Q031",
+  "lane": "blockT",
+  "path": ".rows[7].cells.no_op_or_expression_only_controls",
+  "quote": "On a 273-checkpoint registry ... their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at AUROC 0.95",
+  "url": "https://arxiv.org/pdf/2607.01854"
+ },
+ {
+  "id": "Q032",
+  "lane": "blockT",
+  "path": ".rows[7].cells.over_refusal_as_an_outcome",
+  "quote": "benign fine-tunes, merges, and instruction-tunes as hard negatives",
+  "url": "https://arxiv.org/pdf/2607.01854"
+ },
+ {
+  "id": "Q033",
+  "lane": "blockT",
+  "path": ".rows[7].cells.decode_site_readout",
+  "quote": "a last-token gap cannot see refusal that migrates into the generated chain-of-thought",
+  "url": "https://arxiv.org/pdf/2607.01854"
+ },
+ {
+  "id": "Q034",
+  "lane": "blockT",
+  "path": ".rows[8].cells.over_refusal_as_an_outcome",
+  "quote": "over-refusal direc- tions are also task (or intent) dependent ... Table 8: Share of each direction set captur[ed] ... LLaMA-3.1-8B 46.9% ... Qwen2.5-7B 74.6% ... Gemma-3-4B 67.3%",
+  "url": "https://arxiv.org/pdf/2603.27518"
+ },
+ {
+  "id": "Q035",
+  "lane": "blockT",
+  "path": ".rows[9].cells.over_refusal_as_an_outcome",
+  "quote": "'benign' appears only as the FALSE-POSITIVE calibration set for a jailbreak-success ranking audit (e.g. 'A fixed benign false positive budget measures how the ranking allocates blocking capacity between the two groups'), never as an over-refusal RATE on an XSTest/OR-Bench-style benign-but-alarming set.",
+  "url": "https://arxiv.org/pdf/2608.09624"
+ },
+ {
+  "id": "Q036",
+  "lane": "blockT",
+  "path": ".rows[10].cells.no_op_or_expression_only_controls",
+  "quote": "whether it survives routine operations like quantization is untested",
+  "url": "https://arxiv.org/pdf/2606.08044"
+ },
+ {
+  "id": "Q037",
+  "lane": "blockT",
+  "path": ".rows[10].cells.over_refusal_as_an_outcome",
+  "quote": "Model Variant Benign answer Over-Refusal Direct ASR Jailbreak ASR Facts / Gemma 2 2B base 0.96 0.04 0.000 0.067 7/7 / Gemma 2 2B dissociated 0.96 0.04 0.000 0.000 7/7",
+  "url": "https://arxiv.org/pdf/2606.08044"
+ },
+ {
+  "id": "Q038",
+  "lane": "blockT",
+  "path": ".rows[10].cells.causal_test_with_random_or_orthogonal_control",
+  "quote": "bounded latent attacks with matched random controls, and directional steering symmetrically to the base, dissociated, and harmful models",
+  "url": "https://arxiv.org/pdf/2606.08044"
+ },
+ {
+  "id": "Q039",
+  "lane": "blockT",
+  "path": ".rows[11].cells.over_refusal_as_an_outcome",
+  "quote": "safety guardrails offer a lightweight alternative, yet they suffer from severe over-refusal, indiscriminately blocking benign queries ... We propose a paradigm shift toward output-aware safety guardrails. Our method operates within the model\u2019s hidden state space to predict whether the forthcoming generation...",
+  "url": "https://arxiv.org/pdf/2607.09697"
+ },
+ {
+  "id": "Q040",
+  "lane": "blockT",
+  "path": ".rows[12].cells.no_op_or_expression_only_controls",
+  "quote": "RISA derives a separate threshold pair for each base model. A single global pair would ignore the distinct score ranges across models.",
+  "url": "https://arxiv.org/pdf/2609.00790"
+ },
+ {
+  "id": "Q041",
+  "lane": "blockT",
+  "path": ".rows[12].cells.over_refusal_as_an_outcome",
+  "quote": "The Over-Refusal Rate (ORR) is ORR = (1/|Dbenign|) \u03a3 I[ISREFUSAL(Yfinal)=1], where lower is better.",
+  "url": "https://arxiv.org/pdf/2609.00790"
+ },
+ {
+  "id": "Q042",
+  "lane": "blockT",
+  "path": ".rows[12].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "quote": "A single global pair would ignore the distinct score ranges across models.",
+  "url": "https://arxiv.org/pdf/2609.00790"
+ },
+ {
+  "id": "Q043",
+  "lane": "blockT",
+  "path": ".rows[13].cells.no_op_or_expression_only_controls",
+  "quote": "All candidate checkpoints were trained and evaluated under the same overall fine-tuning protocol",
+  "url": "https://arxiv.org/pdf/2609.00760"
+ },
+ {
+  "id": "Q044",
+  "lane": "blockT",
+  "path": ".rows[13].cells.over_refusal_as_an_outcome",
+  "quote": "Safe Ref.\u2193 measures the fraction of safe prompts (XSTest-safe) that elicit refusal; lower values indicate less over-refusal on benign inputs.",
+  "url": "https://arxiv.org/pdf/2609.00760"
+ },
+ {
+  "id": "Q045",
+  "lane": "blockD",
+  "path": ".rank_debate[0]",
+  "quote": "In this work, we show that refusal is mediated by a one-dimensional subspace, across 13 popular open-source chat models up to 72B parameters in size.",
+  "url": "https://arxiv.org/abs/2406.11717"
+ },
+ {
+  "id": "Q046",
+  "lane": "blockD",
+  "path": ".rank_debate[1]",
+  "quote": "We begin with an affine decomposition of model activation vectors and show that prior methods for steering model behavior correspond to subsets of terms of this decomposition.",
+  "url": "https://arxiv.org/abs/2411.09003"
+ },
+ {
+  "id": "Q047",
+  "lane": "blockD",
+  "path": ".rank_debate[2]",
+  "quote": "Contrary to prior work, we uncover multiple independent directions and even multi-dimensional concept cones that mediate refusal.",
+  "url": "https://arxiv.org/abs/2502.17420"
+ },
+ {
+  "id": "Q048",
+  "lane": "blockD",
+  "path": ".rank_debate[3]",
+  "quote": "Early work assumed behaviours are encoded along single linear directions, but recent findings suggest complex behaviours, such as the refusal to answer harmful queries, live in multi-dimensional subspaces.",
+  "url": "https://arxiv.org/abs/2607.02396"
+ }
+]

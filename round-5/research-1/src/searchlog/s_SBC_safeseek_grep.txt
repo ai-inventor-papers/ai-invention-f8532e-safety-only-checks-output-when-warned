@@ -1,0 +1,16 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2603.23268v1
+Type: HTML
+Pattern: redundan|checkpoint|across model|multiple model|compare.{0,20}model|rank (3 matches in 92705 chars)
+
+--- Content ---
+
+38611:...et al., 2023) on 1,000 samples with a 10% poisoning rate. The models are trained for 8 epochs with an initial learning rate l​r=10−4lr=10^{-4} and a batch size of 8. We employ LoRA (Hu et al., 2022) (rank r=16,α=16r=16,\alpha=16) for training efficiency. (2) Mask Training: We sample a small set of 100 entries from corresponding ID datasets and train the masks for 100 epochs with l​r=10−2lr=10^{-2}, im...
+--
+60414:...mation Processing Systems 36, pp. 16318–16352.  Cited by: §B.4, §1, §2, §3. 
+  * Du et al. (2025) T. Du, Z. Wei, Q. Chen, C. Zhang, and Y. Wang Advancing llm safe alignment with safety representation ranking.  arXiv preprint arXiv:2505.15710.  Cited by: §1. 
+  * Ferraris et al. (2025) A. F. Ferraris, D. Audrito, L. Di Caro, and C. Poncibò The architecture of language: understanding the mechanics behin...
+--
+63554:...ltitask language understanding.  arXiv preprint arXiv:2009.03300.  Cited by: §5.1. 
+  * Hu et al. (2022) E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, W. Chen, et al. Lora: low-rank adaptation of large language models..  ICLR 1 (2), pp. 3.  Cited by: §5.1. 
+  * Ji et al. (2025) J. Ji, K. Wang, T. A. Qiu, B. Chen, J. Zhou, C. Li, H. Lou, J. Dai, Y. Liu, and Y. Yang Language model...

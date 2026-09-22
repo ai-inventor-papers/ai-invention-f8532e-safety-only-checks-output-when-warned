@@ -1,0 +1,52 @@
+
+65721:...ng analysis, or direct behavioral evaluation. We treat that as the natural next direction.
+
+Code, contrastive pair datasets, pre-computed baselines, raw experimental outputs, and CI/CD integration examples are released open-source under Apache 2.0 at <https://github.com/GoogleCloudPlatform/activation-model-scanner>, with a permanent archival snapshot at <https://doi.org/10.5281/zenodo.19501951>.
+
+## Acknowledgments
+
+The author thanks the Google Cloud Kubernetes Engine (GKE) team for internal review and feedback, and the Goog...
+--
+67845:...rt of this research. The contrastive prompt pairs used for evaluation were author-designed and contain only the illustrative examples shown in Appendix D.
+
+## Data Availability
+
+AMS is available as open-source software under the Apache 2.0 license at <https://github.com/GoogleCloudPlatform/activation-model-scanner>. The repository includes the scanning tool, contrastive pair datasets, pre-computed baselines for popular models, and CI/CD integration examples. A permanent archival snapshot with DOI is available at Zenodo: <htt...
+--
+76036:...ICAgICAgICAgIGV4aXQgJChqcSAtciAnLmV4aXRfY29kZScgc2FmZXR5X3JlcG9ydC5qc29uKQ==)
+
+# .github/workflows/model-safety.yml
+
+name: Model Safety Check
+
+on: [push]
+
+jobs:
+
+safety-scan:
+
+runs-on: gpu-runner
+
+steps:
+
+- uses: actions/checkout@v4
+
+- name: Install AMS
+
+run: pip install ams-scanner
+
+- name: Scan model
+
+run: |
+
+ams scan ./model \--json > safety_report.json
+
+exit $(jq -r ’.exit_code’ safety_report.json)
+
+## Appendix B Implementation Details
+
+#### Code
+
+AMS is implemented in Python using HuggingFace Transformers for model loadi...
+--
+[4 more matches not shown]

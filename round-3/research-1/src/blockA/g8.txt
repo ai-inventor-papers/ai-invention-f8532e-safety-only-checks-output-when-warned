@@ -1,0 +1,35 @@
+Search: detect uncensored abliterated model from activations  [general via ddgs]
+Found: 8 results
+
+1. How to Use Uncensored (Abliterated) AI Models on Mobile and Desktop with "Privacy AI" and "LM Studio" | Privacy AI Documentation
+   https://privacyai.acmeup.com/docs/article_32_how_to_use_uncensored_ai_models_on_mobile_and_desktop_with_privacy_ai.html
+   Abliteration was developed to remove this specific refusal direction. By collecting activations of the model on harmful versus harmless instructions and taking the mean difference, researchers can ide...
+
+2. WTF Are Abliterated Models? Uncensored LLMs Explained
+   https://webdecoy.com/blog/wtf-are-abliterated-models-uncensored-llms-explained/
+   March 16, 2026 - Abliterated means the model has had its refusal behavior surgically removed by identifying and dampening the 'refusal direction' in its activation space. The result is an uncensored L...
+
+3. Qwen3.8-27B AEON Uncensored: How This Abliteration Actually Works | MindStudio
+   https://www.mindstudio.ai/blog/qwen3-8-27b-aeon-uncensored-abliteration
+   August 17, 2026 - Abliteration works by identifying that direction (usually by comparing activations on harmful versus harmless prompts) and then projecting it out of the model’s weights, so the model...
+
+4. Abliteration and the "Uncensored" Open-Weight Model Wave: What Removing a Refusal Actually Does - Phosphene Blog
+   https://phosphene.cc/blog/abliteration-uncensored-open-weight-models
+   August 21, 2026 - Abliteration is not retraining. It is a surgical intervention on the trained weights. The idea comes from a line of research into how refusal behavior is represented inside a languag...
+
+5. The Uncensored AI: What’s Actually Happening When People Strip Safety From AI | by Rekhi | Medium
+   https://medium.com/@Reiki32/whats-actually-happening-when-people-strip-safety-from-open-source-ai-06214672fa1c
+   February 28, 2026 - Abliteration finds that vector and removes it. The technique involves running the model on two datasets, one with harmless prompts and one with harmful prompts, measuring how the m...
+
+6. Uncensored and Abliterated Models: What They Are and How to Use Them | RunThisModel · RunThisModel
+   https://runthismodel.com/guides/uncensored-models-guide
+   March 28, 2026 - The process typically involves running many prompts through the model, identifying the activation patterns that distinguish refused from accepted requests, and then mathematically rem...
+
+7. What Are Abliterated Models? How Refusal Removal Works - Atomic Chat
+   https://atomic.chat/blog/guides/what-are-abliterated-models
+   4 weeks ago - The recipe derives a refusal direction from the difference between harmful and harmless residual-stream activations. It then orthogonalizes selected projection weights with layer-depende...
+
+8. Qwen Uncensored, Explained: Run the Abliterated 27B
+   https://www.orcarouter.ai/blog/qwen-uncensored-explained
+   August 17, 2026 - This guide covers what abliteration actually changed, how to pull the 30.9 GB of weights from Hugging Face, how to serve the model with vLLM, SGLang or Transformers, and what to run ...
+

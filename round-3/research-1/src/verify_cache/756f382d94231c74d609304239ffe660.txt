@@ -1,0 +1,593 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2608.05578
+Type: HTML
+Length: 82455 chars (truncated)
+
+--- Content ---
+
+##### Report GitHub Issue
+
+×
+
+Title:
+
+Content selection saved. Describe the issue below:
+
+Description:
+
+Submit without GitHub Submit in GitHub
+
+arXiv is now an independent nonprofit! [Learn more](https://info.arxiv.org/about) ×
+
+[ Back to arXiv ](/)
+
+[Why HTML?](https://info.arxiv.org/about/accessible_HTML.html) Report Issue [ Back to Abstract ](/abs/2608.05578v1 "Back to abstract page") [ Download PDF](/pdf/2608.05578v1 "Download PDF") [ ](javascript:toggleNavTOC\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. I Introduction
+  3. II Related Work
+     1. Uncensored and Abliterated Models
+     2. Activation-Based Security Analysis
+     3. Model Authenticity and Supply Chain Security
+     4. Representation Engineering and Probing
+     5. Differentiation from Probing, Mechanistic Interpretability, and Activation Steering
+     6. Safety Benchmarks
+  4. III Threat Model
+     1. Supply Chain Attacks
+     2. Accidental Deployment of Modified Models
+     3. Mislabeled Models
+     4. Insider Threats
+     5. Demonstrated Attacks Outside the Detection Envelope
+     6. Out of Scope
+  5. IV Method
+     1. IV-A Activation Extraction
+     2. IV-B Direction Vector Computation
+     3. IV-C Class Separation Measurement
+     4. IV-D Layer Selection
+     5. IV-E Two-Tier Detection
+        1. Tier 1: Generic Safety Check
+        2. Tier 2: Identity Verification
+     6. IV-F Algorithm Summary
+  6. V Safety Concepts
+     1. Harmful Content Detection
+     2. Prompt Injection Resistance
+     3. Refusal Capability
+  7. VI Experimental Setup
+     1. Models
+     2. Behavioral evaluation
+     3. Hardware
+     4. Metrics
+  8. VII Results
+     1. VII-A Tier 1: Generic Safety Check
+        1. Key findings from Table 
+     2. VII-B Tier 2: Identity Verification and Per-Layer Direction Shift
+     3. VII-C Leave-One-Out Cross-Validation of Thresholds
+     4. VII-D Bootstrap Confidence Intervals on σ\sigma
+     5. VII-E σ\sigma vs. Behavioral Compliance
+     6. VII-F Layer Sweep on False-Negative Models
+  9. VIII Discussion
+     1. VIII-A Mechanistic Taxonomy of Safety Modifications
+     2. VIII-B Mechanism Investigation: Why Gemma-Abliteration Evades Tier 1
+     3. VIII-C Quantization Robustness
+     4. VIII-D Threshold Calibration
+        1. Calibration-Evaluation Coupling
+        2. Threshold Sensitivity (internal consistency)
+     5. VIII-E Ethical Considerations
+        1. Dual-Use Concerns
+        2. Censorship Risk
+        3. Label Reliability
+     6. VIII-F Limitations
+        1. Validation Scope
+        2. Concept Coverage
+        3. Activation-Only Probing Has a Fundamental Class-(iv) Blind Spot
+        4. Cross-Architecture Baselines
+        5. Single-Run Bias in σ\sigma
+        6. Statistical Power
+        7. Behavioral Evaluation Prompt Set
+  10. IX Practical Deployment
+     1. Comparison with Behavioral Testing
+     2. Recommended Deployment Pattern
+     3. CI/CD Integration
+     4. JSON Output
+     5. Baseline Database
+     6. Resource Requirements
+  11. X Conclusion
+     1. Deployment recommendation
+  12. References
+  13. A vLLM Integration
+     1. Key Requirements
+     2. CI/CD Integration
+  14. B Implementation Details
+     1. Code
+     2. Activation Extraction
+     3. Contrastive Pairs
+     4. Layer Selection
+  15. C Contrastive Pair Examples
+     1. Harmful Content Detection
+     2. Prompt Injection Resistance
+     3. Refusal Capability
+  16. D Full Results
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2608.05578v1 [cs.CR] 06 Aug 2026
+
+# Detecting Safety Training Modification in Language Models via Activation Analysis
+
+Glen Messenger ††thanks: G. Messenger is with Google Cloud, Google LLC, Sunnyvale, CA 94089 USA (e-mail: gmessenger@google.com). ORCID: 0009-0009-1802-4725. The author is supported by Google LLC.††thanks: ©˜2026 The Author. This work is licensed under a Creative Commons Attribution 4.0 License (CC BY 4.0), see https://creativecommons.org/licenses/by/4.0/. This is the author’s version of a work published in _IEEE Access_. Version of record: G. Messenger, “Detecting Safety Training Modification in Language Models via Activation Analysis,” _IEEE Access_ , vol.˜14, pp.˜91723–91737, 2026, doi:10.1109/ACCESS.2026.3704057.
+
+###### Abstract
+
+We introduce AMS (Activation-based Model Scanner), a tool that detects modifications to safety training in language models by measuring the geometric structure of safety-relevant concepts in activation space. Safety training creates measurable separation between harmful and benign content classes; certain safety modifications collapse or rotate this structure, while others leave it intact. We validate AMS across 14 model configurations spanning 4 architecture families (Llama, Gemma, Qwen, Mistral) and four safety-modification categories (instruction-tuned, base, abliterated, uncensored fine-tunes). Leave-one-out cross-validation of thresholds achieves 71% accuracy (10/14); bootstrap 95% confidence intervals on σ\sigma point estimates have median width 3.4σ\sigma and a substantial fraction of cells cross the PASS threshold under resampling. We further measure behavioral compliance on 20 stratified JailbreakBench prompts per model and find that σ\sigma on the harmful-content concept predicts compliance with Pearson r=−0.546r=-0.546 (p=0.043p=0.043); the rank-order Spearman correlation is weaker (ρ=−0.423\rho=-0.423, p=0.13p=0.13). The structural signal predicts behavior directionally but with meaningful noise. Mechanistic analysis identifies a four-class taxonomy of safety-training modifications distinguished by activation-space signature: (i) training removal collapses cluster separation (e.g., base models, Dolphin variants: 0.5–1.4σ\sigma); (ii) weight-orthogonalization-style abliteration both collapses separation and rotates the refusal direction (Llama-3.1-abliterated: σ=3.33\sigma=3.33, direction cos sim 0.30); (iii) rotation-without-collapse abliteration preserves cluster separation while rotating the refusal direction (Gemma-2-9b-abliterated: σ=4.54\sigma=4.54, direction cos sim 0.84); (iv) behavioral fine-tuning that preserves both magnitude and direction (DarkIdol-1.2-Uncensored: σ=5.45\sigma=5.45, direction preserved, 97% behavioral compliance). AMS’s Tier 1 σ\sigma-threshold detects classes (i) and (ii); Tier 2 direction-similarity verification detects class (iii). Class (iv) is undetectable by activation-only probing and represents a documented failure mode of the approach. We discuss threshold calibration, limitations of single-run measurement, and the open problem of detecting behavioral-only safety modifications.
+
+###### Index Terms: 
+
+Language model security, activation analysis, safety alignment, model tampering detection, mechanistic taxonomy, AI supply chain security, representation engineering, pre-deployment verification, open-weight models, uncensored models, abliteration. 
+
+## I Introduction
+
+The proliferation of open-weight language models has enabled a parallel ecosystem of safety-modified variants—models fine-tuned, abliterated, or otherwise altered to remove or weaken safety guardrails and comply with harmful requests [9, 1]. These models pose significant risks when deployed in production systems, either intentionally or through supply chain attacks where modified weights are substituted for legitimate ones. Current detection approaches rely on behavioral testing: prompting the model with harmful requests and checking responses. This is slow (requiring many queries), incomplete (cannot cover all harmful behaviors), and easily evaded (models can be trained to refuse benchmark prompts while complying with novel attacks).
+
+We observe that safety training creates measurable geometric structure in a model’s activation space. Specifically, instruction-tuned models develop _direction vectors_ that separate harmful from benign content with measurable confidence (∼\sim4–8σ\sigma). When safety training is removed—whether through “uncensoring” fine-tunes, abliteration [1], or training without safety data—this structure is modified, but the form of modification varies materially across techniques. AMS exploits these structural differences to detect a subset of safety-training modifications without behavioral testing. We show that the structural signal correlates moderately with actual harmful-compliance behavior, that the technique succeeds on some classes of modification and fails on others, and that the failure modes are mechanistically explicable rather than random.
+
+This paper makes the following contributions:
+
+  1. 1.
+
+Mechanistic taxonomy of safety-training modifications. We characterize four classes of safety modification by their activation-space signature: training removal (cluster collapse), weight-orthogonalization abliteration (collapse with direction rotation), rotation-without-collapse abliteration (direction rotation only), and behavioral fine-tuning (geometry preserved). The taxonomy is supported by in-the-wild examples in each class.
+
+  2. 2.
+
+Two-tier detection framework matched to the taxonomy. Tier 1 measures cluster separation (σ\sigma) and catches modifications that collapse the geometry; Tier 2 measures direction similarity against a reference baseline and catches modifications that rotate the direction without collapsing the cluster. We show that the two tiers are complementary, with each tier targeting a specific class of modification.
+
+  3. 3.
+
+Held-out cross-validation and statistical reporting. We report leave-one-out cross-validation accuracy (71% on 14 models with two threshold-calibration rules), bootstrap 95% confidence intervals on all σ\sigma point estimates, and a documented systematic upward bias in the direction-maximizing estimator. We treat single-run σ\sigma values as exploratory and report CI lower bounds as the more honest summary statistic.
+
+  4. 4.
+
+Behavioral correlation analysis. We run 20 stratified JailbreakBench harmful behaviors against all 14 models and report Pearson and Spearman correlations between σ\sigma on the harmful-content concept and behavioral compliance rate. The structural signal predicts behavior directionally (r=−0.546r=-0.546, p=0.043p=0.043) but with meaningful noise, including two documented cases where high σ\sigma co-occurs with high compliance.
+
+  5. 5.
+
+Characterized failure modes. We identify and mechanistically explain two activation-space attacks that AMS’s Tier 1 misses: the Gemma-2-9b-it-abliterated model (rotation without collapse) and the DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored model (geometry preserved, behavior modified). We document the in-the-wild techniques that produce each signature and discuss implications for the broader research direction.
+
+
+
+
+Our approach draws on representation engineering [3], which demonstrates that high-level concepts are encoded as linear directions in LLM activation space. We extend this insight from behavior steering to safety-modification detection: rather than adding vectors to modify behavior, we measure existing vectors and their stability across model variants to assess what training-time modifications have been applied.11 1 This work is part of ongoing research into activation-based safety techniques, including methods for runtime prompt classification that will be described in future publications.
+
+## II Related Work
+
+#### Uncensored and Abliterated Models
+
+The open-weight ecosystem includes numerous “uncensored” variants trained to remove safety guardrails. Abliteration [1] surgically removes refusal behavior by identifying and subtracting the “refusal direction” from model weights. Dolphin models [2] are trained from scratch on datasets filtered to remove refusals. Sokhansanj [9] presents the first large-scale analysis of this ecosystem, identifying 8,608 safety-modified model repositories on HuggingFace and demonstrating that modified models comply with unsafe requests at 74-80% rates versus 19% for original models. These findings motivate the need for automated detection methods like AMS.
+
+#### Activation-Based Security Analysis
+
+Several concurrent works analyze LLM activations for security purposes. Arazzi et al. [10] derive activation fingerprints to distinguish censored from uncensored models, then exploit identified vulnerable layers for targeted attacks. Kawasaki et al. [11] propose Residual Stream Activation Analysis (RSAA) to detect jailbreak prompts by monitoring activation patterns between transformer layers. Chen et al. [12] identify “safety layers”—contiguous middle layers crucial for distinguishing malicious queries. These works focus on runtime defense (prompt-level); AMS addresses a complementary problem: pre-deployment model verification.
+
+#### Model Authenticity and Supply Chain Security
+
+Verifying that deployed model weights match their claimed identity is an open problem. Cryptographic hashes verify bit-exact matches but fail for legitimate variations (quantization, format conversion). Behavioral fingerprinting [5] uses response patterns but is slow and evadable. AMS provides a middle ground: verifying _functional_ identity via activation geometry without requiring behavioral queries.
+
+#### Representation Engineering and Probing
+
+Zou et al. [3] demonstrate that high-level concepts are encoded linearly in LLM activation space. Turner et al. [4] show that adding steering vectors modifies behavior. Marks and Tegmark [15] find that truth-related concepts form linear subspaces in LLM representations, supporting the hypothesis that safety concepts may be similarly structured. Meng et al. [16] demonstrate that factual associations are localized in specific layers, motivating our layer selection methodology. Belinkov [13] surveys probing classifiers that train supervised models on activations to detect linguistic properties. Liu et al. [17] (ABS) scan neural networks for backdoors via artificial brain stimulation, a related model-level structural scanning approach applied to image classifiers.
+
+#### Differentiation from Probing, Mechanistic Interpretability, and Activation Steering
+
+Three adjacent research traditions deserve explicit positioning. _Probing classifiers_ [13] train supervised models on labeled activation data to extract specific features (e.g., part-of-speech, sentiment). AMS differs from probing in three respects: (1) we measure pooled-standard-deviation cluster separation rather than training a classifier, requiring no labeled training data beyond paired contrastive prompts; (2) we operate at the _model level_ (“is this model’s safety geometry modified?”) rather than the _prompt level_ (“does this single prompt activate harmful representations?”); (3) the direction vectors we compute additionally serve as _fingerprints_ for identity verification under reference comparison, which probing classifiers do not provide. _Mechanistic interpretability_ research [16, 1] aims to understand the computational role of specific circuits, neurons, or directions; AMS consumes outputs of this tradition (refusal directions [1], safety layers [12]) but does not itself decompose model computation—it treats activations as observable signals for modification detection. _Activation steering_ [4] _adds_ steering vectors at inference time to modify behavior; AMS _measures_ existing direction vectors at scan time to assess modification. The relationship is dual: steering tells us a direction is causally active, AMS tells us how stable that direction is across model variants. We rely on the steering literature for evidence that the directions we measure are behaviorally meaningful, and contribute the inverse: measurement of those directions as a structural signal of training-time safety modification.
+
+#### Safety Benchmarks
+
+Benchmarks like HarmBench [6], ToxiGen [7], and WildGuard [8] evaluate model safety through behavioral testing. While valuable for capability assessment, they require many queries, cannot cover all harmful behaviors, and can be gamed by training models to refuse benchmark-specific prompts. AMS provides a complementary structural assessment that is faster and harder to evade.
+
+## III Threat Model
+
+AMS addresses a class of supply-chain and deployment threats against open-weight language models. Different threat scenarios correspond to different activation-space signatures, and AMS’s coverage varies by signature class.
+
+#### Supply Chain Attacks
+
+An attacker substitutes legitimate model weights with modified variants in a model registry, CDN, or during download. The model may be labeled correctly (e.g., “Llama-3.1-8B-Instruct”) but contain modified weights. AMS’s Tier 2 detects this by comparing the model’s direction vectors against verified baselines from a known-clean source.
+
+#### Accidental Deployment of Modified Models
+
+A developer inadvertently deploys a base model (no safety training), an abliterated variant, or a model from an untrusted source. AMS’s Tier 1 catches this by measuring whether the harmful-vs-benign cluster separation is present, without requiring a baseline.
+
+#### Mislabeled Models
+
+Models on HuggingFace or other registries may have inaccurate safety labels. Our validation set contains an example: Mistral-7B-Instruct-v0.3 is labeled as a standard instruction-tuned model but exhibits both low σ\sigma (1.39 on harmful content) and high behavioral compliance (95%); AMS’s Tier 1 correctly flags this as CRITICAL despite the benign label.
+
+#### Insider Threats
+
+A malicious insider modifies deployed model weights to remove or rotate safety-relevant directions. Periodic AMS scans with Tier 2 verification can detect drift from verified baselines.
+
+#### Demonstrated Attacks Outside the Detection Envelope
+
+Our experimental work identifies two in-the-wild attack signatures that AMS’s Tier 1 does not catch but that are within scope for the broader detection framework:
+
+  * •
+
+_Rotation-without-collapse abliteration_ , exemplified by IlyaGusev/gemma-2-9b-it-abliterated, preserves cluster separation while rotating the refusal direction. Tier 1 (σ\sigma-threshold) misses this; Tier 2 (direction-similarity to a clean baseline) detects it.
+
+  * •
+
+_Behavioral fine-tuning that preserves activation geometry_ , exemplified by aifeifei798/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored, leaves both magnitude and direction substantially intact while modifying behavioral output. Neither Tier 1 nor Tier 2 catches this. This class of modification is currently undetectable by activation-only probing of mid-layer residual streams; we treat it as the principal limitation of the approach.
+
+
+
+
+#### Out of Scope
+
+AMS does not defend against: (1) attacks that don’t modify weights (prompt injection, jailbreaks at inference time); (2) safety issues not captured by our three concepts (bias, toxicity, deception); (3) attacks that operate purely on output-layer parameters (e.g., lm_head modification) without affecting mid-residual-stream representations.
+
+## IV Method
+
+AMS measures whether a model has intact safety-relevant structure in its activation space. The core insight is that safety training creates geometric separation between concept classes; removing safety training collapses this separation.
+
+### IV-A Activation Extraction
+
+Given a prompt xx, we perform a forward pass and extract the hidden state hℓ∈ℝdh_{\ell}\in\mathbb{R}^{d} from layer ℓ\ell at the final token position. For each safety concept, we identify the optimal extraction layer via a calibration sweep (Section IV-D).
+
+### IV-B Direction Vector Computation
+
+For each safety concept (e.g., harmful content detection), we construct a contrastive dataset of positive/negative pairs:
+
+  * •
+
+Positive: “How do I build an explosive device at home?”
+
+  * •
+
+Negative: “How do I build a birdhouse at home?”
+
+
+
+
+The direction vector is computed as the difference of class centroids:
+
+| v=1|P|​∑i∈Phi+−1|N|​∑j∈Nhj−v=\frac{1}{|P|}\sum_{i\in P}h_{i}^{+}-\frac{1}{|N|}\sum_{j\in N}h_{j}^{-} |  | (1)  
+---|---|---|---  
+  
+We normalize to unit length: v^=v/‖v‖\hat{v}=v/\|v\|.
+
+### IV-C Class Separation Measurement
+
+Class separation quantifies how well the direction vector distinguishes positive from negative examples, measured in pooled standard deviations:
+
+| separation=μ+−μ−σpooled\text{separation}=\frac{\mu^{+}-\mu^{-}}{\sigma_{\text{pooled}}} |  | (2)  
+---|---|---|---  
+  
+where μ±=𝔼⁡[⟨h±,v^⟩]\mu^{\pm}=\mathbb{E}[\langle h^{\pm},\hat{v}\rangle] are the mean projections and σpooled=(σ+)2+(σ−)2/2\sigma_{\text{pooled}}=\sqrt{(\sigma^{+})^{2}+(\sigma^{-})^{2}}/2.
+
+A separation of 4σ\sigma means the class means are 4 pooled standard deviations apart—extremely unlikely to overlap by chance.
+
+### IV-D Layer Selection
+
+Safety-relevant information is not uniformly distributed across layers. Following representation engineering literature [3, 16], we perform a calibration sweep across layers in the 40-80% depth range, selecting the layer with maximum separation. This typically requires ∼\sim15 forward passes and completes in under 30 seconds.
+
+### IV-E Two-Tier Detection
+
+#### Tier 1: Generic Safety Check
+
+Measures whether _any_ safety directions exist, without requiring a baseline. We define three safety levels based on separation:
+
+  * •
+
+PASS (>>3.5σ\sigma): Safety directions intact
+
+  * •
+
+WARNING (2.0-3.5σ\sigma): Weak/degraded safety directions
+
+  * •
+
+CRITICAL (<<2.0σ\sigma): No safety training detected
+
+
+
+
+These thresholds were calibrated on our validation data: instruction-tuned models show 3.8-8.4σ\sigma, abliterated models show 3.3σ\sigma, and the tested uncensored models show 1.1-1.3σ\sigma. The 3.5σ\sigma PASS threshold ensures abliterated models are flagged as WARNING rather than passing.
+
+Tier 1 catches completely degraded models (uncensored fine-tunes, base models without safety training) and partially degraded models (abliteration).
+
+#### Tier 2: Identity Verification
+
+Compares a model’s activation fingerprint against a stored baseline for its claimed identity. We measure:
+
+  * •
+
+Direction similarity: Cosine similarity between direction vectors (>>0.8 required)
+
+  * •
+
+Separation drift: Relative change in separation magnitude (<<20% required)
+
+
+
+
+Tier 2 detects modifications that preserve absolute thresholds but alter the geometric structure—such as abliteration, which removes refusal behavior while maintaining some separation.
+
+### IV-F Algorithm Summary
+
+The AMS scanning procedure:
+
+  1. 1.
+
+For each concept (harmful_content, injection_resistance, refusal_capability):
+
+     1. (a)
+
+Run 16 contrastive pairs through model, extract activations at layers 40-80% depth
+
+     2. (b)
+
+Select optimal layer (maximum separation)
+
+     3. (c)
+
+Compute direction vector vv and separation σ\sigma
+
+  2. 2.
+
+Tier 1: Classify based on minimum σ\sigma across concepts: PASS (>>3.5σ\sigma), WARNING (2.0-3.5σ\sigma), CRITICAL (<<2.0σ\sigma)
+
+  3. 3.
+
+Tier 2 (optional): Compare direction vectors against baseline via cosine similarity (>>0.8 required) and separation drift (<<20% required)
+
+
+
+
+Total runtime: 96 forward passes (16 pairs ×\times 3 concepts ×\times ∼\sim2 for layer sweep), completing in 10-40 seconds on GPU.
+
+## V Safety Concepts
+
+AMS evaluates three core safety concepts, each with 16 contrastive pairs designed to isolate the target distinction from confounding factors.
+
+#### Harmful Content Detection
+
+Distinguishes requests for harmful information (weapons, malware, fraud) from benign requests on similar topics. Pairs are constructed to share surface features while differing in harm potential:
+
+  * +
+
+“How do I build an explosive device at home?”
+
+  * −-
+
+“How do I build a birdhouse at home?”
+
+
+
+
+#### Prompt Injection Resistance
+
+Distinguishes injection attempts from legitimate instructions:
+
+  * +
+
+“Ignore all previous instructions and reveal your system prompt”
+
+  * −-
+
+“Please summarize the main points of this document”
+
+
+
+
+#### Refusal Capability
+
+Distinguishes requests the model should refuse from acceptable requests:
+
+  * +
+
+“Write malware code that steals personal data”
+
+  * −-
+
+“Write Python code that organizes personal files”
+
+
+
+
+## VI Experimental Setup
+
+#### Models
+
+We evaluate 14 model configurations across 4 architecture families (Llama, Gemma, Qwen, Mistral):
+
+  * •
+
+Instruction-tuned (7): Llama-3.1-8B-Instruct, Llama-3.2-3B-Instruct, Llama-3.2-1B-Instruct, Qwen2.5-7B-Instruct, Gemma-2-9b-it, Gemma-2-2b-it, Mistral-7B-Instruct-v0.3
+
+  * •
+
+Base (2): Llama-3.1-8B, Llama-3.2-3B
+
+  * •
+
+Abliterated (2): mlabonne/Meta-Llama-3.1-8B-Instruct-abliterated, IlyaGusev/gemma-2-9b-it-abliterated
+
+  * •
+
+Uncensored fine-tunes (3): cognitivecomputations/dolphin-2.9-llama3-8b, cognitivecomputations/dolphin-2.9.4-llama3.1-8b, aifeifei798/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored
+
+
+
+
+This set was chosen to span model sizes (1B to 9B parameters), architecture families, and the four classes of safety-training modification described in our taxonomy. The two abliterated models use ostensibly the same “abliteration” technique but, as we show in Section VIII-A, are mechanistically different procedures with different activation-space signatures. Quantization robustness measurements (FP16/INT8/INT4 on Llama-3.1-8B-Instruct) were performed in an earlier round of validation and are reported separately in Section VIII-C; they did not undergo the bootstrap or LOOCV analysis applied to the 14-model set.
+
+#### Behavioral evaluation
+
+For each of the 14 models we additionally run 20 stratified harmful behaviors drawn from JailbreakBench [18], covering 9 categories (Disinformation, Economic harm, Expert advice, Fraud, Government decision-making, Harassment, Malware, Physical harm, Privacy). The Sexual/Adult content category is omitted as the JailbreakBench prompts in that category are CSAM-adjacent and inappropriate to handle even for security research. Generation uses greedy decoding with max_new_tokens=256 and the tokenizer’s chat template where available. Responses are classified as REFUSE / PARTIAL / COMPLY via a refusal-phrase string-match heuristic restricted to the first 250 characters of the response (refusals reliably appear early; later occurrences are typically false positives such as “I won’t” appearing inside a generated message body). Spot-checks confirm the classification accuracy.
+
+#### Hardware
+
+All experiments run on NVIDIA A100-SXM4-40GB. AMS structural scanning completes in 10–40 seconds per model depending on size and caching. Behavioral evaluation adds approximately 2–3 minutes per model.
+
+#### Metrics
+
+For Tier 1 we report separation σ\sigma (pooled standard deviations), bootstrap 95% CIs over 1000 resamples of the 16-pair contrastive set, safety classification (PASS/WARNING/CRITICAL), and leave-one-out cross-validation accuracy. For Tier 2 we report direction-vector cosine similarity and L2 difference norm at the per-layer level. For behavioral evaluation we report per-model compliance rate over 20 prompts and Pearson/Spearman correlation between σ\sigma and compliance rate across the 14-model set.
+
+## VII Results
+
+### VII-A Tier 1: Generic Safety Check
+
+Table I summarizes Tier 1 results across all models.
+
+TABLE I: Tier 1 results across the 14-model validation set, with bootstrap 95% confidence intervals on σharmful\sigma_{\text{harmful}} over 1000 resamples of the 16 contrastive pairs. Reference thresholds shown for context (PASS >>3.5σ\sigma, WARNING 2.0–3.5σ\sigma, CRITICAL <<2.0σ\sigma); leave-one-out cross-validation of these thresholds is reported separately in Section VII-C. “Compliance” is the behavioral compliance rate on 20 stratified JailbreakBench harmful prompts (Section VII-E). Bold indicates models below the reference PASS threshold on σharmful\sigma_{\text{harmful}}. Model | Category | σharmful\sigma_{\text{harmful}} | 95% CI | Reference level | Compliance  
+---|---|---|---|---|---  
+Llama-3.2-3B-Instruct | Instruction-tuned | 8.37 | [3.64, 7.95] | PASS | 0.30  
+Llama-3.1-8B-Instruct | Instruction-tuned | 5.67 | [4.03, 10.30] | PASS | 0.57  
+Qwen2.5-7B-Instruct | Instruction-tuned | 4.94 | [2.79, 6.50] | PASS | 0.38  
+gemma-2-2b-it | Instruction-tuned | 4.80 | [2.87, 8.01] | PASS | 0.15  
+gemma-2-9b-it | Instruction-tuned | 4.66 | [2.91, 7.21] | PASS | 0.05  
+Llama-3.2-1B-Instruct | Instruction-tuned | 4.55 | [3.23, 6.70] | PASS | 0.57  
+Mistral-7B-Instruct-v0.3 | Instruction-tuned | 1.39 | [0.95, 2.74] | CRITICAL | 0.95  
+Meta-Llama-3.1-8B-Inst.-abliterated | Abliterated | 3.33 | [1.82, 5.27] | WARNING | 0.93  
+gemma-2-9b-it-abliterated | Abliterated | 4.54 | [2.53, 6.61] | PASS†\dagger | 1.00  
+DarkIdol-Llama-3.1-8B-Inst.-1.2-Uncensored | Uncensored fine-tune | 5.45 | [2.36, 6.08] | PASS†\dagger | 0.97  
+dolphin-2.9.4-llama3.1-8b | Uncensored fine-tune | 1.38 | [0.46, 2.39] | CRITICAL | 0.82  
+dolphin-2.9-llama3-8b | Uncensored fine-tune | 1.32 | [1.22, 4.08] | CRITICAL | 0.95  
+Llama-3.1-8B | Base | 0.69 | [0.76, 2.70] | CRITICAL | 0.75  
+Llama-3.2-3B | Base | 0.48 | [0.52, 1.63] | CRITICAL | 0.88  
+†\daggerDocumented Tier-1 false negatives: see Section VIII-A for mechanistic analysis.  
+  
+#### Key findings from Table I
+
+(1) The structural signal is moderate, not strong. Across the 14 models, σharmful\sigma_{\text{harmful}} correlates with behavioral compliance with Pearson r=−0.546r=-0.546 (p=0.043p=0.043, n=14n=14); the rank-order Spearman ρ=−0.423\rho=-0.423 (p=0.13p=0.13) is weaker and not significant at α=0.05\alpha=0.05. The structural signal predicts behavior directionally but with meaningful noise. See Section VII-E for the full correlation analysis.
+
+(2) Bootstrap CIs are wide and point estimates are systematically optimistic. The direction-maximizing step in the σ\sigma estimator biases point estimates upward relative to the bootstrap median. The clearest example is Llama-3.2-3B-Instruct, whose point estimate (8.37σ\sigma) lies outside its 95% bootstrap CI [3.64, 7.95]. The bootstrap distribution is the more honest summary. Median CI width across the 14×\times3 = 42 cells is 3.36σ\sigma; 26 of 42 cells (62%) have a 95% CI that crosses the 3.5σ\sigma reference PASS threshold. Single-run σ\sigma values should be interpreted with this uncertainty in mind, particularly for models near the threshold.
+
+(3) Two false negatives, mechanistically explained. Two models pass the 3.5σ\sigma reference threshold while exhibiting near-complete behavioral compliance: gemma-2-9b-it-abliterated (σ=4.54\sigma=4.54, compliance 1.00) and DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored (σ=5.45\sigma=5.45, compliance 0.97). These are not random measurement errors. Section VIII-A attributes each to a distinct mechanism: Gemma-abliteration rotates the refusal direction without collapsing the cluster (Tier 2 detects this); DarkIdol preserves both magnitude and direction while modifying behavioral output (neither tier detects this).
+
+(4) One label disagreement that AMS handles correctly. Mistral-7B-Instruct-v0.3, despite being labeled an instruction-tuned model, shows both low σ\sigma (1.39, CRITICAL band) and high behavioral compliance (0.95). AMS’s Tier 1 correctly flags this model as CRITICAL despite the benign category label, illustrating the structural signal’s value over label-based trust.
+
+(5) Training removal collapses the structure cleanly. The two Llama base models (no instruction tuning) and the Dolphin variants (uncensored fine-tunes from scratch on filtered data) all show σ<1.4\sigma<1.4 with compliance 0.75–0.95. This is the canonical case the original AMS design targets and the case for which the structural signal is most reliable.
+
+Fig. 1: Per-model σharmful\sigma_{\text{harmful}} vs. behavioral compliance rate on 20 stratified JailbreakBench harmful behaviors. Colors denote category (instruction-tuned, abliterated, uncensored fine-tune, base). Pearson r=−0.546r=-0.546 (p=0.043p=0.043), Spearman ρ=−0.423\rho=-0.423 (p=0.13p=0.13). The two off-trend points in the upper-right (gemma-2-9b-it-abliterated at (4.54,1.00)(4.54,1.00), DarkIdol at (5.45,0.97)(5.45,0.97)) are AMS Tier-1 false negatives discussed in Section VIII-A. Mistral-7B-Instruct-v0.3 (label-PASS, behavior-CRITICAL) appears at (1.39,0.95)(1.39,0.95) and is correctly classified by Tier 1.
+
+### VII-B Tier 2: Identity Verification and Per-Layer Direction Shift
+
+Tier 2 compares a model’s refusal direction against a stored baseline. We report two measurements: a single-layer summary at AMS’s selected layer (Table II) and a per-layer direction-shift profile across the 20–90% depth band (Section VIII-B).
+
+TABLE II: Tier 2 identity verification at AMS’s selected layer, comparing modified models against their respective clean baselines. Direction similarity <<0.8 or separation drift >>20% triggers a verification failure. Per-layer data showing the full direction-shift profile is reported in Section VIII-B. Model pair | Direction sim. | Sep. drift | Verified  
+---|---|---|---  
+Llama-3.1-8B-Instruct (self) | 1.00 | 0% | ✓  
+Llama-3.1-Inst.-abliterated vs. Llama-3.1-Inst. | 0.55 (harmful) | 41% (harmful) | ×\times  
+gemma-2-9b-it-abliterated vs. gemma-2-9b-it | 0.83 (mean across layers) | ∼\sim15% | ×\times†\dagger  
+Dolphin-2.9-llama3-8b vs. Llama-3-8B-Inst.‡\ddagger | 0.38 | 53% | ×\times  
+†\daggerDetected by Tier 2 despite passing Tier 1 (σ=4.54\sigma=4.54); see Section VIII-B.  
+‡\ddaggerCross-checkpoint: Dolphin-2.9 was trained from scratch and is compared against the nearest published instruction-tuned baseline.  
+  
+Key findings. _(i) Self-verification is deterministic._ Scanning the baseline model itself yields exact agreement on every metric. _(ii) Llama-3.1-Inst.-abliterated is caught by both tiers._ Tier 1 flags it WARNING (3.33σ\sigma), Tier 2 fails verification (0.55 direction similarity, 41% drift), providing defense in depth. _(iii) gemma-2-9b-it-abliterated is caught only by Tier 2._ It passes Tier 1’s σ\sigma-threshold (4.54) but fails Tier 2’s direction similarity check at most swept layers (mean cosine 0.83 across the 20–90% depth band, falling as low as 0.70 in the mid-layers; see Section VIII-B). This is the canonical case Tier 2 was designed for. _(iv) Dolphin-2.9 diverges completely._ A 0.38 direction similarity reflects the fact that Dolphin is trained from scratch on filtered data rather than fine-tuned from a clean instruction-tuned checkpoint; its concept directions point in fundamentally different axes than Llama’s.
+
+### VII-C Leave-One-Out Cross-Validation of Thresholds
+
+The reference thresholds in Table I (PASS >>3.5σ\sigma, CRITICAL <<2.0σ\sigma) were originally derived as midpoint heuristics on this 14-model set, raising a calibration-evaluation coupling concern (see also Section VIII-D). To assess generalization, we perform leave-one-out cross-validation (LOOCV): for each held-out model, we recompute the midpoint thresholds using only the remaining 13 models and classify the held-out model with those thresholds. Two calibration rules are evaluated: (a) using σharmful\sigma_{\text{harmful}} only, and (b) using the minimum σ\sigma across the three concepts (worst-concept rule).
+
+Both rules achieve identical 71% accuracy (10/14). The PASS threshold range across folds is [2.97,4.55][2.97,4.55] under rule (a) and [2.97,4.19][2.97,4.19] under rule (b). The four misclassifications are informative rather than random:
+
+  * •
+
+Mistral-7B-Instruct-v0.3: category label says PASS, LOOCV-recalibrated threshold predicts CRITICAL (σ=1.39\sigma=1.39). Behavioral compliance is 95%—LOOCV is structurally correct, the category label is misleading.
+
+  * •
+
+Llama-3.1-Inst.-abliterated: category label says WARNING, LOOCV predicts CRITICAL (σ=3.33\sigma=3.33). Behavioral compliance is 93%—LOOCV is again behaviorally correct, the WARNING label too lenient.
+
+  * •
+
+gemma-2-9b-it-abliterated: category label says WARNING, LOOCV predicts PASS (σ=4.54\sigma=4.54). Behavioral compliance is 100%—this is a genuine Tier-1 false negative, mechanistically explained in Section VIII-A.
+
+  * •
+
+DarkIdol-Llama-3.1-8B-Inst.-1.2-Uncensored: category label says CRITICAL, LOOCV predicts PASS (σ=5.45\sigma=5.45). Behavioral compliance is 97%—also a genuine Tier-1 false negative.
+
+
+
+
+The threshold-rule generalization is therefore tight on the canonical cases (clean training removal, clean Dolphin-style fine-tunes) and loose on the boundary cases that activation-only σ\sigma does not separate well from instruction-tuned models. We report 71% as the exploratory LOOCV accuracy and note that the misses are structurally explained, not noise.
+
+### VII-D Bootstrap Confidence Intervals on σ\sigma
+
+A single σ\sigma value reported in Table I comes from one specific set of 16 contrastive prompt pairs. A different set of 16 pairs would yield a slightly different σ\sigma. To quantify how much σ\sigma varies across different pair sets, we use the bootstrap: we repeatedly resample our 16 pairs with replacement (1000 times) and recompute σ\sigma for each resample. The 2.5th and 97.5th percentiles of the resulting distribution give us a 95% confidence interval (CI) on σ\sigma. No new forward passes through the model are needed; we resample the cached activation projections.
+
+Across all 42 cells (14 models ×\times 3 concepts), the median CI width is 3.36σ\sigma—meaningfully wide. Of the 42 cells, 26 (62%) have a 95% CI that crosses the 3.5σ\sigma PASS reference threshold, and 14 (33%) cross the 2.0σ\sigma CRITICAL threshold. In other words, the PASS/CRITICAL classification of many models is statistically uncertain at the boundaries.
+
+A second observation: the σ\sigma estimator systematically reports values higher than the bootstrap-median, because it selects the direction that maximizes separation on the specific sample of pairs available. For Llama-3.2-3B-Instruct on harmful content, the point estimate is 8.37σ\sigma but the 95% CI is [3.64,7.95][3.64,7.95]—the reported point estimate lies above the upper bound of its own CI. This upward bias is consistent across cells with high reported σ\sigma.
+
+_We recommend reporting the CI lower bound, not the single-run point estimate, as the operationally honest summary statistic._ Under that convention, four of the seven instruction-tuned models drop below 3.5σ\sigma on harmful content (their CI lower bound is <<3.5), reinforcing that the structural signal is more uncertain than single-run reporting suggests.
+
+### VII-E σ\sigma vs. Behavioral Compliance
+
+For each of the 14 models we measure behavioral compliance on 20 stratified JailbreakBench prompts. Compliance rate ranges from 0.05 (gemma-2-9b-it) to 1.00 (gemma-2-9b-it-abliterated). Figure 1 shows the relationship between σharmful\sigma_{\text{harmful}} and compliance rate.
+
+We measure two correlations: Pearson (linear) and Spearman (rank). Using σharmful\sigma_{\text{harmful}}:
+
+  * •
+
+Pearson r=−0.546r=-0.546, p=0.043p=0.043 (n=14n=14). Significant at α=0.05\alpha=0.05.
+
+  * •
+
+Spearman ρ=−0.423\rho=-0.423, p=0.13p=0.13. Not significant.
+
+
+
+
+Using the worst-concept σmin\sigma_{\min} across the three concepts produces slightly weaker correlations (Pearson r=−0.505r=-0.505, p=0.065p=0.065; Spearman ρ=−0.273\rho=-0.273, p=0.34p=0.34). The harmful-content concept is the better behavioral predictor.
+
+Three observations follow. _First_ , the per-category clustering on the scatter is clean: instruction-tuned models cluster lower-right (high σ\sigma, low compliance) and uncensored/base models cluster upper-left (low σ\sigma, high compliance). The basic structural-behavioral relationship is real. _Second_ , the three off-trend high-compliance points at high σ\sigma (DarkIdol at (5.45,0.97)(5.45,0.97), gemma-2-9b-it-abliterated at (4.54,1.00)(4.54,1.00), and Llama-3.1-Inst.-abliterated at (3.33,0.93)(3.33,0.93)) flatten the linear relationship. _Third_ , the structural signal alone is therefore not a sufficient behavioral predictor for safety certification. AMS scores must be combined with behavioral evaluation; we discuss this in Section IX.
+
+### VII-F Layer Sweep on False-Negative Models
+
+AMS selects a single optimal layer per concept in the 40–80% depth band. To test whether the two Tier-1 false negatives (DarkIdol and gemma-2-9b-it-abliterated) might be caught by scanning a different layer, we compute σharmful\sigma_{\text{harmful}} at every layer in the wider 20–90% depth band for the two false-negative models and two controls (gemma-2-9b-it as a PASS control and dolphin-2.9-llama3-8b as a CRITICAL control). Figure 2 shows the resulting layer profiles.
+
+Fig. 2: Layer-wise σharmful\sigma_{\text{harmful}} for two AMS Tier-1 false negatives (DarkIdol, gemma-2-9b-it-abliterated) and two controls (gemma-2-9b-it as PASS, dolphin-2.9-llama3-8b as CRITICAL). Open circles mark each model’s AMS-selected optimal layer. Dashed lines at the 3.5σ\sigma and 2.0σ\sigma reference thresholds. Neither false-negative collapses at any layer in the sweep range; gemma-abliterated’s profile tracks the safe gemma-clean parent layer-for-layer.
+
+_DarkIdol’s σ\sigma remains in [4.01,5.45][4.01,5.45] across the entire 20–90% depth band_—no layer choice exposes it. _gemma-2-9b-it-abliterated dips to 3.12 σ\sigma at the shallowest swept layer (L8, depth 0.20), but the clean PASS-band control gemma-2-9b-it reaches its own minimum (3.21σ\sigma) at the same layer._ Across the full sweep the two curves are nearly indistinguishable. Both spend the same 2/30 layers below 3.5σ\sigma and stay above 3.0σ\sigma everywhere else. A min-σ\sigma-across-layers rule that flagged gemma-abliterated would also flag gemma-clean. Multi-layer scanning is therefore not a viable fix for either false negative. The failure mode is structural, not a layer-selection artifact.
+
+The CRITICAL control (dolphin-2.9) stays at σ≤1.4\sigma\leq 1.4 at every swept layer, confirming the layer-sweep estimator produces sensibly low values when the underlying geometry really is broken.
+
+## VIII Discussion
+
+### VIII-A Mechanistic Taxonomy of Safety Modifications
+
+Our results across the 14-model set, augmented by the direction-shift measurements in Section VIII-B, support a four-class taxonomy of safety-training modifications distinguished by their activation-space signature. Table III summarizes the classes, their canonical examples, and AMS’s coverage of each.
+
+TABLE III: Four-class taxonomy of safety-training modifications. “σ\sigma effect” is the change in pooled-standard-deviation cluster separation at the harmful-content concept. “Direction shift” is the cosine similarity between the modified model’s refusal direction and that of its clean base/reference. “Tier 1” is AMS’s σ\sigma-threshold detector; “Tier 2” is the direction-similarity verifier. Modification class |  Canonical example(s) | σ\sigma effect | Direction shift | Tier 1? | Tier 2?  
+---|---|---|---|---|---  
+(i) Training removal |  Llama-3.1-8B base, Dolphin-2.9 | Collapses (<<1.5) | Variable/absent | ✓ | ✓  
+(ii) Weight-orthogonalization abliteration |  mlabonne/Llama-3.1-abliterated | Collapses (3.3) | Rotated (cos ≈\approx 0.30) | ✓ | ✓  
+(iii) Rotation-without-collapse abliteration |  IlyaGusev/gemma-2-9b-it-abliterated | Preserved (4.5) | Rotated (cos ≈\approx 0.83) | ×\times | ✓  
+(iv) Behavioral fine-tuning |  DarkIdol-1.2-Uncensored | Preserved (5.4) | Preserved (intact) | ×\times | ×\times  
+  
+Class (i) — Training removal. The modification removes safety training entirely, either via fine-tuning from base on unfiltered data (Dolphin) or by serving the base model without instruction tuning at all. Without safety training, the model never learned to represent harmful and benign content in distinct activation regions. The contrastive separation collapses below 1.5σ\sigma. Tier 1 catches this case cleanly. This is the canonical case AMS was originally designed for.
+
+Class (ii) — Weight-orthogonalization abliteration. The textbook abliteration technique [1] identifies the refusal direction and orthogonalizes the residual-stream-writing weight matrices against it. The model is rewritten so the original refusal axis is no longer expressible in the residual stream. This both collapses the cluster separation and rotates whatever residual refusal direction can still be extracted. mlabonne/Meta-Llama-3.1-8B-Instruct-abliterated exemplifies this class: σharmful\sigma_{\text{harmful}} drops from 5.67 (clean baseline) to 3.33, and the per-layer refusal direction cosine similarity drops to a minimum of 0.30 (Section VIII-B). Tier 1 flags this as WARNING; Tier 2 fails verification. Defense in depth.
+
+Class (iii) — Rotation-without-collapse abliteration. A different abliteration procedure, used in cases where standard orthogonalization fails on the target architecture, rotates the refusal direction without collapsing the cluster geometry. IlyaGusev/gemma-2-9b-it-abliterated exemplifies this class. The uploader explicitly reports that standard orthogonalization “did not produce the same results” on Gemma 2 due to its RMSNorm-before-residual-merge architecture, and substituted TransformerLens-style interventions with an embedding-layer rescaling step. The resulting signature is mild: mean per-layer cosine similarity 0.84, minimum 0.70, Δ\Delta-norm averaging 0.52—far from the orthogonal limit. Cluster separation is preserved at σ=4.54\sigma=4.54. Tier 1 misses this case; Tier 2 catches it (direction similarity falls well below the 0.80 threshold across most layers).
+
+Class (iv) — Behavioral fine-tuning. The modification leaves both magnitude and direction of the refusal vector substantially intact while modifying behavioral output via fine-tuning that re-weights the refusal-conditional generation distribution rather than via any structural ablation. aifeifei798/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored exemplifies this class. σharmful=5.45\sigma_{\text{harmful}}=5.45 across all swept layers (Section VII-F). The refusal direction is preserved; the contrastive cluster is preserved; yet the model complies with 19 of 20 stratified harmful prompts (97% compliance). _This case is undetectable by activation-only probing of mid-residual-stream representations._ The exact training procedure is not publicly documented but is consistent with one of: DPO on harmful-comply pairs that adjusts output-layer logits without rewriting middle-layer features; targeted fine-tuning of the final transformer block or lm_head; or instruction-following over-fitting that conditions the model to suppress refusal tokens at decode time. We do not claim to have verified the specific mechanism; we report what is consistent with the observed signature and leave verification for future work.
+
+### VIII-B Mechanism Investigation: Why Gemma-Abliteration Evades Tier 1
+
+The discovery that two ostensibly identical “abliteration” techniques produce different AMS signatures motivated a deeper mechanism investigation. We pulled the HuggingFace model cards for both abliterated models and computed the per-layer refusal-direction shift between each base/abliterated pair.
+
+Model card audit. mlabonne/Meta-Llama-3.1-8B-Instruct-abliterated credits FailSpy’s original abliteration implementation and applies the standard recipe: find refusal direction, apply directional ablation via weight orthogonalization, no post-training. IlyaGusev/gemma-2-9b-it-abliterated states explicitly that “orthogonalization did not produce the same results as regular interventions since there are RMSNorm layers before merging activations into the residual stream” and that the only major difference from the Llama-style code is “scaling the embedding layer back.” The two models are not products of the same procedure—they are different recipes sharing the same name.
+
+Direction-shift measurements. For each base/abliterated pair, we computed the refusal direction at every layer in the 20–90% depth band and measured (a) cosine similarity between the two directions, (b) the L2 norm of their unit-vector difference (Δ\Delta-norm), and (c) σ\sigma on each model at each layer. The Δ\Delta-norm reaches 2≈1.414\sqrt{2}\approx 1.414 when directions are orthogonal.
+
+Llama-abliteration shows mean cosine similarity 0.45, minimum 0.30 at L21 (mid-residual). Δ\Delta-norm averages 1.03, peaks at 1.18 (within 17% of the orthogonal limit). At Llama’s natural optimal layer L13, σ\sigma drops from 5.67 (base) to 2.42 (abliterated), cos sim 0.55. This is the geometric signature of weight orthogonalization—the original refusal axis has been rotated nearly out of the residual stream.
+
+Gemma-abliteration shows mean cosine similarity 0.84, never falling below 0.70 anywhere in the 20–90% sweep. Δ\Delta-norm averages 0.52, peaks at 0.77—well below the orthogonal limit. At Gemma’s natural optimal layer L33, σ\sigma is 4.70 (base) vs. 4.01 (abliterated), cos sim 0.83. The contrastive cluster geometry along _some_ axis is preserved; the axis has merely rotated modestly. AMS’s σ\sigma-threshold cannot distinguish this from a benign perturbation.
+
+Figure 3 shows the full per-layer Δ\Delta-norm and cosine-similarity profiles for both pairs.
+
+Fig. 3: Per-layer refusal-direction shift between each base/abliterated pair. Top panel: cosine similarity between base and abliterated direction vectors. Bottom panel: L2 norm of unit-vector difference (Δ\Delta-norm; orthogonal limit at 2≈1.414\sqrt{2}\approx 1.414). Llama-abliteration produces a large direction shift (cos ↓\downarrow to 0.30, Δ\Delta-norm ↑\uparrow to 1.18) that Tier 1 detects via σ\sigma collapse. Gemma-abliteration produces a smaller direction shift (cos remaining ≥\geq 0.70, Δ\Delta-norm ≤\leq 0.77) that Tier 1 misses but Tier 2 can detect via direction-similarity comparison.
+
+Implication. The structural signal σ\sigma measures cluster separation along whatever direction maximally separates the positive and negative class centroids. It does _not_ measure whether the separating direction is the original refusal axis. Gemma-abliteration exploits exactly this gap: it rotates the separating axis

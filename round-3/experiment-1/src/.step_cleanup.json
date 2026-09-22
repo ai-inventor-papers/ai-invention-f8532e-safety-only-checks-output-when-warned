@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "at": 1790001848.2920468,
+  "dry_run": false,
+  "freed_bytes": 344798,
+  "skipped": "",
+  "removed": [
+    {
+      "path": "hf_cache",
+      "source": "structural",
+      "category": "cache",
+      "reason": "known cache directory",
+      "size_bytes": 0
+    },
+    {
+      "path": "src/__pycache__",
+      "source": "structural",
+      "category": "cache",
+      "reason": "known cache directory",
+      "size_bytes": 144418
+    },
+    {
+      "path": "src/h2/__pycache__",
+      "source": "structural",
+      "category": "cache",
+      "reason": "known cache directory",
+      "size_bytes": 200380
+    }
+  ],
+  "refused": []
+}

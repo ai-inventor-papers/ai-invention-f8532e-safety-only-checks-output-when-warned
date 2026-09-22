@@ -1,0 +1,47 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2608.25390
+Type: HTML
+Length: 8022 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2608.25390** (cs) 
+
+[Submitted on 26 Aug 2026 ([v1](https://arxiv.org/abs/2608.25390v1)), last revised 3 Sep 2026 (this version, v2)]
+
+# Title:Refusal geometry reflects refusal training: diverse refusal prefixes can raise stable rank and weaken refusal vector ablation attacks
+
+Authors:[Andrey Labunets](https://arxiv.org/search/cs?searchtype=author&query=Labunets,+A)
+
+View a PDF of the paper titled Refusal geometry reflects refusal training: diverse refusal prefixes can raise stable rank and weaken refusal vector ablation attacks, by Andrey Labunets
+
+[View PDF](/pdf/2608.25390) [HTML (experimental)](https://arxiv.org/html/2608.25390v2)
+
+> Abstract:Refusal training protects AI models from jailbreaks by training models to decline unsafe queries, reducing the risk of misuse. Recent work finds that refusal behavior in aligned language models can be mediated by a single activation direction or a low-dimensional refusal subspace shared across harmful prompts: ablating those directions suppresses refusals while largely preserves other model capabilities. Yet it remains unclear why safety-critical features in a wide range of models emerge in a concentrated, low-dimensional structure. In a case study of OLMo-2-0425-1B-Instruct we find that the refusal geometry reflects refusal training: activation updates resulting from refusal-completion first-token losses explain the resulting refusal direction and refusal subspace. We study refusal directions through the training dynamics across refusal datasets and reveal that their brittleness is associated with repetitive refusal starts, which in turn is linked to concentration of gradients and refusal features in a low-dimensional subspace. Across frozen-model analyses and controlled synthetic fine-tuning, we find evidence of a hardening lever: diverse refusal starts can raise stable ranks of gradients and activation changes, making refusals harder to remove with a vector ablation attack. 
+
+Subjects: |  Machine Learning (cs.LG); Artificial Intelligence (cs.AI); Cryptography and Security (cs.CR)  
+---|---  
+Cite as: | [arXiv:2608.25390](https://arxiv.org/abs/2608.25390) [cs.LG]  
+  | (or  [arXiv:2608.25390v2](https://arxiv.org/abs/2608.25390v2) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2608.25390> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Andrey Labunets [[view email](/show-email/e7ce4fae/2608.25390)]   
+**[[v1]](/abs/2608.25390v1)** Wed, 26 Aug 2026 05:35:54 UTC (678 KB)  
+**[v2]** Thu, 3 Sep 2026 01:09:32 UTC (678 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the pape

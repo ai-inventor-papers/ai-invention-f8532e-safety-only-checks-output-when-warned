@@ -1,0 +1,35 @@
+Search: model-level safety metric from internal representations few prompts  [general via ddgs]
+Found: 8 results
+
+1. When Behavioral Safety Evaluation Fails: A Representation-Level Perspective
+   https://arxiv.org/html/2606.08044
+   August 4, 2026 - Safety cases and pre-deployment audits ask for evidence of the former (Clymer et al., 2024; Casper et al., 2024), and no behavior-only metric can supply it, because such a metric repo...
+
+2. RAS: Measuring LLM Safety Through Refusal Alignment
+   https://arxiv.org/html/2606.25750
+   June 24, 2026 - Given a safety-aligned reference model, SafeVec extracts refusal directions and scores a target model according to how strongly its hidden states align with these directions under unsa...
+
+3. Safety-Aligned LLMs
+   https://www.emergentmind.com/topics/safety-aligned-large-language-models
+   January 12, 2026 - Zero-shot: Assessing model responses ... (CoT): Embedding 5-shot defense exemplars and/or explicit reasoning templates within prompts can boost refusal rates by 20–60 percentage poi...
+
+4. SG-Bench: Evaluating LLM Safety Generalization Across ...
+   https://proceedings.neurips.cc/paper_files/paper/2024/file/de7b99107c53e60257c727dc73daf1d1-Paper-Datasets_and_Benchmarks_Track.pdf
+   which also explains why InternLM2-7B-chat has better safety performance on both generation and ... performance, we only selected several representative jailbreak attack prompts to build a test subset...
+
+5. Rule Based Rewards for Language Model Safety Tong Mu∗ Alec Helyar∗
+   https://proceedings.neurips.cc/paper_files/paper/2024/file/c4e380fb74dec9da9c7212e834657aa9-Paper-Conference.pdf
+   Comply, 565 Hard-Refusal, and 185 Soft-Refusal prompts. We use the classifications of the Safety · RBR’s propositions to automatically evaluate three internal metrics: Not-Unsafe: the percentage...
+
+6. Advancing LLM Safe Alignment with Safety Representation Ranking
+   https://arxiv.org/html/2505.15710
+   May 21, 2025 - SRR encodes both instructions and candidate completions using intermediate transformer representations and ranks candidates via a lightweight similarity-based scorer. Our approach direc...
+
+7. Measuring What Matters: A Framework for Evaluating Safety Risks in Real-World LLM Applications
+   https://arxiv.org/html/2507.09820v1
+   July 13, 2025 - With the automated testing and evaluator in place, the safety score for an LLM application is simply the proportion of safe responses out of the total number of prompts it was probed w...
+
+8. On Prompt-Driven Safeguarding for Large Language Models
+   https://arxiv.org/html/2401.18018v2
+   March 4, 2024 - Inspired by these findings, we present a method for safety prompt optimization, named DRO (Directed Representation Optimization; §3). It takes the setting of the prompt tuning paradigm...
+

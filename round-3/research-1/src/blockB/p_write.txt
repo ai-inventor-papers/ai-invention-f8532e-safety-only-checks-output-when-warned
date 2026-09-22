@@ -1,0 +1,48 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2609.04721
+Type: HTML
+Pattern: write site|where it must be read (108 matches in 202263 chars)
+
+--- Content ---
+
+718:...\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. 1 Introduction
+  3. 2 Method
+     1. 2.1 Threat model
+     2. 2.2 Detector and the detect-then-gate loop
+     3. 2.3 Write site: the SSM selective-scan gate (anchor)
+     4. 2.4 Write site: the transformer attention output (reference)
+     5. 2.5 A recipe for siting the gate on a new model
+     6. 2.6 Baselines
+     7. 2.7 Why projection fails and gating should not
+  4. 3 Experimental Setup
+  5. 4 Locating refusal across architectures...
+--
+2092:...e but brittle.
+     3. State-space interpretability and cross-architecture transfer.
+  8. 7 Scope and Limitations
+     1. Attack coverage and available models.
+     2. The persona fix does not generalize.
+     3. The detector is a bound.
+     4. The write site is not free to calibrate.
+     5. The judge is validated, human counts on the newer architectures are small.
+  9. 8 Conclusion
+  10. References
+  11. A Technical Appendix
+     1. A.1 Formal definitions
+        1. Detector.
+        2. Refusal directi...
+--
+3542:...y resists a single refusal direction, and a two-direction fix
+        1. The fix is a different direction, not a stronger one.
+        2. The fix is weaker off the block output.
+     15. A.15 A second attack family and a compositional defense at the write site
+     16. A.16 RWKV: the residual is inert, but the sub-block write sites steer
+        1. Judging methodology.
+        2. The transport is also causal, though with a narrower specificity margin.
+        3. Why the lexical heuristic differs.
+        ...
+--
+[104 more matches not shown]

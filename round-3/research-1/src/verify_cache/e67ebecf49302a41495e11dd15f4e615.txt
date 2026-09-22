@@ -1,0 +1,269 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2608.16852
+Type: HTML
+Length: 144688 chars (truncated)
+
+--- Content ---
+
+##### Report GitHub Issue
+
+×
+
+Title:
+
+Content selection saved. Describe the issue below:
+
+Description:
+
+Submit without GitHub Submit in GitHub
+
+arXiv is now an independent nonprofit! [Learn more](https://info.arxiv.org/about) ×
+
+[ Back to arXiv ](/)
+
+[Why HTML?](https://info.arxiv.org/about/accessible_HTML.html) Report Issue [ Back to Abstract ](/abs/2608.16852v1 "Back to abstract page") [ Download PDF](/pdf/2608.16852v1 "Download PDF") [ ](javascript:toggleNavTOC\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. 1 Introduction
+  2. 2 Method: The Internal Compliance Score
+  3. 3 Evaluation Validity: What Compliance Benchmarks Can Measure
+  4. 4 Generalisation Beyond the Calibration Distribution
+  5. 5 Comparison with Deployed Guards
+  6. 6 What the Score Measures
+  7. 7 Score-Guided Candidate Selection
+  8. 8 Scope and Limitations
+  9. 9 Conclusion
+  10. A Experimental Setup
+     1. Models.
+     2. Compute budget.
+     3. Data.
+     4. Baselines and the floor pool.
+     5. Statistics.
+  11. B The Pre-Registered Gate
+     1. B.1 Full-Detail Tables Referenced from the Main Text
+     2. B.2 The Fixed-Scenario Counterfactual, in Full
+     3. B.3 The Crossed Rule-Scenario Benchmark, in Full
+     4. B.4 A Worked Example
+     5. B.5 LPG Violated-Policy-Removal Replication
+  12. C Full Per-Domain Gate Table
+  13. D Lexical Floors Across Benchmarks
+     1. D.1 Guard Models on the Same External and Degeneracy Benchmarks
+        1. The LLM judge splits along task type, not benchmark family.
+        2. The selection floor is not a compliance quirk, and it is not outgrown.
+  14. E Split Leakage Audit
+  15. F Cross-Family Generalisation (Leave-One-Family-Out)
+  16. G Applying Guards on Input vs. Response
+  17. H Matched-Threshold Calibration and Cross-Model Adaptation
+     1. H.1 Training-free comparators and model-specific recalibration, in full
+  18. I Rule Ablation, Visualized
+     1. I.1 Benign Inputs (Over-Flagging)
+  19. J Selection Nulls: the Budget-Matched Detection Floor
+  20. K Selection-Null Transfer Beyond Compliance
+  21. L Content-Selection: Generated Responses and the Judged Regulatory Task
+     1. It also works on generated content, not just verdicts.
+     2. And on the regulatory domain itself, judged.
+  22. M Independent Frontier-Model Validation of the LLM-Judge Claims
+  23. N Adversarial Robustness: Verdict- vs. Content-Selection
+     1. Content-selection resists the same attack.
+     2. But an adaptive white-box attack breaks it.
+  24. O Ablations and Robustness
+     1. O.1 Calibration Sensitivity: which ten pairs, and how many?
+        1. Template robustness.
+  25. P Metric Robustness
+  26. Q Threshold Transfer: Direction vs. Operating Point
+  27. R Perturbation Robustness
+  28. S Cross-Model Replication
+     1. The 72B Arm: Methodology
+  29. T Method Axes
+  30. U Sample Efficiency
+     1. Generalisation holds across base-model scale.
+  31. V Further Scope Conditions
+  32. W Extended Related Work
+  33. References
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2608.16852v1 [cs.AI] 17 Aug 2026
+
+# 
+
+Saisab Sadhu  Aadit Sengupta  Vinay Kumar Sankarapu  Affiliation: Pratinav Seth  Affiliation: Lexsi Labs Email: [saisab.sadhu@lexsi.ai](mailto:)
+
+Abstract Regulatory compliance monitoring in deployed language models is increasingly implemented as a legal and audit control, checking model outputs against written rules spanning data protection, healthcare, financial regulation, and platform policy. Such monitoring is meaningful only if a detector’s verdict depends on the stated rule rather than on surface features of the scenario. We show this condition fails across the current class of compliance detectors, a failure we call rule blindness. Deleting, permuting, or substituting the governing rule leaves detection accuracy unchanged for every guard and activation probe we test, including a policy-conditioned guard that correctly cites the governing clause’s position ninety one to ninety five percent of the time yet barely changes its verdict when that clause is swapped for its permissive counterpart. A purpose-built benchmark crossing two rules with two scenarios, so that neither alone predicts the label, confirms the failure under a design no prior benchmark rules out, and shows that step by step reasoning, not any fast detector we test, is what escapes it. Testing this at scale requires a detector cheap enough to run across many guards and benchmarks without retraining, so we introduce the Internal Compliance Score, a training-free activation readout calibrated from ten labelled pairs and scored by a single projection. We hold it to the same scrutiny as the guards it is compared against, and a pre-registered criterion for beating trivial baselines is not met, and a bag-of-words model matches its pooled generalisation exactly. It remains useful because it is inexpensive, letting us audit four deployed guard models, an 8B zero-shot judge, and thirteen benchmarks with no prior guard comparison, and it raises the mechanically verified pass rate when used to rank candidate responses, though an adaptive white-box attack removes this gain. We release the counterfactual protocol, including the crossed-rule benchmark, so rule blindness can be tested for in future probe and guard claims. _Keywords:_ compliance monitoring, activation probing, guard models, representation engineering, rule blindness
+
+## 1 Introduction
+
+Deploying a language model in a regulated setting requires checking outputs against written rules, and this checking is increasingly performed by a guard model, a classifier fine-tuned on a large labelled corpus and run as an additional forward pass (Inan et al., 2023; Han et al., 2024; Zhao et al., 2025a). Consider the storage-limitation principle in the General Data Protection Regulation (GDPR), which limits retention of personal data to what is necessary for the purpose of its collection (European Parliament and Council of the European Union, 2016). A compliance monitor might operationalise this principle as a concrete rule, deletion within ninety days, and check it against a case in which data was retained for four hundred days. A deployed guard correctly flags the violation, yet flags the identical case even when that rule is replaced with an unrelated one or removed outright, so its verdict tracks the scenario rather than the governing rule. The same requirement recurs across data protection, healthcare privacy, financial regulation, and platform content policy alike, and the twenty regulatory domains evaluated in this paper span exactly this range, so the failure is not confined to one jurisdiction or industry.
+
+We term this failure rule blindness, and show it is not confined to a single system, since deleting, permuting, or substituting the governing rule leaves detection accuracy unchanged for every guard model we test and for a training-free activation probe of our own. The guards divide into two kinds and both fail, for different reasons. Fixed-taxonomy safety classifiers such as Llama Guard 3 and Qwen3Guard never receive the rule, so they cannot track it by construction and their failure is a scope limitation rather than evidence about rule-conditioned systems. Policy-conditioned guards do receive it: LPG reads the rule through its own documented custom-policy channel, correctly cites the governing clause, and still barely changes its verdict when that clause is swapped for its permissive counterpart. The failure therefore spans the one-pass detector families we test, conditioned and unconditioned alike, rather than any particular architecture or training regime. An identical pattern has been reported independently for activation probes applied to safety classification (Jiao et al., 2026; Schwarz, 2026) (full positioning in the paper’s Extended Related Work section (§W)), suggesting it is not specific to regulatory compliance. This matters because compliance monitoring is increasingly adopted as a legal and audit control across these sectors, and a detector that cannot distinguish a scenario from the rule that governs it offers only the appearance of rule-specific assurance, regardless of which rule is in force.
+
+Establishing rule blindness at the scale of an entire field, across many guard models, activation probes, and benchmarks, requires a detector inexpensive enough to be run repeatedly without retraining. Guard models cannot meet this requirement, since fine-tuning demands a large labelled corpus, inference demands a complete additional forward pass, and the resulting classifier remains frozen and cannot track a monitored model that is later fine-tuned. We address this requirement by constructing the Internal Compliance Score (ICS), a difference-of-means readout in the lineage of representation engineering, the refusal direction, and mass-mean probing (Zou et al., 2023a; Arditi et al., 2024; Marks and Tegmark, 2023; Burns et al., 2022), applied here to written rules rather than safety labels. ICS reads the activations of the monitored model directly rather than querying a separate network, is calibrated from ten labelled pairs, and is scored by a single dot product, allowing the rule-blindness audit to be conducted across deployed guards (Llama Guard 3, WildGuard, Qwen3Guard, HarmBench (Mazeika et al., 2024), SIREN (Jiao et al., 2026), GLiGuard, and Latent Policy Guard (Li et al., 2026)), activation probes, an 8B zero-shot judge, and thirteen external benchmarks on which no prior guard comparison exists (§D.1); the nearest published neighbour is a compliance-framed whitening score with a different estimator and readout (Rachmil et al., 2025), positioned fully in the paper’s Extended Related Work section (§W).
+
+ICS is evaluated against the same budget-matched selection null and pre-registered floor criterion applied to the guards it is compared against (§B). Among the methods compared here, ICS is the only one that is training-free, reads the monitored model directly, and recalibrates to a changed model at negligible cost, even though every method under test, ICS included, is rule-blind; the claim advanced for it is accordingly structural rather than one of superior accuracy. Whether such probes and their benchmarks can be trusted at all is a standing concern (Bailey et al., 2024; McCoy et al., 2019), positioned fully, including against dynamic policy-conditioned guards, in the paper’s Extended Related Work section (§W).
+
+This paper makes four contributions, in that order of priority.
+
+  * •
+
+Method. We introduce the Internal Compliance Score, a training-free activation readout that scores compliance risk directly from the monitored model, built from a difference of class means over a small labelled calibration set with no gradient step and one projection per case.
+
+  * •
+
+Evaluation. We compare ICS against deployed guards, internal-representation probes, a gradient-based training-free detector, an 8B zero-shot judge, and lexical baselines, across compliance, safety, and held-out distributions, under budget-matched selection nulls, lexical floors, benign-input false-positive rates, and matched threshold budgets. The same pass audits the public compliance benchmarks themselves: four of seven are solvable by a policy-blind bag-of-words model, so they cannot adjudicate a rule-conditioned claim at all.
+
+  * •
+
+Characterisation. Counterfactual rule interventions, and a purpose-built benchmark crossing rules with scenarios so that neither alone predicts the label, show that ICS and every efficient detector we test capture a broad violation signal more reliably than they compose the supplied rule with the scenario. We name this rule blindness, document it across every guard architecture and robustness check we run, and bound what any activation-based compliance readout can claim.
+
+  * •
+
+Application. ICS ranks candidate responses well enough to raise the mechanically verified pass rate on IFEval by 5.2 percentage points, while a white-box adaptive attack drives the same mechanism to its floor and so fixes a non-adversarial scope for it.
+
+
+
+
+## 2 Method: The Internal Compliance Score
+
+Figure 1: The full pipeline, build to score to decide. Offline calibration (left) fits the direction and calibrates the anchor layer and threshold on two disjoint held-out slices, formalised opposite, before any test case is touched. Online inference (centre) costs one forward pass, one activation extraction, and one dot product. The decision stage (right) thresholds the score or, where useful, ranks or routes on it. Total cost is 2​n2n forward passes to calibrate and one to score, no gradient step anywhere. Omitted for space: every scored arm is also checked against a budget-matched null, a lexical floor, and, where applicable, the pre-registered gate.
+
+Figure 1 gives the full pipeline this section formalises. We build dd once from ten pairs, calibrate ℓ∗\ell^{\ast} and τ\tau on two disjoint held-out slices, then score any new case at the cost of one dot product, with every reported number checked against a null, a floor, and the pre-registered gate. Let MM be a decoder transformer with LL blocks and residual width dd. Let aℓ​(x)∈ℝda_{\ell}(x)\in\mathbb{R}^{d} denote the layer-ℓ\ell residual-stream activation at the final token of text xx, with the token position and site ablated in §O. Given nn calibration pairs {(xi+,xi−)}i=1n\\{(x_{i}^{+},x_{i}^{-})\\}_{i=1}^{n} of adherent and violating texts for a rule family RR, the _adherence direction_ at layer ℓ\ell is the normalized difference of class means,
+
+| d^ℓ=a¯ℓ+−a¯ℓ−∥a¯ℓ+−a¯ℓ−∥+ε,a¯ℓ±=1n​∑iaℓ​(xi±),\hat{d}_{\ell}\;=\;\frac{\bar{a}_{\ell}^{+}-\bar{a}_{\ell}^{-}}{\lVert\bar{a}_{\ell}^{+}-\bar{a}_{\ell}^{-}\rVert+\varepsilon},\qquad\bar{a}_{\ell}^{\pm}=\tfrac{1}{n}\textstyle\sum_{i}a_{\ell}(x_{i}^{\pm}), |  | (1)  
+---|---|---|---  
+  
+and the score is the projection ICSℓ​(x)=⟨aℓ​(x),d^ℓ⟩\mathrm{ICS}_{\ell}(x)=\langle a_{\ell}(x),\hat{d}_{\ell}\rangle.
+
+The numerator of (1) points _from_ the violating prototype _to_ the adherent one, so higher ICS means more adherent, and every sign in the paper follows from that choice. Guardrail baselines use the opposite convention, an easy source of silent inversion we guard against explicitly with a 10−910^{-9} reference-implementation check.
+
+Since ⟨a,d^⟩=∥a∥cos(a,d^)\langle a,\hat{d}\rangle=\lVert a\rVert\cos(a,\hat{d}), the raw score mixes angle with norm, and norm is a live confound (length alone scores 0.566), so we report the cosine variant beside it; the two tie, and ∥a∥\lVert a\rVert alone is near chance (§O). Equation (1) with a midpoint threshold is nearest-centroid classification, Fisher’s LDA under identity covariance, not parameter-free but requiring no optimizer and no hyperparameter sweep, though the full pipeline still spends labelled data on two validation slices, one to pick the layer and one to set the threshold, and at small nn approximately the regularized logistic solution (§U), which we treat as the informed ceiling. Each domain’s pairs split 40/20/20/2040/20/20/20 into train, val-layer, val-thresh, and test (seed 42, grouped so no text straddles a boundary): the direction is fit on train, the anchor ℓ∗=arg⁡maxℓ⁡AUROCval-layer\ell^{*}=\arg\max_{\ell}\mathrm{AUROC}_{\text{val-layer}} on the second (a single consensus layer costs <0.01<0.01), the threshold τ\tau on the third, and test is touched once. We report AUROC as primary, since the equal-variance assumption behind τ\tau fails, and FPR​@​95%​TPR\mathrm{FPR}@95\%\mathrm{TPR} as the operating point; every headline finding survives re-expression under both and AUPRC (§P), so none is an AUROC artifact.
+
+The hypothesis is I⁡(a⁡(x);Y∣S⁡(x))>0I\\!\left(a(x);Y\mid S(x)\right)>0, that activations carry adherence signal beyond text surface S⁡(x)S(x), lexical content, sentiment, length. A benchmark that narrates the verdict makes YY a function of S⁡(x)S(x) and any AUROC uninformative (§3), so every headline number is on outcome-ablated inputs and the headline statistic is the margin Δ=AUROCICS−maxb∈ℬ⁡AUROCb\Delta=\mathrm{AUROC}_{\mathrm{ICS}}-\max_{b\in\mathcal{B}}\mathrm{AUROC}_{b} over trivial baselines, with paired-bootstrap CIs and BH correction. Δ≤0\Delta\leq 0 is a reportable outcome, not a failure mode. Four statistical rules hold throughout. First, every metric appears with its exact null. Second, ceilings are one-sided Clopper–Pearson bounds, never 1.01.0; raw perfect-separation point estimates are reported conservatively as >0.999>0.999. Third, best-of-kk is scored against its exchangeable null, P⁡(arg⁡max≠first)=1−1/kP(\arg\max\neq\text{first})=1-1/k, the gain over a random-selection arm. Fourth, a permutation-null direction accompanies every detection table.
+
+Unless noted, the model is Llama-3.2-1B-Instruct and the corpus is outcome-ablated OmniCompliance (Hu et al., 2026), 20 domains, with the Outcome: field removed from every scored text (§3), same split above. The full model roster, baseline and floor pool, and statistics are in §A.
+
+What ICS is calibrated on, and what it is tested on. Calibration and test are always disjoint, asserted throughout (§A), and only the calibration set’s _breadth_ varies below. _Per-distribution_ calibration draws its pairs from the same distribution as the test, the strong in-domain case. _Calibrate-once_ withholds an entire distribution, building the direction from the others so the held-out one appears _only_ at test time, exactly as a deployed guard meets an input it was never trained on (Figure 3).
+
+## 3 Evaluation Validity: What Compliance Benchmarks Can Measure
+
+This criterion determines which numbers in the paper are meaningful, so we state it before reporting any. OmniCompliance (Hu et al., 2026) structures each case as a rule, a scenario, and an Outcome field that states the regulatory result in natural language, for example “fined EUR 725,000 for privacy violations,” and the label is written into the input. On the as-published task the trivial baselines saturate, so no probe result on it is interpretable.
+
+The obvious diagnosis, that a probe reads the narrated verdict, is _refuted_ by ablation. Removing the Outcome field and refitting barely moves detection (20-domain mean 0.968 →\to 0.952): the field is sufficient for the label but not necessary, and the label is encoded redundantly across the scenario. The problem is therefore degeneracy, not contamination. When YY is near-deterministic in the text surface S⁡(x)S(x), the conditional term I⁡(a⁡(x);Y∣S⁡(x))I(a(x);Y\mid S(x)) has no room to be nonzero, bounding what _any_ method on the corpus can show, ours included. It is a property of provenance, not of one dataset: whenever a label is fixed before its prose is written, or recoverable from prose written afterwards, it survives in surface vocabulary. Consequently every detection number we report is on outcome-ablated inputs, carries its trivial-baseline rows and a permutation null, and bolds only the margin over the strongest _named_ baseline. We treat the ablated task as necessary but not sufficient, and the same audit applied to six further public compliance benchmarks leaves only two that can adjudicate a probe at all (Table 1); §D adds benchmarks with mechanical rather than narrated ground truth. Splits are case-level, and we verified the leakage profile rather than assuming it (68% of test cases share a source_rule with train, yet a rule-disjoint restriction leaves AUROC unchanged, 0.962 vs. 0.956). This is a statement about what such corpora can _evaluate_ , not their construction quality.
+
+Table 1: Four of seven public compliance benchmarks are lexically degenerate. _Lex. Floor_ , strongest policy-blind bag-of-words model. _Degenerate_ , floor is high and the probe does not clear it, even for the human-expert-labelled one (AIReg-Bench). Full 14-benchmark table, Table 16 in §D.
+
+Benchmark Lex. Floor ICS Budget Null Verdict OmniCompliance 0.896 0.952 0.714 Degenerate DynaBench 0.982 0.784 0.576 Degenerate SafePyramid 0.90+ 0.871 0.673 Degenerate AIReg-Bench 0.957 0.943 0.708 Degenerate CompliBench 0.879 0.700 0.549 Borderline FlexBench 0.802 0.832 0.603 Clean IFEval 0.574 0.628 0.530 Clean
+
+## 4 Generalisation Beyond the Calibration Distribution
+
+A guard’s value is that it is calibrated once and then handles whatever arrives, so the first question for a training-free readout is whether it survives leaving its calibration distribution. We answer that here and defer to §6 the separate question of what the resulting score represents. We compare ICS against _generative_ guards (Llama Guard 3, Qwen3Guard-8B, WildGuard-7B, HarmBench), _internal-representation_ probes (SIREN, GLiGuard), an 8B zero-shot LLM judge, and Latent Policy Guard (Li et al., 2026), a learned latent reasoner sharing no method overlap with ICS but the same cheap-inference-time-adherence motivation, on the full outcome-ablated OmniCompliance benchmark, under every metric and on benign inputs.
+
+We test whether a training-free direction is a _calibrate-once guard competitive at near-zero cost_ : generalisation, external sources, and efficiency support it; cross-family collapse, rule-blindness, and an adaptive attack bound it; in-domain accuracy is the control. Of the five detector types tested, _zero_ read the rule rather than a generic violation signal (§6) or hold across compliance and safety data (Table 12). ICS’s own cost advantage, zero trained parameters and roughly ten labelled pairs per source distribution (∼\sim100–160 pooled total, not ten total, §O.1) against every other arm’s 1–8B parameters and 10310^{3}–10510^{5} pairs, is in Figure 2.
+
+We pool compliant/violating and safe/unsafe pairs from _eleven_ distinct distributions (OmniCompliance, the three TRIDENT domains, and six safety benchmarks, Table 2), fit a _single_ difference-of-means direction, and test it _leave-one-distribution-out_ : calibrate with a distribution held out entirely, then score it. Mean AUROC on distributions never seen is 0.728, 10/11 above 0.60, clearing its budget-matched null (0.557) at a −0.12-0.12 cost against per-distribution calibration (0.849). The cross-family case is sharpest: with OmniCompliance held out entirely, trained only on TRIDENT and safety, the direction still reads regulatory compliance at 0.783, above the deployed guards on that distribution (Llama Guard 3 0.689, SIREN 0.697). A pooled bag of words matches the pooled mean exactly (TF-IDF LODO 0.728), but that tie is an average: on the outcome-ablated compliance task itself, where lexical shortcuts are removed by design, the internal direction beats TF-IDF by +0.26+0.26, and TF-IDF only draws level on distributions with residual surface cues, so ICS’s case where it ties is structural, first-party, zero-parameter, and re-fittable rather than accuracy (§H). Two scope conditions bound the result for a deployer. The _direction_ , not the operating threshold, is what transfers calibrate-once: a fixed cross-domain τ\tau blows FPR​@​95\mathrm{FPR}@95 up to 77–94% (§Q), so the threshold is re-calibrated per domain even as the direction is reused. And the generalisation is _within-family_ : withholding a whole family, all safety or all compliance, collapses cross-family transfer to chance (0.55/0.48, §F).
+
+Table 2: Calibrate-once, leave-one-distribution-out (AUROC↑\uparrow). _Null_ , budget-matched random directions; _In-Dom._ , per-distribution ICS within this experiment’s own protocol (an upper bound, not a second measurement of the 0.952 headline figure). Clears its null (0.728 vs. 0.557) but ties TF-IDF in the mean.
+
+Held-Out Distribution Family ICS Null TF-IDF In-Dom. OmniCompliance Compliance 0.783 0.538 0.523 0.976 TRIDENT-finance Reg-QA 0.737 0.587 0.836 0.837 TRIDENT-law Reg-QA 0.549 0.555 0.865 0.777 TRIDENT-med Reg-QA 0.917 0.627 0.937 0.916 ToxicChat Safety 0.706 0.546 0.674 0.846 OpenAI Mod. Safety 0.708 0.549 0.725 0.898 Aegis 1.0 Safety 0.639 0.529 0.685 0.833 Aegis 2.0 Safety 0.694 0.512 0.661 0.780 WildGuard Safety 0.718 0.559 0.623 0.864 PKU-SafeRLHF Safety 0.740 0.550 0.777 0.800 BeaverTails Safety 0.820 0.574 0.703 0.810 Mean 0.728 0.557 0.728 0.849
+
+The complete calibrate-on-X, test-on-Y grid (Table 12) confirms that block structure at every cell, and no single calibration ships everywhere: even the best single calibrator collapses on the opposite family. Calibrate on the family you will monitor.
+
+A stricter check scores the three pool directions on _seven_ never-pooled external benchmarks sharing no row, benchmark, or collection process with any pool. The readout fires above chance on never-seen sources and the family structure mostly holds, but the compliance half holds only marginally: an external compliance set is read above chance by the _shared_ signal, not the compliance-specialised direction (Table 13).
+
+## 5 Comparison with Deployed Guards
+
+Calibrated on the test distribution directly (Table 21), ICS reaches AUROC 0.952 on OmniCompliance and beats every deployed guard head-to-head (+0.203+0.203 over Llama Guard 3, +0.255+0.255 over SIREN, an MLP on the same activations, 0.966, and LPG-4B, 0.943, tie it). This is the in-domain case: ICS gets in-domain pairs while the guards run zero-shot out of their safety-training domain, so the leave-one-out number above, not this one, is the calibrate-once comparison the claim rests on.
+
+A guard can screen a compliance case as an _input_ (Scenario in the prompt slot) or judge it as a _response_ (Scenario in the output slot against the Rule); the two are not interchangeable, so we run every generative guard in both modes and report both (§G). Response mode is stronger for all four guards on compliance, decisively for WildGuard, whose prompt-slot head is near-chance on trident and recovers only in response mode (0.785→\to0.875 AUROC on OmniCompliance). An earlier draft’s per-metric tables here and in Table 21 mixed a fixed prompt-slot mapping, the weaker of the two modes for Llama Guard 3, WildGuard, and Qwen3Guard, understating them by 0.060, 0.090, and 0.023 AUROC respectively; every headline table now credits each guard its response mode uniformly, recomputed and verified per-domain-then-mean from the raw scores behind Table 20. The comparison the claim actually rests on, calibrate-once generalisation (Table 2), never used these rows either way. ICS sidesteps the mode choice, since it reads the activation over the case text itself.
+
+At their shipped threshold, guards rarely flag a regulatory violation (recall 0.08–0.22), so native F1 is low against ICS’s 0.904 (Table 3); this is mostly a threshold artifact, not a capability gap. Given every guard the _same_ target-domain threshold budget ICS gets (native, ten pairs, the full budget, or a Platt/isotonic map, fit held-in and scored on a disjoint fold), the collapse recovers to F1 0.54–0.80 (Table 22). ICS’s advantage is _ranking_ , not threshold access: its AUROC (0.952) clears every guard’s (0.735–0.901) budget-free, and at matched calibration it still leads every threshold metric (F1, FPR@95, TPR@10), so ranking, or the calibrate-once generalisation (Table 2), is the comparison that holds.
+
+Two supporting results are summarised here and given in full in §H. The training-free story is not idiosyncratic to difference-of-means: GradSafe, a gradient-based training-free detector, also beats every deployed guard on compliance once re-referenced with sixteen compliance pairs, and collapses to chance under its native safety reference, the same failure the safety-trained guards show. And because ICS reads the monitored model’s own activations, it can be re-fit on that model after fine-tuning, where a shipped guard is a separate frozen network; a fresh ten-pair refit holds across nine models and multiple fine-tunes, AUROC within 0.007 of base (§H).
+
+Guards are trained for safety, so we also run every arm on their home domain, the standard seven safety benchmarks, by Macro F1 (Table 11), and on benign inputs (Table 24). There they are strong on detection but pay in _over-refusal_ , WildGuard flagging 75% of adversarially-benign OR-Bench prompts, which is what a comparison run only on regulatory compliance, the guards’ non-native domain, would otherwise obscure. §6 shows the whole class shares a rule-blind spot.
+
+Table 3: Detector comparison, in-domain. Native-threshold F1 (_Native_) vs. ten-pair-budget F1 (_Recal._); guard AUROCs now uniformly credit each guard its stronger, response mode (§5, full metrics in Table 21 and Table 22).
+
+Arm AUROC F1 (Native) F1 (Recal.) ICS (ours) 0.952 0.897 0.895 Qwen3Guard-Gen (8B) 0.908 0.158 0.804 LLM judge (zero-shot, 8B) 0.901 0.831 0.817 WildGuard (7B) 0.875 0.124 0.715 HarmBench cls (7B) 0.735 0.094 0.656 Llama Guard 3 (1B) 0.749 0.265 0.580
+
+## 6 What the Score Measures
+
+The sections above establish that ICS ranks compliance risk competitively and at low cost. None of it establishes _what_ the score is reading, and that is the question this section answers, for ICS _and_ for the guards it was compared against. The task, as stated, asks whether a given scenario violates _that_ rule, not some other one, so a detector at AUROC 0.952 could be composing the rule with the scenario or could be recognising that the scenario sounds like a violation and ignoring the rule entirely. Conventional accuracy cannot separate the two. We test whether the probe uses the rule at all by refitting ICS from scratch under four corruptions of the rule block and one of the scenario (Table 4). It does not, and the finding is not special to ICS: the same corruptions leave a 4B policy guard with an explicit policy channel unmoved (below), so a first-party probe and a shipped guard that is actually given the rule both read a generic violation signal rather than the rule-scenario relation. Nor is it an artifact of a benchmark whose label ignores the rule, since it survives the sharpest available _counterfactual_ , SafePyramid’s surface-matched flip pairs, where the conversation is byte-identical within a pair and the policy alone flips the label (below).
+
+Table 4: The rule is optional. _Sig. Drops_ , BH-significant AUROC decreases vs. correct-rule (exact arithmetic, 20 domains). A wrong-domain rule carries zero class information yet costs nothing, and rule-only is the positive control. Replicates on four further models (Table 10).
+
+Condition ICS (1B) Null Δ\Delta (Cond−-Corr) Sig. Drops Correct rule 0.9519 0.714 — — No rule at all 0.9549 0.719 +0.003\mathbf{+0.003} 0/20 Shuffled rule 0.9548 0.713 +0.003+0.003 0/20 Wrong-domain rule 0.9554 0.712 +0.003+0.003 0/20 Rule only, no scenario 0.5627 0.527 −0.389-0.389 19/20 TF-IDF, same conditions (null =0.5=0.5, identical by construction) Correct rule 0.8956 0.500 — — No rule at all 0.9308 0.500 +0.035\mathbf{+0.035} 0/20 _(13 gains)_ Rule only 0.5881 0.500 −0.308-0.308 19/20
+
+The rule is unnecessary, and it is not an artifact. Deleting the rule moves mean AUROC by +0.003+0.003, a slight _help_ , with _none_ of 20 domains showing a BH-significant drop and _none_ a gain, symmetric noise rather than an underpowered near-miss. Shuffling the rule and substituting a different domain’s rule give the same answer, and it is not length or truncation: the three conditions are length-identical, no test text nears the 512-token cap, and the pipeline reproduces the published gate bit-exactly before any condition runs. Nor is it an artifact of one model, one benchmark, one rule source, or our particular readout. Table 6 collects every check we ran against those possibilities; all of them leave the finding intact, and the two positive controls confirm the test has power to detect change.
+
+A fixed-scenario counterfactual isolates the readout from the model, but the natural design has a confound a reviewer specifically flagged: holding one scenario fixed and flipping only the rule means rule polarity alone, permissive versus prohibitive, determines the label throughout the set, so a detector that has merely learned to read polarity, not the rule-scenario interaction, could pass without doing anything relational. We resolve this with a crossed design that removes the confound by construction rather than by argument. Each of 200 templates across 8 regulatory domains supplies two rules and two scenarios crossing into four labelled cells, rule R0 with scenario Sa a violation, R0 with Sb compliant, R1 reversing both, so neither the rule text nor the scenario text alone predicts the label, each appearing exactly once with each outcome across the 800 rows. Labels come from a numeric threshold comparison, computed mechanically, never judged, and the no-shortcut guarantee is verified rather than assumed: a TF-IDF classifier trained on the rule alone, the scenario alone, or the two concatenated scores exactly chance, 0.500 AUROC, group-disjoint five-fold cross-validation by quadruple (§B.3).
+
+On this genuinely unconfounded set, every cheap detector we test sits at or barely above chance, and the two detector classes built specifically to escape rule blindness do not (Table 5). LPG was designed to condition on the active policy rather than surface priors, and its own violated-policy-removal probe already showed two baseline dynamic guards flipping to safe only 64% and 36% of the time when the violated policy is removed rather than reliably, evidence the authors read as guards conditioning on positional and content priors rather than the supplied clauses (Li et al., 2026), their figures, not ours. LPG does not escape on our crossed set either. Refitting a probe directly on the crossed data, the strongest possible case for a shallow readout, recovers a real but weak scale-dependent signal, Qwen3-8B topping out at 0.670 AUROC and 11.0% quadruple exact match against a 6.25% chance rate, not a solved task. One configuration does substantially better: the identical local judge, given the same rule and scenario but allowed to reason step by step rather than forced to a single token, reaches 0.849 AUROC and 74.4% quadruple exact match on a seeded 40-quadruple subsample (Wilson CI 58.9–85.4%). That control is neither compute-matched against the forced-choice row nor run over the full set, so it establishes that the benchmark is solvable, not that step-by-step reasoning is necessary or sufficient for it. What it does rule out is a degenerate design, leaving the failure specific to detectors that read a generic violation signal in one forward pass rather than explicitly composing the rule and the scenario.
+
+Table 5: Confound-free crossed benchmark: every cheap detector is at chance; chain-of-thought is the one configuration that moves. Chance is 6.25% quadruple exact match, 0.500 AUROC. Chain-of-thought is a positive control (40/200 quadruples, one prompt, one seed, not compute-matched against forced-choice; Wilson CI 58.9–85.4%), so it shows the benchmark is solvable, not that reasoning is necessary or sufficient. Full detail in §B.3.
+
+Detector AUROC Quad. Exact (%) TF-IDF (rule, scenario, or both) 0.500 0.0 Frozen ICS (1B/8B/Qwen3-8B) 0.50–0.54 0.0–3.5 Best refit (Qwen3-8B MLP) 0.670 11.0 Llama Guard 3 / Qwen3Guard 0.50–0.52 0.0–0.5 LPG-4B (rule as custom policy) 0.535 1.0 Rachmil whitening (their guards) 0.498 0.0 Forced-choice judge (1 token) 0.507 0.0 Same judge, chain-of-thought 0.849 74.4
+
+A companion, earlier fixed-scenario counterfactual replicates the same qualitative pattern with a caveat the crossed design above resolves (full detail, cross-model replication, and an independent frontier-judge cross-check against Haiku 4.5, GPT-4o, and Gemini 2.5 Flash under the local judge’s exact prompts, in §B.2 and §M, including the frontier-judge validation figure there).
+
+Table 6: Rule blindness across every robustness check. Each row refits ICS from scratch under the stated condition against correct-rule; _Holds_ means the no-rule result is unchanged. The two positive controls show the test has power: removing the _scenario_ collapses detection, and the topical rule axis is decodable but label-orthogonal. Full derivations and replication detail throughout this appendix.
+
+Robustness check Result Holds? Is the no-rule result an artifact of one model? Llama-3.2-3B, Llama-3.1-8B 0/20 sig. drops yes Qwen2.5-7B, Qwen3-8B 2/20, negligible effect yes LoRA verdict-SFT (0.67→0.930.67{\to}0.93 acc.) 0/6 sig. drops yes Of the benchmark, or of machine-written rules? trident (real CFA/ABA/AMA codes) Δ<0.001\Delta<0.001, 0/3 yes SafePyramid surface-matched pairs 0.5000 vs. null 0.519 yes Of reading the rule at the wrong place? LPG, permissive counterpart swapped in flips 7.1% of cases yes Refusal-orthogonalised contrastive fit 0.605, below null 19/20 yes Positive controls (these must move, and do) Rule only, no scenario 0.56–0.57 — On- vs. off-topic rule (topical axis) decodable 0.90, label-orthogonal —
+
+The most direct repair also fails: building the direction so that it _must_ attend to the rule, calibrating from badness-matched rule-varying contrasts and orthogonalising against the refusal axis after conditional activation steering (Lee et al., 2025), lands at 0.605, below its null in 19/20 domains, and deleting the rule still costs nothing. A shipped policy-conditioned guard fares no better: swapping the violated rule for its exact permissive counterpart, scenario and decoy policies fixed, flips LPG’s verdict on only 7.1% of cases even though it cites the governing clause’s list position 91–95% of the time (§B.5). Citing the rule and adjudicating against it are separable, and these detectors do the first. ICS is therefore better interpreted as a broad compliance-risk direction than as a rule-specific adjudication direction. Our geometry section could not decide between these two readings within a single-template benchmark. This measurement does.
+
+## 7 Score-Guided Candidate Selection
+
+The strongest practical result is on substantively different generated responses, not menu labels, and is mechanically verified: an ICS-guided pick of instruction-following responses beats random by +5.2pp against a mechanical verifier (541 cases), scaling with within-prompt detection AUROC. A frozen direction, the same one, no re-fitting, also beats random by +11.5pp on LLM-judged regulatory advisory responses across six domains, surviving a coherence control that rules out quality-selection on the judged arm (§L). Across a mechanical verifier and a judge, on format and on regulation, the gain is real and modest. It holds in non-adaptive settings only: a white-box suffix optimised against the direction drives the same selection to its floor (§N), so this is not robust enough for standalone adversarial enforcement; the supported use is score-guided ranking under trusted or non-adaptive candidate generation, not adversarial enforcement.
+
+As a controlled sanity check, the same mechanism is tested on a classification corpus, OmniCompliance, where best-of-kk selection (k=5k{=}5, pure temperature sampling, ablated inputs) returns the candidate whose ICS-predicted verdict is correct (Table 7), capturing 64–79% of the oracle headroom in every one of six models from 1B to 9B, significant and positive with zero significant negative domains anywhere. This is _verdict_ -selection over sampled menu labels, not content-selection, so the headline headroom number is the more modest generated-response result above, not this one. The absolute benefit is governed by the generator’s blind accuracy: gain over the random arm tracks the _available_ headroom (oracle −- random) with slope 0.79, intercept −0.003-0.003, and R2=0.94R^{2}=0.94 across 120 model-domain points (mean +0.27+0.27 where blind accuracy <0.70<0.70 versus +0.02+0.02 where >0.85>0.85; Figure 4). ICS-guided selection also beats the same-model zero-shot verdict logit, a readout needing no direction, at 0.872 vs. 0.703 on the 1B, McNemar p=1.2×10−95p=1.2\times 10^{-95}, _all_ 20 domains, with candidate diversity verified directly (both verdicts present in 88.9% of cases), confirming the direction itself does the work rather than the sampling.
+
+Table 7: Verdict-selection sanity check, best-of-5 (outcome-ablated OmniCompliance verdict accuracy). _Blind_ , no selection; _Random_ /_ICS-Guided_ /_Oracle_ , best-of-5 by random, ICS, and true-verdict pick; headroom == (guided−-random)/(oracle−-random). Absolute gain shrinks on stronger generators as their room shrinks; the recovered fraction (64–79%) does not.
+
+Generator Blind Random ICS-Guided Oracle Headroom Llama-3.2-1B 0.569 0.541 0.872 0.961 78.8% Llama-3.2-3B 0.771 0.773 0.889 0.946 66.7% Mistral-7B 0.775 0.770 0.795 0.805 71.8% Llama-3.1-8B 0.783 0.781 0.889 0.945 66.1% Gemma-2-9B 0.797 0.793 0.832 0.848 70.4% Qwen2.5-7B 0.843 0.842 0.862 0.873 63.9%
+
+## 8 Scope and Limitations
+
+Five limits bound the headline claims. ICS requires first-party activation access, an advantage for self-monitoring, not third-party auditing. Its direction transfers within related task families, collapsing across compliance and safety data (0.55/0.48, §F), and its threshold needs local recalibration regardless. The score captures a broad compliance-risk signal rather than reliable rule-specific composition. A trained MLP or logistic probe on the same activations is slightly more accurate (0.966 vs. 0.952) at every calibration size tested, a cost trade rather than an accuracy one (§U). Finally, the readout is serialisation-sensitive, collapsing to 0.668 when the scored text ends on the rule rather than the case, and an adaptive white-box attack defeats it as a standalone enforcement control (Bailey et al., 2024). Further scope conditions in §V.
+
+## 9 Conclusion
+
+The Internal Compliance Score is a training-free readout of the monitored model’s own activations, a difference of means over a small calibration set scored by one projection per case, no gradient step. It ranks compliance risk competitively in domain, keeps useful signal on distributions withheld from calibration (leave-one-out AUROC 0.728 against a 0.557 null, worst case 0.549), and re-fits after fine-tuning, which a separate guard cannot. Counterfactual testing bounds what the score represents. It reads as a compliance-risk direction rather than a rule-specific adjudication direction, since deleting or substituting the rule leaves it, and every guard and probe tested, unchanged. A bag of words matches its pooled generalisation, transfer between compliance and safety data is weak, and an adaptive attack removes its selection gain. ICS is a low-cost method for monitoring, triage, and candidate ranking, released with the counterfactual protocol that establishes those limits.
+
+## Appendix A Experimental Setup
+
+#### Models.
+
+Table 8 lists the roster. All extraction is bfloat16, last-token, residual stream. Layers are indexed 0,…,L0,\ldots,L, so the anchor search over the layer-validation slice ranges over L+1L{+}1 positions including the embedding (17 for the 1B), and the pipeline reproduces the stored gate receipts bit-exactly before any new arm runs. Detection and geometry use Llama-3.2-1B-Instruct, and the remaining arms replicate detection and, per the paper’s Score-Guided Candidate Selection section, selection.
+
+#### Compute budget.
+
+All detection, gate, and cross-model arms (1B–72B, twelve models) run on a single GPU per arm, the two frontier-scale (70B/72B) rows in int8 (§S); no arm requires multi-GPU sharding. Calibration is ten to two hundred labelled pairs per domain and one forward pass per case, so the full 20-domain, twelve-model detection sweep is on the order of low-thousands of forward passes, not a training run. The adaptive white-box attack (§N) is the single most compute-intensive component, a 40-step GCG (Zou et al., 2023b) search per prompt over 20 stratified prompts; every other reported number is inference-only. Total compute is released with the evaluation protocol.
+
+Table 8: Twelve models, four architecture families, 1B to 72B. All extraction bfloat16 except the 72B arm (int8; see the 72B Arm methodology note in Cross-Model Replication, §S). †Run in an isolated environment (transformers 5.14). A plain — means not applicable to that row; a separate — in the dd column means not required for this paper’s experiments.
+
+Model Family L+1L{+}1 dd Role Llama-3.2-1B-Instruct Llama 17 2048 primary (detection, geometry, keystone) Llama-3.2-3B-Instruct Llama 29 3072 detection, rule-blindness Llama-3.1-8B-Instruct Llama 33 4096 detection, rule-blindness, keystone, geometry Gemma-2-9B-it Gemma 43 3584 detection Mistral-7B-Instruct-v0.3 Mistral 33 4096 detection Qwen2.5-7B-Instruct Qwen 29 3584 detection, rule-blindness Qwen3-8B Qwen 37 4096 detection, rule-blindness, keystone, geometry Llama-3.3-70B-Instruct Llama 81 8192 detection (cross-model replication, 70B arm) Qwen3.5-4B / 9B† Qwen 33 2560 / 4096 detection Qwen3.5-27B† Qwen 65 5120 detection Qwen2.5-72B-Instruct (int8) Qwen 81 8192 detection (frontier-scale arm)
+
+#### Data.
+
+The primary corpus is outcome-ablated OmniCompliance (Hu et al., 2026), 20 domains, with the Outcome: field removed from every scored text (the paper’s Evaluation Validity section). Detection fits the direction on the 40% train slice of each domain’s 73–500 pairs and reports AUROC on its 16–100-pair test slice. Selection uses its own generation sets of 200 cases per domain (the paper’s Score-Guided Candidate Selection section). We additionally run the gauntlet on six external compliance benchmarks and seven safety benchmarks (Table 16). Splits are 40/20/20/20 (train, layer-val, threshold-val, test), seed 42, grouped so no unit sharing text straddles a boundary.
+
+#### Baselines and the floor pool.
+
+The gate (§B) is defined against a _pre-registered_ floor set, TF-IDF, keyword, length, VADER, the same-model Yes/No verdict logit, the SST-2 sentiment direction, and an Arditi-style refusal direction fit with zero compliance supervision (Arditi et al., 2024), fixed before any experiment ran. The 11/20 verdict is the margin over the per-domain maximum of this exact set. Tier-2 estimators (logistic, CCS, shrinkage-LDA, whitened difference-of-means, a one-hidden-layer MLP) and Tier-3 deployed systems (Llama Guard 3, Qwen3Guard-8B, SIREN, GLiGuard, Latent Policy Guard, an 8B LLM judge) are compared in the paper’s Generalisation Beyond the Calibration Distribution section. Every selected direction is additionally scored against a _budget-matched selection null_ , 200 random unit directions pushed through exactly that arm’s hyperparameter search.
+
+#### Statistics.
+
+We use paired bootstrap with the pair as the resampling unit (B=2000B{=}2000), Benjamini–Hochberg across the 20 domains with thresholds in exact rational arithmetic (§B reports a verdict that turns on this), and Clopper–Pearson bounds where a cell saturates, with anchor-layer stability read from 5×25{\times}2 seed-replicate grids. Every AUROC passes through a wrapper asserting agreement with a reference implementation to 10−910^{-9}, a check that caught a sign inversion during development (the paper’s Method section). Provenance-stamped JSONs (model, seed, commit, dtype, pooling, max_length) are released with the code.
+
+## Appendix B The Pre-Registered Gate
+
+A pre-registered floor test, reported in full. Detection is cheap, but is its _absolute_ margin over trivial baselines real? We committed the rule before any experiment ran. Ablated ICS must beat the maximum trivial floor with a paired-bootstrap 95% CI excluding zero, BH-corrected, in at least 12 of 20 domains. With the _full floor pool_ (this section’s complete, corrected set of trivial baselines), including the corrected SST-2 sentiment direction, the maximum floor in 14/20 domains, ICS clears it in 11/20, just short of the pre-registered bar, an honest limit on the _absolute_ detector we report rather than bury (the deployable claims, namely selection and the guard comparison, do not rest on it). Mean ICS is 0.952 against a mean per-domain maximum floor of 0.925 (Table 9). The strongest single floor arm is the SST-2 sentiment direction (mean 0.914, the maximum in 14/20 domains), with TF-IDF at 0.896.
+
+Table 9: The pre-registered gate, outcome-ablated (8 of 20 domains, full table in §C). Floor is the per-domain _maximum_ over trivial baselines, and an SST-2 sentiment direction fit on movie reviews is that maximum in 14/20. The rule, committed before any experiment, needs Δ>0\Delta>0 with a BH-corrected paired-bootstrap CI excluding zero in ≥\geq12/20. It reaches 11/20.
+
+Domain nn ICS Max. trivial floor (Which floor) Δ\Delta Gate Data Act 100 0.964 0.894 sst2 +0.070+0.070 ✓\checkmark Policy: Google 100 0.970 0.919 sst2 +0.051+0.051 ✓\checkmark HIPAA 100 0.983 0.941 sst2 +0.042+0.042 ✓\checkmark EU AI Act 100 0.986 0.938 sst2 +0.048+0.048 ✓\checkmark Fin. crypto 100 0.997 0.985 sst2 +0.012+0.012 – GDPR 100 0.863 0.862 sst2 +0.001+0.001 – Edu: online 72 0.997 0.999 sst2 −0.003-0.003 – Edu: discrim. 16 0.875 0.887 tfidf −0.012-0.012 – Mean, 20 domains 0.952 0.925 +0.027 11/20
+
+The verdict is 11/20 rather than 13/20 for two reasons that are themselves findings about evaluation practice. An earlier computation silently dropped the sentiment floor through a name-prefix filter, and one domain’s pass rested on a floating-point BH threshold (0.03×20/12=0.0499​…0.03{\times}20/12=0.0499\ldots) that fails under exact arithmetic. We report all thresholds exactly, and at meta-analytic boundaries, representation error flips verdicts. Table 31’s cross-model gate column deliberately reuses a _cheap floor_ (the pre-correction, partial baseline set), not this section’s full floor pool, to keep all twelve arms on an identical comparison. Its 13 for this same model is that cheap-floor figure, not a second disagreeing measurement of this section’s full-floor 11/20, and the table’s caption reconciles the two.
+
+The failure pattern is structured but not clean, an

@@ -1,0 +1,33 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2606.29441
+Type: HTML
+Length: 8306 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2606.29441** (cs) 
+
+[Submitted on 28 Jun 2026]
+
+# Title:Closing the Activation-Cone Blind Spot: Response-Time Probing and Unified Defense
+
+Authors:[Subhadip Mitra](https://arxiv.org/search/cs?searchtype=author&query=Mitra,+S)
+
+View a PDF of the paper titled Closing the Activation-Cone Blind Spot: Response-Time Probing and Unified Defense, by Subhadip Mitra
+
+[View PDF](/pdf/2606.29441) [HTML (experimental)](https://arxiv.org/html/2606.29441v1)
+
+> Abstract:Inference-time safety methods for large language models have proliferated, yet no systematic comparison exists. We evaluate five defense paradigms (no defense, static steering, CAST, AlphaSteer, probe-gated) across seven instruction-tuned models (7-31B) and five attack types (GCG, AutoDAN, DeepInception, prefilling, intent laundering). Our central finding: prompt-time activation defenses are structurally blind to prefilling attacks. AlphaSteer achieves 0% attack success on GCG, AutoDAN, and intent laundering but 50% on prefilling. We prove a corollary: any defense that gates intervention on a single layer's activation alignment with a benign reference (cone, subspace, or null-space) is blind to attacks that craft activations to lie inside that reference, whether checked at prompt time or per token. As its constructive contrapositive we introduce response-time probing: a linear probe on the model's hidden state at the first generated tokens, with AUROC 0.97-1.00 across all seven models. Combined with a halt, it cuts prefilling attack success to 0/40 on every model with 0% benign false positives, outperforming Llama Guard 3. Cross-template generalisation depends on probe depth, so we scope the claim to the canonical prefilling-template family. Composing the response-halt with AlphaSteer's null-space steering gives an orthogonal split (the halt catches prefilling, AlphaSteer catches semantic attacks), reaching defense success 0.983 on Mistral and 0.994 on Llama and dominating both components. We further show MMLU fails to capture steering's true utility cost, which appears as behavioral hedging rather than factual loss, and that diverse negative training sets cut probe false positives from 80-100% to near zero. Code, attacks, per-sample results, and the judge prompt are released. 
+
+Comments: | 27 pages, 12 figures, 18 tables. Code and data: [this https URL](https://github.com/bassrehab/response-time-probing)  
+---|---  
+Subjects: |  Cryptography and Security (cs.CR); Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Emerging Technologies (cs.ET); Machine Learning (cs.LG)  
+Cite as: | [arXiv:2606.29441](

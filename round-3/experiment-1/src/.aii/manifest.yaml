@@ -1,0 +1,12 @@
+entries:
+  - path: hf_cache/
+    delete: redownloadable
+    source: "huggingface_hub.snapshot_download (src/gen.py:download) of Vikhrmodels/Vikhr-Llama-3.2-1B-Instruct, Vikhrmodels/Vikhr-Llama-3.2-1B-Instruct-abliterated, tiiuae/Falcon3-1B-Base, tiiuae/Falcon3-1B-Instruct, amd/AMD-OLMo-1B, amd/AMD-OLMo-1B-SFT, amd/AMD-OLMo-1B-SFT-DPO, unsloth/Llama-3.2-1B-Instruct, mylesgoose/Llama-3.2-1B-Instruct-abliterated2, LiquidAI/LFM2-700M + tokenizer files of Qwen/Qwen3-4B (exact commands in README.md 'Restoring removed files')"
+  - path: harvest/
+    keep: raw activations + weight summaries of 10 never-before-loaded checkpoints and the random-init control; the next iteration re-scores the held-out panel from them (regenerating costs 31 GB of downloads + ~40 CPU-min)
+  - path: src/__pycache__/
+    delete: regenerable
+    source: "python -m compileall src"
+  - path: src/h2/__pycache__/
+    delete: regenerable
+    source: "python -m compileall src/h2"

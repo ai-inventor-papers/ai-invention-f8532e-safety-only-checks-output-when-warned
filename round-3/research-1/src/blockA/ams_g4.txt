@@ -1,0 +1,72 @@
+
+1318:...s
+     3. Mislabeled Models
+     4. Insider Threats
+     5. Demonstrated Attacks Outside the Detection Envelope
+     6. Out of Scope
+  5. IV Method
+     1. IV-A Activation Extraction
+     2. IV-B Direction Vector Computation
+     3. IV-C Class Separation Measurement
+     4. IV-D Layer Selection
+     5. IV-E Two-Tier Detection
+        1. Tier 1: Generic Safety Check
+        2. Tier 2: Identity Verification
+     6. IV-F Algorithm Summary
+  6. V Safety Concepts
+     1. Harmful Content Detection
+     2. Prompt Injection Resistance
+     3. Refusal Capability
+  7. VI Experimental Setup
+     1. Models
+     2. Behavioral evaluation
+     3. Hardware
+     4. Metrics
+  8. VII Results
+     1. VII-A Tier 1: Generic Safety Check
+        1. Key findings from Table 
+     2. VII-B Tier 2: Identity Verification and Per-Layer Direction Shift
+     3. VII-C Leave-One-Out Cross-Validation of Thresholds
+     4. VII-D Bootstrap Confidence Intervals on σ\sigma
+     5. VII-E σ\sigma vs. Behavioral Compliance
+     6. VII-F Layer Sweep on False-Negative Models
+  9. VIII Discussion
+     1. VIII-A Mechanistic Taxonomy of Safety Modifications
+     2. VIII-B Mechanism Investigation: Why Gemma-Abliteration Evades Tier 1
+     3. VIII-C Quantization Robustness
+     4. VIII-D Threshold Calibration
+        1. Cal...
+--
+3320:... 6. Resource Requirements
+  11. X Conclusion
+     1. Deployment recommendation
+  12. References
+  13. A vLLM Integration
+     1. Key Requirements
+     2. CI/CD Integration
+  14. B Implementation Details
+     1. Code
+     2. Activation Extraction
+     3. Contrastive Pairs
+     4. Layer Selection
+  15. C Contrastive Pair Examples
+     1. Harmful Content Detection
+     2. Prompt Injection Resistance
+     3. Refusal Capability
+  16. D Full Results
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2608.05578v1 [cs....
+--
+12376:...ated detection methods like AMS.
+
+#### Activation-Based Security Analysis
+
+Several concurrent works analyze LLM activations for security purposes. Arazzi et al. [10] derive activation fingerprints to distinguish censored from uncensored models, then exploit identified vulnerable layers for targeted attacks. Kawasaki et al. [11] propose Residual Stream Activation Analysis (RSAA) to detect jailbreak prompts by monitoring activation patterns between transformer layers. Chen et al. [12] identify “safety layers”—contiguous middle layers crucial for distinguishing malicious queries. These works focus on runtime defense (prompt-level); AMS addresses a complementary problem: pre-deployment model verification.
+
+#### Model Authenticity and Supply C...
+--
+[89 more matches not shown]

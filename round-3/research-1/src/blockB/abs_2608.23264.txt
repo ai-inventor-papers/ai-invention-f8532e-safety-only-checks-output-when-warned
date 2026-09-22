@@ -1,0 +1,46 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2608.23264
+Type: HTML
+Length: 7716 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Artificial Intelligence
+
+**arXiv:2608.23264** (cs) 
+
+[Submitted on 24 Aug 2026]
+
+# Title:Hidden in the Request: Explaining Unethical LLM Compliance through Token Relevance
+
+Authors:[Or Biton](https://arxiv.org/search/cs?searchtype=author&query=Biton,+O), [Tomer Krichli](https://arxiv.org/search/cs?searchtype=author&query=Krichli,+T), [Itai Allouche](https://arxiv.org/search/cs?searchtype=author&query=Allouche,+I), [Joseph Keshet](https://arxiv.org/search/cs?searchtype=author&query=Keshet,+J)
+
+View a PDF of the paper titled Hidden in the Request: Explaining Unethical LLM Compliance through Token Relevance, by Or Biton and 3 other authors
+
+[View PDF](/pdf/2608.23264) [HTML (experimental)](https://arxiv.org/html/2608.23264v1)
+
+> Abstract:Although Large Language Models (LLMs) are aligned to optimize for both helpfulness and harmlessness, these dual objectives may conflict, inevitably leading to alignment failures. This work systematically investigates instances where LLMs fail to exhibit ethical behavior. To understand the underlying mechanics of these vulnerabilities, we introduce a probing methodology that presents unethical scenarios to LLMs in three distinct structural modalities: objective classification tasks, subjective first-person statements, and direct requests for assistance. We find that model performance degrades in the request-for-assistance-based form. Using Layer-wise Relevance Propagation (LRP), we trace this discrepancy to an attribution bias: the model places greater emphasis on benign task-framing tokens (e.g., "Can you help me...") than on tokens signaling the underlying unethical behavior (e.g., "without getting caught"), which we term cue-tokens. We hypothesize that this under-attribution contributes to harmful compliance. To test this, we introduce two LRP-guided decoding methods that steer generation toward trajectories more relevant to cue tokens. Empirical evaluations show that these interventions promote safer responses, supporting cue-token attribution's role in compliance failures. 
+
+Subjects: |  Artificial Intelligence (cs.AI); Computation and Language (cs.CL)  
+---|---  
+Cite as: | [arXiv:2608.23264](https://arxiv.org/abs/2608.23264) [cs.AI]  
+  | (or  [arXiv:2608.23264v1](https://arxiv.org/abs/2608.23264v1) [cs.AI] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2608.23264> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Itai Allouche [[view email](/show-email/5747d87e/2608.23264)]   
+**[v1]** Mon, 24 Aug 2026 13:52:05 UTC (45 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Hidden in the Request: Expl

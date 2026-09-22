@@ -1,0 +1,57 @@
+{
+ "LiquidAI--LFM2-700M": {
+  "mean_abs_cos_between_block_null_vectors": 0.1431845931172866,
+  "mean_abs_cos_with_all_ones": 0.013088559680469836,
+  "min_abs_cos_with_all_ones": 0.00012080994218205757
+ },
+ "RandInit-Vikhr-Llama-3.2-1B-Instruct": {
+  "mean_abs_cos_between_block_null_vectors": 0.01603430744304741,
+  "mean_abs_cos_with_all_ones": 0.017440594527397643,
+  "min_abs_cos_with_all_ones": 0.0007361455288492913
+ },
+ "Vikhrmodels--Vikhr-Llama-3.2-1B-Instruct-abliterated": {
+  "mean_abs_cos_between_block_null_vectors": 0.9999999424494822,
+  "mean_abs_cos_with_all_ones": 0.01682655330216802,
+  "min_abs_cos_with_all_ones": 0.016818542903478916
+ },
+ "Vikhrmodels--Vikhr-Llama-3.2-1B-Instruct": {
+  "mean_abs_cos_between_block_null_vectors": 0.13212132711626365,
+  "mean_abs_cos_with_all_ones": 0.016215298613829265,
+  "min_abs_cos_with_all_ones": 0.0013618770604424601
+ },
+ "amd--AMD-OLMo-1B-SFT-DPO": {
+  "mean_abs_cos_between_block_null_vectors": 0.9987531506668538,
+  "mean_abs_cos_with_all_ones": 0.9992048294653759,
+  "min_abs_cos_with_all_ones": 0.9976021307694014
+ },
+ "amd--AMD-OLMo-1B-SFT": {
+  "mean_abs_cos_between_block_null_vectors": 0.9987534505256112,
+  "mean_abs_cos_with_all_ones": 0.999205000733435,
+  "min_abs_cos_with_all_ones": 0.9976005418179911
+ },
+ "amd--AMD-OLMo-1B": {
+  "mean_abs_cos_between_block_null_vectors": 0.9987083300661868,
+  "mean_abs_cos_with_all_ones": 0.9991792330210754,
+  "min_abs_cos_with_all_ones": 0.9974696328434667
+ },
+ "mylesgoose--Llama-3.2-1B-Instruct-abliterated2": {
+  "mean_abs_cos_between_block_null_vectors": 0.9638644845050571,
+  "mean_abs_cos_with_all_ones": 0.019051676560509725,
+  "min_abs_cos_with_all_ones": 0.017603863567572695
+ },
+ "tiiuae--Falcon3-1B-Base": {
+  "mean_abs_cos_between_block_null_vectors": 0.22693893634152068,
+  "mean_abs_cos_with_all_ones": 0.02348987451401064,
+  "min_abs_cos_with_all_ones": 0.0023751356510979225
+ },
+ "tiiuae--Falcon3-1B-Instruct": {
+  "mean_abs_cos_between_block_null_vectors": 0.22772267040554994,
+  "mean_abs_cos_with_all_ones": 0.02395009176742693,
+  "min_abs_cos_with_all_ones": 0.0031333782655654265
+ },
+ "unsloth--Llama-3.2-1B-Instruct": {
+  "mean_abs_cos_between_block_null_vectors": 0.13366103842419108,
+  "mean_abs_cos_with_all_ones": 0.016284060651380397,
+  "min_abs_cos_with_all_ones": 0.0030155150351370242
+ }
+}

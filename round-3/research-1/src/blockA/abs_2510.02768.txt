@@ -1,0 +1,39 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2510.02768
+Type: HTML
+Length: 7956 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2510.02768** (cs) 
+
+[Submitted on 3 Oct 2025]
+
+# Title:A Granular Study of Safety Pretraining under Model Abliteration
+
+Authors:[Shashank Agnihotri](https://arxiv.org/search/cs?searchtype=author&query=Agnihotri,+S), [Jonas Jakubassa](https://arxiv.org/search/cs?searchtype=author&query=Jakubassa,+J), [Priyam Dey](https://arxiv.org/search/cs?searchtype=author&query=Dey,+P), [Sachin Goyal](https://arxiv.org/search/cs?searchtype=author&query=Goyal,+S), [Bernt Schiele](https://arxiv.org/search/cs?searchtype=author&query=Schiele,+B), [Venkatesh Babu Radhakrishnan](https://arxiv.org/search/cs?searchtype=author&query=Radhakrishnan,+V+B), [Margret Keuper](https://arxiv.org/search/cs?searchtype=author&query=Keuper,+M)
+
+View a PDF of the paper titled A Granular Study of Safety Pretraining under Model Abliteration, by Shashank Agnihotri and 6 other authors
+
+[View PDF](/pdf/2510.02768) [HTML (experimental)](https://arxiv.org/html/2510.02768v1)
+
+> Abstract:Open-weight LLMs can be modified at inference time with simple activation edits, which raises a practical question for safety: do common safety interventions like refusal training or metatag training survive such edits? We study model abliteration, a lightweight projection technique designed to remove refusal-sensitive directions, and conduct a controlled evaluation across a granular sequence of Safety Pretraining checkpoints for SmolLM2-1.7B, alongside widely used open baselines. For each of 20 systems, original and abliterated, we issue 100 prompts with balanced harmful and harmless cases, classify responses as **Refusal** or **Non-Refusal** using multiple judges, and validate judge fidelity on a small human-labeled subset. We also probe whether models can identify refusal in their own outputs. Our study produces a checkpoint-level characterization of which data-centric safety components remain robust under abliteration, quantifies how judge selection influences evaluation outcomes, and outlines a practical protocol for integrating inference-time edits into safety assessments. Code: [this https URL](https://github.com/shashankskagnihotri/safety_pretraining). 
+
+Comments: | Accepted at NeurIPS 2025 bWorkshop Lock-LLM. *Equal Contribution  
+---|---  
+Subjects: |  Machine Learning (cs.LG); Computation and Language (cs.CL)  
+Cite as: | [arXiv:2510.02768](https://arxiv.org/abs/2510.02768) [cs.LG]  
+  | (or  [arXiv:2510.02768v1](https://arxiv.org/abs/2510.02768v1) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2510.02768> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Shashank Agnihotri 

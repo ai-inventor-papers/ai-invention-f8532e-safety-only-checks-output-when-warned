@@ -1,0 +1,90 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://aclanthology.org/2026.tacl-1.14.pdf
+Type: PDF
+Pattern: correlat|lower layers|less toxic output|causal|Spearman|Pearson (42 matches in 75926 chars)
+
+--- Content ---
+
+1002:...we examine
+over 20 OLMo, Llama, and Mistral models,
+bridging behavioral and internal perspectives
+for toxicity for the first time. Our results show
+that LMs strongly encode information about
+the toxicity level of inputs and subsequent
+outputs, particularly in lower layers. Focusing
+on how unique LMs differ offers both correl-
+ative and causal evidence that they generate
+less toxic output when strongly encoding
+information about the input toxicity. We
+also highlight the heterogeneity of toxicity,
+as model behavior and internals vary across
+unique attributes such as Threat. Finally,
+four case studies analyzing detoxification,
+multi-prompt evalu...
+--
+4823:...e average internal representations
+(internals) of input (hI) and output tokens (hO) at every model layer. Then, we probe how strong these internals
+encode input and output toxicity (tI and tO) using four scenarios (Input, Forward, Output, and Backward).
+c) We correlate these two perspectives to analyze the interplay of behavior and internals when it comes to toxicity.
+specific words. For example, Threats rely on
+context, while Sexually Explicit toxicity is fo-
+cused on individual words. Using aligned probing
+and the RealTo...
+--
+5507:... 100K+ probing
+runs to assess model internals, and then systemat-
+ically analyze the interplay between behavior and
+internals.
+We first examine high-level insights across LMs
+(§ 4), and show that LMs strongly encode infor-
+mation about the toxicity of text in lower layers.
+This provides an alternative perspective to previ-
+ous findings that localize toxicity in upper layers
+(Lee et al., 2024). We also find that LMs replicate
+and amplify toxicity more than humans as they
+strongly encode input toxicity, especially when
+focused on single words like Profanities.
+Next, we analyze individual LMs in detail (§ 5)
+and find that less toxic models encode more infor-
+mation about input toxicity. We further establish
+that this is a causal relationship (§ 6), showing
+that LMs are generally less toxic when they
+know more about the toxicity of a given in-
+put. Finally, four case studies (§ 7) reveal that
+toxicity-related internal representations are sig-
+nificantly pruned by DPO detoxification, r...
+--
+7680:...) of the input (I) and the cor-
+responding output (O). Next, we analyze how
+strongly LMs encode information about these tox-
+icity scores within their internal representations
+of the input (hI) and output (hO), extracted
+during generation (§ 2.2). Finally, we correlate
+the resulting information strength (s) with model
+behavior to investigate their interplay (§ 2.3).
+While this study focuses on toxic text, language
+that likely makes people leave a discussion, the
+method we present (aligned probing) general-
+izes to any text...
+--
+9014:...cores, we compute two
+metrics:
+Expected
+Maximum
+Toxicity
+(EMT)
+We
+compute the maximum toxicity across multiple
+generations for a given input (maxOj∈O tOj).
+Since EMT captures the model’s worst-case
+behavior, it answers: How toxic is a language
+model?
+Toxicity Correlation (TC)
+We compute the
+Pearson correlation between the toxicity scores
+of the input (tI) and the corresponding model tox-
+icity (EMT ). This metric quantifies how input
+toxicity relates to generation toxicity, to answer
+the question: Do models replicate input...
+--
+[34 more matches not shown]

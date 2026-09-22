@@ -1,0 +1,53 @@
+
+1648:...      1. Tier 1: Generic Safety Check
+        2. Tier 2: Identity Verification
+     6. IV-F Algorithm Summary
+  6. V Safety Concepts
+     1. Harmful Content Detection
+     2. Prompt Injection Resistance
+     3. Refusal Capability
+  7. VI Experimental Setup
+     1. Models
+     2. Behavioral evaluation
+     3. Hardware
+     4. Metrics
+  8. VII Results
+     1. VII-A Tier 1: Generic Safety Check
+        1. Key findings from Table 
+     2. VII-B Tier 2: Identity Verification and Per-Layer Direction Shift
+     3. VII-C Leave-One-Out Cross-Validation of Thresholds
+     4. VII-D Bootstrap Confidence Intervals on σ\sigma
+     5. VII-E σ\sigma vs. Behavioral Compliance
+     6. VII-F Layer Sweep on False-Negative Models
+  9. VIII Discussion
+     1. VIII-A Mechanistic Taxonomy of Safety Modifications
+     2. VIII-B Mechanism Investigation: Why Gemma-Abliteration Evades Tier 1
+     3. VIII-C Quantization Robustness
+     4. VIII-D Th...
+--
+2819:...ity
+     6. VIII-F Limitations
+        1. Validation Scope
+        2. Concept Coverage
+        3. Activation-Only Probing Has a Fundamental Class-(iv) Blind Spot
+        4. Cross-Architecture Baselines
+        5. Single-Run Bias in σ\sigma
+        6. Statistical Power
+        7. Behavioral Evaluation Prompt Set
+  10. IX Practical Deployment
+     1. Comparison with Behavioral Testing
+     2. Recommended Deployment Pattern
+     3. CI/CD Integration
+     4. JSON Output
+     5. Baseline Database
+     6. Resource Requirements
+  11. X Conclusion
+     1. Deployment recommendation
+  12. References
+  13. A vLLM Integration
+     1. Key Requirements
+     2....
+--
+5220:...d fine-tunes). Leave-one-out cross-validation of thresholds achieves 71% accuracy (10/14); bootstrap 95% confidence intervals on σ\sigma point estimates have median width 3.4σ\sigma and a substantial fraction of cells cross the PASS threshold under resampling. We further measure behavioral compliance on 20 stratified JailbreakBench prompts per model and find that σ\sigma on the harmful-content concept predicts compliance with Pearson r=−0.546r=-0.546 (p=0.043p=0.043); the rank-order Spearman correlation is weaker (ρ=−0.423\rho=-0.423, p=0.13p=0.13). The structural signal predicts behavior directionally but with meaningful noise. Mechanistic analysis identifies a four-class taxonomy of safety-training modifications distinguished by activation-space signature: (i) tra...
+--
+[112 more matches not shown]

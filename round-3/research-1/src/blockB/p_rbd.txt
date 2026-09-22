@@ -1,0 +1,17 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2605.28553
+Type: HTML
+Pattern: well before the final layer|linearly decodable (10 matches in 81331 chars)
+
+--- Content ---
+
+2846:...
+###### Abstract
+
+In this paper, we investigate whether refusal behavior can be predicted from LLM intermediate activations before decoding using linear probes trained on residual stream activations at each transformer block. We find that refusal is linearly decodable well before the final layer, indicating that safety-relevant behavior is represented in intermediate activations before output generation. To test whether this signal is actionable, we introduce Mechanistic AutoDAN, a probe-guided variant of AutoDAN that replaces full-model fi...
+--
+5741:...ting refusal solely as an output-level behavior, we address the question of whether refusal-relevant information can be predicted from intermediate LLM activations before the model produces its final response.
+
+In this paper, we find that refusal is linearly decodable from intermediate residual-stream activations across model families and scales including Llama-3.2-3B-Instruct Grattafiori et al. (2024), Qwen3Guard-Gen-4B Zhao et al. (2025), and Qwen-3.6-27B Qwen Team (2026). In several settings, lightweight probes identify refusal-relevant information well before the final layer. To test whether this signal is diagnostic or also actionable, we consider whether it can be exploited adversarially. Specifically, we introduce _Mechanistic AutoDAN_ , a probe-guided variant of AutoDAN Liu et al. (2024), replacing full-model output...
+--
+[6 more matches not shown]

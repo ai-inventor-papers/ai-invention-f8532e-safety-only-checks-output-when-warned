@@ -1,0 +1,5 @@
+{"file": "assets/panel_rule.json", "sha256": "f933bab9b8ebed2da968f2dd54e733263aa83542c7bb36cb6a4fb1130ed38c08", "utc": "2026-09-21T12:00:37.991698Z", "note": "panel selection rule, frozen BEFORE any rank key is computed"}
+{"file": "results/panel.json", "sha256": "7e28a22555df9faa80940793711521388a63016965ac7d73a01e9f329bde1c0d", "utc": "2026-09-21T12:00:41.926221Z", "note": "panel drawn by the frozen rule (before any generation)"}
+{"file": "results/panel_trim.json", "sha256": "40930627e9cb58ab26aea19dbb785f0968f10b8e7ba0c1d5b1d8f2c7cc085095", "utc": "2026-09-21T12:28:03.347255Z", "note": "TIME rule applied mechanically after stage-1 timing"}
+{"file": "results/graded_truth.json", "sha256": "b3a7bab3b87732e849192ce40fbd14f876fbad0e50f0de04acd4af01d8ebb74a", "utc": "2026-09-21T13:16:45.476976Z", "note": "GRADED TRUTH for the whole panel, committed before the first hook on any panel checkpoint"}
+{"file": "prereg.json", "sha256": "df15fb90e24d8f73bc4c19538f4bc92ee442850029cde2d1d1023d9d35529e8c", "utc": "2026-09-21T13:16:46.555904Z", "note": "PREREG frozen after graded truth, before any panel hook"}

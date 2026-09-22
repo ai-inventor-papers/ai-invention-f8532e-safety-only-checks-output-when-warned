@@ -1,0 +1,56 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.22686
+Type: HTML
+Pattern: 7 model families|Qwen3|Gemma|Mistral|Phi|KL divergence (19 matches in 40129 chars)
+
+--- Content ---
+
+1468:...ty-Coherence Trade-off.
+        2. Safety Hardening (α<0\alpha<0).
+        3. CLS vs. GCG.
+     4. 4.4 Comparison with Activation Steering
+     5. 4.5 Mechanistic Analysis
+        1. The Geometry of Refusal (PCA).
+        2. The Timeline of Refusal (KL Divergence).
+     6. 4.6 Zero-Shot Safety Detection
+  6. 5 Discussion
+     1. The “Wrapper” Hypothesis.
+     2. Architectural and Training Determinism.
+     3. Inverting the Attack.
+     4. Complementarity with Activation Steering.
+  7. 6 Conclusion
+  8. 7 Lim...
+--
+3138:...s directly on the output distribution, serving as a diagnostic probe for alignment fragility. When coupled with prefix injection to bypass initial refusal reflexes, this method induces a phase transition where guardrails collapse. Our experiments on 7 model families reveal that safety implementation is architecturally deterministic. While models like Llama-3.1 exhibit a “Late Decision” topology that is easily bypassed by CLS (reaching 95% ASR in approximately one second), others like Qwen-2.5 demonstrate “Early...
+--
+6515:...lignment depth. We do not search for a bypass; we analytically compute the “Refusal Vector” and subtract it. We pair this with Prefix Injection (forcing the first token to “Sure”) to bypass the model’s initial refusal reflex.
+
+We evaluate CLS across 7 model families. Our results reveal that while the refusal direction is universal, its depth varies:
+
+  * •
+
+The “Late Decision” Vulnerability: Models like Llama-3.1 process harmful and safe queries identically for 95% of their layers, diverging only at the final o...
+--
+17634:...Top) Positive steering. (Bottom) Negative steering.
+
+## 4 Experiments
+
+We evaluate CLS across four dimensions: steering sensitivity (Alpha Sweep), comparison with GCG and activation-level steering Arditi et al. (2024), and mechanistic analysis (PCA, KL divergence).
+
+### 4.1 Experimental Setup
+
+#### Models.
+
+We test 7 open-weights models: Gemma-3 (4B, 12B), Llama-3.1 (8B), Llama-3.2 (3B), Llama-3.3 (70B), and Qwen-2.5 (1.5B, 7B). For comparison with Arditi et al. Arditi et al. (2024), we additionally evaluate on Llama-2 and Qwen-7B.
+
+#### Datasets.
+
+AdvBench for Alpha Sweep analysis, lever...
+--
+18462:...rditi et al. comparison (the “standard behaviors” subset of 159 prompts, matching their evaluation protocol); and JailbreakBench again for zero-shot detection evaluation.
+
+### 4.2 Comparative Analysis: CLS vs. GCG
+
+Figure 4: The Timeline of Refusal. KL Divergence across model depth. Llama-3.1 (Blue) shows a “Late Decision” pattern, diverging only in the final layers. Qwen-2.5 (Orange) shows “Early Divergence,” processing safety mid-network. This architectural difference explains Qwen’s higher resistance to s...
+--
+[13 more matches not shown]

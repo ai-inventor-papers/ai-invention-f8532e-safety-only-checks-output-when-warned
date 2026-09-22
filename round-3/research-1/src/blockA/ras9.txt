@@ -1,0 +1,34 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.25750
+Type: HTML
+Pattern: ρ|r ?= ?0\.|coefficient|strongly|monoton (6 matches in 41846 chars)
+
+--- Content ---
+
+2557:...hat measures safety from internal representations rather than generated outputs. Given a safety-aligned reference model, SafeVec extracts refusal directions and scores a target model according to how strongly its hidden states align with these directions under unsafe and jailbreak prompts. The resulting metric, RAS (Refusal Alignment Score), maps representation-level refusal alignment to a calibrated 0–10...
+--
+6885:...mma, and Qwen. The results support four findings. First, safe and unsafe models exhibit clear separation in refusal-direction alignment under both unsafe and jailbreak prompts. Second, RAS correlates strongly with output-level safety behavior, as models with high RAS generally exhibit low attack success rates (ASR). Third, this relationship remains consistent across different model families after architec...
+--
+16522:...={M∈𝒞a:d~(M)>0,ΔASR(M)>0}.\mathcal{V}_{a}=\\{M\in\mathcal{C}_{a}:\tilde{d}(M)>0,\ \Delta\mathrm{ASR}(M)>0\\}. |   
+---|---|---  
+  
+For each M∈𝒱aM\in\mathcal{V}_{a}, we compute the severity ratio:
+
+| ρ⁡(M)=Δ​ASR​(M)d~​(M).\rho(M)=\frac{\Delta\mathrm{ASR}(M)}{\tilde{d}(M)}. |   
+---|---|---  
+  
+The architecture-specific severity slope is defined as:
+
+| αa=medianM∈𝒱a​ρ​(M).\alpha_{a}=\mathrm{median}_{M\in\mathcal{V}_{a}}\rho(M). |   
+---|---|---  
+  
+We define the global severity slope as:
+
+| αglobal=mediana​(αa).\alpha_{\mathrm{global}}=\mathrm{median}_{a}(\alpha_...
+--
+17139:...verity multiplier is then computed as:
+
+| γa=1+λ⁡(αaαglobal−1),\gamma_{a}=1+\lambda\left(\frac{\alpha_{a}}{\alpha_{\mathrm{global}}}-1\right), |   
+---|---|---  
+  
+where λ=0.5\lambda=0.5 is a shrink coefficient controlling the strength of cross-architecture severity correction. This multiplier controls how strongly normalized refusal drops are penalized for each architecture. If αa>αglobal\alpha_{a}>\alpha_{\mathrm{global}}, then a given normalized refusal drop is associated with a larger ASR increase for archi...

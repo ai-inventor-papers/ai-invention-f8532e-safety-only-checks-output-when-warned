@@ -1,0 +1,74 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.25750
+Type: HTML
+Pattern: layer window|stable layer|models? (evaluated|in total)|Qwen3|checkpoints (12 matches in 41846 chars)
+
+--- Content ---
+
+879:...uation.
+     2. Red teaming and jailbreak attacks.
+     3. Alignment and refusal.
+  4. 3 Proposed Method
+     1. 3.1 System Model
+     2. 3.2 SafeVec
+        1. Stage 1: Refusal direction extraction.
+        2. Stage 2: Layer window selection.
+        3. Stage 3: Calibration model scoring.
+        4. Stage 4: RAS calibration.
+        5. Stage 5: Target model scoring.
+  5. 4 Evaluation
+     1. 4.1 Experimental Setting
+        1. Model families.
+        2. Prompts.
+        3. Layer windows.
+        4. Output-level reference metric.
+        5. Hardware.
+     2. 4.2 Experimental Results
+        1. RQ1: Representation-level separation.
+        2. RQ2: Correlation with output-level safety.
+        3. RQ3: Ge...
+--
+5705:...measuring representation-level refusal alignment. Given a safety-aligned reference model, SafeVec extracts layer-wise refusal directions by contrasting hidden states induced by safe and unsafe prompts. It then selects a stable layer window where unsafe prompts exhibit alignment with the refusal direction and where calibration models with different safety levels show consistent separation. For a target model from the same model family, SafeVec compu...
+--
+11027:...nstead, it is designed as a fast white-box metric for open-weight model auditing, post-training comparison, and safety regression testing.
+
+### 3.2 SafeVec
+
+SafeVec consists of five stages: refusal direction extraction, layer window selection, calibration model scoring, RAS calibration, and target model scoring.
+
+#### Stage 1: Refusal direction extraction.
+
+For each layer ll, we feed safe and unsafe prompts into the reference model and extract the ...
+--
+12102:...Here, ϵ\epsilon is a small constant used to avoid division by zero. Intuitively, r^l\hat{r}_{l} captures how the reference model’s representation shifts when it processes unsafe rather than safe requests.
+
+#### Stage 2: Layer window selection.
+
+Not all layers are equally informative. Early layers may mostly encode lexical or syntactic information, while the final layers can be affected by readout effects near the language modeling head. We therefore select a continuous layer window WW. For each layer, we compute the reference model’s safe and unsafe cosine means:
+
+| mlsafe=1|𝒮|​∑s∈𝒮cos⁡(hlref​(s),r^l),m^{\mathrm{safe}}_{l}=\frac{1}{|\mathcal{S}|}\sum_{s\in\mathcal{S}}\cos(h^{\mathrm{ref}}_{l}(s),\...
+--
+13025:...pute the safe suppression score and separation gap:
+
+| ql=−mlsafe,gl=mlunsafe−mlsafe.q_{l}=-m^{\mathrm{safe}}_{l},\qquad g_{l}=m^{\mathrm{unsafe}}_{l}-m^{\mathrm{safe}}_{l}. |   
+---|---|---  
+  
+We prefer a consecutive layer window, where the separation gap is sufficiently large and stable, and where the unsafe cosine mean together with the safe suppression score reflects a consistent alignment pattern with the refusal direction. We further valida...
+--
+20469:...c chat template before being fed to the model. We extract last-token residual-stream activations at each decoder layer. Output-level ASR is evaluated separately using HEx-PHI prompts, as described in Appendix A.1.
+
+#### Layer windows.
+
+The selected layer windows are family-specific. For Llama, we use layers 22–30. For Gemma, we use layers 27–29. For Qwen, we use layers 22–26. These windows are chosen using the stability and separation criteria described in Section 3.2.
+
+#### O...
+--
+22179:...nd Qwen, the gap becomes larger and more stable in middle-to-late layers. Gemma shows a sharper architecture-specific pattern, motivating a narrower selected window. These observations support the use of family-specific layer windows rather than scoring all layers.
+
+Figure 1: Layer-wise analysis for Llama.
+
+Figure 2: Cosine similarity between Llama models and the refusal direction on unsafe prompts.
+
+Figure 3: Cosine similarity between Llama models...
+--
+[2 more matches not shown]

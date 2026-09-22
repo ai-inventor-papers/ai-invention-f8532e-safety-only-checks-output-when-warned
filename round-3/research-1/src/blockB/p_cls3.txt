@@ -1,0 +1,63 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.22686v2
+Type: HTML
+Pattern: Timeline of Refusal \(KL|Zero-Shot Safety Detection$|Zero-Shot Safety Detection\s|40% depth|∼40 (7 matches in 40129 chars)
+
+--- Content ---
+
+1447:.... 4.1 Experimental Setup
+        1. Models.
+        2. Datasets.
+     2. 4.2 Comparative Analysis: CLS vs. GCG
+        1. Evaluation.
+     3. 4.3 Results: Steering Intensity
+        1. Jailbreaking (α>0\alpha>0): The Safety-Coherence Trade-off.
+        2. Safety Hardening (α<0\alpha<0).
+        3. CLS vs. GCG.
+     4. 4.4 Comparison with Activation Steering
+     5. 4.5 Mechanistic Analysis
+        1. The Geometry of Refusal (PCA).
+        2. The Timeline of Refusal (KL Divergence).
+     6. 4.6 Zero-Shot Safety Detection
+  6. 5 Discussion
+     1. The “Wrapper” Hypothesis.
+     2. Architectural and Training Determinism.
+     3. Inverting the Attack.
+     4. Complementarity with Activation Steering.
+  7. 6 Conclusion
+  8. 7 Limitations
+  9. 8 Broader Impact
+  10. References
+  11. A System Prompt Configurations
+  12. B LLM-as-a-Judge Evaluation Prompts
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2606.22686v2 [c...
+--
+7008:...hile the refusal direction is universal, its depth varies:
+
+  * •
+
+The “Late Decision” Vulnerability: Models like Llama-3.1 process harmful and safe queries identically for 95% of their layers, diverging only at the final output head. Consequently, CLS creates a “jailbreak” state with 95% Attack Success Rate (ASR) in approximately one second.
+
+  * •
+
+The “Early Divergence” Defense: Models like Qwen-2.5 integrate safety earlier in the network (at ∼40%\sim 40\% depth), making them significantly more robust to linear steering.
+
+
+
+
+Direct comparison with Arditi et al. Arditi et al. (2024), who steer via intermediate hidden states, shows that CLS achieves substantially higher ASR on both Llama 2 (73% vs. 22.6%) and Qwen 7B (91% vs. 79.2%). We further show that inverting the steering vector (“Negative Steering”) hardens models against jailbreaks and improves coherence without parameter updates.
+
+...
+--
+24676:...final-layer hidden states (Figure 1) reveals striking linear separability: refused queries (red) cluster tightly and are geometrically distinct from benign compliance (blue), confirming that refusal is not a complex non-linear reasoning process but a low-rank feature along a single axis—the Refusal Vector. We observed identical separability across all evaluated families (Qwen, Gemma), confirming the universality of this representation.
+
+#### The Timeline of Refusal (KL Divergence).
+
+We investigated where in the network the refusal decision occurs by measuring KL Divergence between hidden states of safe vs. harmful trajectories across network depth (Figure 4). Llama-3.1 maintains near-zero divergence for 95% of the network, spiking only at the final layers—a “Late Decision” pattern indicating the model processes harmful and safe query semantics identically until the very end, explaining why logit-level CLS is s...
+--
+[3 more matches not shown]

@@ -1,0 +1,35 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2608.30748
+Type: HTML
+Length: 7999 chars (truncated)
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2608.30748** (cs) 
+
+[Submitted on 31 Aug 2026]
+
+# Title:The Fragility of Jailbreak Robustness Across Operational States
+
+Authors:[Yuna Park](https://arxiv.org/search/cs?searchtype=author&query=Park,+Y), [Hwang Youn Kim](https://arxiv.org/search/cs?searchtype=author&query=Kim,+H+Y), [Yujin Kim](https://arxiv.org/search/cs?searchtype=author&query=Kim,+Y), [Won Woo Ro](https://arxiv.org/search/cs?searchtype=author&query=Ro,+W+W), [Suhyun Kim](https://arxiv.org/search/cs?searchtype=author&query=Kim,+S), [Jae-In Hwang](https://arxiv.org/search/cs?searchtype=author&query=Hwang,+J)
+
+View a PDF of the paper titled The Fragility of Jailbreak Robustness Across Operational States, by Yuna Park and 5 other authors
+
+[View PDF](/pdf/2608.30748) [HTML (experimental)](https://arxiv.org/html/2608.30748v1)
+
+> Abstract:Existing jailbreak evaluations typically characterize robustness using a single attack success rate (ASR) measured in a default configuration (the vanilla state). However, user-LLM interactions can induce diverse operational states beyond the vanilla state. In this work, we find that jailbreak robustness is highly fragile to operational-state variation: even when the attack remains fixed, changing only an ordinary system prompt not designed to affect safety can dramatically alter attack success rates. We systematically investigate this phenomenon across seven aligned models and three representative jailbreak attacks, observing substantial differences in ASR between vanilla and non-vanilla operational states. In one case, ASR increases by up to 56 percentage points (2% to 58%) solely due to a change in operational state. Remarkably, these increases occur even for attacks originally designed and optimized under vanilla-state evaluation. We further show that state-dependent robustness variation is systematically associated with differences in hidden representations along a refusal-related axis, and that projections onto this axis strongly predict jailbreak outcomes. Our results show that a single vanilla-state evaluation may not fully characterize jailbreak robustness, motivating evaluations that also examine how robustness changes across non-vanilla operational states. 
+
+Comments: | Accepted to Findings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)  
+---|---  
+Subjects: |  Cryptography and Security (cs.CR); Computation and Language (cs.CL)  
+Cite as: | [arXiv:2608.30748](https://arxiv.org/abs/2608.30748) [cs.CR]  
+  | (or  [arXiv:2608.30748v1](https://arxiv.org/abs/2608.30748v1) [cs.CR] for this version)   
+  |  <https://doi.org/10

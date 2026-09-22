@@ -1,0 +1,12 @@
+
+46279:...ompts (97% compliance). _This case is undetectable by activation-only probing of mid-residual-stream representations._ The exact training procedure is not publicly documented but is consistent with one of: DPO on harmful-comply pairs that adjusts output-layer logits without rewriting middle-layer features; targeted fine-tuning of the final transformer block or lm_head; or instruction-following over-fitting that conditions the model to suppress refusal tokens at decode time. We do not claim to have verified the specific mechanism; we report what is consistent with the observed signature and leave verification for future work.
+
+### VIII-B Mechanism Investigation: Why Gemma-Abliteration Evades Tier 1
+
+The discovery...
+--
+57420:...tation of AMS and, we believe, of activation-only safety probing more broadly. Detecting class (iv) likely requires either output-layer-aware probing (examining lm_head and final-block parameters), token-level decoding analysis (measuring how the model treats refusal tokens at generation time), or direct behavioral evaluation. We treat this as the principal open problem motivated by the present work.
+
+#### Cross-Architecture Baselines
+
+Tier 2 requires a baseline from the same model family. Comparing Llama to Gemma would show lo...

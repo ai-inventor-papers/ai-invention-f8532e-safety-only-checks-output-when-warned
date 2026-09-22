@@ -1,0 +1,9 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://api.semanticscholar.org/graph/v1/paper/arXiv:2603.27412/citations?fields=title,externalIds,year&limit=100
+Type: HTML
+Length: 931 chars
+
+--- Content ---
+
+{"offset": 0, "data": [{"citingPaper": {"paperId": "af082bdf977da1d31fa518b0621fd8457ee97c29", "externalIds": {"ArXiv": "2608.29109", "CorpusId": 291531239}, "title": "Recognition-Refusal Misalignment in LLMs: Why Models Answer Structurally Unanswerable Questions", "year": 2026}}, {"citingPaper": {"paperId": "ed3886318a0d756262d8331ddbc32fa042299877", "externalIds": {"ArXiv": "2607.13075", "DBLP": "journals/corr/abs-2607-13075", "DOI": "10.48550/arXiv.2607.13075", "CorpusId": 290179426}, "title": "The Entanglement Wall: Activation-Space Probes as Risk Detectors, Not Context Adjudicators", "year": 2026}}, {"citingPaper": {"paperId": "9992b7543c5556603fa7a73e43908b2c4b6d798c", "externalIds": {"DBLP": "journals/corr/abs-2604-18901", "ArXiv": "2604.18901", "DOI": "10.48550/arXiv.2604.18901", "CorpusId": 287636388}, "title": "Harmful Intent as a Geometrically Recoverable Feature of LLM Residual Streams", "year": 2026}}]} 
+

@@ -1,0 +1,42 @@
+# Which safety readouts are still unclaimed
+
+`demo/` — Self-contained demo (Colab-ready notebook or markdown). Run without setup.  
+`src/` — Full source code, data, and outputs from the experiment execution.
+
+**Type:** research  
+**ID:** `art_ZNITuuQab6Nz`
+
+## Layman Summary
+
+Checks whether seven proposed cheap safety measurements for AI models have already been published by someone else, and finds that two are already shipped in a public tool and the other five are partly taken.
+
+## Full Summary
+
+Dated web-only saturation and verification pass, 2026-09-21, $0.00 spend, no cuts taken. Self-verification: 105/105 quote-grade passages re-confirmed by an independent live re-fetch of their own URL; 1 quote deleted as a composite (logged, substantive claim unaffected); 8 anchors recovered beyond the ~50 KB page-fetch horizon kept visibly separate; 3 zero-match regexes used as absence evidence kept separate again and each independently reproduced. Bibliography regenerated from live arXiv metadata: 65/65 ids resolved, 0 UNRESOLVED.
+
+VERDICTS on the seven EXECUTION-side candidates, none OPEN: X2 (weight-space write mass) and X10 (weights-only orthogonality scar) are CLOSED - not by arXiv:2607.01854, which this pass proves is REFERENCE-ANCHORED on BOTH signals ("The audit rests entirely on the reference"), but by the Jorak Model Scanner, a live NON-PEER-REVIEWED open-source tool that ships the exact normalised ||r^T W|| suppression statistic with r fitted from the candidate's OWN activations and a weights-only zero-inference SVD subspace-alignment scar test (A/B/S), calibrated cross-model. X1 PARTIAL (per-input vs per-checkpoint; nearest HPD/HERALD 2609.13534 and Geometry-Lite 2605.20241 scalarise depth profiles per PROMPT). X3 PARTIAL (concept + lexical-token dependence; nearest Logit-Gap Steering 2506.24056). X5 PARTIAL (parent-requiring, only 2 checkpoints; 2607.14147's 0.24-vs-0.03 concentration is a knockout-conditioned instruct-vs-base pair, n=60). X6 PARTIAL on the thinnest margin in the table. X8 PARTIAL (concept).
+
+TWO ADVERSE PRIORS ITERATION 1 DID NOT HAVE, and they own this iteration's axis. (1) arXiv:2604.09544 (Orgad, Wei, Zheng, Wattenberg, Henderson, Goldfarb-Tarrant, Belinkov) - iteration 1 mis-filed it as a pruning-only paper; its abstract publishes "harmful response generation is dissociable from the ability to recognize and reason about harmfulness", a DOUBLE DISSOCIATION between harm generation and refusal, and separability GRADED along the OLMo3-7B alignment ladder (emerging at DPO). (2) arXiv:2603.05773 "Knowing without Acting" names the axes Recognition (v_H) and Execution (v_R) and demonstrates a causal double dissociation on harm. (3) arXiv:2606.24952 publishes a per-checkpoint weight-computable detection-vs-control cosine over four models (0.12/0.20/0.16/0.13; 0.1197 vs 0.1200 across instruction tuning) and concludes it is "not a predictor of how steerable a behavior is". NONE of the three evaluates an abliterated checkpoint (grep abliterat|uncensor = 0 matches on 2606.24952 and on 2603.05773) - that is the one genuinely empty cell.
+
+N-GLARE ALREADY RUNS THIS RUN'S PANEL: ACL 2026 Long 1334 s1 illustrates JSS on "RL-aligned, base, and safety-removed versions of Qwen3-4B". Its margin is input cost only (four constructed dialogue families per model). Re-checked 2026-09-21: STILL NO CODE, and NO numeric Kendall's tau anywhere (Appendix Tables 6-8 are per-model benchmark values) - iteration 1's prohibition stands permanently.
+
+CLEAN NOT-FOUND worth more than any candidate: NO prior work scores a SAFE-COMPLETION model (declines without a lexical refusal) with an INTERNAL readout; OpenAI's 2508.09224 and OpenSafeIntent 2607.02047 are purely behavioural. Every lexical-refusal-keyed internal readout is undefined on GPT-5-class safety training.
+
+CORRECTIONS FORCED ON THE DRAFT: the hypothesis mis-states Basu 2603.18353 (zero-and-zero is the SAE arm ONLY; Arm 1 corrected 17/85 and disrupted 25/47; TSV 19/79 and 4/65); the planner's dose figures for 2512.13655 (minimum effective dose, >=30% bypass, 0.028 MMLU) are FABRICATED and absent across all three rungs; SRP's safety-audit mention is Future Work not abstract; Arditi does NOT logit-lens the refusal direction. Bibliography: Arditi = 7 authors + NeurIPS 2024, 2606.16349 = 6 authors not 1, 2606.22676 = 8 not 1, 2604.18901 MUST BE ADDED. HRCI_repr (G10) is NOT reimplementable as specified - Eq 8's k is never stated; Table 1 implies k=3, which must be declared. NO published behavioural dose curve over abliteration strength exists; the run's causal lane would be first.
+
+KILL X2, X10, and X5-for-novelty. SCREEN ORDER: (1) R-E gap on the abliterated checkpoint, (2) X1, (3) the safe-completion cell of X3.
+
+## Dependencies
+
+- `art_CC5kC0-E3lXW` — extends
+
+## Output Files
+
+- `research_out.json`
+
+## Demo Files
+
+- **research_report.md** — Research report markdown (auto-generated from artifact)
+
+---
+*Generated by AI Inventor Pipeline*

@@ -1,0 +1,199 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2609.20129
+Type: HTML
+Length: 7715 chars
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2609.20129** (cs) 
+
+[Submitted on 17 Sep 2026]
+
+# Title:Local Sparsity Enables Unsupervised LLM Safety Detection
+
+Authors:[Xin Chen](https://arxiv.org/search/cs?searchtype=author&query=Chen,+X), [Gil Kur](https://arxiv.org/search/cs?searchtype=author&query=Kur,+G), [Alexander Shevchenko](https://arxiv.org/search/cs?searchtype=author&query=Shevchenko,+A), [Andreas Krause](https://arxiv.org/search/cs?searchtype=author&query=Krause,+A)
+
+View a PDF of the paper titled Local Sparsity Enables Unsupervised LLM Safety Detection, by Xin Chen and 3 other authors
+
+[View PDF](/pdf/2609.20129) [HTML (experimental)](https://arxiv.org/html/2609.20129v1)
+
+> Abstract:Deployment-time safety methods for large language models (LLMs) are predominantly supervised and assume access to unsafe training data. Nevertheless, new attacks and harm categories regularly arise, not captured by models trained in such a supervised fashion. An alternative approach is to view this problem through the lens of anomaly detection, namely, to rely solely on modeling safe data and flagging out-of-distribution inputs. However, LLM activations lie in a high-dimensional space, raising concerns about whether anomaly detection is statistically feasible. We show that, under the linear representation hypothesis (LRH), there may indeed be hope. In the LRH concept space, which is typically recovered via a sparse autoencoder (SAE), nearby points share a small common active support. Using this local sparsity insight, we propose a framework for locally masked SAE-based anomaly detection, supported by theoretical justifications. We validate it on various architectures and datasets, including both capability-testing datasets and safety-specific datasets. Finally, when we allow algorithms to use 1% out-of-distribution data for calibration, locally sparse methods achieve near-optimal performance, demonstrating their ability to capture meaningful safety information while using only 1-2% of SAE neurons for computation. 
+
+Subjects: |  Machine Learning (cs.LG); Artificial Intelligence (cs.AI)  
+---|---  
+Cite as: | [arXiv:2609.20129](https://arxiv.org/abs/2609.20129) [cs.LG]  
+  | (or  [arXiv:2609.20129v1](https://arxiv.org/abs/2609.20129v1) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2609.20129> Focus to learn more arXiv-issued DOI via DataCite (pending registration)  
+  
+## Submission history
+
+From: Xin Chen [[view email](/show-email/0d6b209c/2609.20129)]   
+**[v1]** Thu, 17 Sep 2026 12:23:04 UTC (461 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Local Sparsity Enables Unsupervised LLM Safety Detection, by Xin Chen and 3 other authors
+
+  * [View PDF](/pdf/2609.20129)
+  * [HTML (experimental)](https://arxiv.org/html/2609.20129v1)
+  * [TeX Source ](/src/2609.20129)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.LG
+
+[< prev](/prevnext?id=2609.20129&function=prev&context=cs.LG "previous in cs.LG \(accesskey p\)")   |   [next >](/prevnext?id=2609.20129&function=next&context=cs.LG "next in cs.LG \(accesskey n\)")   
+
+
+[new](/list/cs.LG/new) |  [recent](/list/cs.LG/recent) | [2026-09](/list/cs.LG/2026-09)
+
+Change to browse by: 
+
+[cs](/abs/2609.20129?context=cs)  
+[cs.AI](/abs/2609.20129?context=cs.AI)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2609.20129)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2609.20129)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2609.20129)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2609.20129&description=Local Sparsity Enables Unsupervised LLM Safety Detection "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2609.20129&title=Local Sparsity Enables Unsupervised LLM Safety Detection "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+IArxiv recommender toggle
+
+IArxiv Recommender _([What is IArxiv?](https://iarxiv.org/about))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2609.20129) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

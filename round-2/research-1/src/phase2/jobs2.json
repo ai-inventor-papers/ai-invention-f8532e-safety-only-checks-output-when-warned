@@ -1,0 +1,7 @@
+[
+{"label":"ORGAD-appH-scalar","url":"https://arxiv.org/html/2604.09544","pattern":"separability (score|index|metric)|AUC of the|area under the trade|single (number|scalar)|Appendix H|H\\.? ?Scale|quantif","i":true,"max":12,"ctx":420,"cap":7000},
+{"label":"ORGAD-refusal-ablation-def","url":"https://arxiv.org/html/2604.09544","pattern":"Refusal ablation|Refusal Ablation","i":false,"max":8,"ctx":480,"cap":5000},
+{"label":"ORGAD-detection-numbers","url":"https://arxiv.org/html/2604.09544","pattern":"detection|detect harmful|accuracy on harmful/benign|explain","i":true,"max":14,"ctx":380,"cap":7000},
+{"label":"LATENTBIOPSY-ablit","url":"https://arxiv.org/html/2603.27412","pattern":"abliterat|0\\.015|invarian|survive","i":true,"max":14,"ctx":420,"cap":8000},
+{"label":"LATENTBIOPSY-exec","url":"https://arxiv.org/html/2603.27412","pattern":"weight|orthogonali|unembed|logit|W_out|steer|causal|intervention","i":true,"max":16,"ctx":260,"cap":7000}
+]

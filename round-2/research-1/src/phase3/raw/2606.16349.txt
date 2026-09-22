@@ -1,0 +1,196 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2606.16349
+Type: HTML
+Length: 8526 chars
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2606.16349** (cs) 
+
+[Submitted on 15 Jun 2026 ([v1](https://arxiv.org/abs/2606.16349v1)), last revised 6 Jul 2026 (this version, v3)]
+
+# Title:From Refusal Geometry to Safety Geometry: Harmfulness--Refusal Coupling under Dynamic Adversarial Fine-Tuning
+
+Authors:[Wenhao Lan](https://arxiv.org/search/cs?searchtype=author&query=Lan,+W), [Shan Li](https://arxiv.org/search/cs?searchtype=author&query=Li,+S), [Xinhua Lai](https://arxiv.org/search/cs?searchtype=author&query=Lai,+X), [Meiqi Wu](https://arxiv.org/search/cs?searchtype=author&query=Wu,+M), [Junbin Yang](https://arxiv.org/search/cs?searchtype=author&query=Yang,+J), [Haihua Shen](https://arxiv.org/search/cs?searchtype=author&query=Shen,+H)
+
+View a PDF of the paper titled From Refusal Geometry to Safety Geometry: Harmfulness--Refusal Coupling under Dynamic Adversarial Fine-Tuning, by Wenhao Lan and 5 other authors
+
+[View PDF](/pdf/2606.16349) [HTML (experimental)](https://arxiv.org/html/2606.16349v3)
+
+> Abstract:Safety alignment requires language models to refuse harmful requests without losing the ability to answer benign ones. Existing robustness evaluations, however, do not reveal whether a model has learned to recognize harmfulness, to activate a refusal policy, or to couple these two processes. We study this question with a dual safety-geometry protocol that measures harmfulness carriers, refusal carriers, and their coupling across aligned instruction-tuned anchors and matched Mistral-7B-v0.1 SFT/R2D2 training trajectories. The aligned anchors validate the protocol: refusal-side interventions reopen attack success more strongly than harmfulness-only interventions, while harmfulness and refusal carriers remain nearly orthogonal. Along the Mistral trajectory, R2D2 exhibits a high-coupling early phase with strong fixed-source robustness, saturated safe-prompt refusal, and collapsed benign utility. Later checkpoints move to a lower-coupling regime with partial utility recovery and reopened attack success. SFT provides an important contrast: it also reaches low coupling, but remains substantially less robust, showing that low coupling alone is not a safety guarantee. All-anchor diagnostics and sparse GCG/AutoDAN transfer experiments further show that H/R coupling is informative in the R2D2 regime, whereas SFT transfer is better summarized by drift or behavior-state measures. Causal sweeps support fixed-protocol sensitivity relative to matched unit-direction controls, but do not establish independent harmfulness and refusal pathways. These results frame harmfulness--refusal coupling as an operational diagnostic for safety-geometry dynamics under adversarial fine-tuning. 
+
+Subjects: |  Cryptography and Security (cs.CR)  
+---|---  
+Cite as: | [arXiv:2606.16349](https://arxiv.org/abs/2606.16349) [cs.CR]  
+  | (or  [arXiv:2606.16349v3](https://arxiv.org/abs/2606.16349v3) [cs.CR] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2606.16349> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Wenhao Lan [[view email](/show-email/2a4aec68/2606.16349)]   
+**[[v1]](/abs/2606.16349v1)** Mon, 15 Jun 2026 07:50:00 UTC (317 KB)  
+**[[v2]](/abs/2606.16349v2)** Tue, 16 Jun 2026 02:48:07 UTC (168 KB)  
+**[v3]** Mon, 6 Jul 2026 07:55:59 UTC (120 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled From Refusal Geometry to Safety Geometry: Harmfulness--Refusal Coupling under Dynamic Adversarial Fine-Tuning, by Wenhao Lan and 5 other authors
+
+  * [View PDF](/pdf/2606.16349)
+  * [HTML (experimental)](https://arxiv.org/html/2606.16349v3)
+  * [TeX Source ](/src/2606.16349)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by-nc-nd/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.CR
+
+[< prev](/prevnext?id=2606.16349&function=prev&context=cs.CR "previous in cs.CR \(accesskey p\)")   |   [next >](/prevnext?id=2606.16349&function=next&context=cs.CR "next in cs.CR \(accesskey n\)")   
+
+
+[new](/list/cs.CR/new) |  [recent](/list/cs.CR/recent) | [2026-06](/list/cs.CR/2026-06)
+
+Change to browse by: 
+
+[cs](/abs/2606.16349?context=cs)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2606.16349)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2606.16349)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2606.16349)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2606.16349&description=From Refusal Geometry to Safety Geometry: Harmfulness--Refusal Coupling under Dynamic Adversarial Fine-Tuning "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2606.16349&title=From Refusal Geometry to Safety Geometry: Harmfulness--Refusal Coupling under Dynamic Adversarial Fine-Tuning "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2606.16349) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

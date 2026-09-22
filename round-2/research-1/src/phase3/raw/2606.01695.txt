@@ -1,0 +1,198 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2606.01695
+Type: HTML
+Length: 7578 chars
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2606.01695** (cs) 
+
+[Submitted on 1 Jun 2026]
+
+# Title:CANARY: Zero-Label Detection of Fine-Tuning Contamination in Language Models
+
+Authors:[Swapnil Parekh](https://arxiv.org/search/cs?searchtype=author&query=Parekh,+S)
+
+View a PDF of the paper titled CANARY: Zero-Label Detection of Fine-Tuning Contamination in Language Models, by Swapnil Parekh
+
+[View PDF](/pdf/2606.01695) [HTML (experimental)](https://arxiv.org/html/2606.01695v1)
+
+> Abstract:Adversaries can implant latent harmful behavior by poisoning as few as 1% of fine-tuning examples. The contamination is invisible to every output-level defense: harmful behavior lies dormant in the model's hidden-state geometry and does not appear in generated text until contamination exceeds 7.5%. We introduce CANARY (Contamination Auditor via Neural Activation Representation Yield), a zero-label checkpoint auditor that detects this hidden shift directly from two forward passes over an unlabeled prompt set. CANARY projects the hidden-state difference through a Sparse Autoencoder, filtering style noise to isolate meaningful semantic drift. It achieves AUROC = 1.000 at 1% contamination (95% CI = [0.997, 1.000]; Cohen's d = 3.28) across four model architectures and two training paradigms, 7.5x below where any output-level method fires, with zero false positives on benign fine-tuning and full robustness to style-matching and gradient-noise adaptive attacks. The same SAE feature basis drives a complete governance pipeline: SAE-filtered amplification surfaces latent harm at a 5x higher rate than standard generation; score-ranked prompts yield 4.2x red-teaming lift; and suppressing a handful of contamination-specific features at inference time reduces harm from 70% to 10% with no perplexity penalty. CANARY is the first zero-label framework to detect, verify, prioritize, and remediate supply-chain contamination from hidden states alone. 
+
+Subjects: |  Machine Learning (cs.LG)  
+---|---  
+Cite as: | [arXiv:2606.01695](https://arxiv.org/abs/2606.01695) [cs.LG]  
+  | (or  [arXiv:2606.01695v1](https://arxiv.org/abs/2606.01695v1) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2606.01695> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Swapnil Parekh [[view email](/show-email/74ad4f66/2606.01695)]   
+**[v1]** Mon, 1 Jun 2026 05:01:01 UTC (240 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled CANARY: Zero-Label Detection of Fine-Tuning Contamination in Language Models, by Swapnil Parekh
+
+  * [View PDF](/pdf/2606.01695)
+  * [HTML (experimental)](https://arxiv.org/html/2606.01695v1)
+  * [TeX Source ](/src/2606.01695)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.LG
+
+[< prev](/prevnext?id=2606.01695&function=prev&context=cs.LG "previous in cs.LG \(accesskey p\)")   |   [next >](/prevnext?id=2606.01695&function=next&context=cs.LG "next in cs.LG \(accesskey n\)")   
+
+
+[new](/list/cs.LG/new) |  [recent](/list/cs.LG/recent) | [2026-06](/list/cs.LG/2026-06)
+
+Change to browse by: 
+
+[cs](/abs/2606.01695?context=cs)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2606.01695)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2606.01695)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2606.01695)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2606.01695&description=CANARY: Zero-Label Detection of Fine-Tuning Contamination in Language Models "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2606.01695&title=CANARY: Zero-Label Detection of Fine-Tuning Contamination in Language Models "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+IArxiv recommender toggle
+
+IArxiv Recommender _([What is IArxiv?](https://iarxiv.org/about))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2606.01695) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

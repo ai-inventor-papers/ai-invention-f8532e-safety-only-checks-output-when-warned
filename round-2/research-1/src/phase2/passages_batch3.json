@@ -1,0 +1,206 @@
+[
+ {
+  "id": "A01",
+  "source_url": "https://arxiv.org/abs/2609.13534",
+  "locator": "abstract",
+  "quote": "This lightweight input moderator extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence and classifies it with a 288-parameter MLP."
+ },
+ {
+  "id": "A02",
+  "source_url": "https://arxiv.org/abs/2609.13534",
+  "locator": "abstract",
+  "quote": "Per-instance trajectories provide machine-readable audit records that reveal when and how harmfulness emerges, offering an interpretability advantage over single-layer approaches."
+ },
+ {
+  "id": "A03",
+  "source_url": "https://arxiv.org/abs/2605.20241",
+  "locator": "abstract",
+  "quote": "introduce Geometry-Lite, a compact prompt-level probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts, then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape"
+ },
+ {
+  "id": "A04",
+  "source_url": "https://arxiv.org/html/2607.00572v1",
+  "locator": "Appendix A.3 Cross-Layer Projection Profiles",
+  "quote": "Figure 9: Cross-layer projection profiles on Llama-3.1-8B. Mean cosine similarity cos(h^(l),v) between residual-stream activations and each of the four directions, across all layers and all input categories... Figure 10: Cross-layer projection profiles on Qwen-2.5-7B. The four-direction structure replicates across architectures with characterization differences"
+ },
+ {
+  "id": "A05",
+  "source_url": "https://arxiv.org/html/2607.00572v1",
+  "locator": "Appendix A.2",
+  "quote": "Since the score depends only on the four-direction geometry rather than absolute layer position, the same criterion adapts to each architecture's depth profile without per-model tuning."
+ },
+ {
+  "id": "A06",
+  "source_url": "https://arxiv.org/abs/2609.07139",
+  "locator": "abstract",
+  "quote": "We find that partner expertise is most decodable in the early layers and falls to near chance before the midpoint of the network. Counterfactual patching shows that injecting the expertise difference at the layer of peak decodability barely changes a fixed late-layer readout, whereas the same difference injected past the midpoint propagates almost completely, a separation of more than an order of magnitude."
+ },
+ {
+  "id": "A07",
+  "source_url": "https://arxiv.org/abs/2609.07139",
+  "locator": "abstract",
+  "quote": "We use one model on a synthetic corpus as an initial demonstration."
+ },
+ {
+  "id": "A08",
+  "source_url": "https://arxiv.org/abs/2608.17843",
+  "locator": "abstract",
+  "quote": "Further analyses show that decodable information is not always actionable. Generation often fails to express this information, and on the two intervention-tested backbones, activation-restoration effects at the patched entity position vanish while decodability persists across depth."
+ },
+ {
+  "id": "A09",
+  "source_url": "https://arxiv.org/html/2608.17843v1",
+  "locator": "full-text grep, html",
+  "quote": "No matches found for pattern: layer gap|depth-fraction|fraction of depth|onset layer|lag of|layers apart|difference in layer"
+ },
+ {
+  "id": "A10",
+  "source_url": "https://arxiv.org/abs/2609.01048",
+  "locator": "abstract",
+  "quote": "Across the full Pythia suite (160M-12B, eight checkpoints, four task families), a linear probe can read a target variable from the residual stream as early as step 1,000 at every scale -- yet steering along that same reading direction remains null-equivalent in 43 of 48 model-checkpoint cells."
+ },
+ {
+  "id": "A11",
+  "source_url": "https://arxiv.org/pdf/2609.01048",
+  "locator": "Section 3.1 Grid and instrumentation, Table 2",
+  "quote": "The grid crosses the six publicly released Pythia sizes with eight checkpoints spanning training, and four task families designed to separate distinct controllability demands (Table 2)... T: template contrast D: distractor robustness P: prior-bias override N: negative transfer"
+ },
+ {
+  "id": "A12",
+  "source_url": "https://arxiv.org/abs/2604.22128",
+  "locator": "abstract",
+  "quote": "By probing and intervening on the residual stream and attention patterns, we find that depth, distance, and top-of-stack signals are all decodable, yet their causal roles diverge."
+ },
+ {
+  "id": "A13",
+  "source_url": "https://arxiv.org/abs/2606.24952",
+  "locator": "abstract",
+  "quote": "On Gemma 2-2B-it, output format (clean JSON vs markdown fencing) collapses both roles onto one axis. Hallucination does not: the model detects fake entities with perfect linear separability (AUC = 1.000 from layer 5), yet that direction sits at cos = 0.12 (about 83 degrees) from the direction producing a refusal... The gap generalizes: across four models from three families and two scales (1B-9B), cos stays in [0.12, 0.20], identical before and after instruction tuning (0.1197 vs 0.1200)... A 15-degree rotation toward the refusal direction partially bridges it -- 73% and 60% refusal on two held-out fake-entity categories at 1.8% false positives. ... The cosine is a weight-computable signature of the dissociation between knowing and steering, not a predictor of it."
+ },
+ {
+  "id": "A14",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "Section 7.1 Four-model triangulation, Table",
+  "quote": "Model | Layers | dim | cos | Signal ratio | Behavior --- Gemma 2-2B-it | 26 | 2304 | 0.12 | 6.9x | Fabricates (~70%) Llama 3.2-1B | 16 | 2048 | 0.20 | 12.5x | Refuses (100%) Qwen 2.5-1.5B | 28 | 1536 | 0.16 | 2.7x | Mixed (40% refuse) Gemma 2-9B-it | 42 | 3584 | 0.13 | 12.8x | Fabricates"
+ },
+ {
+  "id": "A15",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "Section 7.5 Instruction tuning leaves the lm_head geometry unchanged",
+  "quote": "Model | cos(d_det,d_ref) --- Gemma 2-2B (base) | 0.1197 Gemma 2-2B-it | 0.1200 Difference: 0.0003. The instruction tuning does not touch the lm_head geometry."
+ },
+ {
+  "id": "A16",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "full-text grep, html",
+  "quote": "No matches found for pattern: abliterat|uncensor"
+ },
+ {
+  "id": "A17",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "full-text grep (all 'harm' hits are Related Work / mechanism-description, not the paper's own measured concept)",
+  "quote": "harm (4 matches in 64440 chars) ... Arditi et al. (2024) showed that refusal is mediated by a single linear direction ... The detection direction actively harms refusal tokens ... suppressing one MLP neuron suffices to bypass safety alignment across 7 models"
+ },
+ {
+  "id": "A18",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "abstract",
+  "quote": "We propose the Disentangled Safety Hypothesis (DSH), positing that safety computation operates on two distinct subspaces: a Recognition Axis (v_H, \"Knowing\") and an Execution Axis (v_R, \"Acting\")... we demonstrate a causal double dissociation, effectively creating a state of \"Knowing without Acting.\""
+ },
+ {
+  "id": "A19",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "Introduction, Figure 1 caption",
+  "quote": "Figure 1: Layer-wise cosine similarity between the Recognition axis v_H and the Execution axis v_R. The trajectory moves from strong antagonism in early layers (Sim \u2248 -0.9) toward the random baseline"
+ },
+ {
+  "id": "A20",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "Section on Geometric Evolution, Figure 4 caption",
+  "quote": "Figure 4: Layer-wise Cosine Similarity between v_H and v_R. The dashed line and grey band represent the mean and 95% confidence interval of 1000 random vector pairs... In deep layers, the safety axes' similarity converges to this random baseline, confirming the \"Reflex-to-Dissociation\" pattern."
+ },
+ {
+  "id": "A21",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "full-text grep, html",
+  "quote": "No matches found for pattern: abliterat|uncensor"
+ },
+ {
+  "id": "A22",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "Experiment Setup",
+  "quote": "Models. We evaluate three aligned models spanning distinct architectural lineages: Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.2, and Qwen2.5-7B-Instruct."
+ },
+ {
+  "id": "A23",
+  "source_url": "https://arxiv.org/abs/2609.14759",
+  "locator": "abstract",
+  "quote": "The central result is causal and comes from one model, OLMo-3. A nested interchange rank sweep patches successively larger slices of the moral subspace between matched requests and reads how much of refusal's response transfers... about three-quarters of refusal's causal input lies outside the moral subspace altogether."
+ },
+ {
+  "id": "T60",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Abstract",
+  "quote": "The gap generalizes. Across four models from three families and two scales (1B\u20139B),"
+ },
+ {
+  "id": "T61",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Abstract",
+  "quote": "What the cosine _is_ is a robust, weight-computable signature of the dissociation, invariant across four models \u2014 not a predictor of how steerable a behavior is."
+ },
+ {
+  "id": "T62",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Abstract",
+  "quote": "a 15\u2218 rotation from the detection direction toward the intervention direction partially bridges the gap \u2014 73% and 60% refusal on two held-out entity categories, at 1.8% false positives (N=115)."
+ },
+ {
+  "id": "T63",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Section 2.2",
+  "quote": "the intervention (refusal) direction is hand-picked from lm_head alone"
+ },
+ {
+  "id": "T64",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "Abstract",
+  "quote": "positing that safety computation operates on two distinct subspaces"
+ },
+ {
+  "id": "T65",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "Abstract",
+  "quote": "we demonstrate a causal double dissociation, effectively creating a state of"
+ },
+ {
+  "id": "T66",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "Abstract",
+  "quote": "which achieves State-of-the-Art attack success rates by surgically lobotomizing the refusal mechanism"
+ },
+ {
+  "id": "T67",
+  "source_url": "https://arxiv.org/html/2607.14147v1",
+  "locator": "Section 4.3",
+  "quote": "the instruct model routes it to refusal tokens about 8"
+ },
+ {
+  "id": "T68",
+  "source_url": "https://arxiv.org/abs/2609.13534",
+  "locator": "Abstract",
+  "quote": "extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence"
+ },
+ {
+  "id": "T69",
+  "source_url": "https://arxiv.org/abs/2609.01048",
+  "locator": "Abstract",
+  "quote": "yet steering along that same reading direction remains null-equivalent in 43 of 48 model-checkpoint cells"
+ },
+ {
+  "id": "T70",
+  "source_url": "https://arxiv.org/abs/2508.09224",
+  "locator": "Abstract",
+  "quote": "safe-completion training improves safety (especially on dual-use prompts), reduces the severity of residual safety failures, and substantially increases model helpfulness"
+ }
+]

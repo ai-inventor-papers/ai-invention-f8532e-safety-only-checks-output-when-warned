@@ -1,0 +1,7 @@
+[
+{"label":"T3b-eq-def","url":"https://arxiv.org/html/2606.16349","pattern":"HRCI_|\\\\mathrm\\{HRCI\\}|cos|\\\\theta_|we define|Equation|\\(9\\)|\\(8\\)|\\(7\\)","i":false,"max":16,"ctx":420,"cap":9000},
+{"label":"T3d-IRT-abs","url":"https://arxiv.org/abs/2608.05086","pattern":"Abstract","i":false,"max":2,"ctx":2200,"cap":4000},
+{"label":"T3a-NGLARE-code","url":"https://aclanthology.org/2026.acl-long.1334.pdf","pattern":"github|code|available at|released|reproduc","i":true,"max":12,"ctx":300,"cap":5000},
+{"label":"T3a-NGLARE-eq","url":"https://aclanthology.org/2026.acl-long.1334.pdf","pattern":"JR|Jailbreak Risk|Min/Max|JSS|Kendall|tau","i":false,"max":20,"ctx":380,"cap":10000},
+{"label":"T5-dose-13655","url":"https://arxiv.org/html/2512.13655","pattern":"minimum effective dose|30%|0\\.028|MMLU|intensity|sweep|monoton|chaotic","i":true,"max":16,"ctx":380,"cap":9000}
+]

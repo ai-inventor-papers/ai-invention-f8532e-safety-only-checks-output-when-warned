@@ -1,0 +1,6 @@
+[
+{"label":"T5-13655-dose","url":"https://arxiv.org/html/2512.13655v2","pattern":"minimum effective dose|effective dose|30%|30 %|0\\.028|MMLU|sweep|intensity|weight value|monoton","i":true,"max":18,"ctx":360,"cap":9000},
+{"label":"T5-19056","url":"https://arxiv.org/abs/2505.19056","pattern":"Abstract","i":false,"max":2,"ctx":2200,"cap":4000},
+{"label":"HF-drexe-api","url":"https://huggingface.co/api/models/DrExe/qwen3-safety-vectors","pattern":".","i":false,"max":1,"ctx":900,"cap":2000},
+{"label":"T5-3010012","url":"https://arxiv.org/abs/2603.10012","pattern":"Abstract","i":false,"max":2,"ctx":2000,"cap":3500}
+]

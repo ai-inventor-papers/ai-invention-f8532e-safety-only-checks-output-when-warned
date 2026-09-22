@@ -1,0 +1,313 @@
+
+
+##### Report GitHub Issue
+
+×
+
+Title:
+
+Content selection saved. Describe the issue below:
+
+Description:
+
+Submit without GitHub Submit in GitHub
+
+arXiv is now an independent nonprofit! [Learn more](https://info.arxiv.org/about) ×
+
+[ Back to arXiv ](/)
+
+[Why HTML?](https://info.arxiv.org/about/accessible_HTML.html) Report Issue [ Back to Abstract ](/abs/2607.00572v1 "Back to abstract page") [ Download PDF](/pdf/2607.00572v1 "Download PDF") [ ](javascript:toggleNavTOC\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. 1 Introduction
+  3. 2 Background
+     1. Linear representations of behaviors.
+     2. Refusal and harmfulness directions.
+     3. Models and datasets.
+     4. Threat Model.
+  4. 3 Internal Representations of Harmfulness and Refusal
+     1. 3.1 Harmfulness and Refusal are Decoupled in Certain Layers
+     2. 3.2 Jailbreak Attacks Exploit the Dissociations
+  5. 4 HARC: Harmfulness and Refusal Coupling
+     1. 4.1 Layer Selection and Direction Recomputation
+        1. Direction recomputation.
+     2. 4.2 What Coupling Fine-Tuning Changes
+  6. 5 Main Experiment Results
+     1. 5.1 Experimental Setup
+     2. 5.2 Main Results and Ablation Studies
+     3. 5.3 Effectiveness at Scale
+  7. 6 Related Work
+     1. Mechanistic interpretability of safety representations.
+     2. Safety fine-tuning and representation-level interventions.
+     3. Jailbreak attacks.
+  8. 7 Discussion
+  9. References
+  10. A Internal Representations of Harmfulness and Refusal for Qwen
+     1. A.1 Implications for Qwen-2.5-7B
+     2. A.2 The Four-Direction Structure Replicates Across Model Families
+     3. A.3 Cross-Layer Projection Profiles
+        1. Attack signatures are depth-spanning, not single-layer artifacts.
+        2. PAIR exhibits a depth-spanning negative-harm signature.
+        3. Architectural differences in CodeAttack response-side activation.
+  11. B Example of Model Response Continuation
+  12. C Full Algorithm of HARC
+  13. D Full Experiment Details and Replication
+     1. D.1 HARC (Ours)
+        1. LoRA configuration.
+        2. Optimization.
+        3. Loss weights.
+        4. Training data.
+     2. D.2 Vanilla SFT
+     3. D.3 DPO and Ours+DPO
+        1. LoRA configuration.
+        2. Optimization.
+        3. Training data.
+        4. Ours+DPO.
+     4. D.4 Circuit Breakers and RepBend
+        1. Circuit Breakers configuration.
+        2. RepBend configuration.
+     5. D.5 CAST
+     6. D.6 Evaluation protocol
+        1. Harmfulness.
+        2. General Capabilities.
+        3. Over-Refusal.
+        4. Reporting convention.
+     7. D.7 Judge prompts
+     8. D.8 Test-train contamination
+  14. E Multi-Seed Variance Analysis
+  15. F Ablation Studies
+  16. G Full Evaluation on Large Parameter Models
+  17. H Full Use of Assets
+     1. H.1 Models
+     2. H.2 Datasets
+     3. H.3 Jailbreak Attacks
+     4. H.4 Benchmarks
+     5. H.5 Baseline Methods
+  18. I Robustness Under Fine-Tuning Attacks
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2607.00572v1 [cs.AI] 01 Jul 2026
+
+# HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment
+
+Shei Pern Chua ††thanks: Work done while at Microsoft. Affiliation: Tsinghua University  Affiliation: Microsoft  Fangzhao Wu ††thanks: Correspondence to: fangzwu@microsoft.com Affiliation: Microsoft 
+
+###### Abstract
+
+Understanding how aligned LLMs internally represent safety is critical for diagnosing alignment vulnerabilities, as it explains why jailbreaks succeed and informs the design of robust alignment strategies. Prior work shows that aligned LLMs encode harmfulness and refusal as separable directions in the residual stream at prompt-side token positions. We show that jailbreaks succeed at prompt encoding by suppressing either the refusal or harmfulness direction before any token is generated, with distinct attack classes occupying separable regions of the harmfulness-refusal plane. Extending the analysis to response-token positions, we find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful at the prompt side. Motivated by our findings, we introduce _HARC_ (Harmfulness-And-Refusal Coupling), a fine-tuning method that pairs the two directions across both prompt and response positions. Since the intervention is confined to the harmfulness-refusal subspace, it leaves the rest of the residual stream intact and does not degrade general capability or inflate over-refusal. Across extensive experiments, HARC achieves the strongest robustness-capability-usability trade-off among six baselines spanning the major training-time and inference-time safety methods. The harmfulness and refusal directions at prompt and response positions transfer across the five model families and two scales we tested without architecture-specific tuning. 11 1 The code is available at  https://github.com/microsoft/HARC
+
+## 1 Introduction
+
+Aligned large language models refuse harmful requests under direct prompting, but adversarial attacks such as adversarial suffixes [1, 2], persuasion-style rewrites [3, 4], iterative red-teaming [5, 6], multi-turn conversations [7, 8, 9], and obfuscation [10, 11] continue to bypass alignment on frontier models [12]. In response, a range of approaches have been proposed, including preference optimization [13], supervised refusal training [14], deliberative reasoning [15, 16], inference-time steering [17, 18], and representation-level interventions that reshape activations during training [19, 20, 21, 22]. Although these methods improve robustness, they offer little insight into the internal mechanisms by which LLMs encode safety, or why particular adversarial attacks succeed in bypassing these defenses.
+
+Recent interpretability work begins to close this gap by showing that aligned models encode harmfulness (vharmv_{\mathrm{harm}}) and refusal (vrefv_{\mathrm{ref}}) as distinct directions in the residual stream at prompt-side token positions [23, 24]. We therefore ask a sharper question: do jailbreaks succeed by exploiting this structure, and if so, how? By probing three attacks spanning distinct mechanism families, we find that successful jailbreaks suppress either direction, or both. When harmfulness is suppressed before generation, the model registers the jailbreak prompt as not harmful and shows no refusal intent. Yet it proceeds to produce a harmful response. This exposes a limitation of prompt-side analysis alone: does the model know what it is generating?
+
+To answer this, we extend the representational analysis to response-token positions by extracting harmfulness and refusal directions from residuals during generation (Section 3). We find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful during prompt encoding. It knows what it is producing but fails to translate that knowledge into refusal. We further show that this four-direction structure replicates across five instruction-tuned model families, suggesting it is a property of aligned LLMs rather than an architectural artifact (Section A.2).
+
+This suggests a simple intervention, where we directly couple harmful recognition with refusal. In this work, we introduce HARC (Harmfulness-And-Refusal Coupling), an alignment method that couples the harmfulness and refusal directions at both prompt and response positions, so that activation along either direction reliably propagates refusal regardless of where in the sequence harmful intent first becomes detectable. The intervention is confined to a two-dimensional harmfulness–refusal subspace, leaving the rest of the residual stream largely undisturbed. We hypothesize that this mitigates the alignment tax [25, 26] that broader fine-tuning–based alignment methods tend to incur [27]. Across four jailbreak attacks, two over-refusal benchmarks, and five capability benchmarks, HARC achieves the strongest adversarial robustness among six baselines covering major training-time and inference-time safety methods, while preserving general capability and minimizing over-refusal. We also show that our method transfers cleanly across distinct models at a comparable scale.
+
+Our contributions are threefold. (1) We extract harmfulness and refusal directions at response-token positions and show that they are distinct from their prompt-side counterparts: cross-concept, cross-position pairs become nearly orthogonal in late layers (Figure 2b). The model still recognizes harmful content at generation time even when prompt-side refusal has failed. The four-direction structure replicates across five distinct model families. (2) We find that successful attacks suppress the refusal direction during prompt encoding, and distinct attack classes occupy separable regions of the harmfulness-refusal plane. (3) We propose HARC, a representation-level fine-tuning method that pairs the harmfulness and refusal directions at both prompt and response positions through an additive margin hinge loss on cosine projections. Our method reduces average ASR by 4.67×4.67\times on Llama-3.1-8B and 4.75×4.75\times on Qwen-2.5-7B over the base model while undercutting base-model over-refusal and matching its overall helpfulness. It achieves the strongest robustness-capability-usability trade-off among baselines.
+
+## 2 Background
+
+#### Linear representations of behaviors.
+
+A growing body of work demonstrates that high-level behaviors and concepts in language models are encoded as linear directions within their residual streams [28, 29, 30]. This property enables activation steering, a technique that causally modulates a model’s behavior by adding a scaled concept vector to the residual stream during inference [31, 32, 33]. The standard method for extracting these directional vectors is the difference of means [34]. Given a set of prompts 𝒟+\mathcal{D}^{+} that exhibit a target behavior and a contrasting set 𝒟−\mathcal{D}^{-}, the corresponding direction at layer ℓ\ell and token position tt is
+
+| v(ℓ,t)=normalize⁡(1|𝒟+|​∑x∈𝒟+h(ℓ,t)​(x)−1|𝒟−|​∑x∈𝒟−h(ℓ,t)​(x)),v^{(\ell,t)}=\mathrm{normalize}\left(\frac{1}{|\mathcal{D}^{+}|}\sum_{x\in\mathcal{D}^{+}}h^{(\ell,t)}(x)\;-\;\frac{1}{|\mathcal{D}^{-}|}\sum_{x\in\mathcal{D}^{-}}h^{(\ell,t)}(x)\right), |  | (1)  
+---|---|---|---  
+  
+where h(ℓ,t)​(x)∈ℝdh^{(\ell,t)}(x)\in\mathbb{R}^{d} denotes the residual-stream activation at layer ℓ\ell and token position tt when the model is run forward on input xx. This approach has been successfully applied to extract representations for various high-level concepts, including truthfulness [35, 30], sentiment [36], instruction-following [37], and refusal [23].
+
+#### Refusal and harmfulness directions.
+
+Arditi et al. [23] extracted a refusal direction by computing the difference of means between harmful and harmless instruction prompts at the post-instruction token, tpost​-​instt_{\mathrm{post\text{-}inst}}. Ablating this direction removes LLM refusal behavior on harmful prompts, while adding it to harmless prompts induces refusal. Building on this, Zhao et al. [24] demonstrated that the extracted direction differs significantly based on the specific token position. By applying the same harmful and harmless dataset but extracting the activations at the final token of the user instruction (tinstt_{\mathrm{inst}}), they identified a distinct harmfulness direction. This vector encodes the model’s internal recognition of harmful content, distinct from its commitment to refuse.
+
+#### Models and datasets.
+
+We primarily work with open-source instruction-tuned models: Llama-3.1-8B [38] and Qwen-2.5-7B [39]22 2 For brevity, we refer to the instruction-tuned versions of these models as Llama-3.1-8B, 70B and Qwen-2.5-7B, 72B. All models in this paper are instruction-tuned variants (e.g. Llama-3.1-8B-Instruct, Qwen-2.5-7B-Instruct).. We additionally scale our analysis and method to Llama-3.1-70B and Qwen-2.5-72B (Section 5.3). Following prior work [23, 24], we extract the refusal direction vrefv_{\mathrm{ref}} at tpost​-​instt_{\mathrm{post\text{-}inst}} and the harmfulness direction vharmv_{\mathrm{harm}} at tinstt_{\mathrm{inst}}. Both directions are computed via Equation 1 over a held-out set of 300 harmful prompts from AdvBench and 300 harmless prompts from UltraChat. Section 3.2 extends this extraction to response-token positions using the model’s corresponding outputs on each prompt.
+
+#### Threat Model.
+
+We consider black box jailbreak attacks in which adversaries attempt to elicit policy-violating outputs [40] solely through prompt interaction, including persuasion-based rewrites, multi-turn dialogue, and obfuscation attacks as a more realistic threat. Attackers may adapt prompts across turns but do not modify model weights, system prompts, or safety training data after deployment. Our goal is therefore robustness against prompt-space attacks rather than adversarial fine-tuning or weight-space model editing. We evaluate standard black-box jailbreak techniques under this setting.
+
+## 3 Internal Representations of Harmfulness and Refusal
+
+In this section, we characterize the internal representations of harmfulness and refusal in Llama-3.1-8B and Qwen-2.5-7B, which are the two models we use for the main experiments. We additionally showed that this structure replicates across the five model families (Section A.2). Prior work characterizes vrefv_{\mathrm{ref}} at tpost​-​instt_{\mathrm{post\text{-}inst}} [23] and vharmv_{\mathrm{harm}} at tinstt_{\mathrm{inst}} [24] at prompt-side token positions. We hypothesize that harmful recognition may persist at generation time even when prompt-side refusal has been bypassed, so we extend the direction construction to response-token positions and obtain vharmrespv^{\mathrm{resp}}_{\mathrm{harm}} and vrefrespv^{\mathrm{resp}}_{\mathrm{ref}} (Section 3.2, Eq. 2). We then use these four-direction structure to characterize how these directions relate across positions and layers and how jailbreak attacks exploit them. We present Qwen’s analysis in Appendix A, where it shows similar patterns to Llama.
+
+### 3.1 Harmfulness and Refusal are Decoupled in Certain Layers
+
+Figure 1: Cosine similarity between vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} across all layers of Llama-3.1-8B. Both directions are tightly coupled at mid-depth and most decoupled in late layers.
+
+Figure 1 shows that the cosine similarity between vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} varies across model depth. The cosine similarity peaks around L12 and then drops through the late layers (L20–L28). Therefore, the refusal and harmfulness directions diverge most significantly in late layers for Llama-3.1-8B.
+
+Our results suggest that the separation of these directions has major implications for safety behavior. If vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} are nearly orthogonal, an input can activate one concept without the other. We hypothesize that certain successful jailbreak attacks exploit this gap by pushing the residual stream into regions where the refusal direction is suppressed, regardless of whether the harm signal itself is present.
+
+### 3.2 Jailbreak Attacks Exploit the Dissociations
+
+Figure 2: Jailbreaks dissociate harm-recognition from refusal, and a four-direction structure emerges at the most decoupled layers. (a) Δ\Delta projections of successful jailbreak prompts at the prompt-side (left, onto vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}}) and the response-side (right, onto vharmrespv_{\mathrm{harm}}^{\mathrm{resp}} and vrefrespv_{\mathrm{ref}}^{\mathrm{resp}}) on layer 27. Each response-side point is projected at its category’s peak token because attacks express harm and refusal at different continuation positions (Appendix A.3). Baseline harmful prompts (red) activate both directions, whereas benign prompts (green) activate neither. DAN (purple) activates the harm direction but suppresses the refusal direction, PAIR (yellow) activates the refusal direction but suppresses the harm direction, and CodeAttack (blue) suppresses both directions. At the response positions, continuations for harmful prompts, DAN, and PAIR cluster together. CodeAttack separates from the benign cluster but occupies a distinct region of weaker activation on both axes. (b) Pairwise cosines between all four directions at L12 and L27. The directions form a single entangled subspace at L12 but separate cleanly at L27, where same-concept cross-position pairs remain aligned and cross-concept pairs become near-orthogonal.
+
+To verify our hypothesis from Section 3.1, we measure projections onto vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} for three jailbreak methods that span the major attack mechanism families33 3 We omit gradient-based attacks (e.g. GCG [1]) since Arditi et al. [23] already provided an analysis of this attack class.: DAN [4] (persona framing), PAIR [5] (semantic rewriting), and CodeAttack [10] (code obfuscation). We also project onto the response-side directions vharmrespv_{\mathrm{harm}}^{\mathrm{resp}} and vrefrespv_{\mathrm{ref}}^{\mathrm{resp}}, since harmfulness and refusal may diverge during generation rather than at prompt encoding. Concretely, we mean-pool the residual stream over the first 32 response tokens. For the refusal direction, we neutralize prompt-content variation by extracting both a refused continuation (h¯refusal\bar{h}_{\mathrm{refusal}}) and a harmful continuation (h¯harmful\bar{h}_{\mathrm{harmful}}, which was obtained by ablating vrefv_{\mathrm{ref}} [23]). To isolate the harmfulness direction, we directly contrast h¯harmful\bar{h}_{\mathrm{harmful}} against benign continuations (h¯benign\bar{h}_{\mathrm{benign}}) generated from a safe prompt set 𝒟help\mathcal{D}_{\mathrm{help}}:
+
+| vharmresp=normalize⁡(h¯harmful−h¯benign),vrefresp=normalize⁡(h¯refusal−h¯harmful).v^{\mathrm{resp}}_{\mathrm{harm}}=\mathrm{normalize}\\!\left(\bar{h}_{\mathrm{harmful}}-\bar{h}_{\mathrm{benign}}\right),\quad v^{\mathrm{resp}}_{\mathrm{ref}}=\mathrm{normalize}\\!\left(\bar{h}_{\mathrm{refusal}}-\bar{h}_{\mathrm{harmful}}\right). |  | (2)  
+---|---|---|---  
+  
+Continuation examples are in Appendix B.
+
+Jailbreaks succeed by suppressing prompt-side directions before any refusal signal can fire. Figure 2(a) illustrates three distinct mechanisms by which attacks suppress activation along vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} during prompt encoding: DAN suppresses refusal while leaving harmfulness intact, PAIR drives harmfulness into negative while activating refusal, and CodeAttack suppresses both, clustering closely with benign prompts. All three mechanisms effectively lock the model into a compliance trajectory before a refusal response can be elicited. However, harm recognition does not vanish, as it resurfaces during generation. At the response positions, the attacks separate into two distinct clusters: DAN and PAIR strongly recover both harmfulness and refusal signals at response positions, clustering with standard harmful continuations, while CodeAttack separates from benign into a distinct moderate-activation region rather than collapsing onto the harmful cluster. Crucially, for successful jailbreaks like DAN and PAIR, this strong response-side refusal activation comes too late to redirect the generation trajectory the prompt has already committed to [14]. We report the full cross-layer projection profiles for all four directions in Appendix A.3, which confirm that the attack-class signatures characterized at L27 hold consistently across the depth band where the four-direction structure is present.
+
+The four directions are not redundant. Harmfulness and refusal are separable concepts at both prompt and response positions. Figure 2(b) shows that same-concept cross-position pairs (vharmv_{\mathrm{harm}} with vharmrespv_{\mathrm{harm}}^{\mathrm{resp}}, and vrefv_{\mathrm{ref}} with vrefrespv_{\mathrm{ref}}^{\mathrm{resp}}) remain aligned, while cross-concept pairs are near-orthogonal at the most decoupled layer. This gives us two independent measurements of the same dissociation and a way to track it as generation unfolds. The separation is depth-dependent: at other layers the four directions had already collapsed onto a single shared axis (Figure 2b), so any intervention that relies on the four-direction structure must target the layers where this structure is present.
+
+## 4 HARC: Harmfulness and Refusal Coupling
+
+Our analysis motivates a single intervention. Jailbreak attacks suppress vrefv_{\mathrm{ref}} during prompt encoding, response generation, or both, while vharmv_{\mathrm{harm}} remains active in at least one phase. If we train the model so that vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} activate jointly on harmful inputs, then activation along either should trigger refusal, and an attack suppressing one direction must suppress the other as well. Coupling at the prompt position alone is insufficient, since certain attacks suppress prompt-side harm recognition entirely (Figure 2a) and preventing the prompt-side constraint from activating. In these cases, the harmfulness signal emerges only during generation, and a response-position constraint is required to catch it. We call this approach HARC (Harmfulness-And-Refusal Coupling), a LoRA-based fine-tuning method that pairs the harmfulness and refusal directions through an additive margin hinge loss on cosine projections at both prompt and response positions.
+
+Coupling losses. At a selected layer, let htinsth_{t_{\mathrm{inst}}} and htposth_{t_{\mathrm{post}}} be residual streams at the last instruction token and post-instruction template token. We measure each direction’s activation by cosine projection pharm=cos⁡(htinst,vharm)p_{\mathrm{harm}}=\cos(h_{t_{\mathrm{inst}}},v_{\mathrm{harm}}) at the last instruction token, and pref=cos⁡(htpost,vref)p_{\mathrm{ref}}=\cos(h_{t_{\mathrm{post}}},v_{\mathrm{ref}}) at the post-instruction template token. On a harmful prompt, both directions should activate, which we enforce this with a margin hinge:
+
+| Lh=max⁡(0,m−pharm)+max⁡(0,m−pref).L_{h}=\max(0,\,m-p_{\mathrm{harm}})+\max(0,\,m-p_{\mathrm{ref}}). |  | (3)  
+---|---|---|---  
+  
+On a harmless prompt, neither should activate (Lb=max⁡(0,pharm)+max⁡(0,pref)L_{b}=\max(0,p_{\mathrm{harm}})+\max(0,p_{\mathrm{ref}})). The same hinge structure applies at response-token positions, projecting the residual stream mean-pooled over the first 32 response tokens onto vharmrespv_{\mathrm{harm}}^{\mathrm{resp}} and vrefrespv_{\mathrm{ref}}^{\mathrm{resp}} (Section 3.2). Both losses are averaged over selected layers and the batch to give ℒcoupleprompt\mathcal{L}_{\mathrm{couple}}^{\mathrm{prompt}} and ℒcoupleresponse\mathcal{L}_{\mathrm{couple}}^{\mathrm{response}}.
+
+Capability preservation. A KL term anchors the LoRA-tuned model to the base distribution on benign inputs:
+
+| ℒkl=1|ℛ|∑(b,t)∈ℛKL(pbase(⋅∣x<t)∥plora(⋅∣x<t)),\mathcal{L}_{\mathrm{kl}}=\frac{1}{|\mathcal{R}|}\sum_{(b,t)\in\mathcal{R}}\mathrm{KL}\\!\left(p_{\mathrm{base}}(\cdot\mid x_{<t})\ \|\ p_{\mathrm{lora}}(\cdot\mid x_{<t})\right), |  | (4)  
+---|---|---|---  
+  
+where ℛ\mathcal{R} indexes response positions across benign prompts in the batch. A cross-entropy term ℒce\mathcal{L}_{\mathrm{ce}} supervises explicit refusal on harmful inputs, using refusal text (e.g. "I’m sorry…") as the target. The total loss combines all four terms:
+
+| ℒtotal=λc​ℒcoupleprompt+λc​r​ℒcoupleresponse+λkl​ℒkl+λce​ℒce.\mathcal{L}_{\mathrm{total}}=\lambda_{c}\,\mathcal{L}_{\mathrm{couple}}^{\mathrm{prompt}}+\lambda_{cr}\,\mathcal{L}_{\mathrm{couple}}^{\mathrm{response}}+\lambda_{\mathrm{kl}}\,\mathcal{L}_{\mathrm{kl}}+\lambda_{\mathrm{ce}}\,\mathcal{L}_{\mathrm{ce}}. |  | (5)  
+---|---|---|---  
+  
+We weight KL most heavily because capability preservation is the most fragile property under fine-tuning. The directions vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} are detached from gradient computation. Gradients flow only into the LoRA parameters, which reshape the residual stream while keeping the directions fixed within each step.
+
+### 4.1 Layer Selection and Direction Recomputation
+
+We apply coupling at the layer where the four-direction structure (Section 3.2) is cleanest. Let σp=1−|cos⁡(vharm,vref)|\sigma_{p}=1-|\cos(v_{\mathrm{harm}},v_{\mathrm{ref}})| and σr=1−|cos⁡(vharmresp,vrefresp)|\sigma_{r}=1-|\cos(v_{\mathrm{harm}}^{\mathrm{resp}},v_{\mathrm{ref}}^{\mathrm{resp}})| denote prompt-side and response-side decoupling, and let ch=|cos⁡(vharm,vharmresp)|c_{h}=|\cos(v_{\mathrm{harm}},v_{\mathrm{harm}}^{\mathrm{resp}})| and cr=|cos⁡(vref,vrefresp)|c_{r}=|\cos(v_{\mathrm{ref}},v_{\mathrm{ref}}^{\mathrm{resp}})| denote same-concept cross-position alignment for harm and refusal. The layer score is
+
+| score⁡(ℓ)=σp⋅σr⋅ch⋅cr,\mathrm{score}(\ell)=\sigma_{p}\cdot\sigma_{r}\cdot c_{h}\cdot c_{r}, |  | (6)  
+---|---|---|---  
+  
+restricted to the in-band range [4,n−4][4,n-4]. A layer scores highly only when prompt-side and response-side directions are decoupled while same-concept cross-position pairs remain aligned. The criterion has no architecture-specific tuning; it transfers across the five model families we test (Section A.2). We pick the top-KK layers, ramping KK from 2 to 4 linearly over the first 1,000 training steps so that early training perturbs the geometry only weakly while the LoRA establishes initial alignments.
+
+#### Direction recomputation.
+
+As the LoRA reshapes the residual stream, directions extracted from the base model gradually become misaligned with the adapted residual geometry. Every KrecomputeK_{\mathrm{recompute}} steps we extract fresh directions from the current LoRA-adapted model and EMA-blend [41, 42] them with the previous ones:
+
+| vharmnew=normalize⁡((1−β)​vharmold+β​vharmfresh),v_{\mathrm{harm}}^{\mathrm{new}}=\mathrm{normalize}\\!\left((1-\beta)\,v_{\mathrm{harm}}^{\mathrm{old}}+\beta\,v_{\mathrm{harm}}^{\mathrm{fresh}}\right), |  | (7)  
+---|---|---|---  
+  
+EMA blending smooths transient updates while allowing gradual adaptation to the evolving residual geometry. We re-score layers at each recomputation. In practice, the top-KK set stabilizes after roughly 1,000 steps. Coupling is therefore enforced indirectly through iterative optimization and periodic direction recomputation rather than within any single gradient step. Over training, the LoRA reshapes harmful-input residuals to activate both directions jointly. The resulting geometry is analyzed in the following section. The full algorithm is provided in Algorithm 1.
+
+### 4.2 What Coupling Fine-Tuning Changes
+
+Figure 3: Cosine similarity between vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}} across all layers. Gray bands mark the trained layers (L25–28 on Llama; L21–24 on Qwen). Post-tuning alignment increases significantly within the trained bands and remains elevated in the subsequent downstream layers.
+
+Figure 3 reports the layer-wise alignment between vharmv_{\text{harm}} and vrefv_{\text{ref}} before and after fine-tuning. The trained layers respond directly to the intervention. On Llama, alignment peaks at L27, near the center of the targeted band (L25–L28). This coupling effect also propagates forward during generation. Layers downstream of the trained band process residuals that the loss has already reshaped, so directions extracted at L29–L31 inherit the coupling that originated at L27. Layers upstream show minimal shifts, since gradients do not flow backward through positions the loss never penalized. Qwen displays the same pattern within its own intervention band.
+
+These directional shifts reorganize the harmfulness–refusal subspace for the attack clusters. Figure 4 shows how coupling fine-tuning closes the dissociated regions that attacks previously exploited. On the Llama prompt side, the DAN and PAIR clusters migrate into the baseline harmful region, so the fine-tuned model now activates both directions on inputs where the base model activated at most one. The response side shows a sharper collapse: harmful, DAN, and PAIR continuations all compress into a single elongated ridge along the diagonal, leaving only the benign cluster structurally separated. Qwen exhibits the same response-side collapse with larger activation magnitudes.
+
+CodeAttack is the notable exception. It remains clustered with benign prompts on both the prompt and response sides across both architectures. The coupling objective can only amplify activation where a projection already exists, because the gradient on each coupling term scales with the residual’s component along vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}}. CodeAttack’s residuals at the prompt boundary are nearly orthogonal to both directions (Figure 2), so the coupling loss receives almost no gradient signal on these inputs. DAN and PAIR already activate at least one direction at the prompt boundary, which is why they migrate decisively into the harmful region while CodeAttack does not.
+
+Figure 4: Coupling fine-tuning collapses the dissociated regions that jailbreaks exploit. Δ\Delta projections at the prompt-side and response-side for benign, harmful, DAN, PAIR, and CodeAttack inputs. Arrows trace each cluster’s centroid from the base model to the fine-tuned model. On the prompt-side for both architectures, the DAN and PAIR clusters move toward the baseline harmful region, while CodeAttack remains clustered with benign inputs. On the response-side, the harmful, DAN, and PAIR clusters compress into a single diagonal ridge, leaving the benign cluster structurally separated; Qwen shows the same collapse with larger overall magnitudes. CodeAttack remains the exception on the response-side as well, staying clustered with benign across both architectures.
+
+## 5 Main Experiment Results
+
+### 5.1 Experimental Setup
+
+Models and training. We fine-tune Llama-3.1-8B and Qwen-2.5-7B with LoRA adapters on attention and MLP projection matrices. Coupling layers are selected by Equation 6 with K=2→4K{=}2\to 4 ramping over the first 1,000 steps. Directions are recomputed every 200 steps with EMA β=0.3\beta=0.3.
+
+Baselines. We compare against six baselines representing the major training-time and inference-time safety interventions. Base is the original instruction-tuned model. SFT applies vanilla supervised fine-tuning on the same training data with cross-entropy loss only. DPO [13] uses preference pairs from PKU-SafeRLHF [43]. Circuit Breakers (CB) [19] reroutes representations of harmful inputs away from the base model’s distribution. RepBend [20] bends representations along learned safety directions. CAST [17] is an inference-time intervention that conditionally applies a refusal steering vector.
+
+Evaluation protocol. Attack success rate (ASR) is computed by passing model outputs to an LLM judge using the HexPHI scoring template [44]; a response counts as a successful attack if the judge labels it as complying with harmful intent. We evaluate PAP [3], PAIR [5], CodeAttack, and DeepInception [9] on JailbreakBench [45]. Over-refusal is measured on XSTest [46] and CoCoNot [47], and general capability on MMLU [48, 49], GSM8K [50], IFEval [51], HumanEval [52], and MT-Bench [53]. We use GPT-4o as the LLM judge throughout [54].
+
+Training data. Ours and SFT share the same training corpus, drawn from the publicly released Circuit Breakers training set [19] for harmful prompts (paired with the released refusal continuations) and UltraChat [55] for harmless prompts. Sharing a corpus across these two methods isolates the contribution of the coupling loss from differences in training data. We verify that evaluation prompts do not overlap with these training corpora.
+
+Full training configurations, hyperparameters, evaluation protocols, judge prompts, and contamination analysis are deferred to Appendix D.
+
+### 5.2 Main Results and Ablation Studies
+
+HARC is the only method that does not regress on any of the three categories relative to the base model’s mean. It substantially reduces ASR on both models, matches base-model over-refusal on XSTest and CoCoNot, and preserves mean helpfulness across seeds. Every other safety-trained baseline degrades at least one category: RepBend reaches lower raw ASR but refuses nearly all benign prompts, especially on Qwen, while SFT and DPO inflate over-refusal substantially. Because HARC confines its intervention to the harmfulness–refusal subspace, it leaves general-capability computation untouched and avoids the capability–safety trade-off that characterizes prior representation-engineering methods. Ours+DPO is the strongest configuration on Llama, achieving complete robustness while preserving capability and over-refusal. CodeAttack remains the hardest attack across both architectures (Figure 4), as coupling repositions its cluster less effectively than other attack classes. This leaves it separated from the harmful region on both sides. HARC still reduces CodeAttack ASR meaningfully, and Ours+DPO closes most of the remaining gap on Llama. Full results are in Table 1.
+
+Models | Harmfulness (↓\downarrow) | Over-refusal (↓\downarrow) | Helpfulness (↑\uparrow)  
+---|---|---|---  
+PAIR | PAP | DI | Code | Mean | XSTest | CoCoNot | MMLU | GSM8K | HEval | IFEval | MTBench | Mean  
+LLAMA-3.1-8B  
+Baseline | 0.470 | 0.655 | 0.245 | 0.350 | 0.430 | 0.109 | 0.074 | 0.699 | 0.744 | 0.622 | 0.521 | 0.755 | 0.668  
+SFT | 0.047 | 0.037 | 0.090 | 0.455 | 0.157 | 0.239 | 0.275 | 0.699 | 0.768 | 0.604 | 0.457 | 0.706 | 0.647  
+DPO | 0.035 | 0.040 | 0.035 | 0.157 | 0.067 | 0.488 | 0.221 | 0.700 | 0.756 | 0.591 | 0.468 | 0.709 | 0.645  
+CB | 0.117 | 0.035 | 0.052 | 0.277 | 0.120 | 0.113 | 0.054 | 0.698 | 0.748 | 0.616 | 0.492 | 0.774 | 0.666  
+RepBend | 0.013 | 0.003 | 0.000 | 0.295 | 0.078 | 0.878 | 0.805 | 0.697 | 0.660 | 0.616 | 0.268 | 0.516 | 0.551  
+CAST | 0.373 | 0.488 | 0.215 | 0.343 | 0.355 | 0.283 | 0.262 | 0.685 | 0.580 | 0.500 | 0.419 | 0.610 | 0.559  
+Ours | 0.060 | 0.010 | 0.010 | 0.290 | 0.092 | 0.035 | 0.081 | 0.698 | 0.756 | 0.610 | 0.512 | 0.772 | 0.670  
+Ours + DPO | 0.000 | 0.000 | 0.000 | 0.060 | 0.015 | 0.100 | 0.195 | 0.699 | 0.736 | 0.598 | 0.500 | 0.766 | 0.660  
+QWEN-2.5-7B  
+Baseline | 0.748 | 0.728 | 0.637 | 0.417 | 0.632 | 0.091 | 0.094 | 0.764 | 0.808 | 0.640 | 0.536 | 0.824 | 0.714  
+SFT | 0.157 | 0.275 | 0.090 | 0.505 | 0.257 | 0.339 | 0.409 | 0.760 | 0.800 | 0.591 | 0.331 | 0.666 | 0.630  
+DPO | 0.345 | 0.397 | 0.157 | 0.397 | 0.324 | 0.165 | 0.154 | 0.764 | 0.824 | 0.640 | 0.498 | 0.791 | 0.703  
+CB | 0.515 | 0.483 | 0.647 | 0.392 | 0.509 | 0.057 | 0.081 | 0.762 | 0.804 | 0.634 | 0.512 | 0.791 | 0.701  
+RepBend | 0.032 | 0.015 | 0.003 | 0.025 | 0.019 | 1.000 | 1.000 | 0.763 | 0.796 | 0.646 | 0.004 | 0.100 | 0.462  
+CAST | 0.695 | 0.688 | 0.570 | 0.402 | 0.589 | 0.126 | 0.134 | 0.745 | 0.764 | 0.640 | 0.518 | 0.825 | 0.698  
+Ours | 0.140 | 0.040 | 0.010 | 0.340 | 0.133 | 0.026 | 0.042 | 0.763 | 0.804 | 0.683 | 0.510 | 0.826 | 0.717  
+Ours + DPO | 0.350 | 0.270 | 0.230 | 0.190 | 0.260 | 0.057 | 0.094 | 0.764 | 0.832 | 0.640 | 0.518 | 0.802 | 0.711  
+  
+Table 1: Main results across robustness, over-refusal, and capability. We report Attack Success Rates (ASR) for harmfulness using JailbreakBench, refusal rates for over-refusal benchmarks, and standard accuracy for general performance. DI and Code refer to DeepInception and CodeAttack. CB refers to Circuit Breaker. Mean columns report the average across the corresponding group. Bold marks the best result per column within each model section; underline marks the second-best. All rows are single-seed for fair comparison. We run Ours across 3 seeds in Appendix E and find variance is low across all benchmarks.
+
+The dual-position objective preserves the over-refusal advantage that distinguishes HARC from other interventions. Our component ablation (Appendix F, Table 6) shows that single-position variants achieve harmfulness reductions comparable to the full dual-position objective on the harmfulness mean, with prompt-only and response-only variants differing in which attack classes they cover most effectively. The full dual-position objective achieves the lowest over-refusal rates on both architectures (XSTest 0.035 on Llama, 0.026 on Qwen), which is the property that distinguishes HARC from prior representation-engineering methods (Table 1). The dual-position design is therefore required for the overall trade-off rather than for adversarial robustness alone.
+
+### 5.3 Effectiveness at Scale
+
+Figure 5: Scaling analysis on Llama-3.1-70B. _Left:_ Layer score (Equation 6) plotted against relative depth ℓ/nlayers\ell/n_{\mathrm{layers}} for 8B and 70B; stars mark the top-K=4K{=}4 selected layers. _Mid:_ Attack success rate on CodeAttack and PAP. _Right:_ General capability on MMLU and GSM8K.
+
+We extend our analysis to Llama-3.1-70B and Qwen-2.5-72B to test whether HARC scales. Figure 5 reports three axes: the layer-selection criterion, jailbreak attack robustness, and capability. Layer-score curves overlap across scales when plotted against fractional depth, so applying HARC at a new scale requires no retuning. Larger base models are more compliant with jailbreak attacks, since capability gains include better understanding of adversarial prompts. HARC scales effectively: Llama-3.1-70B achieves near-zero ASR on PAIR, PAP, and DeepInception (all under 0.01) and reduces CodeAttack from 0.688 to 0.242, while preserving general capability essentially unchanged from baseline. The same pattern holds on Qwen-2.5-72B. Full per-benchmark results are in Appendix G.
+
+## 6 Related Work
+
+#### Mechanistic interpretability of safety representations.
+
+A line of work studies the internal geometry of safety in instruction-tuned LLMs. Refusal has been shown to be mediated by a single residual-stream direction across many open-source models [23], though subsequent work argues that refusal spans a richer subspace with interpretable subdirections such as role-play and hypothetical framing [56, 57]. A separate line of work demonstrates that harmfulness is encoded as a near-orthogonal concept from refusal, allowing the two beliefs to dissociate [24, 58]. Adjacent directional analyses target truthfulness [30, 36], behavioral steering [32], and representation engineering broadly [33]. We extend these prompt-side characterizations to response-token positions, showing that the model retains a separable harm-recognition signal at generation time even when prompt-side refusal has been bypassed.
+
+#### Safety fine-tuning and representation-level interventions.
+
+Safety alignment is shallow and concentrated in the first few output tokens [14], a finding strongly corroborated by fine-tuning [44] and prefilling [12] attacks. Representation-level training methods address this depth issue. Circuit Breakers reroute harmful representations to an orthogonal space [19], RepBend bends representations along learned safety directions [20], RMU adds random projections to misdirect downstream computation [22], and Latent Adversarial Training perturbs latent activations during training [21]. A complementary line of work trains models to deliberate about safety through chain-of-thought reasoning before responding [15, 16]. Inference-time steering offers a training-free alternative [18, 59] but generalizes poorly out of distribution [60]. Over-refusal is a common problem of broad safety interventions [61, 46]. Since HARC operates on a specific two-dimensional subspace rather than the residual stream as a whole, our method largely preserves capability and avoids over-refusal while matching the robustness of broader SOTA interventions.
+
+#### Jailbreak attacks.
+
+Optimization-based attacks search for adversarial suffixes [1, 2] or use attacker LLMs to iteratively refine prompts [5], with successful suffixes acting as attention hijackers that suppress the refusal direction [62]. Template-based attacks rely on persona framings [4], persuasive paraphrases [3], encoded instructions [10, 63], and many-shot demonstrations [64]; multi-turn variants such as Crescendo bypass even strong representation-level defenses [7, 8]. Standard behavior sets for evaluation are provided by JailbreakBench [45] and HarmBench [65]. Our analysis (Section 3) characterizes how distinct attack classes occupy separable regions of the harmfulness–refusal plane, providing a mechanistic account of why specific attacks succeed.
+
+## 7 Discussion
+
+We have shown that aligned LLMs encode harmfulness and refusal as separable directions at both prompt and response positions (Section 3), and that successful jailbreak attacks exploit this separation by suppressing prompt-side directions while harm recognition persists during generation. HARC pairs the two directions at both positions through an additive margin hinge loss, achieving strong robustness against diverse jailbreak attacks without the capability or over-refusal costs of prior safety alignment techniques [19, 20]. The four-direction structure transfers across the five model families we test (Section A.2) and to larger scales without architecture-specific tuning, which suggests it is a property of how aligned LLMs are organized rather than an artifact of any specific training pipeline. Beyond the headline result, the response-side directions provide a complementary signal that fires even when prompt-side recognition is bypassed (Section 3.2), and the dual-position design follows directly from this structure. Coupling at a single position addresses only half of the safety signal. Full asset details and licenses for models, datasets, and code are reported in Appendix H.
+
+Limitations. We focus on LoRA fine-tuning rather than full-parameter, and our hyperparameter search ablates only loss weights (Appendix F), leaving LoRA rank, learning rate, and KL retention strength unswept. We tested HARC under a fine-tuning attack (Appendix I) and found that adversaries with weight access can break HARC within roughly 160 harmful examples, since the same subspace-targeted footprint that preserves capability under benign training is structurally easier to undo than methods that reshape the residual stream more broadly. We do not evaluate against adaptive attacks designed with knowledge of HARC’s coupling target, a separate threat model from the static jailbreaks we report. Finally, we evaluate on five model families at 7B–14B scale and on Llama and Qwen at 70B–72B scale, but behavior on closed-source models remains untested since HARC requires gradient access for fine-tuning.
+
+HARC’s mechanism also assumes that the base model’s harmfulness direction carries a usable signal on the inputs the coupling loss is applied to. The intervention amplifies and binds an existing recognition signal rather than constructing one from scratch, so the gains depend on what the model already represents as harmful from pretraining and instruction-tuning. Attack classes that the model treats as fully benign at both prompt and response positions, such as CodeAttack on the architectures we test, offer little harm signal for the coupling loss to amplify, which is consistent with CodeAttack remaining the hardest residual attack across our experiments. The natural mitigation is to include such attack distributions when extracting vharmv_{\mathrm{harm}} and vrefv_{\mathrm{ref}}, so that the directions span the obfuscation patterns the deployed model will encounter. We leave a systematic study of direction-extraction coverage to future work.
+
+Ethics and Broader Implication to AI Safety. HARC is a safety alignment method intended to make deployed models more robust to jailbreak attacks, supporting more reliable deployment in user-facing applications. The representational characterization in Section 3 has dual-use implications: a thorough account of how attacks succeed can in principle inform the design of new attacks targeting the harmfulness or refusal directions specifically. We believe the deployment benefits outweigh this risk, since the underlying direction structure was already documented in prior work and our characterizations primarily benefit researchers by identifying which subspaces require protection. For closed-API deployment, where weight access is not available to potential attackers, HARC provides meaningful strengthening of model safety.
+
+Future work. Three directions follow naturally from the limitations above. First, designing coupling objectives that survive adversarial fine-tuning. The response-side observation in Section 3.2 indicates that harmful recognition persists even during compliant generation, which suggests the directional structure could in principle be made robust to fine-tuning if the recognition signal could be made harder to suppress under adversarial training. Second, adaptive evaluation: an adversary who knows the defense mechanism could craft attacks that specifically target the coupled directions or the trained layers. Studying robustness under such adaptive attacks is necessary before strong claims about deployment. Lastly, extending the framework to multimodal models, since vision-language models exhibit additional attack surfaces that may have their own distinct representational signatures.
+
+## References
+
+  * [1] A. Zou, Z. Wang, N. Carlini, M. Nasr, J. Z. Kolter, and M. Fredrikson (2023) Universal and transferable adversarial attacks on aligned language models.  arXiv preprint arXiv:2307.15043.  Cited by: Table 9, §1, §6, footnote 3. 
+  * [2] X. Liu, N. Xu, M. Chen, and C. Xiao (2023) Autodan: generating stealthy jailbreak prompts on aligned large language models.  In Int. Conf. Learn. Rep. (ICLR),  Cited by: §1, §6. 
+  * [3] Y. Zeng, H. Lin, J. Zhang, D. Yang, R. Jia, and W. Shi (2024) How johnny can persuade llms to jailbreak them: rethinking persuasion to challenge ai safety by humanizing llms.  In Ann. Meet. Assoc. Comput. Linguistics (ACL),  pp. 14322–14350.  Cited by: Table 10, §1, §5.1, §6. 
+  * [4] X. Shen, Z. Chen, M. Backes, Y. Shen, and Y. Zhang (2024) " Do anything now": characterizing and evaluating in-the-wild jailbreak prompts on large language models.  In Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security,  pp. 1671–1685.  Cited by: Table 10, §1, §3.2, §6. 
+  * [5] P. Chao, A. Robey, E. Dobriban, H. Hassani, G. J. Pappas, and E. Wong (2025) Jailbreaking black box large language models in twenty queries.  In 2025 IEEE Conference on Secure and Trustworthy Machine Learning (SaTML),  pp. 23–42.  Cited by: Table 10, §1, §3.2, §5.1, §6. 
+  * [6] X. Liu, P. Li, E. Suh, Y. Vorobeychik, Z. Mao, S. Jha, P. McDaniel, H. Sun, B. Li, and C. Xiao (2025) AUTODAN-turbo: a lifelong agent for strategy self-exploration to jailbreak llms.  In Int. Conf. Learn. Rep. (ICLR),  pp. 22337–22384.  Cited by: §1. 
+  * [7] M. Russinovich, A. Salem, and R. Eldan (2025) Great, now write an article about that: the crescendo {\\{multi-turn}\\}{\\{llm}\\} jailbreak attack.  In 34th USENIX Security Symposium (USENIX Security 25),  pp. 2421–2440.  Cited by: §1, §6. 
+  * [8] S. P. Chua, Z. L. Thai, K. J. Teh, X. Li, Q. Ren, and X. Hu (2025) Between a rock and a hard place: the tension between ethical reasoning and safety alignment in llms.  arXiv preprint arXiv:2509.05367.  Cited by: §1, §6. 
+  * [9] X. Li, Z. Zhou, J. Zhu, J. Yao, T. Liu, and B. Han (2023) Deepinception: hypnotize large language model to be jailbreaker.  arXiv preprint arXiv:2311.03191.  Cited by: Table 10, §1, §5.1. 
+  * [10] Q. Ren, C. Gao, J. Shao, J. Yan, X. Tan, W. Lam, and L. Ma (2024) Codeattack: revealing safety generalization challenges of large language models via code completion.  In Ann. Meet. Assoc. Comput. Linguistics (ACL),  pp. 11437–11452.  Cited by: Table 10, §1, §3.2, §6. 
+  * [11] F. Jiang, Z. Xu, L. Niu, Z. Xiang, B. Ramasubramanian, B. Li, and R. Poovendran (2024) Artprompt: ascii art-based jailbreak attacks against aligned llms.  In Ann. Meet. Assoc. Comput. Linguistics (ACL),  pp. 15157–15173.  Cited by: §1. 
+  * [12] M. Andriushchenko, F. Croce, and N. Flammarion (2024) Jailbreaking leading safety-aligned llms with simple adaptive attacks.  In Int. Conf. Mach. Learn. (ICML),  Cited by: §1, §6. 
+  * [13] R. Rafailov, A. Sharma, E. Mitchell, C. D. Manning, S. Ermon, and C. Finn (2023) Direct preference optimization: your language model is secretly a reward model.  Adv. Neural Inform. Process. Syst. (NeurIPS) 36, pp. 53728–53741.  Cited by: §1, §5.1. 
+  * [14] X. Qi, A. Panda, K. Lyu, X. Ma, S. Roy, A. Beirami, P. Mittal, and P. Henderson (2024) Safety alignment should be made more than just a few tokens deep.  In Int. Conf. Learn. Rep. (ICLR),  Cited by: §1, §3.2, §6. 
+  * [15] M. Y. Guan, M. Joglekar, E. Wallace, S. Jain, B. Barak, A. Helyar, R. Dias, A. Vallone, H. Ren, J. Wei, et al. (2024) Deliberative alignment: reasoning enables safer language models.  arXiv preprint arXiv:2412.16339.  Cited by: §1, §6. 
+  * [16] Y. Zhang, S. Zhang, Y. Huang, Z. Xia, Z. Fang, X. Yang, R. Duan, D. Yan, Y. Dong, and J. Zhu (2025) STAIR: improving safety alignment with introspective reasoning.  In Int. Conf. Mach. Learn. (ICML),  pp. 76754–76777.  Cited by: §1, §6. 
+  * [17] B. W. Lee, I. Padhi, K. N. Ramamurthy, E. Miehling, P. Dognin, M. Nagireddy, and A. Dhurandhar (2025) Programming refusal with conditional activation steering.  In Int. Conf. Learn. Rep. (ICLR),  Cited by: Table 12, §1, §5.1. 
+  * [18] Z. Cao, Y. Yang, and H. Zhao (2025) Scans: mitigating the exaggerated safety for llms via safety-conscious activation steering.  In AAAI,  Vol. 39, pp. 23523–23531.  Cited by: §1, §6. 
+  * [19] A. Zou, L. Phan, J. Wang, D. Duenas, M. Lin, M. Andriushchenko, R. Wang, Z. Kolter, M. Fredrikson, and D. Hendrycks (2024) Improving alignment and robustness with circuit breakers.  Adv. Neural Inform. Process. Syst. (NeurIPS) 37

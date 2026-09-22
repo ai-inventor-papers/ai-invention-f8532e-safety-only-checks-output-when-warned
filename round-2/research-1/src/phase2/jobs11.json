@@ -1,0 +1,5 @@
+[
+{"label":"T6-cosines","url":"https://arxiv.org/html/2606.24952","pattern":"0\\.12|0\\.20|0\\.1197|0\\.1200|-0\\.06|weight-computable|not a predictor|1\\.000|layer 5","i":true,"max":20,"ctx":420,"cap":11000},
+{"label":"T6-safety","url":"https://arxiv.org/html/2606.24952","pattern":"harm|refus|safety|toxic|jailbreak|abliterat|uncensor","i":true,"max":16,"ctx":320,"cap":8000},
+{"label":"T6-models","url":"https://arxiv.org/html/2606.24952","pattern":"Qwen|Llama|Gemma|Pythia|models|15|rotation|held-out|1\\.8","i":true,"max":16,"ctx":320,"cap":8000}
+]

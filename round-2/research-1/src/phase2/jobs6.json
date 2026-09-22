@@ -1,0 +1,7 @@
+[
+{"label":"T3a-JR","url":"https://aclanthology.org/2026.acl-long.1334.pdf","pattern":"JR|Min|Max","i":false,"max":24,"ctx":300,"cap":9000},
+{"label":"T3a-tables78","url":"https://aclanthology.org/2026.acl-long.1334.pdf","pattern":"Table 7|Table 8|0\\.[0-9]{2,4}","i":false,"max":24,"ctx":260,"cap":9000},
+{"label":"T3b-k","url":"https://arxiv.org/html/2606.16349","pattern":"k=|k =|k\\\\!=|with kk|set kk|kk to|top-|Qwen3|4B","i":false,"max":16,"ctx":320,"cap":7000},
+{"label":"T5-13655","url":"https://arxiv.org/abs/2512.13655","pattern":"Abstract","i":false,"max":2,"ctx":2400,"cap":4000},
+{"label":"T5-17427","url":"https://arxiv.org/abs/2607.17427","pattern":"Abstract","i":false,"max":2,"ctx":2400,"cap":4000}
+]

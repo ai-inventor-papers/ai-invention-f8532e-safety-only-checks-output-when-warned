@@ -1,0 +1,525 @@
+{
+ "tag": "HG__Qwen--Qwen2.5-1.5B-Instruct",
+ "group": "panel",
+ "root": "H4",
+ "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+ "n_layers": 28,
+ "hidden": 1536,
+ "registered": {
+  "G1": 35.37945814621365,
+  "G2": 1.0581965029066742,
+  "G3": 0.44078450287579285,
+  "G4": 4.534400618201982,
+  "G4_ratio": 21.293875787012436,
+  "A1_slope": 0.20121326989820615,
+  "A3": 0.2349384714075483,
+  "A3_sd": 0.4704829152601882,
+  "W7c": 1.253679180434436,
+  "W7c_tok1": 1.3980486731751607,
+  "plain_DiM": 4.471925496790273,
+  "G2_censored": false,
+  "A3_censored": false
+ },
+ "censored": {
+  "G2": false,
+  "A3": false
+ },
+ "bstar_read": {
+  "A": 5,
+  "B": 4
+ },
+ "bstar_write": {
+  "A": 5,
+  "B": 4
+ },
+ "per_fold": {
+  "A": {
+   "band": 5,
+   "G1": 33.183709585610345,
+   "G2_censored": false,
+   "G2": 1.1037128998060863,
+   "G3": 0.49086098294593117,
+   "G4": 3.6781957241130057,
+   "G4_ratio": 13.529123784883199,
+   "A1_slope": 0.16001546269675615,
+   "A3_domains": {
+    "deception": {
+     "g": 1.7327626099967384,
+     "n_harm": 8,
+     "n_benign": 7
+    },
+    "illegal": {
+     "g": 1.5600309011571705,
+     "n_harm": 12,
+     "n_benign": 23
+    },
+    "violence": {
+     "g": 2.3457244231145578,
+     "n_harm": 29,
+     "n_benign": 28
+    }
+   },
+   "A3_sd": 0.41289077208246516,
+   "A3_censored": false,
+   "A3": 0.21968047821915793,
+   "W7c": 1.2531395375614542,
+   "W7c_tok1": 1.3336872112638272,
+   "plain_DiM": 3.563653832505586,
+   "b_read": 5,
+   "b_write": 5,
+   "dfit": [
+    2.7520504927255502,
+    2.9563075736948337,
+    5.474658281583114,
+    7.839341245866644,
+    9.83599456715608,
+    7.828557013158156
+   ]
+  },
+  "B": {
+   "band": 4,
+   "G1": 37.575206706816964,
+   "G2_censored": false,
+   "G2": 1.012680106007262,
+   "G3": 0.3907080228056546,
+   "G4": 5.390605512290959,
+   "G4_ratio": 29.05862778914167,
+   "A1_slope": 0.24241107709965612,
+   "A3_domains": {
+    "deception": {
+     "g": 2.564209634145332,
+     "n_harm": 8,
+     "n_benign": 7
+    },
+    "illegal": {
+     "g": 1.5309123915548046,
+     "n_harm": 10,
+     "n_benign": 21
+    },
+    "violence": {
+     "g": 2.2368026794399594,
+     "n_harm": 31,
+     "n_benign": 30
+    }
+   },
+   "A3_sd": 0.5280750584379112,
+   "A3_censored": false,
+   "A3": 0.2501964645959387,
+   "W7c": 1.2542188233074179,
+   "W7c_tok1": 1.4624101350864942,
+   "plain_DiM": 5.3801971610749595,
+   "b_read": 4,
+   "b_write": 4,
+   "dfit": [
+    4.081807235502446,
+    7.328863458754684,
+    7.10351326866816,
+    9.469147750134136,
+    7.790027465570348,
+    6.532663595049445
+   ]
+  }
+ },
+ "flags": {},
+ "band_curves": {
+  "G1": [
+   63.36155815308327,
+   71.22469299917856,
+   53.64171548067071,
+   32.36635116906203,
+   38.60490749872908,
+   44.118445881972875
+  ],
+  "G2": [
+   0.6540285325814945,
+   0.539972193118188,
+   0.7336630415880334,
+   1.197157325548201,
+   0.9824281283823044,
+   0.8794802078681736
+  ],
+  "G3": [
+   0.12930580308890466,
+   0.06499507452785794,
+   0.22870549325199183,
+   0.3878826943251654,
+   0.4336057277727159,
+   0.15152905891229884
+  ],
+  "G4": [
+   1.6647197011741173,
+   1.5453010823851256,
+   2.5881454572466365,
+   4.8160665517068875,
+   5.423259528700335,
+   5.317574152995898
+  ],
+  "A1_slope": [
+   -0.0443555111924786,
+   -0.038770124951507515,
+   0.12869623067017474,
+   0.21141525612258755,
+   0.18479984279972142,
+   0.19020576171588732
+  ],
+  "A3": [
+   0.6054532351699307,
+   0.6804720582227354,
+   0.3146619735343971,
+   0.20388123316121762,
+   0.23323032944608618,
+   0.2917926770577457
+  ],
+  "plain_DiM": [
+   1.6797673876368515,
+   1.5347658218437266,
+   2.596992110305193,
+   4.799854488155667,
+   5.4039824117855195,
+   5.274893112053724
+  ]
+ },
+ "k_curve": {
+  "G1": {
+   "4": 55.95578650132986,
+   "8": 45.3010128422549,
+   "16": 52.30981667737632,
+   "32": 35.37945814621365,
+   "pool": 30.53780931678992,
+   "0": "N/A"
+  },
+  "G2": {
+   "4": 1.0993282128984012,
+   "8": 0.8261564410698597,
+   "16": 1.0409824166083932,
+   "32": 1.0581965029066742,
+   "pool": 1.2826744472051048,
+   "0": "N/A"
+  },
+  "G3": {
+   "4": 0.12918804999878847,
+   "8": 0.4692836028820231,
+   "16": 0.20276930503664928,
+   "32": 0.44078450287579285,
+   "pool": 0.44042076974203037,
+   "0": "N/A"
+  },
+  "G4": {
+   "4": null,
+   "8": 25.28008041928468,
+   "16": 0.8974214136576253,
+   "32": 4.534400618201982,
+   "pool": 7.334727067156878,
+   "0": "N/A"
+  },
+  "G4_ratio": {
+   "4": null,
+   "8": 639.0824660055007,
+   "16": 0.8053651936912506,
+   "32": 21.293875787012436,
+   "pool": 55.97852820240158,
+   "0": "N/A"
+  },
+  "A1_slope": {
+   "4": 0.01434603455357932,
+   "8": 0.12974517085566126,
+   "16": 0.12107623523197447,
+   "32": 0.20121326989820615,
+   "pool": 0.18369806439307187,
+   "0": "N/A"
+  },
+  "A3": {
+   "4": 1.1007865297119706,
+   "8": 0.18496523642458726,
+   "16": 0.38459134284318675,
+   "32": 0.2349384714075483,
+   "pool": 0.26962966634092556,
+   "0": "N/A"
+  },
+  "A3_sd": {
+   "4": 0.24804451152770168,
+   "8": 0.374808099617348,
+   "16": 0.3751588945006574,
+   "32": 0.4704829152601882,
+   "pool": 0.48931583498565356,
+   "0": "N/A"
+  },
+  "W7c": {
+   "4": 1.2151274057844057,
+   "8": 1.3035199733722709,
+   "16": 1.2715509738824484,
+   "32": 1.253679180434436,
+   "pool": 1.092794328868139,
+   "0": "N/A"
+  },
+  "W7c_tok1": {
+   "4": 1.3925064453925242,
+   "8": 1.4604156480909651,
+   "16": 1.4194294403114505,
+   "32": 1.3980486731751607,
+   "pool": 1.2415556068803477,
+   "0": "N/A"
+  },
+  "plain_DiM": {
+   "4": null,
+   "8": 23.131926448396225,
+   "16": 0.8982412968189917,
+   "32": 4.471925496790273,
+   "pool": 7.124615893897198,
+   "0": "N/A"
+  }
+ },
+ "k_curve_notes": {
+  "4": "IN_SAMPLE",
+  "8": "IN_SAMPLE",
+  "16": "cross-fitted",
+  "32": "registered",
+  "pool": "40 pairs + 48 P, cross-fitted",
+  "0": "N/A (no k=0 point for Tier A)"
+ },
+ "stability": {
+  "grid": "stab4",
+  "draws": [
+   {
+    "prompt_draw": 0,
+    "fold_seed": 1,
+    "band_offset": 0,
+    "values": {
+     "G1": 41.681492301203285,
+     "G2": 0.9691207665275893,
+     "G3": 0.30625838310496184,
+     "G4": 7.679922297960844,
+     "G4_ratio": 70.82126054209138,
+     "A1_slope": 0.1795218925040924,
+     "A3": 0.24146601899339518,
+     "A3_sd": 0.4642754820743187,
+     "W7c": 1.2526052069769864,
+     "W7c_tok1": 1.4108370580096876,
+     "plain_DiM": 7.510019378745322
+    }
+   },
+   {
+    "prompt_draw": 0,
+    "fold_seed": 2,
+    "band_offset": 0,
+    "values": {
+     "G1": 37.509889531146506,
+     "G2": 1.1052635862707545,
+     "G3": 0.3108753495057691,
+     "G4": 5.725792701394904,
+     "G4_ratio": 33.174042047689056,
+     "A1_slope": 0.18901465052194844,
+     "A3": 0.22109678226238577,
+     "A3_sd": 0.4366716201033879,
+     "W7c": 1.257879668381884,
+     "W7c_tok1": 1.4057438028171303,
+     "plain_DiM": 5.523560036559295
+    }
+   },
+   {
+    "prompt_draw": 1,
+    "fold_seed": 1,
+    "band_offset": 0,
+    "values": {
+     "G1": 42.126728955479805,
+     "G2": 0.9419735847794801,
+     "G3": 0.24384251547276825,
+     "G4": 8.399380199963677,
+     "G4_ratio": 78.01346303424508,
+     "A1_slope": 0.17788605098354193,
+     "A3": 0.2520373855422474,
+     "A3_sd": 0.4959657416377155,
+     "W7c": 1.2565047552772892,
+     "W7c_tok1": 1.4231549924586882,
+     "plain_DiM": 8.745021573392824
+    }
+   },
+   {
+    "prompt_draw": 1,
+    "fold_seed": 2,
+    "band_offset": 0,
+    "values": {
+     "G1": 47.51628567401903,
+     "G2": 0.872892433622586,
+     "G3": 0.09870553322472103,
+     "G4": 9.062311630087953,
+     "G4_ratio": 87.14926449485051,
+     "A1_slope": 0.17477781929886632,
+     "A3": 0.2692198811995862,
+     "A3_sd": 0.5199895774996817,
+     "W7c": 1.2571782964345244,
+     "W7c_tok1": 1.4319098324195898,
+     "plain_DiM": 9.8100402378851
+    }
+   }
+  ]
+ },
+ "shuffled_band": {
+  "G1": {
+   "lo": 43.4271863473619,
+   "hi": 83.76609748104187,
+   "outside": true
+  },
+  "G2": {
+   "lo": 0.6819224071005677,
+   "hi": 1.3748119446574905,
+   "outside": false
+  },
+  "G3": {
+   "lo": -0.12065166258671421,
+   "hi": 0.06982935659909945,
+   "outside": true
+  },
+  "G4": {
+   "lo": -1.1283490557073381,
+   "hi": 1.11953492689431,
+   "outside": true
+  },
+  "A1_slope": {
+   "lo": -7.545695061376245,
+   "hi": 2.691590447899372,
+   "outside": false
+  },
+  "plain_DiM": {
+   "lo": -1.0937974773336068,
+   "hi": 1.1103065540372639,
+   "outside": true
+  }
+ },
+ "transfer": {
+  "G2_c11": 0.7448698714197464
+ },
+ "A3_domains": {
+  "A": {
+   "deception": {
+    "g": 1.7327626099967384,
+    "n_harm": 8,
+    "n_benign": 7
+   },
+   "illegal": {
+    "g": 1.5600309011571705,
+    "n_harm": 12,
+    "n_benign": 23
+   },
+   "violence": {
+    "g": 2.3457244231145578,
+    "n_harm": 29,
+    "n_benign": 28
+   }
+  },
+  "B": {
+   "deception": {
+    "g": 2.564209634145332,
+    "n_harm": 8,
+    "n_benign": 7
+   },
+   "illegal": {
+    "g": 1.5309123915548046,
+    "n_harm": 10,
+    "n_benign": 21
+   },
+   "violence": {
+    "g": 2.2368026794399594,
+    "n_harm": 31,
+    "n_benign": 30
+   }
+  }
+ },
+ "utc": "2026-09-22T00:51:38.280304Z",
+ "runtime_s": 1.25,
+ "bars": {
+  "tag": "HG__Qwen--Qwen2.5-1.5B-Instruct",
+  "dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/harvest/HG__Qwen--Qwen2.5-1.5B-Instruct",
+  "provenance": "artifact",
+  "L": 28,
+  "availability": {
+   "A_c11": true,
+   "A_dec": true,
+   "A_dec_tok1": true,
+   "A_ams": true,
+   "A_prompt_p1": true,
+   "A_prompt_p2": true,
+   "A_prompt_p3": true,
+   "vmin_stacked": true,
+   "vmin_onesproj": true,
+   "gram": false
+  },
+  "BL1_easy": 1.9347281853357952,
+  "BL1_easy_meta": {
+   "array": "r_refusal - r_control @ hidden-state index L (final layer)",
+   "layer": "L=28",
+   "prompt_set": "EASY n=96 (48 advbench-harmful vs 48 dolly-benign)"
+  },
+  "BL1_hard": 0.37911009788513184,
+  "BL1_hard_meta": {
+   "array": "r_refusal - r_control @ hidden-state index L (final layer)",
+   "layer": "L=28",
+   "prompt_set": "HARD n=160 (40 xstest-harmful-twin+40 or_bench_toxic vs 40 xstest-benign-twin+40 or_bench_hard_1k)"
+  },
+  "BL1_truelogit": 1.5934062725059077,
+  "BL1_truelogit_meta": {
+   "array": "LSE(H_L @ WU_ref^T) - LSE(H_L @ WU_ctl^T) @ hidden-state index L (final layer)",
+   "layer": "L=28",
+   "prompt_set": "EASY n=96 -- WITHDRAWN convention (double final RMSNorm lens) NOT used"
+  },
+  "BL1_truelogit_hard": 0.4633134166250148,
+  "BL1_truelogit_hard_meta": {
+   "array": "LSE(H_L @ WU_ref^T) - LSE(H_L @ WU_ctl^T) @ hidden-state index L (final layer)",
+   "layer": "L=28",
+   "prompt_set": "HARD n=160 -- WITHDRAWN convention (double final RMSNorm lens) NOT used"
+  },
+  "N1": 1.9620731441644774,
+  "N1_l_star": 19,
+  "N1_meta": {
+   "array": "own-EASY-axis Cohen's d at cross-fitted l_star (20 seeded 2-fold splits x 2 dirs, NO post-hoc argmax)",
+   "layer": "l_star=19/28",
+   "prompt_set": "fit=EASY n=96, score=HARD n=160"
+  },
+  "N6": 3.430698488680853,
+  "N6_meta": {
+   "array": "own-EASY-axis Cohen's d at N1's l_star, restricted to the XSTest twin rows within HARD",
+   "layer": "l_star=19/28",
+   "prompt_set": "XSTest harmful-twin n=40 vs XSTest benign-twin n=40 (subset of HARD n=160)"
+  },
+  "C7": 0.7071707589285714,
+  "C7_meta": {
+   "array": "trapezoid(AUROC_l over f=l/L, l=0..L) -- own-EASY-axis AUROC curve, area under curve",
+   "layer": "all layers l=0..L",
+   "prompt_set": "fit=EASY n=96, score=HARD n=160"
+  },
+  "C13_peak_d": 1.9620731441644774,
+  "C13_peak_f": 0.6785714285714286,
+  "C13_peak_d_meta": {
+   "array": "max over l=1..L of own-EASY-axis Cohen's d (post-hoc argmax over the whole curve, by construction/name -- distinct from N1's cross-fitted l_star)",
+   "layer": "peak at f=0.6786",
+   "prompt_set": "fit=EASY n=96, score=HARD n=160"
+  },
+  "N11": 1.1215029977536493,
+  "N11_meta": {
+   "array": "mean Fisher ratio over l in [floor(0.4L), floor(0.8L)] of the own-EASY-axis curve",
+   "layer": "[11,22] (of 0..28)",
+   "prompt_set": "fit=EASY n=96, score=HARD n=160"
+  },
+  "plain_diffmeans": 1.8539363377466573,
+  "plain_diffmeans_meta": {
+   "array": "own-EASY-axis Cohen's d at the FIXED final layer L -- NO cross-fit l_star search, NO post-hoc argmax (field-norm-D 'plain difference-in-means' baseline floor)",
+   "layer": "L=28 (fixed, not searched)",
+   "prompt_set": "fit=EASY n=96, score=HARD n=160"
+  },
+  "B7_nullproj": 0.5044025280723459,
+  "B7_nullproj_meta": {
+   "array": "top singular value / sqrt(L) of the unit-normalised, all-ones-null-projected least Gram-eigenvector stack (vmin_onesproj.npy) -- B7's OTHER variant (raw vmin_stacked / gram-derived, no ones-projection) is NEVER used here, per the registered choice",
+   "layer": "all layers stacked",
+   "prompt_set": "N/A (weights only, no prompts)"
+  },
+  "AMS_T1_sigma": 4.803242672407815,
+  "AMS_T1_sigma_meta": {
+   "array": "reuse.ams_reimpl.ams_tier1: in-sample argmax sigma over layers int(0.4L)..int(0.8L), last-position hidden state, RAW TEXT (no chat template), 1-D diff-of-means direction, pooled_std=sqrt((var_pos+var_neg)/2); mean over the 3 standard AMS concepts ('batch 1': no batching/padding -- reads pre-harvested rows)",
+   "layer": "argmax per concept over int(0.4L)..int(0.8L)",
+   "prompt_set": "A_ams n=96: AMS package's own harmful_content x3-concept pos/neg prompt set"
+  },
+  "AMS_T2_meta": {
+   "note": "AMS_T2 is a PAIR-LEVEL check (reuse.ncands.ams_t2_values(child_ckpt, parent_ckpt)), not a per-checkpoint scalar: it compares one child against its declared parent's baseline. Computed only when parent_dir is supplied."
+  }
+ }
+}

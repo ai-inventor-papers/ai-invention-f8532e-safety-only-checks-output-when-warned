@@ -1,0 +1,5 @@
+Query family: 2606.08044 deep grep (over-refusal, LVS, correlat) | mode: grep (aii_fast_web_fetch.py grep) | date: 2026-09-22
+1) pattern "over.?refus" -i on https://arxiv.org/pdf/2606.08044 -> 4 matches (benign answer rate and over-refusal move by at most 0.04; static-audit Table showing over-refusal near-identical base vs dissociated 0.00-0.04 across Gemma/Llama/Qwen)
+2) pattern "LVS|latent vulnerability" -i on same URL -> 49 matches (LVS defined eq.5, per-model LVS values in Table 1, 2.5-3.1x higher for dissociated)
+3) pattern "correlat" -i on same URL -> 0 matches. Positive control: same URL, same session, patterns (1) and (2) above return 4 and 49 matches respectively, confirming fetch/grep pipeline works on this exact document.
+CONCLUSION: 2606.08044 never uses the word "correlate"/"correlation" anywhere. Over-refusal is reported as a static-audit column shown to be *insensitive* (near-identical base vs. dissociated, ~0.04) -- used as a negative-control demonstration that behavioral audits fail to see the LVS-revealed gap, not as a target predicted by/correlated with LVS across models. Ruling: does NOT close the cell.

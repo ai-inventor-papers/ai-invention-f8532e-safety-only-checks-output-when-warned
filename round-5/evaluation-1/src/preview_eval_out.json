@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "evaluation_name": "Iteration-5 re-derivation audit of every blocking number",
+    "description": "Every contested number in the iteration-4 draft re-derived from the JSON and .npy files written by iterations 2-4. No new data, no new method, no GPU, $0 API spend. The DISK is authoritative: where a ...",
+    "primary_metric": "claim_match_rate = MATCH / (MATCH + MISMATCH)",
+    "prereg_sha256": "3e9b77b5eef00369ab1aa62dd1dd09ae8051a46f69183d10e3e156dad9681482",
+    "self_check_gate_passed": true,
+    "self_check_failures": [],
+    "run_invariant": "The deliverable is the activation-level comparison of the three Qwen3-4B models and any metric built from it reads activations or weights of a SINGLE model. Logit-only and text-only readouts are basel...",
+    "curated_metrics_missing": [],
+    "deliverables_produced": [
+      "D1",
+      "D10",
+      "D11"
+    ],
+    "deliverables_missing": [],
+    "seed": 20260921,
+    "bootstrap_B": 2000,
+    "n_permutations": 20000
+  },
+  "metrics_agg": {
+    "claim_match_rate": 0.6865671641791045,
+    "n_claims_total": 68.0,
+    "n_claims_match": 46.0,
+    "n_claims_mismatch": 21.0,
+    "n_claims_unverifiable": 1.0,
+    "n_claims_source_absent": 0.0,
+    "n_deliverables_produced": 11.0,
+    "n_deliverables_missing": 0.0,
+    "n_table_rows_total": 1324.0,
+    "n_candidate_rows": 32.0,
+    "n_rows_missing_provenance": 0.0,
+    "gate_passed": 1.0,
+    "gpu_hours_spent": 0.0,
+    "usd_api_spend": 0.0,
+    "mcnemar15_b": 6.0,
+    "mcnemar15_c": 1.0,
+    "mcnemar15_p_exact": 0.125,
+    "mcnemar12_b": 4.0,
+    "mcnemar12_c": 1.0,
+    "mcnemar12_p_exact": 0.375,
+    "mcnemar12_min_attainable_p": 0.0625,
+    "spearman_fa_sens_activation_excl_ams": 0.40584332029170395,
+    "spearman_fa_sens_activation_incl_ams": 0.482202962774421,
+    "spearman_fa_sens_all32": 0.5959347158385865,
+    "max_abs_effect_FR_judged_refusal": 0.05555555555555555,
+    "signed_effect_FR_judged_refusal": -0.05555555555555555,
+    "median_mde80_instruct": 0.06736324330839275,
+    "median_mde80_saferl": 0.06112957923930268,
+    "median_mde80_abliterated": 0.09826571257300643,
+    "tost_p_instruct": 3.716812162871508e-24,
+    "tost_p_saferl": 1.3305647187046763e-25,
+    "tost_p_abliterated": 9.706030141161042e-10,
+    "global_ablation_did_saferl_minus_instruct": 0.22916666666666666,
+    "global_ablation_did_ci_lo": 0.08333333333333333,
+    "global_ablation_did_ci_hi": 0.375,
+    "registered_did_cells_matching_sign": 8.0,
+    "registered_did_cells_total": 18.0,
+    "device_swap_text_identical_frac": 0.25595238095238093,
+    "device_swap_hc_label_agreement": 0.9647058823529412,
+    "ratio_bl1_hard_over_activation": 7.234382164818016,
+    "critical_rho_n10_mc": 0.6363636363636364,
+    "panel_n_prereg_rule": 55.0,
+    "rho_B3_BL1_n10": 0.6484848484848484,
+    "claim_match_rate_rounding_aware_posthoc": 0.7611940298507462,
+    "ratio_bl1_easy_over_activation": 6.228035224566493,
+    "falcon3_batch8_sigma_shift": 5.282955884933472,
+    "panel_n80_power_observed_margin": 30.0,
+    "panel_n80_power_half_margin": 150.0,
+    "D1_n_primary_noop": 15.0,
+    "D1_n_primary_effective": 9.0,
+    "D1_n_pairs_total": 56.0,
+    "D4_n_rows": 32.0,
+    "D5_seed": 20260921.0,
+    "D5_b_boot": 2000.0,
+    "D5_n_rows_grid": 756.0,
+    "D6_seed": 20260921.0,
+    "D6_b_boot": 2000.0,
+    "D8_ratio_bl1_over_activation": 7.234382164818016,
+    "D8_n_rows": 32.0,
+    "D8_n_noop_pairs": 15.0,
+    "D4plus_official_effective_n": 9.0,
+    "D4plus_effective_n_under_frozen_count_rule": 10.0,
+    "D4plus_effective_n_literal_reclassification": 11.0,
+    "D4plus_n_candidates": 32.0,
+    "D4plus_n_candidates_reproduced_exactly": 26.0,
+    "D7plus_rho_B3_BL1_true_root": 0.6484848484848484
+  },
+  "datasets": [
+    {
+      "dataset": "contradictions_ledger",
+      "examples": [
+        {
+          "input": "Recipe histogram of the 15 NOOP pairs: precision x8, head-only-unembed x3, system-prompt x2, DPO x1, rank-one-lesion-a0.5 x1.",
+          "output": "{'numerical precision': 8, 'head-only unembedding': 3, 'system-prompt': 2, 'DPO': 1, 'rank-one lesion alpha 0.5': 1}",
+          "predict_published_prose": "{'numerical precision': 8, 'head-only unembedding': 3, 'system-prompt': 2, 'DPO': 1, 'rank-one lesion alpha 0.5': 1}",
+          "metadata_claim_id": "C01",
+          "metadata_verdict": "MATCH",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/classification.json",
+          "metadata_source_key": "primary_noop_pairs[*].recipe (re-derived)",
+          "metadata_tolerance_rule": "count",
+          "metadata_note": "disk-derived histogram from the recipe field.",
+          "eval_match": 1.0,
+          "eval_mismatch": 0.0,
+          "eval_verifiable": 1.0
+        },
+        {
+          "input": "count_check reports n_NOOP_nontrivial=15, n_EFFECTIVE=9, status OK.",
+          "output": "{'n_NOOP_nontrivial': 15, 'families_NOOP': ['falcon3', 'llama3.2', 'qwen3'], 'n_EFFECTIVE': 9, 'families_EFFECTIVE': ['falcon3', 'llama3.2', 'olmo', 'qwen3'], 'noop_ok': True, 'effective_ok': True, 's...",
+          "predict_published_prose": "{'n_NOOP_nontrivial': 15, 'n_EFFECTIVE': 9, 'status': 'OK'}",
+          "metadata_claim_id": "C02",
+          "metadata_verdict": "MATCH",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/classification.json",
+          "metadata_source_key": "count_check",
+          "metadata_tolerance_rule": "count",
+          "metadata_note": "verbatim recount against classification.json's own count_check block.",
+          "eval_match": 1.0,
+          "eval_mismatch": 0.0,
+          "eval_verifiable": 1.0
+        },
+        {
+          "input": "The primary_effective_pairs list (9 pairs) is the complete EFFECTIVE set under the frozen count rule.",
+          "output": "{'primary_effective_pairs': 9, 'frozen_count_rule': 10, 'literal_reclassification_clause': 11}",
+          "predict_published_prose": "9",
+          "metadata_claim_id": "C03",
+          "metadata_verdict": "MISMATCH",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/classification.json",
+          "metadata_source_key": "rule.count_check + rule.reclassification + pairs[*].observed_class",
+          "metadata_tolerance_rule": "count",
+          "metadata_note": "The frozen count rule counts 'constructed + primary harvested + AMD count when observed EFFECTIVE'. HG::amd--AMD-OLMo-1B-SFT-DPO (intended NOOP_HARVESTED) was observed EFFECTIVE (dHC +0.318), so the r...",
+          "eval_match": 0.0,
+          "eval_mismatch": 1.0,
+          "eval_verifiable": 1.0
+        }
+      ]
+    },
+    {
+      "dataset": "D1_table_composition",
+      "examples": [
+        {
+          "input": "[D1] Composition table: every NOOP and EFFECTIVE pair :: row",
+          "output": "{\"rows\": [{\"pair_id\": \"F1__int8wo\", \"role\": \"PRIMARY_NOOP\", \"family\": \"qwen3\", \"parent_repo\": \"F1__ref\", \"child_repo\": \"F1__int8wo\", \"recipe\": \"numerical precision (int8 weight-only)\", \"recipe_group\":...",
+          "metadata_deliverable": "D1",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/classification.json",
+          "metadata_source_key": "",
+          "metadata_readout_class": "",
+          "eval_n_primary_noop": 15.0,
+          "eval_n_primary_effective": 9.0,
+          "eval_n_pairs_total": 56.0
+        },
+        {
+          "input": "[D1] Composition table: every NOOP and EFFECTIVE pair :: row",
+          "output": "{\"kind\": \"stage:AMD-OLMo-1B-SFT->AMD-OLMo-1B-SFT-DPO\", \"n_items\": 45, \"hc_parent\": 0.5777777777777777, \"hc_child\": 0.5555555555555556, \"delta_hc\": -0.022222222222222143, \"ci95_item_boot\": [-0.15555555...",
+          "metadata_deliverable": "D1",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_3/gen_art/gen_art_experiment_1/results/extra_analyses.json",
+          "metadata_source_key": "paired_contrasts[kind='stage:AMD-OLMo-1B-SFT->AMD-OLMo-1B-SFT-DPO']",
+          "metadata_readout_class": "",
+          "eval_n_items": 45.0,
+          "eval_hc_parent": 0.5777777777777777,
+          "eval_hc_child": 0.5555555555555556,
+          "eval_delta_hc": -0.022222222222222143
+        },
+        {
+          "input": "[D1] Composition table: every NOOP and EFFECTIVE pair :: row",
+          "output": "{\"observed_class\": \"EFFECTIVE\", \"intended_stratum\": \"NOOP_HARVESTED\", \"kind\": \"harvested_regen\", \"parent\": \"HG__amd--AMD-OLMo-1B-SFT\", \"child\": \"HG__amd--AMD-OLMo-1B-SFT-DPO\", \"reclassified\": true, \"o...",
+          "metadata_deliverable": "D1",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/classification.json",
+          "metadata_source_key": "pairs[pair_id=HG::amd--AMD-OLMo-1B-SFT-DPO]",
+          "metadata_readout_class": "",
+          "eval_primary_dHC": 0.3176470588235294,
+          "eval_primary_n_harm": 85.0,
+          "eval_laneC_dHC": 0.4222222222222222,
+          "eval_laneC_n_harm": 45.0
+        }
+      ]
+    },
+    {
+      "dataset": "D2_table_degeneracy",
+      "examples": [
+        {
+          "input": "[D2] Structural degeneracy and exact McNemar :: row; readout_class=activation",
+          "output": "{\"analytic_zero_rule\": \"A (pair, readout-class) cell is ANALYTIC_ZERO iff the underlying delta is bitwise 0.0 for every prompt.\", \"activation_degenerate_pairs\": [\"F1__wu05\", \"F2__wu05\", \"F3__wu05\"], \"...",
+          "metadata_deliverable": "D2",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/scores/pairs_long.json",
+          "metadata_source_key": "candidate in {N1,N2,N3,AMS_T1_sigma,AMS_T2_drift,BL1_easy}",
+          "metadata_readout_class": "activation"
+        },
+        {
+          "input": "[D2] Structural degeneracy and exact McNemar :: pair_id=F2__sysprompt; readout_class=activation (AMS bar, raw-text input)",
+          "output": "{\"pair_id\": \"F2__sysprompt\", \"readout_class\": \"activation (AMS bar, raw-text input)\", \"analytic_zero\": true, \"reason\": \"AMS prompts are raw text with no chat template/system prompt (ams_reimpl.py); th...",
+          "metadata_deliverable": "D2",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/scores/pairs_long.json",
+          "metadata_source_key": "[candidate=AMS_T1_sigma,pair_id=F2__sysprompt].Delta",
+          "metadata_readout_class": "activation (AMS bar, raw-text input)",
+          "eval_ams_t1_delta": 0.0,
+          "eval_ams_t2_delta": 0.0
+        },
+        {
+          "input": "[D2] Structural degeneracy and exact McNemar :: pair_id=F1__sysprompt; readout_class=activation (AMS bar, raw-text input)",
+          "output": "{\"pair_id\": \"F1__sysprompt\", \"readout_class\": \"activation (AMS bar, raw-text input)\", \"analytic_zero\": true, \"reason\": \"AMS prompts are raw text with no chat template/system prompt (ams_reimpl.py); th...",
+          "metadata_deliverable": "D2",
+          "metadata_source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_1/results/scores/pairs_long.json",
+          "metadata_source_key": "[candidate=AMS_T1_sigma,pair_id=F1__sysprompt].Delta",
+          "metadata_readout_class": "activation (AMS bar, raw-text input)",
+          "eval_ams_t1_delta": 0.0,
+          "eval_ams_t2_delta": 0.0
+        }
+      ]
+    }
+  ]
+}

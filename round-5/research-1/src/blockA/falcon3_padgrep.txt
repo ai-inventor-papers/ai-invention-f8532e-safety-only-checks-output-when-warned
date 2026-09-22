@@ -1,0 +1,8 @@
+URL: https://huggingface.co/tiiuae/Falcon3-1B-Instruct/raw/main/tokenizer_config.json
+Type: HTML
+Pattern: padding_side|pad_token|model_max_length (2 matches in 275360 chars)
+
+--- Content ---
+
+275262:...rue, "eos_token": "<|endoftext|>", "extra_special_tokens": {}, "model_input_names": [ "input_ids", "attention_mask" ], "model_max_length": 32768, "pad_token": "<|pad|>", "tokenizer_class": "PreTrainedTokenizerFast" } 
+

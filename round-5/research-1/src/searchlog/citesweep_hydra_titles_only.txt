@@ -1,0 +1,12 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://api.semanticscholar.org/graph/v1/paper/arXiv:2307.15771/citations?fields=title,abstract,year,externalIds&limit=100
+Type: HTML
+Pattern: "title": "[^"]*[Ss]elf-repair[^"]*"|"title": "[^"]*[Bb]ackup[^"]*"|"title": "[^"]*[Rr]edundan[^"]*"|"title": "[^"]*[Hh]ydra[^"]*" (3 matches in 224714 chars)
+
+--- Content ---
+
+59190:..."title": "Conditional Co-Ablation: Recovering Self-Repair Backups in Transformer Circuits"...
+--
+63852:..."title": "Factual Retrieval in LLMs Is a Redundant, Distributed and Non-Contiguous Process"...
+--
+113180:..."title": "Universal Redundancies in Time Series Foundation Models"...

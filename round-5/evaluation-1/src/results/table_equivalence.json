@@ -1,0 +1,126 @@
+{
+ "seed": 20260921,
+ "b_boot": 2000,
+ "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+ "max_abs_effect_FR_judged_refusal": {
+  "model": "instruct",
+  "outcome": "refused_harm",
+  "arm": "F",
+  "site": "P",
+  "band": "B4",
+  "status": "OK",
+  "effect_FR": -0.05555555555555555,
+  "ci_lo": -0.11805555555555554,
+  "ci_hi": 0.0,
+  "mde_80": 0.08938162628330422,
+  "p_raw_signflip": 0.24437556244375563,
+  "n": 48,
+  "p_holm_rederived": 1.0,
+  "holm_family_size": 18,
+  "holm_family_definition": "6 bands x 3 sites = 18 (fewer for N6perp/POS, which are site-P only), NOT_RUN cells excluded",
+  "causal_rederived": false,
+  "causal_stored_flag_on_disk": false,
+  "flags_match_disk": true,
+  "arm0_baseline_mean": 0.9166666666666666,
+  "mean_T": 0.875,
+  "mean_R": 0.9305555555555556,
+  "n_R_draws": 3,
+  "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+  "source_key": "per_model.instruct.causal_grid_judged.refused_harm.F.cells.P_B4",
+  "readout_class": "behavioral (activation-space projection -> greedy decode -> LLM judge label)",
+  "caveat_R_not_matched": null
+ },
+ "median_mde80_per_model": {
+  "instruct": {
+   "median_mde_80_judged_cells": 0.06736324330839275,
+   "median_mde_80_all_null_cells": 0.0752971859507297,
+   "n_null_cells": 424,
+   "n_zero_variance_excluded": 127,
+   "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+   "source_key": "per_model.instruct.power_nulls",
+   "readout_class": "behavioral (activation-space projection -> greedy decode -> LLM judge label)"
+  },
+  "saferl": {
+   "median_mde_80_judged_cells": 0.06112957923930268,
+   "median_mde_80_all_null_cells": 0.06191500218590334,
+   "n_null_cells": 421,
+   "n_zero_variance_excluded": 208,
+   "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+   "source_key": "per_model.saferl.power_nulls",
+   "readout_class": "behavioral (activation-space projection -> greedy decode -> LLM judge label)"
+  },
+  "abliterated": {
+   "median_mde_80_judged_cells": 0.09826571257300643,
+   "median_mde_80_all_null_cells": 0.10809918244210813,
+   "n_null_cells": 255,
+   "n_zero_variance_excluded": 57,
+   "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+   "source_key": "per_model.abliterated.power_nulls",
+   "readout_class": "behavioral (activation-space projection -> greedy decode -> LLM judge label)"
+  }
+ },
+ "results_text": "Over the judged-refusal grid (refused_harm outcome, arms F/N6/N6perp, all sites x bands x models), the largest activation-intervention effect on judged refusal is -0.0556 (model=instruct, arm=F, site=P, band=B4; 95% CI [-0.1181,0.0000]) against median MDE80 of 0.0674 (instruct), 0.0611 (SafeRL), 0.0983 (abliterated).",
+ "table_caption": "Judged-refusal null: max|effect_FR| = -0.056 vs. median MDE80 0.067 / 0.061 / 0.098 (instruct / SafeRL / abliterated).",
+ "bound_statement": "BOUND: no site-local activation intervention (own-request axis F, benign-twin axis N6, or its orthogonal complement N6perp) produces an effect on judged refusal larger than about 0.056 in magnitude, at any depth band or generation site measured, in any of the three Qwen3-4B variants (instruct, SafeRL, mlabonne abliterated).",
+ "tost_per_model": {
+  "instruct": {
+   "verdict": "EQUIVALENT",
+   "p_tost": 3.716812162871508e-24,
+   "mean": -0.008432539682539682,
+   "se": 0.0027552613914118606,
+   "n": 42,
+   "margin": 0.06736324330839275,
+   "df": 41
+  },
+  "saferl": {
+   "verdict": "EQUIVALENT",
+   "p_tost": 1.3305647187046763e-25,
+   "mean": -0.0004960317460317451,
+   "se": 0.002596786787368519,
+   "n": 42,
+   "margin": 0.06112957923930268,
+   "df": 41
+  },
+  "abliterated": {
+   "verdict": "EQUIVALENT",
+   "p_tost": 9.706030141161042e-10,
+   "mean": -0.008101851851851848,
+   "se": 0.007844898226571579,
+   "n": 18,
+   "margin": 0.09826571257300643,
+   "df": 17
+  }
+ },
+ "arm0_baselines_all_three_models": {
+  "instruct": {
+   "refused_harm_arm0": 0.9166666666666666,
+   "over_refusal_hb_arm0": 0.4375,
+   "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+   "source_key": "per_model.instruct.causal_grid_judged.{refused_harm,over_refusal_hb}.F.cells.P_B1.mean_0",
+   "readout_class": "behavioral (arm-0 / no-intervention judged generation baseline)"
+  },
+  "saferl": {
+   "refused_harm_arm0": 0.9791666666666666,
+   "over_refusal_hb_arm0": 0.4791666666666667,
+   "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+   "source_key": "per_model.saferl.causal_grid_judged.{refused_harm,over_refusal_hb}.F.cells.P_B1.mean_0",
+   "readout_class": "behavioral (arm-0 / no-intervention judged generation baseline)"
+  },
+  "abliterated": {
+   "refused_harm_arm0": 0.1875,
+   "over_refusal_hb_arm0": 0.041666666666666664,
+   "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/analysis.json",
+   "source_key": "per_model.abliterated.causal_grid_judged.{refused_harm,over_refusal_hb}.F.cells.P_B1.mean_0",
+   "readout_class": "behavioral (arm-0 / no-intervention judged generation baseline)"
+  }
+ },
+ "abliterated_grid_footnote": {
+  "family_size_used_by_outcome": {
+   "refused_harm": 6,
+   "over_refusal_hb": 6
+  },
+  "note": "the abliterated grid has family_size_used=6 (site P only, all D'/E judged cells NOT_RUN per deviations.json 'abliterated_scope') vs 18 for instruct/saferl on F/N6 -- a sixth of the others' registered family size.",
+  "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/results/deviations.json",
+  "source_key": "deviations[].key=='abliterated_scope'"
+ }
+}

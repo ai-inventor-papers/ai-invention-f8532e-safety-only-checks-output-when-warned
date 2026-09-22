@@ -1,0 +1,216 @@
+[
+ {
+  "claim": "Conditional Co-Ablation (CoAx, arXiv:2607.01940), the nearest-neighbour scalarisation candidate found in this sweep (including via the forward-citation sweep on both anchors), does not frame or evaluate its score at checkpoint level / across checkpoints -- it is a per-unit, per-circuit score.",
+  "lane": "lane_SA",
+  "url": "https://arxiv.org/pdf/2607.01940",
+  "zero_regex": "per[- ]checkpoint|checkpoint-level|across checkpoints|compare (training )?checkpoints",
+  "control_regex": "ablation",
+  "zero_matches": 0,
+  "control_matches": 143,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "The forward-citation set of Hydra Effect (100 citing papers, API-capped) contains no paper reducing self-repair to a per-checkpoint scalar.",
+  "lane": "lane_SA",
+  "url": "https://api.semanticscholar.org/graph/v1/paper/arXiv:2307.15771/citations?fields=title,abstract,year,externalIds&limit=100",
+  "zero_regex": "per[- ]model|per model|per[- ]checkpoint|across models|across checkpoints|model-level|checkpoint|scalar|coefficient|quantif|compare.{0,20}model",
+  "control_regex": "self-repair",
+  "zero_matches": 15,
+  "control_matches": 6,
+  "status": "NOT_REPRODUCED"
+ },
+ {
+  "claim": "The forward-citation set of Rushing & Nanda (36 citing papers, uncapped/complete) contains no paper reducing self-repair to a per-checkpoint scalar.",
+  "lane": "lane_SA",
+  "url": "https://api.semanticscholar.org/graph/v1/paper/arXiv:2402.15390/citations?fields=title,abstract,year,externalIds&limit=100",
+  "zero_regex": "per[- ]model|per model|across models|model-level|checkpoint|scalar|coefficient|quantif|compare.{0,20}model",
+  "control_regex": "\"citingPaper\"",
+  "zero_matches": 8,
+  "control_matches": 36,
+  "status": "NOT_REPRODUCED"
+ },
+ {
+  "claim": "Query family 'compensation coefficient ablation transformer layers' returns no results relevant to a self-repair/ablation-compensation model scalar.",
+  "lane": "lane_SA",
+  "url": "web search (general mode, marginalia engine), query='compensation coefficient ablation transformer layers'",
+  "zero_regex": "N/A -- search result relevance judged by manual inspection of all 10 returned snippets (patents, aircraft-certification, medical-imaging, EE coursework -- none about language-model self-repair)",
+  "control_regex": "search query 'hydra effect language model self-repair' in the same session",
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": "Query family 'how much of an ablated component is written back downstream' (retried per coordinator) returns no result presenting a per-checkpoint self-repair scalar.",
+  "lane": "lane_SA",
+  "url": "web search (general mode, marginalia engine), query='how much of an ablated component is written back downstream'",
+  "zero_regex": "N/A -- manual inspection of all 10 returned snippets: topically adjacent (Neel Nanda's Othello-GPT and attribution-patching blog posts, transformer-circuits.pub 'Global Workspace' paper, activation-patching discussion) but none present a scalarisation of self-repair into a per-checkpoint number",
+  "control_regex": "search query 'hydra effect language model self-repair' in the same session",
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": "No published work computes W1's construction (early-band axis-ablation -> late-band refusal-projection change minus matched-norm random-direction control) as a per-checkpoint scalar",
+  "lane": "lane_SBC",
+  "url": "https://arxiv.org/pdf/2606.24952",
+  "zero_regex": "matched-norm random|random-direction control",
+  "control_regex": "detection",
+  "zero_matches": 0,
+  "control_matches": 104,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "No published work computes W3's construction (all-position ablation effect / last-prompt-token-only ablation effect, same band, as a ratio) on the nearest positional-alignment paper",
+  "lane": "lane_SBC",
+  "url": "https://arxiv.org/pdf/2510.18081",
+  "zero_regex": "ablation ratio|all-position.{0,20}last.token|last.token.{0,20}all.position",
+  "control_regex": "token",
+  "zero_matches": 0,
+  "control_matches": 191,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "No published work computes G2's three-cluster (harmful / hard-benign / plain-benign) margin ratio, checked on the nearest refusal-geometry clustering paper",
+  "lane": "lane_SBC",
+  "url": "https://arxiv.org/pdf/2602.02132",
+  "zero_regex": "three.cluster margin|margin ratio|hard.benign",
+  "control_regex": "direction",
+  "zero_matches": 0,
+  "control_matches": 236,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "No published work computes G4's Fisher ratio in the subspace orthogonal to unembedding refusal-token rows, checked on the nearest lexical-logit-margin paper",
+  "lane": "lane_SBC",
+  "url": "https://arxiv.org/pdf/2506.24056",
+  "zero_regex": "Fisher ratio|orthogonal complement|orthogonal.{0,20}unembedding",
+  "control_regex": "logit gap",
+  "zero_matches": 0,
+  "control_matches": 31,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "The mechanistic-interpretability field handbook used for this run's novelty screen contains essentially no redundancy/self-repair/backup-behavior vocabulary (carried over from a prior session of this same run, same files)",
+  "lane": "lane_SBC",
+  "url": "local skill files (aii-handbook-auto-mechanistic-interpretability), not a web URL",
+  "zero_regex": "self-repair|self repair|hydra|backup head|backup behavior|backup behaviour|redundan|compensat|ablation-induced",
+  "control_regex": "sparse autoencoder / steering / circuit / patching",
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[0].cells.no_op_or_expression_only_controls",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2609.18471",
+  "zero_regex": "quantiz|dtype|checkpoint",
+  "control_regex": "XSTest|steer|logit",
+  "zero_matches": 0,
+  "control_matches": 20,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": ".rows[0].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2609.18471",
+  "zero_regex": "correlat|predict.{0,20}over.?refus|over.?refus.{0,40}(predict|correlat)|regression",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[1].cells.no_op_or_expression_only_controls",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2609.04721",
+  "zero_regex": "quantiz|dtype|fp16|bf16|int8|int4",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[3].cells.over_refusal_as_an_outcome",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2608.05578",
+  "zero_regex": "over.?refus|XSTest|OR-Bench|false refus",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[4].cells.over_refusal_as_an_outcome",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2511.14195",
+  "zero_regex": "over.?refus|XSTest|OR-Bench|false refus",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[5].cells.over_refusal_as_an_outcome",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2606.25750",
+  "zero_regex": "over.?refus|XSTest|OR-Bench|false refus",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[6].cells.over_refusal_as_an_outcome",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2503.13390",
+  "zero_regex": "over.?refus|XSTest|OR-Bench|false refus",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[8].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2603.27518",
+  "zero_regex": "checkpoint|correlat|predict|per.model|across model",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[8].cells.causal_test_with_random_or_orthogonal_control",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2603.27518",
+  "zero_regex": "random direction|orthogonal control|random vector",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[10].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2606.08044",
+  "zero_regex": "correlat",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[11].cells.no_op_or_expression_only_controls",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2607.09697",
+  "zero_regex": "correlat|checkpoint|per.model|across model",
+  "control_regex": null,
+  "status": "NOT_REPRODUCIBLE_BY_GREP (search-family or API absence; original evidence carried)"
+ },
+ {
+  "claim": ".rows[13].cells.OVER_REFUSAL_AS_TARGET_OF_A_PER_CHECKPOINT_INTERNAL_SCORE",
+  "lane": "blockT",
+  "url": "https://arxiv.org/pdf/2609.00760",
+  "zero_regex": "correlat",
+  "control_regex": "correlat|checkpoint|per.model|across model|over.?refus",
+  "zero_matches": 0,
+  "control_matches": 19,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "2608.05086's full text never mentions model internals (activations/hidden states/internal representation)",
+  "lane": "blockD",
+  "url": "https://arxiv.org/html/2608.05086v1",
+  "zero_regex": "activation|hidden state|internal representation",
+  "control_regex": "refusal strictness",
+  "zero_matches": 0,
+  "control_matches": 8,
+  "status": "REPRODUCED"
+ },
+ {
+  "claim": "2606.20626 never performs a dimensionality/factor-count test across its benchmark suite (unidimensionality is assumed per benchmark, not tested jointly)",
+  "lane": "blockD",
+  "url": "https://arxiv.org/pdf/2606.20626",
+  "zero_regex": "unidimension|effective rank|scree|eigenvalue|number of (latent )?(dimension|trait|factor)|multidimensional|factor analysis",
+  "control_regex": "2PL",
+  "zero_matches": 2,
+  "control_matches": 17,
+  "status": "NOT_REPRODUCED"
+ }
+]

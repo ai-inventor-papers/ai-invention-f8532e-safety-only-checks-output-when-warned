@@ -1,0 +1,177 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://github.com/JolanMc/Jorak
+Type: HTML
+Length: 30034 chars (truncated) (offset: 12000)
+
+--- Content ---
+
+anner tui`** (full-screen wizard). The rest of this README is reference — start above, dig in below.
+
+## Jorak — three detection techniques
+
+**Jorak** is the project (this scanner and the report it produces). It is not a single metric but a bundle of **three complementary detection techniques** , one per angle of attack:
+
+  * **Weights — spectral signature (SVD)** (the _smoking-gun_ , CPU, no inference). Three signals: **global** alignment `A` (full ablation), **band** alignment `B` (localized/stealthy ablation, Heretic-style), and **subspace** alignment `S` (bottom-`k` shared subspace — catches **multi-direction** ablation, e.g. OBLITERATUS `n_directions > 1`, which a single `u_min` dilutes).
+  * **Activations — axis health (Cohen's d)** : "is the refusal axis live?".
+  * **Behavioral — refusal rate** (and harmless over-refusal): separates censored from fine-tuned, and flags **evasive ablation** — norm-preserving multi-direction that leaves the weights looking intact to the SVD signature but the behavior damaged (strong live axis + complies on harmful + incoherent over-refusal / uneven multilingual refusal).
+
+
+
+> **Naming.** `svd_alignment` (signal `A`) is just **one signal of the weights technique** — not to be confused with **Jorak** , which names the whole project (all three techniques and the report bundle it emits).
+
+## Pipeline
+
+[](/JolanMc/Jorak/blob/main/docs/pipeline.png)
+
+End-to-end flow, from a model to a `ScanResult`: the airtight `loaders/` \+ `probes/`, the three techniques (**weights/SVD** always on, **activations** and **behavioral** optional), `classify()` into 4 buckets, then the views (report, profile, CLI, viz) and the `experiments/` orchestration. Annotated walkthrough: [`docs/PIPELINE.md`](/JolanMc/Jorak/blob/main/docs/PIPELINE.md).
+
+## Architecture
+    
+    
+    modelscanner/
+    ├── core/types.py   # ScanResult, ModelHandle, enums (airtight boundary)
+    ├── loaders/        # safetensors -> ModelHandle ; arch_adapter ; oracle (dev)
+    ├── probes/         # harmful/harmless probes (6 languages) + per-family templates
+    ├── activations/    # scan-once: hidden states at the last token
+    ├── directions/     # per-layer r̂ (mean-diff)
+    ├── metrics/        # axis_health · jorak (A + band + subspace) · behavioral
+    ├── classifier/     # scan() · classify() · Thresholds -> 4 buckets
+    ├── viz/            # per-layer heatmaps · provenance scatter
+    ├── profile.py      # model profile (behavior, quality, hallucination, metadata)
+    ├── report.py       # JSON logger (flags + stats + Q/A)
+    └── cli.py          # `modelscanner scan`
+    experiments/        # run_scan.py (YAML runner) · run_campaign.sh (one-command launcher) · aggregate.py · campaign_report.py · figures
+    docs/               # HOW_TO_USE · PROTOCOLE_TEST · AWS_RUNBOOK · rapport.tex · presentation
+    tests/              # 125 offline tests + real e2e (gated MS_E2E=1)
+    
+
+Two invariants: an **airtight boundary** (`metrics/` never knows where the model comes from) and **scan-once** (a single forward pass → a rich `ScanResult` → views, no recomputation).
+
+## Supported & unsupported model types
+
+The scanner loads **safetensors /`.bin` weights** via `transformers` and reads the text decoder (`o_proj` / `down_proj` per layer). What works, and what to do otherwise:
+
+Case | Status | What to do  
+---|---|---  
+Llama / **Mistral · Ministral** (`mistral`, `ministral`) / **Qwen2 · Qwen3** / Gemma 2·3 (text) | ✅ supported | `modelscanner scan <id>`  
+`config.json` **without`model_type`** (e.g. many `huihui-ai` repos) | ✅ auto-handled | `model_type` is inferred from `architectures` (`["Qwen3ForCausalLM"]` → `qwen3`)  
+Unknown family but standard `*.self_attn.o_proj` naming | ✅ auto-detected | weight paths are auto-detected on the loaded model  
+**`mistral3`** multimodal (e.g. Ministral-3-8B-2512) | ⚠️ needs transformers upgrade | `pip install -U "transformers>=5.2.0"` on the box — then it loads: the registry knows `mistral3` and the loader falls back to `AutoModelForImageTextToText` to reach the nested text decoder.  
+`model_type` **too new** for the installed `transformers` | ⚠️ upgrade | `pip install -U transformers` → error `transformers_outdated`  
+**GGUF** (`*.gguf`, gguf-only repos) | ⛔ not supported | choose a safetensors variant — GGUF has no dequantizable tensors for Jorak  
+bnb 4/8-bit, AWQ, MLX, FP8 quantized | ⛔ not supported (J1) | load a full-precision (fp16/bf16/fp32) checkpoint  
+  
+Failures are reported with a precise `error_kind` (`gguf_only`, `config_no_model_type`, `transformers_outdated`, `unsupported_arch`, `gated`, `unsupported_format`, `oom`, `download`). See [docs/MAINTENANCE.md](/JolanMc/Jorak/blob/main/docs/MAINTENANCE.md) for the maintenance details.
+
+## Installation
+
+**Prerequisites:** `git`, and either **conda** (recommended) _or_ **Python 3.10+** for the venv path. **No GPU required** for the default weights/SVD plan.
+
+**Fastest — one command** (auto-detects conda, else falls back to a venv, then installs):
+    
+    
+    ./scripts/setup.sh
+
+On **Windows (PowerShell)** , use the equivalent script:
+    
+    
+    powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
+
+Or set it up by hand — **A. conda (recommended):**
+    
+    
+    # 1. Make conda available in this shell (skip if `conda` is already on the PATH)
+    source ~/miniconda3/etc/profile.d/conda.sh
+    # 2. Create + activate the env (Python 3.11)
+    conda env create -f environment.yml
+    conda activate modelscanner
+    # 3. Install the scanner (editable) + dev tools (pytest, optuna)
+    pip install -e ".[dev]"
+    # 4. Verify
+    pytest -q                                      # 125 passed, 13 skipped
+
+**B. plain venv (no conda on the machine):**
+    
+    
+    python3 -m venv .venv && source .venv/bin/activate
+    python -m pip install -U pip && pip install -e ".[dev]"
+    pytest -q                                      # 125 passed, 13 skipped
+
+**Optional extras** — append to the `pip install`, comma-separated:
+
+  * `quant` → `bitsandbytes`, to load a 7B in 4-bit on a CUDA GPU: `pip install -e ".[dev,quant]"`
+  * `gguf` → `gguf` \+ `llama-cpp-python` (present in `pyproject.toml`, but GGUF scanning is **not supported yet** — see the model-types table above).
+
+
+
+The editable install keeps the `modelscanner` package in this repo; its dependencies (torch, transformers, …) land in `~/miniconda3/envs/modelscanner/lib/python3.11/site-packages/`. Air-gapped / no-cert box (AWS): see [docs/AWS_RUNBOOK.md](/JolanMc/Jorak/blob/main/docs/AWS_RUNBOOK.md).
+
+## Usage
+
+**Interactive TUI** (full-screen wizard, zero extra deps — wraps the commands below):
+    
+    
+    modelscanner tui   # home screen → single-model scan OR YAML campaign
+
+It builds and launches the exact `scan` / `run_scan.py` command from checkboxes (plans), radio buttons (local vs S3), and a model picker (3 preset 8B models or a typed id). For a campaign it takes a models-only YAML (`path` \+ `expected_label`) and **injects the checked plans** if the file has no `plans:` block (a full YAML is launched as-is). It replaces nothing — just a front-end over the CLI.
+
+Scan a model (CLI):
+    
+    
+    modelscanner scan <id_or_path> --behavioral --probe-subset 16 --log out.json
+    # options: --no-activations (tight GPU) · --subspace-k · --multilingual · --profile · --expected-label · --device cuda
+
+Self-contained **Jorak report** for a single scan (no campaign needed):
+    
+    
+    modelscanner scan <id_or_path> --report          # -> ./<model>_jorak_<YYYYMMDD>/
+    modelscanner scan <id_or_path> --report reports/  # bundle under reports/
+    modelscanner scan <id_or_path> --s3   # push to s3://your-bucket/results/Jorak/<bundle>, then DELETE local
+    modelscanner scan <id_or_path> --s3 s3://your-bucket/results/rapports --keep-local  # exact prefix, keep local copy
+
+During a `--report` scan a **progress bar with ETA** is shown on stderr (one unit per prompt across activations + behavioral + multilingual generation), so you can see how far along the scan is and when it will finish. It is automatic on an interactive terminal; disable with `MODELSCANNER_NO_PROGRESS=1`.
+
+**What`--s3` does:**
+
+  * **Push** — sends the bundle to the fixed `s3://your-bucket/results/Jorak/<bundle>`. Override with `--s3 s3://other` or `$MODELSCANNER_S3_BUCKET`; pass an **exact prefix** `--s3 s3://bucket/path` to push there verbatim.
+  * **Clean up local** — deletes the local folder afterwards, but only if the upload succeeded (otherwise it is kept, so nothing is lost). Add **`--keep-local`** to keep it.
+  * **Fetch if missing** — if the model is **not in the HF cache** , first downloads it via the offline procedure (internal CA certs + HF token behind a private proxy, `hf download`) into `~/.cache/huggingface/hub/`, then **purges it after the scan** — but only the model it downloaded itself (a model already cached, e.g. a shared vLLM cache, is untouched).
+  * **Net effect** — the box is left as it was found: no local bundle, no extra cached model.
+
+
+
+**A`--report` bundle contains:**
+
+  * **`jorak_report_en.html` / `jorak_report_fr.html`** — two standalone branded reports (EN / FR), each with an embedded layer heatmap, a **4-bucket position plot** (this model as one point on the weight-severance × refusal plane), **clickable language tabs** for the prompts/responses, and **hover tooltips** explaining every indicator (meaning + how to read it).
+  * **`prompts.csv`** (every Q/R: behavioral + multilingual + profile), **`summary.csv`** (one-row metrics), **`bucket_position.png`** , **`scan_log.json`**.
+  * `--report` auto-enables the behavioral plan **and the full multilingual probe** — every language, all prompts, both harmful **refusal** and harmless **over-refusal** — so each language tab is populated. Cap the per-language count with `--probe-subset N`; add `--profile` for the profile section.
+
+
+
+Compare several single-scan bundles on one 4-bucket plane:
+    
+    
+    modelscanner compare reports/                 # all <model>_jorak_* bundles under reports/
+    modelscanner compare a_jorak_*/ b_jorak_*/ --out compare.png --lang en
+    # -> compare.png (overlaid points, colored by predicted label) + compare.csv
+
+YAML-driven batch (the runner, 1 subprocess per model, anti-OOM):
+    
+    
+    python experiments/run_scan.py experiments/runs/campaign_cpu.yaml
+    python experiments/aggregate.py runs_out/<run>/     # table + confusion matrix
+
+Curated campaign YAMLs (shown in `modelscanner tui`): `campaign_cpu.yaml`, `campaign_gpu_qwen.yaml`, `campaign_gpu_mistral.yaml`, `campaign_20260703_base.yaml` (template to copy). Older extended matrices live under `experiments/runs/archive/`. **Whole benchmark in one command (AWS box):**
+    
+    
+    ./experiments/run_campaign.sh                                        # GPU Qwen matrix (default YAML)
+    ./experiments/run_campaign.sh experiments/runs/campaign_gpu_mistral.yaml  # GPU Mistral matrix
+
+`run_campaign.sh` chains the runner (download + scan + purge + campaign HTML/CSV + S3 push) then `aggregate.py` (text accuracy + confusion matrix). It activates the `modelscanner` conda env and forwards `$HF_TOKEN` if set.
+
+On the AWS box the runner reuses the **same cycle as`scan --s3`**: with `download: true` it fetches each model absent from the cache via the box procedure (internal CA + secrets + `hf download`) before scanning it, and with `purge: true` it removes from the HF cache — after each scan — **only the models this run downloaded itself** (a model already cached / a local `models_dir` entry is left untouched). So a whole matrix scans **anti-OOM** (1 subprocess per model) **and anti-disk-fill** (purge between models) without saturating the box. The GPU campaign YAMLs (`campaign_gpu_qwen.yaml`, `campaign_gpu_mistral.yaml`) ship with `download`/`purge` enabled; `campaign_cpu.yaml` leaves them off (no behavior change).
+
+**Practical runner flags** (any `run_scan.py` / `run_campaign.sh` call):
+    
+    
+    python experiments/run_scan.py <ya

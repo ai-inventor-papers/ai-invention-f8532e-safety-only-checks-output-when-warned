@@ -1,0 +1,127 @@
+{
+ "N1(Qwen3-4B)": {
+  "published": 2.45,
+  "published_source": "iter_4/gen_art/gen_art_experiment_2/results/disk_readouts.json models.instruct.d_hard_by_layer[l_star=26]",
+  "recomputed_disk_readouts_convention": 2.4475654603212607,
+  "recomputed_disk_readouts_rel_diff": 0.0009936896647916417,
+  "recomputed_disk_readouts_PASS": true,
+  "recomputed_ncands_C13_peak_d": 2.4475654678907968,
+  "recomputed_ncands_C13_peak_d_rel_diff": 0.0009936865751850666,
+  "recomputed_ncands_C13_peak_d_PASS": true,
+  "recomputed_ncands_N1_crossfit_l_star": 2.326601579822087,
+  "recomputed_ncands_N1_crossfit_rel_diff": 0.05036670211343398,
+  "recomputed_ncands_N1_crossfit_PASS": false,
+  "PASS": true,
+  "diagnosed_cause": "BAND/LAYER-SELECTION CONVENTION MISMATCH, not prompt-set or missing-arrays. The published 'N1' number is a PLAIN POST-HOC ARGMAX over the own-EASY-axis, per-layer Cohen's-d curve on HARD (disk_readouts.json's own l_star, and reuse.ncands.values()['C13_peak_d']) -- it reproduces the published figure to <1e-6 relative. reuse.ncands.values()['N1'] (the CROSS-FITTED l_star, no post-hoc argmax -- the deliberately more conservative screening convention this artifact's plan calls 'N1') gives a materially different, LOWER number (instruct 2.3266 vs 2.45, 5.0% high; saferl 2.1625 vs 2.34, 7.6% high) because cross-fit chooses a different, less-overfit layer (l_star=23 vs the disk file's plain-argmax layer 26). Both are correctly computed from the same on-disk H2 arrays; they are simply two different, both-legitimate scoring conventions with the same name."
+ },
+ "N1(Qwen3-4B-SafeRL)": {
+  "published": 2.34,
+  "published_source": "iter_4/gen_art/gen_art_experiment_2/results/disk_readouts.json models.saferl.d_hard_by_layer[l_star=26]",
+  "recomputed_disk_readouts_convention": 2.340678087427338,
+  "recomputed_disk_readouts_rel_diff": 0.0002897809518538428,
+  "recomputed_disk_readouts_PASS": true,
+  "recomputed_ncands_C13_peak_d": 2.3406780778939877,
+  "recomputed_ncands_C13_peak_d_rel_diff": 0.00028977687777259956,
+  "recomputed_ncands_C13_peak_d_PASS": true,
+  "recomputed_ncands_N1_crossfit_l_star": 2.1624549474867263,
+  "recomputed_ncands_N1_crossfit_rel_diff": 0.07587395406550153,
+  "recomputed_ncands_N1_crossfit_PASS": false,
+  "PASS": true,
+  "diagnosed_cause": "BAND/LAYER-SELECTION CONVENTION MISMATCH, not prompt-set or missing-arrays. The published 'N1' number is a PLAIN POST-HOC ARGMAX over the own-EASY-axis, per-layer Cohen's-d curve on HARD (disk_readouts.json's own l_star, and reuse.ncands.values()['C13_peak_d']) -- it reproduces the published figure to <1e-6 relative. reuse.ncands.values()['N1'] (the CROSS-FITTED l_star, no post-hoc argmax -- the deliberately more conservative screening convention this artifact's plan calls 'N1') gives a materially different, LOWER number (instruct 2.3266 vs 2.45, 5.0% high; saferl 2.1625 vs 2.34, 7.6% high) because cross-fit chooses a different, less-overfit layer (l_star=23 vs the disk file's plain-argmax layer 26). Both are correctly computed from the same on-disk H2 arrays; they are simply two different, both-legitimate scoring conventions with the same name."
+ },
+ "cos(F_instruct,F_SafeRL)_by_band": {
+  "published": {
+   "B1": 0.9967063858254698,
+   "B2": 0.9816775440215814,
+   "B3": 0.915890049203718,
+   "B4": 0.8950170142517914,
+   "B5": 0.9006245181226079,
+   "B6": 0.8407803675275848
+  },
+  "published_source": "iter_4/gen_art/gen_art_experiment_2/results/direction_cosines.json three_model_cross_direction_cosines_by_band.cos_F_instruct_vs_saferl_by_band",
+  "recomputed": {
+   "B1": 0.9967064062754313,
+   "B2": 0.9816775520642599,
+   "B3": 0.915890097618103,
+   "B4": 0.895017017920812,
+   "B5": 0.9006244937578837,
+   "B6": 0.8407803277174631
+  },
+  "max_abs_diff_vs_published": 4.8414385056538833e-08,
+  "min_band": "B6",
+  "min_value": 0.8407803277174631,
+  "target_>=0.84_every_band_PASS": true,
+  "PASS": true,
+  "diagnosed_cause": "exact match (<1e-6 abs diff); F built from H2 A_prompt.npy EASY(96) rows (unit(mean_harm-mean_benign) per layer, cos averaged within WS/src/core.py band_indices bands) exactly reproduces prep.py:disk_directions()'s recipe."
+ },
+ "cos(F_instruct,F_abliterated)_by_band": {
+  "published_rounded_target": {
+   "B1": 0.999,
+   "B2": 0.994,
+   "B3": 0.943,
+   "B4": 0.412,
+   "B5": 0.306,
+   "B6": 0.328
+  },
+  "published_exact_source": "direction_cosines.json cos_F_instruct_vs_abliterated_by_band",
+  "published_exact": {
+   "B1": 0.9991778906778152,
+   "B2": 0.9935195464680014,
+   "B3": 0.9429253505261208,
+   "B4": 0.41184335091619967,
+   "B5": 0.30612810946633623,
+   "B6": 0.32849182306240604
+  },
+  "recomputed": {
+   "B1": 0.9991779228051504,
+   "B2": 0.9935195843378702,
+   "B3": 0.9429253538449606,
+   "B4": 0.4118433396021525,
+   "B5": 0.3061280945936839,
+   "B6": 0.32849180201689404
+  },
+  "max_abs_diff_vs_published_exact": 3.786986879639187e-08,
+  "PASS": true,
+  "diagnosed_cause": "exact match (<1e-6 abs diff), same F recipe as above."
+ },
+ "cos(N6_instruct,N6_abliterated)_by_band": {
+  "published_rounded_target": {
+   "B1": 0.997,
+   "B4": 0.021,
+   "B5": 0.027,
+   "B6": 0.061
+  },
+  "published_exact_source": "direction_cosines.json cos_N6_instruct_vs_abliterated_by_band (this file IS on disk and gives the exact per-band cosines)",
+  "published_exact": {
+   "B1": 0.9974618503672376,
+   "B2": 0.9263725270426372,
+   "B3": 0.6091229861899786,
+   "B4": 0.021174306238966507,
+   "B5": 0.02667686045832195,
+   "B6": 0.06130599558274973
+  },
+  "recomputed_proxy_source": "40/40 XSTest harmful-twin/benign-twin rows WITHIN H2's own A_prompt.npy/stimuli.json HARD set (same recipe: unit(mean_safe-mean_unsafe) per layer) -- a PROXY, not a reproduction: the published N6 used a SEPARATE, 85-confirmatory-twin-pair harvest (method.py stage 'twins', out/cells/{instruct,saferl,abliterated}/twins_N6__*.{json,npz}) whose RAW ACTIVATIONS were never written to disk (only the derived twin_d/cos_F_N6 scalars in the .json/.npz cell files survive; out/private/directions_*.npz is empty/deleted).",
+  "recomputed_proxy": {
+   "B1": 0.9955598215262095,
+   "B2": 0.9031739632288615,
+   "B3": 0.5844713350137075,
+   "B4": -0.001530303464581569,
+   "B5": 0.012290882567564646,
+   "B6": 0.058752039447426796
+  },
+  "PASS": null,
+  "diagnosed_cause": "ARRAYS-NOT-ON-DISK for an exact reproduction (the 85-pair twin harvest's raw activations are gone; only its derived scalars survive). The EXACT published cosines themselves, however, ARE readable directly from direction_cosines.json (no GPU pass needed to READ them) and already satisfy the registered claim (B1=0.997, B4-B6 in [0.021,0.061]). As the CLOSEST REPRODUCIBLE CHECK computed fresh from arrays that ARE on disk in this workspace (H2's own 40/40 XSTest-twin subset, same unit(mean_safe-mean_unsafe) recipe), the same qualitative story reproduces: B1=0.996 (published 0.997), B4=-0.002, B5=0.012, B6=0.059 (published 0.021/0.027/0.061) -- near-total rotation onto an orthogonal direction in B4-B6 either way, even though the 40-pair proxy's exact decimals differ from the 85-pair published figures (different prompt set)."
+ },
+ "|N6|_magnitude_parent_vs_child": {
+  "note": "|N6| 1.79 (child) vs 1.87 (parent) is NOT located as an exact number in any file on disk (direction_cosines.json / disk_readouts.json / analysis.json / summary_tables.md were all searched; no key or value matches to 3 significant figures). The same twins_N6 cell files DO carry a same-family Cohen's-d-like 'magnitude' array (twin_d_by_layer, O(1)-O(4) range, matching the claimed scale) at out/cells/{instruct,abliterated}/twins_N6__*.json, but neither array contains the literal values 1.79/1.87 at any layer or band-mean to 2 decimal places.",
+  "instruct_twin_d_by_layer_source": "iter_4/gen_art/gen_art_experiment_2/out/cells/instruct/twins_N6__6e406f7f.json",
+  "instruct_n6_best_layer": 26,
+  "instruct_twin_d_at_best_layer": 4.0157,
+  "abliterated_twin_d_by_layer_source": "iter_4/gen_art/gen_art_experiment_2/out/cells/abliterated/twins_N6__6e406f7f.json",
+  "abliterated_n6_best_layer": 19,
+  "abliterated_twin_d_at_best_layer": 2.6064,
+  "closest_reproducible_check": "the cos(N6_instruct,N6_abliterated) rotation story above (arrays-not-on-disk for an exact match; proxy computed from on-disk arrays reproduces the qualitative rotation, not the exact magnitude scalar).",
+  "PASS": null,
+  "diagnosed_cause": "ARRAYS-NOT-ON-DISK: this specific magnitude scalar's source GPU pass output (out/private/directions_disk_*.npz / directions_*.npz) was not persisted; the closest on-disk quantity of the same statistical family (twin_d_by_layer) does not numerically match 1.79/1.87 at any single layer or band mean we tried."
+ }
+}

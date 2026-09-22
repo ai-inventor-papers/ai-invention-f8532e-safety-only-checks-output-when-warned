@@ -1,0 +1,292 @@
+{
+ "utc_created": "2026-09-22T00:16:14Z",
+ "policy": "Append-only. Every fallback is numbered and stated. The family-exclusion rule and the order gate are NEVER relaxed; an attempt to log such a relaxation is refused by this module.",
+ "deviations": [
+  {
+   "id": "D01",
+   "utc": "2026-09-22T00:16:14Z",
+   "title": "HF_HOME left at the shared run cache instead of WS/hf_cache",
+   "detail": "The artifact plan mandates HF_HOME=WS/hf_cache, HUGGINGFACE_HUB_CACHE=WS/hf_cache/hub and TRANSFORMERS_CACHE=WS/hf_cache/transformers. The execution environment sets HF_HOME, HF_HUB_CACHE, TRANSFORMERS_CACHE, HF_DATASETS_CACHE, TORCH_HOME, PIP_CACHE_DIR and UV_CACHE_DIR to a shared per-run cache at run_YqmEFECOIR3D/.shared_cache and explicitly forbids overriding them, because pointing HF_HOME and TRANSFORMERS_CACHE at one directory stores every weight twice (one earlier run wasted 25 GB that way). Overriding was therefore refused. Consequence: WS/hf_cache is never created, the Stage-G instruction to empty it is vacuous, and downloaded snapshots are deleted from the SHARED cache after each checkpoint's GPU visit instead.",
+   "reduction_ladder_rung": null,
+   "stage": "env",
+   "n": 1,
+   "code": "D01"
+  },
+  {
+   "id": "D02",
+   "utc": "2026-09-22T00:16:14Z",
+   "title": "GPU is an RTX 2000 Ada (16380 MiB), not the L4 (23034 MiB) the plan assumes",
+   "detail": "nvidia-smi reports a single NVIDIA RTX 2000 Ada Generation with 16380 MiB and no co-tenant processes. The plan's co-tenancy arithmetic (three artifacts sharing 23034 MiB, ceiling 22500) does not apply. The declared 7.5 GB VRAM budget is KEPT and enforced with torch.cuda.set_per_process_memory_fraction(7500/16380); the lease ceiling is computed against 16380 MiB. Throughput anchors quoted for the L4 (55-100 tok/s) are treated as upper bounds and the reduction rung is chosen from measured timing instead.",
+   "reduction_ladder_rung": null,
+   "stage": "env",
+   "n": 2,
+   "code": "D02"
+  },
+  {
+   "n": 3,
+   "code": "D03",
+   "id": "D03",
+   "utc": "2026-09-22T00:23:00Z",
+   "title": "OR_HARDBENIGN ships n=43, not the planned n=40",
+   "detail": "The artifact plan specifies 40 orh_* hard-benign items. The authoritative staged asset behaviour_items.json and H1/results/graded_truth.json per_ckpt labels BOTH carry exactly 43 orh_* ids; two originally-generated ids (orh_75, orh_1197) were dropped upstream before iteration 4 graded anything. All 43 are shipped. Trimming to 40 would have matched the plan's text but BROKEN the join with iteration 4's denominators, which is the whole reason the set is reused verbatim. The denominator is stated as n=43 in every column header and CI.",
+   "reduction_ladder_rung": null,
+   "stage": "items"
+  },
+  {
+   "n": 4,
+   "code": "D04",
+   "id": "D04",
+   "utc": "2026-09-22T00:23:00Z",
+   "title": "Partial-seal disclosure quantified: 30 of the 54 sealed XSTest pair_uids were already exposed",
+   "detail": "The plan states that 40 of the 54 heldout XSTest items appear in D2's probe_baseline_disjoint table. The measured figure is different and is reported instead: probe_baseline_disjoint has 40 ROWS which trace via metadata_source_row_id to 30 DISTINCT pair_uids, all 30 inside the sealed 54-pair split. So the split is 30/54 exposed, not 40/54, and it is NOT pristine. Opening it here is sanctioned only because this artifact fits and selects nothing; the seal is now spent and that is stated in method_out.json.",
+   "reduction_ladder_rung": null,
+   "stage": "items"
+  },
+  {
+   "n": 5,
+   "code": "D05",
+   "id": "D05",
+   "utc": "2026-09-22T00:23:00Z",
+   "title": "heldout id-list hash convention recovered and verified, not assumed",
+   "detail": "D1/prereg.json split.heldout_ids_sha256 = 898b70e13c84206befe5bdd078d3cfe168d53b754d036ee654a89bfcddfa0e54. The convention was not documented, so several were tried; the match is sha256(json.dumps(sorted(ids), separators=(',',':'))). The recovered OR_XSTEST54 id list reproduces that value EXACTLY, which proves the 54 recovered benign twins are the pre-registered sealed split and not some other 54 rows. Recovery used the safety_2x2 table only (request level literal is 'benign_twin', not 'benign' as the plan's text says); coherence_control was never touched because it crosses one item's question with another item's output.",
+   "reduction_ladder_rung": null,
+   "stage": "items"
+  },
+  {
+   "n": 6,
+   "code": "harvest_failed",
+   "stage": "harvest",
+   "detail": "HG__unsloth--gemma-3-270m-it: FileNotFoundError(2, 'No such file or directory')",
+   "utc": "2026-09-22T00:23:55Z"
+  },
+  {
+   "n": 7,
+   "code": "D06",
+   "id": "D06",
+   "utc": "2026-09-22T00:23:59Z",
+   "title": "graded_truth_s0.json is a retracted smoke stub; real staged commits begin at s1",
+   "detail": "During acceptance testing the harvest driver needed a committed graded_truth to exercise the order gate, and wrote results/graded_truth_s0.json, whose sha256 entered logs/chain.jsonl as record 3. A later record (4, item_sets_frozen) was appended before this was noticed. The chain is append-only and each record commits to the previous chain_sha256, so record 3 cannot be removed and its payload cannot be rewritten or deleted without invalidating records 4+. The file is therefore FROZEN ON DISK, a retraction record is appended to the chain, src/hygiene_check.py order_gate_audit() explicitly REFUSES graded_truth_s0.json as a gate source, and judgeflow.order_gate_ok() applies the same exclusion. Real staged commits begin at s1. Net effect: no harvested array can ever be justified by the stub, and the chain still verifies end to end.",
+   "reduction_ladder_rung": null,
+   "stage": "protocol"
+  },
+  {
+   "n": 8,
+   "code": "D07",
+   "id": "D07",
+   "utc": "2026-09-22T00:24:35Z",
+   "title": "Blindness-lint regex: W/G/A alternatives anchored to a whole token",
+   "detail": "The plan's pattern (survivor|winner|rank|rho|spearman|pearson|score_of|W[1-8]$|G[1-4]$|A[1-3]$) applied with re.search makes the last three alternatives match ANY key merely ending in a letter+digit. On real data it flagged results/sweep_order.json key 'zamba2' (a model family) as candidate A2. The three alternatives now require a whole token, preceded by start-of-string or a non-alphanumeric separator. Verified on 20 cases: still catches A2, cand_A1, score.A1, W3, G4, rho, spearman_rho, survivor; no longer fires on zamba2, alpha2, gemma3. T1e selftest still FAILS on a planted survivor.json and a planted 'rho'/'W3' key and PASSES once they are removed. This is a correction that keeps every intended catch, not a relaxation. mcnemar was also added to the pattern, as the testing plan's T1e list includes it.",
+   "reduction_ladder_rung": null,
+   "stage": "lint"
+  },
+  {
+   "n": 9,
+   "code": "D08",
+   "id": "D08",
+   "utc": "2026-09-22T00:26:19Z",
+   "title": "Vendored modules resolved the workspace one level too shallow; path constants patched",
+   "detail": "src/vendor/{common,p_common,ncands}.py used WS = Path(__file__).resolve().parents[1] and ams_reimpl.py used parent.parent. Correct where written (H1/src/X.py -> H1), WRONG once vendored at src/vendor/X.py (-> src/). Observed: import-time mkdir created empty src/{assets,harvest,logs,private,results}, and ams_reimpl raised FileNotFoundError looking for src/assets/ams_spec.json, which failed the first harvest of HG__unsloth--gemma-3-270m-it. Fixed by changing ONLY path constants to parents[2]; no numerical code touched. Before/after sha256 of every patched file are in results/vendor_patch_notes.json patches_applied, superseding the plain-copy hashes in reuse_manifest.json for those four files. Additionally vendor/common.CHAIN is ISOLATED to logs/vendor_h1_chain.jsonl because H1's chain record format {step,file,sha256,prev} is incompatible with this artifact's logs/chain.jsonl; every real commit goes through src/common.py. The five stray directories held 0 files and were removed.",
+   "reduction_ladder_rung": null,
+   "stage": "vendor"
+  },
+  {
+   "n": 10,
+   "code": "D09",
+   "id": "D09",
+   "utc": "2026-09-22T00:27:28Z",
+   "title": "Lease gains a per-artifact 7.5 GB cap; own-artifact contention never times out",
+   "detail": "The plan's lease guards a single physical ceiling for three co-tenant artifacts. Here the panel sweep and the Part-B arm builder are two processes of ONE artifact that declares 7.5 GB total, and the run kills a process tree exceeding its declaration; a physical ceiling of 15800 MiB would have let both hold 7.5 GB at once. Every lease is now stamped with this workspace and the sum over this workspace's live leases is capped at 7500 MiB, while foreign artifacts count only against the physical ceiling. The 30-minute 'proceed anyway at half batch' fallback now applies ONLY to cross-artifact contention: proceeding while blocked by our own other process would breach our own declaration, so that wait is unbounded. Poll interval cut from 30 s to 10 s so serialised hand-offs between the two processes waste less GPU time. Verified by 5 unit cases (results/unit_tests_T1.json).",
+   "reduction_ladder_rung": null,
+   "stage": "lease"
+  },
+  {
+   "n": 11,
+   "code": "gen_failed",
+   "stage": "gen",
+   "detail": "HG__PleIAs--Pleias-1.2b-Preview: ValueError(\"Asking to pad but the tokenizer does not have a padding token. Please select a token to use as `pad_token` `(tokenizer.pad_token = tokenizer.eos_token e.g.)` or add a new pad token via `tokenizer.add_special_tokens({'pad_token': '[PAD]'})`.\")",
+   "utc": "2026-09-22T00:36:39Z"
+  },
+  {
+   "n": 12,
+   "code": "D10",
+   "id": "D10",
+   "utc": "2026-09-22T00:41:50Z",
+   "title": "Part-B arm int8bnb dropped",
+   "detail": "bitsandbytes LLM.int8() decode is ~40x slower on this RTX 2000 Ada; the GPU is shared with the panel sweep, which has priority, and the time budget is ~5 h. Dropped at reduction-ladder rung 4 before it was built. It is listed in not_run and is excluded from both denominators. It remains declared a priori in partb_arms.json.",
+   "reduction_ladder_rung": 4,
+   "stage": "partb"
+  },
+  {
+   "n": 13,
+   "code": "D11",
+   "id": "D11",
+   "utc": "2026-09-22T00:43:54Z",
+   "title": "Part-B lesion: no candidate passed KL<0.1 with a positive refusal drop",
+   "detail": "ERNIE-4.5-0.3B-PT lesion fit: no hidden-state candidate in [5, 6, 7, 8, 9, 10, 11, 12, 13] passed the A12 filter; the registered fallback applies unchanged (max-drop candidate l=8, drop +0.117, KL 0.530); a10/a05 carry flag KL_FILTER_FAILED.",
+   "reduction_ladder_rung": null,
+   "stage": "partb"
+  },
+  {
+   "n": 14,
+   "code": "D12",
+   "id": "D12",
+   "utc": "2026-09-22T00:44:26Z",
+   "title": "Part-B arm fp16 failed",
+   "detail": "PB__ernie03b__fp16: AttributeError(\"'types.SimpleNamespace' object has no attribute 'keep_snapshot'\")",
+   "reduction_ladder_rung": null,
+   "stage": "partb"
+  },
+  {
+   "n": 15,
+   "code": "D13",
+   "id": "D13",
+   "utc": "2026-09-22T00:45:37Z",
+   "title": "Order gate honours chained retractions; a contaminated commit is retracted, never deleted",
+   "detail": "The chain is append-only, so a graded_truth commit later found to be contaminated (e.g. generated under the padding corruption found by T4) cannot be removed. Any chained payload carrying retracted_payload (optionally narrowed by retracted_tags) now removes that commit, or those tags, as a gate source in BOTH judgeflow.order_gate_ok() (what the harvest driver calls) and hygiene_check.order_gate_audit() (the end-of-run audit). A later commit of the same tag under a new stage number gates normally. Verified: PB__ernie03b__fp16 gated by s901 -> True; HG__unsloth--gemma-3-270m-it (only the retracted s0 stub) -> False.",
+   "reduction_ladder_rung": null,
+   "stage": "protocol"
+  },
+  {
+   "n": 16,
+   "code": "D14",
+   "id": "D14",
+   "utc": "2026-09-22T01:39:35Z",
+   "title": "Left-padded batched generation corrupts some architectures; every tag regenerated under a per-tag padding guard",
+   "detail": "Selftest T4 found batch-8 vs batch-1 greedy generation token-identical on 0/8 rows for gemma-3-270m-it, and forward-only last-token states moved 10-290% relative under left padding (gemma-3, pythia); exact-length buckets reproduced batch 1 exactly. Since padding-induced errors would corrupt every behavioural rate, the 11 tags generated before the fix (10 panel + PB__ernie03b__fp16) were moved to private/gens/_pre_guard and ALL are regenerated. Every tag now runs padding_guard() after load: padded@native attention -> padded@eager -> zero-pad exact-length buckets -> batch 1, requiring >=7/8 rows token-identical to batch 1 (one row of slack for a legitimate bf16 near-tie). The chosen config is recorded per tag (timings.padding_guard) and stamped on every generated row (gen_batching, gen_attn_implementation). All harvest forwards use zero-pad buckets, and the decode-site A_dec harvest runs at batch 1, so no activation array is exposed to padding. The one commit made before the fix (graded_truth_s901) is retracted in the chain.",
+   "reduction_ladder_rung": null,
+   "stage": "gen"
+  },
+  {
+   "n": 17,
+   "code": "D15",
+   "id": "D15",
+   "utc": "2026-09-22T01:43:30Z",
+   "title": "Part-B lesion direction was fitted on left-padded batches before the padding fix",
+   "detail": "The a10/a05 rank-one lesion direction (A12 fit on side_sets lesion_fit, 64+64) was estimated at 00:43 with pipeline.encode_left, i.e. over LEFT-PADDED batches, before T4 exposed padding corruption on some architectures. No hidden-state candidate passed the A12 filter (KL<0.1 with a positive refusal drop); the registered fallback applied (max-drop candidate l=8, drop +0.117, KL 0.530) and both arms carry KL_FILTER_FAILED. The fit was NOT redone for time. This does not contaminate any label: a10/a05 are classified purely from graded behaviour generated under the per-tag padding guard, so their observed class is valid; a padding-distorted direction can only make the lesion WEAKER, i.e. bias the arms toward NOOP/AMBIGUOUS, never manufacture an EFFECTIVE result. Also: the fp16 arm's pre-guard stage s901 is retracted (chain record 18) and it is re-run at s921 via revision.json; partb.py's own 'retract' command was deliberately NOT used because it would have rewritten the already-chained retraction payload.",
+   "reduction_ladder_rung": null,
+   "stage": "partb"
+  },
+  {
+   "n": 18,
+   "code": "D16",
+   "id": "D16",
+   "utc": "2026-09-22T01:50:47Z",
+   "title": "Every forward-only harvest pass and every intervention cell runs padding-free (batch 1 / exact-length buckets)",
+   "detail": "An audit after T4 found that the harvest's prompt-site passes (A_prompt and its p1/p2/p3 renders via p_harvest; A_c11 and A_ams via simple_prompt_harvest) and the intervention grid (interventions.run_cell) all encoded LEFT-PADDED batches, although a zero-pad bucketing helper existed and its docstring claimed it was used. Left-padded forwards were measured to move last-token states 10-290% relative on gemma-3 and pythia, so every activation array would have been contaminated on those families. Fix: harvest_one forces batch=1 for all forward-only passes (padding-free AND a single bf16 GEMM kernel path, which also makes the T3a arm-0 identity check exact); run_cell iterates exact-token-length buckets with an assert_no_pad guard and scatters rows back to cells_32 order; A_dec runs at batch 1. Recorded per tag as meta.json harvest_batching. No array under arrays/ was produced by the padded code path except the ungated selftest directory, which is deleted before release.",
+   "reduction_ladder_rung": null,
+   "stage": "harvest"
+  },
+  {
+   "n": 19,
+   "code": "D17",
+   "id": "D17",
+   "utc": "2026-09-22T01:50:47Z",
+   "title": "Lease made FIFO within this artifact and dead holders reclaimed immediately",
+   "detail": "The generation sweep released and re-acquired the lease between tags within milliseconds, so the T3 selftest and the Part-B arm runner (polling every 10 s) starved for the whole sweep. Waiters of this workspace now hold a FIFO ticket and a grant is refused while an OLDER waiter of the same workspace is queued. A holder record whose pid is dead is now dropped at once instead of after 20 minutes (all co-tenant artifacts run on this one pod, so os.kill(pid,0) is authoritative), removing a 20-minute stall after any killed or crashed visit. Verified live: selftest HOLD, Part-B WAITING, sweep WAITING, in launch order, alongside a foreign 4.6 GB lease held by the sibling screen artifact under the physical ceiling.",
+   "reduction_ladder_rung": null,
+   "stage": "lease"
+  },
+  {
+   "n": 20,
+   "code": "D18",
+   "id": "D18",
+   "utc": "2026-09-22T01:57:23Z",
+   "title": "Padding guard: zero-pad buckets accepted whenever padded batching fails; their batch-1 agreement is a diagnostic",
+   "detail": "The guard exists to catch the MASKING bug in left-padded batches (gemma-3: 0/8 rows identical to batch 1). Exact-length buckets contain no pad token, so that bug cannot occur in them; residual disagreement with batch 1 is ordinary bf16 GEMM nondeterminism across batch shapes, and both are valid greedy decodes. The first version also required 7/8 agreement for buckets, which sent pythia-410m to batch 1 (padded 3/8) at ~5x the wall clock for no correctness gain. From the restart after pythia-410m, a family that fails padded@native and padded@eager is generated on zero-pad buckets, and bucket_agreement_with_batch1 is recorded in timings.padding_guard. pythia-410m itself was generated at batch 1 (the stricter setting), and every row is stamped with its gen_batching, so the per-tag config is auditable.",
+   "reduction_ladder_rung": null,
+   "stage": "gen"
+  },
+  {
+   "n": 21,
+   "code": "D19",
+   "id": "D19",
+   "utc": "2026-09-22T02:08:57Z",
+   "title": "Panel capped at 20 checkpoints (reduction-ladder rung 6), not 28",
+   "detail": "Measured cost after the padding fix: guard-certified generation is 3-6x slower than the padded batching it replaced (gemma-3 45s -> 280s for 236 items) and each harvest runs 104 intervention cells at about 1.0 s/cell for a 0.27B model, scaling with size. With about 177 minutes of GPU left and the sibling screen artifact co-resident on the card, 28 panel checkpoints plus the 9 Part-B arms did not fit. The panel was capped at the plan's quota of 20 (the first 20 of the FROZEN sweep order, which span 9 never-loaded families, so every quota still clears). Rungs 1 (R draws 10->5) and 2 (no C5 decode-site cells) were already in force; the C4 ladder was kept intact. The draw itself was NOT re-cut: the order is the pre-committed one and the achieved n is reported with its detectable effect size.",
+   "reduction_ladder_rung": null,
+   "stage": "time"
+  },
+  {
+   "n": 22,
+   "code": "D20",
+   "id": "D20",
+   "utc": "2026-09-22T02:17:21Z",
+   "title": "VRAM lease sized per checkpoint so this artifact's workers run concurrently inside the same 7.5 GB declaration",
+   "detail": "Every visit originally reserved the artifact's whole 7500 MiB declaration, which serialised the generation sweep, the harvest sweep and the Part-B runner even though measured peaks are far smaller (gemma-3-270m 641 MiB, ERNIE-0.3B 801/1102 MiB, EXAONE-1.2B 2634 MiB, gpt-neo-1.3B 3289 MiB: about 1.0-1.25x the bf16 weight bytes). A visit now reserves 1.5x weights + 700 MiB, clamped to [1800, 7500], and holds itself to that grant via set_per_process_memory_fraction. src/lease.py still caps the SUM over this workspace at 7500 MiB, so the declaration is unchanged and enforced; what changes is that two or three SMALL visits can hold leases at once instead of queueing. Observed immediately after the change: three of our workers holding 2355 + 2099 + 1808 = 6262 MiB of 7500, alongside a foreign 4608 MiB lease from the sibling screen artifact under the physical ceiling. Checkpoints at or above the cap still run alone.",
+   "reduction_ladder_rung": null,
+   "stage": "lease"
+  },
+  {
+   "n": 23,
+   "code": "D21",
+   "id": "D21",
+   "utc": "2026-09-22T02:26:51Z",
+   "title": "Chunk-resume collision corrupted one tag's generation; caught by the commit-time denominator assertion",
+   "detail": "Generation chunk files were named by INDEX for the current chunk size. When the sweep was restarted with a larger batch (16 -> 48, to make zero-pad buckets bigger and generation ~10x faster), the resumed tag treated the OLD 16-item chunk 0000 as the NEW 48-item chunk 0000, skipped those items and finished with 112 of 236 rows: OR_XSTEST54 27/54, HARM_XSTEST54 0/54, OR_HARDBENIGN 0/43. It was caught before any commit by judgeflow's per-set denominator assertion, which is exactly why that assertion was added. HG__tencent--Hunyuan-0.5B-Pretrain was discarded and regenerated from scratch; an audit of every other generation file confirmed 236 rows and 0 duplicates, so no other tag was affected and nothing corrupt was ever committed or harvested. Fixes: the partial directory now carries the batch in its name so layouts can never mix, and gen refuses to write GEN_DONE unless the row count equals the sum of the frozen item-set sizes.",
+   "reduction_ladder_rung": null,
+   "stage": "gen"
+  },
+  {
+   "n": 24,
+   "code": "D22",
+   "id": "D22",
+   "utc": "2026-09-22T02:28:52Z",
+   "title": "Part-B arm sysprompt failed",
+   "detail": "PB__ernie03b__sysprompt: RepositoryNotFoundError('404 Client Error. (Request ID: Root=1-6ab1e7e3-7d17ca2b0feabaa619d03353;a283feee-69b4-4f6a-aeca-917d3a7bf82a)\\n\\nRepository Not Found for url: https://huggingface.co/api/models/partb-local/ernie03b__sysprompt/revision/main.\\nPlease make sure you specified the correct `repo_id` and `repo_type`.\\nIf you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.\\nFor more details, see https://huggingface.co/docs/huggingface_hub/authentication')",
+   "reduction_ladder_rung": null,
+   "stage": "partb"
+  },
+  {
+   "n": 25,
+   "code": "harvest_failed",
+   "stage": "harvest",
+   "detail": "HG__bigscience--bloomz-3b: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.39 GiB. GPU 0 has a total capacity of 15.57 GiB of which 7.52 GiB is free. Including non-PyTorch memory, this process has 5.72 GiB memory in use. Process 59695 has 2.31 GiB memory in use. 7.13 GiB allowed; Of the al",
+   "utc": "2026-09-22T03:50:34Z"
+  },
+  {
+   "n": 26,
+   "code": "D23",
+   "id": "D23",
+   "utc": "2026-09-22T03:52:20Z",
+   "title": "Tier-3 arrays and the AMS baseline are back-filled AFTER the DONE marker; A_ams was rebuilt from the right row set",
+   "detail": "The sweep ran harvest --tier2 for wall clock, which omits A_c11, A_ams, A_prompt_p1/p2/p3. Those cannot be reconstructed without the model, so src/tier3_backfill.py adds them to already-harvested tags at batch 1 (identical numerics to the tier-1/2 arrays of the same tag) and then recomputes MANIFEST.sha256.json and meta.json. Consequence, stated plainly: for back-filled tags the DONE marker is no longer the last write, so DONE means 'the GATED harvest completed', and the per-tag meta.json records tier3_backfill with its own timings; results/manifest_verification.json re-hashes every listed file and reports which files post-date DONE. Separately, the sweep's own tier-3 block built A_ams.npy from assets/cells.json (the 96 XSTest 2x2 cells), which is the WRONG row set for the AMS instrument: ams_reimpl.ams_tier1 needs the 96 rows of ams_prompts() (3 concepts x 16 pairs x 2 polarities) in that order and raised KeyError('concept') on the cells. The back-fill writes A_ams.npy from ams_prompts() with RAW text and no chat template as the AMS code path pins, keeps the cell set as A_cells96.npy, and records ams_row_set in meta.json. ams_sigma_bs8 is NOT computed and says why: the released CLI reads padded batch-8 activations, and this artifact captures every forward padding-free, so the batch-8 variant does not exist here.",
+   "reduction_ladder_rung": null,
+   "stage": "harvest"
+  },
+  {
+   "n": 27,
+   "code": "harvest_failed",
+   "stage": "harvest",
+   "detail": "HG__bigscience--bloomz-3b: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.39 GiB. GPU 0 has a total capacity of 15.57 GiB of which 8.66 GiB is free. Including non-PyTorch memory, this process has 5.72 GiB memory in use. Process 62697 has 1.18 GiB memory in use. 7.13 GiB allowed; Of the al",
+   "utc": "2026-09-22T04:01:38Z"
+  },
+  {
+   "n": 28,
+   "code": "harvest_failed",
+   "stage": "harvest",
+   "detail": "HG__bigscience--bloomz-3b: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.39 GiB. GPU 0 has a total capacity of 15.57 GiB of which 9.75 GiB is free. Including non-PyTorch memory, this process has 5.72 GiB memory in use. Process 64490 has 86.00 MiB memory in use. 7.13 GiB allowed; Of the a",
+   "utc": "2026-09-22T04:05:13Z"
+  },
+  {
+   "n": 29,
+   "code": "D24",
+   "id": "D24",
+   "utc": "2026-09-22T04:08:42Z",
+   "title": "bigscience/bloomz-3b could not be harvested inside the artifact's own 7.5 GB VRAM declaration: achieved panel is 19 of 20",
+   "detail": "bloomz-3b is 6.00 GB of bf16 weights and its vocabulary is 250,880, which makes the per-layer logit-lens step (r_refusal/r_hedge/r_control/r_fullV_final over 256 stimuli x 31 layers) request a single 2.39 GiB allocation. Two attempts raised torch.cuda.OutOfMemoryError with 8.7 and 9.8 GiB still FREE on the card: the binding limit was this artifact's own declaration, enforced by set_per_process_memory_fraction(7500/16380) plus the lease cap, not the hardware. The declaration was NOT raised to rescue the checkpoint, and the family-exclusion rule and the order gate were not touched. Its generation and judging DID complete and its graded_truth is committed (stage s6, chained), so its behavioural row is part of the panel's behavioural table; only its activation arrays are absent. The achieved activation panel is therefore 19 checkpoints, reported with its detectable-effect-size arithmetic rather than by lowering the bar. Remaining GPU time was spent on tier-3 coverage across the 19 harvested tags instead, which improves every one of them.",
+   "reduction_ladder_rung": null,
+   "stage": "harvest"
+  },
+  {
+   "n": 30,
+   "code": "D25",
+   "id": "D25",
+   "utc": "2026-09-22T04:16:37Z",
+   "title": "The 20th panel slot is filled from the NEXT position in the frozen draw order, not by re-picking",
+   "detail": "bigscience/bloomz-3b (sweep position 16) generated and was graded and committed, but its activation harvest could not run inside the artifact's own 7.5 GB VRAM declaration (250,880-token vocabulary makes the logit-lens step request 2.39 GiB beyond the cap; see the preceding deviation). To keep the achieved activation panel at the planned 20 without weakening the declaration, the next still-eligible checkpoint in the PRE-COMMITTED sweep order was admitted: position 20, prithivMLmods/gemma-3-1b-it-abliterated, an edited child. This is order-following, not cherry-picking: the sweep order is derived from the seeded draw frozen in chain record 1 and was written before any behaviour was read, positions 20+ were always part of the 40 drawn, and no measured quantity influenced the choice. bloomz-3b's behavioural row REMAINS in the panel (committed at stage s6); it simply has no arrays. Both facts are reported.",
+   "reduction_ladder_rung": null,
+   "stage": "panel"
+  }
+ ],
+ "n": 30
+}

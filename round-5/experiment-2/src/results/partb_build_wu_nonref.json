@@ -1,0 +1,42 @@
+{
+  "arm": "wu_nonref",
+  "parent_repo": "baidu/ERNIE-4.5-0.3B-PT",
+  "parent_revision_sha": "b565cf6caebdb7a1eadf00100857b1ed5e044f12",
+  "utc": "2026-09-22T00:41:17Z",
+  "parent_weight_sha_full": "3a551b6545279a381151db1d920f8a124534dc648ae4075057941496ec405bb2",
+  "edit": {
+    "n_control_resolved": 55,
+    "n_excluded_refusal_or_hedge": 2,
+    "n_rows_edited": 53,
+    "sigma_rule": "0.02 x per-row RMS",
+    "seed": 20260921,
+    "storage_shared_lm_head_embed": true,
+    "input_embedding_changed": true,
+    "input_embedding_elements_changed": 49385,
+    "input_embedding_rows_changed": 53,
+    "non_control_rows_bit_identical": true,
+    "mean_row_rms_edited": 0.014245642349123955
+  },
+  "t_edit_s": 0.5043206214904785,
+  "tie": {
+    "config_tie_word_embeddings": true,
+    "storage_shared": true,
+    "lm_head_present": true
+  },
+  "weight_fingerprint": "ef163027ddbdc2526d89a1fb870de4bcdc347b47f22d0149062448223860dae4",
+  "weight_sha_full": "3a7d716a330bb95966417c2e5da415e0caff3e3fec269904f4cda01c14d4f005",
+  "weights_differ_from_parent": true,
+  "verify": {
+    "reload_weight_sha_full_equal": true,
+    "reload_tie": {
+      "config_tie_word_embeddings": true,
+      "storage_shared": true,
+      "lm_head_present": true
+    },
+    "weight_fingerprint": "ef163027ddbdc2526d89a1fb870de4bcdc347b47f22d0149062448223860dae4",
+    "weight_sha_full": "3a7d716a330bb95966417c2e5da415e0caff3e3fec269904f4cda01c14d4f005"
+  },
+  "t_build_s": 7.6068925857543945,
+  "tag": "PB__ernie03b__wu_nonref",
+  "weights_location": "private/partb/wu_nonref/ (deleted before the artifact finishes)"
+}

@@ -1,0 +1,459 @@
+{
+ "blindness_lint": {
+  "passed": true,
+  "scanned_files": 17122,
+  "scanned_json_keys": 357986,
+  "pattern": "(survivor|winner|rank|rho|spearman|pearson|mcnemar|score_of|(?:^|[^A-Za-z0-9])(?:W[1-8]|G[1-4]|A[1-3])$)",
+  "violations": [],
+  "allowlisted": [
+   {
+    "path": "results/panel.json",
+    "token": "rank_key",
+    "reason": "The seeded SHA-256 draw key sha256(seed|repo) that orders the panel draw. It is part of the pre-committed panel rule, ranks REPOSITORIES for selection, and is already sealed into logs/chain.jsonl record 1 -- renaming it would break the hash chain. It is not a candidate score and no measured quantity enters it."
+   },
+   {
+    "path": "results/panel_rejects.json",
+    "token": "rank_key",
+    "reason": "Same seeded SHA-256 draw key, carried on each REJECTED candidate so the reject table is auditable against the frozen rule. Selection bookkeeping over repositories, not a measured quantity and not a candidate score."
+   },
+   {
+    "path": "results/panel_rule.json",
+    "token": "rank_key",
+    "reason": "Same seeded draw key, defined in the frozen rule itself (chain record 0)."
+   }
+  ],
+  "allowlist_policy": [
+   {
+    "path": "results/panel.json",
+    "token": "rank_key",
+    "reason": "The seeded SHA-256 draw key sha256(seed|repo) that orders the panel draw. It is part of the pre-committed panel rule, ranks REPOSITORIES for selection, and is already sealed into logs/chain.jsonl record 1 -- renaming it would break the hash chain. It is not a candidate score and no measured quantity enters it."
+   },
+   {
+    "path": "results/panel_rule.json",
+    "token": "rank_key",
+    "reason": "Same seeded draw key, defined in the frozen rule itself (chain record 0)."
+   },
+   {
+    "path": "results/panel_rule.json",
+    "token": "rank_key_rule",
+    "reason": "Prose describing the seeded draw key in the frozen rule."
+   },
+   {
+    "path": "results/panel_rejects.json",
+    "token": "rank_key",
+    "reason": "Same seeded SHA-256 draw key, carried on each REJECTED candidate so the reject table is auditable against the frozen rule. Selection bookkeeping over repositories, not a measured quantity and not a candidate score."
+   }
+  ]
+ },
+ "hash_chain": {
+  "exists": true,
+  "records": 40,
+  "ok": true,
+  "errors": [],
+  "head": "dd2901e247f829ba500f9c32c84e53964318e39eb797cfa23503b93225a28fb4",
+  "order": [
+   {
+    "i": 0,
+    "utc": "2026-09-21T23:27:07Z",
+    "event": "panel_rule_frozen",
+    "payload_path": "results/panel_rule.json"
+   },
+   {
+    "i": 1,
+    "utc": "2026-09-21T23:27:15Z",
+    "event": "panel_drawn",
+    "payload_path": "results/panel.json"
+   },
+   {
+    "i": 2,
+    "utc": "2026-09-22T00:21:33Z",
+    "event": "env_verified",
+    "payload_path": "results/env_verified.json"
+   },
+   {
+    "i": 3,
+    "utc": "2026-09-22T00:22:12Z",
+    "event": "graded_truth_committed",
+    "payload_path": "results/graded_truth_s0.json"
+   },
+   {
+    "i": 4,
+    "utc": "2026-09-22T00:23:01Z",
+    "event": "item_sets_frozen",
+    "payload_path": "results/item_sets.json"
+   },
+   {
+    "i": 5,
+    "utc": "2026-09-22T00:23:59Z",
+    "event": "graded_truth_s0_retracted",
+    "payload_path": "results/graded_truth_s0_retraction.json"
+   },
+   {
+    "i": 6,
+    "utc": "2026-09-22T00:38:03Z",
+    "event": "partb_arms_declared",
+    "payload_path": "results/partb_arms.json"
+   },
+   {
+    "i": 7,
+    "utc": "2026-09-22T00:39:21Z",
+    "event": "partb_build_fp16",
+    "payload_path": "results/partb_build_fp16.json"
+   },
+   {
+    "i": 8,
+    "utc": "2026-09-22T00:41:09Z",
+    "event": "partb_build_int8wo",
+    "payload_path": "results/partb_build_int8wo.json"
+   },
+   {
+    "i": 9,
+    "utc": "2026-09-22T00:41:17Z",
+    "event": "partb_build_resave",
+    "payload_path": "results/partb_build_resave.json"
+   },
+   {
+    "i": 10,
+    "utc": "2026-09-22T00:41:17Z",
+    "event": "graded_truth_committed_s901",
+    "payload_path": "results/graded_truth_s901.json"
+   },
+   {
+    "i": 11,
+    "utc": "2026-09-22T00:41:24Z",
+    "event": "partb_build_wu_nonref",
+    "payload_path": "results/partb_build_wu_nonref.json"
+   },
+   {
+    "i": 12,
+    "utc": "2026-09-22T00:41:27Z",
+    "event": "partb_build_sysprompt",
+    "payload_path": "results/partb_build_sysprompt.json"
+   },
+   {
+    "i": 13,
+    "utc": "2026-09-22T00:43:54Z",
+    "event": "partb_lesion_fitted",
+    "payload_path": "results/partb_lesion_table.json"
+   },
+   {
+    "i": 14,
+    "utc": "2026-09-22T00:44:01Z",
+    "event": "partb_build_a10",
+    "payload_path": "results/partb_build_a10.json"
+   },
+   {
+    "i": 15,
+    "utc": "2026-09-22T00:47:05Z",
+    "event": "partb_build_a05",
+    "payload_path": "results/partb_build_a05.json"
+   },
+   {
+    "i": 16,
+    "utc": "2026-09-22T00:48:31Z",
+    "event": "partb_build_lora",
+    "payload_path": "results/partb_build_lora.json"
+   },
+   {
+    "i": 17,
+    "utc": "2026-09-22T00:50:19Z",
+    "event": "partb_build_dpo",
+    "payload_path": "results/partb_build_dpo.json"
+   },
+   {
+    "i": 18,
+    "utc": "2026-09-22T01:39:35Z",
+    "event": "graded_truth_s901_retracted",
+    "payload_path": "results/graded_truth_s901_retraction.json"
+   },
+   {
+    "i": 19,
+    "utc": "2026-09-22T01:53:45Z",
+    "event": "graded_truth_committed_s1",
+    "payload_path": "results/graded_truth_s1.json"
+   },
+   {
+    "i": 20,
+    "utc": "2026-09-22T01:53:46Z",
+    "event": "graded_truth_committed_s921",
+    "payload_path": "results/graded_truth_s921.json"
+   },
+   {
+    "i": 21,
+    "utc": "2026-09-22T01:59:14Z",
+    "event": "instrument_selftests_passed_harvest_opened",
+    "payload_path": "results/T3_GATE.json"
+   },
+   {
+    "i": 22,
+    "utc": "2026-09-22T01:59:45Z",
+    "event": "graded_truth_committed_s902",
+    "payload_path": "results/graded_truth_s902.json"
+   },
+   {
+    "i": 23,
+    "utc": "2026-09-22T02:04:19Z",
+    "event": "graded_truth_committed_s903",
+    "payload_path": "results/graded_truth_s903.json"
+   },
+   {
+    "i": 24,
+    "utc": "2026-09-22T02:08:59Z",
+    "event": "graded_truth_committed_s2",
+    "payload_path": "results/graded_truth_s2.json"
+   },
+   {
+    "i": 25,
+    "utc": "2026-09-22T02:10:13Z",
+    "event": "graded_truth_committed_s904",
+    "payload_path": "results/graded_truth_s904.json"
+   },
+   {
+    "i": 26,
+    "utc": "2026-09-22T02:26:32Z",
+    "event": "graded_truth_committed_s3",
+    "payload_path": "results/graded_truth_s3.json"
+   },
+   {
+    "i": 27,
+    "utc": "2026-09-22T02:31:41Z",
+    "event": "graded_truth_committed_s906",
+    "payload_path": "results/graded_truth_s906.json"
+   },
+   {
+    "i": 28,
+    "utc": "2026-09-22T02:32:39Z",
+    "event": "graded_truth_committed_s4",
+    "payload_path": "results/graded_truth_s4.json"
+   },
+   {
+    "i": 29,
+    "utc": "2026-09-22T02:38:03Z",
+    "event": "graded_truth_committed_s907",
+    "payload_path": "results/graded_truth_s907.json"
+   },
+   {
+    "i": 30,
+    "utc": "2026-09-22T02:49:03Z",
+    "event": "graded_truth_committed_s908",
+    "payload_path": "results/graded_truth_s908.json"
+   },
+   {
+    "i": 31,
+    "utc": "2026-09-22T03:01:43Z",
+    "event": "graded_truth_committed_s909",
+    "payload_path": "results/graded_truth_s909.json"
+   },
+   {
+    "i": 32,
+    "utc": "2026-09-22T03:06:50Z",
+    "event": "partb_classification_written",
+    "payload_path": null
+   },
+   {
+    "i": 33,
+    "utc": "2026-09-22T03:07:21Z",
+    "event": "partb_classification_written",
+    "payload_path": null
+   },
+   {
+    "i": 34,
+    "utc": "2026-09-22T03:08:14Z",
+    "event": "graded_truth_committed_s5",
+    "payload_path": "results/graded_truth_s5.json"
+   },
+   {
+    "i": 35,
+    "utc": "2026-09-22T03:23:49Z",
+    "event": "graded_truth_committed_s905",
+    "payload_path": "results/graded_truth_s905.json"
+   },
+   {
+    "i": 36,
+    "utc": "2026-09-22T03:29:00Z",
+    "event": "partb_classification_written",
+    "payload_path": null
+   },
+   {
+    "i": 37,
+    "utc": "2026-09-22T03:43:25Z",
+    "event": "graded_truth_committed_s6",
+    "payload_path": "results/graded_truth_s6.json"
+   },
+   {
+    "i": 38,
+    "utc": "2026-09-22T04:16:37Z",
+    "event": "graded_truth_committed_s7",
+    "payload_path": "results/graded_truth_s7.json"
+   },
+   {
+    "i": 39,
+    "utc": "2026-09-22T04:31:12Z",
+    "event": "partb_classification_written",
+    "payload_path": null
+   }
+  ]
+ },
+ "order_gate_audit": {
+  "checked": 29,
+  "ok": true,
+  "problems": [],
+  "tags": [
+   {
+    "tag": "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic",
+    "graded_truth_committed_utc": "2026-09-22T03:08:14Z",
+    "harvest_utc": "2026-09-22T03:08:44Z"
+   },
+   {
+    "tag": "HG__EleutherAI--gpt-neo-1.3B",
+    "graded_truth_committed_utc": "2026-09-22T02:32:39Z",
+    "harvest_utc": "2026-09-22T02:52:15Z"
+   },
+   {
+    "tag": "HG__EleutherAI--pythia-410m",
+    "graded_truth_committed_utc": "2026-09-22T02:08:59Z",
+    "harvest_utc": "2026-09-22T02:18:29Z"
+   },
+   {
+    "tag": "HG__LGAI-EXAONE--EXAONE-4.0-1.2B",
+    "graded_truth_committed_utc": "2026-09-22T02:32:39Z",
+    "harvest_utc": "2026-09-22T02:40:37Z"
+   },
+   {
+    "tag": "HG__PleIAs--Pleias-1.2b-Preview",
+    "graded_truth_committed_utc": "2026-09-22T02:32:39Z",
+    "harvest_utc": "2026-09-22T02:33:05Z"
+   },
+   {
+    "tag": "HG__baidu--ERNIE-4.5-0.3B-Base-PT",
+    "graded_truth_committed_utc": "2026-09-22T03:43:25Z",
+    "harvest_utc": "2026-09-22T03:53:12Z"
+   },
+   {
+    "tag": "HG__baidu--ERNIE-4.5-0.3B-PT",
+    "graded_truth_committed_utc": "2026-09-22T01:53:45Z",
+    "harvest_utc": "2026-09-22T02:09:16Z"
+   },
+   {
+    "tag": "HG__bigscience--bloom-1b7",
+    "graded_truth_committed_utc": "2026-09-22T03:08:14Z",
+    "harvest_utc": "2026-09-22T03:33:21Z"
+   },
+   {
+    "tag": "HG__bigscience--bloomz-560m",
+    "graded_truth_committed_utc": "2026-09-22T02:26:32Z",
+    "harvest_utc": "2026-09-22T02:27:00Z"
+   },
+   {
+    "tag": "HG__deepseek-ai--deepseek-coder-1.3b-instruct",
+    "graded_truth_committed_utc": "2026-09-22T02:32:39Z",
+    "harvest_utc": "2026-09-22T02:56:20Z"
+   },
+   {
+    "tag": "HG__hereticness--heretic_Hunyuan-0.5B-Instruct",
+    "graded_truth_committed_utc": "2026-09-22T03:08:14Z",
+    "harvest_utc": "2026-09-22T03:12:43Z"
+   },
+   {
+    "tag": "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated",
+    "graded_truth_committed_utc": "2026-09-22T02:32:39Z",
+    "harvest_utc": "2026-09-22T03:03:29Z"
+   },
+   {
+    "tag": "HG__mlabonne--gemma-3-1b-it-abliterated",
+    "graded_truth_committed_utc": "2026-09-22T03:08:14Z",
+    "harvest_utc": "2026-09-22T03:16:12Z"
+   },
+   {
+    "tag": "HG__prithivMLmods--gemma-3-1b-it-abliterated",
+    "graded_truth_committed_utc": "2026-09-22T04:16:37Z",
+    "harvest_utc": "2026-09-22T04:17:00Z"
+   },
+   {
+    "tag": "HG__tencent--Hunyuan-0.5B-Instruct",
+    "graded_truth_committed_utc": "2026-09-22T03:43:25Z",
+    "harvest_utc": "2026-09-22T03:55:25Z"
+   },
+   {
+    "tag": "HG__tencent--Hunyuan-0.5B-Pretrain",
+    "graded_truth_committed_utc": "2026-09-22T03:43:25Z",
+    "harvest_utc": "2026-09-22T03:44:51Z"
+   },
+   {
+    "tag": "HG__tencent--Hunyuan-1.8B-Pretrain",
+    "graded_truth_committed_utc": "2026-09-22T03:08:14Z",
+    "harvest_utc": "2026-09-22T03:39:55Z"
+   },
+   {
+    "tag": "HG__unsloth--gemma-3-1b-it",
+    "graded_truth_committed_utc": "2026-09-22T03:08:14Z",
+    "harvest_utc": "2026-09-22T03:26:12Z"
+   },
+   {
+    "tag": "HG__unsloth--gemma-3-270m",
+    "graded_truth_committed_utc": "2026-09-22T03:43:25Z",
+    "harvest_utc": "2026-09-22T03:50:34Z"
+   },
+   {
+    "tag": "HG__unsloth--gemma-3-270m-it",
+    "graded_truth_committed_utc": "2026-09-22T01:53:45Z",
+    "harvest_utc": "2026-09-22T02:00:13Z"
+   },
+   {
+    "tag": "PB__ernie03b__a05",
+    "graded_truth_committed_utc": "2026-09-22T02:38:03Z",
+    "harvest_utc": "2026-09-22T02:38:04Z"
+   },
+   {
+    "tag": "PB__ernie03b__a10",
+    "graded_truth_committed_utc": "2026-09-22T02:31:41Z",
+    "harvest_utc": "2026-09-22T02:31:42Z"
+   },
+   {
+    "tag": "PB__ernie03b__dpo",
+    "graded_truth_committed_utc": "2026-09-22T03:01:43Z",
+    "harvest_utc": "2026-09-22T03:01:44Z"
+   },
+   {
+    "tag": "PB__ernie03b__fp16",
+    "graded_truth_committed_utc": "2026-09-22T01:53:46Z",
+    "harvest_utc": "2026-09-22T02:16:03Z"
+   },
+   {
+    "tag": "PB__ernie03b__int8wo",
+    "graded_truth_committed_utc": "2026-09-22T01:59:45Z",
+    "harvest_utc": "2026-09-22T02:20:38Z"
+   },
+   {
+    "tag": "PB__ernie03b__lora",
+    "graded_truth_committed_utc": "2026-09-22T02:49:03Z",
+    "harvest_utc": "2026-09-22T02:49:04Z"
+   },
+   {
+    "tag": "PB__ernie03b__resave",
+    "graded_truth_committed_utc": "2026-09-22T02:04:19Z",
+    "harvest_utc": "2026-09-22T02:23:11Z"
+   },
+   {
+    "tag": "PB__ernie03b__sysprompt",
+    "graded_truth_committed_utc": "2026-09-22T03:23:49Z",
+    "harvest_utc": "2026-09-22T03:23:50Z"
+   },
+   {
+    "tag": "PB__ernie03b__wu_nonref",
+    "graded_truth_committed_utc": "2026-09-22T02:10:13Z",
+    "harvest_utc": "2026-09-22T02:25:24Z"
+   }
+  ],
+  "retracted_payloads": {
+   "results/graded_truth_s0.json": "ALL",
+   "results/graded_truth_s901.json": "ALL"
+  }
+ },
+ "private_hygiene": {
+  "private_exists": false,
+  "private_deleted": true,
+  "raw_text_leak_suspects": [],
+  "ok": true
+ }
+}

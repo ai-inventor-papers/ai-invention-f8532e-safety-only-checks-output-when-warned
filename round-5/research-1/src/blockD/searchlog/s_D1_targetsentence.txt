@@ -1,0 +1,12 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2608.05086v1
+Type: HTML
+Pattern: aggregated benchmark scores are hard to trust (1 matches in 70192 chars)
+
+--- Content ---
+
+3044:...Shah  David Demitri Africa  Note: These authors contributed equally as senior authors.  Konstantinos Voudouris  Note: These authors contributed equally as senior authors. 
+
+###### Abstract
+
+Language models differ in how safely they behave and these differences are measured by safety benchmarks. But aggregated benchmark scores are hard to trust and interpret, because benchmarks duplicate one another, correlate heavily, and models may sandbag when they detect evaluation. To address these issues, we draw on Item Response Theory (IRT), a statistical toolkit for measuring these latents from performance on items with inferred psychometric prop...

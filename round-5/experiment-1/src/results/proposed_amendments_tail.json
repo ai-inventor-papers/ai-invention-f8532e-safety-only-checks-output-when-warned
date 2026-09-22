@@ -1,0 +1,84 @@
+{
+  "utc": "2026-09-22T01:45:00.000000Z",
+  "author": "pipeline-tail build session (assemble/prescreen/freeze/join/method)",
+  "note": "Ambiguities found in results/prereg.json and src/SPEC_tail.md while building the pipeline tail. NONE of these were applied to prereg.json (which is hashed/frozen and was never edited). Each item records how the CODE resolved the ambiguity so the resolution is auditable; a human/PI should confirm or override before a real production run.",
+  "amendments": [
+    {
+      "id": "A1",
+      "area": "assemble_screen.py / screen_table.json rows[].n_prompts",
+      "issue": "Neither prereg.json nor SPEC_tail.md gives one canonical 'n_prompts' definition per candidate for this summary column (candidates draw from S32, A_c11 n=64, per-domain OR-Bench subsets, or decode-position counts of varying size).",
+      "resolution": "Used a documented best-effort fixed mapping (assemble_screen.py:N_PROMPTS) per candidate family (A1=64, A2=10, G4/W8=32, others=6/None where the formula has no simple fixed item count, e.g. G1/G2 which are norm-of-mean-vector quantities with no natural single 'n').",
+      "impact": "Cosmetic only (a reported column); does not affect any candidate value, the prescreen threshold, or the freeze ranking."
+    },
+    {
+      "id": "A2",
+      "area": "assemble_screen.py / screen_table.json rows[].band",
+      "issue": "SPEC_tail says rows carry a single 'band' field, but b*_read/b*_write are themselves fold-dependent (per-fold A/B values, cross-fit-averaged for the candidate itself).",
+      "resolution": "Stored the {'A':.,'B':.} per-fold dict as-is (from tierA bstar_read / ckpt bstar.write) rather than collapsing to one integer.",
+      "impact": "None on any statistic; only affects how the band is displayed."
+    },
+    {
+      "id": "A3",
+      "area": "assemble_screen.py / k_curve for Tier-B-sourced candidates (W1..W8, A2)",
+      "issue": "SPEC_tierB registers only k=32 for Tier-B candidates ('Tier B reports k=32 (registered) only unless time allows'); the exact JSON field name for any additional k points Tier B DOES compute is not specified.",
+      "resolution": "k_curve for Tier-B-sourced candidates is {'0':'N/A','4':'N/A','8':'N/A','16':'N/A','32':<value>,'pool':'N/A'} unless/until ckpt_<tag>.json exposes more.",
+      "impact": "Conservative (under- rather than over-reports coverage); never fabricates a non-computed point as 0."
+    },
+    {
+      "id": "A4",
+      "area": "assemble_screen.py / A1 (A1_joint) k-curve and per-row fallback",
+      "issue": "The k0_rule says k=0 is defined only for A1_prior and weights-only quantities; no rule is given for A1_joint's k-curve at other k, nor for a PANEL ROW that has A1_slope but is individually missing A1_prior (vs. the 'missing everywhere' case the prereg does address).",
+      "resolution": "(a) A1's k_curve is reported 'N/A' at every k (joint-PCA k-curve is not registered). (b) A row missing only its own A1_prior (while other rows have it) reports A1_slope for that row with flag 'A1_prior_missing_this_row: reported A1_slope', rather than treating the whole candidate as missing.",
+      "impact": "Affects display/coverage bookkeeping only; the PC1 loading itself is fit only on rows with BOTH values finite, per prereg."
+    },
+    {
+      "id": "A5",
+      "area": "assemble_screen.py / W7 fallback tier label",
+      "issue": "SPEC_tail specifies the W7c-fallback VALUE and flag ('W7_is_W7c') but not what 'tier' string a fallen-back row should carry in screen_table.json.",
+      "resolution": "Used the literal string 'A (W7c fallback)' for that row's tier field (instead of 'B').",
+      "impact": "Cosmetic. freeze.py's survivor tier-tiebreak ('Tier A before Tier B') treats any tier string starting with 'A' as Tier A, so a W7c-fallback row is correctly treated as Tier-A-priority in ties."
+    },
+    {
+      "id": "A6",
+      "area": "join.py / confirmation manifest schema",
+      "issue": "SPEC_tail explicitly states the panel_manifest.json schema is UNKNOWN until after the freeze (it lives in the blind, never-opened gen_art_experiment_2 sibling). No real manifest could be inspected in this build session.",
+      "resolution": "join.py's loader tries several plausible top-level shapes (a list, dict['checkpoints'/'rows'/'entries'/'panel'/'manifest'/'items'], or a dict keyed by tag), reads OR/OR_benign_set/HC/AMS_T1 from a nested 'graded_truth'/'outcome'/'truth' dict or the entry root, and resolves each checkpoint's array directory via a 'dir'/'harvest_dir'/'path'/'root' field or the iteration-4 harvest/<tag>/ convention. It records EVERY manifest it finds (results/confirm/manifest_schema.json) before assuming anything, and FAILS LOUDLY (SystemExit) if no checkpoint resolves to the recognised iteration-4 27-file array layout.",
+      "impact": "join.py was validated end-to-end against a SYNTHETIC fixture manifest built to this assumed shape (tests_tmp/fake_sibling/, deleted). The real manifest may differ; the loader is designed to fail loudly (not silently misread) if so, and the recorded schema file gives a human what they need to extend the loader."
+    },
+    {
+      "id": "A7",
+      "area": "join.py / Tier-A confirmation-panel scoring",
+      "issue": "Reproducing every candidate's exact cross-fitted, per-band, structural-pair-aware definition (as implemented privately inside src/tierA.py) against an EXTERNAL confirmation checkpoint, within the time budget, was not feasible.",
+      "resolution": "Implemented a documented, clearly-labelled SIMPLIFIED scorer (score_tierA_on_confirmation): a single fixed band (b=4 of 6), non-cross-fitted, all-item Cohen's-d-style H-vs-P contrast, used identically for G1/G2/G3/G4/A3/A1 when a survivor needs a Tier-A confirmation score. Every such value is tagged with a '<cand>_note' field in confirmation_table saying 'simplified all-item Cohen's d at band 4' so it is never mistaken for the registered screen definition.",
+      "impact": "The (ii)-(vii) selection-rule STATISTICS (paired margins, partial rho, McNemar, sensitivity) are implemented exactly and unit-tested; only the per-checkpoint CANDIDATE VALUE that feeds them is simplified. A real production run should replace score_tierA_on_confirmation with tierA.py's actual cross-fitted per-candidate functions before the confirmation numbers are treated as final."
+    },
+    {
+      "id": "A8",
+      "area": "join.py / Tier-B external-checkpoint scoring",
+      "issue": "SPEC_tail says 'Tier B via src/tierB.py external-checkpoint mode', but src/tierB.py does not exist in this workspace (Tier B has not been built/run yet at all -- results/screen/ has zero ckpt_*.json files).",
+      "resolution": "join.py attempts `import tierB; tierB.score_external_checkpoint(candidate, checkpoint)` and, if tierB.py or that hook is absent, marks the value None with note 'TIER_B_EXTERNAL_UNAVAILABLE: ...' rather than failing the whole join.",
+      "impact": "Any W-family or A2 survivor will show as unconfirmed (None) on the confirmation panel until src/tierB.py ships an external-checkpoint hook. Tier-A survivors are unaffected."
+    },
+    {
+      "id": "A9",
+      "area": "join.py / McNemar (iv) and sensitivity (v)",
+      "issue": "These require results/classification.json (screen-panel behavioural outcome) and a no-op/effective category+degeneracy labelling of the structural pairs in I4/assets/pairs.json. classification.json is in this session's explicit never-open list (it is an outcome file), so it could not be read or its real schema inspected even from join.py in THIS session.",
+      "resolution": "Implemented the exact statistics as pure, schema-agnostic functions (mcnemar_15_and_12, sensitivity_v) that take already-classified pair dicts, and unit-tested them on synthetic tables (join.py --self-test, all PASS). A real classification.json reader (mapping pair_id -> per-candidate alarm booleans) is a TODO left for the actual post-freeze run, which is the first time this session is permitted to open that file.",
+      "impact": "confirmation.json's 'note_scope' field states this explicitly; the McNemar/sensitivity blocks are not populated by the current end-to-end test run."
+    },
+    {
+      "id": "A10",
+      "area": "join.py / S5.4 fallback",
+      "issue": "S5.4's fallback sources (the two disclosed-upstream sealed families, and the iter_1 heldout 54-scenario XSTest split) are real files this session should not open outside of an actual post-freeze production run.",
+      "resolution": "Implemented as a documented hook (s5_4_fallback.ran=False with an explanatory note) rather than exercised against the real files in this build/test session.",
+      "impact": "Confirmed only PARTIAL/FULL labelling + MDE (S5.4's first half) is exercised; the fallback confirmation itself is not run here."
+    },
+    {
+      "id": "A11",
+      "area": "method.py / exp_gen_sol_out 'predict_*' fields for diagnostic (non-outcome) datasets",
+      "issue": "screen_table / rank_analysis / commissioned_quartet / stability / transfer_check / norm_displacement are diagnostic tables with no single 'ground truth vs prediction' pair (unlike confirmation, which naturally has observed OR vs predicted candidate values).",
+      "resolution": "For these datasets, 'output' carries the primary reported statistic and no predict_* fields are emitted. The aii-json validator accepts this (warnings only, not schema errors); confirmed via a passing --format exp_gen_sol_out run.",
+      "impact": "None on schema validity. A reviewer who wants predict_* columns on these tables can add them without changing the schema."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+ "source": "results/screen/quartet_tierA.json (array-only, iteration-2 harvest, 256-row frozen stimuli, prereg band rule)",
+ "classes": {"H": "40 XSTest harmful twins", "Bn": "their 40 benign twins", "P": "48 dolly plain-benign"},
+ "headlines": [
+  {"id": "Q1", "claim": "Abliteration ROTATES the request axis, and the rotation is near-total at mid-depth.",
+   "numbers": "|cos(F_instruct, F_abliterated)| per band B1-B6 = 0.983, 0.772, 0.362, 0.015, 0.130, 0.217; |cos(N6)| = 0.994, 0.885, 0.573, 0.005, 0.007, 0.041. SafeRL~abliterated shows the same pattern (F: 0.978, 0.761, 0.342, 0.001, 0.088, 0.115)."},
+  {"id": "Q2", "claim": "The abliterated child still separates harmful from hard-benign along ITS OWN axis, while the parent's axis has gone nearly blind on it - the direct argument for self-fitted, parent-free readouts.",
+   "numbers": "At B4, Cohen's d of H vs P for the abliterated model: 4.83 along its own F, 0.22 along the instruct model's F. (B5: 4.47 vs 2.33; B6: 4.21 vs 3.12.)"},
+  {"id": "Q3", "claim": "The official safety fine-tune does NOT move the axis; it sharpens the separation along it.",
+   "numbers": "|cos(F_instruct, F_SafeRL)| = 0.997, 0.982, 0.916, 0.932, 0.926, 0.873 (>= 0.84 in every band, reproducing iteration 4); d(H vs P) at B4 = 6.63 (SafeRL) vs 5.78 (instruct); cross-projection at B4: SafeRL scores 6.38 along the instruct axis vs 6.63 along its own."},
+  {"id": "Q4", "claim": "Instruction tuning CREATES the axis: the base model's own harmful-vs-benign direction is different and much weaker.",
+   "numbers": "|cos(F_Base, F_instruct)| = 0.527, 0.280, 0.167, 0.125, 0.091, 0.145; d(H vs P) at B4 = 1.95 (Base) vs 5.78 (instruct); |F|/mean residual norm at B4 = 0.133 (Base) vs 0.423 (instruct)."},
+  {"id": "Q5", "claim": "A NON-safety fine-tune of the same base (CohenQu STaR) rotates the axis far less than abliteration does - rotation at B4 is not a generic fine-tuning artefact.",
+   "numbers": "|cos(F_Base, F_STaR)| = 0.963, 0.847, 0.683, 0.434, 0.272, 0.391 vs |cos(F_instruct, F_abliterated)| = 0.015 at B4."},
+  {"id": "Q6", "claim": "CONTRADICTS the plan's inherited claim that abliteration 'rotates but does not shrink': at the prompt site the abliterated 4B model both rotates AND loses ~40% of the axis magnitude.",
+   "numbers": "|F| ratio (abliterated / instruct) per band = 0.933, 0.840, 0.864, 0.571, 0.578, 0.603; |F|/mean residual norm at B5 = 0.351 (abliterated) vs 0.589 (instruct). The iteration-4 figure (|N6| 1.79 vs 1.87) was a raw norm on a different item set and could not be reproduced from disk (see results/regression_check.json)."},
+  {"id": "Q7", "claim": "The 'looks alarming' and 'is harmful' axes nearly coincide in the aligned chat models and separate in the base/control models (this is candidate G1's raw material).",
+   "numbers": "|cos(F, N6)| at B4 = 0.94 (instruct), 0.94 (SafeRL), 0.82 (abliterated), 0.57 (Base), 0.63 (STaR)."}
+ ],
+ "caveat": "All five arms are > 2.2B parameters, so they are array-only here (no GPU intervention pass) and are EXCLUDED from the screen panel's correlation statistics by the prereg, exactly as registered."
+}

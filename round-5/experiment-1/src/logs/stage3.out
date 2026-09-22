@@ -1,0 +1,13 @@
+01:47:01|INFO   |=== HG__tiiuae--Falcon3-1B-Base (phase 1, draws auto)
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 652.29it/s]
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 400.93it/s]
+Loading weights:   0%|          | 0/165 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 43/165 [00:00<00:00, 427.94it/s]Loading weights:  52%|█████▏    | 86/165 [00:00<00:00, 357.69it/s]Loading weights:  75%|███████▍  | 123/165 [00:00<00:00, 317.91it/s]Loading weights: 100%|██████████| 165/165 [00:00<00:00, 409.38it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+01:49:31|INFO   |HG__tiiuae--Falcon3-1B-Base: OK t=150s vram=3.431653376 reg={'W1': 0.6777532269078584, 'W2': 1.0, 'W3': 1.0216418967875236, 'W4': 0.8858643142298656, 'W5': 0.06597102428681752, 'W6': -0.6117822026210409, 'W7': 0.39280934065885176, 'W8': 0.19546005664071098, 'A1_prior': 0.2085619688462217, 'A2': 0.350037551271617, 'A2_cos': 0.028391817763710983, 'A2_mag': 12.328817907496493}
+01:49:31|INFO   |=== F2__ref (phase 1, draws auto)
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 285.17it/s]
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 931.71it/s]
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:  20%|█▉        | 29/146 [00:00<00:00, 233.80it/s]Loading weights:  48%|████▊     | 70/146 [00:00<00:00, 272.30it/s]Loading weights:  80%|████████  | 117/146 [00:00<00:00, 330.75it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 348.05it/s]
+01:50:51|INFO   |F2__ref: OK t=79s vram=2.568863744 reg={'W1': 0.1971810064614981, 'W2': 4.0, 'W3': 1.1709961549350782, 'W4': 0.8604542026475099, 'W5': 0.15627343491849444, 'W6': -0.040907571543003673, 'W7': 0.03398569777027517, 'W8': 0.372515528895144, 'A1_prior': 0.45145493780730017, 'A2': -0.04859425177714152, 'A2_cos': -0.057849309837855974, 'A2_mag': 0.8400143737815513}
+01:50:51|INFO   |=== HG__mylesgoose--Llama-3.2-1B-Instruct-abliterated2 (phase 1, draws auto)
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 661.62it/s]

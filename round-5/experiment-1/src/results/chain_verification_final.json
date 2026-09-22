@@ -1,0 +1,72 @@
+{
+ "utc": "2026-09-22T04:37:35.133070Z",
+ "chain": {
+  "ok": true,
+  "digests_ok": true,
+  "stage_order_ok": true,
+  "monotone_utc": true,
+  "monotone_mtime": true,
+  "stages_seen": [
+   "S1",
+   "S1-amend",
+   "S1-amend",
+   "S1-amend",
+   "S2",
+   "S3a",
+   "S3b",
+   "S4",
+   "S1-amend",
+   "S5"
+  ],
+  "n_records": 10
+ },
+ "per_file": [
+  {
+   "file": "prereg.json",
+   "ok": true
+  },
+  {
+   "file": "prereg_amendments_b1.json",
+   "ok": true
+  },
+  {
+   "file": "prereg_amendments_b2.json",
+   "ok": true
+  },
+  {
+   "file": "prereg_amendments_b3.json",
+   "ok": true
+  },
+  {
+   "file": "screen_table.json",
+   "ok": true
+  },
+  {
+   "file": "prescreen.json",
+   "ok": true
+  },
+  {
+   "file": "rank_analysis.json",
+   "ok": true
+  },
+  {
+   "file": "survivor.json",
+   "ok": true
+  },
+  {
+   "file": "prereg_amendments_b4.json",
+   "ok": true
+  },
+  {
+   "file": "confirmation.json",
+   "ok": true
+  }
+ ],
+ "s3_open_audit": {
+  "path": "logs/s3_open_audit.txt",
+  "n_lines": 6,
+  "forbidden_substrings_found": [],
+  "clean": true
+ },
+ "note": "S1 = prereg (frozen before any candidate value), S1-amend = 7 amendments in 4 immutable batch files, S2 = screen table, S3a/S3b = pre-screen + effective rank in an open()-audited process, S4 = survivor freeze, S5 = the one-shot held-out join opened at the registered 04:31Z"
+}

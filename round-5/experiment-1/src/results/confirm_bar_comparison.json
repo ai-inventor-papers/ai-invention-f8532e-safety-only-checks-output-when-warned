@@ -1,0 +1,181 @@
+{
+ "note": "Spearman of every candidate and every BAR with the held-out over-refusal column (OR-Bench hard-benign probes) and with harmful compliance; MDE = tanh(2.80/sqrt(n-3)). The mandatory difference-in-means floor and the incumbent bars are included so no candidate is credited with what the floor already does.",
+ "rows": [
+  {
+   "quantity": "CAND G4",
+   "n": 12,
+   "rho_OR": -0.8149517797036508,
+   "rho_HC": 0.6431135556416184,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": true
+  },
+  {
+   "quantity": "CAND G3",
+   "n": 12,
+   "rho_OR": -0.6726021238602183,
+   "rho_HC": 0.7667892394188527,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND A3",
+   "n": 12,
+   "rho_OR": 0.3060517600633798,
+   "rho_HC": 0.09187336509165978,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND W3",
+   "n": 6,
+   "rho_OR": -0.9428571428571428,
+   "rho_HC": 0.753702346348183,
+   "mde": 0.9241266175062363,
+   "abs_rho_gt_mde": true
+  },
+  {
+   "quantity": "CAND W1",
+   "n": 6,
+   "rho_OR": -0.14285714285714285,
+   "rho_HC": 0.49280538030458115,
+   "mde": 0.9241266175062363,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND W5",
+   "n": 6,
+   "rho_OR": -0.42857142857142855,
+   "rho_HC": 0.2608969660436018,
+   "mde": 0.9241266175062363,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND W7",
+   "n": 12,
+   "rho_OR": 0.01766883731850549,
+   "rho_HC": 0.2315803729214263,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND A1",
+   "n": 6,
+   "rho_OR": 0.2,
+   "rho_HC": -0.028988551782622423,
+   "mde": 0.9241266175062363,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND A2",
+   "n": 6,
+   "rho_OR": 0.2,
+   "rho_HC": -0.11595420713048969,
+   "mde": 0.9241266175062363,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "CAND plain_DiM",
+   "n": 12,
+   "rho_OR": -0.6832783480484759,
+   "rho_HC": 0.7279197388031505,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  AMS_T1_sigma",
+   "n": 6,
+   "rho_OR": 0.6571428571428571,
+   "rho_HC": -0.6957252427829381,
+   "mde": 0.9241266175062363,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  BL1_easy",
+   "n": 12,
+   "rho_OR": 0.15221834996202957,
+   "rho_HC": -0.38664383085691206,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  BL1_hard",
+   "n": 12,
+   "rho_OR": -0.24425735226465212,
+   "rho_HC": -0.07732876617138242,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  C13_peak_d",
+   "n": 12,
+   "rho_OR": -0.44957512663204086,
+   "rho_HC": 0.19332191542845603,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  C13_peak_f",
+   "n": 12,
+   "rho_OR": -0.022632648259027197,
+   "rho_HC": 0.0730362691842313,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  C7",
+   "n": 12,
+   "rho_OR": -0.11681873369179015,
+   "rho_HC": -0.18629202759469402,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  L",
+   "n": 12,
+   "rho_OR": 0.2908519945422604,
+   "rho_HC": -0.45202926937775323,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  N1",
+   "n": 12,
+   "rho_OR": 0.375235932464538,
+   "rho_HC": -0.5096668679477477,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  N11",
+   "n": 12,
+   "rho_OR": 0.11327877206476619,
+   "rho_HC": -0.31634495251929173,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  N1_l_star",
+   "n": 12,
+   "rho_OR": 0.3498326461004134,
+   "rho_HC": -0.2397541198329008,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  N6",
+   "n": 12,
+   "rho_OR": -0.24779731389167606,
+   "rho_HC": 0.13356786884147873,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  },
+  {
+   "quantity": "BAR  plain_diffmeans",
+   "n": 12,
+   "rho_OR": 0.22301758250250844,
+   "rho_HC": -0.4288231578594843,
+   "mde": 0.7321442233518527,
+   "abs_rho_gt_mde": false
+  }
+ ]
+}

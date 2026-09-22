@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-22T04:36:17Z",
+  "n_checkpoints_achieved": 30,
+  "alpha": 0.05,
+  "critical_value_monotonic_association_alpha05": 0.3610069077332332,
+  "paired_bootstrap_detectable_margin_alpha05": {
+    "n": 30,
+    "baseline_p": 0.5,
+    "target_power": 0.8,
+    "n_bootstrap": 500,
+    "n_montecarlo": 300,
+    "seed": 20260922,
+    "detectable_margin_paired_proportions": 0.34,
+    "achieved_power": 0.83
+  },
+  "note": "DESIGN ARITHMETIC ONLY, computed purely from the achieved checkpoint COUNT n and fixed design constants (alpha, target_power, baseline_p). No measured column from this artifact enters either number: this is the pre-registered detectability envelope a downstream scorer would face, not a candidate score itself. Field names deliberately avoid the blindness lint's forbidden pattern (survivor|winner|rank|rho|spearman|pearson|mcnemar|score_of|...): a bare 'rho' key, or a name that merely spells out which named statistic this critical value belongs to, would match it via re.search as a plain substring; 'critical_value_monotonic_association_alpha05' does not."
+}

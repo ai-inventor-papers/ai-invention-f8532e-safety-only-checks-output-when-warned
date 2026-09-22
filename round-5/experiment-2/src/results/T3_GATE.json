@@ -1,0 +1,32 @@
+{
+ "utc": "2026-09-22T01:59:14Z",
+ "harvest_allowed": true,
+ "basis": "T3a-T3d instrument selftests on HG__unsloth--gemma-3-270m-it (the architecture that failed padded generation 0/8), run with the batch-1, zero-pad, prepend-hook code that every harvest uses",
+ "selftest_run_utc": "2026-09-22T01:53:15Z",
+ "T3a": {
+  "verdict": "PASS",
+  "max_rel_diff_grid_arm0_vs_plain_forward": 8.971281317826652e-07,
+  "inert_hook_bitwise_identical": true,
+  "threshold": 0.001
+ },
+ "T3b": {
+  "verdict": "PASS",
+  "ratio": 0.0008394657052122056,
+  "threshold": 0.01
+ },
+ "T3c": {
+  "verdict": "PASS",
+  "ratio": 1.0005607604980469,
+  "deviation_pct": 0.0560760498046875,
+  "threshold_pct": 1.0,
+  "context_band_mean_ratio": 0.725001335144043
+ },
+ "T3d": {
+  "verdict": "PASS",
+  "ratio_at_first_modified_index": 1.0002131462097168,
+  "deviation_pct": 0.021314620971679688,
+  "threshold_pct": 5.0
+ },
+ "T4_evidence": "Per-tag padding guard, recorded in logs/timing.json and meta.json as padding_guard: every generated tag compares its production batching against batch 1 on 8 fixed prompts before generating. The selftest's own T4 leg was SKIPPED on gemma-3 because its generation_config carries sampling defaults; those are neutralised (do_sample=False, temperature/top_p/top_k=None).",
+ "note": "Harvest is refused for ANY tag without a valid graded_truth commit regardless of this file."
+}

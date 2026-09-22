@@ -1,0 +1,327 @@
+{
+  "runs": [
+    {
+      "utc": "2026-09-22T00:34:05Z",
+      "tag": "HG__unsloth--gemma-3-270m-it",
+      "repo": "unsloth/gemma-3-270m-it",
+      "T3": {
+        "n_prompts": 32,
+        "depth": 18,
+        "bank_K": 15,
+        "T3a": {
+          "max_abs_diff_proj_vs_harvest": 18413.025390625,
+          "max_rel_diff_proj_vs_harvest": 0.9424453973770142,
+          "proj_scale": 19537.498046875,
+          "inert_hooks_fired": 8,
+          "inert_hook_bitwise_identical": true,
+          "inert_hook_max_abs_diff": 0.0,
+          "threshold": 0.001,
+          "verdict": "FAIL",
+          "note": "abs diff is against the f16-stored A_prompt, so the relative form is the meaningful one; the inert-hook leg is the exact 'a hook fires when it should not' check."
+        },
+        "T3b": {
+          "band": 4,
+          "blocks": [
+            9,
+            10,
+            11
+          ],
+          "hidden_indices_checked": [
+            10,
+            11,
+            12
+          ],
+          "mean_abs_proj_arm0": 3747.650390625,
+          "mean_abs_proj_ablated": 1308.2550048828125,
+          "ratio": 0.349086731672287,
+          "threshold": 0.01,
+          "verdict": "FAIL"
+        },
+        "T3c": {
+          "band": 4,
+          "r_draw": 1,
+          "mean_abs_proj_arm0": 3747.650390625,
+          "mean_abs_proj_control": 2821.102294921875,
+          "ratio": 0.7527655959129333,
+          "deviation_pct": 24.723440408706665,
+          "control_norm": 1.0,
+          "orthogonality_to_F": 9.313225746154785e-10,
+          "threshold_pct": 5.0,
+          "verdict": "FAIL"
+        },
+        "T3d": {
+          "first_modified_hidden_index": 10,
+          "mean_displacement_F": 0.0,
+          "mean_displacement_R": 0.0,
+          "ratio_at_first_modified_index": 0.0,
+          "deviation_pct": 100.0,
+          "accumulated_index": 12,
+          "mean_accumulated_displacement_F": 6268.2783203125,
+          "mean_accumulated_displacement_R": 8425.3125,
+          "accumulated_ratio": 1.3441190719604492,
+          "threshold_pct": 5.0,
+          "verdict": "FAIL",
+          "note": "the matching is DEFINED at the first modified layer, where the F and R cells still see the same incoming state; the accumulated figure at the end of the band is reported for context only."
+        },
+        "verdict": "FAIL"
+      },
+      "T4": {
+        "precondition_no_logits_processors": false,
+        "logits_processor_overrides": [
+          "do_sample=True",
+          "top_p=0.95",
+          "top_k=64"
+        ],
+        "n_rows": 8,
+        "max_new": 16,
+        "verdict": "SKIPPED (generation_config carries logits processors; hf_generate path used)"
+      },
+      "max_memory_allocated_mib": 542.7607421875
+    },
+    {
+      "utc": "2026-09-22T01:50:20Z",
+      "tag": "HG__unsloth--gemma-3-270m-it",
+      "repo": "unsloth/gemma-3-270m-it",
+      "T3": {
+        "n_prompts": 32,
+        "depth": 18,
+        "bank_K": 15,
+        "T3a": {
+          "max_abs_diff_proj_vs_harvest": 214.9521484375,
+          "max_rel_diff_proj_vs_harvest": 0.011002030223608017,
+          "proj_scale": 19537.498046875,
+          "inert_hooks_fired": 128,
+          "inert_hook_bitwise_identical": true,
+          "inert_hook_max_abs_diff": 0.0,
+          "threshold": 0.001,
+          "verdict": "FAIL",
+          "note": "abs diff is against the f16-stored A_prompt, so the relative form is the meaningful one; the inert-hook leg is the exact 'a hook fires when it should not' check."
+        },
+        "T3b": {
+          "band": 4,
+          "blocks": [
+            9,
+            10,
+            11
+          ],
+          "hidden_indices_checked": [
+            10,
+            11,
+            12
+          ],
+          "mean_abs_proj_arm0": 5234.3583984375,
+          "mean_abs_proj_ablated": 4.394064426422119,
+          "ratio": 0.0008394657052122056,
+          "threshold": 0.01,
+          "verdict": "PASS"
+        },
+        "T3c": {
+          "band": 4,
+          "r_draw": 1,
+          "mean_abs_proj_arm0": 5234.3583984375,
+          "mean_abs_proj_control": 3794.916748046875,
+          "ratio": 0.725001335144043,
+          "deviation_pct": 27.499866485595703,
+          "control_norm": 1.0,
+          "orthogonality_to_F": 9.313225746154785e-10,
+          "threshold_pct": 5.0,
+          "verdict": "FAIL"
+        },
+        "T3d": {
+          "first_modified_hidden_index": 10,
+          "mean_displacement_F": 3450.575439453125,
+          "mean_displacement_R": 3451.310791015625,
+          "ratio_at_first_modified_index": 1.0002131462097168,
+          "deviation_pct": 0.021314620971679688,
+          "accumulated_index": 12,
+          "mean_accumulated_displacement_F": 8282.033203125,
+          "mean_accumulated_displacement_R": 13671.548828125,
+          "accumulated_ratio": 1.6507478952407837,
+          "threshold_pct": 5.0,
+          "verdict": "PASS",
+          "note": "the matching is DEFINED at the first modified layer, where the F and R cells still see the same incoming state; the accumulated figure at the end of the band is reported for context only."
+        },
+        "verdict": "FAIL"
+      },
+      "T4": {
+        "precondition_no_logits_processors": false,
+        "logits_processor_overrides": [
+          "do_sample=True",
+          "top_p=0.95",
+          "top_k=64"
+        ],
+        "n_rows": 8,
+        "max_new": 16,
+        "verdict": "SKIPPED (generation_config carries logits processors; hf_generate path used)"
+      },
+      "max_memory_allocated_mib": 520.97998046875
+    },
+    {
+      "utc": "2026-09-22T01:53:15Z",
+      "tag": "HG__unsloth--gemma-3-270m-it",
+      "repo": "unsloth/gemma-3-270m-it",
+      "T3": {
+        "n_prompts": 32,
+        "depth": 18,
+        "bank_K": 15,
+        "T3a": {
+          "max_rel_diff_grid_arm0_vs_plain_forward": 8.971281317826652e-07,
+          "proj_scale": 19593.7734375,
+          "inert_hooks_fired": 128,
+          "inert_hook_bitwise_identical": true,
+          "inert_hook_max_abs_diff": 0.0,
+          "threshold": 0.001,
+          "verdict": "PASS",
+          "context_max_rel_diff_vs_stored_A_prompt": 0.011002030223608017,
+          "context_max_abs_diff_vs_stored_A_prompt": 214.9521484375,
+          "note": "VERDICT legs: (1) the grid's arm-0 cell, through run_cell's bucketing and scatter, reproduces a plain hook-free forward on the same 32 prompts; (2) a registered hook carrying a zero direction changes nothing, bitwise. The comparison against the STORED f16 A_prompt is context only: it is exact only when that file was produced by the current batch-1 harvest code."
+        },
+        "T3b": {
+          "band": 4,
+          "blocks": [
+            9,
+            10,
+            11
+          ],
+          "hidden_indices_checked": [
+            10,
+            11,
+            12
+          ],
+          "mean_abs_proj_arm0": 5234.3583984375,
+          "mean_abs_proj_ablated": 4.394064426422119,
+          "ratio": 0.0008394657052122056,
+          "threshold": 0.01,
+          "verdict": "PASS"
+        },
+        "T3c": {
+          "band": 4,
+          "r_draw": 1,
+          "first_modified_hidden_index": 10,
+          "mean_abs_proj_arm0_first": 3451.28369140625,
+          "mean_abs_proj_control_first": 3453.21923828125,
+          "ratio": 1.0005607604980469,
+          "deviation_pct": 0.0560760498046875,
+          "control_norm": 1.0,
+          "orthogonality_to_F": 9.313225746154785e-10,
+          "threshold_pct": 1.0,
+          "verdict": "PASS",
+          "context_band_mean_ratio": 0.725001335144043,
+          "note": "At the first modified layer a matched-displacement R edit moves the state only along r_hat, which is orthogonal to f_hat, so the F projection must be unchanged (exact up to float). Later in-band layers legitimately respond nonlinearly to the displaced state; that band-mean drift is reported as context, not as the verdict."
+        },
+        "T3d": {
+          "first_modified_hidden_index": 10,
+          "mean_displacement_F": 3450.575439453125,
+          "mean_displacement_R": 3451.310791015625,
+          "ratio_at_first_modified_index": 1.0002131462097168,
+          "deviation_pct": 0.021314620971679688,
+          "accumulated_index": 12,
+          "mean_accumulated_displacement_F": 8282.033203125,
+          "mean_accumulated_displacement_R": 13671.548828125,
+          "accumulated_ratio": 1.6507478952407837,
+          "threshold_pct": 5.0,
+          "verdict": "PASS",
+          "note": "the matching is DEFINED at the first modified layer, where the F and R cells still see the same incoming state; the accumulated figure at the end of the band is reported for context only."
+        },
+        "verdict": "PASS"
+      },
+      "T4": {
+        "precondition_no_logits_processors": false,
+        "logits_processor_overrides": [
+          "do_sample=True",
+          "top_p=0.95",
+          "top_k=64"
+        ],
+        "n_rows": 8,
+        "max_new": 16,
+        "verdict": "SKIPPED (generation_config carries logits processors; hf_generate path used)"
+      },
+      "max_memory_allocated_mib": 523.048828125
+    },
+    {
+      "utc": "2026-09-22T02:30:33Z",
+      "tag": "HG__EleutherAI--pythia-410m",
+      "repo": "EleutherAI/pythia-410m",
+      "T3": {
+        "n_prompts": 32,
+        "depth": 24,
+        "bank_K": 15,
+        "T3a": {
+          "max_rel_diff_grid_arm0_vs_plain_forward": 8.410017358073674e-07,
+          "proj_scale": 870.8922119140625,
+          "inert_hooks_fired": 128,
+          "inert_hook_bitwise_identical": true,
+          "inert_hook_max_abs_diff": 0.0,
+          "threshold": 0.001,
+          "verdict": "PASS",
+          "context_max_rel_diff_vs_stored_A_prompt": 0.0,
+          "context_max_abs_diff_vs_stored_A_prompt": 0.0,
+          "note": "VERDICT legs: (1) the grid's arm-0 cell, through run_cell's bucketing and scatter, reproduces a plain hook-free forward on the same 32 prompts; (2) a registered hook carrying a zero direction changes nothing, bitwise. The comparison against the STORED f16 A_prompt is context only: it is exact only when that file was produced by the current batch-1 harvest code."
+        },
+        "T3b": {
+          "band": 4,
+          "blocks": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "hidden_indices_checked": [
+            13,
+            14,
+            15,
+            16
+          ],
+          "mean_abs_proj_arm0": 867.4668579101562,
+          "mean_abs_proj_ablated": 0.03889875113964081,
+          "ratio": 4.484177043195814e-05,
+          "threshold": 0.01,
+          "verdict": "PASS"
+        },
+        "T3c": {
+          "band": 4,
+          "r_draw": 1,
+          "first_modified_hidden_index": 13,
+          "mean_abs_proj_arm0_first": 868.4224853515625,
+          "mean_abs_proj_control_first": 869.2289428710938,
+          "ratio": 1.0009286403656006,
+          "deviation_pct": 0.0928640365600586,
+          "control_norm": 1.0,
+          "orthogonality_to_F": 9.313225746154785e-10,
+          "threshold_pct": 1.0,
+          "verdict": "PASS",
+          "context_band_mean_ratio": 1.0027697086334229,
+          "note": "At the first modified layer a matched-displacement R edit moves the state only along r_hat, which is orthogonal to f_hat, so the F projection must be unchanged (exact up to float). Later in-band layers legitimately respond nonlinearly to the displaced state; that band-mean drift is reported as context, not as the verdict."
+        },
+        "T3d": {
+          "first_modified_hidden_index": 13,
+          "mean_displacement_F": 868.4293212890625,
+          "mean_displacement_R": 868.3489379882812,
+          "ratio_at_first_modified_index": 0.9999074339866638,
+          "deviation_pct": 0.009256601333618164,
+          "accumulated_index": 16,
+          "mean_accumulated_displacement_F": 866.7880859375,
+          "mean_accumulated_displacement_R": 3456.3740234375,
+          "accumulated_ratio": 3.987565279006958,
+          "threshold_pct": 5.0,
+          "verdict": "PASS",
+          "note": "the matching is DEFINED at the first modified layer, where the F and R cells still see the same incoming state; the accumulated figure at the end of the band is reported for context only."
+        },
+        "verdict": "PASS"
+      },
+      "T4": {
+        "precondition_no_logits_processors": true,
+        "logits_processor_overrides": [],
+        "n_rows": 8,
+        "max_new": 16,
+        "shrink_vs_generate_rows_identical": "8/8",
+        "shrink_vs_generate_pass": true,
+        "batch16_vs_batch1_rows_identical": "2/8",
+        "batch16_vs_batch1_pass": false,
+        "verdict": "FAIL"
+      },
+      "max_memory_allocated_mib": 818.0654296875
+    }
+  ],
+  "utc": "2026-09-22T02:33:09Z"
+}

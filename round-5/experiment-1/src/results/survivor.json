@@ -1,0 +1,253 @@
+{
+ "utc": "2026-09-22T03:06:19.289074Z",
+ "survivors": [
+  {
+   "candidate": "A2",
+   "rho_BL1_easy": -0.05728871242200794,
+   "tier": "mixed/Tier-B",
+   "band_rule": "B5 (REGISTERED, not searched: no harmful text may choose it)",
+   "site": "last token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint + prereg d_candidates.A2",
+   "n_prompts": 11,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.3650261164278171,
+    "hi": 0.25199553187069734,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 42,
+   "prescreen_mde": 0.4205490285079086,
+   "rank": 1
+  },
+  {
+   "candidate": "A1",
+   "rho_BL1_easy": 0.12129439236299253,
+   "tier": "mixed/Tier-B",
+   "band_rule": "b*_read",
+   "site": "last token",
+   "expected_sign": {
+    "HC": "- (joint)",
+    "OR": "+ (joint, prior); - (slope)"
+   },
+   "scoring_ref": "src/assemble_screen.py::compute_a1_joint (PC1 of Tier-A A1_slope + Tier-B A1_prior) + prereg d_candidates.A1",
+   "n_prompts": 97,
+   "flags": [
+    "sign_unstable (<80% draw agreement)"
+   ],
+   "prescreen_ci": {
+    "lo": -0.19543491950634478,
+    "hi": 0.45116471967112687,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 48,
+   "prescreen_mde": 0.3947372700961405,
+   "rank": 2
+  },
+  {
+   "candidate": "G4",
+   "rho_BL1_easy": 0.15903169778549717,
+   "tier": "Tier-A-only",
+   "band_rule": "b*_read",
+   "site": "last prompt token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierA.py::run_tag + prereg d_candidates.G4",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.13167691170366763,
+    "hi": 0.4164639335100501,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 48,
+   "prescreen_mde": 0.3947372700961405,
+   "rank": 3
+  },
+  {
+   "candidate": "W2",
+   "rho_BL1_easy": 0.20292808368214757,
+   "tier": "mixed/Tier-B",
+   "band_rule": "bands 1..5 (B6 excluded: ablating the read band trivially removes the readout)",
+   "site": "last prompt token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint + prereg d_candidates.W2",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.048622900313348816,
+    "hi": 0.43667409376429206,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 42,
+   "prescreen_mde": 0.4205490285079086,
+   "rank": 4
+  },
+  {
+   "candidate": "W3",
+   "rho_BL1_easy": 0.22656346499806435,
+   "tier": "mixed/Tier-B",
+   "band_rule": "B4 (REGISTERED, not searched)",
+   "site": "ALL positions vs LAST prompt token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint + prereg d_candidates.W3",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.12924839942086955,
+    "hi": 0.5411588810968124,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 42,
+   "prescreen_mde": 0.4205490285079086,
+   "rank": 5
+  },
+  {
+   "candidate": "W7",
+   "rho_BL1_easy": -0.25401650021710814,
+   "tier": "mixed/Tier-B",
+   "band_rule": "b*_write",
+   "site": "last prompt token AND every generated position (hooks live during greedy decoding)",
+   "expected_sign": {
+    "HC": "- (W7); - (W7c)",
+    "OR": "+ (W7); - (W7c)"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint (or src/tierA.py::run_tag W7c fallback -- see flags) + prereg d_candidates.W7",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.47462935244154675,
+    "hi": -0.0034430976981330397,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 48,
+   "prescreen_mde": 0.3947372700961405,
+   "rank": 6
+  },
+  {
+   "candidate": "A3",
+   "rho_BL1_easy": -0.2935172269983606,
+   "tier": "Tier-A-only",
+   "band_rule": "b*_read",
+   "site": "last token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierA.py::run_tag + prereg d_candidates.A3",
+   "n_prompts": 170,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.48923429086463605,
+    "hi": -0.009589887809842632,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 48,
+   "prescreen_mde": 0.3947372700961405,
+   "rank": 7
+  },
+  {
+   "candidate": "W4",
+   "rho_BL1_easy": 0.3125253713868267,
+   "tier": "mixed/Tier-B",
+   "band_rule": "b*_write",
+   "site": "last prompt token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint + prereg d_candidates.W4",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.025626230773738438,
+    "hi": 0.5792402595726285,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 42,
+   "prescreen_mde": 0.4205490285079086,
+   "rank": 8
+  },
+  {
+   "candidate": "W1",
+   "rho_BL1_easy": -0.38238392350700917,
+   "tier": "mixed/Tier-B",
+   "band_rule": "b*_write (registered scalar) + full 6-band curve printed (B6 trivially removes the readout itself)",
+   "site": "last prompt token, every block of band b",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint + prereg d_candidates.W1",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": -0.6341370269568518,
+    "hi": -0.04939579779429112,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 42,
+   "prescreen_mde": 0.4205490285079086,
+   "rank": 9
+  },
+  {
+   "candidate": "G3",
+   "rho_BL1_easy": 0.3853838840611105,
+   "tier": "Tier-A-only",
+   "band_rule": "b*_read",
+   "site": "last prompt token",
+   "expected_sign": {
+    "HC": "-",
+    "OR": "+"
+   },
+   "scoring_ref": "src/tierA.py::run_tag + prereg d_candidates.G3",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": 0.09889093614354387,
+    "hi": 0.5913927407194414,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 48,
+   "prescreen_mde": 0.3947372700961405,
+   "rank": 10
+  },
+  {
+   "candidate": "W5",
+   "rho_BL1_easy": 0.4750830564784053,
+   "tier": "mixed/Tier-B",
+   "band_rule": "b*_write",
+   "site": "last prompt token",
+   "expected_sign": {
+    "HC": "+",
+    "OR": "-"
+   },
+   "scoring_ref": "src/tierB.py::run_checkpoint + prereg d_candidates.W5",
+   "n_prompts": 32,
+   "flags": [],
+   "prescreen_ci": {
+    "lo": 0.18837853396058568,
+    "hi": 0.6716181576814142,
+    "n_boot_ok": 2000
+   },
+   "prescreen_n": 42,
+   "prescreen_mde": 0.4205490285079086,
+   "rank": 11
+  }
+ ],
+ "n_survivors": 11,
+ "n_prescreen_kept": 11,
+ "n_prescreen_dropped": 4,
+ "rank_analysis_verdict": "P1 NOT supported by the rank structure: erank_entropy=7.158 (threshold <=1.5), |cos(leading ckpt singvec, z(BL1_easy))|=0.645 (threshold >=0.8)"
+}

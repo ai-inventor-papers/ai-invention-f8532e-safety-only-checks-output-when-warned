@@ -1,0 +1,277 @@
+{
+ "panel": {
+  "rows": 48,
+  "independent_lineages": 7,
+  "tierB": {
+   "OK": 42,
+   "INTERVENTION_MISSING": 6,
+   "reason": "LoRA/DPO adapters are not on disk (would need retraining)"
+  },
+  "quartet_block": "Qwen3-4B Base/instruct/SafeRL/mlabonne-abliterated + CohenQu STaR control, array-only, excluded from screen statistics"
+ },
+ "prescreen": {
+  "threshold": "|Spearman vs BL1_easy| >= 0.50 -> DROPPED",
+  "dropped": {
+   "W6": 0.5536828457985576,
+   "W8": 0.6149169758674657,
+   "G1": -0.7133239601007143,
+   "G2": 0.7451406628423051
+  },
+  "kept": {
+   "W1": -0.38238392350700917,
+   "W2": 0.20292808368214757,
+   "W3": 0.22656346499806435,
+   "W4": 0.3125253713868267,
+   "W5": 0.4750830564784053,
+   "W7": -0.25401650021710814,
+   "G3": 0.3853838840611105,
+   "G4": 0.15903169778549717,
+   "A1": 0.12129439236299253,
+   "A2": -0.05728871242200794,
+   "A3": -0.2935172269983606
+  },
+  "n_dropped": 4,
+  "n_kept": 11
+ },
+ "effective_rank": {
+  "full_panel_all_candidates": {
+   "n_candidates": 15,
+   "n_checkpoints": 48,
+   "n_imputed": 48,
+   "erank_entropy": 7.158055694551095,
+   "erank_participation": 5.316231986909411,
+   "erank_entropy_partialled_BL1": 7.602984749925749,
+   "cos_leading_with_BL1_easy": null
+  },
+  "tier_A_only_full_panel": {
+   "n_candidates": 5,
+   "n_checkpoints": 48,
+   "n_imputed": 0,
+   "erank_entropy": 2.934190608164508,
+   "erank_participation": 2.2284384552420726,
+   "erank_entropy_partialled_BL1": 3.3509877352635637,
+   "cos_leading_with_BL1_easy": null
+  },
+  "complete_tierB_coverage": {
+   "n_candidates": 15,
+   "n_checkpoints": 42,
+   "n_imputed": 0,
+   "erank_entropy": 6.242528768016961,
+   "erank_participation": 4.662787772675943,
+   "erank_entropy_partialled_BL1": 6.4977283730102915,
+   "cos_leading_with_BL1_easy": null
+  }
+ },
+ "rank_verdict": "P1 NOT supported by the rank structure: erank_entropy=7.158 (threshold <=1.5), |cos(leading ckpt singvec, z(BL1_easy))|=0.645 (threshold >=0.8)",
+ "survivors_ranked": [
+  {
+   "rank": 1,
+   "candidate": "A2",
+   "rho_BL1_easy": -0.05728871242200794,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  },
+  {
+   "rank": 2,
+   "candidate": "A1",
+   "rho_BL1_easy": 0.12129439236299253,
+   "tier": "mixed/Tier-B",
+   "flags": [
+    "sign_unstable (<80% draw agreement)"
+   ]
+  },
+  {
+   "rank": 3,
+   "candidate": "G4",
+   "rho_BL1_easy": 0.15903169778549717,
+   "tier": "Tier-A-only",
+   "flags": []
+  },
+  {
+   "rank": 4,
+   "candidate": "W2",
+   "rho_BL1_easy": 0.20292808368214757,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  },
+  {
+   "rank": 5,
+   "candidate": "W3",
+   "rho_BL1_easy": 0.22656346499806435,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  },
+  {
+   "rank": 6,
+   "candidate": "W7",
+   "rho_BL1_easy": -0.25401650021710814,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  },
+  {
+   "rank": 7,
+   "candidate": "A3",
+   "rho_BL1_easy": -0.2935172269983606,
+   "tier": "Tier-A-only",
+   "flags": []
+  },
+  {
+   "rank": 8,
+   "candidate": "W4",
+   "rho_BL1_easy": 0.3125253713868267,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  },
+  {
+   "rank": 9,
+   "candidate": "W1",
+   "rho_BL1_easy": -0.38238392350700917,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  },
+  {
+   "rank": 10,
+   "candidate": "G3",
+   "rho_BL1_easy": 0.3853838840611105,
+   "tier": "Tier-A-only",
+   "flags": []
+  },
+  {
+   "rank": 11,
+   "candidate": "W5",
+   "rho_BL1_easy": 0.4750830564784053,
+   "tier": "mixed/Tier-B",
+   "flags": []
+  }
+ ],
+ "stability": {},
+ "lineage_cluster_sensitivity": {
+  "A1": {
+   "rho": 0.12129439236299253,
+   "cluster_ci95": [
+    -0.30182987509713044,
+    0.7817638266068759
+   ]
+  },
+  "A2": {
+   "rho": -0.05728871242200794,
+   "cluster_ci95": [
+    -0.7590892398090342,
+    0.2860123288702557
+   ]
+  },
+  "A3": {
+   "rho": -0.29253992213599095,
+   "cluster_ci95": [
+    -0.7211602718819963,
+    0.3134578239529007
+   ]
+  },
+  "G1": {
+   "rho": -0.7133239601007143,
+   "cluster_ci95": [
+    -0.805265225822907,
+    -0.268369701089584
+   ]
+  },
+  "G2": {
+   "rho": 0.7451406628423051,
+   "cluster_ci95": [
+    0.21468382931278224,
+    0.7973693148507048
+   ]
+  },
+  "G3": {
+   "rho": 0.3853838840611105,
+   "cluster_ci95": [
+    -0.32817323225766576,
+    0.692254591103197
+   ]
+  },
+  "G4": {
+   "rho": 0.15903169778549717,
+   "cluster_ci95": [
+    -0.36866116862607473,
+    0.6611694152923538
+   ]
+  },
+  "W1": {
+   "rho": -0.38238392350700917,
+   "cluster_ci95": [
+    -0.5973873722994474,
+    0.1701710227104224
+   ]
+  },
+  "W2": {
+   "rho": 0.20292808368214757,
+   "cluster_ci95": [
+    -0.20177349349279025,
+    0.664205282540407
+   ]
+  },
+  "W3": {
+   "rho": 0.22656346499806435,
+   "cluster_ci95": [
+    -0.551232923944993,
+    0.6829928757414248
+   ]
+  },
+  "W4": {
+   "rho": 0.3125253713868267,
+   "cluster_ci95": [
+    -0.3660716087134761,
+    0.43777589090026325
+   ]
+  },
+  "W5": {
+   "rho": 0.4750830564784053,
+   "cluster_ci95": [
+    -0.16595706132801885,
+    0.7293577981651376
+   ]
+  },
+  "W6": {
+   "rho": 0.5536828457985576,
+   "cluster_ci95": [
+    0.04017467248908297,
+    0.7171316479540878
+   ]
+  },
+  "W7": {
+   "rho": -0.25401650021710814,
+   "cluster_ci95": [
+    -0.49218670207333265,
+    0.078032449137265
+   ]
+  },
+  "W8": {
+   "rho": 0.6149169758674657,
+   "cluster_ci95": [
+    -0.07214711744713624,
+    0.8449674707789168
+   ]
+  }
+ },
+ "a3_domain_decomposition": {
+  "n_domains": 3,
+  "domains_common": [
+   "deception",
+   "illegal",
+   "violence"
+  ],
+  "var_within_checkpoint": 0.3818415954248536,
+  "var_between_checkpoints": 0.6931803586039347,
+  "ratio_within_over_between": 0.5508546090282803,
+  "A3_wins_outright (within > between)": false
+ },
+ "patching_validation_B4_spearman_patch_vs_W1": {
+  "F1__ref": 0.527,
+  "F2__ref": -0.536,
+  "HG__huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2": 0.4
+ },
+ "hashes": {
+  "prereg": "689216f41af9cff6bdd3160bd3a80d6d268a73cafffa1d311973f86f2fa81260",
+  "survivor": "8f0b7db5e0bbcbd903b38454fff6ad8fb0069bb2f402e24394af9dc2b3a3dc5b",
+  "screen_table": "46d05156140a8ed7f51aa0ee62cbcd42a9e18738401d16e07381791cacf9e86f"
+ }
+}

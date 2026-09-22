@@ -1,0 +1,152 @@
+{
+ "date": "2026-09-22",
+ "note": "Block 0 dependency intake. Read-only sources: iter-2, iter-3 and iter-4 gen_art_research_1 workspaces (254 passages already verified there) plus iter-4 gen_art_experiment_1/results/ams_validation.json. This lane's job is the DELTA, not a re-run.",
+ "verified_claims": [
+  {
+   "claim": "AMS (arXiv:2608.05578) is the incumbent bar: Tier-1 reference-free, 16 contrastive pairs per concept, last prompt token at 40-80% depth, 14 checkpoints over 4 families including 2 abliterated and 3 uncensored; sigma predicts JailbreakBench compliance at Pearson r=-0.546 (p=0.043) while Spearman is not significant (rho=-0.423, p=0.13); LOO threshold accuracy 71%.",
+   "source_iter": 3,
+   "url": "https://arxiv.org/pdf/2608.05578",
+   "reverify_required": false
+  },
+  {
+   "claim": "AMS code facts pinned at code-line level in iter-4 (layer grid int(0.4L)..int(0.8L) with in-sample argmax; hidden_states[:,-1,:]; no chat template; pooled_std=sqrt((var+ + var-)/2); fp16 default with CPU fp32 override; Tier-2 README 0.7 vs code 0.8; model_hash always None).",
+   "source_iter": 4,
+   "url": "https://github.com/GoogleCloudPlatform/activation-model-scanner",
+   "reverify_required": true
+  },
+  {
+   "claim": "2609.18471 'First Token Matters' CLOSES over-refusal-AS-AN-OUTCOME (XSTest, DeepSeek-Chat judge, per model in Table 4), a Logit-Lens baseline, a decode-site readout at generated tokens and two-sided causal steering -- but never tests a no-op.",
+   "source_iter": 4,
+   "url": "https://arxiv.org/abs/2609.18471",
+   "reverify_required": true
+  },
+  {
+   "claim": "2609.04721 closes XSTest + OR-Bench-hard over-refusal with matched-random controls (46.3% / 47.5% at a 21% FPR).",
+   "source_iter": 4,
+   "url": "https://arxiv.org/abs/2609.04721",
+   "reverify_required": true
+  },
+  {
+   "claim": "Duan 2606.15980 freezes probes (incl. an XSTest refusal-compliance probe) across 12 quantisation/LoRA/QLoRA updates on Qwen2.5-7B / Gemma-2-2B; scores per-input AUC, not a per-checkpoint score, and does not grade behaviour.",
+   "source_iter": 4,
+   "url": "https://arxiv.org/abs/2606.15980",
+   "reverify_required": true
+  },
+  {
+   "claim": "Hurtado 2607.01854 is REFERENCE-ANCHORED on both its signals ('The audit rests entirely on the reference'), 37 benign fine-tunes, FPR 0.11.",
+   "source_iter": 2,
+   "url": "https://arxiv.org/abs/2607.01854",
+   "reverify_required": false
+  },
+  {
+   "claim": "Galeone 2606.24952 publishes a per-checkpoint weight-computable detection-vs-control cosine over four models (0.12/0.20/0.16/0.13; 0.1197 vs 0.1200 across instruction tuning) and concludes it is 'not a predictor of how steerable a behavior is'. No abliterated checkpoint (grep abliterat|uncensor = 0 matches).",
+   "source_iter": 2,
+   "url": "https://arxiv.org/abs/2606.24952",
+   "reverify_required": true
+  },
+  {
+   "claim": "N-GLARE (ACL 2026 Long 1334) already illustrates JSS on 'RL-aligned, base, and safety-removed versions of Qwen3-4B'; Figure 7 DOES print layer-group Pearson/Spearman couplings of JSS with unsafe rate and refusal rate across DPO steps; still no code and no cross-model tau. 'N-GLARE has no correlations' is FALSE and may not be said. Its Refusal Rate is keyword refusal on HARMFUL prompts, so it is NOT over-refusal.",
+   "source_iter": 3,
+   "url": "https://arxiv.org/abs/2511.14195",
+   "reverify_required": false
+  },
+  {
+   "claim": "Basu 2603.18353: probes at 98.2% AUROC vs 65/144 detected; the zero-corrections-and-zero-disruptions figure is the SAE arm ONLY; Arm 1 corrected 17/85 and disrupted 25/47; TSV corrected 19/79 and disrupted 4/65. This is the knowledge-action gap and is a cited PREMISE, never a finding.",
+   "source_iter": 2,
+   "url": "https://arxiv.org/abs/2603.18353",
+   "reverify_required": false
+  },
+  {
+   "claim": "The '0.016 consecutive-layer cosine' figure is UNSOURCED across 282 repo files and 3 PDFs. DELETE it. Do NOT substitute Galeone's 0.12-0.20, which are that paper's detection-vs-control cosines over four models and mean something else.",
+   "source_iter": 4,
+   "url": "n/a",
+   "reverify_required": false
+  },
+  {
+   "claim": "AMS padding hazard: tokenizer(batch, padding=True) with no padding_side plus a hidden_states[:,-1,:] hook. Iteration 4 could only INFER it.",
+   "source_iter": 4,
+   "url": "https://github.com/GoogleCloudPlatform/activation-model-scanner",
+   "reverify_required": true
+  }
+ ],
+ "open_questions": [
+  {
+   "question": "Has anyone already computed redundancy / self-repair / backup behaviour as a PER-CHECKPOINT SCALAR characterising a model?",
+   "why_still_open": "The mechanistic-interpretability handbook is provably silent (0 matches on self-repair, hydra, backup head, redundan, compensat, ablation-induced; positive controls: sparse autoencoder 8, steering 16, circuit 29, patching 11), and its own directive says map-silence means not-yet-checked with a measured base rate of 11/11 unchecked lanes turning out occupied. No iteration has searched the CIRCUITS literature by name."
+  },
+  {
+   "question": "Is over-refusal still unused as the TARGET a per-checkpoint internal readout is validated against?",
+   "why_still_open": "Iteration 4 found it OPEN but NARROWER; two September-2026 papers report over-refusal as an outcome of their own defence, which is a different thing, and the 2026-09-01..22 window was not covered."
+  },
+  {
+   "question": "Has anyone published, in either direction, that cheap single-model internal safety readouts are effectively one-dimensional, or run a factor-analysis / effective-rank treatment of a FAMILY of internal safety scores?",
+   "why_still_open": "Never asked in iterations 1-4. The nearest known neighbour, IRT for AI Safety 2608.05086, is a factor analysis of OUTPUT scores."
+  }
+ ],
+ "must_not_claim_seed": [
+  "a first cross-family few-prompt activation metric (AMS 2608.05578)",
+  "a first internal scoring of abliterated checkpoints",
+  "'reference-free' or '<=16 prompts' as novelty (AMS)",
+  "Recognition/Execution naming (Orgad 2604.09544; 2603.05773)",
+  "recognition surviving abliteration",
+  "any weights-only statistic (Jorak; 2607.01854; OBLITERATUS)",
+  "'N-GLARE has no correlations' (false)",
+  "first readout under quantisation / model updates (Duan 2606.15980; AMS; Aligned Probing 2503.13390)",
+  "first benign-fine-tune false-positive analysis (Hurtado 2607.01854, FPR 0.11)",
+  "first decode-site / generated-token readout (Mitra 2606.29441; 2609.18471)",
+  "first logit(-lens)-versus-activation comparison (Galeone 2606.24952; 2609.18471)",
+  "first matched-random-direction control (2609.04721; 2606.08044)",
+  "'logit metrics are known to be template-sensitive while behaviour is fixed' (no source exists)",
+  "'AMS Tier-2 verifies model identity by hashing weights' (model_hash is an unimplemented TODO)",
+  "'AMS applies the chat template' (it does not)",
+  "the 0.016 consecutive-layer cosine figure (unsourced, DELETE)",
+  "'N-GLARE measures over-refusal' (its RR is keyword refusal on harmful prompts)"
+ ],
+ "bib_defects": [
+  {
+   "entry_key": "(none present)",
+   "defect": "references_verified.bib contains NEITHER a JailbreakBench NOR a HarmBench entry. The reviewer's premise that an existing entry 'attributes JailbreakBench to Mazeika' does not hold against this file; the required action is therefore ADD BOTH, correctly attributed, not FIX ONE.",
+   "required_action": "verify and add"
+  },
+  {
+   "entry_key": "Spagliardi2026",
+   "defect": "Does not exist in the bib and the reviewer supplies no id. Under no circumstances fabricate it.",
+   "required_action": "resolve or record NOT_FOUND and substitute FonsecaRivera2026 (2608.05086) with a loud name-mismatch flag"
+  },
+  {
+   "entry_key": "Li2023",
+   "defect": "iter-4 recommended PRUNE; the reviewer asks for a KEEP/PRUNE ruling with a section.",
+   "required_action": "one final ruling"
+  },
+  {
+   "entry_key": "Wei2023",
+   "defect": "iter-4 recommended PRUNE; reviewer asks for a ruling.",
+   "required_action": "one final ruling"
+  },
+  {
+   "entry_key": "Meng2022",
+   "defect": "iter-4 recommended PRUNE.",
+   "required_action": "one final ruling"
+  },
+  {
+   "entry_key": "Yuan2024",
+   "defect": "iter-4 recommended PRUNE.",
+   "required_action": "one final ruling"
+  },
+  {
+   "entry_key": "Yamaguchi2025",
+   "defect": "Already resolved by iter-4 = 2507.03167 (Kureha Yamaguchi, Benjamin Etheridge, Andy Arditi; ICML'25 R2FM). Needs a KEEP/PRUNE ruling only.",
+   "required_action": "one final ruling"
+  },
+  {
+   "entry_key": "Wollschlager2025",
+   "defect": "ALREADY PRESENT and corrected by iter-4 (2502.17420, ICML 2025, umlaut fixed). The reviewer's 'add it' is already satisfied; what is still owed is the list of draft sites where refusal is treated as a single direction.",
+   "required_action": "keep; supply cite sites"
+  },
+  {
+   "entry_key": "(base file)",
+   "defect": "The prior session in THIS workspace copied blockC/bib_verified.bib (47 entries) instead of the final references_verified.bib (54), dropping Duan2026, YangFirstToken2026, Bosco2026, Kadadekar2026, JiangChatBug2025, Prasad2026 and Ferrara2026 -- including the Duan and First-Token entries that Block T depends on.",
+   "required_action": "REBASED in this session onto references_verified.bib (54 entries); the 47-entry file is preserved at blockB/references_iter5_prior_session_base47.bib"
+  }
+ ]
+}

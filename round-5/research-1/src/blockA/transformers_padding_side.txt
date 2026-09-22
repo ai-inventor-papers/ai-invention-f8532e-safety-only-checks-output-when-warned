@@ -1,0 +1,24 @@
+URL: https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/tokenization_utils_base.py
+Type: HTML
+Pattern: padding_side *[:=] *"(right|left)"|padding_side = kwargs.pop (1 matches in 147189 chars)
+
+--- Content ---
+
+41380:...ax_len if provided model_max_length = kwargs.pop("model_max_length", kwargs.pop("max_len", None)) self.model_max_length = model_max_length if model_max_length is not None else VERY_LARGE_INTEGER self.padding_side = kwargs.pop("padding_side", self.padding_side) if self.padding_side not in ["right", "left"]: raise ValueError( f"Padding side should be selected between 'right' and 'left', current value: {self.padding_side}" )...
+URL: https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/tokenization_utils_base.py
+Type: HTML
+Pattern: padding_side (35 matches in 147189 chars)
+
+--- Content ---
+
+30632:..._to_multiple_of (`int`, *optional*): If set will pad the sequence to a multiple of the provided value. Requires `padding` to be activated. This is especially useful to enable the use of Tensor Cores on NVIDIA hardware with compute capability `>= 7.5` (Volta). padding_side (`str`, *optional*): The side on which the model should have padding applied. Should be selected between ['right', 'left']. Default value is picked from the class attribute of the same name. return_tensors (`str` or [`~utils.TensorType`], *optional*): If set,...
+--
+34654:..., the low-level being the `short-cut-names` of the pretrained models with, as associated values, the `url` to the associated pretrained vocabulary file. \- **model_input_names** (`list[str]`) -- A list of inputs expected in the forward pass of the model. \- **padding_side** (`str`) -- The default value for the side on which the model should have padding applied. Should be `'right'` or `'left'`. \- **truncation_side** (`str`) -- The default value for the side on which the model should have truncation applied. Should be `'right'...
+--
+35348:... loaded with [`~tokenization_utils_base.PreTrainedTokenizerBase.from_pretrained`], this will be set to the value stored for the associated model in `max_model_input_sizes` (see above). If no value is provided, will default to VERY_LARGE_INTEGER (`int(1e30)`). padding_side (`str`, *optional*): The side on which the model should have padding applied. Should be selected between ['right', 'left']. Default value is picked from the class attribute of the same name. truncation_side (`str`, *optional*): The side on which the model sho...
+--
+38468:...retrained_vocab_files_map: dict[str, dict[str, str]] = {} _auto_class: str | None = None # first name has to correspond to main model input name # to make sure `tokenizer.pad(...)` works correctly model_input_names: list[str] = ["input_ids", "attention_mask"] padding_side: str = "right" truncation_side: str = "right" slow_tokenizer_class = None # Special tokens support (moved from SpecialTokensMixin) # V5: Clean separation of named special tokens from extra special tokens SPECIAL_TOKENS_ATTRIBUTES = [ "bos_token", "eos_token",...
+--
+41380:...ard compatibility we fallback to set model_max_length from max_len if provided model_max_length = kwargs.pop("model_max_length", kwargs.pop("max_len", None)) self.model_max_length = model_max_length if model_max_length is not None else VERY_LARGE_INTEGER self.padding_side = kwargs.pop("padding_side", self.padding_side) if self.padding_side not in ["right", "left"]: raise ValueError( f"Padding side should be selected between 'right' and 'left', current value: {self.padding_side}" ) self.truncation_side = kwargs.pop("truncation_side", self.truncation_side...
+--
+[29 more matches not shown]

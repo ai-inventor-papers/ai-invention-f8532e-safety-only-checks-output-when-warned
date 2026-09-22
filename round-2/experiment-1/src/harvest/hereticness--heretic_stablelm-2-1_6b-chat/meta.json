@@ -1,0 +1,42 @@
+{
+ "repo": "hereticness/heretic_stablelm-2-1_6b-chat",
+ "tag": "hereticness--heretic_stablelm-2-1_6b-chat",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_layers": 24,
+ "hidden_size": 2048,
+ "vocab_size": 100352,
+ "tie_word_embeddings": false,
+ "dtype_loaded": "torch.bfloat16",
+ "dtype_config": "torch.bfloat16",
+ "rms_eps": 1e-06,
+ "t_load_s": 19.110817909240723,
+ "timings": {
+  "p_harvest_s": 89.84337186813354,
+  "u_summary_s": 7.7798826694488525,
+  "total_s": 116.78759813308716
+ },
+ "load_missing_keys_n": 0,
+ "load_unexpected_keys_n": 0,
+ "load_missing_keys_head": [],
+ "load_unexpected_keys_head": [],
+ "weights_fully_bound": true,
+ "token_ids": {
+  "refusal": 44,
+  "hedge": 16,
+  "control": 56
+ },
+ "n_prompts": 256,
+ "prompt_token_lengths": {
+  "mean": 34.484375,
+  "p50": 32.0,
+  "p95": 51.34999999999994,
+  "max": 115,
+  "truncation_cap": 192
+ },
+ "n_cells": 0,
+ "x5_undefined": true,
+ "role": "child",
+ "family": "stablelm",
+ "priority": 4
+}

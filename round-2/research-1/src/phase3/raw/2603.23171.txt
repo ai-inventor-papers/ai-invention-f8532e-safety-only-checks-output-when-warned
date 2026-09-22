@@ -1,0 +1,200 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2603.23171
+Type: HTML
+Length: 8377 chars
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Cryptography and Security
+
+**arXiv:2603.23171** (cs) 
+
+[Submitted on 24 Mar 2026 ([v1](https://arxiv.org/abs/2603.23171v1)), last revised 29 Jul 2026 (this version, v3)]
+
+# Title:Adaptively Robust LLM Monitoring via Activation Watermarking
+
+Authors:[Toluwani Aremu](https://arxiv.org/search/cs?searchtype=author&query=Aremu,+T), [Daniil Ognev](https://arxiv.org/search/cs?searchtype=author&query=Ognev,+D), [Samuele Poppi](https://arxiv.org/search/cs?searchtype=author&query=Poppi,+S), [Nils Lukas](https://arxiv.org/search/cs?searchtype=author&query=Lukas,+N)
+
+View a PDF of the paper titled Adaptively Robust LLM Monitoring via Activation Watermarking, by Toluwani Aremu and 3 other authors
+
+[View PDF](/pdf/2603.23171) [HTML (experimental)](https://arxiv.org/html/2603.23171v3)
+
+> Abstract:Providers monitor deployed large language models (LLMs) to detect misuse that they cannot prevent. LLM monitoring is deterministic and often openly available, so $\emph{adaptive}$ attackers with a local copy can search offline for prompts that elicit harmful behavior and evade detection. These attacks are especially concerning because providers never observe the misuse and cannot patch their defenses post-hoc. The core challenge is resisting adaptive attackers while preserving detection rates against non-adaptive ones. We propose $\emph{Activation Watermarking}$ (AWM), which randomizes monitoring through limited fine-tuning that aligns the LLM's hidden states with a secret key-derived direction whenever a response violates a policy. Detection is a similarity test on activations the provider already computes, and attackers who know everything but the key must optimize against differently keyed surrogate detectors. At a matched $1\%$ false-positive rate, such surrogate-based attacks evade every evaluated baseline at least $79\%$ of the time, but AWM more than halves this evasion rate. AWM also achieves the lowest evasion rate on three of four non-adaptive jailbreak families at a small drop in utility measured across seven benchmarks. Because random high-dimensional directions are near-orthogonal, assigning one watermark per policy enables attribution. Across 20 monitored policies, AWM identifies the violated policy with $80\%$ accuracy versus a $5\%$ chance baseline. AWM is (i) efficient, (ii) substantially more robust against adaptive attackers than related work and (iii) can attribute which policies were violated. 
+
+Comments: | 17 pages, 17 figures, 8 tables  
+---|---  
+Subjects: |  Cryptography and Security (cs.CR); Artificial Intelligence (cs.AI); Computers and Society (cs.CY); Machine Learning (cs.LG)  
+Cite as: | [arXiv:2603.23171](https://arxiv.org/abs/2603.23171) [cs.CR]  
+  | (or  [arXiv:2603.23171v3](https://arxiv.org/abs/2603.23171v3) [cs.CR] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2603.23171> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Toluwani Aremu [[view email](/show-email/1f35598a/2603.23171)]   
+**[[v1]](/abs/2603.23171v1)** Tue, 24 Mar 2026 13:13:23 UTC (1,316 KB)  
+**[[v2]](/abs/2603.23171v2)** Mon, 30 Mar 2026 21:43:49 UTC (1,320 KB)  
+**[v3]** Wed, 29 Jul 2026 15:06:33 UTC (1,080 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Adaptively Robust LLM Monitoring via Activation Watermarking, by Toluwani Aremu and 3 other authors
+
+  * [View PDF](/pdf/2603.23171)
+  * [HTML (experimental)](https://arxiv.org/html/2603.23171v3)
+  * [TeX Source ](/src/2603.23171)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.CR
+
+[< prev](/prevnext?id=2603.23171&function=prev&context=cs.CR "previous in cs.CR \(accesskey p\)")   |   [next >](/prevnext?id=2603.23171&function=next&context=cs.CR "next in cs.CR \(accesskey n\)")   
+
+
+[new](/list/cs.CR/new) |  [recent](/list/cs.CR/recent) | [2026-03](/list/cs.CR/2026-03)
+
+Change to browse by: 
+
+[cs](/abs/2603.23171?context=cs)  
+[cs.AI](/abs/2603.23171?context=cs.AI)  
+[cs.CY](/abs/2603.23171?context=cs.CY)  
+[cs.LG](/abs/2603.23171?context=cs.LG)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2603.23171)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2603.23171)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2603.23171)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2603.23171&description=Adaptively Robust LLM Monitoring via Activation Watermarking "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2603.23171&title=Adaptively Robust LLM Monitoring via Activation Watermarking "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2603.23171) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

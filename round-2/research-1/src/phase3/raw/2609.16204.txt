@@ -1,0 +1,200 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2609.16204
+Type: HTML
+Length: 7934 chars
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2609.16204** (cs) 
+
+[Submitted on 14 Sep 2026]
+
+# Title:Decoy Direction Optimization: A Post-Hoc Defense Against LLM Abliteration
+
+Authors:[Aashiq Muhamed](https://arxiv.org/search/cs?searchtype=author&query=Muhamed,+A), [Mona T. Diab](https://arxiv.org/search/cs?searchtype=author&query=Diab,+M+T), [Virginia Smith](https://arxiv.org/search/cs?searchtype=author&query=Smith,+V)
+
+View a PDF of the paper titled Decoy Direction Optimization: A Post-Hoc Defense Against LLM Abliteration, by Aashiq Muhamed and 2 other authors
+
+[View PDF](/pdf/2609.16204) [HTML (experimental)](https://arxiv.org/html/2609.16204v1)
+
+> Abstract:Safety guardrails in open-weight language models can be readily bypassed using Refusal Feature Ablation (RFA), a technique that identifies and projects out a linear refusal direction from the residual stream, often achieving a high attack success rate (ASR) while preserving model capability. Defending against these attacks typically requires computationally expensive safety finetuning for every new checkpoint. We introduce Decoy Direction Optimization (DDO), a fast, post-hoc weight-editing defense that requires no base-model finetuning. Our approach is based on a simple mechanistic insight: ablation attacks rely on contrastive estimators to find the refusal direction. Rather than trying to hide the true refusal circuitry, DDO actively injects a high-magnitude, nonlinear decoy signal into the network's MLP neurons. When an attacker attempts to locate the refusal direction, the decoy corrupts their estimator, tricking them into ablating a harmless orthogonal feature while the actual safety mechanism remains intact. We prove a spectral bound formalizing this effect and evaluate DDO across six model families, achieving <10% ASR under standard RFA. On Llama-3-8B-Instruct, DDO remains comparable to trained defenses under adaptive multi-phase attacks (65% vs. 58% worst-case ASR) and reduces Heretic weight-level attack ASR from 88.7% to 18%, all at 30 to 450 times lower optimization cost per configuration than the trained baselines. 
+
+Subjects: |  Machine Learning (cs.LG); Computation and Language (cs.CL); Cryptography and Security (cs.CR)  
+---|---  
+Cite as: | [arXiv:2609.16204](https://arxiv.org/abs/2609.16204) [cs.LG]  
+  | (or  [arXiv:2609.16204v1](https://arxiv.org/abs/2609.16204v1) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2609.16204> Focus to learn more arXiv-issued DOI via DataCite (pending registration)  
+  
+## Submission history
+
+From: Aashiq Muhamed [[view email](/show-email/f66acf61/2609.16204)]   
+**[v1]** Mon, 14 Sep 2026 18:36:35 UTC (616 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Decoy Direction Optimization: A Post-Hoc Defense Against LLM Abliteration, by Aashiq Muhamed and 2 other authors
+
+  * [View PDF](/pdf/2609.16204)
+  * [HTML (experimental)](https://arxiv.org/html/2609.16204v1)
+  * [TeX Source ](/src/2609.16204)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.LG
+
+[< prev](/prevnext?id=2609.16204&function=prev&context=cs.LG "previous in cs.LG \(accesskey p\)")   |   [next >](/prevnext?id=2609.16204&function=next&context=cs.LG "next in cs.LG \(accesskey n\)")   
+
+
+[new](/list/cs.LG/new) |  [recent](/list/cs.LG/recent) | [2026-09](/list/cs.LG/2026-09)
+
+Change to browse by: 
+
+[cs](/abs/2609.16204?context=cs)  
+[cs.CL](/abs/2609.16204?context=cs.CL)  
+[cs.CR](/abs/2609.16204?context=cs.CR)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2609.16204)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2609.16204)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2609.16204)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2609.16204&description=Decoy Direction Optimization: A Post-Hoc Defense Against LLM Abliteration "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2609.16204&title=Decoy Direction Optimization: A Post-Hoc Defense Against LLM Abliteration "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+IArxiv recommender toggle
+
+IArxiv Recommender _([What is IArxiv?](https://iarxiv.org/about))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2609.16204) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

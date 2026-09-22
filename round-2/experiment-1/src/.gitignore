@@ -1,0 +1,7 @@
+# Large, regenerable or bulky intermediates (see .aii/manifest.yaml and README "Restoring removed files")
+.venv/
+__pycache__/
+*.tmp
+harvest/*/gram/
+harvest/*/*.npy
+harvest/*/D_resp_parts/

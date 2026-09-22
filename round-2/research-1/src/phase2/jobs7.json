@@ -1,0 +1,7 @@
+[
+{"label":"T3a-qwen3-4b","url":"https://aclanthology.org/2026.acl-long.1334.pdf","pattern":"Qwen3-4B|SafeRL|safety-removed|Default|Jailbreaked","i":false,"max":16,"ctx":420,"cap":8000},
+{"label":"T3b-k","url":"https://arxiv.org/html/2606.16349","pattern":"principal angles|canonical correlation|we set|we use the top|effective rank","i":true,"max":14,"ctx":400,"cap":7000},
+{"label":"T5-13655","url":"https://arxiv.org/abs/2512.13655","pattern":"Abstract","i":false,"max":2,"ctx":2500,"cap":4500},
+{"label":"T5-17427","url":"https://arxiv.org/abs/2607.17427","pattern":"Abstract","i":false,"max":2,"ctx":2500,"cap":4500},
+{"label":"HF-drexe","url":"https://huggingface.co/DrExe/qwen3-safety-vectors","pattern":".","i":false,"max":1,"ctx":1200,"cap":2500}
+]

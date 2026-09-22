@@ -1,0 +1,84 @@
+{
+ "n_tests": 7,
+ "n_pass": 7,
+ "all_pass": true,
+ "tests": [
+  {
+   "name": "T1a_X2_normalisation",
+   "mean": 0.9983799161328124,
+   "sd": 0.041646685547772254,
+   "tolerance": 0.05,
+   "pass": true
+  },
+  {
+   "name": "T1b_gram_identities",
+   "rel_sigma_min": 2.7691141375309e-15,
+   "rel_quadratic_form": 0.0,
+   "rel_full_spectrum": 4.373667216941334e-15,
+   "pass": true
+  },
+  {
+   "name": "T1c_X3_closed_form",
+   "rel_mean": 0.0,
+   "rel_second_moment": 0.0,
+   "pass": true
+  },
+  {
+   "name": "T1d_rmsnorm_jacobian",
+   "max_rel_err": 2.997896940131128e-05,
+   "tolerance": 0.001,
+   "pass": true
+  },
+  {
+   "name": "T1f_auroc_tpr",
+   "auroc_perfect": 1.0,
+   "auroc_noise": 0.50435,
+   "tpr1_perfect": 1.0,
+   "tpr1_noise": 0.01,
+   "pass": true
+  },
+  {
+   "name": "T1g_x2_rank1_deletion",
+   "write_mass_before": 0.9253254352637277,
+   "write_mass_after": 2.7156033529209098e-17,
+   "cos_vmin_u0": 0.9999999999999998,
+   "pass": true
+  },
+  {
+   "name": "T1e_marchenko_pastur",
+   "cases": [
+    {
+     "shape": [
+      2560,
+      13824
+     ],
+     "analytic": 66.983223173985,
+     "empirical_median": 67.18358211647846,
+     "rel_err": 0.0029822604895656927,
+     "within_10pct": true
+    },
+    {
+     "shape": [
+      1024,
+      5504
+     ],
+     "analytic": 42.17136208924092,
+     "empirical_median": 42.12193564689408,
+     "rel_err": 0.0011734133673528548,
+     "within_10pct": true
+    },
+    {
+     "shape": [
+      2048,
+      8192
+     ],
+     "analytic": 45.24732309040939,
+     "empirical_median": 45.22171814164751,
+     "rel_err": 0.0005662091095627749,
+     "within_10pct": true
+    }
+   ],
+   "pass": true
+  }
+ ]
+}

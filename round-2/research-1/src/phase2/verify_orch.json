@@ -1,0 +1,390 @@
+[
+ {
+  "id": "P01",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Abstract",
+  "quote": "We further show that harmful response generation is dissociable from the ability to recognize and reason about harmfulness.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "marily in aligned models, suggesting that alignment training internally reshapes the harmful response mechanism even when behavioral safeguards remain brittle. we further show that harmful response generation is dissociable from the ability to recognize and reason about harmfulness. finally, we extend our analysis to emergent misalignment and identify a sparse set of parameters contributing to it, with substantial sharing across fine-tuning domains. together, these results reveal a consistent parameter-level organization underlying unsafe behaviors and point toward more principled interventions for improving model safety. this paper includes red-teaming data and model-gen"
+ },
+ {
+  "id": "P02",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 1 (Introduction)",
+  "quote": "Crucially, the identified parameters support the generation of harmful responses, not the underlying knowledge: pruned models can still recognize harmful requests, refuse, and explain their risks, dissociating generation from harmfulness recognition and reasoning.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ernal organization, concentrating harmful-response dependence onto a smaller and more separable set of parameters-a phenomenon we call mechanistic compression. crucially, the identified parameters support the generation of harmful responses, not the underlying knowledge: pruned models can still recognize harmful requests, refuse, and explain their risks, dissociating generation from harmfulness recognition and reasoning. moreover, adversarial fine-tuning largely restores generation-further indicating that pruning disrupts the generation mechanism rather than erasing knowledge. finally, we extend this analysis to another, distinct alignment failure: emergent misalignment, "
+ },
+ {
+  "id": "P03",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 1 (Introduction)",
+  "quote": "concentrating harmful-response dependence onto a smaller and more separable set of parameters\u2014a phenomenon we call mechanistic compression.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "gned counterparts. this suggests that alignment training does more than induce brittle behavioral refusals: it also reshapes the model's internal organization, concentrating harmful-response dependence onto a smaller and more separable set of parameters-a phenomenon we call mechanistic compression. crucially, the identified parameters support the generation of harmful responses, not the underlying knowledge: pruned models can still recognize harmful requests, refuse, and explain their risks, dissociating generation from harmfulness recognition and reasoning. moreover, adversarial fine-tuning largely restores generation-further indicating that pruning disrupts the generati"
+ },
+ {
+  "id": "P04",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 3.3 / Figure 4 caption",
+  "quote": "Across the OLMo3-7B checkpoint sequence (base \u2192 mid-train \u2192 long-context \u2192 SFT \u2192 DPO \u2192 RL), separability emerges gradually with alignment training, especially after preference optimization.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "dicate greater separability. (a, b) in llama-3.1-8b and qwen2.5-14b, aligned variants (instruct) show better trade-offs than their pretrained counterparts. (c) across the olmo3-7b checkpoint sequence (base \u2192 mid-train \u2192 long-context \u2192 sft \u2192 dpo \u2192 rl), separability emerges gradually with alignment training, especially after preference optimization. stars mark unpruned baselines. what drives this mechanistic compression? we hypothesize that alignment, specifically refusal training, reorganizes model weights such that certain critical harmful response parameters are separable from benign capabilities. testing this requires more than a single pruning configuration: separabili"
+ },
+ {
+  "id": "P05",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 3.1",
+  "quote": "pruning approximately 0.0005%\u20130.001% of total parameters substantially reduces the model\u2019s ability to comply with harmful requests under jailbreaks, while largely preserving performance on general-purpose benchmarks.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "dissociations reveal functional organization within the llm. we find that harmful response generation depends on a remarkably small subset of model parameters: pruning approximately 0.0005%-0.001% of total parameters substantially reduces the model's ability to comply with harmful requests under jailbreaks, while largely preserving performance on general-purpose benchmarks. this dissociation suggests that the pruned parameters support a critical, yet specific component of the harmful-response generation mechanism. moreover, pruning parameters identified using a single harm category, such as malware generation, substantially reduces harmful outputs across unrelated domains"
+ },
+ {
+  "id": "P06",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 2.2 (Models)",
+  "quote": "Our main experiments are performed on Llama3.1-8B-Instruct (Grattafiori et al., 2024), Qwen2.5-14B-Instruct and Qwen2.5-32B-Instruct (Yang et al., 2025), and we expand this set when a deeper analysis is required.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ed from safety-related prompts. pruning datasets for the other analyses (explaining harmfulness, emergent misalignment) are described in 4 and 5. ##### models. our main experiments are performed on llama3.1-8b-instruct (grattafiori et al., 2024), qwen2.5-14b-instruct and qwen2.5-32b-instruct (yang et al., 2025), and we expand this set when a deeper analysis is required. ##### evaluating harmful response capabilities. to measure the reduction of harmful-response capability, we evaluate the model responses after applying various jailbreaks. we evaluate on hex-phi (qi et al., 2024b), a held-out dataset of harmful requests from which we pick five distinct categories (adult co"
+ },
+ {
+  "id": "P07",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 4 / Figure 5 caption",
+  "quote": "Metrics are StrongREJECT score (generation), refusal rate (keyword-based), LLM-judged (explanation), and accuracy on harmful/benign pairs (detection). (b) Harm generation and Refusal are double-dissociated.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "bilities, measured as percentage change relative to the unpruned baseline. harmful generation drops sharply, while other capabilities remain largely preserved. metrics are strongreject score (generation), refusal rate (keyword-based), llm-judged (explanation), and accuracy on harmful/benign pairs (detection). (b) harm generation and refusal are double-dissociated. \u2020measured after prefilling to bypass refusal (see text). a (a) llama-3.1-8b-inst. (b) qwen-2.5-14b-inst. a fundamental question is whether a model's content generation and its understanding of that content rely on a shared mechanism. we test this for harmfulness: a model can generate harmful responses, refuse ha"
+ },
+ {
+  "id": "P08",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Appendix H",
+  "quote": "Figure 14 demonstrates, through different size Qwen models, that the separation of harmful-response generation and utility strengthens with scale, with the 1.5B being inseparable, the 7B separable but with a significant utility cost and the 14B and 32B models most separable.",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "P09",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 7 (Discussion)",
+  "quote": "Lastly, these results provide insight rather than a deployable defense: practical applications would require scaling beyond the models tested here",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "age models, this question takes concrete form: do the ability to write malware and the ability to explain why malware is dangerous rely on the same parameters? lastly, these results provide insight rather than a deployable defense: practical applications would require scaling beyond the models tested here, addressing collateral effects on adjacent content, and integrating interventions with existing alignment pipelines. more broadly, these findings motivate mechanistic alignment as a research direction: using causal understanding of internal behavior-supporting components to inform future safety interventions, alongside behavioral alignment. ## acknowledgments this work h"
+ },
+ {
+  "id": "P10",
+  "source_url": "https://arxiv.org/html/2603.27412",
+  "locator": "Abstract",
+  "quote": "First, geometry survives refusal ablation: both abliterated variants achieve AUROC at most 0.015 below their instruction-tuned counterparts, establishing a geometric dissociation between harmful-intent representation and the downstream generative refusal mechanism.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "and auroc ==1.000 for discriminating harmful from benign-aggressive prompts (xstest), with sub-millisecond per-query overhead. three empirical findings emerge. first, geometry survives refusal ablation: both abliterated variants achieve auroc at most 0.015 below their instruction-tuned counterparts, establishing a geometric dissociation between harmful-intent representation and the downstream generative refusal mechanism. second, harmful prompts exhibit a near-degenerate angular distribution (\u03c3\u03b8\u22480.03\\sigma{\\theta}\\approx 0.03 rad), an order of magnitude tighter than the normative distribution (\u03c3\u03b8\u22480.27\\sigma{\\theta}\\approx 0.27 rad), preserved across all alignment stages i"
+ },
+ {
+  "id": "P11",
+  "source_url": "https://arxiv.org/html/2603.27412",
+  "locator": "Abstract",
+  "quote": "We evaluate two complete model triplets from the Qwen3.5-0.8B and Qwen2.5-0.5B families: base, instruction-tuned, and _abliterated_ (refusal direction surgically removed via orthogonalisation).",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "under a gaussian fit to the normative distribution, flagging deviations symmetrically regardless of orientation. no harmful examples are required for training. we evaluate two complete model triplets from the qwen3.5-0.8b and qwen2.5-0.5b families: base, instruction-tuned, and abliterated (refusal direction surgically removed via orthogonalisation). across all six variants, latentbiopsy achieves auroc \u2265\\geq0.937 for harmful-vs-normative detection and auroc ==1.000 for discriminating harmful from benign-aggressive prompts (xstest), with sub-millisecond per-query overhead. three empirical findings emerge. first, geometry survives refusal ablation: both abliterated variants "
+ },
+ {
+  "id": "P12",
+  "source_url": "https://arxiv.org/html/2603.27412",
+  "locator": "Section 1 (Introduction)",
+  "quote": "The model\u2019s internal encoding of harmful semantic intent is geometrically distinct from the circuits that generate refusal text. Harm recognition and refusal generation are separable mechanisms.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "hat sharpens the safety implications: latentbiopsy detects harmful intent even in abliterated models that are constitutionally incapable of producing refusals. the model's internal encoding of harmful semantic intent is geometrically distinct from the circuits that generate refusal text. harm recognition and refusal generation are separable mechanisms. the practical consequence is direct: stripping a model's refusal behaviour does not erase the latent signal available to an external detector. a secondary finding concerns the structure of the deviation itself. the two tested model families exhibit opposite ring orientations at the same residual-stream depth; harmful prompt"
+ },
+ {
+  "id": "P13",
+  "source_url": "https://arxiv.org/html/2603.27412",
+  "locator": "Contributions (1)",
+  "quote": "LatentBiopsy builds a normative reference exclusively from 200 safe activations and scores every prompt by the negative log-likelihood of its angular deviation",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "threshold on \u03b8\\theta is architecturally unreliable and motivates the symmetric anomaly score. #### contributions. 1. 1. training-free angular anomaly detector. latentbiopsy builds a normative reference exclusively from 200 safe activations and scores every prompt by the negative log-likelihood of its angular deviation \u03b8\\theta from the leading normative principal component. the score is symmetric around the normative mean, requiring no knowledge of the ring direction and no harmful data. 2. 2. geometry survives refusal ablation in both tested model families. abliterated variants of both qwen3.5-0.8b and qwen2.5-0.5b achieve auroc h/b =1.000=1.000 and auroc h/n within 0.015"
+ },
+ {
+  "id": "P14",
+  "source_url": "https://arxiv.org/html/2603.27412",
+  "locator": "Section 8 (Discussion)",
+  "quote": "Our findings suggest that such interventions address the generative mechanism without altering the representational geometry; the latent signal persists even when the direction has been mathematically erased.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "y of the downstream mechanism that acts on it. recent safety approaches such as zheng et al. (2024) target the refusal direction to strengthen model behaviour. our findings suggest that such interventions address the generative mechanism without altering the representational geometry; the latent signal persists even when the direction has been mathematically erased. this is consequential for both offensive and defensive ai safety: a model that cannot refuse retains an intact, exploitable signal for an external detector, and an adversary who abliterates a model to bypass its safeguards does not thereby erase the geometric evidence of harmful intent. #### why do the two fam"
+ },
+ {
+  "id": "P15",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Abstract",
+  "quote": "matches its instruction-tuned counterpart within \u00b10.003\\pm 0.003 AUROC in abliterated variants from which the refusal mechanism has been removed.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " via soft-auc optimisation reaches mean effective auroc 0.982 and tpr@1%fpr 0.797, generalises to three held-out harm benchmarks and a hard-benign control, and matches its instruction-tuned counterpart within \u00b10.003\\pm 0.003 auroc in abliterated variants from which the refusal mechanism has been removed. the supervised strategies all exceed auroc 0.96, but their tpr@1%fpr varies by more than ten times the auroc gap; a deployed 9b safety classifier shows the same pattern at auroc 0.94 and tpr 0.30, motivating low-fpr reporting as a default in safety-adjacent detection evaluation. geometric measurements refine the picture. the recovered direction is concentrated within each"
+ },
+ {
+  "id": "P16",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Abstract",
+  "quote": "their TPR@1%FPR varies by more than ten times the AUROC gap; a deployed 9B safety classifier shows the same pattern at AUROC 0.94 and TPR 0.30, motivating low-FPR reporting as a default in safety-adjacent detection evaluation.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "rt within \u00b10.003\\pm 0.003 auroc in abliterated variants from which the refusal mechanism has been removed. the supervised strategies all exceed auroc 0.96, but their tpr@1%fpr varies by more than ten times the auroc gap; a deployed 9b safety classifier shows the same pattern at auroc 0.94 and tpr 0.30, motivating low-fpr reporting as a default in safety-adjacent detection evaluation. geometric measurements refine the picture. the recovered direction is concentrated within each extraction protocol but protocol-dependent across them: two pooling choices applied to the same chat-templated activations at the same residual-stream layer (max-pool over content tokens versus last"
+ },
+ {
+  "id": "P17",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Abstract",
+  "quote": "two pooling choices applied to the same chat-templated activations at the same residual-stream layer (max-pool over content tokens versus last-token at the post-instruction position) recover harm directions 73",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "luation. geometric measurements refine the picture. the recovered direction is concentrated within each extraction protocol but protocol-dependent across them: two pooling choices applied to the same chat-templated activations at the same residual-stream layer (max-pool over content tokens versus last-token at the post-instruction position) recover harm directions 73\u221873^{\\circ} apart, and projecting one out leaves detection under either max-pool extraction essentially intact. probing identifies a protocol-specific direction rather than a unique computational feature. ## 1 introduction aligned language models refuse harmful instructions reliably enough that attention has s"
+ },
+ {
+  "id": "P18",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Section 3.2",
+  "quote": "Gemma-3 is the exception: alignment rotates the harm direction by 73",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " and llama-3.2, base-to-instruct angular shifts range from 17\u221817^{\\circ} to 39\u221839^{\\circ} and auroc transfer remains within 0.010 of own-direction performance. gemma-3 is the exception: alignment rotates the harm direction by 73\u221873^{\\circ}, base-to-instruct auroc drops by 0.057, and tpr collapses from 0.751 to 0.175. each gemma-3 variant's own direction recovers auroc above 0.969. across all four families, instruct-to-abliterated transfer is substantially cleaner than base-to-instruct (angles 11\u221811^{\\circ} to 42\u221842^{\\circ}, auroc degradation \u22640.003\\leq 0.003). full 3\u00d733\\times 3 transfer matrices including the asymmetric gemma-3 case are reported in appendix k. table 1: cr"
+ },
+ {
+  "id": "P19",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Section 2.1",
+  "quote": "Abliterated variants are community-produced via the weight-orthogonalisation procedure of Arditi et al. (2024) and sourced from HuggingFace under the huihui-ai organisation.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "26), llama-3.2 (llama team, 2024), gemma-3 (team, 2025)) and three alignment variants per family (base, instruction-tuned, abliterated; table 6 in appendix a). abliterated variants are community-produced via the weight-orthogonalisation procedure of arditi et al. (2024) and sourced from huggingface under the huihui-ai organisation. the main analysis covers 0.5-1.3b parameters; we additionally evaluate qwen3.5 at 2b, 4b, and 9b. #### datasets and splits. harmful prompts are drawn from advbench (zou et al., 2023b) (520 direct instructions), harmbench (mazeika et al., 2024) (200 standard behaviours), and jailbreakbench (chao et al., 2024) (100 harmful goals); benign prompts "
+ },
+ {
+  "id": "P20",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Section 1 (Contributions 1)",
+  "quote": "A mean-difference direction fitted from 100 examples per class achieves mean effective AUROC 0.9820.982 across 12 models",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ers. throughout we report low-fpr operating-point metrics alongside auroc. #### contributions. 1. 1. stable linear recovery across architectures and alignment. a mean-difference direction fitted from 100 examples per class achieves mean effective auroc 0.9820.982 across 12 models (qwen2.5, qwen3.5, llama-3.2, gemma-3; base, instruct, abliterated; 0.5b-1.3b), with within-family scale stability tested on qwen3.5 up to 9b. cross-variant transfer is auroc-robust (\u22650.90\\geq 0.90 in every pair tested). 2. 2. detection persists through alignment interventions. auroc differences between abliterated variants and their instruction-tuned counterparts are within \u00b10.003\\pm 0.003, indi"
+ },
+ {
+  "id": "P21",
+  "source_url": "https://arxiv.org/html/2606.16349",
+  "locator": "Abstract",
+  "quote": "SFT supplies the negative control: its direct-coupling change is much smaller, and it remains high-ASR, so low coupling is not itself a safety score.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "-source attack success rate (asr) rises from 0 to 0.25, xstest refusal falls from 1.00 to 0.228, and benign helpfulness recovers from 0 to 1.12 on a 0-2 scale. sft supplies the negative control: its direct-coupling change is much smaller, and it remains high-asr, so low coupling is not itself a safety score. causal sweeps, dense all-anchor checks, and sparse greedy coordinate gradient (gcg) and autodan transfer comparisons against refusal-drift predictors support h/r coupling as a fixed-protocol descriptive diagnostic rather than a standalone safety predictor. the evidence does not prove independent harmfulness and refusal pathways or deployment-grade prediction. keywords"
+ },
+ {
+  "id": "P22",
+  "source_url": "https://arxiv.org/html/2606.16349",
+  "locator": "Section 3.3, Eq. (8)",
+  "quote": "For subspaces, let",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "g three normalized quantities. the first is directional alignment, | ccos\u200b(t)=|ht\u22a4\u200brt|.c{\\mathrm{cos}}(t)=\\left|h{t}^{\\top}r{t}\\right|. | | (7) ---|---|---|--- for subspaces, let \u03b81,...,\u03b8k\\theta{1},\\ldots,\\theta{k} be the first kk principal angles between ht\\mathcal{h}{t} and rt\\mathcal{r}{t}, a standard way to measure overlap between linear subspaces [23]. we use the average squared canonical correlation, | csub\u200b(t)=1k\u200b\u2211i=1kcos2\u2061\u03b8i,c{\\mathrm{sub}}(t)=\\frac{1}{k}\\sum{i=1}^{k}\\cos^{2}\\theta{i}, | | (8) ---|---|---|--- which is high when the two local subspaces overlap and low when their leading directions are nearly orthogonal. our primary direct representational coupling "
+ },
+ {
+  "id": "P23",
+  "source_url": "https://arxiv.org/html/2606.16349",
+  "locator": "Abstract",
+  "quote": "drops from 0.0784 at step 50 to 0.0205 at step 500, while fixed-source attack success rate (ASR) rises from 0 to 0.25, XSTest refusal falls from 1.00 to 0.228, and benign helpfulness recovers from 0 to 1.12 on a 0\u20132 scale.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "-regime transition in r2d2. the primary direct-coupling metric, the representational harmfulness-refusal coupling index (hrcirepr\\mathrm{hrci}{\\mathrm{repr}}), drops from 0.0784 at step 50 to 0.0205 at step 500, while fixed-source attack success rate (asr) rises from 0 to 0.25, xstest refusal falls from 1.00 to 0.228, and benign helpfulness recovers from 0 to 1.12 on a 0-2 scale. sft supplies the negative control: its direct-coupling change is much smaller, and it remains high-asr, so low coupling is not itself a safety score. causal sweeps, dense all-anchor checks, and sparse greedy coordinate gradient (gcg) and autodan transfer comparisons against refusal-drift predicto"
+ },
+ {
+  "id": "P24",
+  "source_url": "https://arxiv.org/html/2606.16349",
+  "locator": "Section 4.1, Table 1",
+  "quote": "Principal angles | 86.1, 88.7, 89.4 | 82.3, 88.1, 89.7",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "n exposes refusal-side reopening without proving independent h/r mechanisms. metric | llama-3.1-8b | qwen2.5-7b ---|---|--- h layer | 31 | 15 r layer | 12 | 20 principal angles | 86.1, 88.7, 89.4 | 82.3, 88.1, 89.7 baseline asr | 0.1675 | 0.2625 h-only asr | 0.1400 | 0.2925 r-only asr | 0.6825 | 0.4050 r\u27c2hr{\\perp h} asr | 0.6575 | 0.4250 this calibration is necessary for interpreting the mistral trajectory. if the same protocol did not recover a refusal-side bottleneck in aligned instruction models, a mixed result on base-to-r2d2 checkpoints would be hard to interpret. instead, the aligned anchors show that the protocol can detect refusal-side causal reopening under a fix"
+ },
+ {
+  "id": "P25",
+  "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+  "locator": "Section 3.5 / Eq. (9)",
+  "quote": "A higher value of JR Min/Max indicates that\nJailbreak\u2013Ideal Refusal separability remains stable\nacross the entire trajectory",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ent ability to discriminate ad- versarial jailbreak behavior beyond explicit harm- ful intent. jr min/max = mins\u2208[0,1] jsss \u0000j, r \u0001 maxs\u2208[0,1] jsss \u0000j, r \u0001 (9) a higher value of jr min/max indicates that jailbreak-ideal refusal separability remains stable across the entire trajectory, whereas a low value reflects late-stage collapse of refusal and successful jailbreak intrusion. we quantify the agreement between our proxy- based safety ranking rjss-proxy and the ranking ob- tained from conventional red-teaming evaluations rhybrid using kendall's \u03c4 correlation coefficient: \u03c4(rjss-proxy, rhybrid) \u2208[-1, 1]. figure 4 show that cross a sufficiently large model set, the proxy-b"
+ },
+ {
+  "id": "P26",
+  "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+  "locator": "Section 1 (Introduction)",
+  "quote": "when com-\nparing multiple variants of the same base model\n(e.g., RL-aligned, base, and safety-removed ver-\nsions of Qwen3-4B), we observe that better-aligned\nvariants exhibit more pronounced geometric sepa-\nration between different trajectories in latent space.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "te of the model, potentially repro- ducing the discriminative power of large-scale red teaming at a fraction of the cost. figure 1 supports the core intuition: when com- paring multiple variants of the same base model (e.g., rl-aligned, base, and safety-removed ver- sions of qwen3-4b), we observe that better-aligned variants exhibit more pronounced geometric sepa- ration between different trajectories in latent space. experiments on over 40 models and 20 red- teaming strategies demonstrate that n-glare faithfully reproduces the safety rankings induced by traditional red teaming while using less than 1% of the token and runtime cost, making it suit- able for agile diagnost"
+ },
+ {
+  "id": "P27",
+  "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+  "locator": "Section 4 (Results)",
+  "quote": "remains consistently high, with p-values far be-\nlow conventional significance thresholds",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "tional safety orderings within representative alignment regimes, while requiring far lower evaluation cost. as the model and metric pool expands in figure 5, \u03c4 remains consistently high, with p-values far be- low conventional significance thresholds(< 0.05). this indicates that even under diverse models and red-teaming metrics, the consistency between the proxy-based and red-teaming rankings remains higher than red-teaming metrics themselves and statistically significant. 4.1.2 consistency under model weight variations in essence, we demonstrate that the geomet- ric safety scale captured by jss not only re- flects static differences among models but also dynamically respo"
+ },
+ {
+  "id": "P28",
+  "source_url": "https://arxiv.org/html/2603.18353",
+  "locator": "Abstract (Findings)",
+  "quote": "At baseline, Steerling-8B detected 51 of 144 hazards (35% sensitivity) and Qwen 2.5 7B detected 65 of 144 (45%).",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "). linear probes quantified the model's internal hazard knowledge; intervention methods attempted to translate that knowledge into corrected outputs. findings: at baseline, steerling-8b detected 51 of 144 hazards (35% sensitivity) and qwen 2.5 7b detected 65 of 144 (45%). linear probes trained on qwen's internal representations discriminated hazardous from benign cases with 98.2% auroc (95% ci 0.968 to 0.993), demonstrating a 53-percentage-point gap between internal knowledge and output behaviour. concept bottleneck steering corrected 17 of 85 missed hazards (20%) but disrupted 25 of 47 correct detections (53%), indistinguishable from random perturbation (p=0.84p=0.84). s"
+ },
+ {
+  "id": "P29",
+  "source_url": "https://arxiv.org/html/2603.18353",
+  "locator": "Abstract (Findings)",
+  "quote": "Linear probes trained on Qwen\u2019s internal representations discriminated hazardous from benign cases with 98.2% AUROC (95% CI 0.968 to 0.993), demonstrating a 53-percentage-point gap between internal knowledge and output behaviour.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "at knowledge into corrected outputs. findings: at baseline, steerling-8b detected 51 of 144 hazards (35% sensitivity) and qwen 2.5 7b detected 65 of 144 (45%). linear probes trained on qwen's internal representations discriminated hazardous from benign cases with 98.2% auroc (95% ci 0.968 to 0.993), demonstrating a 53-percentage-point gap between internal knowledge and output behaviour. concept bottleneck steering corrected 17 of 85 missed hazards (20%) but disrupted 25 of 47 correct detections (53%), indistinguishable from random perturbation (p=0.84p=0.84). sae feature steering produced zero corrections and zero disruptions despite identifying 3,695 significant hazard-a"
+ },
+ {
+  "id": "P30",
+  "source_url": "https://arxiv.org/html/2603.18353",
+  "locator": "Abstract (Findings)",
+  "quote": "Concept bottleneck steering corrected 17 of 85 missed hazards (20%) but disrupted 25 of 47 correct detections (53%), indistinguishable from random perturbation",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " hazardous from benign cases with 98.2% auroc (95% ci 0.968 to 0.993), demonstrating a 53-percentage-point gap between internal knowledge and output behaviour. concept bottleneck steering corrected 17 of 85 missed hazards (20%) but disrupted 25 of 47 correct detections (53%), indistinguishable from random perturbation (p=0.84p=0.84). sae feature steering produced zero corrections and zero disruptions despite identifying 3,695 significant hazard-associated features. tsv steering at high strength corrected 19 of 79 missed hazards (24%) while disrupting 4 of 65 correct detections (6%), but left 76% of errors uncorrected. interpretation: language models encode near-perfect ta"
+ },
+ {
+  "id": "P31",
+  "source_url": "https://arxiv.org/html/2603.18353",
+  "locator": "Abstract (Findings)",
+  "quote": "SAE feature steering produced zero corrections and zero disruptions despite identifying 3,695 significant hazard-associated features. TSV steering at high strength corrected 19 of 79 missed hazards (24%) while disrupting 4 of 65 correct detections (6%), but left 76% of errors uncorrected.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ck steering corrected 17 of 85 missed hazards (20%) but disrupted 25 of 47 correct detections (53%), indistinguishable from random perturbation (p=0.84p=0.84). sae feature steering produced zero corrections and zero disruptions despite identifying 3,695 significant hazard-associated features. tsv steering at high strength corrected 19 of 79 missed hazards (24%) while disrupting 4 of 65 correct detections (6%), but left 76% of errors uncorrected. interpretation: language models encode near-perfect task knowledge in linearly separable internal representations, yet current mechanistic interpretability methods at best correct a minority of errors. the knowledge-action gap per"
+ },
+ {
+  "id": "P32",
+  "source_url": "https://arxiv.org/html/2603.18353",
+  "locator": "Abstract (Methods)",
+  "quote": "for correcting false-negative triage errors using 400 physician-adjudicated clinical vignettes (144 hazards, 256 benign)",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ncoder (sae) feature steering, logit lens with activation patching, and linear probing with truthfulness separator vector (tsv) steering (qwen 2.5 7b instruct) for correcting false-negative triage errors using 400 physician-adjudicated clinical vignettes (144 hazards, 256 benign). linear probes quantified the model's internal hazard knowledge; intervention methods attempted to translate that knowledge into corrected outputs. findings: at baseline, steerling-8b detected 51 of 144 hazards (35% sensitivity) and qwen 2.5 7b detected 65 of 144 (45%). linear probes trained on qwen's internal representations discriminated hazardous from benign cases with 98.2% auroc (95% ci 0.96"
+ },
+ {
+  "id": "P33",
+  "source_url": "https://arxiv.org/abs/2608.05086",
+  "locator": "Abstract",
+  "quote": "roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ween models across benchmarks. second, psychometrically selected items recover full benchmark scores with lower error than random subsets of the same size, and roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%. third, irt supports audits of individual models, showing that it can be used to detect naive sandbagging and changes of model behind apis. overall, we show irt is a ready-made toolkit for reading, reducing, and auditing safety benchmarks, which we recommend frontier labs and evaluators adopt. comments: | 15 pages, 9 figures, 6 tables ---|--- subjects: | artificial intelligence (cs.ai); computation and l"
+ },
+ {
+  "id": "P34",
+  "source_url": "https://arxiv.org/abs/2608.05086",
+  "locator": "Abstract",
+  "quote": "We fit IRT models to eight safety benchmarks across 192 language models, the largest psychometric analysis of LLM safety evaluations to date",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "sues, we draw on item response theory (irt), a statistical toolkit for measuring these latents from performance on items with inferred psychometric properties. we fit irt models to eight safety benchmarks across 192 language models, the largest psychometric analysis of llm safety evaluations to date, and contribute three results. first, we find that three interpretable factors of refusal strictness, truthfulness, and contextual harm explain most of the variance between models across benchmarks. second, psychometrically selected items recover full benchmark scores with lower error than random subsets of the same size, and roughly ten adaptively chosen items suffice for sev"
+ },
+ {
+  "id": "P35",
+  "source_url": "https://arxiv.org/abs/2512.13655",
+  "locator": "Abstract",
+  "quote": "Single-pass methods demonstrated superior capability preservation on the benchmarked subset (avg GSM8K change across three models: ErisForge -0.28 pp; DECCP -0.13 pp), while Bayesian-optimized abliteration produced variable distribution shift (KL divergence: 0.043-1.646)",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "xteen instruction-tuned models (7b-14b parameters), reporting tool compatibility on all 16 models and quantitative metrics on subsets dictated by tool support. single-pass methods demonstrated superior capability preservation on the benchmarked subset (avg gsm8k change across three models: erisforge -0.28 pp; deccp -0.13 pp), while bayesian-optimized abliteration produced variable distribution shift (kl divergence: 0.043-1.646) with model-dependent capability impact. these findings provide researchers with evidence-based selection criteria for abliteration tool deployment across diverse model architectures. the principal finding indicates that mathematical reasoning capab"
+ },
+ {
+  "id": "P36",
+  "source_url": "https://arxiv.org/abs/2607.17427",
+  "locator": "Abstract",
+  "quote": "abliterated models are systematically more optimistic (+12.2 pp Gemma, +7.4 pp Qwen; the confirmed preregistered endpoint), justify themselves at greater length, and use fewer explicit uncertainty words in forced self-critiques",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "erts families, gemma-4-26b-a4b-it and qwen3-30b-a3b-instruct-2507. three effects replicate across both families (weeks-clustered bootstrap cis excluding zero): abliterated models are systematically more optimistic (+12.2 pp gemma, +7.4 pp qwen; the confirmed preregistered endpoint), justify themselves at greater length, and use fewer explicit uncertainty words in forced self-critiques (both exploratory). a fourth effect reverses sign: the same operation makes gemma-abliterated less confident and qwen-abliterated more (family cis non-overlapping) - one weight surgery, opposite shifts in expressed confidence. capability covariates rule out instruction-following degradation "
+ },
+ {
+  "id": "P37",
+  "source_url": "https://arxiv.org/abs/2505.19056",
+  "locator": "Abstract",
+  "quote": "refusal rates drop by at most 10%, compared to 70-80% drops in baseline models",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "s. fine-tuning llama-2-7b-chat and qwen2.5-instruct (1.5b and 3b parameters) on this dataset yields models that maintain high refusal rates under abliteration: refusal rates drop by at most 10%, compared to 70-80% drops in baseline models. comprehensive evaluations of safety and utility demonstrate that extended-refusal fine-tuning effectively neutralizes abliteration attacks while preserving general model performance and enhancing robustness across multiple alignment scenarios. comments: | preprint - under review ---|--- subjects: | computation and language (cs.cl); artificial intelligence (cs.ai); machine learning (cs.lg) cite as: | [arxiv:2505.19056](https://arxiv.org/"
+ },
+ {
+  "id": "P38",
+  "source_url": "https://arxiv.org/abs/2609.01936",
+  "locator": "Abstract",
+  "quote": "we introduce Sparse Readout Prism (SRP), which decomposes the readout using only its weights and expresses any token logit or logit difference as a sum of contributions from sparse readout features.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "t different tokens for the same hidden states. we call this dependence corpus conditionality. to examine readout structure independently of the fitting corpus, we introduce sparse readout prism (srp), which decomposes the readout using only its weights and expresses any token logit or logit difference as a sum of contributions from sparse readout features. this reveals readout features as a new unit of analysis for lens readings, exposing structure that token identities can obscure and enabling comparisons across tokens, contexts, layers, and lenses. replacing the original readout with srp's sparse approximation reconstructs 8.9-17.3 percentage points more of the tested l"
+ },
+ {
+  "id": "P39",
+  "source_url": "https://arxiv.org/abs/2605.20241",
+  "locator": "Abstract",
+  "quote": "then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape. Across nine instruction-tuned backbones",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "l probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts, then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape. across nine instruction-tuned backbones ($1.2$b--$70$b) and seven safety benchmarks, geometry-lite improves over single-layer probes while remaining close to raw multi-layer score stacking, making it a useful instrument for analyzing the multi-layer safety signal. the decomposition shows that safety evidence is expressed primarily through persistent boundary-position geometry: final or extremal margins and u"
+ },
+ {
+  "id": "P40",
+  "source_url": "https://arxiv.org/abs/2605.12726",
+  "locator": "Abstract",
+  "quote": "Token-level prefill analyses reveal that probe-visible unsafe evidence often appears earlier in the sequence but is not exposed at the final-token readout, while naive max-pooling over token positions overfires on safe prompts.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ng directions that are poorly captured by the probe's representational subspace, and increasing probe bottleneck width does not reliably resolve this mismatch. token-level prefill analyses reveal that probe-visible unsafe evidence often appears earlier in the sequence but is not exposed at the final-token readout, while naive max-pooling over token positions overfires on safe prompts. a simple pca-hmm trajectory model, trained only on the same clean split, recovers many final-token misses from user-content prefill trajectories without the catastrophic false-positive behavior of naive token pooling, motivating trajectory-aware hidden-state analyses as diagnostic complement"
+ },
+ {
+  "id": "P41",
+  "source_url": "https://arxiv.org/abs/2608.30585",
+  "locator": "Abstract",
+  "quote": "Successful attacks retain the measured harmful-versus-benign distinction at the request, while its refusal-associated expression weakens where the answer begins, a pattern we call safety-relay attenuation.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ene on their activation directions in held-out evaluation requests, and decompose effective directions geometrically. > our analysis yields three findings. (1) successful attacks retain the measured harmful-versus-benign distinction at the request, while its refusal-associated expression weakens where the answer begins, a pattern we call safety-relay attenuation. (2) constructing the complete roleplay around the request and framing it within the scenario contribute causally: removing the associated activation changes restores refusal. (3) these effects largely share internal structure, and most repair is reproduced by components aligned with the model's ordinary refusal o"
+ },
+ {
+  "id": "P42",
+  "source_url": "https://go.alice.io/hubfs/alice-abliteration-report-april2026.pdf",
+  "locator": "Section 5.1",
+  "quote": "training succeeded at harm detection but failed at harm refusal. These\nappear to be separable functions.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ontent as harmful - prepending disclaimers like \"this is dangerous\" or \"for educational purposes only\" - and then produced the requested content anyway. safety training succeeded at harm detection but failed at harm refusal. these appear to be separable functions. 5.2 abliteration works across architectures all five safety-trained models converged to 96-100% compliance post-abliteration despite different architectures (dense and moe), parameter counts (8b to 30b), and baseline strengths (89-100% refusal). nemotron's moe architecture - 30b total parameters, ~3b active per token - was as vulnerable as the dense models. 5.3 baseline alignment is strong but irrelevant safety-"
+ },
+ {
+  "id": "P43",
+  "source_url": "https://arxiv.org/abs/2607.01854",
+  "locator": "Abstract",
+  "quote": "we combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": ", before deployment, whether an open-weight checkpoint has had its refusal mechanism stripped? runtime guards cannot: they score generations, not the artifact. we combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit. the two are negatively correlated and label-complementary: the gap supplies refusal-specificity and the weight energy supplies recall. on a 273-checkpoint registry spanning qwen, deepseek-distilled qwen, llama, and gemma, their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes"
+ }
+]

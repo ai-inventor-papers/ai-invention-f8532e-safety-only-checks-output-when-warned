@@ -1,0 +1,368 @@
+[
+ {
+  "id": "P44",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Section 3.2",
+  "quote": "Across all four families, instruct-to-abliterated transfer is substantially cleaner than base-to-instruct",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "y 73\u221873^{\\circ}, base-to-instruct auroc drops by 0.057, and tpr collapses from 0.751 to 0.175. each gemma-3 variant's own direction recovers auroc above 0.969. across all four families, instruct-to-abliterated transfer is substantially cleaner than base-to-instruct (angles 11\u221811^{\\circ} to 42\u221842^{\\circ}, auroc degradation \u22640.003\\leq 0.003). full 3\u00d733\\times 3 transfer matrices including the asymmetric gemma-3 case are reported in appendix k. table 1: cross-variant direction transfer summary. for each family, the base model's wldamp/raw\\mathbf{w}{\\mathrm{lda}}^{\\mathrm{mp/raw}} direction is applied to instruction-tuned and abliterated variants at the base model's validation"
+ },
+ {
+  "id": "P45",
+  "source_url": "https://arxiv.org/html/2604.18901",
+  "locator": "Section 1, Contributions (3)",
+  "quote": "The recovered direction is also nearly orthogonal to the leading principal component of benign-prompt activations",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "g wldalt/chat\\mathbf{w}{\\mathrm{lda}}^{\\mathrm{lt/chat}} out leaves the mean-difference vector under max-pool extraction with \u226589%\\geq 89\\% of its norm intact. the recovered direction is also nearly orthogonal to the leading principal component of benign-prompt activations (82\u2218\u00b14\u221882^{\\circ}\\pm 4^{\\circ}). 4. 4. operating-point evaluation. tpr@1%fpr varies by more than ten times the auroc gap among supervised strategies that all exceed auroc 0.960.96. a deployed 99b safety classifier shows the same pattern at auroc 0.940.94 / tpr 0.300.30. we recommend low-fpr metrics as a default alongside auroc in safety-adjacent detection. ## 2 methods ### 2.1 models, datasets, and nota"
+ },
+ {
+  "id": "P46",
+  "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+  "locator": "Section 2 (Method overview)",
+  "quote": "benign (B), jailbreak (J), plainquery (P)",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " llm safety evaluator). for each model, we construct angular-probabilistic trajectories (apt) of hid- den representations under different probing con- ditions: benign (b), jailbreak (j), plainquery (p) and an idealized refusal counterfactual (r). after normalizing these trajectories along a standardized progress axis, we model benign activations as a 28902 saferl default jailbreaked 0.045 0.050 0.055 0.060 0.065 0.070 jss jss (j vs r) median mean 10-1 100 101 102 efficiency vs best baseline (\u00d7) mixed (pyrit) autodan pair gptfuzzer cipher dan devmode multiling artprompt ours (jss-only) 117.5\u00d7 token efficiency figure 1: jss exhibits clear separability across safety states w"
+ },
+ {
+  "id": "P47",
+  "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+  "locator": "Appendix, Table 7",
+  "quote": "Table 7: Model Safety Benchmark Results",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "P48",
+  "source_url": "https://arxiv.org/html/2606.16349",
+  "locator": "Section 3.3 after Eq. (9)",
+  "quote": "It was not optimized against ASR, refusal, or utility outcomes",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": ")+\\frac{1}{2}c{\\mathrm{sub}}(t). | | (9) ---|---|---|--- the equal weighting is a fixed symmetry-based summary of two direct activation-space overlap measures. it was not optimized against asr, refusal, or utility outcomes; we therefore interpret hrcirepr\\mathrm{hrci}{\\mathrm{repr}} descriptively and report component-wise and sensitivity analyses separately. because selected carrier layers are discrete and may be sensitive to direction-selection details, we report normalized layer separation, | dlayer\u200b(t)=|lh\u200b(t)-lr\u200b(t)|l-1,d{\\mathrm{layer}}(t)=\\frac{|l{h}(t)-l{r}(t)|}{l-1}, | | (10) ---|---|---|--- as a separate localization diagnostic. for continuity with the initial tr"
+ },
+ {
+  "id": "P49",
+  "source_url": "https://arxiv.org/abs/2608.05086",
+  "locator": "Abstract",
+  "quote": "three interpretable factors of refusal strictness, truthfulness, and contextual harm explain most of the variance between models across benchmarks",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "y benchmarks across 192 language models, the largest psychometric analysis of llm safety evaluations to date, and contribute three results. first, we find that three interpretable factors of refusal strictness, truthfulness, and contextual harm explain most of the variance between models across benchmarks. second, psychometrically selected items recover full benchmark scores with lower error than random subsets of the same size, and roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%. third, irt supports audits of individual models, showing that it can be used to detect naive sandbagging and changes of model beh"
+ },
+ {
+  "id": "P50",
+  "source_url": "https://arxiv.org/html/2603.18353",
+  "locator": "Section 3.4",
+  "quote": "Hazard-feature steering at",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ssociated with hazard cases (q<0.05q<0.05). the top 20 hazard-associated features were clamped to their true-positive mean activation levels during generation. hazard-feature steering at 1\u00d71\\times tp-mean corrected 0 of 79 false negatives (0.0%, 95% ci 0.0 to 4.6%) while disrupting 0 of 65 true positives (0.0%, 95% ci 0.0 to 5.6%). amplification at 2\u00d72\\times tp-mean also produced no corrections or disruptions. the random-feature control corrected 0 of 79 false negatives while disrupting 0 of 65 true positives. ### 3.5 arm 3: logit lens and activation patching hazard-associated tokens never approached top vocabulary predictions at any layer for either true-positive or fals"
+ },
+ {
+  "id": "P51",
+  "source_url": "https://arxiv.org/html/2512.13655v2",
+  "locator": "Section 4.3, Table 4",
+  "quote": "Heretic | \u2212-0.78 | \u2212-7.81 | \u2212-0.56",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "P52",
+  "source_url": "https://arxiv.org/abs/2603.10012",
+  "locator": "Abstract",
+  "quote": "showing an absolute increase in answer rate of 66.5 points but an average relative decrease of 2% on other military tasks",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "c datasets and show their correlations with the gold dataset. finally, we perform abliteration using the heretic library on a military-tuned gpt-oss-20b model, showing an absolute increase in answer rate of 66.5 points but an average relative decrease of 2% on other military tasks. in our concluding remarks, we argue for deeper specialization, including with mid-training and end-to-end post-training, to achieve zero refusals and maximum military task accuracy for closed military models. comments: | 30 pages ---|--- subjects: | computation and language (cs.cl); artificial intelligence (cs.ai) cite as: | [arxiv:2603.10012](https://arxiv.org/abs/2603.10012) [cs.cl] | (or [ar"
+ },
+ {
+  "id": "P53",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Appendix A.2.4",
+  "quote": "Weights responsible for refusal behavior are removed via targeted pruning, eliminating the refusal mechanism entirely.",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "P54",
+  "source_url": "https://arxiv.org/html/2604.09544",
+  "locator": "Section 4",
+  "quote": "We also observe a symmetric relationship between response-generation and refusal: impairing one leaves the other intact, indicating a double dissociation",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "tion in which the pruned weights are specifically responsible for harmful response production. full cross-capability results and discussions are in appendix i. we also observe a symmetric relationship between response-generation and refusal: impairing one leaves the other intact, indicating a double dissociation (figure 5b). the weight sets for all four capabilities are largely disjoint (appendix i.2). additionally, fine-tuning on harmful examples largely restores generation, confirming that pruning impairs response production while preserving much of the underlying knowledge, although recovery is partial: in some cases, fine-tuned models mimic the structure of harmful co"
+ },
+ {
+  "id": "P55",
+  "source_url": "https://arxiv.org/abs/2609.14754",
+  "locator": "arXiv listing",
+  "quote": "Calibrating Interpretability Instruments Before Trusting Their Verdicts",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "r to search [advanced search](https://arxiv.org/search/advanced) # computer science > machine learning arxiv:2609.14754 (cs) [submitted on 13 sep 2026] # title:calibrating interpretability instruments before trusting their verdicts authors:[orion reblitz-richardson](https://arxiv.org/search/cs?searchtype=author&query=reblitz-richardson,+o) view a pdf of the paper titled calibrating interpretability instruments before trusting their verdicts, by orion reblitz-richardson [view pdf](/pdf/2609.14754) [html (experimental)](https://arxiv.org/html/2609.14754v1) > abstract:causal claims about large language model (llm) internals rest on measurements. those might include a project"
+ },
+ {
+  "id": "B01",
+  "source_url": "https://github.com/JolanMc/Jorak",
+  "locator": "README.md, top of file",
+  "quote": "**Reference-free** detection of **abliteration** in open-source LLMs \u2014 determining whether a model has been \"uncensored\" through directional ablation (Arditi et al. 2024 ; Heretic / Reaper / mlabonne) **without access to the original model**.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "6467652f646574656374696f6e2d7265666572656e63652d2d667265652d3841324245322e737667) > \ud83c\uddeb\ud83c\uddf7 version franc\u0327aise : [readmefr.md](/jolanmc/jorak/blob/main/readmefr.md) reference-free detection of abliteration in open-source llms - determining whether a model has been \"uncensored\" through directional ablation (arditi et al. 2024 ; heretic / reaper / mlabonne) without access to the original model. principle. abliteration orthogonalizes the refusal direction r\u0302 out of the weights that write into the residual stream (oproj, downproj): w' = (i - r\u0302r\u0302t)w, so r\u0302tw' = 0. the detectable signature = a live refusal axis that is disconnected from the weights , a combination that no fine-tuni"
+ },
+ {
+  "id": "B02",
+  "source_url": "https://github.com/JolanMc/Jorak",
+  "locator": "README.md, Principle section",
+  "quote": "**Principle.** Abliteration orthogonalizes the refusal direction `r\u0302` out of the weights that write into the residual stream (`o_proj`, `down_proj`): `W' = (I \u2212 r\u0302r\u0302\u1d40)W`, so `r\u0302\u1d40W' = 0`.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ing whether a model has been \"uncensored\" through directional ablation (arditi et al. 2024 ; heretic / reaper / mlabonne) without access to the original model. principle. abliteration orthogonalizes the refusal direction r\u0302 out of the weights that write into the residual stream (oproj, downproj): w' = (i - r\u0302r\u0302t)w, so r\u0302tw' = 0. the detectable signature = a live refusal axis that is disconnected from the weights , a combination that no fine-tuning reproduces. output. a provenance label - censored / ablated / finetuneddecensored / ambiguous - plus a confidence score and the affected layers. ## the signature at a glance [](/jolanmc/jorak/blob/main/docs/figures/heatmap-censo"
+ },
+ {
+  "id": "B03",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a71.5 `suppression`",
+  "quote": "`suppression_\u2113 = \u2016r\u0302\u1d40W\u2016 / (\u2016r\u0302\u2016\u00b7\u2016W\u2016_F)` pour `W \u2208 {o_proj, down_proj}`, par couche. \u2192 [`jorak.suppression`](../modelscanner/metrics/jorak.py).",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "e notre direction de refus r\u0302 reste-t-il dans les poids ? \u00bb. sert de signal de secours (ou) quand l'ablation a e\u0301te\u0301 faite exactement le long de r\u0302. \\- calcul. suppressionl = \u2016r\u0302tw\u2016 / (\u2016r\u0302\u2016\u00b7\u2016w\u2016f) pour w \u2208 {oproj, downproj}, par couche. \u2192 [jorak.suppression](../modelscanner/metrics/jorak.py). \\- interpre\u0301tation. pour un r\u0302 ale\u0301atoire, ce ratio vaut de\u0301ja\u0300 \u2248 1/\u221admodel (\u2248 0.0156 pour d=4096) : c'est le plancher. l'axe de refus est au-dessus sur un censure\u0301 (\u2248 0.038), et tombe au plancher nume\u0301rique (~2e-8) sur un ablitere\u0301 le long de r\u0302. on prend la me\u0301diane par couche. \\- exemple chiffre\u0301. calibration mesure\u0301e : censure\u0301 \u2248 0.038 vs ablitere\u0301 \u2248 2e-8. le seuil \u2264 1e-2 les se\u0301p"
+ },
+ {
+  "id": "B04",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a71.5 `suppression`, calibrated example",
+  "quote": "Calibration mesur\u00e9e : censur\u00e9 \u2248 `0.038` vs abliter\u00e9 \u2248 `2e-8`. Le seuil `\u2264 1e-2` les s\u00e9pare nettement (0.038 > 0.01 > 2e-8).",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "dessus sur un censure\u0301 (\u2248 0.038), et tombe au plancher nume\u0301rique (~2e-8) sur un ablitere\u0301 le long de r\u0302. on prend la me\u0301diane par couche. \\- exemple chiffre\u0301. calibration mesure\u0301e : censure\u0301 \u2248 0.038 vs ablitere\u0301 \u2248 2e-8. le seuil \u2264 1e-2 les se\u0301pare nettement (0.038 > 0.01 > 2e-8). \\- seuil. me\u0301diane \u2264 1e-2 (suppressionsevered). \\- \u26a0\ufe0f limite. downproj retire\u0301 du verdict (cf. [maintenance.md](maintenance.md) \u00a74) : sa bande est naturellement haute sur les bases \u2192 non discriminante. reste affiche\u0301e dans la heatmap pour la lecture, mais ne de\u0301cide pas. \\- rapport. lignes \u00ab oproj suppr. \u00bb / \u00ab downproj suppr. \u00bb de la heatmap ; cle\u0301s json mediansuppression, perlayer.suppression. "
+ },
+ {
+  "id": "B05",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a70, problem statement",
+  "quote": "L'id\u00e9e-cl\u00e9 **reference-free** : on n'a pas besoin de g\u00e9n\u00e9rer ni de comparer \u00e0 un original pour s\u00e9parer *censur\u00e9* de *ablated* \u2014 c'est la **signature spectrale des poids** (plan \u2460) qui dit si l'axe est d\u00e9branch\u00e9.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "e mode\u0300le | l'axe de refus est-il encore vivant dans les activations ? | | 3 behavioral | ge\u0301ne\u0301ration | ge\u0301ne\u0301rer du texte | le mode\u0300le refuse-t-il encore ? | l'ide\u0301e-cle\u0301 reference-free : on n'a pas besoin de ge\u0301ne\u0301rer ni de comparer a\u0300 un original pour se\u0301parer censure\u0301 de ablated - c'est la signature spectrale des poids (plan 1) qui dit si l'axe est de\u0301branche\u0301. le comportement (3) ne sert qu'a\u0300 confirmer / arbitrer et a\u0300 attraper l'ablation furtive. pourquoi trois plans et pas un seul ? chaque type d'attaque casse un plan diffe\u0301rent. une ablation directionnelle classique se voit au plan 1 (poids). une ablation furtive norm-preserving (obliteratus) laisse les poids qu"
+ },
+ {
+  "id": "B06",
+  "source_url": "https://arxiv.org/abs/2607.01854",
+  "locator": "Abstract",
+  "quote": "we combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": ", before deployment, whether an open-weight checkpoint has had its refusal mechanism stripped? runtime guards cannot: they score generations, not the artifact. we combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit. the two are negatively correlated and label-complementary: the gap supplies refusal-specificity and the weight energy supplies recall. on a 273-checkpoint registry spanning qwen, deepseek-distilled qwen, llama, and gemma, their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes"
+ },
+ {
+  "id": "B07",
+  "source_url": "https://github.com/JolanMc/Jorak",
+  "locator": "README.md, 'Jorak \u2014 three detection techniques'",
+  "quote": "**Jorak** is the project (this scanner and the report it produces). It is not a single metric but a bundle of **three complementary detection techniques**... **Weights \u2014 spectral signature (SVD)** (the _smoking-gun_ , CPU, no inference).",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": " over flags? run modelscanner tui (full-screen wizard). the rest of this readme is reference - start above, dig in below. ## jorak - three detection techniques jorak is the project (this scanner and the report it produces). it is not a single metric but a bundle of three complementary detection techniques , one per angle of attack: weights - spectral signature (svd) (the smoking-gun , cpu, no inference). three signals: global alignment a (full ablation), band alignment b (localized/stealthy ablation, heretic-style), and subspace alignment s (bottom-k shared subspace - catches multi-direction ablation, e.g. obliteratus ndirections > 1, which a single umin dilutes). activat"
+ },
+ {
+  "id": "B08",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a71, Plan \u2460 intro",
+  "quote": "C'est **le c\u0153ur** du projet (\u00ab la technique mise en avant \u00bb). NumPy pur, sans inf\u00e9rence. Intuition physique : une ablation directionnelle r\u00e9\u00e9crit les poids qui **\u00e9crivent dans le r\u00e9sidu** (`o_proj` de l'attention, `down_proj` du MLP) pour que la direction de refus `r\u0302` **ne puisse plus y \u00eatre \u00e9crite**... Apr\u00e8s \u00e7a, `r\u0302` tombe dans le **noyau gauche** de `W'` (valeur singuli\u00e8re \u2248 0). On cherche cette signature, couche par couche, par SVD.",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "l'axe : seul le comportement le distingue d'un censure\u0301. la robustesse vient du croisement des trois. \\--- ## 1. plan 1 - jorak : signature spectrale des poids c'est le c\u0153ur du projet (\u00ab la technique mise en avant \u00bb). numpy pur, sans infe\u0301rence. intuition physique : une ablation directionnelle re\u0301e\u0301crit les poids qui e\u0301crivent dans le re\u0301sidu (oproj de l'attention, downproj du mlp) pour que la direction de refus r\u0302 ne puisse plus y e\u0302tre e\u0301crite : w' = (i - r\u0302r\u0302t)w. apre\u0300s c\u0327a, r\u0302 tombe dans le noyau gauche de w' (valeur singulie\u0300re \u2248 0). on cherche cette signature, couche par couche, par svd. ### 1.1 svdalignment - alignement svd global a (le smoking-gun) \\- pourquoi. c'"
+ },
+ {
+  "id": "B09",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a71.1 `svd_alignment` A",
+  "quote": "**Calcul.** Pour chaque couche, on prend `u_min` = le vecteur singulier gauche de **plus petite** valeur singuli\u00e8re de `W`... On empile les `u_min` en `U \u2208 \u211d^{n\u00d7d_model}`, puis **A = \u03c3\u2081(U) / \u2016U\u2016_F** (fraction de l'\u00e9nergie capt\u00e9e par la 1\u02b3\u1d49 direction singuli\u00e8re de `U`).",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "direction ablite\u0301re\u0301e me\u0302me si elle diffe\u0300re de notre r\u0302 mean-diff, et sans aucune sonde ni forward - donc il passe a\u0300 l'e\u0301chelle des gros mode\u0300les sur cpu. \\- calcul. pour chaque couche, on prend umin = le vecteur singulier gauche de plus petite valeur singulie\u0300re de w (la direction \u00ab la moins e\u0301crite \u00bb). on empile les umin en u \u2208 r^{n\u00d7dmodel}, puis a = \u03c31(u) / \u2016u\u2016f (fraction de l'e\u0301nergie capte\u0301e par la 1re direction singulie\u0300re de u). \u2192 [jorak.uminsignature / weightsignatures](../modelscanner/metrics/jorak.py). \\- interpre\u0301tation. sur un mode\u0300le sain, les umin pointent un peu partout (\u2248 ale\u0301atoires) \u2192 a \u2248 1/\u221an. sur un ablitere\u0301, toutes les couches ont vu retirer la me\u0302"
+ },
+ {
+  "id": "B10",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a71.1, numeric example",
+  "quote": "**Qwen/Qwen3-8B (base, censur\u00e9)** : `A = 0.184` \u2248 le plancher 0.167 \u2192 `u_min` dispers\u00e9s, **aucune** direction partag\u00e9e \u2192 poids intacts. \u2714 **Josiefied-Qwen3-8B-abliterated-v1** : `A = 0.705` \u2192 forte direction commune \u2192 poids sectionn\u00e9s. \u2714",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "t vu retirer la me\u0302me direction \u2192 leurs umin s'alignent \u2192 a tend vers 1. \\- exemple chiffre\u0301. qwen3-8b \u2192 n = 36 \u2192 plancher ale\u0301atoire attendu 1/\u221a36 = 0.167. \\- qwen/qwen3-8b (base, censure\u0301) : a = 0.184 \u2248 le plancher 0.167 \u2192 umin disperse\u0301s, aucune direction partage\u0301e \u2192 poids intacts. \u2714 \\- josiefied-qwen3-8b-abliterated-v1 : a = 0.705 \u2192 forte direction commune \u2192 poids sectionne\u0301s. \u2714 le fait que la base tombe pile sur 1/\u221an valide la calibration. \\- seuil. a \u2265 0.5 \u21d2 poids sectionne\u0301s (svdalignsevered). \\- rapport. carte \u00ab alignement svd global \u00bb + tooltip svdglobal ; cle\u0301 json results.svdalignmentglobal. ### 1.2 bandalignment - alignement de bande b (ablation localise\u0301e) \\-"
+ },
+ {
+  "id": "B11",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "docs/METRICS.md \u00a71.3 `subspace_alignment` S",
+  "quote": "Les ablations modernes (**OBLITERATUS**, Gabliteration) retirent un **sous-espace de k directions** (`n_directions \u2248 4`), pas une seule. Le `u_min` mono-direction **rate/dilue** ce cas... On agr\u00e8ge les projecteurs `M = \u03a3_\u2113 B_\u2113 B_\u2113\u1d40`, puis **S = (somme des k plus grandes valeurs propres de M) / (n\u00b7k)**.",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "heatmap, tooltip band ; cle\u0301s json bandalignment + touchedband. ### 1.3 subspacealignment - alignement de sous-espace bottom-k s (multi-direction) \\- pourquoi. les ablations modernes (obliteratus, gabliteration) retirent un sous-espace de k directions (ndirections \u2248 4), pas une seule. le umin mono-direction rate/dilue ce cas : chaque couche pioche un membre diffe\u0301rent du sous-espace, donc aucun umin partage\u0301 \u2192 a reste bas malgre\u0301 l'ablation. \\- calcul. par couche on prend les k plus petits vecteurs singuliers gauches bl \u2208 r^{dmodel\u00d7k}. on agre\u0300ge les projecteurs m = \u03c3l bl blt, puis s = (somme des k plus grandes valeurs propres de m) / (n\u00b7k). \u2192 [jorak.subspacesignature / w"
+ },
+ {
+  "id": "B12",
+  "source_url": "https://github.com/JolanMc/Jorak",
+  "locator": "README.md, Status (v0.1.0)",
+  "quote": "Detector **complete and validated** on a real matrix of 4 models derived from `Qwen2.5-0.5B` \u2014 **accuracy 4/4**",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "/howtouse.md) (setup, recipes, how to read the results). gpu/aws porting: [docs/awsrunbook.md](/jolanmc/jorak/blob/main/docs/awsrunbook.md). ## status (v0.1.0) detector complete and validated on a real matrix of 4 models derived from qwen2.5-0.5b - accuracy 4/4 : model | verdict | a (global) | b (band) | refusal ---|---|---|---|--- qwen2.5-0.5b-instruct | censored | 0.24 | 0.28 | 0.88 huihui ...-abliterated | ablated | 0.90 | 0.99 | 0.06 grisun0 ...-heretic (localized) | ablated | 0.29 | 0.67 | - dolphin3.0-qwen2.5-0.5b | finetuneddecensored | 0.24 | 0.28 | 0.06 false positive (fine-tuned) avoided; stealthy ablation (heretic) caught by the band criterion. multi-direction "
+ },
+ {
+  "id": "B13",
+  "source_url": "https://github.com/JolanMc/Jorak",
+  "locator": "",
+  "quote": "**Reference-free** detection of **abliteration** in open-source LLMs \u2014 determining whether a model has been \"uncensored\" through directional ablation (Arditi et al. 2024 ; Heretic / Reaper / mlabonne) **without access to the original model**.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "6467652f646574656374696f6e2d7265666572656e63652d2d667265652d3841324245322e737667) > \ud83c\uddeb\ud83c\uddf7 version franc\u0327aise : [readmefr.md](/jolanmc/jorak/blob/main/readmefr.md) reference-free detection of abliteration in open-source llms - determining whether a model has been \"uncensored\" through directional ablation (arditi et al. 2024 ; heretic / reaper / mlabonne) without access to the original model. principle. abliteration orthogonalizes the refusal direction r\u0302 out of the weights that write into the residual stream (oproj, downproj): w' = (i - r\u0302r\u0302t)w, so r\u0302tw' = 0. the detectable signature = a live refusal axis that is disconnected from the weights , a combination that no fine-tuni"
+ },
+ {
+  "id": "B14",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "",
+  "quote": "On re\u00e7oit **un seul mod\u00e8le**, sans son original, sans GPU garanti, et on veut dire **comment ses garde-fous ont boug\u00e9** : intacts (censur\u00e9), *d\u00e9branch\u00e9s par ablation directionnelle* (ablated), ou *dissous par fine-tuning* (decensored).",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "er/scanner.py), > [report.py](../modelscanner/report.py), > [experiments/campaignreport.py](../experiments/campaignreport.py). ## 0. le proble\u0300me en une phrase on rec\u0327oit un seul mode\u0300le, sans son original, sans gpu garanti, et on veut dire comment ses garde-fous ont bouge\u0301 : intacts (censure\u0301), de\u0301branche\u0301s par ablation directionnelle (ablated), ou dissous par fine-tuning (decensored). trois plans de mesure inde\u0301pendants, du moins cher au plus cher : | plan | cou\u0302t | a besoin de... | question | |---|---|---|---| | 1 jorak (poids) | cpu, aucune sonde | les tenseurs seuls | la direction de refus est-elle sectionne\u0301e des poids ? | | 2 activations | 1 forward (gpu utile) | e"
+ },
+ {
+  "id": "B15",
+  "source_url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+  "locator": "",
+  "quote": "**\u2460 JORAK (poids)** | CPU, aucune sonde | les tenseurs seuls | la direction de refus est-elle **sectionn\u00e9e des poids** ?",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ar fine-tuning (decensored). trois plans de mesure inde\u0301pendants, du moins cher au plus cher : | plan | cou\u0302t | a besoin de... | question | |---|---|---|---| | 1 jorak (poids) | cpu, aucune sonde | les tenseurs seuls | la direction de refus est-elle sectionne\u0301e des poids ? | | 2 activations | 1 forward (gpu utile) | exe\u0301cuter le mode\u0300le | l'axe de refus est-il encore vivant dans les activations ? | | 3 behavioral | ge\u0301ne\u0301ration | ge\u0301ne\u0301rer du texte | le mode\u0300le refuse-t-il encore ? | l'ide\u0301e-cle\u0301 reference-free : on n'a pas besoin de ge\u0301ne\u0301rer ni de comparer a\u0300 un original pour se\u0301parer censure\u0301 de ablated - c'est la signature spectrale des poids (plan 1) qui dit si l'axe"
+ },
+ {
+  "id": "B16",
+  "source_url": "https://github.com/JolanMc/Jorak",
+  "locator": "",
+  "quote": "Detector **complete and validated** on a real matrix of 4 models derived from `Qwen2.5-0.5B` \u2014 **accuracy 4/4**",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "/howtouse.md) (setup, recipes, how to read the results). gpu/aws porting: [docs/awsrunbook.md](/jolanmc/jorak/blob/main/docs/awsrunbook.md). ## status (v0.1.0) detector complete and validated on a real matrix of 4 models derived from qwen2.5-0.5b - accuracy 4/4 : model | verdict | a (global) | b (band) | refusal ---|---|---|---|--- qwen2.5-0.5b-instruct | censored | 0.24 | 0.28 | 0.88 huihui ...-abliterated | ablated | 0.90 | 0.99 | 0.06 grisun0 ...-heretic (localized) | ablated | 0.29 | 0.67 | - dolphin3.0-qwen2.5-0.5b | finetuneddecensored | 0.24 | 0.28 | 0.06 false positive (fine-tuned) avoided; stealthy ablation (heretic) caught by the band criterion. multi-direction "
+ },
+ {
+  "id": "C01",
+  "source_url": "https://arxiv.org/html/2609.01936v1",
+  "locator": "Section 6 'Future Work'",
+  "quote": "Safety audits can use SRP wherever the question admits a concrete readout score. A study can define a group contrast for refusal, source verification, or a specified lexical family, compare its feature contributions across paraphrases, languages, adversarial prompts, and checkpoints, and treat the features that recur as nominations for causal tests or constrained interventions.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "uage and size of the fitting corpus, while the dominant readout feature remains stable across these changes and across two lens constructions. ## 6 future work safety audits can use srp wherever the question admits a concrete readout score. a study can define a group contrast for refusal, source verification, or a specified lexical family, compare its feature contributions across paraphrases, languages, adversarial prompts, and checkpoints, and treat the features that recur as nominations for causal tests or constrained interventions. the evaluation should report reconstruction error, transfer, distributional cost, and effects on other outputs, so the safety claim stays t"
+ },
+ {
+  "id": "C02",
+  "source_url": "https://arxiv.org/abs/2506.24056",
+  "locator": "Abstract",
+  "quote": "We introduce the refusal-affirmation logit gap: the difference between the top refusal-token logit and the top affirmative-token logit at the first decoding step. This single scalar quantifies the per-prompt safety margin that alignment provides.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "html/2506.24056v2) > abstract:rlhf-style alignment trains language models to refuse unsafe requests, but how much operational margin does this refusal rest on? we introduce the refusal-affirmation logit gap: the difference between the top refusal-token logit and the top affirmative-token logit at the first decoding step. this single scalar quantifies the per-prompt safety margin that alignment provides. empirically, alignment widens the gap on 97.5-99.8% of toxic prompts across three model families, and median gap closure co-varies with true-asr ranking across suffix strategies (an internal consistency check, since our method optimises gap closure). to validate the metric"
+ },
+ {
+  "id": "C03",
+  "source_url": "https://arxiv.org/html/2506.24056v2",
+  "locator": "Section 3, 'Empirical check (base vs. aligned)'",
+  "quote": "Median gap shifts: Qwen2.5-0.5B \u22123.8\u2192+1.5; Llama-3.2-1B +0.8\u2192+12.7; gemma-2b +2.4\u2192+14.8. Aligned exceeds base on 97.5\u201399.8% of prompts, with mean shifts +5.0/+11.4/+11.6 logit units.",
+  "status": "valid",
+  "match_type": "partial-10w",
+  "context": " all 520 advbench prompts (fig. 2). median gap shifts: qwen2.5-0.5b -3.8\u2192+1.5-3.8\\to+1.5; llama-3.2-1b +0.8\u2192+12.7+0.8\\to+12.7; gemma-2b +2.4\u2192+14.8+2.4\\to+14.8. aligned exceeds base on 97.5-99.8% of prompts, with mean shifts +5.0+5.0/+11.4+11.4/+11.6+11.6 logit units. for the aligned models, the toxic-prompt refusal-logit distribution lies to the right of the benign-prompt distribution (fig. 9), confirming alignment elevates lrefusal\\ell{\\text{refusal}} specifically on toxic input. position-1 decision census. treating the gap at position 1 as the decision point requires that refusals actually emerge at position 1. we tested this with the refusal-token set r\\mathcal{r} defi"
+ },
+ {
+  "id": "C04",
+  "source_url": "https://arxiv.org/abs/2406.11717",
+  "locator": "Abstract",
+  "quote": "In this work, we show that refusal is mediated by a one-dimensional subspace, across 13 popular open-source chat models up to 72B parameters in size.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "obey benign requests but refuse harmful ones. while this refusal behavior is widespread across chat models, its underlying mechanisms remain poorly understood. in this work, we show that refusal is mediated by a one-dimensional subspace, across 13 popular open-source chat models up to 72b parameters in size. specifically, for each model, we find a single direction such that erasing this direction from the model's residual stream activations prevents it from refusing harmful instructions, while adding this direction elicits refusal on even harmless instructions. leveraging this insight, we propose a novel white-box jailbreak method that surgically disables refusal with min"
+ },
+ {
+  "id": "C05",
+  "source_url": "https://arxiv.org/html/2406.11717v3",
+  "locator": "Appendix, direction selection filters",
+  "quote": "This condition ensures that the direction is not too close to the unembedding directions. Intuitively, one could disable refusal by preventing the model from writing to refusal unembed directions... However, we restrict our search to higher level features, and do not prevent the model from outputting specific tokens",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "C06",
+  "source_url": "https://arxiv.org/html/2607.14147v1",
+  "locator": "Section 6/7 body text, concentration definition",
+  "quote": "For each early-window generated step we record the softmax mass on refusal-onset tokens (p_refuse) and the probability of the compliance continuation (p_comply)... and define concentration = \u0394p_refuse/(\u2212\u0394p_comply): of the probability the knockout strips off compliance, the fraction that lands on refusal.",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "C07",
+  "source_url": "https://arxiv.org/html/2607.14147v1",
+  "locator": "Body text immediately following the concentration definition",
+  "quote": "But the instruct model routes the freed mass to refusal far more than the base model (concentration 0.24 vs 0.03; prefill-specific p_refuse gain +1.3pp vs matched +0.1pp)... Instruct 60 prompts; base as anchor. Measure-only, experiments/modal_active_probe.py.",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "C08",
+  "source_url": "https://arxiv.org/abs/2607.14147",
+  "locator": "Abstract",
+  "quote": "A small safety-specific attractor remains on top (logit-trace concentration 0.24 vs 0.03), whose active-vs-passive character we size but do not fully separate.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "neric autoregressive conditioning, not safety-specific suppression, and \"refusal restoration\" is a model-dependent fallback. the dominant mechanism is passive. a small safety-specific attractor remains on top (logit-trace concentration 0.24 vs 0.03), whose active-vs-passive character we size but do not fully separate. no single direction or component is a clean handle either: the decision is decodable but distributed, and refusal tracks harm rather than scary surface. the consequence is structural: a monitor reading the untouched prompt-side representation is immune by construction, but only to response-site attacks. the mechanism is diffuse; the failure surface is local."
+ },
+ {
+  "id": "C09",
+  "source_url": "https://arxiv.org/html/2609.14759v1",
+  "locator": "Abstract / Section on causal core",
+  "quote": "The central result is causal and comes from one model, OLMo-3... about three-quarters of refusal's causal input lies outside the moral subspace altogether... (the rank sweep below reports 76% outside the rank-16 basis)",
+  "status": "valid",
+  "match_type": "partial-11w",
+  "context": "fusal's response transfers: as the basis widens, moral judgment keeps reading more of it, while refusal levels off at the level of a single harm direction, and about three-quarters of refusal's causal input lies outside the moral subspace altogether. refusal reads the harm percept, not the moral content that judgment reads on the same patches. the picture is not uniform across families. llama reads broad moral content; qwen reads beyond the single harm cue but is unresolved at our sample size; gpt-oss reads harm, and its refusals can be argued in either direction by its own reasoning trace. where refusal reads only a low- rank slice and routes around the bulk of what the "
+ },
+ {
+  "id": "C10",
+  "source_url": "https://arxiv.org/abs/2609.14759",
+  "locator": "Abstract",
+  "quote": "The picture is not uniform across families. Llama reads broad moral content; Qwen reads beyond the single harm cue but is unresolved at our sample size; GPT-OSS reads harm, and its refusals can be argued in either direction by its own reasoning trace.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "fusal's causal input lies outside the moral subspace altogether. refusal reads the harm percept, not the moral content that judgment reads on the same patches. the picture is not uniform across families. llama reads broad moral content; qwen reads beyond the single harm cue but is unresolved at our sample size; gpt-oss reads harm, and its refusals can be argued in either direction by its own reasoning trace. where refusal reads only a low-rank slice and routes around the bulk of what the model knows, a rank-one edit removes it. whether widening what refusal reads would also deepen the behavior is the open question this raises. comments: | 34 pages, 6 figures, 15 tables. c"
+ },
+ {
+  "id": "C11",
+  "source_url": "https://arxiv.org/abs/2508.09224",
+  "locator": "",
+  "quote": "We incorporated this approach into GPT-5 and find that across both production comparisons and internally controlled experiments, safe-completion training improves safety (especially on dual-use prompts), reduces the severity of residual safety failures, and substantially increases model helpfulness.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "stant's output, rather than a binary classification of the user's intent. safe-completions seek to maximize helpfulness within the safety policy's constraints. we incorporated this approach into gpt-5 and find that across both production comparisons and internally controlled experiments, safe-completion training improves safety (especially on dual-use prompts), reduces the severity of residual safety failures, and substantially increases model helpfulness. subjects: | computers and society (cs.cy); artificial intelligence (cs.ai); computation and language (cs.cl) ---|--- cite as: | [arxiv:2508.09224](https://arxiv.org/abs/2508.09224) [cs.cy] | (or [arxiv:2508.09224v1](htt"
+ },
+ {
+  "id": "C12",
+  "source_url": "https://arxiv.org/abs/2607.02047",
+  "locator": "",
+  "quote": "Our results suggest that safe completion should be evaluated as intent-calibrated behavior over controlled task variants, not as a single safety-helpfulness tradeoff over independent prompts.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " risky topics are not reliably safe, and responses that reframe ambiguous requests into safer tasks are substantially less likely to cross the safety boundary. our results suggest that safe completion should be evaluated as intent-calibrated behavior over controlled task variants, not as a single safety-helpfulness tradeoff over independent prompts. comments: | preprint ---|--- subjects: | computation and language (cs.cl); artificial intelligence (cs.ai) cite as: | [arxiv:2607.02047](https://arxiv.org/abs/2607.02047) [cs.cl] | (or [arxiv:2607.02047v1](https://arxiv.org/abs/2607.02047v1) [cs.cl] for this version) | <https://doi.org/10.48550/arxiv.2607.02047> focus to learn"
+ }
+]

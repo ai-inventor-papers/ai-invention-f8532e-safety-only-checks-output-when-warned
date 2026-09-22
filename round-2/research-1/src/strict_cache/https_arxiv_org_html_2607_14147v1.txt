@@ -1,0 +1,289 @@
+
+
+##### Report GitHub Issue
+
+×
+
+Title:
+
+Content selection saved. Describe the issue below:
+
+Description:
+
+Submit without GitHub Submit in GitHub
+
+arXiv is now an independent nonprofit! [Learn more](https://info.arxiv.org/about) ×
+
+[ Back to arXiv ](/)
+
+[Why HTML?](https://info.arxiv.org/about/accessible_HTML.html) Report Issue [ Back to Abstract ](/abs/2607.14147v1 "Back to abstract page") [ Download PDF](/pdf/2607.14147v1 "Download PDF") [ ](javascript:toggleNavTOC\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. 1 Introduction
+     1. Relation to prior work.
+     2. Contributions.
+  3. 2 Setup
+     1. Models.
+     2. Data.
+     3. The attack.
+     4. The probe.
+  4. 3 The phenomenon: represented but not refused
+     1. Harm is strongly represented.
+     2. The attack changes behavior; it cannot change the prompt-side read.
+     3. Is the probe reading harm, or scary words?
+     4. A design consequence: a prompt-side monitor is immune to this attack.
+  5. 4 The mechanism
+     1. 4.1 Refusal restoration is response-site and concentrated in an early window (causal patching)
+        1. Position control: the attack’s grip is an early response window, not the whole response and not a single token.
+        2. Robustness of the early window (boundary, prefill-exclusion, prefill length, sampling).
+     2. 4.2 The reversal is early-window too: the model’s own refuse-state re-induces refusal (state transfer)
+        1. Design (measure-only, held-out, Qwen2.5-1.5B, L12).
+        2. Result: state-specific, early-gated, and a working lever (held-out).
+        3. Benign-sparing, and a syntax-vs-content byproduct.
+     3. 4.3 Cutting early attention to the prefill restores refusal, generically (attention knockout)
+        1. Design (edge knockout, mass-matched control; n=100n=100, Qwen2.5-1.5B, all layers/heads).
+        2. Result: prefill-specific, early-window-gated, and harm-selective.
+        3. What this settles: the grip is generic, not safety-specific.
+        4. The generic story extends to the early MLP pathway.
+     4. 4.4 The onset projection is illustrative (and confounded)
+     5. 4.5 Steering fails; monitoring works
+        1. Why response-site patching spares benign but global steering does not: the injection site.
+  6. 5 What refusal reads: harm, not surface
+     1. Off ceiling (SmolLM2).
+     2. A retracted reading.
+     3. 5.1 Is there a separate refusal direction? A decision-direction search
+        1. Across scale (within family).
+        2. Refusal is not selectively ablatable.
+        3. Not specific to surface harm (exploratory).
+  7. 6 Related work
+  8. 7 Limitations
+  9. 8 Conclusion
+  10. References
+  11. A Claims and evidence
+  12. B Reproduction and data
+     1. Data.
+     2. Models and environment.
+     3. Probe, attack, and refusal.
+     4. Determinism.
+     5. State-transfer experiment (§).
+     6. Attention-knockout experiment (§, App. ).
+  13. C Full per-model results and the XSTest control
+     1. Surface control (Table ).
+  14. D Patching grids and the benign control
+     1. Cell selection and the bootstrap.
+     2. Dose-matched positional control.
+  15. E Attention-knockout: unit tests, control matching, and the full matrix
+     1. Intervention and the onset caveat.
+     2. Unit tests (all pass before any behavioral run).
+     3. Mass-matched control.
+     4. Full matrix and contrasts.
+     5. Held-out replications of the two causal handles (§, §).
+     6. Active-vs-passive: base-model discriminator.
+     7. Active-vs-passive: logit-level decomposition (a small active component).
+     8. The MLP pathway (closing the accounting gap on the generic side).
+     9. Clean path patch: the early MLP pathway is generic.
+     10. Reviewer robustness checks (boundary, prefill-exclusion, prefill length, sampling, benign-sparing).
+     11. Scale (Qwen2.5-7B).
+  16. F The steering nulls
+  17. G The pre-registered 2×22\times 2
+     1. Construction.
+     2. Results.
+  18. H The refusal-direction search
+  19. I The intent-axis extension
+  20. J Refusal is not selectively ablatable (the head-ablation arc)
+     1. At 1414B (Phi-3-medium, heavily safety-trained).
+  21. K What did not work
+     1. Two off-thesis nulls (in brief; full detail in the ledger).
+     2. An attack-surface map (exploratory).
+  22. L Controls ledger: every adversarial check and its verdict
+
+
+
+[ License: CC BY 4.0 ](https://info.arxiv.org/help/license/index.html#licenses-available)
+
+arXiv:2607.14147v1 [cs.CL] 14 Jul 2026
+
+# Breaking Refusal in the First Half   
+A Mechanistic Study of the Prefill JailbreakThanks: Code, data, and the full reproducible experiment ledger: <https://github.com/collapseindex/breaking-refusal>
+
+Alex Kwon ask@collapseindex.org Affiliation: Independent Researcher
+
+###### Abstract
+
+Aligned language models refuse harmful requests, but a one-line prefill (“Sure, here is”) strips the refusal. We ask where and how it fails. The harm representation stays intact: on the very prompts the attack flips to compliance, a linear probe reads harm as high as on the refused ones (0.910.91–0.980.98), while behavioral refusal drops to chance. This holds across four models and three families (1.51.5–3.83.8B, and at 1414B). Refusal is therefore a shallow, response-site computation. We localize it to an _early window_ : a dose-matched position control shows the first half of the response suffices to break refusal, while the second half is nearly inert. Three causal probes converge on that window. Restoring the harm direction there partially re-engages refusal. Injecting the model’s own refuse-state reverses the jailbreak (→74%\to 74\%, held-out). And knocking out the early response’s attention to the prefill, but not an equal attention mass elsewhere, selectively collapses the harmful continuation. What kind of mechanism is this? A base-model control answers: the same knockout collapses the continuation _prefill-specifically_ even in a non-safety-tuned base model (64%→25%64\%\to 25\% harmful content vs a matched control’s 64%64\%, replicated at 77B). So the prefill’s grip is generic autoregressive conditioning, not safety-specific suppression, and “refusal restoration” is a model-dependent fallback. The dominant mechanism is passive. A small safety-specific attractor remains on top (logit-trace concentration 0.240.24 vs 0.030.03), whose active-vs-passive character we size but do not fully separate. No single direction or component is a clean handle either: the decision is decodable but distributed, and refusal tracks harm rather than scary surface. Every reported effect is one that passed its controls. The practical consequence is structural: a monitor reading the untouched prompt-side representation is immune to this attack by construction, though only to response-site attacks. The mechanism is diffuse; the failure surface is local.
+
+Figure 1: The prefill’s grip is an early response window (the central finding). Restoring the harm direction over a dose-matched band of the response under the attack (n=100n=100, Qwen2.5-1.5B, L12/α=1\alpha{=}1; §4.1, App. D): the _first half_ restores refusal to 42%42\%, as much as the whole response (41%41\%), while the _second half_ restores only 6%6\% at double strength and the onset alone 9%9\%. An early multi-token window suffices; the late response carries no weight.
+
+## 1 Introduction
+
+Aligned language models refuse harmful requests, and that refusal is easily removed. Prepend an affirmative prefix to the model’s own turn (“Sure, here is”) and many models continue straight into the harmful content they would otherwise decline (Wei et al., 2023; Qi et al., 2025). The fragility is well documented _behaviorally_ : we know the attack works. We ask the mechanistic question underneath it. The prefill appends to the model’s _own response_ , so it cannot touch the representation the model has already computed over the prompt; the question is therefore not whether that representation is preserved under the attack (structurally, it must) but whether the model builds a strong harm representation there at all, and if so, why the refusal decision ignores it.
+
+This localizes what kind of defense is possible. A behavioral gate is defeated by the attack; a monitor that reads the prompt-side harm representation is not, because the attack never reaches that representation, though this prompt-side placement is already how production input classifiers work, so the observation is about placement, not a new detector. The scientific question that remains is why a model that represents the request as harmful nonetheless complies, that is, where the refusal decision overriding the representation is computed.
+
+Empirically, the model builds a full-strength harm representation on the flipped prompts (probe 0.910.91–0.980.98, as high as on the ones it refuses) while behavioral refusal drops to chance, across four models and three families (§3). But the sharper mechanistic statement is that the gate is not _ignoring_ harm, it is being _overpowered_ : under a full-strength prefill essentially every prompt flips, so harm cannot predict who complies, yet under a _weakened_ prefill where a real split exists, harm strength predicts refuse-vs-comply (AUC 0.630.63–0.720.72, n=70n=70; §5.1). And the gate’s failure is localized to an early window: a dose-matched position control shows that restoring the harm signal over the _first half_ of the response recovers refusal as much as the whole response, while the second half recovers almost nothing and the onset token alone only 9%9\% (§4). We use _overpowered_ descriptively: the evidence fixes _where_ refusal fails, an early window, but does not separate active suppression from passive autoregressive conditioning (§7). We then pin down what the gate reads (§5) and show it has no compact internal handle (§5.1).
+
+#### Relation to prior work.
+
+Two lines are adjacent (§6). Qi et al. (2025) show safety alignment is “shallow” in _token depth_ : the refusal decision is carried by the first few output tokens, and attacks that get past them succeed. We go past that behavioral picture on three fronts. First, we localize the failure causally, not just correlating depth with success, to an early multi-token _window_ rather than a first-token count. Second, we show the causal converse: transplanting the refuse-state re-induces refusal. Third, the base-model discriminator identifies the prefill’s grip as generic autoregressive conditioning rather than a defeated safety-specific gate, a distinction depth-shallowness alone does not make. Arditi et al. (2024) show refusal is mediated by a single _direction_ in activation space. Closest, concept-level work shows a model still _recognizes_ toxicity under a jailbreak while complying (Zhang et al., 2025c), but attributes the behavior-flip to a competing _prompt-side_ “jailbreak concept” that overrides it. Our contribution is positional and causal. The representational half is a clarification, not a discovery: because prefill leaves the prompt untouched, the harm representation there is trivially unchanged, and the useful contrast is with _prompt-modifying_ jailbreaks (the ones that literature studies), which do move or attenuate the prompt-side representation. Our substantive claims are mechanistic: refusal is computed at the response site and the attack operates there; and the harm direction is an excellent read-out but only a partial, non-selective write-handle for the refusal action. The prompt-side account cannot explain the prefill attack at all. Prefill adds nothing to the prompt, so there is no prompt-side jailbreak concept to override anything. The flip is _response-site_ , and we localize it there. The template (read what a model represents versus what it acts on) is the one we used for communicative intent in prior work (Kwon, 2026); here it is pointed at safety.
+
+#### Contributions.
+
+  * •
+
+A quantitative dissociation under prefill (§3). On the very prompts a prefill attack flips to compliance, the harm representation is not degraded but _intact_ : a probe scores the complied prompts at 0.910.91–0.980.98, level with the ones the model refuses, while behavioral refusal collapses to chance. This replicates across four models and three families (1.51.5–3.83.8B, weak and strong gates). Unlike the prompt-modifying jailbreaks prior work studies, prefill leaves the representation _quantitatively_ unchanged, not merely present-but-attenuated.
+
+  * •
+
+A response-site causal mechanism (§4). We localize refusal causally, not just correlationally: adding the harm direction back across the response positions partially restores refusal (harm 3333–48%48\% at two fixed cells vs a matched-norm random control’s 1414–16%16\%; harm−-random +17+17 to +34+34pp at n=100n=100, both significant), so the intact representation is upstream of the gate, not epiphenomenal. A dose-matched position control localizes the effect to an _early window_ of the response (the first half restores as much as the whole; the second half is nearly inert), more than a single onset token but not the whole generation. The converse holds in the same window and is state-specific: transplanting the model’s own refuse-state into the attack re-induces refusal (→74%\to 74\% held-out, first half == whole response), matched by a random control at 0%0\%, a working lever where the single harm direction is only partial. And the grip operates through early-window attention: knocking out the early response’s attention to the prefill (but not an equal mass elsewhere) restores refusal +21+21pp (CI [+12,+30][+12,+30]), harm-selectively and early-window-gated. A base-model control identifies this as _generic_ autoregressive conditioning, not safety-specific active suppression (the non-safety-tuned base model shows the same prefill-specific collapse, at both 1.51.5B and 77B), resolving the paper’s central open question toward the passive reading. The dramatic full-residual “restoration” is generic disruption, since a benign-patch control also hits 100%100\%. Replicated on two families, and the discriminator holds at 77B.
+
+  * •
+
+A defensive consequence, and its scope (§3, §4.5). Read as a monitor, the intact representation catches 100%100\% of the attack at 0%0\% false positive. The scope is narrow, in three ways. First, this 100%/0%100\%/0\% is in-distribution: the probe is AdvBench-calibrated (it fires at 0.970.97 on that phrasing but 0.490.49 on differently-worded unsafe prompts, and a mixed-source fix wrecked specificity), so a source-general detector is unbuilt. Second, it is only a response-site guarantee, and the placement is not novel (input classifiers already sit prompt-side). Third, steering the same direction does _not_ close the gap: the harm direction is a read-out, not a write-handle.
+
+  * •
+
+What the gate reads (§5). A pre-registered harm ×\times surface 2×22\times 2 that decorrelates harm from trigger-word surface shows refusal is harm-primary and the harm representation keyword-invariant, with a real but secondary surface-driven over-refusal on benign inputs. A matched-contrast search finds no single refusal-decision _direction_ (any one reads ≤0.73\leq 0.73 and none steers), yet a full linear probe reads the decision at ∼0.85\sim 0.85: within the Qwen family the decision is decodable but _multidimensional_ , not a single steerable feature (SmolLM2 is a single-direction counterexample; cross-family is open).
+
+
+
+
+Every headline effect is checked against a control that can demote it, and several do; the claims-and-evidence table (Table 5, Appendix A) records each claim that passed with its evidence and the demoted versions (full-residual disruption, the steering null, the retracted “separate feature”), and Appendix B gives the reproduction chain. The dissociation also extends, exploratorily, to inferred-intent refusal (n=24n=24, one model; §5, App. I).
+
+## 2 Setup
+
+#### Models.
+
+We use open-weight instruction-tuned models so we can read activations: Qwen2.5-1.5B and 3B (Qwen Team, 2024), SmolLM2-1.7B (Allal et al., 2025), and Phi-3-mini-3.8B (Abdin et al., 2024): three families, 1.51.5–3.83.8B parameters, and a range of safety-gate strength (SmolLM2 refuses 63%63\% of plain harmful prompts; the others ≈100%\approx 100\%). All experiments run on CPU; sample sizes are reported per experiment.
+
+#### Data.
+
+Harmful prompts are AdvBench behaviors (Zou et al., 2023b); benign prompts are Alpaca instructions (Taori et al., 2023); the surface-vs-harm control uses XSTest (Röttger et al., 2024), whose “safe” split is purpose-built to _sound_ harmful (“how do I kill a Python process”) while being benign.
+
+#### The attack.
+
+The prefill attack forces the assistant turn to begin with the affirmative prefix “Sure, here is” and lets the model continue; we score whether the continuation refuses.
+
+#### The probe.
+
+The harm probe is ℓ2\ell_{2}-regularized logistic regression on the default-pass hidden state at the last prompt token (the decision point), trained on plain harmful vs. benign prompts. Probe AUCs use cross-validation (nested-CV layer selection; no test-set peeking). Refusal is detected by string match against a fixed refusal-phrase list. Full details in App. B.
+
+## 3 The phenomenon: represented but not refused
+
+This section states the phenomenon the rest of the paper explains: a fully intact harm representation coexists with compliance, part of which is structural (below). The mechanistic account of _how_ that gate is defeated (§4) is where the empirical work and every control live.
+
+#### Harm is strongly represented.
+
+On plain prompts, the harm probe separates harmful from benign near-perfectly: one nested-CV probe scores AUC 0.9960.996 on Qwen2.5-1.5B and ≥0.990\geq 0.990 on every model (Table 1, one estimator throughout). The representation of harm is not subtle.
+
+#### The attack changes behavior; it cannot change the prompt-side read.
+
+Under the prefill attack the same model complies: on Qwen2.5-1.5B, refusal on harmful prompts drops from 1.001.00 to 0.030.03 (97 of 100 comply) and behavior, used as a harm detector, collapses to chance (AUC 0.510.51). “Comply” here is coherent harmful compliance, not just an absent refusal string: a judge-free content read of the attacked outputs (§7) finds 94%94\% of the non-refusals are coherent harmful content, deflection rare. The other half of the dissociation is partly structural. The harm representation we probe is the model’s read at the last prompt token, computed before any of the attack’s tokens exist; the prefill appends to the _response_ , so by the causal structure of the transformer this representation is bit-for-bit identical with and without the attack. Its “intactness” is _structural, not a measurement_. The substantive finding is this: at full attack strength, _compliance is not explained by a weaker harm read._ The prompts the model complies on score as harmful (0.9750.975) as the ones it refuses (0.9660.966; benign 0.0550.055). Here “refused” is the plain-condition harmful set, since the strong prefill leaves at most 5/1005/100 still refusing per model. A _full_ -strength harm representation coexists with compliance; the comparison has little variation, since 9595–100%100\% comply under the strong attack. Where a real split exists, a weakened prefill (§5.1, 41/2941/29 refuse/comply), harm strength _does_ predict who complies: the harm-probe score reads refuse-vs-comply at AUC 0.630.63 (layer 12) to 0.720.72 (best layer). This is harm, not the obvious surface correlate: prompt length and scary-keyword count predict the same split at chance (AUC 0.500.50–0.540.54), and the harm-probe AUC _holds_ when we regress out length and keyword count (0.730.73). So the strong attack overrides the harm signal rather than the model down-weighting it. This is moderate evidence: n=70n=70 is small and prompt-level confounds (topic, severity, formality) are not held fixed. Table 1 shows the pattern across all four models and three families, at both weak and strong gates. It also extends to larger scale (run on GPU). On Qwen2.5-7B the prefill drops refusal 0.98→0.240.98\to 0.24 at probe AUC 1.001.00; the attack is weaker here, with a quarter still refusing under the same prefill (§7). On the heavily-safety-trained Phi-3-medium-14B (Abdin et al., 2024) it drops refusal 1.00→0.151.00\to 0.15 (probe AUC 1.001.00, complied-harmful 0.960.96, coherent output; App. J). So the dissociation is not a small-model artifact. The attack is also not specific to one prefill string: across six affirmative prefills (varying length and phrasing) it drops refusal from 100%100\% to 00–37%37\% (most to ≤7%\leq 7\%), so it is a general property of affirmative response-onset prefills. The real question is then why an intact, strong harm representation fails to drive refusal, which the mechanism (§4) answers.
+
+Table 1: The dissociation replicates across models and families. Under the prefill attack, behavioral refusal collapses (behavior AUC →\to chance). The harm representation is the model’s clean prompt-side read, which the response-site attack cannot alter (invariant by construction); we report it to show the read is strong (rep. AUC ≥0.990\geq 0.990, one nested-CV estimator) and that compliance does not track a weaker read: the _complied_ -harmful prompts score 0.910.91–0.980.98, level with the refused ones and far above benign (“refused” is the plain-condition harmful set, since the strong prefill leaves almost no refusals). SmolLM2’s behavior AUC is undefined because it refuses nothing under attack (all comply). |  | refusal (harmful) | harm representation  
+---|---|---|---  
+model | family | plain | attack | behavior AUC | rep. AUC | complied-harmful  
+Qwen2.5-1.5B | Qwen | 1.001.00 | 0.030.03 | 0.510.51 | 0.9960.996 | 0.9750.975  
+Qwen2.5-3B | Qwen | 0.980.98 | 0.050.05 | 0.520.52 | 1.0001.000 | 0.9810.981  
+SmolLM2-1.7B | HuggingFaceTB | 0.630.63 | 0.000.00 | _all comply_ | 0.9900.990 | 0.9580.958  
+Phi-3-mini-3.8B | Microsoft | 1.001.00 | 0.000.00 | 0.490.49 | 0.9980.998 | 0.9070.907  
+  
+#### Is the probe reading harm, or scary words?
+
+A natural worry is that the probe separates AdvBench from Alpaca on surface features (violent vocabulary) rather than harm. We test this with XSTest, whose “safe” prompts sound harmful but are benign. The AdvBench-trained probe scores XSTest-_safe_ at 0.210.21 (mean; only 12%12\% exceed the 0.50.5 threshold) versus XSTest-_unsafe_ at 0.490.49, separating them at AUC 0.790.79. The probe is not fooled by scary surface: it reads harm. It is, however, calibrated to AdvBench-style phrasing (it fires at 0.970.97 there but only 0.490.49 on differently-phrased unsafe prompts), and training on mixed harmful sources did not fix this: it raised sensitivity but collapsed specificity (XSTest-safe false positives 12%→64%12\%\to 64\%). So the harm reading is earned; a _source-general_ harm detector is not (§7).
+
+#### A design consequence: a prompt-side monitor is immune to this attack.
+
+Because the attack cannot reach the prompt-side representation, a monitor that reads it inherits that immunity by construction: on the attacked set the harm probe flags 100%100\% of harmful prompts at 0%0\% false positive on easy (Alpaca) negatives. This is _not_ an empirical detection result, since the probe input is unchanged by the attack, “catching the attack” reduces to ordinary harmful-vs-benign accuracy, and the placement is not new: production input classifiers (e.g. Llama Guard, Inan et al., 2023) already sit prompt-side and are unreachable by a response-site prefill for the same reason. Our contribution is the mechanistic account of _why_ that placement is immune. The guarantee is scoped to response-site attacks (prompt-modifying jailbreaks change the probe input and degrade it: Doda, 2026 and our encoding nulls, App. K) and costs 12%12\% over-refusal on scary-but-benign XSTest inputs (App. C).
+
+## 4 The mechanism
+
+The dissociation says behavior and the harm representation are separable; it does not say whether the harm representation is causally in the refusal pathway or epiphenomenal for it, nor _why_ prefill specifically defeats the gate. This section answers both with white-box causal experiments on Qwen2.5-1.5B, replicated on Phi-3-mini: activation patching, a position control, a direction search, and component ablation, each against a control that can kill it. For each effect we report the version that passes its control, not the dramatic one.
+
+### 4.1 Refusal restoration is response-site and concentrated in an early window (causal patching)
+
+The intact harm representation lives at the _prompt_ ; the attack operates at the _response site_ (it occupies the output tokens). So we ask: under the attack, if we restore the harm signal at the response positions, does refusal return despite the prefill? We patch there and let generation flow, sweeping layers and injection strength (App. D, Table 7) and settling the harm-vs-random delta at two fixed cells with n=100n=100 (Table 2). A dose-matched position control (below) localizes the effect to an _early window_ of the response: injecting over the first half restores as much as the whole response, the second half is nearly inert, and prompt-side injection does nothing.
+
+Two rungs, and the control matters. _Full-residual_ patching (replacing the response-onset residual with the mean harmful residual) restores refusal to 100%100\%. But a benign control demolishes it: patching the mean _benign_ residual at the same position also restores refusal to 100%100\% at every layer. Full-residual patching is generic disruption; injecting _any_ prompt-final state at the onset breaks the prefill continuation and the model reverts to refusing. It says nothing harm-specific.
+
+What passes is the _subspace_ rung: adding only the harm _direction_ at the response positions restores refusal while sparing benign, and it passes the same control the full rung got. We settle it at n=100n=100 on two cells _fixed in advance_ from the grid (L12, the best subspace layer there, and L8), against a matched-norm direction _orthogonalized_ to the harm direction. The cells are grid-selected (fixed before the run) and the n=100n=100 re-estimates them on overlapping AdvBench prompts. The delta CI bootstraps over the harm prompts and the 2424 random seeds (App. D). At L12/α=1\alpha{=}1 the harm direction restores 48%48\% (95%95\% bootstrap CI 3838–58%58\%) versus 14%14\% for the orthogonal-random control (24 seeds, range 00–60%60\%): a harm−-random delta of +𝟑𝟒\mathbf{+34}pp (CI +22+22,+46+46). At L8/α=1.5\alpha{=}1.5 it restores 33%33\% (2424–42%42\%) versus random 16%16\% (00–60%60\%): delta +𝟏𝟕\mathbf{+17}pp (CI +6+6,+28+28). Both deltas exclude zero, and restoration is benign-sparing (benign 12%12\%/0%0\% vs random’s 3%3\%/4%4\%), so the harm direction is a real causal handle above the generic-perturbation baseline, but a partial one: a third to a half of the raw restoration is matched by the random control. This passes a clean held-out replication. Training the harm direction on a disjoint 200200-prompt AdvBench split (activations recomputed, so there is no overlap with the test prompts) and testing restoration on a held-out 100100, the L12/α=1\alpha{=}1 cell restores 42%42\% (95%95\% CI 3232–52%52\%) versus 13%13\% for the matched-norm random control (6 seeds), a harm−-random delta of +𝟐𝟗\mathbf{+29}pp (CI +16+16,+41+41): the effect shrinks only ∼5\sim 5pp off-distribution and the delta still excludes zero, so it is not an artifact of prompt overlap (App. E).
+
+Table 2: The causal handle, settled at n=100n=100 on two _fixed_ cells (not grid maxima). Adding the harm _direction_ at the response positions under the attack restores harmful refusal well above a matched-norm direction _orthogonalized_ to d^harm\hat{d}_{\text{harm}} (24 seeds); both harm−-random deltas exclude zero, so the handle is real but partial (a third to a half of the raw restoration is matched by the random control). Restoration is benign-sparing. Attack baseline: harmful refusal ≤0.07\leq 0.07. The full per-layer grid and the full-residual/benign-residual control (which demotes the 100%100\% “restoration” to generic disruption) are in App. D; replicated on Phi-3-mini there. cell (Qwen2.5-1.5B) | harm restore % (CI) | random ctrl % (range) | harm−-random Δ\Delta (CI) | benign H/rand  
+---|---|---|---|---  
+L12, α=1\alpha{=}1 | 4848 (3838–5858) | 1414 (00–6060) | +𝟑𝟒\mathbf{+34} (+22,+46+22,+46) | 12/312/3  
+L8, α=1.5\alpha{=}1.5 | 3333 (2424–4242) | 1616 (00–6060) | +𝟏𝟕\mathbf{+17} (+6,+28+6,+28) | 0/40/4  
+  
+#### Position control: the attack’s grip is an early response window, not the whole response and not a single token.
+
+We test _where_ the harm signal has to be restored, over one consistent response window (the prefill tokens plus the 1818 generated tokens; n=100n=100, L12/α=1\alpha{=}1). Two axes matter, position and per-position strength, and a dose-matched design separates them (App. D). Position: injecting over the _first half_ of the response (the prefill and the first ∼7\sim 7 generated tokens) restores refusal to 42%42\%, _as much as_ the whole response (41%41\%), whereas the _second half_ restores only 6%6\% even at double strength. (These dose-matched levels sit just below the 48%48\% fixed-cell of Table 2: this control matches per-position dose to isolate _where_ , so the first-half-vs-whole ratio is the claim, not the absolute level.) So the early window _suffices on its own_ , and the late response is nearly inert. Strength: halving the per-position coefficient (whole response at α=0.5\alpha{=}0.5) drops restoration to 0%0\%, so there is a per-position threshold, not just a total-dose budget; a distributed every-other-token pattern also needs the higher coefficient (1%1\% at α=1\alpha{=}1, 48%48\% at α=2\alpha{=}2). This _sharpens_ the shallow-alignment picture: the prefill’s grip is not a single onset token (injecting only the onset restores 9%9\%, less than the early window) but an early multi-token window; the back half of the response carries no weight. (An earlier version of this control compared an all-positions band that silently included the prefill against half-bands that did not, which confounded position with prefill-inclusion and dose; the dose-matched window design here corrects it.) We use “defeated” descriptively: the control localizes _where_ the counter-signal must go, but does not distinguish an active mechanism that down-weights the harm signal from passive autoregressive conditioning by the forced affirmative context (§7).
+
+#### Robustness of the early window (boundary, prefill-exclusion, prefill length, sampling).
+
+Four checks probe the window’s edges (App. E). _Boundary:_ sweeping the cutoff, restoration is already saturated by the first _third_ (first-third 50%50\%, first-half 57%57\%, first-two-thirds 55%55\%, whole 50%50\% at full per-position dose, reproducing the 48%48\% fixed cell) while the onset alone is 10%10\% and the second half 5%5\%; so first-half≈\approxwhole is not a knife-edge at 1/21/2, the window is the early response and saturates by its first third. _Prefill-exclusion:_ the restoration is anchored at the prefill positions. Injecting the harm direction over the generated tokens _only_ (excluding the prefill span) restores ≤3%\leq 3\%, so the causal write-site inside the early window is the prefill span; sustaining across the early generated tokens then boosts it (prefill++onset 10%→10\%\to prefill++first-half 57%57\%), but the generated positions carry nothing on their own. _Prefill length:_ the early saturation is stable across prefill length (short and long prefills both saturate by the first third), while the restoration _magnitude_ tracks prefill commitment, a short prefill (“Sure,”) is easy to reverse (86%86\%) and a long committal one (“Sure, here is a detailed step-by-step guide:”) is hard (66–12%12\% across bands) at fixed injection strength. _Sampling:_ the dissociation is not a greedy artifact, at temperature 0.70.7 plain prompts still refuse 100%100\% and the attack still strips refusal to 0%0\%; the harm-direction restoration, a partial handle, weakens under sampling (50%→21%50\%\to 21\%), as expected for a non-selective write-handle.
+
+### 4.2 The reversal is early-window too: the model’s own refuse-state re-induces refusal (state transfer)
+
+The position control shows the attack _breaks_ refusal in an early response window. We now show the _converse_ , and it lands in the same window: transplanting the model’s own refusal state into the attack re-induces refusal, and doing so over the first half of the response suffices. This is a cleaner causal handle than the single harm direction (§4.1), because it uses the full multidimensional state, not one line.
+
+#### Design (measure-only, held-out, Qwen2.5-1.5B, L12).
+
+We capture the mean layer-1111-output residual over the first-half generated window in two conditions: the _plain_ prompt with no prefill (refusal 100%100\%) and the _attack_ (“Sure, here is”). Their difference dreverse=splain−sattackd_{\text{reverse}}=s_{\text{plain}}-s_{\text{attack}} is the model’s own refuse-vs-comply state shift. This is _held out_ : dreversed_{\text{reverse}} is estimated on a 260260-prompt AdvBench train split and injected/tested on a _disjoint_ 100100-prompt held-out split (with an in-distribution reference, the same dreversed_{\text{reverse}} tested on train prompts, run alongside). We add dreversed_{\text{reverse}} into the attack run’s early generated window and measure whether refusal returns (string-match plus the judge-free coherence read of §7), against a matched-norm orthogonal-random control at the same norm.
+
+#### Result: state-specific, early-gated, and a working lever (held-out).
+
+Injecting dreversed_{\text{reverse}} over the first half of the response restores refusal on the held-out split from the attack’s ≈0%\approx 0\% to 𝟕𝟒%\mathbf{74\%}, _as much as_ injecting over the whole response (78%78\%), while the onset token alone restores 13%13\%; the matched-norm random control restores 𝟎%\mathbf{0\%}, and coherence holds throughout (≈0.97\approx 0.97–0.990.99 distinct-token ratio, no degeneracy). The in-distribution reference (same dreversed_{\text{reverse}}, tested on train prompts) restores 72%72\%, so there is no generalization gap: the refuse-state is not an artifact of the prompts it was estimated on. This replicates on a second family: on Phi-3-mini (3.83.8B, L​16L16) the same held-out procedure restores refusal to 69%69\% over the first half (whole 71%71\%, onset 4%4\%) against a matched-norm random control at 2%2\%, coherent, with the same early-window gating (App. E). Three things follow. (i) The reversal is _state-specific_ , not generic disruption: unlike the full-residual patch of §4.1 (which a benign control also drove to 100%100\%), here a matched-norm random vector does nothing, so this transfer passes the very control that demoted the full-residual effect. (ii) It is _early-window-gated_ , the same locus as the attack: the first half restores as much as the whole response and the second half adds nothing, mirroring the break direction. (iii) It works where the single harm _direction_ is only a partial handle (§4.1) and drefused_{\text{refuse}} steering is inert (§5.1), precisely because it is the full multidimensional state shift: the lever exists, but it is the early-window _state_ , not any single direction, consistent with the decision being distributed (§5.1).
+
+#### Benign-sparing, and a syntax-vs-content byproduct.
+
+We verified state-specificity against a matched-norm random control and generalization against a held-out split. The transfer is also _benign-sparing_ , so it is a selective edit and not merely a refusal-inducer: injecting dreversed_{\text{reverse}} over the early window of _benign_ prompts under the attack raises their refusal only 12%→18%12\%\to 18\% (+6+6pp) while restoring harmful refusal to 75%75\% (this run reproducing the held-out 74%74\%), a +57+57pp selectivity gap (App. E). A syntax-vs-content check falls out of the same run: forcing a benign affirmative onset (“Sure, here is a poem about”) yields 0%0\% harmful procedural content (vs the attack’s 47%47\%) and near-zero refusal, so the jailbreak rides the harmful _continuation_ , not the affirmative syntax alone.
+
+### 4.3 Cutting early attention to the prefill restores refusal, generically (attention knockout)
+
+The reversal shows the refuse/comply decision is carried in the early-window residual _state_. That leaves the paper’s central open question (§7) standing: is the prefill’s effect _maintained_ by the response continuing to attend to it, or written into the trajectory at the first generated token and merely relayed forward? We test this directly by knocking out the attention _edges_ from early generated positions to the forced-prefill key positions and asking whether refusal returns, against a control that removes the same attention _mass_ from non-prefill keys. This is the discriminating experiment the Limitations named (§7); it is preregistered (PREREG_attn_knockout.md), including the falsifier and the interpretation table.
+
+#### Design (edge knockout, mass-matched control; n=100n=100, Qwen2.5-1.5B, all layers/heads).
+
+At each early generated decode step (g<9g<9, the first-half window) we add ln⁡(1−λ)\ln(1-\lambda) to the pre-softmax attention logit of every (current query →\to prefill key) edge and let softmax renormalize (λ=1\lambda{=}1 removes the edge, λ=0.5\lambda{=}0.5 halves it). The control removes the same total baseline attention mass from non-prefill prompt keys, selected per prompt to match the prefill’s mass (achieved ratio 0.980.98, [0.75,1.08][0.75,1.08] over three fixed seeds); this matters because attention-sink tokens carry far more mass than the prefill, so an unmatched span is not a fair control. The intervention passes a unit-test suite before any behavioral run (sham-hook bit-identity, edge-only masking with softmax renormalization, KV-cache consistency, and a behavioral positive control; App. E). Indexing caveat: generated token 1’s logits come from the final prefill token’s hidden state, so this cannot touch token 1; it is a test of early _maintenance_ through direct attention, not attack initiation.
+
+#### Result: prefill-specific, early-window-gated, and harm-selective.
+
+Knocking out early response-to-prefill attention restores refusal from the attack’s 3%3\% to 24%24\%, versus 1%1\% for the mass-matched control (Table 3, three-seed mean 1%1\%): a prefill−-matched difference of +𝟐𝟏\mathbf{+21}pp (paired bootstrap 95%95\% CI [+12,+30][+12,+30], computed against one fixed control seed). It is early-window-gated: knocking out the _late_ window does nothing (4%≈4\%\approx baseline; early−-late +20+20pp, CI [+11,+29][+11,+29]), and knocking out the _whole_ response (29%29\%) is not distinguishable from early alone (whole−-early +5+5pp, CI [−1,+12][-1,+12], includes zero), so the early window carries the effect, matching the reversal and the position control. Halving the knockout (λ=0.5\lambda{=}0.5) does nothing (3%3\%), a threshold echoing the position control’s. The effect is _harm-selective_ : the same early knockout on benign prompts under the prefill barely moves refusal (0%→4%0\%\to 4\%), a specificity difference-in-differences of +16.8+16.8pp, and coherence is unchanged throughout (0.960.96–0.970.97). It suppresses harmful _content_ , not just adds refusal strings (procedural-content rate 51%→18%51\%\to 18\% early, →3%\to 3\% whole, while the matched control stays at 50%50\%). This replicates on a second family: on Phi-3-mini (3.83.8B) the identical pattern holds, early prefill-edge knockout restores refusal to 25%25\% versus 1%1\% for the mass-matched control, early-window-gated (late knockout inert at 0%0\%, whole 32%≈32\%\approx early), threshold in dose (λ=0.5\lambda{=}0.5 inert), coherent (App. E).
+
+#### What this settles: the grip is generic, not safety-specific.
+
+The effect is real but _partial_ (24%24\% of a 97%97\% compliance), consistent with the distributed, redundant computation: direct early-window attention is one causal pathway, not the whole mechanism. Its _interpretation_ we can now pin down, and it resolves the paper’s central open question toward passive conditioning. A base-model control is the discriminator: on the Qwen2.5-1.5B _base_ model (no safety tuning, and so no refusal to re-engage), the identical early prefill-edge knockout collapses the harmful continuation _prefill-specifically_ , harmful content 64%→25%64\%\to 25\% against the mass-matched control’s 64%64\% (a +39+39pp prefill-specific drop), early-window-gated (late knockout inert). The same discriminator holds at mid scale: on the Qwen2.5-_7B_ base model the identical knockout drops harmful content 68%→30%68\%\to 30\% against the mass-matched control’s 66%66\% (a +36+36pp prefill-specific drop, n=100n=100), again early-window-gated (late knockout 68%68\%, inert), so the passive reading is not a small-model artifact. The dependence on early attention to the prefill is therefore _architecture-general autoregressive conditioning_ , not a safety-tuning-specific active suppression of the harm signal: safety tuning fixes only the _fallback_ once the grip is cut (the instruct model reverts to refusing, the base model degrades). So the prefill sustains compliance through generic early-window attention, and “refusal restoration” is a model-dependent fallback, not a re-engaging gate. This is the passive reading. A logit-level trace then measures a safety-specific component on top: when the knockout frees probability mass off the compliance continuation, the instruct model routes it to refusal tokens about 8×8\times more than the base model does (concentration 0.240.24 vs 0.030.03, App. E). Safety tuning adds a small learned refusal attractor, but the dominant mechanism is passive: compliance collapses in both models. The trace confirms a safety-specific refusal pull exists; it does not separate an actively-suppressed gate springing back from a passive fallback attractor.
+
+#### The generic story extends to the early MLP pathway.
+
+Attention is one causal pathway; the compliance that persists (24%24\% of 97%97\%) could hide a safety-specific mechanism in the pathway we did not cut. We probe the early-window MLP contribution (App. E) and find the same base-vs-instruct control resolves it the same way. In the _base_ model, removing the prefill’s early-MLP shift drops harmful content 68%→48%68\%\to 48\%, a +16+16pp prefill-specific, early-window-gated drop (matched-random inert) in a model with no safety mechanism to house, so the early MLP’s prefill-dependence is _generic_ too. The passive account therefore holds across _two_ pathways (attention and early MLP), not one.
+
+What a difference-of-means test could not settle, a clean path patch does. That test restored 47%47\% refusal in the instruct model, but a plain−-attack injection tests decodability, not active computation, so the larger instruct effect is overdetermined by its larger behavioral gap. We therefore run a frozen-residual path patch that routes the prefill counterfactual through the early-MLP sub-block _alone_ , every other activation held at its clean attack value (the surgery is bit-exact under a sham / MLP-output-faithfulness / locality unit-test suite, App. E). The MLP pathway carries the _generic_ effect and only that: it strips prefill-specific compliance probability hard (instruct −21-21pp, base −25-25pp, both far above their mass-matched controls at −7-7/−5-5pp) but produces _no_ safety-specific refusal pull (instruct concentration 0.007≈0.007\approx base 0.001≈0.001\approx matched; prefill-specific refusal gain +0.26+0.26pp, within noise). So the instruct excess was decodability, not an active MLP computation, and the small residual safety-specific pull (the 0.240.24 generative concentration above) does not route through the early MLP. The passive account holds across _both_ pathways under a clean path patch (§7).
+
+Table 3: Knocking out early response-to-prefill attention restores refusal, prefill-specifically and harm-selectively (n=100n=100, Qwen2.5-1.5B, all layers/heads). Removing the attention _edges_ from the early response window to the forced-prefill keys restores refusal well above a control that removes the same attention _mass_ from non-prefill keys; the effect is early-window-gated (late knockout is inert, whole ≈\approx early), threshold in dose (λ=0.5\lambda{=}0.5 inert), and does not transfer to benign prompts (specificity DiD +16.8+16.8pp). Coherence is preserved. Paired-bootstrap 95%95\% CIs: early−-matched +21+21 [+12,+30][+12,+30], early−-late +20+20 [+11,+29][+11,+29], whole−-early +5+5 [−1,+12][-1,+12]. Attack baseline refusal 0.030.03. condition (early window unless noted) | refusal | harmful content | coherence  
+---|---|---|---  
+attack baseline (no knockout) | 0.030.03 | 0.510.51 | 0.970.97  
+early prefill-edge KO | 0.24\mathbf{0.24} | 0.180.18 | 0.960.96  
+whole-response prefill-edge KO | 0.290.29 | 0.030.03 | 0.960.96  
+late prefill-edge KO | 0.040.04 | 0.530.53 | 0.970.97  
+early prefill-edge KO, λ=0.5\lambda{=}0.5 | 0.030.03 | 0.490.49 | 0.970.97  
+early mass-matched KO (3 seeds) | 0.010.01 | 0.500.50 | 0.960.96  
+benign ++ early prefill-edge KO | 0.040.04 | — | —  
+  
+### 4.4 The onset projection is illustrative (and confounded)
+
+We also track the projection of the generation-site state onto the harm-probe direction across decoding steps (Fig. 2): with no attack the onset step sits high (2.802.80) and the model goes on to refuse, while under the prefill it sits low (0.220.22). We report it as illustration, not localization; the causal locus is the early-window response-site effect above.
+
+The 2.80→0.222.80\to 0.22 drop is _not_ a clean measurement of the refusal decision being displaced, and a control says why. The axis is the harm-probe direction, so the projection at a forced onset position reflects the _content_ of the token sitting there. Forcing a fully benign, non-affirmative prefix on the same harmful prompts (“Here’s a fun fact:”) drives the onset projection even _lower_ (−0.82-0.82) than the attack’s “Sure, here is” (0.220.22), and a benign affirmative (“Sure, here is a poem about”) to −0.11-0.11; none of these is the attack, yet all read low, and the benign prefixes are not refused either (00–7%7\%). The onset projection therefore tracks measured-position content, not a pure refusal-decision magnitude, so we treat it as illustrative only; the clean positional result comes from the patching (§4.1), not the projection.
+
+Figure 2: The onset projection is illustrative only: neither a clean measurement nor the causal locus. Projection onto the harm-probe direction across decoding steps: the no-attack harmful state sits high at onset (2.802.80), the prefill state low (0.220.22). We do not read this as a displacement measurement: a fully-benign forced prefix drives the onset projection even lower (−0.82-0.82; §4.4), so the value reflects the content at the measured position. The causal weight is on the patching (Table 2).
+
+### 4.5 Steering fails; monitoring works
+
+If the harm direction were a clean causal handle, adding it should restore refusal selectively. It does not. Sweeping layers and coefficients (raw and Arditi-normalized), we find no window that raises harmful refusal without dragging benign refusal up with it: the best cell restores harmful refusal to 83%83\% but at 40%40\% benign over-refusal; smaller coefficients over-refuse everything, larger ones break generation. Adding the direction induces refusal broadly, not on-harm, consistent with Arditi et al. (2024), where the refusal direction makes the model refuse harmless prompts too. The harm representation is a perfect _read-out_ (detection AUC 1.01.0) but not a selective _write-handle_. The usable intervention is therefore the monitor of §3 (100%100\% catch, 0%0\% false positive), not steering: we can monitor the gap shut, not steer it shut.
+
+#### Why response-site patching spares benign but global steering does not: the injection site.
+
+The benign-sparing patching (§4.1, benign restoration 12%12\%/0%0\%) and this non-selective steering look like the same intervention, adding the harm direction under attack, but differ in _where_ it is added: patching touches only the response positions, steering adds it at _all_ positions, the benign prompt included. We ran a dedicated site comparison: direction and layer held fixed (the harm-probe direction at the patching coefficient α=1\alpha{=}1 of §4.1, layer 1212; not the normalized Table 8 sweep), varying only the injection site. Response-only restores 48%48\% harmful at 12%12\% benign (reproducing Table 2). All-positions restores 58%58\% harmful but drags benign to 40%40\% (the steering over-refusal). Global injection corrupts the benign prompt’s _own_ read, so it registers as harmful; response-site injection leaves the prompt intact. The harm direction is thus a partial, benign-sparing handle _at the response site_ but a non-selective knob applied globally, and even response-only its window is narrow: harmful 48%48\% at α=1\alpha{=}1, 74%74\% at α=1.5\alpha{=}1.5, but benign over-refusal climbs 12→28%12\to 28\% and generation collapses by α=2\alpha{=}2.
+
+## 5 What refusal reads: harm, not surface
+
+Does the refusal gate read harm, or the scary surface features that correlate with it? We answer with a pre-registered 2×22\times 2 that decorrelates the two axes (actual harm and surface trigger-word density) and asks which drives refusal. Cells come from natural keyword-density variation in existing public prompts (no authored evasions): harmful-scary (AdvBench with trigger words), harmful-clean (AdvBench without), benign-scary (all of XSTest-safe), benign-clean (Alpaca). We fix the keyword lexicon and the l

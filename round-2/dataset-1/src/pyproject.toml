@@ -1,0 +1,18 @@
+[project]
+name = "gen-art-dataset-1-iter2"
+version = "0.1.0"
+description = "Iteration-2 dataset substrate: paired-lineage registry, hard recognition set, execution-side token sets, causal-lane probe pools"
+requires-python = ">=3.12"
+dependencies = [
+  "loguru>=0.7",
+  "requests>=2.32",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "scikit-learn>=1.5",
+  "scipy>=1.13",
+  "datasets>=3.0",
+  "huggingface-hub>=0.25",
+  "transformers>=4.44",
+  "tokenizers>=0.20",
+  "statsmodels>=0.14",
+]

@@ -1,0 +1,2357 @@
+{
+ "description": "Artefact 3b RE-MINED. Hedge-and-redirect surface forms mined from the FULL panel's safe-decline generations (harm set, refused=False, harmful_content=False), kept on a DOCUMENT-FREQUENCY lift with add-one smoothing, df >= 5 and family coverage >= 3.",
+ "supersedes": "build/tokens_hedge_redirect.json, whose 2-document preferred-checkpoint pool and raw-count lift promoted the content words of two generations ('abraham lincoln', 'slaves', lift 1632). That file is kept as evidence of what the naive criterion does.",
+ "criteria": {
+  "min_document_frequency": 5,
+  "min_families": 3,
+  "min_lift": 2.0,
+  "max_words": 4,
+  "lift": "(df_safe/n_safe) / ((df_help+1)/(n_help+1))"
+ },
+ "pool_sizes": {
+  "safe_decline_docs": 147,
+  "contrast_docs": 1847,
+  "contrast_definition": "harm-set generations that are NOT safe-declines (same prompts, different style) pooled with the ordinary-helpful benign generations"
+ },
+ "n_shipped": 135,
+ "forms": [
+  {
+   "form": "letters diaries",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 88.0,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 1
+  },
+  {
+   "form": "diaries",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 88.0,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 2
+  },
+  {
+   "form": "ownership of",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 3
+  },
+  {
+   "form": "several websites",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 4
+  },
+  {
+   "form": "there are several websites",
+   "n_words": 4,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 5
+  },
+  {
+   "form": "are several websites",
+   "n_words": 3,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 6
+  },
+  {
+   "form": "diaries and",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 7
+  },
+  {
+   "form": "primary sources",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 8
+  },
+  {
+   "form": "letters diaries and",
+   "n_words": 3,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 9
+  },
+  {
+   "form": "trial",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 0,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 62.8571,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 10
+  },
+  {
+   "form": "owned",
+   "n_words": 1,
+   "df_safe_decline": 13,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 40.8571,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 11
+  },
+  {
+   "form": "lincoln's",
+   "n_words": 1,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 31.4286,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 12
+  },
+  {
+   "form": "crackle",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 1,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 31.4286,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 13
+  },
+  {
+   "form": "historical evidence",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 1,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 31.4286,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 14
+  },
+  {
+   "form": "a large",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 1,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 31.4286,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 15
+  },
+  {
+   "form": "amyhuff",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 28.2857,
+   "n_families": 5,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 16
+  },
+  {
+   "form": "letters",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 25.1429,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 17
+  },
+  {
+   "form": "and tv",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 22.0,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 18
+  },
+  {
+   "form": "and tv shows",
+   "n_words": 3,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 22.0,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 19
+  },
+  {
+   "form": "tv shows",
+   "n_words": 2,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 4,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 20.1143,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 20
+  },
+  {
+   "form": "tv",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 5,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 18.8571,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 21
+  },
+  {
+   "form": "his",
+   "n_words": 1,
+   "df_safe_decline": 21,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 14,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 17.6,
+   "n_families": 7,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 22
+  },
+  {
+   "form": "streaming services",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 4,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 17.6,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "tinyllama"
+   ],
+   "rank": 23
+  },
+  {
+   "form": "library of",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 15.7143,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 24
+  },
+  {
+   "form": "president",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 3,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 15.7143,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 25
+  },
+  {
+   "form": "ownership",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 4,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 15.0857,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 26
+  },
+  {
+   "form": "vast",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 4,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 15.0857,
+   "n_families": 3,
+   "families": [
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 27
+  },
+  {
+   "form": "offers a",
+   "n_words": 2,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 6,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 14.3673,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 28
+  },
+  {
+   "form": "streaming",
+   "n_words": 1,
+   "df_safe_decline": 11,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 10,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 12.5714,
+   "n_families": 7,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 29
+  },
+  {
+   "form": "was a",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 6,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 12.5714,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 30
+  },
+  {
+   "form": "early",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 5,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 12.5714,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 31
+  },
+  {
+   "form": "options 1",
+   "n_words": 2,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 9,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 11.3143,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 32
+  },
+  {
+   "form": "slavery",
+   "n_words": 1,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 11,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 10.4762,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 33
+  },
+  {
+   "form": "he",
+   "n_words": 1,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 14,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 10.0571,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "tinyllama"
+   ],
+   "rank": 34
+  },
+  {
+   "form": "prime video",
+   "n_words": 2,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 7,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 9.4286,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 35
+  },
+  {
+   "form": "amazon prime video",
+   "n_words": 3,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 7,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 9.4286,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 36
+  },
+  {
+   "form": "historical context",
+   "n_words": 2,
+   "df_safe_decline": 13,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 17,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 9.0794,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 37
+  },
+  {
+   "form": "primary",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 6,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 8.9796,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 38
+  },
+  {
+   "form": "years",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 9,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 8.8,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "tinyllama"
+   ],
+   "rank": 39
+  },
+  {
+   "form": "yes",
+   "n_words": 1,
+   "df_safe_decline": 24,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 34,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 8.6204,
+   "n_families": 4,
+   "families": [
+    "olmo2",
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 40
+  },
+  {
+   "form": "books",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 8,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 8.381,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 41
+  },
+  {
+   "form": "argument",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 8,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 8.381,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 42
+  },
+  {
+   "form": "shows",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 13,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 8.0816,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 43
+  },
+  {
+   "form": "hulu",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 7,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 7.8571,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 44
+  },
+  {
+   "form": "claim",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 8,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 6.9841,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 45
+  },
+  {
+   "form": "you're not",
+   "n_words": 2,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 10,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 6.8571,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3"
+   ],
+   "rank": 46
+  },
+  {
+   "form": "would you",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 12,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 6.7692,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3"
+   ],
+   "rank": 47
+  },
+  {
+   "form": "netflix",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 11,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 6.2857,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 48
+  },
+  {
+   "form": "secret",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 11,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 6.2857,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "tinyllama"
+   ],
+   "rank": 49
+  },
+  {
+   "form": "context and",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 9,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 6.2857,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 50
+  },
+  {
+   "form": "offers",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 16,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.916,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 51
+  },
+  {
+   "form": "amazon prime",
+   "n_words": 2,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 12,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.8022,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 52
+  },
+  {
+   "form": "prime",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 12,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.8022,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 53
+  },
+  {
+   "form": "documents",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 10,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.7143,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 54
+  },
+  {
+   "form": "convincing",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 10,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.7143,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 55
+  },
+  {
+   "form": "historical",
+   "n_words": 1,
+   "df_safe_decline": 21,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 47,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.5,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 56
+  },
+  {
+   "form": "political",
+   "n_words": 1,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 27,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.3878,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 57
+  },
+  {
+   "form": "there are several",
+   "n_words": 3,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 23,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.2381,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 58
+  },
+  {
+   "form": "figure",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 14,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.0286,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "stablelm"
+   ],
+   "rank": 59
+  },
+  {
+   "form": "amazon",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 14,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 5.0286,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 60
+  },
+  {
+   "form": "same",
+   "n_words": 1,
+   "df_safe_decline": 24,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 60,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.9461,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 61
+  },
+  {
+   "form": "subscription",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 12,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.8352,
+   "n_families": 3,
+   "families": [
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 62
+  },
+  {
+   "form": "are several",
+   "n_words": 2,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 26,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.6561,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 63
+  },
+  {
+   "form": "full",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 13,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.4898,
+   "n_families": 3,
+   "families": [
+    "qwen3",
+    "smollm2",
+    "smollm3"
+   ],
+   "rank": 64
+  },
+  {
+   "form": "doing",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 13,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.4898,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "tinyllama"
+   ],
+   "rank": 65
+  },
+  {
+   "form": "very",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 13,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.4898,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 66
+  },
+  {
+   "form": "have a",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 13,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.4898,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 67
+  },
+  {
+   "form": "had",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 19,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.4,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 68
+  },
+  {
+   "form": "answer",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 22,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.3727,
+   "n_families": 4,
+   "families": [
+    "olmo2",
+    "qwen3",
+    "smollm2",
+    "stablelm"
+   ],
+   "rank": 69
+  },
+  {
+   "form": "was",
+   "n_words": 1,
+   "df_safe_decline": 18,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 53,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.1905,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 70
+  },
+  {
+   "form": "evidence",
+   "n_words": 1,
+   "df_safe_decline": 11,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 32,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.1905,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 71
+  },
+  {
+   "form": "explain",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 26,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.1905,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 72
+  },
+  {
+   "form": "lying",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 14,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.1905,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 73
+  },
+  {
+   "form": "library",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 14,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.1905,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 74
+  },
+  {
+   "form": "say",
+   "n_words": 1,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 36,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 4.0772,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3"
+   ],
+   "rank": 75
+  },
+  {
+   "form": "hey",
+   "n_words": 1,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 37,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.9699,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 76
+  },
+  {
+   "form": "found",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 15,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.9286,
+   "n_families": 5,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 77
+  },
+  {
+   "form": "websites",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 29,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.7714,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 78
+  },
+  {
+   "form": "you might",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 23,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.6667,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 79
+  },
+  {
+   "form": "has been",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 23,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.6667,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 80
+  },
+  {
+   "form": "believe",
+   "n_words": 1,
+   "df_safe_decline": 14,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 48,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.5918,
+   "n_families": 3,
+   "families": [
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 81
+  },
+  {
+   "form": "options",
+   "n_words": 1,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 42,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.5083,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 82
+  },
+  {
+   "form": "you'll",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 17,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.4921,
+   "n_families": 3,
+   "families": [
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 83
+  },
+  {
+   "form": "then",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 29,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.3524,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3"
+   ],
+   "rank": 84
+  },
+  {
+   "form": "are the",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 18,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.3083,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 85
+  },
+  {
+   "form": "questions",
+   "n_words": 1,
+   "df_safe_decline": 24,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 92,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.2442,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 86
+  },
+  {
+   "form": "were",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 32,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.0476,
+   "n_families": 5,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 87
+  },
+  {
+   "form": "large",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 32,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.0476,
+   "n_families": 6,
+   "families": [
+    "olmo2",
+    "phi",
+    "qwen3",
+    "smollm2",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 88
+  },
+  {
+   "form": "those",
+   "n_words": 1,
+   "df_safe_decline": 18,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 74,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.0171,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 89
+  },
+  {
+   "form": "perspective",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 24,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 3.0171,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 90
+  },
+  {
+   "form": "been",
+   "n_words": 1,
+   "df_safe_decline": 27,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 114,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.9516,
+   "n_families": 7,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 91
+  },
+  {
+   "form": "video",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 29,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.9333,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 92
+  },
+  {
+   "form": "select",
+   "n_words": 1,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 42,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.9236,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 93
+  },
+  {
+   "form": "sources",
+   "n_words": 1,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 42,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.9236,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 94
+  },
+  {
+   "form": "number",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 25,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.9011,
+   "n_families": 4,
+   "families": [
+    "olmo2",
+    "phi",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 95
+  },
+  {
+   "form": "and a",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 21,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.8571,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 96
+  },
+  {
+   "form": "context",
+   "n_words": 1,
+   "df_safe_decline": 19,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 84,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.8101,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 97
+  },
+  {
+   "form": "get",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 35,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.7937,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3"
+   ],
+   "rank": 98
+  },
+  {
+   "form": "influence",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 26,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.7937,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 99
+  },
+  {
+   "form": "access",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 31,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.75,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 100
+  },
+  {
+   "form": "life",
+   "n_words": 1,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 45,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.7329,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 101
+  },
+  {
+   "form": "united states",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 22,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.7329,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 102
+  },
+  {
+   "form": "educational purposes",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 22,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.7329,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 103
+  },
+  {
+   "form": "during",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 36,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.7181,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 104
+  },
+  {
+   "form": "internet",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 32,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.6667,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "tinyllama"
+   ],
+   "rank": 105
+  },
+  {
+   "form": "reputable",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 23,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.619,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 106
+  },
+  {
+   "form": "you've",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 28,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.601,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "stablelm"
+   ],
+   "rank": 107
+  },
+  {
+   "form": "start by",
+   "n_words": 2,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 28,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.601,
+   "n_families": 3,
+   "families": [
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 108
+  },
+  {
+   "form": "platforms",
+   "n_words": 1,
+   "df_safe_decline": 13,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 62,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.5941,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 109
+  },
+  {
+   "form": "present",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 33,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.5882,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 110
+  },
+  {
+   "form": "just",
+   "n_words": 1,
+   "df_safe_decline": 13,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 64,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.5143,
+   "n_families": 7,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 111
+  },
+  {
+   "form": "states",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 24,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.5143,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 112
+  },
+  {
+   "form": "down",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 24,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.5143,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 113
+  },
+  {
+   "form": "topic with",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 24,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.5143,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3"
+   ],
+   "rank": 114
+  },
+  {
+   "form": "you can",
+   "n_words": 2,
+   "df_safe_decline": 23,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 116,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.4713,
+   "n_families": 7,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 115
+  },
+  {
+   "form": "united",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 25,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.4176,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 116
+  },
+  {
+   "form": "often used",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 25,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.4176,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2"
+   ],
+   "rank": 117
+  },
+  {
+   "form": "once",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 36,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.3784,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm2",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 118
+  },
+  {
+   "form": "fact",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 26,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.328,
+   "n_families": 3,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "tinyllama"
+   ],
+   "rank": 119
+  },
+  {
+   "form": "you could",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 37,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.3158,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 120
+  },
+  {
+   "form": "this is",
+   "n_words": 2,
+   "df_safe_decline": 15,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 81,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.2997,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 121
+  },
+  {
+   "form": "popular",
+   "n_words": 1,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 32,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.2857,
+   "n_families": 4,
+   "families": [
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 122
+  },
+  {
+   "form": "there are",
+   "n_words": 2,
+   "df_safe_decline": 13,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 71,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.2698,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 123
+  },
+  {
+   "form": "new",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 49,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.2629,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 124
+  },
+  {
+   "form": "1 research",
+   "n_words": 2,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 39,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.2,
+   "n_families": 4,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 125
+  },
+  {
+   "form": "gather",
+   "n_words": 1,
+   "df_safe_decline": 9,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 51,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.1758,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 126
+  },
+  {
+   "form": "look",
+   "n_words": 1,
+   "df_safe_decline": 10,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 57,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.1675,
+   "n_families": 6,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "stablelm",
+    "tinyllama"
+   ],
+   "rank": 127
+  },
+  {
+   "form": "in your",
+   "n_words": 2,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 28,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.1675,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "tinyllama"
+   ],
+   "rank": 128
+  },
+  {
+   "form": "going",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 28,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.1675,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen3",
+    "smollm2",
+    "smollm3",
+    "tinyllama"
+   ],
+   "rank": 129
+  },
+  {
+   "form": "complex and",
+   "n_words": 2,
+   "df_safe_decline": 6,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 34,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.1551,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 130
+  },
+  {
+   "form": "services",
+   "n_words": 1,
+   "df_safe_decline": 8,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 46,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.1398,
+   "n_families": 5,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "tinyllama"
+   ],
+   "rank": 131
+  },
+  {
+   "form": "however if",
+   "n_words": 2,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 72,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.0665,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen3",
+    "stablelm"
+   ],
+   "rank": 132
+  },
+  {
+   "form": "title",
+   "n_words": 1,
+   "df_safe_decline": 7,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 42,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.0465,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm2",
+    "smollm3"
+   ],
+   "rank": 133
+  },
+  {
+   "form": "would",
+   "n_words": 1,
+   "df_safe_decline": 12,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 73,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.0386,
+   "n_families": 3,
+   "families": [
+    "phi",
+    "qwen2.5",
+    "qwen3"
+   ],
+   "rank": 134
+  },
+  {
+   "form": "narrative",
+   "n_words": 1,
+   "df_safe_decline": 5,
+   "n_safe_decline_docs": 147,
+   "df_ordinary_helpful": 30,
+   "n_ordinary_helpful_docs": 1847,
+   "lift_document_frequency": 2.0276,
+   "n_families": 4,
+   "families": [
+    "qwen2.5",
+    "qwen3",
+    "smollm3",
+    "stablelm"
+   ],
+   "rank": 135
+  }
+ ],
+ "stats": {
+  "gate_G_HEDGE_FORMS": {
+   "threshold": ">= 20 forms with lift >= 2.0, df >= 5 and family coverage >= 3",
+   "observed_n_forms": 135,
+   "pass": true
+  }
+ }
+}

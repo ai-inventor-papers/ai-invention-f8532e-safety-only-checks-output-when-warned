@@ -1,0 +1,156 @@
+{
+  "generated_by": "aii-web-tools / built-in WebSearch, cross-checked against live HF metadata (build/hf_candidates.json) and build/repo_meta/*.json",
+  "notes": "One paragraph of provenance per candidate, each with at least one URL. Red/green flags noted per hard rule 3. Gated/size facts are from LIVE checks in this run (2026-09-21), not assumed from priors.",
+  "candidates": [
+    {
+      "repo_id": "bench-llm/or-bench",
+      "verdict": "KEEP",
+      "provenance": "OR-Bench (Cui et al. 2024, 'OR-Bench: An Over-Refusal Benchmark for Large Language Models', https://arxiv.org/abs/2405.20947) is the standard over-refusal benchmark, hosting three configs: or-bench-80k (80,359 seemingly-toxic-but-benign prompts), or-bench-hard-1k (1,319 hardest cases) and or-bench-toxic (655 genuinely toxic control prompts) across a shared 10-category taxonomy. GREEN: established benchmark cited widely, clear card, 8,965 HF downloads, matches all expected row counts exactly on live check (1319/655/80359).",
+      "urls": ["https://arxiv.org/abs/2405.20947", "https://huggingface.co/datasets/bench-llm/or-bench"]
+    },
+    {
+      "repo_id": "Paul/XSTest",
+      "verdict": "KEEP (used GitHub raw CSV as primary instead, per task instructions)",
+      "provenance": "XSTest (Rottger et al. 2024, 'XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models', NAACL 2024, https://aclanthology.org/2024.naacl-long.301/, also arXiv:2308.01263) is the canonical exaggerated-safety test suite: 250 safe + 200 unsafe prompts across 20 (task text says 18) types x ~25 each. GREEN: peer-reviewed NAACL paper, original author's GitHub repo (paul-rottger/exaggerated-safety) is the canonical source and matches the exact header (id,prompt,type,label,focus,note) and 450 rows we verified live.",
+      "urls": ["https://aclanthology.org/2024.naacl-long.301/", "https://arxiv.org/abs/2308.01263", "https://github.com/paul-rottger/exaggerated-safety"]
+    },
+    {
+      "repo_id": "furonghuang-lab/PHTest",
+      "verdict": "KEEP",
+      "provenance": "PHTest (Automatic Pseudo-Harmful Prompt Generation for Evaluating False Refusals in Large Language Models, Zhang et al., ICML 2024/OpenReview, arXiv:2409.00598, https://arxiv.org/abs/2409.00598) auto-generates pseudo-harmful prompts via an AutoDAN-style controllable generation method; ~3,269 prompts (matches our live row count exactly: 3269), labeled harmless/controversial. GREEN: peer-reviewed, project page https://phtest-frf.github.io/, official GitHub umd-huang-lab/FalseRefusal, verified ungated, columns match spec exactly (ID/Request/Harmfulness).",
+      "urls": ["https://arxiv.org/abs/2409.00598", "https://phtest-frf.github.io/", "https://github.com/umd-huang-lab/FalseRefusal"]
+    },
+    {
+      "repo_id": "AmazonScience/FalseReject",
+      "verdict": "KEEP",
+      "provenance": "FalseReject (Zhang et al., 'FalseReject: A Resource for Improving Contextual Safety and Mitigating Over-Refusals in LLMs via Structured Reasoning', COLM 2025, arXiv:2505.08054, https://arxiv.org/html/2505.08054v1) is a 16k-query over-refusal resource built via a graph-informed adversarial multi-agent framework across 44 safety categories, with a 14,624-row synthetic train split (instruct_response + cot_response) and a 1,187-row human-annotated test split. GREEN: COLM 2025 acceptance, Amazon Science org, license CC-BY-NC-4.0. Verified LIVE as ungated (gated=false), so the primary source is usable directly -- the Locutusque/Brantliu fallbacks were not needed.",
+      "urls": ["https://arxiv.org/html/2505.08054v1", "https://huggingface.co/datasets/AmazonScience/FalseReject"]
+    },
+    {
+      "repo_id": "Locutusque/FalseReject-sharegpt",
+      "verdict": "DISCARD (not needed -- primary AmazonScience/FalseReject is ungated)",
+      "provenance": "A community re-upload of FalseReject reformatted into ShareGPT conversational schema. RED FLAGS: only 7 downloads, 1 like, no independent documentation beyond re-packaging the original. Kept only as a documented fallback candidate per task instructions; not used since the primary source resolved fine.",
+      "urls": ["https://huggingface.co/datasets/Locutusque/FalseReject-sharegpt"]
+    },
+    {
+      "repo_id": "SillyTilly/SorryBench",
+      "verdict": "KEEP",
+      "provenance": "SORRY-Bench (Xie et al., 'SORRY-Bench: Systematically Evaluating Large Language Model Safety Refusal', ICLR 2025, arXiv:2406.14598, https://arxiv.org/abs/2406.14598; official code github.com/SORRY-Bench/sorry-bench) defines a 44/45-topic unsafe-instruction taxonomy with linguistic-mutation 'wrapped' variants (ascii/atbash/caesar/morse/translations/persuasion styles/etc.). The official sorry-bench/sorry-bench-202406 and -202503 HF repos are gated='auto' (verified live 2026-09-21), so we used the ungated community mirror SillyTilly/SorryBench, which ships the vintage-202406 data (file `sorry_bench_202406.csv` among its siblings) with exactly the expected columns (question_id, category, turns, prompt_style) and 9,450 rows = 450 base questions x 21 style variants including 'base'. RED FLAG: low downloads (392) and no independent card beyond re-hosting, so we cross-checked row/column shape against the official SORRY-Bench GitHub repo structure before trusting it.",
+      "urls": ["https://arxiv.org/abs/2406.14598", "https://github.com/SORRY-Bench/sorry-bench", "https://huggingface.co/datasets/SillyTilly/SorryBench"]
+    },
+    {
+      "repo_id": "AIM-Harvard/sorrybench",
+      "verdict": "DISCARD (not needed -- SillyTilly mirror sufficed and matched spec exactly)",
+      "provenance": "Second-choice ungated SORRY-Bench mirror per task's fallback order; ships a single 'query_result (2).parquet' file with no card. RED FLAGS: 54 downloads, 0 likes, filename suggests an ad hoc SQL export, not documented.",
+      "urls": ["https://huggingface.co/datasets/AIM-Harvard/sorrybench"]
+    },
+    {
+      "repo_id": "AlignmentResearch/SorryBench",
+      "verdict": "DISCARD (not needed)",
+      "provenance": "Third-choice fallback mirror; splits into pos/neg/data x train/validation, suggesting a repackaging for a specific downstream training pipeline rather than a faithful copy of the benchmark. RED FLAGS: 38 downloads, 0 likes, no card documentation found.",
+      "urls": ["https://huggingface.co/datasets/AlignmentResearch/SorryBench"]
+    },
+    {
+      "repo_id": "kylelovesllms/sorry-bench-with-refusals",
+      "verdict": "DISCARD (explicitly flagged by task; VERIFIED)",
+      "provenance": "Claims to add real model refusal text to SORRY-Bench prompts. VERIFIED LIVE via datasets-server /first-rows: all 100 sampled rows carry the byte-identical string \"I'm sorry, but I can't help with that request.\" in the `refusal` column regardless of prompt content -- confirming the task's warning that this is a single hard-coded template, not real model output. RED FLAG: 8 downloads.",
+      "urls": ["https://huggingface.co/datasets/kylelovesllms/sorry-bench-with-refusals"]
+    },
+    {
+      "repo_id": "chcleung/sorry_bench_with_refusals",
+      "verdict": "DISCARD (explicitly flagged by task; VERIFIED)",
+      "provenance": "Same claim as above. VERIFIED LIVE: 100 sampled rows draw from only 15 distinct canned refusal strings (e.g. \"I'm not able to assist with this type of request.\", \"This is not something I can help with.\") that repeat with no visible correlation to prompt content -- i.e. a small fixed template pool, not genuine per-row model generations. RED FLAG: 9 downloads.",
+      "urls": ["https://huggingface.co/datasets/chcleung/sorry_bench_with_refusals"]
+    },
+    {
+      "repo_id": "JailbreakBench/JBB-Behaviors",
+      "verdict": "KEEP",
+      "provenance": "JailbreakBench (Chao et al., 'JailbreakBench: An Open Robustness Benchmark for Jailbreaking Language Models', NeurIPS 2024 Datasets & Benchmarks Track, https://proceedings.neurips.cc/paper_files/paper/2024/file/63092d79154adebd7305dfd498cbff70-Paper-Datasets_and_Benchmarks_Track.pdf). JBB-Behaviors ships 100 harmful + 100 topic-matched benign behaviors (18% sourced from AdvBench, 27% from HarmBench/TDC, 55% original) plus a 300-row judge_comparison split with 3 human labels + 4 automated classifier verdicts per response. GREEN: NeurIPS peer-reviewed, MIT license, 53,144 downloads, 127 likes, official GitHub github.com/JailbreakBench/jailbreakbench. Verified ungated live; all split row counts matched (100/100/300).",
+      "urls": ["https://proceedings.neurips.cc/paper_files/paper/2024/file/63092d79154adebd7305dfd498cbff70-Paper-Datasets_and_Benchmarks_Track.pdf", "https://github.com/JailbreakBench/jailbreakbench", "https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors"]
+    },
+    {
+      "repo_id": "walledai/AdvBench",
+      "verdict": "DISCARD -- GATED (verified live, contradicts task assumption; used GitHub primary source instead)",
+      "provenance": "AdvBench originates from Zou et al. 2023, 'Universal and Transferable Adversarial Attacks on Aligned Language Models' (arXiv:2307.15043, https://arxiv.org/abs/2307.15043; official code github.com/llm-attacks/llm-attacks). The task brief listed walledai/AdvBench as a plain ungated mirror, but a LIVE check on 2026-09-21 shows `gated: 'auto'` via both huggingface_hub.HfApi.dataset_info and a 401 from datasets-server /first-rows -- i.e. the walledai mirror has since been gated (the whole walledai/* namespace we sampled -- AdvBench, HarmBench, StrongREJECT -- now returns gated='auto'). Per hard rule 2 we did not authenticate; instead we downloaded the original harmful_behaviors.csv straight from the llm-attacks/llm-attacks GitHub repo (520 goal/target rows, byte-for-byte matching the paper's released data), cross-checked against the ungated community mirror carl213/advbench (520 rows, same schema).",
+      "urls": ["https://arxiv.org/abs/2307.15043", "https://github.com/llm-attacks/llm-attacks", "https://huggingface.co/datasets/walledai/AdvBench", "https://huggingface.co/datasets/carl213/advbench"]
+    },
+    {
+      "repo_id": "carl213/advbench",
+      "verdict": "KEEP (as cross-check only; GitHub CSV used as the actual downloaded artifact)",
+      "provenance": "Unofficial community re-upload of the same AdvBench harmful_behaviors data (520 rows, goal/target columns matching the original). RED FLAGS: 670 downloads but 0 likes, no independent card/documentation -- used only to confirm the row count (520) matched our GitHub download, not as the source of record.",
+      "urls": ["https://huggingface.co/datasets/carl213/advbench"]
+    },
+    {
+      "repo_id": "LibrAI/do-not-answer",
+      "verdict": "KEEP",
+      "provenance": "Do-Not-Answer (Wang et al. 2024, 'Do-Not-Answer: A Dataset for Evaluating Safeguards in LLMs', EACL Findings 2024, https://aclanthology.org/2024.findings-eacl.61/, arXiv:2308.13387) ships 939 risky instructions across 5 risk areas / 12 harm types, with responses + harmful flags + action-category codes from 6 LLMs (GPT-4, ChatGPT, Claude, ChatGLM2, LLaMA-2-7B-chat, Vicuna-7B). GREEN: peer-reviewed EACL paper, 3,942 downloads, 57 likes, matches exact row/column count (939 rows, 23 columns) live. LICENSE CORRECTION: the task brief stated CC-BY-NC-SA-4.0, but we verified LIVE (HF card YAML front-matter AND the GitHub repo's own LICENSE file at github.com/Libr-AI/do-not-answer) that the actual license is Apache-2.0 -- recorded as such in sources_manifest.json.",
+      "urls": ["https://aclanthology.org/2024.findings-eacl.61/", "https://arxiv.org/abs/2308.13387", "https://github.com/Libr-AI/do-not-answer"]
+    },
+    {
+      "repo_id": "allenai/ai2_arc",
+      "verdict": "KEEP",
+      "provenance": "ARC (Clark et al. 2018, 'Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge', arXiv:1803.05457, https://arxiv.org/abs/1803.05457) is a standard grade-school-science multiple-choice benchmark split into Challenge/Easy sets. The paper's own Easy-Test count is 2,376, which matches our live download exactly. GREEN: 872,631 downloads, 401 likes, extremely well established, used here as an auto-gradable benign anchor pool.",
+      "urls": ["https://arxiv.org/abs/1803.05457", "https://huggingface.co/datasets/allenai/ai2_arc"]
+    },
+    {
+      "repo_id": "openai/gsm8k",
+      "verdict": "KEEP",
+      "provenance": "GSM8K (Cobbe et al. 2021, 'Training Verifiers to Solve Math Word Problems', arXiv:2110.14168) is OpenAI's grade-school math word-problem benchmark, used here as a second auto-gradable benign/no-safety-relevance anchor pool. GREEN: 1,221,924 downloads, 1,656 likes, ubiquitous in the literature; main/test split matches the canonical 1,319-row test set.",
+      "urls": ["https://arxiv.org/abs/2110.14168", "https://huggingface.co/datasets/openai/gsm8k"]
+    },
+    {
+      "repo_id": "PKU-Alignment/PKU-SafeRLHF",
+      "verdict": "KEEP",
+      "provenance": "PKU-SafeRLHF (Ji et al., 'PKU-SafeRLHF: Towards Multi-Level Safety Alignment for LLMs with Human Preference', arXiv:2406.15513, https://arxiv.org/html/2406.15513v1; project page https://sites.google.com/view/pku-saferlhf) is the GRADED-HARM-SEVERITY source for our dataset: it labels each of two paired responses with a `response_{0,1}_severity_level` field over 19 harm categories and three named severity tiers (Minor / Moderate / Severe, per the paper's own definitions). GREEN: 13,124 downloads, 196 likes, ungated, license cc-by-nc-4.0. This is the ONLY ordinal harm-severity field found across all 25 candidates screened -- see search item #11 in the task and the discussion of a graded-harm source below.",
+      "urls": ["https://arxiv.org/html/2406.15513v1", "https://sites.google.com/view/pku-saferlhf", "https://huggingface.co/datasets/PKU-Alignment/PKU-SafeRLHF"]
+    },
+    {
+      "repo_id": "PKU-Alignment/BeaverTails",
+      "verdict": "KEEP (additional strong source, item #12)",
+      "provenance": "BeaverTails (Ji et al., 'BeaverTails: Towards Improved Safety Alignment of LLM via a Human-Preference Dataset', NeurIPS 2023 Datasets & Benchmarks, https://arxiv.org/abs/2307.04657) is the sibling project to PKU-SafeRLHF: 330k+ human-labeled QA pairs with a binary `is_safe` meta-label derived from annotating each pair across 14 harm categories, disentangling harmlessness from helpfulness. Justification for including it beyond the required 12: it gives us a large, independently-curated harmful/harmless QA corpus (distinct question+response pairs, not just prompts) that complements do-not-answer's action-taxonomy and PKU-SafeRLHF's severity field. GREEN: 15,487 downloads, 114 likes, NeurIPS peer-reviewed, ungated. We downloaded only the small `30k_test` split (3,021 rows) to stay well inside the byte budget.",
+      "urls": ["https://arxiv.org/abs/2307.04657", "https://github.com/PKU-Alignment/beavertails", "https://huggingface.co/datasets/PKU-Alignment/BeaverTails"]
+    },
+    {
+      "repo_id": "tau/commonsense_qa",
+      "verdict": "DISCARD (not downloaded -- ARC-Easy + GSM8K already give us two auto-gradable benign anchor pools; kept as documented alternative)",
+      "provenance": "CommonsenseQA (Talmor et al. 2019, NAACL, https://aclanthology.org/N19-1421/) is a 5-way multiple-choice commonsense benchmark (12,102 questions) built from ConceptNet relations. GREEN: 304,868 downloads, 154 likes, extremely well established. Considered as a third benign anchor pool but not downloaded, since ARC-Easy + GSM8K already cover the 'auto-gradable benign pool' requirement without adding more bytes.",
+      "urls": ["https://aclanthology.org/N19-1421/", "https://huggingface.co/datasets/tau/commonsense_qa"]
+    },
+    {
+      "repo_id": "nvidia/Aegis-AI-Content-Safety-Dataset-2.0",
+      "verdict": "DISCARD (not downloaded this iteration -- documented as a strong candidate for a future iteration)",
+      "provenance": "AEGIS2.0 (Ghosh et al., 'Aegis2.0: A Diverse AI Safety Dataset and Risks Taxonomy for Alignment of LLM Guardrails', NAACL 2025, https://aclanthology.org/2025.naacl-long.306.pdf, arXiv:2501.09004) has 33,416 annotated human-LLM interactions over a 12-top-level x 9-subcategory hazard taxonomy, license CC-BY-4.0, ungated (verified live), 8,143 downloads, 110 likes. GREEN flags across the board; not pulled into this iteration's KEEP-15 purely to stay within scope, but is our top pick if a 16th/17th source is wanted.",
+      "urls": ["https://aclanthology.org/2025.naacl-long.306.pdf", "https://arxiv.org/abs/2501.09004", "https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0"]
+    },
+    {
+      "repo_id": "allenai/real-toxicity-prompts",
+      "verdict": "DISCARD (not downloaded -- overlaps with or-bench-toxic/PKU-SafeRLHF severity for the toxicity axis)",
+      "provenance": "RealToxicityPrompts (Gehman et al. 2020, EMNLP Findings, https://aclanthology.org/2020.findings-emnlp.301/, arXiv:2009.11462) is 99,442 web-text prompts with continuous Perspective-API toxicity scores in [0,1]. GREEN: peer-reviewed, 20,834 downloads, 123 likes, ungated. A genuinely graded (continuous, not ordinal-bucketed) toxicity signal, but not pulled in since PKU-SafeRLHF already supplies our ordinal graded-harm field and or-bench-toxic already supplies a toxic-prompt control set.",
+      "urls": ["https://aclanthology.org/2020.findings-emnlp.301/", "https://arxiv.org/abs/2009.11462"]
+    },
+    {
+      "repo_id": "walledai/HarmBench",
+      "verdict": "DISCARD -- GATED (verified live)",
+      "provenance": "HarmBench (Mazeika et al. 2024, 'HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal', arXiv:2402.04249, https://arxiv.org/abs/2402.04249; official code github.com/centerforaisafety/HarmBench) is a large, well-cited red-teaming behavior benchmark (standard + copyright + contextual + multimodal behaviors). VERIFIED LIVE: walledai/HarmBench returns gated='auto' (401 on datasets-server), part of the same walledai/* gating pattern noted under AdvBench. Not part of the required-12 list, so not chased via GitHub fallback in this iteration (the original behavior CSV is available ungated at github.com/centerforaisafety/HarmBench/blob/main/data/behavior_datasets/harmbench_behaviors_text_all.csv, verified reachable, 1,528 rows, for a future iteration).",
+      "urls": ["https://arxiv.org/abs/2402.04249", "https://github.com/centerforaisafety/HarmBench"]
+    },
+    {
+      "repo_id": "walledai/StrongREJECT",
+      "verdict": "DISCARD -- GATED (verified live)",
+      "provenance": "StrongREJECT (Souly et al., 'A StrongREJECT for Empty Jailbreaks', NeurIPS 2024 Datasets & Benchmarks, arXiv:2402.10260) is a 313-query high-quality jailbreak-grading benchmark. VERIFIED LIVE: walledai/StrongREJECT returns gated='auto' (401 on datasets-server) -- same walledai/* namespace gating pattern. Not part of the required-12 list; not chased via a GitHub fallback this iteration.",
+      "urls": ["https://proceedings.neurips.cc/paper_files/paper/2024/hash/e2e06adf560b0706d3b1ddfca9f29756-Abstract-Datasets_and_Benchmarks_Track.html"]
+    },
+    {
+      "repo_id": "deepset/prompt-injections",
+      "verdict": "DISCARD (not downloaded -- prompt injection is adjacent to, not part of, the refusal/over-refusal axis this dataset targets)",
+      "provenance": "A binary prompt-injection classification dataset from deepset (an NLP tooling company), combining injection attempts with benign prompts sourced from Open-Orca. RED FLAG: no peer-reviewed paper found, industry-authored rather than academic; still widely used (9,863 downloads, 183 likes) for training injection-detection classifiers (e.g. deepset/deberta-v3-base-injection). Out of scope for a refusal/over-refusal-focused build.",
+      "urls": ["https://huggingface.co/datasets/deepset/prompt-injections", "https://huggingface.co/deepset/deberta-v3-base-injection"]
+    },
+    {
+      "repo_id": "natolambert/xstest-v2-copy",
+      "verdict": "DISCARD -- explicitly excluded by task instructions (VERIFIED)",
+      "provenance": "A community repackaging of XSTest into per-model parquet files (gpt4/llama2new/llama2orig/mistralguard/mistralinstruct/prompts). VERIFIED LIVE: its `prompts` config lacks the `focus` and `label` columns present in the original xstest_prompts.csv, confirming the task's instruction to avoid it as a substitute for the canonical file.",
+      "urls": ["https://huggingface.co/datasets/natolambert/xstest-v2-copy"]
+    }
+  ]
+}

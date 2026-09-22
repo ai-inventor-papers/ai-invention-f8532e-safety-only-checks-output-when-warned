@@ -1,0 +1,110 @@
+[
+ {
+  "pair": "P0",
+  "parent": "Qwen/Qwen3-4B",
+  "child": "mlabonne/Qwen3-4B-abliterated",
+  "X2_parent": 0.003647438024061037,
+  "X2_parent_min": -0.19074890659274593,
+  "X2_own_child": -0.0014984030947490727,
+  "X2_parent_checkpoint": 0.08863502815755302,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "P1",
+  "parent": "Qwen/Qwen3-0.6B",
+  "child": "huihui-ai/Huihui-Qwen3-0.6B-abliterated-v2",
+  "X2_parent": -0.07569990159704122,
+  "X2_parent_min": -0.15570307422243254,
+  "X2_own_child": 0.055810616842949815,
+  "X2_parent_checkpoint": 0.06688788272570918,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "P2",
+  "parent": "Qwen/Qwen3-1.7B",
+  "child": "huihui-ai/Huihui-Qwen3-1.7B-abliterated-v2",
+  "X2_parent": 0.06613473723719347,
+  "X2_parent_min": -0.006982098222249742,
+  "X2_own_child": -0.023611339513947227,
+  "X2_parent_checkpoint": 0.07170452544378762,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "P3",
+  "parent": "Qwen/Qwen2.5-1.5B-Instruct",
+  "child": "Goekdeniz-Guelmez/Josiefied-Qwen2.5-1.5B-Instruct-abliterated-v3",
+  "X2_parent": -0.01220374822613501,
+  "X2_parent_min": -0.13645002714015894,
+  "X2_own_child": -0.001801209672612912,
+  "X2_parent_checkpoint": 0.10437087044100281,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "P6",
+  "parent": "ibm-granite/granite-3.2-2b-instruct",
+  "child": "Damien420/granite-3.2-2b-instruct-abliterated",
+  "X2_parent": 0.0182037304999583,
+  "X2_parent_min": -0.0629842146238096,
+  "X2_own_child": 0.22032692325571224,
+  "X2_parent_checkpoint": 0.0182037304999583,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "P4",
+  "parent": "HuggingFaceTB/SmolLM3-3B",
+  "child": "mlx-community/SmolLM3-3B-abliterated-bf16",
+  "X2_parent": -0.05786346248897075,
+  "X2_parent_min": -0.11349451821509889,
+  "X2_own_child": 0.005154689189494313,
+  "X2_parent_checkpoint": 0.05200855004512969,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "P5",
+  "parent": "microsoft/Phi-4-mini-instruct",
+  "child": "lunahr/Phi-4-mini-instruct-abliterated",
+  "X2_parent": 0.10891404884093399,
+  "X2_parent_min": -0.13489730815335227,
+  "X2_own_child": 0.07922600047938844,
+  "X2_parent_checkpoint": 0.2294422489065579,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "S1",
+  "parent": "stabilityai/stablelm-2-1_6b-chat",
+  "child": "hereticness/heretic_stablelm-2-1_6b-chat",
+  "X2_parent": 0.02556519466485233,
+  "X2_parent_min": -0.030674388892193635,
+  "X2_own_child": 0.021763451547490417,
+  "X2_parent_checkpoint": 0.024027787993640266,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ },
+ {
+  "pair": "S2",
+  "parent": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "child": "venkycs/SmolLM2-1.7B-Instruct-Abliterated",
+  "X2_parent": 0.002698723774099597,
+  "X2_parent_min": -0.02001117256884148,
+  "X2_own_child": 0.00613356478386089,
+  "X2_parent_checkpoint": 0.004370326988184772,
+  "structurally_guaranteed": true,
+  "excluded_from_scoring": true,
+  "note": "the child's write mass along the PARENT's axis; its collapse is an algebraic identity of an orthogonalisation against (a direction close to) that axis. X2_own, refit on the child's own activations, is the metric."
+ }
+]

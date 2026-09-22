@@ -1,0 +1,6 @@
+{
+ "extends_prereg_sha256": "b3849ae02159573c253b85644bb2a4c7fd9712db531bbccf03e8917f40d11f12",
+ "sealed_truth_sha256": "f44810498ec3313718f3429acecd065b25b2b0c783c62cd2c4e9a91fbdd6d024",
+ "written_at_utc": "2026-09-21T03:53:20Z",
+ "why_an_addendum": "DEVIATION, stated deliberately: a Phase-A file cannot contain the SHA-256 of a file that does not yet exist without destroying the ordering guarantee this prereg is for. The binding therefore runs the other way: sealed_truth.json embeds prereg_sha256 and its own hash is published in sealed_truth.sha256 and in prereg_addendum.json, which records the prereg.sha256 it extends."
+}

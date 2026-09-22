@@ -1,0 +1,313 @@
+[
+ {
+  "id": "A01",
+  "source_url": "https://arxiv.org/abs/2609.13534",
+  "locator": "abstract",
+  "quote": "This lightweight input moderator extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence and classifies it with a 288-parameter MLP.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ing on hpd, we introduce \\textbf{\\herald{}} (\\textbf{h}armful \\textbf{e}ncoding \\textbf{r}ecognition via \\textbf{a}ctivation \\textbf{l}ayer \\textbf{d}ynamics). this lightweight input moderator extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence and classifies it with a 288-parameter mlp. \\herald{} stores one $d$-dimensional direction per layer ($262$\\,kb for a 32-layer, $d{=}4096$ model), requires no gradient computation during training, and adds only $2.6{\\times}10^{-6}$ prefill flops at inference. across eight prompt-harmfulness benchmarks and four model families, \\hera"
+ },
+ {
+  "id": "A02",
+  "source_url": "https://arxiv.org/abs/2609.13534",
+  "locator": "abstract",
+  "quote": "Per-instance trajectories provide machine-readable audit records that reveal when and how harmfulness emerges, offering an interpretability advantage over single-layer approaches.",
+  "status": "valid",
+  "match_type": "partial-9w",
+  "context": "sed methods by $2.3$-$4.1$ f1 points on every backbone. per-instance trajectories provide machine-readable audit records that reveal \\emph{when} and \\emph{how} harmfulness emerges, offering an interpretability advantage over single-layer approaches. comments: | international conference on machine learning (icml) workshop on mechanistic interpretability in 2026, accepted in south korea. [this https url](https://openreview.net/pdf?id=sgnakwz3vv) ---|--- subjects: | computation and language (cs.cl) cite as: | [arxiv:2609.13534](https://arxiv.org/abs/2609.13534) [cs.cl] | (or [arxiv:2609.13534v1](https://arxiv.org/abs/2609.13534v1) [cs.cl] for this version) | <https://doi.org"
+ },
+ {
+  "id": "A03",
+  "source_url": "https://arxiv.org/abs/2605.20241",
+  "locator": "abstract",
+  "quote": "introduce Geometry-Lite, a compact prompt-level probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts, then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "y support low-false-positive decisions, and which geometric biases remain stable under benchmark shift. we study this as an empirical decomposition problem and introduce geometry-lite, a compact prompt-level probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts, then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coarse shape. across nine instruction-tuned backbones ($1.2$b--$70$b) and seven safety benchmarks, geometry-lite improves over single-layer probes while remaining close to raw multi-layer score stacking, making it a use"
+ },
+ {
+  "id": "A04",
+  "source_url": "https://arxiv.org/html/2607.00572v1",
+  "locator": "Appendix A.3 Cross-Layer Projection Profiles",
+  "quote": "Figure 9: Cross-layer projection profiles on Llama-3.1-8B. Mean cosine similarity cos(h^(l),v) between residual-stream activations and each of the four directions, across all layers and all input categories... Figure 10: Cross-layer projection profiles on Qwen-2.5-7B. The four-direction structure replicates across architectures with characterization differences",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "A05",
+  "source_url": "https://arxiv.org/html/2607.00572v1",
+  "locator": "Appendix A.2",
+  "quote": "Since the score depends only on the four-direction geometry rather than absolute layer position, the same criterion adapts to each architecture's depth profile without per-model tuning.",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "A06",
+  "source_url": "https://arxiv.org/abs/2609.07139",
+  "locator": "abstract",
+  "quote": "We find that partner expertise is most decodable in the early layers and falls to near chance before the midpoint of the network. Counterfactual patching shows that injecting the expertise difference at the layer of peak decodability barely changes a fixed late-layer readout, whereas the same difference injected past the midpoint propagates almost completely, a separation of more than an order of magnitude.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " expert its dialogue partner is. using expertcollab, a corpus of multi-turn research-planning dialogues between model-played personas at four expertise levels, we find that partner expertise is most decodable in the early layers and falls to near chance before the midpoint of the network. counterfactual patching shows that injecting the expertise difference at the layer of peak decodability barely changes a fixed late-layer readout, whereas the same difference injected past the midpoint propagates almost completely, a separation of more than an order of magnitude. a content-matched random control and a probe-free diagnostic place the transition at the same early layer, an"
+ },
+ {
+  "id": "A07",
+  "source_url": "https://arxiv.org/abs/2609.07139",
+  "locator": "abstract",
+  "quote": "We use one model on a synthetic corpus as an initial demonstration.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " therefore represented well before it becomes causally active, which bounds where any attempt to read out or steer partner-conditioned behavior must intervene. we use one model on a synthetic corpus as an initial demonstration. comments: | published at the scientific understanding of foundation models (sci-fm) workshop at colm 2026 ---|--- subjects: | artificial intelligence (cs.ai); computation and language (cs.cl) cite as: | [arxiv:2609.07139](https://arxiv.org/abs/2609.07139) [cs.ai] | (or [arxiv:2609.07139v1](https://arxiv.org/abs/2609.07139v1) [cs.ai] for this version) | <https://doi.org/10.48550/arxiv.2609.07139> focus to learn more arxiv-issued doi via datacite (pe"
+ },
+ {
+  "id": "A08",
+  "source_url": "https://arxiv.org/abs/2608.17843",
+  "locator": "abstract",
+  "quote": "Further analyses show that decodable information is not always actionable. Generation often fails to express this information, and on the two intervention-tested backbones, activation-restoration effects at the patched entity position vanish while decodability persists across depth.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "ly initialized representations and improves only modestly with pretraining, indicating that much of its probe performance is available without learned weights. further analyses show that decodable information is not always actionable. generation often fails to express this information, and on the two intervention-tested backbones, activation-restoration effects at the patched entity position vanish while decodability persists across depth. mean-difference steering also does not reliably control outputs. these results show that decodability, generation, activation-level influence, and steerability can diverge in the tested setting. the audit provides a controlled way to di"
+ },
+ {
+  "id": "A09",
+  "source_url": "https://arxiv.org/html/2608.17843v1",
+  "locator": "full-text grep, html",
+  "quote": "No matches found for pattern: layer gap|depth-fraction|fraction of depth|onset layer|lag of|layers apart|difference in layer",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "A10",
+  "source_url": "https://arxiv.org/abs/2609.01048",
+  "locator": "abstract",
+  "quote": "Across the full Pythia suite (160M-12B, eight checkpoints, four task families), a linear probe can read a target variable from the residual stream as early as step 1,000 at every scale -- yet steering along that same reading direction remains null-equivalent in 43 of 48 model-checkpoint cells.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "f of the paper titled lagged coupling: internal representations become readable before they become causal, by xining xun [view pdf](/pdf/2609.01048) > abstract:across the full pythia suite (160m-12b, eight checkpoints, four task families), a linear probe can read a target variable from the residual stream as early as step 1,000 at every scale -- yet steering along that same reading direction remains null-equivalent in 43 of 48 model-checkpoint cells. internal readability systematically outruns causal efficacy, and the lag does not shrink with scale. we call this structure lagged coupling and decompose it into three dissociable tracks: (i) internal readability, saturated ("
+ },
+ {
+  "id": "A11",
+  "source_url": "https://arxiv.org/pdf/2609.01048",
+  "locator": "Section 3.1 Grid and instrumentation, Table 2",
+  "quote": "The grid crosses the six publicly released Pythia sizes with eight checkpoints spanning training, and four task families designed to separate distinct controllability demands (Table 2)... T: template contrast D: distractor robustness P: prior-bias override N: negative transfer",
+  "status": "valid",
+  "match_type": "partial-16w",
+  "context": "roduced, and none touched thresholds, nulls, or the decision tree (\u00a77). 3.1 grid and instrumentation the grid crosses the six publicly released pythia sizes[1] with eight checkpoints spanning training, and four task families designed to separate distinct controllability demands (table 2). each of the resulting 192 units is evaluated by the same frozen pipeline: a probe track, an output-level track, an intervention track with matched nulls, and per-unit resolution bookkeeping. every model\u00d7checkpoint weight file passed a mandatory content-hash gate (per-checkpoint hashes pairwise distinct, lineage pinned by revision) before use; this gate is what caught the corrupted 2.8b l"
+ },
+ {
+  "id": "A12",
+  "source_url": "https://arxiv.org/abs/2604.22128",
+  "locator": "abstract",
+  "quote": "By probing and intervening on the residual stream and attention patterns, we find that depth, distance, and top-of-stack signals are all decodable, yet their causal roles diverge.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "amine this gap in transformers trained on the dyck language (a formal language of balanced bracket sequences), where the hierarchical ground truth is explicit. by probing and intervening on the residual stream and attention patterns, we find that depth, distance, and top-of-stack signals are all decodable, yet their causal roles diverge. specifically, masking attention to the true top-of-stack position causes a sharp drop in long-distance accuracy, while ablating low-dimensional residual stream subspaces has comparatively little effect. these results, which extend to a templated natural language setting, suggest that even in a controlled setting where the relevant hierarc"
+ },
+ {
+  "id": "A13",
+  "source_url": "https://arxiv.org/abs/2606.24952",
+  "locator": "abstract",
+  "quote": "On Gemma 2-2B-it, output format (clean JSON vs markdown fencing) collapses both roles onto one axis. Hallucination does not: the model detects fake entities with perfect linear separability (AUC = 1.000 from layer 5), yet that direction sits at cos = 0.12 (about 83 degrees) from the direction producing a refusal... The gap generalizes: across four models from three families and two scales (1B-9B), cos stays in [0.12, 0.20], identical before and after instruction tuning (0.1197 vs 0.1200)... A 15-degree rotation toward the refusal direction partially bridges it -- 73% and 60% refusal on two held-out fake-entity categories at 1.8% false positives. ... The cosine is a weight-computable signature of the dissociation between knowing and steering, not a predictor of it.",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "st detects a behavior and the one that best causes it? if detection implies control the cosine is near 1; otherwise it quantifies a detection-intervention gap. on gemma 2-2b-it, output format (clean json vs markdown fencing) collapses both roles onto one axis. hallucination does not: the model detects fake entities with perfect linear separability (auc = 1.000 from layer 5), yet that direction sits at cos = 0.12 (about 83 degrees) from the direction producing a refusal -- a small, reproducible alignment, far from the cos = 1 that \"detection is control\" would require. a detector built from activations, with no chosen tokens, likewise fails to align (cos = -0.06). the gap g"
+ },
+ {
+  "id": "A14",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "Section 7.1 Four-model triangulation, Table",
+  "quote": "Model | Layers | dim | cos | Signal ratio | Behavior --- Gemma 2-2B-it | 26 | 2304 | 0.12 | 6.9x | Fabricates (~70%) Llama 3.2-1B | 16 | 2048 | 0.20 | 12.5x | Refuses (100%) Qwen 2.5-1.5B | 28 | 1536 | 0.16 | 2.7x | Mixed (40% refuse) Gemma 2-9B-it | 42 | 3584 | 0.13 | 12.8x | Fabricates",
+  "status": "valid",
+  "match_type": "partial-13w",
+  "context": "asurement of sections 2 and 4.3, with both directions built from each model's own lmhead - on llama-3.2-1b-instruct, qwen-2.5-1.5b-instruct, and gemma 2-9b-it. model | layers | dim | cos | signal ratio | behavior ---|---|---|---|---|--- gemma 2-2b-it | 26 | 2304 | 0.12 | 6.9\u00d7\\times | fabricates (~70%) llama 3.2-1b | 16 | 2048 | 0.20 | 12.5\u00d7\\times | refuses (100%) qwen 2.5-1.5b | 28 | 1536 | 0.16 | 2.7\u00d7\\times | mixed (40% refuse) gemma 2-9b-it | 42 | 3584 | 0.13 | 12.8\u00d7\\times | fabricates cos = cos\u2061(ddet,dref)\\cos(\\mathbf{d}{\\text{det}},\\mathbf{d}{\\text{ref}}), the cosine between detection and intervention directions. signal ratio = gap between fake and real projections on"
+ },
+ {
+  "id": "A15",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "Section 7.5 Instruction tuning leaves the lm_head geometry unchanged",
+  "quote": "Model | cos(d_det,d_ref) --- Gemma 2-2B (base) | 0.1197 Gemma 2-2B-it | 0.1200 Difference: 0.0003. The instruction tuning does not touch the lm_head geometry.",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "}},\\mathbf{d}{\\text{ref}}) on the gemma 2-2b base model (no instruction tuning): model | cos\u2061(ddet,dref)\\cos(\\mathbf{d}{\\text{det}},\\mathbf{d}{\\text{ref}}) ---|--- gemma 2-2b (base) | 0.1197 gemma 2-2b-it | 0.1200 difference: 0.0003. the instruction tuning does not touch the lmhead geometry. what alignment does change is where the activations land along the (fixed) detection direction. in the base model the ordering is backwards - real entities project further along it, as if more uncertain than the fakes (gap --23.2). instruction tuning flips it the sensible way: now the fake entities are the ones that look uncertain (gap +49.8). the geometry is the same in both models; "
+ },
+ {
+  "id": "A16",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "full-text grep, html",
+  "quote": "No matches found for pattern: abliterat|uncensor",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "A17",
+  "source_url": "https://arxiv.org/html/2606.24952v1",
+  "locator": "full-text grep (all 'harm' hits are Related Work / mechanism-description, not the paper's own measured concept)",
+  "quote": "harm (4 matches in 64440 chars) ... Arditi et al. (2024) showed that refusal is mediated by a single linear direction ... The detection direction actively harms refusal tokens ... suppressing one MLP neuron suffices to bypass safety alignment across 7 models",
+  "status": "valid",
+  "match_type": "partial-14w",
+  "context": "iking capability: find a direction in a model's residual stream that corresponds to a behavior, and you can often steer that behavior by adding or ablating it. arditi et al. (2024) showed that refusal is mediated by a single linear direction - the same difference-in-means direction that separates harmful from harmless prompts also removes refusal when ablated. li et al. (2023) found truth-related directions by probing and added them at inference to increase honesty. turner et al. (2023) formalized activation addition as a general steering paradigm. these results are often read as licensing a general inference: that the direction which detects a behavior is also the direct"
+ },
+ {
+  "id": "A18",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "abstract",
+  "quote": "We propose the Disentangled Safety Hypothesis (DSH), positing that safety computation operates on two distinct subspaces: a Recognition Axis (v_H, \"Knowing\") and an Execution Axis (v_R, \"Acting\")... we demonstrate a causal double dissociation, effectively creating a state of \"Knowing without Acting.\"",
+  "status": "valid",
+  "match_type": "partial-11w",
+  "context": " layers. to validate this, we introduce \\textit{double-difference extraction} and \\textit{adaptive causal steering}. using our curated \\textsc{ambiguitybench}, we demonstrate a causal double dissociation, effectively creating a state of knowing without acting.'' crucially, we leverage this disentanglement to propose the \\textbf{refusal erasure attack (rea)}, which achieves state-of-the-art attack success rates by surgically lobotomizing the refusal mechanism. furthermore, we uncover a critical architectural divergence, contrasting the \\textit{explicit semantic control} of llama3.1 with the \\textit{latent distributed control} of qwen2.5. the code and dataset are available "
+ },
+ {
+  "id": "A19",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "Introduction, Figure 1 caption",
+  "quote": "Figure 1: Layer-wise cosine similarity between the Recognition axis v_H and the Execution axis v_R. The trajectory moves from strong antagonism in early layers (Sim \u2248 -0.9) toward the random baseline",
+  "status": "valid",
+  "match_type": "partial-11w",
+  "context": "anism under adversarial conditions? figure 1: layer-wise cosine similarity between the recognition axis vh\\mathbf{v}{h} and the execution axis vr\\mathbf{v}{r}. the trajectory moves from strong antagonism in early layers (sim \u2248-0.9\\approx-0.9) toward the random baseline (dashed line); deep-layer values lie within the plotted 95% confidence band, indicating execution-aligned safety signal becomes statistically indistinguishable from noise and thus creates a latent gap where \"knowing\" need not trigger \"acting\". mechanistic interpretability (bereska and gavves, 2024; tak et al., 2025; gross et al., 2024) and representation-steering techniques (li et al., 2025b; zhang et al., "
+ },
+ {
+  "id": "A20",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "Section on Geometric Evolution, Figure 4 caption",
+  "quote": "Figure 4: Layer-wise Cosine Similarity between v_H and v_R. The dashed line and grey band represent the mean and 95% confidence interval of 1000 random vector pairs... In deep layers, the safety axes' similarity converges to this random baseline, confirming the \"Reflex-to-Dissociation\" pattern.",
+  "status": "valid",
+  "match_type": "partial-17w",
+  "context": "linearly mapped to the vocabulary. (a) jailbreakbench (b) maliciousinstruct figure 4: layer-wise cosine similarity between vh\\mathbf{v}{h} and vr\\mathbf{v}{r}. the dashed line and grey band represent the mean and 95% confidence interval of 1000 random vector pairs, respectively. in deep layers, the safety axes' similarity converges to this random baseline, confirming the \"reflex-to-dissociation\" pattern. 2\\. geometric evolution (reflex-to-dissociation). as visualized in figure 4, calculating sim\u200b(vh,vr)\\text{sim}(\\mathbf{v}{h},\\mathbf{v}{r}) relative to a random baseline reveals a distinct biphasic trajectory: \u2219\\bullet phase 1: antagonistic reflex. early layers exhibit st"
+ },
+ {
+  "id": "A21",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "full-text grep, html",
+  "quote": "No matches found for pattern: abliterat|uncensor",
+  "status": "error",
+  "match_type": null,
+  "context": null,
+  "note": "string not found in live re-fetch"
+ },
+ {
+  "id": "A22",
+  "source_url": "https://arxiv.org/html/2603.05773v2",
+  "locator": "Experiment Setup",
+  "quote": "Models. We evaluate three aligned models spanning distinct architectural lineages: Llama-3.1-8B-Instruct, Mistral-7B-Instruct-v0.2, and Qwen2.5-7B-Instruct.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "nd vr\\mathbf{v}{r} at the last layer on jailbreakbench. note the explicit semantic lock in llama/mistral vs. latent artifacts in qwen. ### 4.1 experiment setup models. we evaluate three aligned models spanning distinct architectural lineages: llama-3.1-8b-instruct, mistral-7b-instruct-v0.2, and qwen2.5-7b-instruct. this selection ensures our findings capture trends beyond a single model family and allows us to investigate architectural differences in safety implementation. datasets. we employ a diverse suite to assess safety mechanisms: (1) malicious stimuli: jailbreakbench (chao et al., 2024) and maliciousinstruct (huang et al., 2024) are used to evaluate robustness agai"
+ },
+ {
+  "id": "A23",
+  "source_url": "https://arxiv.org/abs/2609.14759",
+  "locator": "abstract",
+  "quote": "The central result is causal and comes from one model, OLMo-3. A nested interchange rank sweep patches successively larger slices of the moral subspace between matched requests and reads how much of refusal's response transfers... about three-quarters of refusal's causal input lies outside the moral subspace altogether.",
+  "status": "valid",
+  "match_type": "partial-18w",
+  "context": "on with only a weak pretraining precursor, written into a narrow control-token channel where the refusal decision is orthogonal to the moral-judgment decision. the central result is causal and comes from one model, olmo-3. a nested interchange rank sweep patches successively larger slices of the moral subspace between matched requests and reads how much of refusal's response transfers: as the basis widens, moral judgment keeps reading more of it, while refusal levels off at the level of a single harm direction, and about three-quarters of refusal's causal input lies outside the moral subspace altogether. refusal reads the harm percept, not the moral content that judgment "
+ },
+ {
+  "id": "T60",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Abstract",
+  "quote": "The gap generalizes. Across four models from three families and two scales (1B\u20139B),",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "n is control\" would require. a detector built a second way, from activations with no chosen tokens, likewise fails to align with control (cos=-0.06\\cos=-0.06). the gap generalizes. across four models from three families and two scales (1b-9b), cos\\cos stays in [0.12, 0.20]; it is identical before and after instruction tuning (0.1197 vs 0.1200), so the geometry is laid down in pretraining. on gemma 2-2b-it, a 15\u2218 rotation from the detection direction toward the intervention direction partially bridges the gap - 73% and 60% refusal on two held-out entity categories, at 1.8% false positives (n=115). it is tempting to read this cosine as a steerability diagnostic - high meani"
+ },
+ {
+  "id": "T61",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Abstract",
+  "quote": "What the cosine _is_ is a robust, weight-computable signature of the dissociation, invariant across four models \u2014 not a predictor of how steerable a behavior is.",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "nsional class, and what separates the steerable case is functional - whether the control direction also works as a detector - not readable from a static angle. what the cosine is is a robust, weight-computable signature of the dissociation, invariant across four models - not a predictor of how steerable a behavior is. ### 1\\. introduction recent work in mechanistic interpretability has demonstrated a striking capability: find a direction in a model's residual stream that corresponds to a behavior, and you can often steer that behavior by adding or ablating it. arditi et al. (2024) showed that refusal is mediated by a single linear direction - the same difference-in-means "
+ },
+ {
+  "id": "T62",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Abstract",
+  "quote": "a 15\u2218 rotation from the detection direction toward the intervention direction partially bridges the gap \u2014 73% and 60% refusal on two held-out entity categories, at 1.8% false positives (N=115).",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "s stays in [0.12, 0.20]; it is identical before and after instruction tuning (0.1197 vs 0.1200), so the geometry is laid down in pretraining. on gemma 2-2b-it, a 15\u2218 rotation from the detection direction toward the intervention direction partially bridges the gap - 73% and 60% refusal on two held-out entity categories, at 1.8% false positives (n=115). it is tempting to read this cosine as a steerability diagnostic - high meaning the detection direction is itself a control knob, low meaning it is not. we test that reading, and it does not hold. measured the same independent way, the cosine sits near the high-dimensional chance level for steerable and unsteerable behaviors "
+ },
+ {
+  "id": "T63",
+  "source_url": "https://arxiv.org/html/2606.24952",
+  "locator": "Section 2.2",
+  "quote": "the intervention (refusal) direction is hand-picked from lm_head alone",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "-in-means, section 2.1), or hand-picked , by reading the lmhead rows of tokens typical of a behavior (section 2.2). we build the detection direction both ways; the intervention (refusal) direction is hand-picked from lmhead alone. we test whether a direction is causally relevant by adding it to the residual stream and measuring the behavioral change (section 2.5), and we localize where in the network the signal lives (section 2.3). all analysis is at inference time - we observe and steer the model without updating any weights. figure 1 lays out the full pipeline. figure 1: the method in one view. from the last-token residual state h\\mathbf{h} we build two directions: a de"
+ },
+ {
+  "id": "T64",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "Abstract",
+  "quote": "positing that safety computation operates on two distinct subspaces",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "undamental mechanistic decoupling. we propose the \\textbf{\\underline{d}}isentangled \\textbf{\\underline{s}}afety \\textbf{\\underline{h}}ypothesis \\textbf{(dsh)}, positing that safety computation operates on two distinct subspaces: a \\textit{recognition axis} ($\\mathbf{v}h$, knowing'') and an \\textit{execution axis} ($\\mathbf{v}r$, acting''). our geometric analysis reveals a universal reflex-to-dissociation'' evolution, where these signals transition from antagonistic entanglement in early layers to structural independence in deep layers. to validate this, we introduce \\textit{double-difference extraction} and \\textit{adaptive causal steering}. using our curated \\textsc{ambi"
+ },
+ {
+  "id": "T65",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "Abstract",
+  "quote": "we demonstrate a causal double dissociation, effectively creating a state of",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " layers. to validate this, we introduce \\textit{double-difference extraction} and \\textit{adaptive causal steering}. using our curated \\textsc{ambiguitybench}, we demonstrate a causal double dissociation, effectively creating a state of knowing without acting.'' crucially, we leverage this disentanglement to propose the \\textbf{refusal erasure attack (rea)}, which achieves state-of-the-art attack success rates by surgically lobotomizing the refusal mechanism. furthermore, we uncover a critical architectural divergence, contrasting the \\textit{explicit semantic control} of llama3.1 with the \\textit{latent distributed control} of qwen2.5. the code and dataset are available "
+ },
+ {
+  "id": "T66",
+  "source_url": "https://arxiv.org/abs/2603.05773",
+  "locator": "Abstract",
+  "quote": "which achieves State-of-the-Art attack success rates by surgically lobotomizing the refusal mechanism",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "on, effectively creating a state of knowing without acting.'' crucially, we leverage this disentanglement to propose the \\textbf{refusal erasure attack (rea)}, which achieves state-of-the-art attack success rates by surgically lobotomizing the refusal mechanism. furthermore, we uncover a critical architectural divergence, contrasting the \\textit{explicit semantic control} of llama3.1 with the \\textit{latent distributed control} of qwen2.5. the code and dataset are available at [this https url](https://anonymous.4open.science/r/dsh). subjects: | cryptography and security (cs.cr); artificial intelligence (cs.ai); machine learning (cs.lg) ---|--- cite as: | [arxiv:2603.05773"
+ },
+ {
+  "id": "T67",
+  "source_url": "https://arxiv.org/html/2607.14147v1",
+  "locator": "Section 4.3",
+  "quote": "the instruct model routes it to refusal tokens about 8",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "assive reading. a logit-level trace then measures a safety-specific component on top: when the knockout frees probability mass off the compliance continuation, the instruct model routes it to refusal tokens about 8\u00d78\\times more than the base model does (concentration 0.240.24 vs 0.030.03, app. e). safety tuning adds a small learned refusal attractor, but the dominant mechanism is passive: compliance collapses in both models. the trace confirms a safety-specific refusal pull exists; it does not separate an actively-suppressed gate springing back from a passive fallback attractor. #### the generic story extends to the early mlp pathway. attention is one causal pathway; the "
+ },
+ {
+  "id": "T68",
+  "source_url": "https://arxiv.org/abs/2609.13534",
+  "locator": "Abstract",
+  "quote": "extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "\\herald{}} (\\textbf{h}armful \\textbf{e}ncoding \\textbf{r}ecognition via \\textbf{a}ctivation \\textbf{l}ayer \\textbf{d}ynamics). this lightweight input moderator extracts a seven-dimensional feature record, slope, curvature, monotonicity, onset layer, and related statistics from the cross-layer projection sequence and classifies it with a 288-parameter mlp. \\herald{} stores one $d$-dimensional direction per layer ($262$\\,kb for a 32-layer, $d{=}4096$ model), requires no gradient computation during training, and adds only $2.6{\\times}10^{-6}$ prefill flops at inference. across eight prompt-harmfulness benchmarks and four model families, \\herald{} achieves an average f1 of $8"
+ },
+ {
+  "id": "T69",
+  "source_url": "https://arxiv.org/abs/2609.01048",
+  "locator": "Abstract",
+  "quote": "yet steering along that same reading direction remains null-equivalent in 43 of 48 model-checkpoint cells",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": " (160m-12b, eight checkpoints, four task families), a linear probe can read a target variable from the residual stream as early as step 1,000 at every scale -- yet steering along that same reading direction remains null-equivalent in 43 of 48 model-checkpoint cells. internal readability systematically outruns causal efficacy, and the lag does not shrink with scale. we call this structure lagged coupling and decompose it into three dissociable tracks: (i) internal readability, saturated (auroc >= 0.990) from the first checkpoint everywhere; (ii) behavioral readability, which develops gradually and progressively later at larger scales (12b reaches 0.909 only at the final ch"
+ },
+ {
+  "id": "T70",
+  "source_url": "https://arxiv.org/abs/2508.09224",
+  "locator": "Abstract",
+  "quote": "safe-completion training improves safety (especially on dual-use prompts), reduces the severity of residual safety failures, and substantially increases model helpfulness",
+  "status": "valid",
+  "match_type": "normalized",
+  "context": "e safety policy's constraints. we incorporated this approach into gpt-5 and find that across both production comparisons and internally controlled experiments, safe-completion training improves safety (especially on dual-use prompts), reduces the severity of residual safety failures, and substantially increases model helpfulness. subjects: | computers and society (cs.cy); artificial intelligence (cs.ai); computation and language (cs.cl) ---|--- cite as: | [arxiv:2508.09224](https://arxiv.org/abs/2508.09224) [cs.cy] | (or [arxiv:2508.09224v1](https://arxiv.org/abs/2508.09224v1) [cs.cy] for this version) | <https://doi.org/10.48550/arxiv.2508.09224> focus to learn more arxi"
+ }
+]

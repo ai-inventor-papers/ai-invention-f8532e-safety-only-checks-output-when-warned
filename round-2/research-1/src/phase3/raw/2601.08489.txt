@@ -1,0 +1,196 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/abs/2601.08489
+Type: HTML
+Length: 7770 chars
+
+--- Content ---
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Computation and Language
+
+**arXiv:2601.08489** (cs) 
+
+[Submitted on 13 Jan 2026]
+
+# Title:Surgical Refusal Ablation: Disentangling Safety from Intelligence via Concept-Guided Spectral Cleaning
+
+Authors:[Tony Cristofano](https://arxiv.org/search/cs?searchtype=author&query=Cristofano,+T)
+
+View a PDF of the paper titled Surgical Refusal Ablation: Disentangling Safety from Intelligence via Concept-Guided Spectral Cleaning, by Tony Cristofano
+
+[View PDF](/pdf/2601.08489) [HTML (experimental)](https://arxiv.org/html/2601.08489v1)
+
+> Abstract:Safety-aligned language models systematically refuse harmful requests. While activation steering can modulate refusal, ablating the raw "refusal vector" calculated from contrastive harmful and harmless prompts often causes collateral damage and distribution drift. We argue this degradation occurs because the raw vector is polysemantic, entangling the refusal signal with core capability circuits and linguistic style.   
+> We introduce Surgical Refusal Ablation (SRA) to distill these steering directions. SRA constructs a registry of independent Concept Atoms representing protected capabilities and stylistic confounds, then uses ridge-regularized spectral residualization to orthogonalize the refusal vector against these directions. This yields a clean refusal direction that targets refusal-relevant structure while minimizing disruption to the model's semantic geometry.   
+> Across five models (Qwen3-VL and Ministral series), SRA achieves deep refusal reduction (0-2%) with negligible perplexity impact on Wikitext-2 (mean delta PPL approx. 0.02) and minimal distribution drift. Notably, standard ablation on Qwen3-VL-4B induces severe drift (first-token KL = 2.088), whereas SRA maintains the original distribution (KL = 0.044) while achieving the same 0% refusal rate. Using teacher-forced perplexity on GSM8K and MBPP as a high-resolution capability proxy, we show SRA preserves math and code distributions. These results suggest that common "model damage" is often "Ghost Noise," defined as the spectral bleeding of the dirty refusal direction into capability subspaces. 
+
+Subjects: |  Computation and Language (cs.CL)  
+---|---  
+Cite as: | [arXiv:2601.08489](https://arxiv.org/abs/2601.08489) [cs.CL]  
+  | (or  [arXiv:2601.08489v1](https://arxiv.org/abs/2601.08489v1) [cs.CL] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2601.08489> Focus to learn more arXiv-issued DOI via DataCite  
+  
+## Submission history
+
+From: Tony Cristofano [[view email](/show-email/3425fa2c/2601.08489)]   
+**[v1]** Tue, 13 Jan 2026 12:21:44 UTC (208 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Surgical Refusal Ablation: Disentangling Safety from Intelligence via Concept-Guided Spectral Cleaning, by Tony Cristofano
+
+  * [View PDF](/pdf/2601.08489)
+  * [HTML (experimental)](https://arxiv.org/html/2601.08489v1)
+  * [TeX Source ](/src/2601.08489)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.CL
+
+[< prev](/prevnext?id=2601.08489&function=prev&context=cs.CL "previous in cs.CL \(accesskey p\)")   |   [next >](/prevnext?id=2601.08489&function=next&context=cs.CL "next in cs.CL \(accesskey n\)")   
+
+
+[new](/list/cs.CL/new) |  [recent](/list/cs.CL/recent) | [2026-01](/list/cs.CL/2026-01)
+
+Change to browse by: 
+
+[cs](/abs/2601.08489?context=cs)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2601.08489)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2601.08489)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2601.08489)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2601.08489&description=Surgical Refusal Ablation: Disentangling Safety from Intelligence via Concept-Guided Spectral Cleaning "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2601.08489&title=Surgical Refusal Ablation: Disentangling Safety from Intelligence via Concept-Guided Spectral Cleaning "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2601.08489) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

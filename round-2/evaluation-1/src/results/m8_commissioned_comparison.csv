@@ -1,0 +1,36 @@
+metric,READOUT_CLASS,BASELINE_ONLY,DESCRIPTIVE,checkpoint,cos_content_ablit_at_band,split_half_cosine_G1,A_shuffled_label_band_p975,A_term_std,CB_term_std,A_escapes_band,source_file,baseline,baseline_value,json_path
+M8.commissioned,activation,False,True,NonSafetyFT-STaR,0.04823780328863197,,11.473274714732348,-4.254065470271278,13.243296955063252,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,NonSafetyFT-STaR,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.NonSafetyFT-STaR
+M8.commissioned,activation,False,True,NonSafetyFT-STaR,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.NonSafetyFT-STaR
+M8.commissioned,activation,False,True,NonSafetyFT-STaR,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.NonSafetyFT-STaR
+M8.commissioned,logit,True,True,NonSafetyFT-STaR,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.NonSafetyFT-STaR
+M8.commissioned,activation,False,True,Qwen3-4B,0.07823375452102886,,11.775488564627633,-7.475109908346373,16.87422474289028,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,Qwen3-4B,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.Qwen3-4B
+M8.commissioned,activation,False,True,Qwen3-4B,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.Qwen3-4B
+M8.commissioned,activation,False,True,Qwen3-4B,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.Qwen3-4B
+M8.commissioned,logit,True,True,Qwen3-4B,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.Qwen3-4B
+M8.commissioned,activation,False,True,Qwen3-4B-Base-chat,0.0662097746713294,,11.041308571591605,-4.390740941871456,13.036051961913726,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,Qwen3-4B-Base-chat,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.Qwen3-4B-Base-chat
+M8.commissioned,activation,False,True,Qwen3-4B-Base-chat,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.Qwen3-4B-Base-chat
+M8.commissioned,activation,False,True,Qwen3-4B-Base-chat,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.Qwen3-4B-Base-chat
+M8.commissioned,logit,True,True,Qwen3-4B-Base-chat,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.Qwen3-4B-Base-chat
+M8.commissioned,activation,False,True,Qwen3-4B-Base-plain,0.2345743195878135,,11.613141984744878,-0.2542374826802627,9.74324407069279,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,Qwen3-4B-Base-plain,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.Qwen3-4B-Base-plain
+M8.commissioned,activation,False,True,Qwen3-4B-Base-plain,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.Qwen3-4B-Base-plain
+M8.commissioned,activation,False,True,Qwen3-4B-Base-plain,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.Qwen3-4B-Base-plain
+M8.commissioned,logit,True,True,Qwen3-4B-Base-plain,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.Qwen3-4B-Base-plain
+M8.commissioned,activation,False,True,Qwen3-4B-SafeRL,0.08699025979472531,,11.273110645162628,-8.301948861078337,19.334818558367562,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,Qwen3-4B-SafeRL,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.Qwen3-4B-SafeRL
+M8.commissioned,activation,False,True,Qwen3-4B-SafeRL,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.Qwen3-4B-SafeRL
+M8.commissioned,activation,False,True,Qwen3-4B-SafeRL,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.Qwen3-4B-SafeRL
+M8.commissioned,logit,True,True,Qwen3-4B-SafeRL,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.Qwen3-4B-SafeRL
+M8.commissioned,activation,False,True,Qwen3-4B-abliterated,0.043273108907871775,,11.69186978273105,-9.287550081269714,13.999897715488386,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,Qwen3-4B-abliterated,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.Qwen3-4B-abliterated
+M8.commissioned,activation,False,True,Qwen3-4B-abliterated,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.Qwen3-4B-abliterated
+M8.commissioned,activation,False,True,Qwen3-4B-abliterated,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.Qwen3-4B-abliterated
+M8.commissioned,logit,True,True,Qwen3-4B-abliterated,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.Qwen3-4B-abliterated
+M8.commissioned,activation,False,True,RandInit-4B,0.06651969667938021,,1.2682012897003507,0.34515582605282596,-0.40412633595394326,False,LANE_A/out/method_out.json,,,
+M8.commissioned,activation,False,True,RandInit-4B,,,,,,,LANE_A/out/method_out.json,B1 (diff-in-means AUROC),,metadata.baselines.B1.RandInit-4B
+M8.commissioned,activation,False,True,RandInit-4B,,,,,,,LANE_A/out/method_out.json,B2 (supervised probe AUROC),,metadata.baselines.B2.RandInit-4B
+M8.commissioned,activation,False,True,RandInit-4B,,,,,,,LANE_A/out/method_out.json,B3 (cluster separation),,metadata.baselines.B3.RandInit-4B
+M8.commissioned,logit,True,True,RandInit-4B,,,,,,,LANE_A/out/method_out.json,B4 (first-token refusal-logit gap),,metadata.baselines.B4.RandInit-4B

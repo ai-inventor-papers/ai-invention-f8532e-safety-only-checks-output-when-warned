@@ -1,0 +1,259 @@
+{
+  "agent": "C",
+  "date": "2026-09-21",
+  "candidates": [
+    {
+      "id": "X3",
+      "name": "Analytic Percept-to-Refusal Gain",
+      "verdict": "PARTIAL",
+      "escape_hatch": "DIFFERENT CONCEPT (+ lexical-token dependence): the nearest relative reports a fixed logit GAP (top refusal-token logit minus top affirmative-token logit at one decoding step), not an ANALYTIC SLOPE of refusal-logit-mass per unit of a continuous harm-projection variable through the final norm+unembedding; it also presupposes identified refusal/affirmative vocabulary tokens, which is undefined for a safe-completion model with no lexical refusal token.",
+      "nearest_paper": {
+        "title": "Logit-Gap Steering: A Forward-Pass Diagnostic for Alignment Robustness",
+        "url": "https://arxiv.org/abs/2506.24056",
+        "arxiv_id": "2506.24056"
+      },
+      "remaining_unclaimed": "An analytic, token-lexicon-free, per-unit-harm-projection GAIN (derivative) through the unembedding, valid for lexical-refusal-free safe-completion models, per checkpoint.",
+      "falsifier": "X3 is dead if anyone computes an analytic, sampling-free gain from a residual-stream safety direction to refusal-token logits and reports it per model.",
+      "confidence": "medium-high",
+      "confidence_reason": "Full query protocol run (5 kinds) for the main lane plus the seeded papers checked directly (SRP, Refusal-Before-Decoding, Arditi). The strongest near-miss (Logit-Gap Steering) was read at the html rung and its defining sentence quoted verbatim; it clearly differs in level (gap vs. slope) and in vocabulary-dependence. Residual risk: a paper computing an explicit harm-projection-to-logit derivative could exist under different terminology (e.g. 'safety Jacobian') that our terms did not surface.",
+      "queries": [
+        {
+          "q": "analytic logit-lens gain harm direction to refusal token logits per model sampling-free",
+          "mode": "general",
+          "kind": "academic",
+          "date": "2026-09-21",
+          "top_hits": ["COSMIC: Generalized Refusal Direction Identification in LLM Activations (aclanthology)", "Refusal in Language Models Is Mediated by a Single Direction (NeurIPS)", "What is a refusal direction? - abliteration.org wiki", "The Geometry of Refusal: Linear Instability in Safety-Aligned LLMs", "What do your logits know? (2604.09885)"],
+          "empty": false
+        },
+        {
+          "q": "abliterated model refusal logit gain unembedding orthogonalization heretic uncensored",
+          "mode": "general",
+          "kind": "community",
+          "date": "2026-09-21",
+          "top_hits": ["p-e-w/heretic (GitHub)", "Abliteration Is Not a Scalpel: Off-Target Effects of Refusal Removal (2607.17427)", "abliteration.org wiki: abliterated vs uncensored", "Uncensor any LLM with abliteration (mlabonne blog)"],
+          "empty": false
+        },
+        {
+          "q": "refusal-onset logit gain reported as per-model safety score analytic no sampling defined for safe-completion",
+          "mode": "general",
+          "kind": "adversarial",
+          "date": "2026-09-21",
+          "top_hits": ["From Hard Refusals to Safe-Completions (OpenAI PDF)", "Refusal–Affirmation Logit Gap (emergentmind topic page)", "The Refusal–Compliance Tradeoff: A Large-Scale Safety Behavior Audit", "A Unified Mechanistic Analysis of Knowledge- and Safety-Based Refusals (2609.00760)"],
+          "empty": false
+        },
+        {
+          "q": "analytic slope harm projection refusal token logit unembedding safety metric",
+          "mode": "scholarly",
+          "kind": "scholarly",
+          "date": "2026-09-21",
+          "top_hits": ["ChaosAthena: A Framework to Compare Gen AI Model States (OpenAlex, unrelated PTQ case study)"],
+          "empty": false
+        },
+        {
+          "q": "2026 sampling-free refusal logit gain safety metric residual stream harm direction",
+          "mode": "general",
+          "kind": "recency",
+          "date": "2026-09-21",
+          "top_hits": ["RAS: Measuring LLM Safety Through Refusal Alignment (2606.25750)", "Locating and Steering Refusal Beyond Attention (2609.04721)", "Logit-Gap Steering: A Forward-Pass Diagnostic for Alignment Robustness (2506.24056)", "Beyond Shallow Alignment: How Post-Training Methods Determine Refusal Circuits (2609.03887)"],
+          "empty": false
+        }
+      ],
+      "evidence": [
+        {
+          "quote": "Safety audits can use SRP wherever the question admits a concrete readout score. A study can define a group contrast for refusal, source verification, or a specified lexical family, compare its feature contributions across paraphrases, languages, adversarial prompts, and checkpoints, and treat the features that recur as nominations for causal tests or constrained interventions.",
+          "locator": "Section 6 'Future Work'",
+          "url": "https://arxiv.org/html/2609.01936v1",
+          "rung": "html"
+        },
+        {
+          "quote": "We introduce the refusal-affirmation logit gap: the difference between the top refusal-token logit and the top affirmative-token logit at the first decoding step. This single scalar quantifies the per-prompt safety margin that alignment provides.",
+          "locator": "Abstract",
+          "url": "https://arxiv.org/abs/2506.24056",
+          "rung": "abs"
+        },
+        {
+          "quote": "Median gap shifts: Qwen2.5-0.5B −3.8→+1.5; Llama-3.2-1B +0.8→+12.7; gemma-2b +2.4→+14.8. Aligned exceeds base on 97.5–99.8% of prompts, with mean shifts +5.0/+11.4/+11.6 logit units.",
+          "locator": "Section 3, 'Empirical check (base vs. aligned)'",
+          "url": "https://arxiv.org/html/2506.24056v2",
+          "rung": "html"
+        },
+        {
+          "quote": "In this work, we show that refusal is mediated by a one-dimensional subspace, across 13 popular open-source chat models up to 72B parameters in size.",
+          "locator": "Abstract",
+          "url": "https://arxiv.org/abs/2406.11717",
+          "rung": "abs"
+        },
+        {
+          "quote": "This condition ensures that the direction is not too close to the unembedding directions. Intuitively, one could disable refusal by preventing the model from writing to refusal unembed directions... However, we restrict our search to higher level features, and do not prevent the model from outputting specific tokens",
+          "locator": "Appendix, direction selection filters",
+          "url": "https://arxiv.org/html/2406.11717v3",
+          "rung": "html"
+        }
+      ],
+      "notes": "The seed claim that SRP's ABSTRACT mentions safety audits/refusal group contrasts is inaccurate: the abstract (checked at html rung) contains no mention of safety, refusal, or harm; the safety-audit application appears only in the Future Work section (Section 6) and is proposed, not executed — SRP itself runs no refusal experiment. The seed claim that Arditi (2406.11717) 'already logit-lenses the refusal direction to show it decodes to refusal words' was also not confirmed on inspection: the paper discusses unembedding directions only as an exclusion filter in its direction-selection procedure, and its main causal-attribution tool is DFA (direct feature attribution) onto the refusal DIRECTION in activation space, not a logit-lens/analytic-gain computation through the unembedding onto refusal TOKENS. Neither paper closes X3."
+    },
+    {
+      "id": "X5",
+      "name": "Routing Concentration (harm-signal flow onto refusal-onset positions)",
+      "verdict": "PARTIAL",
+      "escape_hatch": "PARENT-REQUIRING + only 2 checkpoints (not >=3, not an independent per-checkpoint score): 2607.14147 defines the exact statistic (concentration = Δp_refuse/(−Δp_comply), the fraction of knockout-freed probability mass landing on refusal) but computes it only as a PAIRED, knockout-conditioned contrast between an instruct checkpoint and its base-model anchor within one family (Qwen2.5-1.5B, n=60 prompts; 'Instruct 60 prompts; base as anchor'), requiring both checkpoints and a causal intervention simultaneously to be defined at all -- it is never reported as a free-standing, activation-only score for a single checkpoint, let alone across >=3 checkpoints as a comparative table.",
+      "nearest_paper": {
+        "title": "Breaking Refusal in the First Half: A Mechanistic Study of the Prefill Jailbreak",
+        "url": "https://arxiv.org/abs/2607.14147",
+        "arxiv_id": "2607.14147"
+      },
+      "remaining_unclaimed": "A parent-free, activation-only (no causal knockout, no paired base model needed) share-of-harm-signal-onto-refusal-positions score reported independently across >=3 checkpoints.",
+      "falsifier": "X5 is dead if a concentration-of-harm-signal-onto-refusal-positions statistic is reported as a cross-model comparison anywhere.",
+      "confidence": "high",
+      "confidence_reason": "The exact defining sentence and the exact model/n for the 0.24 vs 0.03 numbers were located and quoted directly from the paper's html full text (not the abstract), settling the decisive question. Four query kinds plus all three named seed candidates (2609.04721, 2609.14759, 2605.00236) were fetched and checked; none reports the same construct across >=3 checkpoints as a comparative score.",
+      "queries": [
+        {
+          "q": "concentration of harm signal onto refusal-onset positions cross-model comparison",
+          "mode": "general",
+          "kind": "academic",
+          "date": "2026-09-21",
+          "top_hits": ["Refusal Reads Only a Slice of What the Model Knows (2609.14759)", "Harmful Intent as a Geometrically Recoverable Feature of LLM Residual Streams (2604.18901)", "HARC: Coupling Harmfulness and Refusal Directions (2607.00572)", "Breaking Refusal in the First Half (Pith summary of 2607.14147)"],
+          "empty": false
+        },
+        {
+          "q": "abliterated model refusal direction routing concentration heretic orthogonalization",
+          "mode": "general",
+          "kind": "community",
+          "date": "2026-09-21",
+          "top_hits": ["What Are Abliterated Models? (atomic.chat)", "Heretic vs Abliterated LLM Models (bswen docs)", "Abliterated Models 2026 guide (locallyuncensored.com)", "Directional Ablation - Heretic docs"],
+          "empty": false
+        },
+        {
+          "q": "routing concentration statistic reported as per-model safety score across checkpoints refusal onset",
+          "mode": "general",
+          "kind": "adversarial",
+          "date": "2026-09-21",
+          "top_hits": ["Quality Is Not a Safety Proxy Under Quantization (2606.10154)", "LoMC: Localized Multidirectional Correction for Refusal Suppression (2606.13709)", "Refusal Reads Only a Slice of What the Model Knows (2609.14759)", "Residual Paving: Diagnosing the Routing Bottleneck in Selective Refusal Editing (2605.20262)"],
+          "empty": false
+        },
+        {
+          "q": "harm signal flow concentration refusal onset positions activation patching multiple models",
+          "mode": "scholarly",
+          "kind": "scholarly",
+          "date": "2026-09-21",
+          "top_hits": ["(no on-topic OpenAlex/Crossref hits; unrelated medical/legal records only)"],
+          "empty": false
+        },
+        {
+          "q": "2026 refusal routing concentration metric cross-checkpoint safety comparison mechanistic",
+          "mode": "general",
+          "kind": "recency",
+          "date": "2026-09-21",
+          "top_hits": ["Who Bridges Safety? Cross-Lingual Shared Safety Pathways (2608.09095)", "Refusal Reads Only a Slice of What the Model Knows (2609.14759)", "Tracking Harmfulness–Refusal Coupling under Dynamic Adversarial Fine-Tuning (2606.16349)", "A Unified Mechanistic Analysis of Knowledge- and Safety-Based Refusals (2609.00760)"],
+          "empty": false
+        }
+      ],
+      "evidence": [
+        {
+          "quote": "For each early-window generated step we record the softmax mass on refusal-onset tokens (p_refuse) and the probability of the compliance continuation (p_comply)... and define concentration = Δp_refuse/(−Δp_comply): of the probability the knockout strips off compliance, the fraction that lands on refusal.",
+          "locator": "Section 6/7 body text, concentration definition",
+          "url": "https://arxiv.org/html/2607.14147v1",
+          "rung": "html"
+        },
+        {
+          "quote": "But the instruct model routes the freed mass to refusal far more than the base model (concentration 0.24 vs 0.03; prefill-specific p_refuse gain +1.3pp vs matched +0.1pp)... Instruct 60 prompts; base as anchor. Measure-only, experiments/modal_active_probe.py.",
+          "locator": "Body text immediately following the concentration definition",
+          "url": "https://arxiv.org/html/2607.14147v1",
+          "rung": "html"
+        },
+        {
+          "quote": "A small safety-specific attractor remains on top (logit-trace concentration 0.24 vs 0.03), whose active-vs-passive character we size but do not fully separate.",
+          "locator": "Abstract",
+          "url": "https://arxiv.org/abs/2607.14147",
+          "rung": "abs"
+        },
+        {
+          "quote": "The central result is causal and comes from one model, OLMo-3... about three-quarters of refusal's causal input lies outside the moral subspace altogether... (the rank sweep below reports 76% outside the rank-16 basis)",
+          "locator": "Abstract / Section on causal core",
+          "url": "https://arxiv.org/html/2609.14759v1",
+          "rung": "html"
+        },
+        {
+          "quote": "The picture is not uniform across families. Llama reads broad moral content; Qwen reads beyond the single harm cue but is unresolved at our sample size; GPT-OSS reads harm, and its refusals can be argued in either direction by its own reasoning trace.",
+          "locator": "Abstract",
+          "url": "https://arxiv.org/abs/2609.14759",
+          "rung": "abs"
+        }
+      ],
+      "notes": "2609.14759 is the closest thing to a cross-model routing statistic but measures a DIFFERENT CONCEPT: it patches successively larger slices of a moral SUBSPACE (by rank) between matched requests to see how much of refusal transfers, quantified as a fraction of causal input lying outside that subspace (76%) -- this is a subspace-rank causal-transfer share, not a sequence-position flow-concentration share, and the 76% number is reported for ONE model (OLMo-3) only; the other three families get only qualitative descriptions, not the matched quantitative statistic. 2609.04721 (Locating and Steering Refusal Beyond Attention) is about cross-architecture (SSM/transformer/hybrid) TRANSFER of the refusal direction via rigid rotation, not a position-based concentration score. 2605.00236 (Attention Is Where You Attack) reports per-model attack success rates (36% Mistral, 30% Llama, 1% Gemma) from an attention-redistribution attack, a different construct (ASR under adversarial attack, not passive harm-flow concentration)."
+    }
+  ],
+  "safe_completion_subquestion": {
+    "verdict": "NO PRIOR WORK FOUND",
+    "queries": [
+      {
+        "q": "safe completion model internal probe declines without lexical refusal",
+        "date": "2026-09-21",
+        "top_hits": ["(mostly off-topic academic-conference PDFs unrelated to LLM safety; no relevant hit)"],
+        "empty": false
+      },
+      {
+        "q": "OpenAI safe-completions output-centric safety training internal readout mechanistic",
+        "date": "2026-09-21",
+        "top_hits": ["From hard refusals to safe-completions (OpenAI blog + arXiv:2508.09224)", "OpenSafeIntent: Evaluating Intent-Calibrated Safe Completion Across Dual-Use Prompt Sets (2607.02047)", "Deliberative Alignment: Reasoning Enables Safer Language Models (2412.16339)"],
+        "empty": false
+      },
+      {
+        "q": "refusal-free safety non-refusal safe response internal probe residual stream",
+        "date": "2026-09-21",
+        "top_hits": ["Mechanistic Interpretability for AI Safety -- A Review (2404.14082)", "Steering Llama 2 via Contrastive Activation Addition", "'I've Decided to Leak': Probing Internals Behind Prompt Leakage Intents (EMNLP 2025)"],
+        "empty": false
+      },
+      {
+        "q": "mechanistic interpretability scores safe-completion decline without lexical refusal token internal direction",
+        "date": "2026-09-21",
+        "top_hits": ["Refusal Before Decoding (2605.28553)", "Over-Refusal and Representation Subspaces (2603.27518)", "aaliyan1230/dual-direction-mech-interp (GitHub, ICML 2026 workshop poster: disentangles safety-refusal vs epistemic-abstention directions, not safe-completion)", "What Drives Representation Steering? (2604.08524)"],
+        "empty": false
+      },
+      {
+        "q": "2026 internal activation probe safe completion model no lexical refusal declines",
+        "date": "2026-09-21",
+        "top_hits": ["(mostly off-topic academic-conference PDFs; no relevant hit)"],
+        "empty": false
+      }
+    ],
+    "nearest_if_any": "OpenAI's safe-completions paper (arXiv:2508.09224) and its follow-on evaluation OpenSafeIntent (2607.02047) both define and study safe-completion behavior, but purely at the OUTPUT/behavioral level (judge-graded responses, production A/B comparisons); neither reports any internal activation, probe, or logit-lens readout of the safe-completion decision.",
+    "evidence": [
+      {
+        "quote": "We incorporated this approach into GPT-5 and find that across both production comparisons and internally controlled experiments, safe-completion training improves safety (especially on dual-use prompts), reduces the severity of residual safety failures, and substantially increases model helpfulness.",
+        "url": "https://arxiv.org/abs/2508.09224"
+      },
+      {
+        "quote": "Our results suggest that safe completion should be evaluated as intent-calibrated behavior over controlled task variants, not as a single safety-helpfulness tradeoff over independent prompts.",
+        "url": "https://arxiv.org/abs/2607.02047"
+      }
+    ]
+  },
+  "prefill_2607_14147": {
+    "concentration_definition_quote": "For each early-window generated step we record the softmax mass on refusal-onset tokens (p_refuse) and the probability of the compliance continuation (p_comply), under baseline / early knockout / mass-matched knockout, and define concentration = Δp_refuse/(−Δp_comply): of the probability the knockout strips off compliance, the fraction that lands on refusal.",
+    "numbers_quote": "But the instruct model routes the freed mass to refusal far more than the base model (concentration 0.24 vs 0.03; prefill-specific p_refuse gain +1.3pp vs matched +0.1pp)... Instruct 60 prompts; base as anchor.",
+    "models_covered": "Primary measurement is a single matched pair: Qwen2.5-1.5B-Instruct vs its own base model (n=60 prompts, 'base as anchor'); the paper's broader prefill-collapse results (not the concentration number itself) are additionally replicated at 7B (Qwen2.5-7B) and span 'four models and three families (1.5-3.8B, and at 14B)' for the non-concentration parts of the study, but the concentration=0.24-vs-0.03 statistic specifically is reported for the one 1.5B instruct/base pair only.",
+    "reported_as_per_model_score": "NO",
+    "url": "https://arxiv.org/html/2607.14147v1"
+  },
+  "not_printed_log": [
+    {
+      "what": "An analytic (non-sampling) refusal-onset logit-MASS GAIN per unit of a continuous harm-projection variable, computed through the final norm + unembedding and defined without a pre-identified lexical refusal token, reported as an independent per-checkpoint score",
+      "id": "X3 core construct",
+      "rungs_tried": ["general web search (academic/community/adversarial/recency)", "scholarly (OpenAlex/Crossref)", "abs+html fetch of 3 named seeds (2609.01936, 2605.28553, 2406.11717) and 1 discovered near-miss (2506.24056)"],
+      "result": "NOT-PRINTED"
+    },
+    {
+      "what": "A position-based (sequence-position) harm-signal-flow concentration statistic, activation-only and parent-free, reported as an independent comparative score across >=3 checkpoints",
+      "id": "X5 core construct",
+      "rungs_tried": ["general web search (academic/community/adversarial/recency)", "scholarly (OpenAlex/Crossref)", "abs+html fetch of all 4 named seeds (2607.14147, 2609.04721, 2609.14759, 2605.00236)"],
+      "result": "NOT-PRINTED"
+    },
+    {
+      "what": "Any internal/mechanistic (activation, probe, or logit-lens) readout used to score a safe-completion model's decline that carries no lexical refusal token",
+      "id": "safe-completion subquestion",
+      "rungs_tried": ["general web search (5 queries spanning academic/OpenAI-direct/scholarly/adversarial/recency)", "abs fetch of OpenAI safe-completions paper (2508.09224) and OpenSafeIntent (2607.02047), both confirmed behavioral-only"],
+      "result": "NOT-PRINTED"
+    }
+  ]
+}

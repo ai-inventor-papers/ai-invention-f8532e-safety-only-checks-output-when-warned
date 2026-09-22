@@ -1,0 +1,196 @@
+
+
+Skip to main content [](https://arxiv.org/IgnoreMe) [ ](https://arxiv.org/) [ Search ](https://arxiv.org/search) [Submit](https://arxiv.org/user/create) [Donate](https://info.arxiv.org/about/donate.html) [Log in](https://arxiv.org/login)
+
+Search arXiv
+
+Press Enter to search * [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Machine Learning
+
+**arXiv:2609.14754** (cs) 
+
+[Submitted on 13 Sep 2026]
+
+# Title:Calibrating Interpretability Instruments Before Trusting Their Verdicts
+
+Authors:[Orion Reblitz-Richardson](https://arxiv.org/search/cs?searchtype=author&query=Reblitz-Richardson,+O)
+
+View a PDF of the paper titled Calibrating Interpretability Instruments Before Trusting Their Verdicts, by Orion Reblitz-Richardson
+
+[View PDF](/pdf/2609.14754) [HTML (experimental)](https://arxiv.org/html/2609.14754v1)
+
+> Abstract:Causal claims about large language model (LLM) internals rest on measurements. Those might include a projection, a cosine, an ablation delta, or an interchange patch among others. These measurements fail in specific, diagnosable ways that return a plausible number instead of an error, so a broken instrument can easily read as a finding. A covariance-matched null can saturate until every direction looks typical, a per-head attribution can overshoot the true residual write threefold on reordered-normalization architectures, an interchange patch can go sign-chaotic because its outcome is pinned at a ceiling, or a read-from verdict can be an artifact of measuring past the layer where the model already decided. This note documents six such failures from a causal interpretability program on refusal and moral representation, spanning several papers and a four-model open-weight panel; each mode is established on one or two of the four. For each we give the tell that catches it and a protocol keyed to a detectable trigger (reordered normalization, massive activations, a low-dimensional decision channel), so we and readers can check whether a given setup is exposed. The discipline reduces to four moves: calibrate against a positive-control ladder, certify with an orthogonal cell, compute power before spending compute, and state every read-from verdict at a depth referenced to the model's commitment. The evidence is four architectures across three families within a single program; external replication across programs is future work. 
+
+Comments: | 16 pages, 3 figures, 1 table. Companion to "Refusal Reads Only a Slice of What the Model Knows" (submitted concurrently). Per-unit arrays: [this https URL](https://doi.org/10.5281/zenodo.22731361). Code: [this https URL](https://github.com/deepsteer/deepsteer)  
+---|---  
+Subjects: |  Machine Learning (cs.LG); Artificial Intelligence (cs.AI); Computation and Language (cs.CL)  
+Cite as: | [arXiv:2609.14754](https://arxiv.org/abs/2609.14754) [cs.LG]  
+  | (or  [arXiv:2609.14754v1](https://arxiv.org/abs/2609.14754v1) [cs.LG] for this version)   
+  |  <https://doi.org/10.48550/arXiv.2609.14754> Focus to learn more arXiv-issued DOI via DataCite (pending registration)  
+  
+## Submission history
+
+From: Orion Reblitz-Richardson [[view email](/show-email/73baefb2/2609.14754)]   
+**[v1]** Sun, 13 Sep 2026 19:37:02 UTC (93 KB)  
+
+
+Full-text links:
+
+## Access Paper:
+
+View a PDF of the paper titled Calibrating Interpretability Instruments Before Trusting Their Verdicts, by Orion Reblitz-Richardson
+
+  * [View PDF](/pdf/2609.14754)
+  * [HTML (experimental)](https://arxiv.org/html/2609.14754v1)
+  * [TeX Source ](/src/2609.14754)
+
+
+
+[ view license ](http://creativecommons.org/licenses/by/4.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.LG
+
+[< prev](/prevnext?id=2609.14754&function=prev&context=cs.LG "previous in cs.LG \(accesskey p\)")   |   [next >](/prevnext?id=2609.14754&function=next&context=cs.LG "next in cs.LG \(accesskey n\)")   
+
+
+[new](/list/cs.LG/new) |  [recent](/list/cs.LG/recent) | [2026-09](/list/cs.LG/2026-09)
+
+Change to browse by: 
+
+[cs](/abs/2609.14754?context=cs)  
+[cs.AI](/abs/2609.14754?context=cs.AI)  
+[cs.CL](/abs/2609.14754?context=cs.CL)  
+
+
+### References & Citations
+
+  * [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2609.14754)
+  * [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2609.14754)
+  * [Semantic Scholar](https://api.semanticscholar.org/arXiv:2609.14754)
+
+
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+loading...
+
+Data provided by: 
+
+### Bookmark
+
+[ ](http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2609.14754&description=Calibrating Interpretability Instruments Before Trusting Their Verdicts "Bookmark on BibSonomy") [ ](https://reddit.com/submit?url=https://arxiv.org/abs/2609.14754&title=Calibrating Interpretability Instruments Before Trusting Their Verdicts "Bookmark on Reddit")
+
+Bibliographic Tools
+
+# Bibliographic and Citation Tools
+
+Bibliographic Explorer Toggle
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+Connected Papers Toggle
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+Litmaps Toggle
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+scite.ai Toggle
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media
+
+# Code, Data and Media Associated with this Article
+
+alphaXiv Toggle
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+Links to Code Toggle
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com))_
+
+DagsHub Toggle
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+GotitPub Toggle
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+Huggingface Toggle
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+ScienceCast Toggle
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos
+
+# Demos
+
+Replicate Toggle
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+Spaces Toggle
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+Spaces Toggle
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai))_
+
+Related Papers
+
+# Recommenders and Search Tools
+
+Link to Influence Flower
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+Core recommender toggle
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+IArxiv recommender toggle
+
+IArxiv Recommender _([What is IArxiv?](https://iarxiv.org/about))_
+
+  * Author
+  * Venue
+  * Institution
+  * Topic
+
+
+
+About arXivLabs 
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](/auth/show-endorsers/2609.14754) | [Disable MathJax](javascript:setMathjaxCookie\(\)) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+We gratefully acknowledge support from our **major funders** , [**member institutions**](https://info.arxiv.org/about/ourmembers.html) , ****, and all contributors.
+
+[About](https://info.arxiv.org/about) * [Help](https://info.arxiv.org/help) * [Contact](https://info.arxiv.org/help/contact.html) * [Subscribe](https://info.arxiv.org/help/subscribe) * [Copyright](https://info.arxiv.org/help/license/index.html) * [Privacy](https://info.arxiv.org/help/policies/privacy_policy.html) * [Accessibility](https://info.arxiv.org/help/web_accessibility.html) * [Operational Status (opens in new tab)](https://status.arxiv.org)
+
+Major funding support from
+
+[ ](https://www.simonsfoundation.org/) [ ](https://www.sfi.org.bm/) [ ](https://www.schmidtsciences.org/)
+

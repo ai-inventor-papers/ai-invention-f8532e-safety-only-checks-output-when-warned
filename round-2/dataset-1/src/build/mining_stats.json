@@ -1,0 +1,166 @@
+{
+  "seed_panel": {
+    "n_families": 9,
+    "n_repos": 27,
+    "families": [
+      "granite",
+      "olmo2",
+      "phi",
+      "qwen2.5",
+      "qwen3",
+      "smollm2",
+      "smollm3",
+      "stablelm",
+      "tinyllama"
+    ]
+  },
+  "judged_source": {
+    "dir": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged",
+    "n_files": 26,
+    "n_rows_loaded": 2369
+  },
+  "generation_class_counts": {
+    "REFUSING": 1115,
+    "ORDINARY_HELPFUL": 815,
+    "HARMFUL_COMPLIANT": 292,
+    "SAFE_DECLINE": 147
+  },
+  "class_definitions": "REFUSING=refused==True (any set); SAFE_DECLINE=refused==False & harmful_content==False & set=='harm'; ORDINARY_HELPFUL=refused==False & harmful_content==False & set=='benign' (this is the compliant/helpful control-frequency baseline); HARMFUL_COMPLIANT=harmful_content==True (excluded from all 3 artefacts, topically contaminated); OTHER=anything left over (should be ~0).",
+  "naive_comparator": {
+    "naive_comparator_list": [
+      "I'm sorry",
+      "I cannot",
+      "I can't",
+      "Sorry",
+      "As an AI",
+      "I'm unable",
+      "I won't",
+      "Unfortunately",
+      "I apologize"
+    ],
+    "naive_comparator_label": "CONSTRUCTED (obvious guess, not mined)",
+    "n_total_refusing_generations": 1115,
+    "n_opened_by_naive_comparator": 396,
+    "frac_opened_by_naive_comparator": 0.3552,
+    "n_opened_by_mined_set": 846,
+    "frac_opened_by_mined_set": 0.7587
+  },
+  "gates": {
+    "G_REFUSAL_FORMS": {
+      "threshold": ">= 20 forms with n_families >= 3",
+      "observed_n_forms": 60,
+      "observed_min_families_among_shipped": 3,
+      "pass": true
+    },
+    "G_HEDGE_FORMS": {
+      "threshold": ">= 20 forms with lift >= 2.0",
+      "observed_n_forms": 60,
+      "pass": true
+    },
+    "G_CONTROL_BALANCE": {
+      "threshold": "median |delta log-freq| <= 0.25",
+      "observed_median": 0.0081,
+      "pass": true
+    },
+    "G_SINGLE_TOKEN": {
+      "threshold": ">= 80% single-token coverage across 28 verified tokenizers",
+      "n_primary_forms": 77,
+      "n_dropped": 0,
+      "dropped_forms": [],
+      "pass": true
+    },
+    "G_XSRC_JACCARD": {
+      "threshold": ">= 0.2",
+      "panel_top30": [
+        "i",
+        "i'm",
+        "i'm sorry,",
+        "i'm sorry, but",
+        "it",
+        "it's",
+        "it's important",
+        "it's important to",
+        "i cannot",
+        "i'm really",
+        "creating",
+        "i'm really sorry,",
+        "creating a",
+        "how",
+        "**",
+        "how do",
+        "how do i",
+        "i'm really sorry",
+        "i understand",
+        "a",
+        "as",
+        "i'm sorry",
+        "it is",
+        "the",
+        "what",
+        "i have",
+        "using",
+        "using a",
+        "i cannot provide",
+        "subject"
+      ],
+      "dna_top30": [
+        "i",
+        "i'm",
+        "i apologize,",
+        "i apologize, but",
+        "i'm sorry,",
+        "i'm sorry, but",
+        "sorry",
+        "sorry,",
+        "sorry, but",
+        "sorry, but i",
+        "i cannot",
+        "as",
+        "i'm really",
+        "as an",
+        "as an ai",
+        "i cannot fulfill",
+        "i'm really sorry,",
+        "i cannot provide",
+        "i'm really sorry",
+        "thank",
+        "thank you",
+        "thank you for",
+        "it",
+        "no",
+        "no,",
+        "as a",
+        "i am",
+        "it is",
+        "no, i",
+        "as a responsible"
+      ],
+      "intersection": [
+        "as",
+        "i",
+        "i cannot",
+        "i cannot provide",
+        "i'm",
+        "i'm really",
+        "i'm really sorry",
+        "i'm really sorry,",
+        "i'm sorry,",
+        "i'm sorry, but",
+        "it",
+        "it is"
+      ],
+      "observed_jaccard": 0.25,
+      "pass": true
+    }
+  },
+  "tokenizer_load": {
+    "n_attempted": 28,
+    "n_verified": 28,
+    "n_failed": 0,
+    "failures": {}
+  },
+  "grep_check_no_iter1_lexicon": {
+    "command": "grep -rliE \"refusal.?lexicon|refusal.?token|refusal.?onset|hedge.?redirect\" <iter_1 gen_art_dataset_1> <gen_art_experiment_1> <gen_art_experiment_2> <gen_art_experiment_3>",
+    "finding": "Hits are all ad hoc hand-written baseline word lists embedded in EXPERIMENT code (e.g. gen_art_experiment_2/src/causal.py REFUSAL_WORDS = [\"I\",\"Sorry\",...] 11 words for a logit-space baseline; gen_art_experiment_3/lc_harvest.py REFUSAL_ONSET = [\"I\",\"Sorry\",\"I'm\",...] 9 words for a regex classifier), NOT a mined, ranked, provenance-tracked lexicon artifact with per-token counts and family coverage. No such artifact exists on disk in iteration 1."
+  }
+}

@@ -1,0 +1,42 @@
+{
+ "repo": "allenai/OLMo-2-0425-1B-Instruct",
+ "tag": "allenai--OLMo-2-0425-1B-Instruct",
+ "template_mode": "chat",
+ "random_init": false,
+ "n_layers": 16,
+ "hidden_size": 2048,
+ "vocab_size": 100352,
+ "tie_word_embeddings": false,
+ "dtype_loaded": "torch.bfloat16",
+ "dtype_config": "torch.bfloat16",
+ "rms_eps": 1e-06,
+ "t_load_s": 3.4645731449127197,
+ "timings": {
+  "p_harvest_s": 79.2041974067688,
+  "u_summary_s": 7.60256290435791,
+  "total_s": 90.2964699268341
+ },
+ "load_missing_keys_n": 0,
+ "load_unexpected_keys_n": 0,
+ "load_missing_keys_head": [],
+ "load_unexpected_keys_head": [],
+ "weights_fully_bound": true,
+ "token_ids": {
+  "refusal": 44,
+  "hedge": 16,
+  "control": 56
+ },
+ "n_prompts": 256,
+ "prompt_token_lengths": {
+  "mean": 27.203125,
+  "p50": 25.0,
+  "p95": 40.099999999999966,
+  "max": 107,
+  "truncation_cap": 192
+ },
+ "n_cells": 0,
+ "x5_undefined": true,
+ "role": "instruct",
+ "family": "olmo2",
+ "priority": 4
+}

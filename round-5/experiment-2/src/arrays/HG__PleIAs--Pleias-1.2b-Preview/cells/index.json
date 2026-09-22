@@ -1,0 +1,2319 @@
+{
+  "cells": [
+    {
+      "cell_id": "C1__arm0__P",
+      "family": "C1",
+      "site": "P",
+      "mode": "none",
+      "bands": [],
+      "direction": null,
+      "matched_to": null,
+      "blocks": [],
+      "seconds": 1.4486141204833984,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C1__arm0__A",
+      "family": "C1",
+      "site": "A",
+      "mode": "none",
+      "bands": [],
+      "direction": null,
+      "matched_to": null,
+      "blocks": [],
+      "seconds": 1.1936209201812744,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b1__F__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        1
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.2446980476379395,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b1__F__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        1
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 2.1215951442718506,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b1__N6__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        1
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 2.0766968727111816,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b1__N6__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        1
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 2.1360297203063965,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b2__F__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        2
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 1.9370155334472656,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b2__F__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        2
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 2.1231541633605957,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b2__N6__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        2
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 1.9724218845367432,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b2__N6__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        2
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 1.9445292949676514,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b3__F__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        3
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 1.7914714813232422,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b3__F__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        3
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 1.7114582061767578,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b3__N6__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        3
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 1.3734946250915527,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b3__N6__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        3
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 1.5246820449829102,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b4__F__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        4
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.3327796459197998,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b4__F__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.2867178916931152,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b4__N6__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        4
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.3754963874816895,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b4__N6__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 2.180075168609619,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b5__F__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        5
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.7493550777435303,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b5__F__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        5
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.5629913806915283,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b5__N6__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        5
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 2.119159698486328,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b5__N6__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        5
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.9663059711456299,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b6__F__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        6
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.9104483127593994,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b6__F__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        6
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 2.2402195930480957,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b6__N6__P",
+      "family": "C2",
+      "site": "P",
+      "mode": "project",
+      "bands": [
+        6
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.885657787322998,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C2__b6__N6__A",
+      "family": "C2",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        6
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 2.3138413429260254,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C3__b1__R1__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.879601240158081,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R2__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.346548318862915,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R3__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.2576117515563965,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R4__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R4",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.0447182655334473,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R5__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R5",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.3178138732910156,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R1__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.0993432998657227,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R2__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.3597753047943115,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b1__R3__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        1
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2
+      ],
+      "seconds": 1.0707733631134033,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R1__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 1.3295159339904785,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R2__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 1.056990385055542,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R3__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 0.9982545375823975,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R4__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R4",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 0.7505848407745361,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R5__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R5",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 0.740180492401123,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R1__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 0.7449874877929688,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R2__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 0.7731437683105469,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b2__R3__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        2
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "seconds": 0.7910561561584473,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R1__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 0.7369725704193115,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R2__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 0.7627456188201904,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R3__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 0.7294261455535889,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R4__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R4",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 0.6994669437408447,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R5__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R5",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 0.7157177925109863,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R1__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 0.8741576671600342,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R2__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 1.3052752017974854,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b3__R3__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        3
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seconds": 1.1588375568389893,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R1__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.4033229351043701,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R2__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.1333158016204834,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R3__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.1312000751495361,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R4__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R4",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.3025481700897217,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R5__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R5",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.1066944599151611,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R1__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.4715754985809326,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R2__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.1716301441192627,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b4__R3__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.2574617862701416,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R1__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.4651615619659424,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R2__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.171346664428711,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R3__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.3556673526763916,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R4__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R4",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.2242023944854736,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R5__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R5",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.2419662475585938,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R1__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.3859593868255615,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R2__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.1926419734954834,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b5__R3__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        5
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.5306482315063477,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R1__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1588919162750244,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R2__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.0409715175628662,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R3__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 0.8193089962005615,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R4__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R4",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 0.9131524562835693,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R5__P",
+      "family": "C3",
+      "site": "P",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R5",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 0.8429222106933594,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R1__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 0.8415400981903076,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R2__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 0.8837890625,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C3__b6__R3__A",
+      "family": "C3",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        6
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 0.8592803478240967,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S1__F__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 0.9083271026611328,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S1__N6__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 0.917661190032959,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S1__R1__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 0.8921782970428467,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S1__R2__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 0.906078577041626,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S1__R3__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13
+      ],
+      "seconds": 1.397533655166626,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S2__F__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4,
+        5
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.4282662868499756,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S2__N6__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4,
+        5
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.5761325359344482,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S2__R1__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4,
+        5
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.2849154472351074,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S2__R2__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4,
+        5
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.87245512008667,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S2__R3__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4,
+        5
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "seconds": 1.5690622329711914,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S3__F__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4,
+        5,
+        6
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.680903434753418,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S3__N6__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        4,
+        5,
+        6
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.7439327239990234,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S3__R1__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4,
+        5,
+        6
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.70383882522583,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S3__R2__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4,
+        5,
+        6
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.5358948707580566,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S3__R3__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        4,
+        5,
+        6
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.4627854824066162,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S4__F__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.8700125217437744,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S4__N6__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.4772305488586426,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S4__R1__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1392579078674316,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S4__R2__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1159718036651611,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S4__R3__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.0170872211456299,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S5__F__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1505227088928223,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S5__N6__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1189045906066895,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S5__R1__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1515071392059326,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S5__R2__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.1633262634277344,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S5__R3__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.4159727096557617,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S6__F__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "F",
+      "matched_to": null,
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.7090435028076172,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S6__N6__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "project",
+      "bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "N6",
+      "matched_to": null,
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.9023222923278809,
+      "full_saved": true
+    },
+    {
+      "cell_id": "C4__S6__R1__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R1",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.9194798469543457,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S6__R2__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R2",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 1.950943946838379,
+      "full_saved": false
+    },
+    {
+      "cell_id": "C4__S6__R3__A",
+      "family": "C4",
+      "site": "A",
+      "mode": "matched_displacement",
+      "bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "direction": "R3",
+      "matched_to": "F",
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "seconds": 2.0831139087677,
+      "full_saved": false
+    }
+  ],
+  "n_cells": 104,
+  "bank_names": [
+    "F_b1",
+    "F_b2",
+    "F_b3",
+    "F_b4",
+    "F_b5",
+    "F_b6",
+    "N6_b1",
+    "N6_b2",
+    "N6_b3",
+    "N6_b4",
+    "N6_b5",
+    "N6_b6",
+    "Rfixed_1",
+    "Rfixed_2",
+    "Rfixed_3"
+  ],
+  "bank_K": 15,
+  "n_prompts": 32,
+  "cells_32_sha256": "3e2d991b4b9859c0a4b321ee9061a124ced12a52577048bd4618ef420a8b96a0",
+  "mean_seconds_per_cell": 1.3657297194004059,
+  "total_seconds": 142.0358908176422,
+  "proj_slices": {
+    "P": [
+      "last_token"
+    ],
+    "A": [
+      "mean_over_positions",
+      "last_token"
+    ]
+  },
+  "topk_files": [
+    "topk_ids.npy",
+    "topk_probs.npy"
+  ],
+  "utc": "2026-09-22T02:40:23Z"
+}

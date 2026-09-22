@@ -1,0 +1,516 @@
+{
+  "substrate_identity_check": {
+    "L1": {
+      "same_pair_key_set_as_L1": true,
+      "same_sid_sequence_as_L1": true,
+      "same_REQUEST_pos_idx_layout_as_L1": true
+    },
+    "L2": {
+      "same_pair_key_set_as_L1": true,
+      "same_sid_sequence_as_L1": true,
+      "same_REQUEST_pos_idx_layout_as_L1": true
+    },
+    "L3": {
+      "same_pair_key_set_as_L1": true,
+      "same_sid_sequence_as_L1": true,
+      "same_REQUEST_pos_idx_layout_as_L1": true
+    },
+    "L4": {
+      "same_pair_key_set_as_L1": true,
+      "same_sid_sequence_as_L1": true,
+      "same_REQUEST_pos_idx_layout_as_L1": true
+    }
+  },
+  "drop_definition": "drop_s(Lk) = metric(alpha=0.00) - metric(alpha=X), band-pooled logistic REQUEST probe, site s",
+  "rows": [
+    {
+      "site": "PROMPT",
+      "alpha": "0.50",
+      "lineage": "L1",
+      "ref": "L4",
+      "drop_auroc_L1": -0.0004340277777777901,
+      "drop_auroc_L4": 5.4253472222209886e-05,
+      "contrast_auroc": -0.00048828125,
+      "contrast_auroc_ci": [
+        -0.0022786458333333703,
+        0.0009765625
+      ],
+      "drop_tpr1_L1": 0.0,
+      "drop_tpr1_L4": 0.04166666666666674,
+      "contrast_tpr1": -0.04166666666666674,
+      "contrast_tpr1_ci": [
+        -0.08333333333333337,
+        0.02083333333333326
+      ],
+      "drop_tpr5_L1": -0.01041666666666663,
+      "drop_tpr5_L4": 0.0,
+      "contrast_tpr5": -0.01041666666666663,
+      "contrast_tpr5_ci": [
+        -0.02083333333333337,
+        0.03125
+      ]
+    },
+    {
+      "site": "PROMPT",
+      "alpha": "0.50",
+      "lineage": "L2",
+      "ref": "L4",
+      "drop_auroc_L2": 0.0022786458333333703,
+      "drop_auroc_L4": 5.4253472222209886e-05,
+      "contrast_auroc": 0.0022243923611111605,
+      "contrast_auroc_ci": [
+        -0.0013576931423610243,
+        0.00618489583333337
+      ],
+      "drop_tpr1_L2": -0.07291666666666663,
+      "drop_tpr1_L4": 0.04166666666666674,
+      "contrast_tpr1": -0.11458333333333337,
+      "contrast_tpr1_ci": [
+        -0.16666666666666663,
+        0.05208333333333337
+      ],
+      "drop_tpr5_L2": 0.01041666666666663,
+      "drop_tpr5_L4": 0.0,
+      "contrast_tpr5": 0.01041666666666663,
+      "contrast_tpr5_ci": [
+        -0.01041666666666663,
+        0.08359374999999872
+      ]
+    },
+    {
+      "site": "PROMPT",
+      "alpha": "0.50",
+      "lineage": "L3",
+      "ref": "L4",
+      "drop_auroc_L3": 0.0011935763888889506,
+      "drop_auroc_L4": 5.4253472222209886e-05,
+      "contrast_auroc": 0.0011393229166667407,
+      "contrast_auroc_ci": [
+        -0.0034735785590277652,
+        0.00575086805555558
+      ],
+      "drop_tpr1_L3": -0.14583333333333337,
+      "drop_tpr1_L4": 0.04166666666666674,
+      "contrast_tpr1": -0.1875000000000001,
+      "contrast_tpr1_ci": [
+        -0.25,
+        0.06276041666666535
+      ],
+      "drop_tpr5_L3": 0.03125,
+      "drop_tpr5_L4": 0.0,
+      "contrast_tpr5": 0.03125,
+      "contrast_tpr5_ci": [
+        -0.01041666666666674,
+        0.10416666666666663
+      ]
+    },
+    {
+      "site": "PROMPT",
+      "alpha": "1.00",
+      "lineage": "L1",
+      "ref": "L4",
+      "drop_auroc_L1": 0.0020616319444444198,
+      "drop_auroc_L4": 0.0041232638888888395,
+      "contrast_auroc": -0.0020616319444444198,
+      "contrast_auroc_ci": [
+        -0.005372450086805555,
+        0.0007595486111110523
+      ],
+      "drop_tpr1_L1": 0.04166666666666663,
+      "drop_tpr1_L4": 0.09375,
+      "contrast_tpr1": -0.05208333333333337,
+      "contrast_tpr1_ci": [
+        -0.09375,
+        0.0
+      ],
+      "drop_tpr5_L1": 0.01041666666666663,
+      "drop_tpr5_L4": 0.01041666666666663,
+      "contrast_tpr5": 0.0,
+      "contrast_tpr5_ci": [
+        -0.04166666666666663,
+        0.03125
+      ]
+    },
+    {
+      "site": "PROMPT",
+      "alpha": "1.00",
+      "lineage": "L2",
+      "ref": "L4",
+      "drop_auroc_L2": 0.02387152777777779,
+      "drop_auroc_L4": 0.0041232638888888395,
+      "contrast_auroc": 0.01974826388888895,
+      "contrast_auroc_ci": [
+        0.004446072048611099,
+        0.0353746202256945
+      ],
+      "drop_tpr1_L2": 0.01041666666666674,
+      "drop_tpr1_L4": 0.09375,
+      "contrast_tpr1": -0.08333333333333326,
+      "contrast_tpr1_ci": [
+        -0.17708333333333337,
+        0.125
+      ],
+      "drop_tpr5_L2": 0.0625,
+      "drop_tpr5_L4": 0.01041666666666663,
+      "contrast_tpr5": 0.05208333333333337,
+      "contrast_tpr5_ci": [
+        -0.020833333333333374,
+        0.14583333333333337
+      ]
+    },
+    {
+      "site": "PROMPT",
+      "alpha": "1.00",
+      "lineage": "L3",
+      "ref": "L4",
+      "drop_auroc_L3": 0.02029079861111116,
+      "drop_auroc_L4": 0.0041232638888888395,
+      "contrast_auroc": 0.01616753472222232,
+      "contrast_auroc_ci": [
+        0.0002143012152777292,
+        0.03233506944444442
+      ],
+      "drop_tpr1_L3": -0.03125,
+      "drop_tpr1_L4": 0.09375,
+      "contrast_tpr1": -0.125,
+      "contrast_tpr1_ci": [
+        -0.34375,
+        0.21875
+      ],
+      "drop_tpr5_L3": 0.09375,
+      "drop_tpr5_L4": 0.01041666666666663,
+      "contrast_tpr5": 0.08333333333333337,
+      "contrast_tpr5_ci": [
+        -0.02083333333333337,
+        0.1562500000000001
+      ]
+    },
+    {
+      "site": "EARLY",
+      "alpha": "0.50",
+      "lineage": "L1",
+      "ref": "L4",
+      "drop_auroc_L1": 0.0021497938368055802,
+      "drop_auroc_L4": 0.0019259982638889506,
+      "contrast_auroc": 0.00022379557291662966,
+      "contrast_auroc_ci": [
+        -0.0007936265733506948,
+        0.0012139214409721017
+      ],
+      "drop_tpr1_L1": 0.023437500000000056,
+      "drop_tpr1_L4": 0.0026041666666666297,
+      "contrast_tpr1": 0.020833333333333426,
+      "contrast_tpr1_ci": [
+        -0.03125,
+        0.046875
+      ],
+      "drop_tpr5_L1": 0.00520833333333337,
+      "drop_tpr5_L4": 0.0234375,
+      "contrast_tpr5": -0.01822916666666663,
+      "contrast_tpr5_ci": [
+        -0.03645833333333326,
+        0.02864583333333337
+      ]
+    },
+    {
+      "site": "EARLY",
+      "alpha": "0.50",
+      "lineage": "L2",
+      "ref": "L4",
+      "drop_auroc_L2": 0.0007527669270833703,
+      "drop_auroc_L4": 0.0019259982638889506,
+      "contrast_auroc": -0.0011732313368055802,
+      "contrast_auroc_ci": [
+        -0.002719455295138842,
+        0.00030517578125000276
+      ],
+      "drop_tpr1_L2": -0.01822916666666663,
+      "drop_tpr1_L4": 0.0026041666666666297,
+      "contrast_tpr1": -0.02083333333333326,
+      "contrast_tpr1_ci": [
+        -0.08333333333333326,
+        0.04433593749999968
+      ],
+      "drop_tpr5_L2": 0.01041666666666663,
+      "drop_tpr5_L4": 0.0234375,
+      "contrast_tpr5": -0.01302083333333337,
+      "contrast_tpr5_ci": [
+        -0.04166666666666663,
+        0.03124999999999989
+      ]
+    },
+    {
+      "site": "EARLY",
+      "alpha": "0.50",
+      "lineage": "L3",
+      "ref": "L4",
+      "drop_auroc_L3": 9.494357638895057e-05,
+      "drop_auroc_L4": 0.0019259982638889506,
+      "contrast_auroc": -0.0018310546875,
+      "contrast_auroc_ci": [
+        -0.003317091200086733,
+        -0.00048777262369781305
+      ],
+      "drop_tpr1_L3": -0.01822916666666674,
+      "drop_tpr1_L4": 0.0026041666666666297,
+      "contrast_tpr1": -0.02083333333333337,
+      "contrast_tpr1_ci": [
+        -0.09374999999999994,
+        0.06770833333333337
+      ],
+      "drop_tpr5_L3": 0.00520833333333337,
+      "drop_tpr5_L4": 0.0234375,
+      "contrast_tpr5": -0.01822916666666663,
+      "contrast_tpr5_ci": [
+        -0.04427083333333337,
+        0.02604166666666663
+      ]
+    },
+    {
+      "site": "EARLY",
+      "alpha": "1.00",
+      "lineage": "L1",
+      "ref": "L4",
+      "drop_auroc_L1": 0.00780571831597221,
+      "drop_auroc_L4": 0.00893147786458337,
+      "contrast_auroc": -0.0011257595486111605,
+      "contrast_auroc_ci": [
+        -0.0030181884765624416,
+        0.0005155775282118515
+      ],
+      "drop_tpr1_L1": 0.039062500000000056,
+      "drop_tpr1_L4": 0.0390625,
+      "contrast_tpr1": 5.551115123125783e-17,
+      "contrast_tpr1_ci": [
+        -0.0703125,
+        0.07291666666666669
+      ],
+      "drop_tpr5_L1": 0.0546875,
+      "drop_tpr5_L4": 0.07552083333333326,
+      "contrast_tpr5": -0.02083333333333326,
+      "contrast_tpr5_ci": [
+        -0.05989583333333326,
+        0.046875
+      ]
+    },
+    {
+      "site": "EARLY",
+      "alpha": "1.00",
+      "lineage": "L2",
+      "ref": "L4",
+      "drop_auroc_L2": 0.00750054253472221,
+      "drop_auroc_L4": 0.00893147786458337,
+      "contrast_auroc": -0.0014309353298611605,
+      "contrast_auroc_ci": [
+        -0.006469726562499889,
+        0.0031738281249998916
+      ],
+      "drop_tpr1_L2": -0.03125,
+      "drop_tpr1_L4": 0.0390625,
+      "contrast_tpr1": -0.0703125,
+      "contrast_tpr1_ci": [
+        -0.20052083333333331,
+        0.15885416666666663
+      ],
+      "drop_tpr5_L2": 0.04166666666666663,
+      "drop_tpr5_L4": 0.07552083333333326,
+      "contrast_tpr5": -0.03385416666666663,
+      "contrast_tpr5_ci": [
+        -0.08854166666666663,
+        0.05989583333333337
+      ]
+    },
+    {
+      "site": "EARLY",
+      "alpha": "1.00",
+      "lineage": "L3",
+      "ref": "L4",
+      "drop_auroc_L3": 0.0027804904513889506,
+      "drop_auroc_L4": 0.00893147786458337,
+      "contrast_auroc": -0.00615098741319442,
+      "contrast_auroc_ci": [
+        -0.010755750868055473,
+        -0.0019799126519096646
+      ],
+      "drop_tpr1_L3": -0.04947916666666674,
+      "drop_tpr1_L4": 0.0390625,
+      "contrast_tpr1": -0.08854166666666674,
+      "contrast_tpr1_ci": [
+        -0.23958333333333326,
+        0.16666666666666663
+      ],
+      "drop_tpr5_L3": 0.04166666666666663,
+      "drop_tpr5_L4": 0.07552083333333326,
+      "contrast_tpr5": -0.03385416666666663,
+      "contrast_tpr5_ci": [
+        -0.09635416666666663,
+        0.05208333333333337
+      ]
+    },
+    {
+      "site": "LATE",
+      "alpha": "0.50",
+      "lineage": "L1",
+      "ref": "L4",
+      "drop_auroc_L1": 0.0026380750868055802,
+      "drop_auroc_L4": 0.0025431315104167407,
+      "contrast_auroc": 9.494357638883955e-05,
+      "contrast_auroc_ci": [
+        -0.0020345052083333703,
+        0.002136400010850799
+      ],
+      "drop_tpr1_L1": -0.005208333333333315,
+      "drop_tpr1_L4": 0.005208333333333315,
+      "contrast_tpr1": -0.01041666666666663,
+      "contrast_tpr1_ci": [
+        -0.05729166666666663,
+        0.057291666666666685
+      ],
+      "drop_tpr5_L1": 0.01041666666666663,
+      "drop_tpr5_L4": 0.0,
+      "contrast_tpr5": 0.01041666666666663,
+      "contrast_tpr5_ci": [
+        -0.031249999999999892,
+        0.06256510416666641
+      ]
+    },
+    {
+      "site": "LATE",
+      "alpha": "0.50",
+      "lineage": "L2",
+      "ref": "L4",
+      "drop_auroc_L2": 0.0013359917534722099,
+      "drop_auroc_L4": 0.0025431315104167407,
+      "contrast_auroc": -0.0012071397569445308,
+      "contrast_auroc_ci": [
+        -0.0034654405381944224,
+        0.0010786268446180201
+      ],
+      "drop_tpr1_L2": 0.0078125,
+      "drop_tpr1_L4": 0.005208333333333315,
+      "contrast_tpr1": 0.002604166666666685,
+      "contrast_tpr1_ci": [
+        -0.078125,
+        0.1171875
+      ],
+      "drop_tpr5_L2": 0.015625,
+      "drop_tpr5_L4": 0.0,
+      "contrast_tpr5": 0.015625,
+      "contrast_tpr5_ci": [
+        -0.05208333333333337,
+        0.046875
+      ]
+    },
+    {
+      "site": "LATE",
+      "alpha": "0.50",
+      "lineage": "L3",
+      "ref": "L4",
+      "drop_auroc_L3": 0.00041368272569441977,
+      "drop_auroc_L4": 0.0025431315104167407,
+      "contrast_auroc": -0.002129448784722321,
+      "contrast_auroc_ci": [
+        -0.004177686903211744,
+        -0.00025753445095477815
+      ],
+      "drop_tpr1_L3": 0.015625,
+      "drop_tpr1_L4": 0.005208333333333315,
+      "contrast_tpr1": 0.010416666666666685,
+      "contrast_tpr1_ci": [
+        -0.07291666666666663,
+        0.07552083333333337
+      ],
+      "drop_tpr5_L3": 0.0234375,
+      "drop_tpr5_L4": 0.0,
+      "contrast_tpr5": 0.0234375,
+      "contrast_tpr5_ci": [
+        -0.04687500000000011,
+        0.059960937499999784
+      ]
+    },
+    {
+      "site": "LATE",
+      "alpha": "1.00",
+      "lineage": "L1",
+      "ref": "L4",
+      "drop_auroc_L1": 0.01479763454861105,
+      "drop_auroc_L4": 0.01473659939236116,
+      "contrast_auroc": 6.103515624988898e-05,
+      "contrast_auroc_ci": [
+        -0.003759426540798671,
+        0.0040162828233506614
+      ],
+      "drop_tpr1_L1": 0.08333333333333331,
+      "drop_tpr1_L4": 0.16927083333333331,
+      "contrast_tpr1": -0.0859375,
+      "contrast_tpr1_ci": [
+        -0.18489583333333331,
+        0.09641927083333304
+      ],
+      "drop_tpr5_L1": 0.06510416666666663,
+      "drop_tpr5_L4": 0.08072916666666674,
+      "contrast_tpr5": -0.01562500000000011,
+      "contrast_tpr5_ci": [
+        -0.08854166666666657,
+        0.09374999999999994
+      ]
+    },
+    {
+      "site": "LATE",
+      "alpha": "1.00",
+      "lineage": "L2",
+      "ref": "L4",
+      "drop_auroc_L2": 0.01382107204861105,
+      "drop_auroc_L4": 0.01473659939236116,
+      "contrast_auroc": -0.000915527343750111,
+      "contrast_auroc_ci": [
+        -0.007195705837673599,
+        0.005812581380208245
+      ],
+      "drop_tpr1_L2": 0.18489583333333331,
+      "drop_tpr1_L4": 0.16927083333333331,
+      "contrast_tpr1": 0.015625,
+      "contrast_tpr1_ci": [
+        -0.14850260416666666,
+        0.23958333333333326
+      ],
+      "drop_tpr5_L2": 0.04166666666666674,
+      "drop_tpr5_L4": 0.08072916666666674,
+      "contrast_tpr5": -0.0390625,
+      "contrast_tpr5_ci": [
+        -0.1067708333333332,
+        0.09902343749999967
+      ]
+    },
+    {
+      "site": "LATE",
+      "alpha": "1.00",
+      "lineage": "L3",
+      "ref": "L4",
+      "drop_auroc_L3": 0.01139322916666663,
+      "drop_auroc_L4": 0.01473659939236116,
+      "contrast_auroc": -0.003343370225694531,
+      "contrast_auroc_ci": [
+        -0.008830939398871598,
+        0.002571445041232644
+      ],
+      "drop_tpr1_L3": 0.13802083333333326,
+      "drop_tpr1_L4": 0.16927083333333331,
+      "contrast_tpr1": -0.031250000000000056,
+      "contrast_tpr1_ci": [
+        -0.16412760416666666,
+        0.20846354166666606
+      ],
+      "drop_tpr5_L3": 0.0859375,
+      "drop_tpr5_L4": 0.08072916666666674,
+      "contrast_tpr5": 0.005208333333333259,
+      "contrast_tpr5_ci": [
+        -0.1015625,
+        0.09635416666666663
+      ]
+    }
+  ],
+  "verdict_LATE_alpha1.00_tpr1": "execution reading WITHDRAWN (L4 drop >= safety-lineage drop, CI does not exclude 0 in L4's favour)",
+  "rescued_lineages": [],
+  "pooled_mean_of_4_not_an_estimate": "The mean over L1..L4 reported elsewhere in this artifact (e.g. task1's cross-lineage means) is a POOLED MEAN OF FOUR CHECKPOINTS, not a sampling estimate of a population of lineages: n=4 is the entire panel, not a random sample, so no sampling-based CI is attached to that mean and none should be inferred from one."
+}

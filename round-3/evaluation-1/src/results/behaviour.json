@@ -1,0 +1,445 @@
+{
+ "checkpoints": {
+  "Damien420--granite-3.2-2b-instruct-abliterated": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Damien420__granite-3.2-2b-instruct-abliterated.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.5777777777777777,
+   "OR_ci": [
+    0.433,
+    0.7103
+   ],
+   "SE": 0.0
+  },
+  "Goekdeniz-Guelmez--Josiefied-Qwen2.5-1.5B-Instruct-abliterated-v3": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Goekdeniz-Guelmez__Josiefied-Qwen2.5-1.5B-Instruct-abliterated-v3.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.4666666666666667,
+   "HC_ci": [
+    0.3293,
+    0.6092
+   ],
+   "OR": 0.08888888888888889,
+   "OR_ci": [
+    0.0351,
+    0.2073
+   ],
+   "SE": 0.08888888888888889
+  },
+  "HuggingFaceTB--SmolLM2-1.7B-Instruct": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/HuggingFaceTB__SmolLM2-1.7B-Instruct.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.2,
+   "HC_ci": [
+    0.109,
+    0.3382
+   ],
+   "OR": 0.022222222222222223,
+   "OR_ci": [
+    0.0039,
+    0.1157
+   ],
+   "SE": 0.06666666666666667
+  },
+  "HuggingFaceTB--SmolLM2-1.7B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/HuggingFaceTB__SmolLM2-1.7B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.08888888888888889,
+   "HC_ci": [
+    0.0351,
+    0.2073
+   ],
+   "OR": 0.4222222222222222,
+   "OR_ci": [
+    0.2897,
+    0.567
+   ],
+   "SE": 0.0
+  },
+  "HuggingFaceTB--SmolLM3-3B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/HuggingFaceTB__SmolLM3-3B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.26666666666666666,
+   "HC_ci": [
+    0.1596,
+    0.4104
+   ],
+   "OR": 0.06666666666666667,
+   "OR_ci": [
+    0.0229,
+    0.1786
+   ],
+   "SE": 0.1111111111111111
+  },
+  "Qwen--Qwen2.5-1.5B-Instruct": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen2.5-1.5B-Instruct.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.7777777777777778,
+   "OR_ci": [
+    0.6373,
+    0.8746
+   ],
+   "SE": 0.022222222222222223
+  },
+  "Qwen--Qwen2.5-1.5B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen2.5-1.5B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.24444444444444444,
+   "HC_ci": [
+    0.1424,
+    0.3867
+   ],
+   "OR": 0.13333333333333333,
+   "OR_ci": [
+    0.0626,
+    0.2618
+   ],
+   "SE": 0.06666666666666667
+  },
+  "Qwen--Qwen3-0.6B-Base": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-0.6B-Base.jsonl",
+   "n_harm": 60,
+   "n_benign": 60,
+   "HC": 0.31666666666666665,
+   "HC_ci": [
+    0.2131,
+    0.4423
+   ],
+   "OR": 0.08333333333333333,
+   "OR_ci": [
+    0.0361,
+    0.1807
+   ],
+   "SE": 0.05
+  },
+  "Qwen--Qwen3-0.6B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-0.6B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.15555555555555556,
+   "HC_ci": [
+    0.0775,
+    0.2878
+   ],
+   "OR": 0.06666666666666667,
+   "OR_ci": [
+    0.0229,
+    0.1786
+   ],
+   "SE": 0.08888888888888889
+  },
+  "Qwen--Qwen3-1.7B-Base": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-1.7B-Base.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.1111111111111111,
+   "HC_ci": [
+    0.0484,
+    0.235
+   ],
+   "OR": 0.15555555555555556,
+   "OR_ci": [
+    0.0775,
+    0.2878
+   ],
+   "SE": 0.08888888888888889
+  },
+  "Qwen--Qwen3-1.7B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-1.7B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.4222222222222222,
+   "OR_ci": [
+    0.2897,
+    0.567
+   ],
+   "SE": 0.06666666666666667
+  },
+  "Qwen--Qwen3-4B-Base": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-4B-Base.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.022222222222222223,
+   "HC_ci": [
+    0.0039,
+    0.1157
+   ],
+   "OR": 0.15555555555555556,
+   "OR_ci": [
+    0.0775,
+    0.2878
+   ],
+   "SE": 0.06666666666666667
+  },
+  "Qwen--Qwen3-4B-SafeRL": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-4B-SafeRL.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.3333333333333333,
+   "OR_ci": [
+    0.2136,
+    0.4793
+   ],
+   "SE": 0.06666666666666667
+  },
+  "Qwen--Qwen3-4B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/Qwen__Qwen3-4B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.4444444444444444,
+   "OR_ci": [
+    0.3094,
+    0.5882
+   ],
+   "SE": 0.022222222222222223
+  },
+  "TinyLlama--TinyLlama-1.1B-Chat-v1.0": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/TinyLlama__TinyLlama-1.1B-Chat-v1.0.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.6444444444444445,
+   "HC_ci": [
+    0.4984,
+    0.7678
+   ],
+   "OR": 0.044444444444444446,
+   "OR_ci": [
+    0.0123,
+    0.1483
+   ],
+   "SE": 0.13333333333333333
+  },
+  "allenai--OLMo-2-0425-1B-Instruct": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/allenai__OLMo-2-0425-1B-Instruct.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.022222222222222223,
+   "HC_ci": [
+    0.0039,
+    0.1157
+   ],
+   "OR": 0.5333333333333333,
+   "OR_ci": [
+    0.3908,
+    0.6707
+   ],
+   "SE": 0.0
+  },
+  "allenai--OLMo-2-0425-1B": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/allenai__OLMo-2-0425-1B.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.06666666666666667,
+   "HC_ci": [
+    0.0229,
+    0.1786
+   ],
+   "OR": 0.6888888888888889,
+   "OR_ci": [
+    0.5433,
+    0.8047
+   ],
+   "SE": 0.022222222222222223
+  },
+  "hereticness--heretic_stablelm-2-1_6b-chat": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/hereticness__heretic_stablelm-2-1_6b-chat.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.35555555555555557,
+   "HC_ci": [
+    0.2322,
+    0.5016
+   ],
+   "OR": 0.0,
+   "OR_ci": [
+    0.0,
+    0.0787
+   ],
+   "SE": 0.17777777777777778
+  },
+  "huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/huihui-ai__Huihui-Qwen3-0.6B-abliterated-v2.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.6222222222222222,
+   "HC_ci": [
+    0.4763,
+    0.7489
+   ],
+   "OR": 0.0,
+   "OR_ci": [
+    0.0,
+    0.0787
+   ],
+   "SE": 0.08888888888888889
+  },
+  "huihui-ai--Huihui-Qwen3-1.7B-abliterated-v2": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/huihui-ai__Huihui-Qwen3-1.7B-abliterated-v2.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.6666666666666666,
+   "HC_ci": [
+    0.5207,
+    0.7864
+   ],
+   "OR": 0.022222222222222223,
+   "OR_ci": [
+    0.0039,
+    0.1157
+   ],
+   "SE": 0.15555555555555556
+  },
+  "ibm-granite--granite-3.2-2b-instruct": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/ibm-granite__granite-3.2-2b-instruct.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.6,
+   "OR_ci": [
+    0.4545,
+    0.7298
+   ],
+   "SE": 0.0
+  },
+  "lunahr--Phi-4-mini-instruct-abliterated": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/lunahr__Phi-4-mini-instruct-abliterated.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.24444444444444444,
+   "HC_ci": [
+    0.1424,
+    0.3867
+   ],
+   "OR": 0.0,
+   "OR_ci": [
+    0.0,
+    0.0787
+   ],
+   "SE": 0.17777777777777778
+  },
+  "microsoft--Phi-4-mini-instruct": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/microsoft__Phi-4-mini-instruct.jsonl",
+   "n_harm": 45,
+   "n_benign": 44,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 0.6590909090909091,
+   "OR_ci": [
+    0.5114,
+    0.7812
+   ],
+   "SE": 0.022222222222222223
+  },
+  "mlx-community--SmolLM3-3B-abliterated-bf16": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/mlx-community__SmolLM3-3B-abliterated-bf16.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.5555555555555556,
+   "HC_ci": [
+    0.4118,
+    0.6906
+   ],
+   "OR": 0.0,
+   "OR_ci": [
+    0.0,
+    0.0787
+   ],
+   "SE": 0.15555555555555556
+  },
+  "stabilityai--stablelm-2-1_6b-chat": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/stabilityai__stablelm-2-1_6b-chat.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.4666666666666667,
+   "HC_ci": [
+    0.3293,
+    0.6092
+   ],
+   "OR": 0.022222222222222223,
+   "OR_ci": [
+    0.0039,
+    0.1157
+   ],
+   "SE": 0.13333333333333333
+  },
+  "venkycs--SmolLM2-1.7B-Instruct-Abliterated": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/results/judged/venkycs__SmolLM2-1.7B-Instruct-Abliterated.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.0,
+   "HC_ci": [
+    0.0,
+    0.0787
+   ],
+   "OR": 1.0,
+   "OR_ci": [
+    0.9213,
+    1.0
+   ],
+   "SE": 0.0
+  },
+  "mlabonne--Qwen3-4B-abliterated": {
+   "source": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/results/judge_ext/judged_mlabonne--Qwen3-4B-abliterated.jsonl",
+   "n_harm": 45,
+   "n_benign": 45,
+   "HC": 0.7333333333333333,
+   "HC_ci": [
+    0.5896,
+    0.8404
+   ],
+   "OR": 0.0,
+   "OR_ci": [
+    0.0,
+    0.0787
+   ],
+   "SE": 0.13333333333333333
+  }
+ },
+ "k1_granite": {
+  "parent_A": -0.5212995581902202,
+  "child_A": -0.4003378105156829,
+  "delta_raw": 0.12096174767453732,
+  "child_null_sd_A": 0.029237689143025724,
+  "delta_null_sd": 4.13718564017879,
+  "delta_as_fraction_of_child_CB": 0.04664373095202776,
+  "note": "4.14 null-SD is a raw shift of 0.121 against a null SD of 0.029; the unit is the isotropic random-direction SD, which the Lane A shuffled-label test showed is far narrower than the evidence band"
+ }
+}

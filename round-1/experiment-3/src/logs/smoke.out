@@ -1,0 +1,14 @@
+21:55:42 | INFO    | === HARVEST Qwen/Qwen3-0.6B (fam=qwen3 role=instruct L=28 H=1024 sealed=False) ===
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  19%|█▉        | 60/311 [00:00<00:00, 584.67it/s]Loading weights:  38%|███▊      | 119/311 [00:00<00:00, 521.47it/s]Loading weights:  55%|█████▌    | 172/311 [00:00<00:00, 467.27it/s]Loading weights:  71%|███████   | 220/311 [00:00<00:00, 436.87it/s]Loading weights:  85%|████████▌ | 265/311 [00:00<00:00, 398.88it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 472.00it/s]
+21:55:55 | INFO    |   band layers (1-idx): 13..19 of 28; instruct=True
+21:55:58 | INFO    |   r_content: split-half cos=0.957  held-out AUROC=0.043
+21:55:59 | INFO    |   |cos(r_content, r_request)| = 0.546
+21:55:59 | INFO    |   2x2 built; continuation token-match failures (>|2|): 52/96
+21:56:02 | INFO    |   K1 (null-SD units): O=2.52 CB=2.55 A=-1.64 T=1.99
+21:56:03 | INFO    |   K2 prior=0.63 slope=0.17 rungs=[1.013, 2.538, 1.415, 3.056, 0.891]
+21:56:03 | INFO    |   K4 tau=95.7 tokens plateau=7.290 peak=-3.716
+21:56:04 | INFO    |   K5 mean_gain=-1.29 dispersion=0.41 over 10 domains
+21:56:14 | INFO    |   baselines: B1=1.0 B2=0.08 B3=-0.05 B4=0.656 B5=43.79 B7=0.476
+22:00:53 | INFO    | === DONE Qwen/Qwen3-0.6B in 310.9s -> Qwen__Qwen3-0.6B.json ===
+22:00:55 | INFO    | harvest driver done: 1 checkpoints

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "at": 1789948511.6170454,
+  "dry_run": false,
+  "freed_bytes": 11213953517,
+  "skipped": "",
+  "removed": [
+    {
+      "path": ".venv_phi",
+      "source": "structural",
+      "category": "cache",
+      "reason": "virtualenv (pyvenv.cfg)",
+      "size_bytes": 5491563323
+    },
+    {
+      "path": "__pycache__",
+      "source": "structural",
+      "category": "cache",
+      "reason": "known cache directory",
+      "size_bytes": 130796
+    },
+    {
+      "path": ".venv",
+      "source": "structural",
+      "category": "cache",
+      "reason": "virtualenv (pyvenv.cfg)",
+      "size_bytes": 5722259398
+    }
+  ],
+  "refused": []
+}

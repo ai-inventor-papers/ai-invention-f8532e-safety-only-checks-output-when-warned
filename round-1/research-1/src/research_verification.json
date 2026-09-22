@@ -1,0 +1,550 @@
+{
+  "valid": true,
+  "file_errors": [],
+  "schema_errors": [],
+  "content_warnings": [],
+  "files_found": {
+    "research_out.json": {
+      "exists": true,
+      "path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_research_1/research_out.json",
+      "source_count": 32,
+      "size": 53863
+    }
+  },
+  "source_count": 32,
+  "checked_at": "2026-09-20T21:46:41.274858+00:00",
+  "passage_check_scope": "Case/whitespace-normalized text occurrence at the source URL (or archive fallback). Not claim entailment, locator verification, or author/year verification. status=error means unverified, not a misquotation.",
+  "passages": [
+    {
+      "source_index": 1,
+      "source_url": "https://arxiv.org/abs/2607.00572",
+      "quote": "Extending the analysis to response-token positions, we find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful at the prompt side.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...nerated, with distinct attack classes occupying separable regions of the harmfulness-refusal plane. extending the analysis to response-token positions, we find that the model recognizes harmful content while it is generating that content, even when it failed to recognize the input as harmful at the prompt side. motivated by our findings, we introduce harc (harmfulness-and-refusal coupling), a fine-tuning meth...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 1,
+      "source_url": "https://arxiv.org/abs/2607.00572",
+      "quote": "The harmfulness and refusal directions at prompt and response positions transfer across the five model families and two scales we tested without architecture-specific tuning.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...y trade-off among six baselines spanning the major training-time and inference-time safety methods. the harmfulness and refusal directions at prompt and response positions transfer across the five model families and two scales we tested without architecture-specific tuning. subjects: | artificial intelligence (cs.ai); cryptography and security (cs.cr) ---|--- cite as: | [...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 2,
+      "source_url": "https://arxiv.org/html/2607.00572v3",
+      "quote": "Concretely, we mean-pool the residual stream over the first 32 response tokens.",
+      "locator": "Section 3.2, above Eq. 2",
+      "status": "valid",
+      "context": "...resp}}, since harmfulness and refusal may diverge during generation rather than at prompt encoding. concretely, we mean-pool the residual stream over the first 32 response tokens. for the refusal direction, we neutralize prompt-content variation by extracting both a refused cont...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 2,
+      "source_url": "https://arxiv.org/html/2607.00572v3",
+      "quote": "We extract harmfulness and refusal directions at response-token positions and show that they are distinct from their prompt-side counterparts: cross-concept, cross-position pairs become nearly orthogonal in late layers (Figure 2b).",
+      "locator": "Section 1, Contributions (1)",
+      "status": "valid",
+      "context": "...ransfers cleanly across distinct models at a comparable scale. our contributions are threefold. (1) we extract harmfulness and refusal directions at response-token positions and show that they are distinct from their prompt-side counterparts: cross-concept, cross-position pairs become nearly orthogonal in late layers (figure 2b). the model still recognizes harmful content at generation time even when prompt-side refusal has fai...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 2,
+      "source_url": "https://arxiv.org/html/2607.00572v3",
+      "quote": "A layer scores highly only when prompt-side and response-side directions are decoupled while same-concept cross-position pairs remain aligned.",
+      "locator": "Section 4.1, below Eq. 6",
+      "status": "valid",
+      "context": "..._{r}\\cdot c_{h}\\cdot c_{r}, | | (6) ---|---|---|--- restricted to the in-band range [4,n−4][4,n-4]. a layer scores highly only when prompt-side and response-side directions are decoupled while same-concept cross-position pairs remain aligned. the criterion has no architecture-specific tuning; it transfers across the five model families we t...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "To obtain a model-level separability measure, we aggregate JSDs across all slices and layer groups to define the Jensen-Shannon Separability (JSS)",
+      "locator": "Section 3.4, above Eq. 7",
+      "status": "valid",
+      "context": "...the jensen– shannon divergence (jsd): js(g) i (a, b) = js \u0000d(θ(g) a (si)), , d(θ(g) b (si)) \u0001 . (6) to obtain a model-level separability measure, we aggregate jsds across all slices and layer groups to define the jensen-shannon separability (jss): jss(a, b) = 1 |g| x g 1 i i x i=1 js(g) i (a, b) ! . (7) algorithm 1 summarizes the core computati...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "A higher value of JR Min/Max indicates that Jailbreak–Ideal Refusal separability remains stable across the entire trajectory, whereas a low value reflects late-stage collapse of refusal and successful jailbreak intrusion.",
+      "locator": "Section 4.1.1, below Eq. 9",
+      "status": "valid",
+      "context": "... beyond explicit harm- ful intent. jr min/max = mins∈[0,1] jsss \u0000j, r \u0001 maxs∈[0,1] jsss \u0000j, r \u0001 (9) a higher value of jr min/max indicates that jailbreak–ideal refusal separability remains stable across the entire trajectory, whereas a low value reflects late-stage collapse of refusal and successful jailbreak intrusion. we quantify the agreement between our proxy- based safety ranking rjss-proxy and the ranking ob- ta...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 3,
+      "source_url": "https://aclanthology.org/2026.acl-long.1334.pdf",
+      "quote": "remains consistently high, with p-values far be- low conventional significance thresholds",
+      "locator": "Section 4.1.1 - the only statement of the consistency result; no numeric tau in the body",
+      "status": "valid",
+      "context": "...mes, while requiring far lower evaluation cost. as the model and metric pool expands in figure 5, τ remains consistently high, with p-values far be- low conventional significance thresholds(< 0.05). this indicates that even under diverse models and red-teaming metrics, the consistency bet...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/abs/2511.14195",
+      "quote": "N-GLARE operates entirely on the model's latent representations, bypassing the need for full text generation.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "... this, we propose n-glare (a non-generative, latent representation-efficient llm safety evaluator). n-glare operates entirely on the model's latent representations, bypassing the need for full text generation. it characterizes hidden layer dynamics by analyzing the apt (angular-probabilistic trajectory) of l...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/abs/2511.14195",
+      "quote": "providing an efficient output-free evaluation proxy for real-time diagnostics.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ve trends of large-scale red-teaming tests at less than 1\\% of the token cost and the runtime cost, providing an efficient output-free evaluation proxy for real-time diagnostics. subjects: | machine learning (cs.lg); cryptography and security (cs.cr) ---|--- cite as: | [arxiv:2...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 4,
+      "source_url": "https://arxiv.org/abs/2511.14195",
+      "quote": "Experiments on over 40 models and 20 red teaming strategies demonstrate that the JSS metric exhibits high consistency with the safety rankings derived from Red Teaming.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...trajectory) of latent representations and introducing the jss (jensen-shannon separability) metric. experiments on over 40 models and 20 red teaming strategies demonstrate that the jss metric exhibits high consistency with the safety rankings derived from red teaming. n-glare reproduces the discriminative trends of large-scale red-teaming tests at less than 1\\% of t...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://arxiv.org/html/2604.18901",
+      "quote": "Abliterated variants, from which the refusal direction has been removed via the weight-orthogonalisation procedure of Arditi et al. (2024), match their instruction-tuned counterparts within",
+      "locator": "Section 3.2",
+      "status": "valid",
+      "context": "...{\\mathrm{mp/raw}} and 0.029 for 𝐰ldamp/raw\\mathbf{w}_{\\mathrm{lda}}^{\\mathrm{mp/raw}} (appendix c). abliterated variants, from which the refusal direction has been removed via the weight-orthogonalisation procedure of arditi et al. (2024), match their instruction-tuned counterparts within ±0.003\\pm 0.003 auroc. #### cross-variant direction transfer. a direction fitted on the base model ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://arxiv.org/html/2604.18901",
+      "quote": "instruct-to-abliterated transfer is substantially cleaner than base-to-instruct",
+      "locator": "Section 3.2, Cross-variant direction transfer",
+      "status": "valid",
+      "context": "...o 0.175. each gemma-3 variant’s own direction recovers auroc above 0.969. across all four families, instruct-to-abliterated transfer is substantially cleaner than base-to-instruct (angles 11∘11^{\\circ} to 42∘42^{\\circ}, auroc degradation ≤0.003\\leq 0.003). full 3×33\\times 3 tran...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 5,
+      "source_url": "https://arxiv.org/html/2604.18901",
+      "quote": "Gemma-3 is the exception: alignment rotates the harm direction by",
+      "locator": "Section 3.2, Cross-variant direction transfer",
+      "status": "valid",
+      "context": "...7∘17^{\\circ} to 39∘39^{\\circ} and auroc transfer remains within 0.010 of own-direction performance. gemma-3 is the exception: alignment rotates the harm direction by 73∘73^{\\circ}, base-to-instruct auroc drops by 0.057, and tpr collapses from 0.751 to 0.175. each g...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 6,
+      "source_url": "https://arxiv.org/abs/2604.18901",
+      "quote": "two pooling choices applied to the same chat-templated activations at the same residual-stream layer (max-pool over content tokens versus last-token at the post-instruction position) recover harm directions",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...vered direction is concentrated within each extraction protocol but protocol-dependent across them: two pooling choices applied to the same chat-templated activations at the same residual-stream layer (max-pool over content tokens versus last-token at the post-instruction position) recover harm directions $73^\\circ$ apart, and projecting one out leaves detection under either max-pool extraction essentia...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 6,
+      "source_url": "https://arxiv.org/abs/2604.18901",
+      "quote": "Probing identifies a protocol-specific direction rather than a unique computational feature.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...apart, and projecting one out leaves detection under either max-pool extraction essentially intact. probing identifies a protocol-specific direction rather than a unique computational feature. comments: | 26 pages, 1(+6) figures, 4(+14) tables. code at [this https url](https://github.com/isa...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 7,
+      "source_url": "https://arxiv.org/abs/2606.22676",
+      "quote": "Crucially, GFS identifies, before any fine-tuning, the initially safe model that retains the most refusal after small-scale LoRA fine-tuning.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...-request refusal, providing causal evidence that the recovered geometry underlies refusal behavior. crucially, gfs identifies, before any fine-tuning, the initially safe model that retains the most refusal after small-scale lora fine-tuning. these results establish gfs as a practical pre-deployment diagnostic for flagging fragile refusal b...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 7,
+      "source_url": "https://arxiv.org/abs/2606.22676",
+      "quote": "These results establish GFS as a practical pre-deployment diagnostic for flagging fragile refusal behavior without running an attack.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...-tuning, the initially safe model that retains the most refusal after small-scale lora fine-tuning. these results establish gfs as a practical pre-deployment diagnostic for flagging fragile refusal behavior without running an attack. comments: | 16 pages, 3 figures, 12 tables. the first two authors contributed equally. code (pre-at...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 8,
+      "source_url": "https://arxiv.org/html/2606.22676",
+      "quote": "Skin-Deep first compares aligned and base-model activations on matched harmful-request examples and benign instructions.",
+      "locator": "Section 1, method summary",
+      "status": "valid",
+      "context": "...that measures alignment fragility from hidden-state activations before such an intervention is run. skin-deep first compares aligned and base-model activations on matched harmful-request examples and benign instructions. it then finds the hidden-state directions that best separate harmful-request examples from benign i...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 8,
+      "source_url": "https://arxiv.org/html/2606.22676",
+      "quote": "When an analysis requires a base model, the base checkpoint is version-matched to its aligned counterpart.",
+      "locator": "Section 4.1, Model Sets",
+      "status": "valid",
+      "context": "...lee et al., 2023), and conditioned reinforcement learning fine-tuning (c-rlft) (wang et al., 2023). when an analysis requires a base model, the base checkpoint is version-matched to its aligned counterpart. we use five color-coded model sets. * • core model set. llama-3.1-8b, qwen-2.5-7b, mistral-7b-v0.3,...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 9,
+      "source_url": "https://arxiv.org/abs/2603.27412",
+      "quote": "Given 200 safe normative prompts, LatentBiopsy computes the leading principal component of their activations at a target layer",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "... harmful prompts by analysing the geometry of residual-stream activations in large language models. given 200 safe normative prompts, latentbiopsy computes the leading principal component of their activations at a target layer and characterises new prompts by their radial deviation angle $\\theta$ from this reference directio...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 9,
+      "source_url": "https://arxiv.org/abs/2603.27412",
+      "quote": "No harmful examples are required for training.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ian fit to the normative distribution, flagging deviations symmetrically regardless of orientation. no harmful examples are required for training. > we evaluate two complete model triplets from the qwen3.5-0.8b and qwen2.5-0.5b families: base, in...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 10,
+      "source_url": "https://arxiv.org/html/2603.27412",
+      "quote": "both abliterated variants achieve AUROC at most 0.015 below their instruction-tuned counterparts, establishing a geometric dissociation between harmful-intent representation and the downstream generative refusal mechanism",
+      "locator": "abstract / Section 1 contribution 2",
+      "status": "valid",
+      "context": "...ond per-query overhead. three empirical findings emerge. first, geometry survives refusal ablation: both abliterated variants achieve auroc at most 0.015 below their instruction-tuned counterparts, establishing a geometric dissociation between harmful-intent representation and the downstream generative refusal mechanism. second, harmful prompts exhibit a near-degenerate angular distribution (σθ≈0.03\\sigma_{\\theta}\\app...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 10,
+      "source_url": "https://arxiv.org/html/2603.27412",
+      "quote": "These methods share a common dependency: they require harmful examples or deliberate safety-prompt manipulations to define the reference geometry.",
+      "locator": "Section 1",
+      "status": "valid",
+      "context": "...in the residual stream, and that orthogonalising this direction renders the model unable to refuse. these methods share a common dependency: they require harmful examples or deliberate safety-prompt manipulations to define the reference geometry. we ask whether the safe distribution alone defines a reference geometry from which harmful prompts ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 11,
+      "source_url": "https://arxiv.org/abs/2607.13075",
+      "quote": "fixed transfer to matched pairs is weaker: 0.656-0.819 on the guard-selected Twin-n70 subset and 0.590-0.690 on the full Twin-n163 cohort.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "... prompts. a fully disjoint audit reconstructs near-ceiling source-contrast auroc (0.996-0.999), but fixed transfer to matched pairs is weaker: 0.656-0.819 on the guard-selected twin-n70 subset and 0.590-0.690 on the full twin-n163 cohort. we test ten axes on the reference family and seven across all families with leakage, hold-out, and ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 11,
+      "source_url": "https://arxiv.org/abs/2607.13075",
+      "quote": "At the tested read points, these activation scores behave as broad-risk detectors rather than standalone context adjudicators.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...d generation-batch hold-out and false-block 79.6-100 percent of xstest at 95 percent in-corpus tpr. at the tested read points, these activation scores behave as broad-risk detectors rather than standalone context adjudicators. comments: | 19 pages, 4 figures, 30 tables. code and supporting artifacts: [this https url](https:/...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 12,
+      "source_url": "https://arxiv.org/html/2606.16349",
+      "quote": "Thus low coupling is not a safety score.",
+      "locator": "Section 4.3",
+      "status": "valid",
+      "context": "...maller: hrcirepr\\mathrm{hrci}_{\\mathrm{repr}} moves from 0.0217 at reference to 0.0190 at step 500. thus low coupling is not a safety score. the useful signal is the regime transition: in r2d2, direct coupling changes jointly with robustnes...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 12,
+      "source_url": "https://arxiv.org/html/2606.16349",
+      "quote": "Dense all-anchor results therefore support a fixed-protocol R2D2 diagnostic, not a general safety score.",
+      "locator": "Section 4.4",
+      "status": "valid",
+      "context": "...hanges weakly from first to last, and its xstest/refusal/utility correlations are weak or unstable. dense all-anchor results therefore support a fixed-protocol r2d2 diagnostic, not a general safety score. they also refine the five-anchor story: r2d2 direct coupling is a plateau-to-low transition around ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 12,
+      "source_url": "https://arxiv.org/html/2606.16349",
+      "quote": "The equal weighting is a fixed symmetry-based summary of two direct activation-space overlap measures.",
+      "locator": "Section 3.3, below Eq. 9",
+      "status": "valid",
+      "context": "...rm{repr}}(t)=\\frac{1}{2}c_{\\mathrm{cos}}(t)+\\frac{1}{2}c_{\\mathrm{sub}}(t). | | (9) ---|---|---|--- the equal weighting is a fixed symmetry-based summary of two direct activation-space overlap measures. it was not optimized against asr, refusal, or utility outcomes; we therefore interpret hrcirepr\\mat...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 13,
+      "source_url": "https://arxiv.org/abs/2607.01854",
+      "quote": "We combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ad its refusal mechanism stripped? runtime guards cannot: they score generations, not the artifact. we combine two cheap internal signals, a reference-anchored activation refusal-gap and a weight-recovery energy of the base-to-candidate weight difference, into a threshold-free checkpoint audit. the two are negatively correlated and label-complementary: the gap supplies refusal-specificity and...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 13,
+      "source_url": "https://arxiv.org/abs/2607.01854",
+      "quote": "their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at AUROC 0.95, significantly above either signal alone (0.84, 0.90)",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...lies recall. on a 273-checkpoint registry spanning qwen, deepseek-distilled qwen, llama, and gemma, their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at auroc 0.95, significantly above either signal alone (0.84, 0.90), and a youden-calibrated threshold transfers to held-out families at balanced accuracy 0.89 (fpr 0....",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 14,
+      "source_url": "https://arxiv.org/abs/2608.05086",
+      "quote": "we find that three interpretable factors of refusal strictness, truthfulness, and contextual harm explain most of the variance between models across benchmarks",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...rgest psychometric analysis of llm safety evaluations to date, and contribute three results. first, we find that three interpretable factors of refusal strictness, truthfulness, and contextual harm explain most of the variance between models across benchmarks. second, psychometrically selected items recover full benchmark scores with lower error than random...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 14,
+      "source_url": "https://arxiv.org/abs/2608.05086",
+      "quote": "roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...cted items recover full benchmark scores with lower error than random subsets of the same size, and roughly ten adaptively chosen items suffice for several individual benchmarks, cutting evaluation cost by 97-99%. third, irt supports audits of individual models, showing that it can be used to detect naive sandb...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2607.14147",
+      "quote": "so the intact representation is upstream of the gate, not epiphenomenal",
+      "locator": "Contributions, Section 4",
+      "status": "valid",
+      "context": "...rm random control’s 1414–16%16\\%; harm−-random +17+17 to +34+34pp at n=100n=100, both significant), so the intact representation is upstream of the gate, not epiphenomenal. a dose-matched position control localizes the effect to an _early window_ of the response (the fir...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2607.14147",
+      "quote": "a dose-matched position control shows the first half of the response suffices to break refusal, while the second half is nearly inert",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...). refusal is therefore a shallow, response-site computation. we localize it to an _early window_ : a dose-matched position control shows the first half of the response suffices to break refusal, while the second half is nearly inert. three causal probes converge on that window. restoring the harm direction there partially re-engag...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 15,
+      "source_url": "https://arxiv.org/html/2607.14147",
+      "quote": "refusal tracks harm rather than scary surface",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...gle direction or component is a clean handle either: the decision is decodable but distributed, and refusal tracks harm rather than scary surface. every reported effect is one that passed its controls. the practical consequence is structural: a ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 16,
+      "source_url": "https://arxiv.org/abs/2608.09624",
+      "quote": "Among wrapped harmful prompts the outcome AUROC is 0.220, which places the attacks that succeeded below the attacks that failed.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "... from 0.936 to 0.803, so the attacks grow more dangerous while the prompts look safer to the score. among wrapped harmful prompts the outcome auroc is 0.220, which places the attacks that succeeded below the attacks that failed. rare token, passive, and detector derived channels reproduce the reversal on the same matched desig...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 16,
+      "source_url": "https://arxiv.org/abs/2608.09624",
+      "quote": "On Llama, wrapping raises harmful generation from 0.05 to 0.27 while harmful intent AUROC falls from 0.936 to 0.803, so the attacks grow more dangerous while the prompts look safer to the score.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "... base goal with a plain and a wrapped version and generate real completions from the target models. on llama, wrapping raises harmful generation from 0.05 to 0.27 while harmful intent auroc falls from 0.936 to 0.803, so the attacks grow more dangerous while the prompts look safer to the score. among wrapped harmful prompts the outcome auroc is 0.220, which places the attacks that succeeded b...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 17,
+      "source_url": "https://arxiv.org/abs/2608.05578",
+      "quote": "sigma on the harmful-content concept predicts compliance with Pearson r = -0.546 (p = 0.043), directionally but with meaningful noise",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...a. we measure behavioral compliance on 20 stratified jailbreakbench prompts per model and find that sigma on the harmful-content concept predicts compliance with pearson r = -0.546 (p = 0.043), directionally but with meaningful noise. mechanistic analysis identifies a four-class taxonomy of safety-training modifications distinguish...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 17,
+      "source_url": "https://arxiv.org/abs/2608.05578",
+      "quote": "The fourth is undetectable by activation-only probing and represents a documented failure mode.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...hreshold detects the first two classes; tier 2 direction-similarity verification detects the third. the fourth is undetectable by activation-only probing and represents a documented failure mode. we discuss threshold calibration, limitations of single-run measurement, and the open problem of de...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 18,
+      "source_url": "https://arxiv.org/abs/2609.14759",
+      "quote": "The refusal gate, in contrast, is a fresh post-training construction with only a weak pretraining precursor, written into a narrow control-token channel where the refusal decision is orthogonal to the moral-judgment decision.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...oral subspace crystallizes during pretraining, and alignment rotates it once without rebuilding it. the refusal gate, in contrast, is a fresh post-training construction with only a weak pretraining precursor, written into a narrow control-token channel where the refusal decision is orthogonal to the moral-judgment decision. the central result is causal and comes from one model, olmo-3. a nested interchange rank sweep patc...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 18,
+      "source_url": "https://arxiv.org/abs/2609.14759",
+      "quote": "Refusal reads the harm percept, not the moral content that judgment reads on the same patches.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ion, and about three-quarters of refusal's causal input lies outside the moral subspace altogether. refusal reads the harm percept, not the moral content that judgment reads on the same patches. the picture is not uniform across families. llama reads broad moral content; qwen reads beyond the ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 19,
+      "source_url": "https://arxiv.org/abs/2609.19366",
+      "quote": "internal harmfulness representations in large language models vary across risk categories, while sharing a common general harm representation component",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...66) [html (experimental)](https://arxiv.org/html/2609.19366v1) > abstract:prior work has shown that internal harmfulness representations in large language models vary across risk categories, while sharing a common general harm representation component. this raises a question about the role of the category-specific component beyond general harm repre...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 19,
+      "source_url": "https://arxiv.org/abs/2609.19366",
+      "quote": "yielding a category residual that is orthogonal to general harmfulness at every layer",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...emoving shared general harmfulness representation from each categorical harmfulness representation, yielding a category residual that is orthogonal to general harmfulness at every layer. using activation steering with category residuals across 11 risk categories in 3 instruction-tuned...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 20,
+      "source_url": "https://arxiv.org/abs/2608.14577",
+      "quote": "defines the resulting harmful-output distribution as a model-level risk profile",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...mark dataset that collects model misbehavior across diverse harm categories and model families, and defines the resulting harmful-output distribution as a model-level risk profile. the premise is that, just as linguistic behavior can be characterized from an utterance corpus, mo...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 20,
+      "source_url": "https://arxiv.org/abs/2608.14577",
+      "quote": "HarmProfile contains over 80,000 validated artifacts from 23 frontier LLMs across 13 model families, organized into 15 harm categories and 57 subcategories.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "..., model risk can be characterized from the content, severity, and variation of its safety failures. harmprofile contains over 80,000 validated artifacts from 23 frontier llms across 13 model families, organized into 15 harm categories and 57 subcategories. using this corpus, we find that frontier llms reliably produce harmful content at scale, yet exhibi...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 21,
+      "source_url": "https://aclanthology.org/2026.findings-acl.489/",
+      "quote": "revealing that safety alignment is not a uniform semantic capability but a demographic hierarchy, with defense rates fluctuating by up to 42% within the same model solely based on the target group",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...of-the-art llms on mijabench, we curate 615,454 prompt-response pairs that compose mijabench-align, revealing that safety alignment is not a uniform semantic capability but a demographic hierarchy, with defense rates fluctuating by up to 42% within the same model solely based on the target group. this disparity persists across architectures and languages and is amplified by scaling, indicating...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 22,
+      "source_url": "https://arxiv.org/abs/2606.08044",
+      "quote": "We call the gap between what static audits certify and what an intervention can reach the audit gap, and we show it is realizable",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...tputs; they do not measure how easily an intervention on the model turns a refusal into compliance. we call the gap between what static audits certify and what an intervention can reach the audit gap, and we show it is realizable: one can build a model that matches its safety-aligned base on every static audit yet gives way to ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 22,
+      "source_url": "https://arxiv.org/abs/2606.08044",
+      "quote": "Every static audit we run gives the dissoci",
+      "locator": "abstract (sentence truncated on the abstract page)",
+      "status": "valid",
+      "context": "...vulnerability score (lvs), the safety degradation produced per unit of bounded latent perturbation. every static audit we run gives the dissociated model the same verdict as its base, since its refusals match the base, jailbreaks show no consi...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 23,
+      "source_url": "https://arxiv.org/abs/2502.10487",
+      "quote": "we find that it and embedding-space attacks can predict attack success rates well",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ttacks, and direct prompting. even though direct prompting in particular does not achieve high asr, we find that it and embedding-space attacks can predict attack success rates well, achieving $r_p=0.87$ (linear) and $r_s=0.94$ (spearman rank) correlations with the full attack ens...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 24,
+      "source_url": "https://arxiv.org/abs/2606.01695",
+      "quote": "a zero-label checkpoint auditor that detects this hidden shift directly from two forward passes over an unlabeled prompt set",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ceeds 7.5%. we introduce canary (contamination auditor via neural activation representation yield), a zero-label checkpoint auditor that detects this hidden shift directly from two forward passes over an unlabeled prompt set. canary projects the hidden-state difference through a sparse autoencoder, filtering style noise to...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 25,
+      "source_url": "https://arxiv.org/abs/2609.20129",
+      "quote": "to rely solely on modeling safe data and flagging out-of-distribution inputs",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...ion. an alternative approach is to view this problem through the lens of anomaly detection, namely, to rely solely on modeling safe data and flagging out-of-distribution inputs. however, llm activations lie in a high-dimensional space, raising concerns about whether anomaly d...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 26,
+      "source_url": "https://arxiv.org/abs/2605.02958",
+      "quote": "a sparse upstream activation pattern that often persists even when attacks such as GCG suppress terminal refusal signals",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...cted across layer-token positions. using causal tracing, we identify a \\textit{refusal trajectory}: a sparse upstream activation pattern that often persists even when attacks such as gcg suppress terminal refusal signals. based on this observation, we propose salo (sparse activation localization operator), a lightweigh...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 27,
+      "source_url": "https://arxiv.org/abs/2507.11878",
+      "quote": "LLMs Encode Harmfulness and Refusal Separately",
+      "locator": "title",
+      "status": "valid",
+      "context": "...025 ([v1](https://arxiv.org/abs/2507.11878v1)), last revised 6 jul 2026 (this version, v5)] # title:llms encode harmfulness and refusal separately authors:[jiachen zhao](https://arxiv.org/search/cs?searchtype=author&query=zhao,+j), [jing huang](h...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 28,
+      "source_url": "https://arxiv.org/abs/2608.30585",
+      "quote": "Successful attacks retain the measured harmful-versus-benign distinction at the request, while its refusal-associated expression weakens where the answer begins",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...quests, and decompose effective directions geometrically. > our analysis yields three findings. (1) successful attacks retain the measured harmful-versus-benign distinction at the request, while its refusal-associated expression weakens where the answer begins, a pattern we call safety-relay attenuation. (2) constructing the complete roleplay around the requ...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 29,
+      "source_url": "https://arxiv.org/abs/2605.12726",
+      "quote": "Final-token safety probes monitor a single hidden state after prompt prefill, but jailbreak prompts can contain probe-visible unsafe evidence distributed across earlier user-token representations that is missed by this readout.",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...a [view pdf](/pdf/2605.12726) [html (experimental)](https://arxiv.org/html/2605.12726v2) > abstract:final-token safety probes monitor a single hidden state after prompt prefill, but jailbreak prompts can contain probe-visible unsafe evidence distributed across earlier user-token representations that is missed by this readout. we study this prefill-time failure mode using safeswitch-style probes trained only on clean harmful...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 30,
+      "source_url": "https://arxiv.org/abs/2604.26052",
+      "quote": "We present a paired analysis over human labeled prompt and response records across four harm categories",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...te, or harmful versus safe classification, which hide how risk changes between prompt and response. we present a paired analysis over human labeled prompt and response records across four harm categories (sexual, self harm, hate and violence) and ordinal severity levels (safe, low, medium, high). 61% o...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 31,
+      "source_url": "https://arxiv.org/abs/2608.08029",
+      "quote": "we test how much of the reported performance is affected by non-determinism during inference by repeating",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...-7b-v0.3, and qwen2-7b, using the three benchmarks (wildjailbreak, beavertails, aegis 2.0). second, we test how much of the reported performance is affected by non-determinism during inference by repeating extraction under five random seeds and measuring the variance of f1 scores. our results reproduce t...",
+      "match_type": "exact"
+    },
+    {
+      "source_index": 32,
+      "source_url": "https://arxiv.org/abs/2605.20241",
+      "quote": "introduce Geometry-Lite, a compact prompt-level probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts",
+      "locator": "abstract",
+      "status": "valid",
+      "context": "...biases remain stable under benchmark shift. we study this as an empirical decomposition problem and introduce geometry-lite, a compact prompt-level probe that maps each layer's final prompt-token representation to signed margins under centroid, local-neighborhood, and supervised linear-boundary readouts, then summarizes the resulting margin profiles by boundary position, layer-to-layer change, and coa...",
+      "match_type": "exact"
+    }
+  ]
+}

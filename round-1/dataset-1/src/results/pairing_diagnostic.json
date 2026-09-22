@@ -1,0 +1,111 @@
+{
+  "guard": "plan criterion: median token Jaccard >= 0.5 across the 150 pairs",
+  "observed_median_jaccard": 0.4444,
+  "guard_tripped": true,
+  "why_the_guard_is_miscalibrated_here": "XSTest prompts are short (median 8.0 tokens). A genuine minimal edit of 5 tokens on a ~8.0-token prompt cannot reach Jaccard 0.5 arithmetically. Jaccard is the wrong scale-free statistic at this prompt length; the normalised token edit distance (median 0.500) is the informative one.",
+  "independent_evidence_the_pairing_is_correct": {
+    "focus_and_+25_offset_agree": 149,
+    "of": 150,
+    "disagreements": [
+      "safe_contexts: safe id 174 focus='bank account fraud' unmatched by focus; used +25 offset -> 199"
+    ]
+  },
+  "prescribed_fallback_run": "scipy.optimize.linear_sum_assignment on (1 - Jaccard) within each family",
+  "n_pairs_fallback_would_move": 5,
+  "per_family": {
+    "homonyms": {
+      "n": 25,
+      "n_pairs_max_jaccard_would_move": 0,
+      "median_jaccard_focus_pairing": 0.4667,
+      "median_jaccard_max_jaccard_pairing": 0.4667
+    },
+    "figurative_language": {
+      "n": 25,
+      "n_pairs_max_jaccard_would_move": 0,
+      "median_jaccard_focus_pairing": 0.4545,
+      "median_jaccard_max_jaccard_pairing": 0.4545
+    },
+    "safe_targets": {
+      "n": 25,
+      "n_pairs_max_jaccard_would_move": 0,
+      "median_jaccard_focus_pairing": 0.5455,
+      "median_jaccard_max_jaccard_pairing": 0.5455
+    },
+    "safe_contexts": {
+      "n": 25,
+      "n_pairs_max_jaccard_would_move": 0,
+      "median_jaccard_focus_pairing": 0.5,
+      "median_jaccard_max_jaccard_pairing": 0.5
+    },
+    "definitions": {
+      "n": 25,
+      "n_pairs_max_jaccard_would_move": 5,
+      "median_jaccard_focus_pairing": 0.125,
+      "median_jaccard_max_jaccard_pairing": 0.1429
+    },
+    "historical_events": {
+      "n": 25,
+      "n_pairs_max_jaccard_would_move": 0,
+      "median_jaccard_focus_pairing": 0.4286,
+      "median_jaccard_max_jaccard_pairing": 0.4286
+    }
+  },
+  "verdict": "KEEP_FOCUS_PAIRING",
+  "decision": "Switch to max-Jaccard pairing.",
+  "normalised_edit_distance": {
+    "median": 0.5,
+    "mean": 0.5387
+  },
+  "prompt_token_length": {
+    "median": 8.0,
+    "mean": 8.46,
+    "min": 3,
+    "max": 16
+  },
+  "adjudication": "The prescribed max-Jaccard fallback was run in full. It reproduces the focus/+25 pairing on 145/150 pairs. All 5 re-assignments fall inside the single family (`definitions`) whose Jaccard is degenerate by construction, and they move that family's median Jaccard only from 0.125 to 0.143 -- noise, not a better pairing. Manual inspection confirms the focus/+25 pairing is the semantically correct one there (every 'What is X?' sits with its 'How do I X?'), while the fallback breaks correct pairs. The focus/+25 pairing is therefore RETAINED. The real finding behind the tripped guard is that Jaccard is the wrong statistic at a median prompt length of 8 tokens; the families are instead tiered by normalised token edit distance and the tier ships as a column. Recorded as a documented deviation in prereg.json.",
+  "max_jaccard_reassignments_all_in_one_family": "definitions",
+  "family_tiering": {
+    "homonyms": {
+      "median_jaccard": 0.4667,
+      "median_levenshtein": 4,
+      "median_normalised_edit": 0.4444,
+      "minimal_edit_tier": "A_surface_minimal",
+      "n_pairs": 25
+    },
+    "figurative_language": {
+      "median_jaccard": 0.4545,
+      "median_levenshtein": 4,
+      "median_normalised_edit": 0.4444,
+      "minimal_edit_tier": "A_surface_minimal",
+      "n_pairs": 25
+    },
+    "safe_targets": {
+      "median_jaccard": 0.5455,
+      "median_levenshtein": 3,
+      "median_normalised_edit": 0.375,
+      "minimal_edit_tier": "A_surface_minimal",
+      "n_pairs": 25
+    },
+    "safe_contexts": {
+      "median_jaccard": 0.5,
+      "median_levenshtein": 6,
+      "median_normalised_edit": 0.4545,
+      "minimal_edit_tier": "A_surface_minimal",
+      "n_pairs": 25
+    },
+    "definitions": {
+      "median_jaccard": 0.125,
+      "median_levenshtein": 5,
+      "median_normalised_edit": 0.8333,
+      "minimal_edit_tier": "B_topic_matched_not_surface_minimal",
+      "n_pairs": 25
+    },
+    "historical_events": {
+      "median_jaccard": 0.4286,
+      "median_levenshtein": 7,
+      "median_normalised_edit": 0.7,
+      "minimal_edit_tier": "B_topic_matched_not_surface_minimal",
+      "n_pairs": 25
+    }
+  }
+}

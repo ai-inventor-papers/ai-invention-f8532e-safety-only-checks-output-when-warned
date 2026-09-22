@@ -1,0 +1,63 @@
+{
+ "utc": "2026-09-22T03:23:05.289265+00:00",
+ "order": "alphabetical by tag",
+ "source": "directory listing of the substrate arrays (names only)",
+ "log": [
+  {
+   "tag": "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic",
+   "repo": "AiAsistent/ERNIE-4.5-0.3B-PT-heretic",
+   "status": "OK",
+   "seconds": 144.6,
+   "rc": 0,
+   "stderr_tail": ""
+  },
+  {
+   "tag": "HG__EleutherAI--gpt-neo-1.3B",
+   "repo": "EleutherAI/gpt-neo-1.3B",
+   "status": "FAILED",
+   "seconds": 100.4,
+   "rc": 1,
+   "stderr_tail": "GPTNeoForCausalLM does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue in Transformers GitHub repository and load your model with the argument `attn_implementation=\"eager\"` meanwhile. Example: `model = AutoModel.from_pretrained(\"openai/whisper-tiny\", attn_implementation=\"eager\")`\n"
+  },
+  {
+   "tag": "HG__EleutherAI--pythia-410m",
+   "repo": "EleutherAI/pythia-410m",
+   "status": "FAILED",
+   "seconds": 88.1,
+   "rc": 1,
+   "stderr_tail": "EFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_1/src/reuse/variants.py\", line 114, in blocks\n    return getattr(model, \"model\", model).layers\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_1/.venv_gpu/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1964, in __getattr__\n    raise AttributeError(\nAttributeError: 'GPTNeoXForCausalLM' object has no attribute 'layers'\n"
+  },
+  {
+   "tag": "HG__LGAI-EXAONE--EXAONE-4.0-1.2B",
+   "repo": "LGAI-EXAONE/EXAONE-4.0-1.2B",
+   "status": "OK",
+   "seconds": 209.5,
+   "rc": 0,
+   "stderr_tail": ""
+  },
+  {
+   "tag": "HG__PleIAs--Pleias-1.2b-Preview",
+   "repo": "PleIAs/Pleias-1.2b-Preview",
+   "status": "FAILED",
+   "seconds": 72.3,
+   "rc": 1,
+   "stderr_tail": "i-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_1/.venv_gpu/lib/python3.12/site-packages/transformers/tokenization_utils_base.py\", line 2396, in _get_padding_truncation_strategies\n    raise ValueError(\nValueError: Asking to pad but the tokenizer does not have a padding token. Please select a token to use as `pad_token` `(tokenizer.pad_token = tokenizer.eos_token e.g.)` or add a new pad token via `tokenizer.add_special_tokens({'pad_token': '[PAD]'})`.\n"
+  },
+  {
+   "tag": "HG__baidu--ERNIE-4.5-0.3B-PT",
+   "repo": "baidu/ERNIE-4.5-0.3B-PT",
+   "status": "OK",
+   "seconds": 147.6,
+   "rc": 0,
+   "stderr_tail": ""
+  },
+  {
+   "tag": "HG__bigscience--bloomz-560m",
+   "repo": "bigscience/bloomz-560m",
+   "status": "FAILED",
+   "seconds": 85.0,
+   "rc": 1,
+   "stderr_tail": " BloomForCausalLM does not support an attention implementation through torch.nn.functional.scaled_dot_product_attention yet. Please request the support for this architecture: https://github.com/huggingface/transformers/issues/28005. If you believe this error is a bug, please open an issue in Transformers GitHub repository and load your model with the argument `attn_implementation=\"eager\"` meanwhile. Example: `model = AutoModel.from_pretrained(\"openai/whisper-tiny\", attn_implementation=\"eager\")`\n"
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "n_tags": 51,
+ "published_source": "I4/results/scores/ckpt_<tag>.json (values_full / B7 / AMS_T1_full)",
+ "bars": {
+  "N1": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 1.8464396678297135e-14,
+   "max_rel_diff": 4.213387768644127e-13,
+   "worst_tag": "HG__huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2",
+   "target_met": true
+  },
+  "N6": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 8.992806499463768e-15,
+   "max_rel_diff": 1.6677546228140225e-14,
+   "worst_tag": "HG__huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2",
+   "target_met": true
+  },
+  "C7": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 0.0,
+   "max_rel_diff": 0.0,
+   "worst_tag": null,
+   "target_met": true
+  },
+  "C13_peak_d": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 3.9968028886505635e-15,
+   "max_rel_diff": 4.853416188885144e-15,
+   "worst_tag": "F1__a05",
+   "target_met": true
+  },
+  "N11": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 9.992007221626409e-16,
+   "max_rel_diff": 3.4236773862786135e-15,
+   "worst_tag": "F1__a05",
+   "target_met": true
+  },
+  "BL1_easy": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 0.0,
+   "max_rel_diff": 0.0,
+   "worst_tag": null,
+   "target_met": true
+  },
+  "BL1_hard": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 0.0,
+   "max_rel_diff": 0.0,
+   "worst_tag": null,
+   "target_met": true
+  },
+  "BL1_truelogit": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 2.220446049250313e-16,
+   "max_rel_diff": 1.877764676196655e-16,
+   "worst_tag": "F2__wu20",
+   "target_met": true
+  },
+  "BL1_truelogit_hard": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 4.440892098500626e-16,
+   "max_rel_diff": 1.1949736473882864e-15,
+   "worst_tag": "F2__wu05",
+   "target_met": true
+  },
+  "B7_nullproj": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 3.3306690738754696e-16,
+   "max_rel_diff": 6.69245318140442e-16,
+   "worst_tag": "F2__int8bnb",
+   "target_met": true
+  },
+  "AMS_T1_sigma": {
+   "n_compared": 51,
+   "n_skipped": 0,
+   "max_abs_diff": 2.3318917818926366e-07,
+   "max_rel_diff": 4.1151303048166485e-08,
+   "worst_tag": "F3__cautious",
+   "target_met": true
+  }
+ },
+ "errors": []
+}

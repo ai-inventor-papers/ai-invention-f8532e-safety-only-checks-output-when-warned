@@ -1,0 +1,89 @@
+{
+ "utc": "2026-09-22T03:06:19.439812Z",
+ "chain_verify": {
+  "ok": true,
+  "digests_ok": true,
+  "stage_order_ok": true,
+  "monotone_utc": true,
+  "monotone_mtime": true,
+  "stages_seen": [
+   "S1",
+   "S1-amend",
+   "S1-amend",
+   "S1-amend",
+   "S2",
+   "S3a",
+   "S3b",
+   "S4"
+  ],
+  "expected_order": [
+   "S1",
+   "S2",
+   "S3a",
+   "S3b",
+   "S4"
+  ],
+  "n_records": 8,
+  "checks": [
+   {
+    "file": "prereg.json",
+    "ok": true,
+    "recorded": "689216f41af9cff6",
+    "current": "689216f41af9cff6"
+   },
+   {
+    "file": "prereg_amendments_b1.json",
+    "ok": true,
+    "recorded": "093730ca704235fc",
+    "current": "093730ca704235fc"
+   },
+   {
+    "file": "prereg_amendments_b2.json",
+    "ok": true,
+    "recorded": "5b9269afc03ddc1c",
+    "current": "5b9269afc03ddc1c"
+   },
+   {
+    "file": "prereg_amendments_b3.json",
+    "ok": true,
+    "recorded": "762b7be46551829f",
+    "current": "762b7be46551829f"
+   },
+   {
+    "file": "screen_table.json",
+    "ok": true,
+    "recorded": "46d05156140a8ed7",
+    "current": "46d05156140a8ed7"
+   },
+   {
+    "file": "prescreen.json",
+    "ok": true,
+    "recorded": "2de32e05e568c009",
+    "current": "2de32e05e568c009"
+   },
+   {
+    "file": "rank_analysis.json",
+    "ok": true,
+    "recorded": "45f5cc851b383d32",
+    "current": "45f5cc851b383d32"
+   },
+   {
+    "file": "survivor.json",
+    "ok": true,
+    "recorded": "8f0b7db5e0bbcbd9",
+    "current": "8f0b7db5e0bbcbd9"
+   }
+  ]
+ },
+ "expected_order": [
+  "S1",
+  "S2",
+  "S3a",
+  "S3b",
+  "S4"
+ ],
+ "audit_log_path": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_1/logs/s3_open_audit.txt",
+ "audit_log_clean": true,
+ "audit_log_forbidden_hits": [],
+ "freeze_ok": true
+}

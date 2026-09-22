@@ -1,0 +1,129 @@
+00:38:11|INFO   |partb run  WS=/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2
+00:38:23|INFO   |GPU NVIDIA RTX 2000 Ada Generation 15947 MiB; declared 7500 MiB
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 643.99it/s]
+Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 6455.50it/s]
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.44it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.44it/s]
+Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 61/164 [00:00<00:00, 601.31it/s]Loading weights:  82%|████████▏ | 135/164 [00:00<00:00, 632.72it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 683.67it/s]
+00:39:21|INFO   |chain: committed partb_build_fp16.json as record 7 (da8e00635b2a)
+00:39:21|INFO   |BUILD DONE fp16 (57s): tie={'config_tie_word_embeddings': True, 'storage_shared': True, 'lm_head_present': True} differs_from_parent=True
+00:39:21|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:39:31|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:39:41|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:39:51|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 6825.15it/s]
+00:40:07|INFO   |    gen 16/16  (5s, batch 16)
+00:40:07|INFO   |  PB__ernie03b__fp16: chunk 1/15 (16/236 items)
+00:40:11|INFO   |    gen 16/16  (4s, batch 16)
+00:40:12|INFO   |  PB__ernie03b__fp16: chunk 2/15 (32/236 items)
+00:40:17|INFO   |    gen 16/16  (5s, batch 16)
+00:40:17|INFO   |  PB__ernie03b__fp16: chunk 3/15 (48/236 items)
+00:40:22|INFO   |    gen 16/16  (5s, batch 16)
+00:40:22|INFO   |  PB__ernie03b__fp16: chunk 4/15 (64/236 items)
+00:40:28|INFO   |    gen 16/16  (6s, batch 16)
+00:40:28|INFO   |  PB__ernie03b__fp16: chunk 5/15 (80/236 items)
+00:40:33|INFO   |    gen 5/5  (5s, batch 16)
+00:40:36|INFO   |    gen 11/11  (3s, batch 16)
+00:40:36|INFO   |  PB__ernie03b__fp16: chunk 6/15 (96/236 items)
+00:40:39|INFO   |    gen 16/16  (3s, batch 16)
+00:40:39|INFO   |  PB__ernie03b__fp16: chunk 7/15 (112/236 items)
+00:40:41|INFO   |    gen 16/16  (2s, batch 16)
+00:40:41|INFO   |  PB__ernie03b__fp16: chunk 8/15 (128/236 items)
+00:40:43|INFO   |    gen 16/16  (3s, batch 16)
+00:40:44|INFO   |  PB__ernie03b__fp16: chunk 9/15 (144/236 items)
+00:40:46|INFO   |    gen 16/16  (2s, batch 16)
+00:40:46|INFO   |  PB__ernie03b__fp16: chunk 10/15 (160/236 items)
+00:40:48|INFO   |    gen 16/16  (2s, batch 16)
+00:40:48|INFO   |  PB__ernie03b__fp16: chunk 11/15 (176/236 items)
+00:40:50|INFO   |    gen 16/16  (2s, batch 16)
+00:40:50|INFO   |  PB__ernie03b__fp16: chunk 12/15 (192/236 items)
+00:40:53|INFO   |    gen 16/16  (2s, batch 16)
+00:40:53|INFO   |  PB__ernie03b__fp16: chunk 13/15 (208/236 items)
+00:40:55|INFO   |    gen 16/16  (2s, batch 16)
+00:40:55|INFO   |  PB__ernie03b__fp16: chunk 14/15 (224/236 items)
+00:40:57|INFO   |    gen 12/12  (2s, batch 16)
+00:40:57|INFO   |  PB__ernie03b__fp16: chunk 15/15 (236/236 items)
+00:40:58|INFO   |GEN DONE PB__ernie03b__fp16: dl 0s, load 1s, gen 54s (0.23 s/item), peak 801 MiB
+00:41:17|INFO   |judged PB__ernie03b__fp16: primary 236/236, audit 47, ext 236; ledger $0.0348
+00:41:17|INFO   |JUDGED PB__ernie03b__fp16: n=236 labeled=236 unparsable=0 proxy_mode=False ledger=$0.0348
+00:41:17|INFO   |JUDGED PB__ernie03b__fp16: {'tag': 'PB__ernie03b__fp16', 'n': 236, 'n_labeled': 236, 'n_unparsable': 0, 'proxy_mode': False, 'ledger_usd': 0.034825549999999955} (18s)
+00:41:17|INFO   |COMMIT s901: ['PB__ernie03b__fp16'] -> chain i=10 sha=d4b3e667be13db23
+00:41:17|INFO   |COMMITTED PB__ernie03b__fp16 as graded_truth_s901.json
+00:41:17|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:41:27|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:41:37|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:41:47|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:41:58|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:42:08|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:42:18|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:42:28|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:42:38|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:42:48|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:42:58|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:43:08|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:43:18|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:43:28|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:43:38|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+00:43:48|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
+Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  20%|██        | 33/164 [00:00<00:00, 303.15it/s]Loading weights:  43%|████▎     | 71/164 [00:00<00:00, 314.05it/s]Loading weights:  78%|███████▊  | 128/164 [00:00<00:00, 420.91it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 402.49it/s]
+00:44:08|INFO   |E3 grid: 104 cells, K=15 bank directions, 32 prompts
+00:44:10|INFO   |  cells 10/104 (0.21 s/cell)
+00:44:12|INFO   |  cells 20/104 (0.20 s/cell)
+00:44:14|INFO   |  cells 30/104 (0.19 s/cell)
+00:44:16|INFO   |  cells 40/104 (0.18 s/cell)
+00:44:17|INFO   |  cells 50/104 (0.18 s/cell)
+00:44:18|INFO   |  cells 60/104 (0.17 s/cell)
+00:44:20|INFO   |  cells 70/104 (0.17 s/cell)
+00:44:22|INFO   |  cells 80/104 (0.17 s/cell)
+00:44:23|INFO   |  cells 90/104 (0.17 s/cell)
+00:44:25|INFO   |  cells 100/104 (0.17 s/cell)
+00:44:25|INFO   |  cells 104/104 (0.17 s/cell)
+00:44:26|ERROR  |arm fp16 failed
+Traceback (most recent call last):
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src/partb.py", line 1558, in <module>
+    raise SystemExit(main())
+                     └ <function main at 0x7a5b74e694e0>
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src/partb.py", line 1554, in main
+    return int(a.fn(a) or 0)
+               │ │  └ Namespace(cmd='run', arms=['fp16', 'int8wo', 'resave', 'wu_nonref', 'sysprompt'], stop_after=None, fn=<function cmd_run at 0x...
+               │ └ <function cmd_run at 0x7a5b74e68fe0>
+               └ Namespace(cmd='run', arms=['fp16', 'int8wo', 'resave', 'wu_nonref', 'sysprompt'], stop_after=None, fn=<function cmd_run at 0x...
+
+> File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src/partb.py", line 1501, in cmd_run
+    run_arm(arm, args.stop_after)
+    │       │    │    └ None
+    │       │    └ Namespace(cmd='run', arms=['fp16', 'int8wo', 'resave', 'wu_nonref', 'sysprompt'], stop_after=None, fn=<function cmd_run at 0x...
+    │       └ 'fp16'
+    └ <function run_arm at 0x7a5b74e68f40>
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src/partb.py", line 1486, in run_arm
+    harvest_arm(arm)
+    │           └ 'fp16'
+    └ <function harvest_arm at 0x7a5b74e68900>
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src/partb.py", line 1127, in harvest_arm
+    meta = pipeline.harvest_one(row, harvest_args())
+           │        │           │    └ <function harvest_args at 0x7a5b74e68860>
+           │        │           └ {'tag': 'PB__ernie03b__fp16', 'repo': 'partb-local/ernie03b__fp16', 'revision_sha': None, 'trust_remote_code': False, 'family...
+           │        └ <function harvest_one at 0x7a5b74e5e340>
+           └ <module 'pipeline' from '/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src...
+
+  File "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2/src/pipeline.py", line 1392, in harvest_one
+    if not args.keep_snapshot:
+           └ namespace(tier2=True, tier3=False, r_draws_p=5, with_c5=False, no_cells=False, max_cells=None, batch=16, limit_items=None, fo...
+
+AttributeError: 'types.SimpleNamespace' object has no attribute 'keep_snapshot'
+00:44:26|WARNING|DEVIATION D12: Part-B arm fp16 failed
+00:44:26|INFO   |int8wo: BUILD_DONE present -> skip
+Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 44/164 [00:00<00:00, 388.42it/s]Loading weights:  55%|█████▍    | 90/164 [00:00<00:00, 406.13it/s]Loading weights:  80%|███████▉  | 131/164 [00:00<00:00, 386.97it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 419.57it/s]
+00:44:34|INFO   |    gen 16/16  (3s, batch 16)
+00:44:34|INFO   |  PB__ernie03b__int8wo: chunk 1/15 (16/236 items)
+00:44:36|INFO   |    gen 16/16  (3s, batch 16)
+00:44:36|INFO   |  PB__ernie03b__int8wo: chunk 2/15 (32/236 items)
+00:44:39|INFO   |    gen 16/16  (3s, batch 16)
+00:44:39|INFO   |  PB__ernie03b__int8wo: chunk 3/15 (48/236 items)
+00:44:42|INFO   |    gen 16/16  (3s, batch 16)
+00:44:42|INFO   |  PB__ernie03b__int8wo: chunk 4/15 (64/236 items)
+00:44:44|INFO   |    gen 16/16  (3s, batch 16)
+00:44:44|INFO   |  PB__ernie03b__int8wo: chunk 5/15 (80/236 items)

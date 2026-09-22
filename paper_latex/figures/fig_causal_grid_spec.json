@@ -1,0 +1,121 @@
+{
+  "type": "panel",
+  "panel_labels": true,
+  "ncols": 2,
+  "aspect": "21:9",
+  "title": "Ablating the refusal direction (arm F) cuts over-refusal at bands B4\u2013B5",
+  "panels": [
+    {
+      "type": "heatmap",
+      "title": "Qwen3-4B-Instruct",
+      "xlabel": "Intervention site",
+      "ylabel": "Layer band",
+      "row_labels": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "col_labels": [
+        "P",
+        "D'",
+        "E"
+      ],
+      "matrix": [
+        [
+          -0.041667,
+          -0.048611,
+          -0.055556
+        ],
+        [
+          0.055556,
+          -0.013889,
+          0.048611
+        ],
+        [
+          0.083333,
+          -0.013889,
+          0.090278
+        ],
+        [
+          -0.125,
+          -0.131944,
+          -0.131944
+        ],
+        [
+          -0.138889,
+          -0.069444,
+          -0.048611
+        ],
+        [
+          -0.041667,
+          -0.069444,
+          0.055556
+        ]
+      ],
+      "diverging": true,
+      "vmin": -0.19,
+      "vmax": 0.19,
+      "fmt": "+.3f",
+      "cbar_label": "\u0394 over-refusal rate (F \u2212 R)"
+    },
+    {
+      "type": "heatmap",
+      "title": "Qwen3-4B-SafeRL",
+      "xlabel": "Intervention site",
+      "ylabel": "Layer band",
+      "row_labels": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "col_labels": [
+        "P",
+        "D'",
+        "E"
+      ],
+      "matrix": [
+        [
+          0.048611,
+          -0.006944,
+          -0.055556
+        ],
+        [
+          0.020833,
+          -0.006944,
+          0.076389
+        ],
+        [
+          0.0,
+          0.027778,
+          -0.013889
+        ],
+        [
+          -0.1875,
+          -0.111111,
+          -0.055556
+        ],
+        [
+          -0.166667,
+          -0.118056,
+          0.0
+        ],
+        [
+          -0.083333,
+          -0.097222,
+          -0.013889
+        ]
+      ],
+      "diverging": true,
+      "vmin": -0.19,
+      "vmax": 0.19,
+      "fmt": "+.3f",
+      "cbar_label": "\u0394 over-refusal rate (F \u2212 R)"
+    }
+  ]
+}

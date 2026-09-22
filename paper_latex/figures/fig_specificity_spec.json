@@ -1,0 +1,465 @@
+{
+  "figure_id": "fig_specificity",
+  "type": "scatter_class_multiplicity",
+  "renderer": "render_fig_specificity.py",
+  "provenance": {
+    "source_file": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_paper_text/gen_paper_text/extracted_data.md",
+    "source_section": "1.3 Aggregates - all 32 candidates (aggregates.json -> aggregates.<name>)",
+    "false_alarms_def": "len(false_alarm_pairs) out of 15 no-op pairs",
+    "sensitivity_def": "n_hit / n_effective, where n_effective is 9 or 8 depending on how many effective pairs the readout could be evaluated on",
+    "notes": [
+      "The 'FA n/15' field in the source is n_ci_covers_0 (no-op pairs NOT alarmed); the false-alarm COUNT is the length of the false_alarm_pairs list. Both are recorded below.",
+      "N4_shape_onset/peak_frac/width sensitivities are 3/9, 1/9, 1/9 in aggregates.json - NOT 0 as an earlier draft stated.",
+      "AMS_T2_drift sensitivity 0/8 failed downstream validation against the reproduced pairs_long; regex/regex_namefree were flagged UNVERIFIABLE for a differently-named key. Both are plotted as recorded and flagged in the caption."
+    ]
+  },
+  "title": "False alarms vs. sensitivity across 32 candidate readouts",
+  "xlabel": "False alarms (count, out of 15 no-op pairs)",
+  "ylabel": "Sensitivity (hits / effective pairs)",
+  "aspect": "21:9",
+  "width_in": 7.0,
+  "xlim": [
+    -0.6,
+    9.9
+  ],
+  "ylim": [
+    -0.05,
+    1.0
+  ],
+  "xticks": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "yticks": [
+    0.0,
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    1.0
+  ],
+  "gap_line_x": 4.0,
+  "gap_line_note": "No readout has 4 false alarms: every activation/text readout has <= 3, every logit and weight readout has >= 5.",
+  "class_dodge": [
+    -0.12,
+    -0.04,
+    0.04,
+    0.12
+  ],
+  "classes": [
+    {
+      "key": "activation",
+      "label": "Activation",
+      "marker": "o",
+      "palette_index": 0
+    },
+    {
+      "key": "logit",
+      "label": "Logit",
+      "marker": "s",
+      "palette_index": 1
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "marker": "D",
+      "palette_index": 2
+    },
+    {
+      "key": "text",
+      "label": "Text/card",
+      "marker": "^",
+      "palette_index": 3
+    }
+  ],
+  "readouts": [
+    {
+      "name": "N1_d_lstar",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "N1_parentL",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "N2_d_lstar_perpWU",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "N3_F_clust_perpWU",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "F_clust_raw",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "N7_two_sided_gap",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "N4_shape_onset",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 3,
+      "n_effective": 9,
+      "sensitivity": 0.3333
+    },
+    {
+      "name": "N4_shape_peak_frac",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 1,
+      "n_effective": 9,
+      "sensitivity": 0.1111
+    },
+    {
+      "name": "N4_shape_width",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 1,
+      "n_effective": 9,
+      "sensitivity": 0.1111
+    },
+    {
+      "name": "N6_benign_sep",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "N8_severity_rho",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 4,
+      "n_effective": 8,
+      "sensitivity": 0.5
+    },
+    {
+      "name": "N9_decode_d",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 3,
+      "n_effective": 8,
+      "sensitivity": 0.375
+    },
+    {
+      "name": "N9_tok1",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 4,
+      "n_effective": 8,
+      "sensitivity": 0.5
+    },
+    {
+      "name": "N10_dec_minus_prompt",
+      "class": "activation",
+      "false_alarms": 2,
+      "noop_clean": 13,
+      "hits": 3,
+      "n_effective": 8,
+      "sensitivity": 0.375
+    },
+    {
+      "name": "N11_ams_window_fisher",
+      "class": "activation",
+      "false_alarms": 2,
+      "noop_clean": 13,
+      "hits": 6,
+      "n_effective": 9,
+      "sensitivity": 0.6667
+    },
+    {
+      "name": "N12_combo_DEFAULT",
+      "class": "activation",
+      "false_alarms": 3,
+      "noop_clean": 12,
+      "hits": 3,
+      "n_effective": 9,
+      "sensitivity": 0.3333
+    },
+    {
+      "name": "C4",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 3,
+      "n_effective": 9,
+      "sensitivity": 0.3333
+    },
+    {
+      "name": "C7",
+      "class": "activation",
+      "false_alarms": 1,
+      "noop_clean": 14,
+      "hits": 6,
+      "n_effective": 9,
+      "sensitivity": 0.6667
+    },
+    {
+      "name": "C13",
+      "class": "activation",
+      "false_alarms": 2,
+      "noop_clean": 13,
+      "hits": 4,
+      "n_effective": 9,
+      "sensitivity": 0.4444
+    },
+    {
+      "name": "C13_peak_d",
+      "class": "activation",
+      "false_alarms": 3,
+      "noop_clean": 12,
+      "hits": 6,
+      "n_effective": 9,
+      "sensitivity": 0.6667
+    },
+    {
+      "name": "AMS_T1_sigma",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 3,
+      "n_effective": 8,
+      "sensitivity": 0.375
+    },
+    {
+      "name": "AMS_T2_drift",
+      "class": "activation",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 0,
+      "n_effective": 8,
+      "sensitivity": 0.0
+    },
+    {
+      "name": "BL1_easy",
+      "class": "logit",
+      "false_alarms": 6,
+      "noop_clean": 9,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "BL1_hard",
+      "class": "logit",
+      "false_alarms": 6,
+      "noop_clean": 9,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "BL1_truelogit",
+      "class": "logit",
+      "false_alarms": 8,
+      "noop_clean": 7,
+      "hits": 6,
+      "n_effective": 9,
+      "sensitivity": 0.6667
+    },
+    {
+      "name": "BL1_truelogit_hard",
+      "class": "logit",
+      "false_alarms": 5,
+      "noop_clean": 10,
+      "hits": 6,
+      "n_effective": 9,
+      "sensitivity": 0.6667
+    },
+    {
+      "name": "B7",
+      "class": "weight",
+      "false_alarms": 9,
+      "noop_clean": 6,
+      "hits": 7,
+      "n_effective": 9,
+      "sensitivity": 0.7778
+    },
+    {
+      "name": "B7_nullproj",
+      "class": "weight",
+      "false_alarms": 9,
+      "noop_clean": 6,
+      "hits": 6,
+      "n_effective": 9,
+      "sensitivity": 0.6667
+    },
+    {
+      "name": "regex",
+      "class": "text",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 5,
+      "n_effective": 9,
+      "sensitivity": 0.5556
+    },
+    {
+      "name": "regex_namefree",
+      "class": "text",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 4,
+      "n_effective": 9,
+      "sensitivity": 0.4444
+    },
+    {
+      "name": "greedy_refusal_rate",
+      "class": "text",
+      "false_alarms": 2,
+      "noop_clean": 13,
+      "hits": 7,
+      "n_effective": 8,
+      "sensitivity": 0.875
+    },
+    {
+      "name": "greedy_refusal_onset",
+      "class": "text",
+      "false_alarms": 0,
+      "noop_clean": 15,
+      "hits": 5,
+      "n_effective": 8,
+      "sensitivity": 0.625
+    }
+  ],
+  "point_labels": [
+    {
+      "at": {
+        "class": "activation",
+        "false_alarms": 1,
+        "sensitivity": 0.5556
+      },
+      "text": "N1 family (6)",
+      "offset": [
+        6,
+        5
+      ]
+    },
+    {
+      "at": {
+        "class": "activation",
+        "false_alarms": 0,
+        "sensitivity": 0.5556
+      },
+      "text": "N6",
+      "leader_text_xy": [
+        0.03,
+        0.785
+      ]
+    },
+    {
+      "at": {
+        "class": "activation",
+        "false_alarms": 0,
+        "sensitivity": 0.0
+      },
+      "text": "AMS_T2",
+      "leader_text_xy": [
+        0.55,
+        0.055
+      ]
+    },
+    {
+      "at": {
+        "class": "logit",
+        "false_alarms": 6,
+        "sensitivity": 0.5556
+      },
+      "text": "BL1_easy",
+      "offset": [
+        6,
+        -12
+      ]
+    },
+    {
+      "at": {
+        "class": "logit",
+        "false_alarms": 8,
+        "sensitivity": 0.6667
+      },
+      "text": "BL1_truelogit",
+      "offset": [
+        -10,
+        10
+      ]
+    },
+    {
+      "at": {
+        "class": "weight",
+        "false_alarms": 9,
+        "sensitivity": 0.7778
+      },
+      "text": "B7",
+      "offset": [
+        6,
+        4
+      ]
+    },
+    {
+      "at": {
+        "class": "text",
+        "false_alarms": 2,
+        "sensitivity": 0.875
+      },
+      "text": "greedy_rate",
+      "offset": [
+        7,
+        2
+      ]
+    }
+  ],
+  "caption": "False-alarm count versus sensitivity for all 32 candidate readouts on the specificity panel (15 constructed no-op pairs; 9 effective pairs, or 8 for readouts that could not be evaluated on all 9). Each marker is one cell of the grid -- 32 readouts fall into 23 distinct cells -- and a marker's area and inset digit give how many readouts share it, so no readout is hidden under another. Colour and shape give the readout class. Every activation readout sits at 0-3 false alarms but none exceeds 6/9 sensitivity; the logit baselines BL1 scatter at 5-8 false alarms, and the weight-space cosine B7/B7_nullproj are the worst at 9/15 even though B7 has the highest sensitivity of any activation or weight readout (7/9). The single most sensitive readout is the text-only greedy_refusal_rate (7/8) at 2 false alarms. No readout reaches both zero false alarms and high sensitivity: the best zero-false-alarm readout is text-only greedy_refusal_rate_onset at 5/8, and the best zero-false-alarm activation readout is N6 at 5/9. Markers are dodged horizontally by class by at most 0.12 so coincident readouts of different classes stay visible; the dashed line at 4 marks the band no readout occupies. AMS_T2_drift (0/8) later failed validation against the reproduced pair list, and the two regex readouts were flagged unverifiable; all three are plotted as recorded in aggregates.json.",
+  "legend": {
+    "loc": "lower right",
+    "fontsize": 9,
+    "title": "Marker area = readouts in cell"
+  }
+}

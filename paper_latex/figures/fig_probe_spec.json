@@ -1,0 +1,523 @@
+{
+  "figure_id": "fig_probe",
+  "source_artifact": "3_invention_loop/iter_3/gen_art/gen_art_evaluation_1/SUMMARY.md § 3 'Site table' (copied verbatim to data/site_table_alpha_sweep.csv)",
+  "n_pos": 384,
+  "n_neg": 384,
+  "alpha_grid": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "sites": [
+    "PROMPT",
+    "EARLY",
+    "LATE"
+  ],
+  "lineages": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "panel_a": {
+    "title": "Probe AUROC under directional lesion",
+    "xlabel": "Lesion strength α (fraction of fitted direction removed)",
+    "ylabel": "Held-out probe AUROC",
+    "ylim": [
+      0.89,
+      0.995
+    ],
+    "series": [
+      {
+        "site": "PROMPT",
+        "lineage": "L1",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.989,
+          0.989,
+          0.989,
+          0.989,
+          0.987
+        ],
+        "auroc_ci_lo": [
+          0.976,
+          0.977,
+          0.976,
+          0.976,
+          0.973
+        ],
+        "auroc_ci_hi": [
+          0.998,
+          0.998,
+          0.998,
+          0.998,
+          0.996
+        ]
+      },
+      {
+        "site": "PROMPT",
+        "lineage": "L2",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.982,
+          0.981,
+          0.98,
+          0.974,
+          0.958
+        ],
+        "auroc_ci_lo": [
+          0.959,
+          0.958,
+          0.956,
+          0.95,
+          0.932
+        ],
+        "auroc_ci_hi": [
+          0.997,
+          0.996,
+          0.995,
+          0.992,
+          0.981
+        ]
+      },
+      {
+        "site": "PROMPT",
+        "lineage": "L3",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.984,
+          0.983,
+          0.983,
+          0.977,
+          0.964
+        ],
+        "auroc_ci_lo": [
+          0.966,
+          0.965,
+          0.965,
+          0.957,
+          0.939
+        ],
+        "auroc_ci_hi": [
+          0.997,
+          0.997,
+          0.996,
+          0.993,
+          0.984
+        ]
+      },
+      {
+        "site": "PROMPT",
+        "lineage": "L4",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.989,
+          0.989,
+          0.989,
+          0.987,
+          0.985
+        ],
+        "auroc_ci_lo": [
+          0.976,
+          0.976,
+          0.976,
+          0.974,
+          0.97
+        ],
+        "auroc_ci_hi": [
+          0.998,
+          0.998,
+          0.998,
+          0.998,
+          0.996
+        ]
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L1",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.963,
+          0.963,
+          0.961,
+          0.96,
+          0.955
+        ],
+        "auroc_ci_lo": [
+          0.943,
+          0.942,
+          0.94,
+          0.938,
+          0.933
+        ],
+        "auroc_ci_hi": [
+          0.98,
+          0.98,
+          0.978,
+          0.978,
+          0.975
+        ]
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L2",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.989,
+          0.989,
+          0.989,
+          0.987,
+          0.982
+        ],
+        "auroc_ci_lo": [
+          0.979,
+          0.979,
+          0.978,
+          0.976,
+          0.969
+        ],
+        "auroc_ci_hi": [
+          0.997,
+          0.997,
+          0.997,
+          0.996,
+          0.992
+        ]
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L3",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.989,
+          0.989,
+          0.989,
+          0.988,
+          0.986
+        ],
+        "auroc_ci_lo": [
+          0.977,
+          0.977,
+          0.977,
+          0.977,
+          0.975
+        ],
+        "auroc_ci_hi": [
+          0.997,
+          0.997,
+          0.997,
+          0.996,
+          0.994
+        ]
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L4",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.967,
+          0.967,
+          0.965,
+          0.963,
+          0.958
+        ],
+        "auroc_ci_lo": [
+          0.949,
+          0.948,
+          0.947,
+          0.944,
+          0.938
+        ],
+        "auroc_ci_hi": [
+          0.984,
+          0.983,
+          0.982,
+          0.981,
+          0.977
+        ]
+      },
+      {
+        "site": "LATE",
+        "lineage": "L1",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.91,
+          0.909,
+          0.908,
+          0.905,
+          0.895
+        ],
+        "auroc_ci_lo": [
+          0.883,
+          0.882,
+          0.88,
+          0.877,
+          0.868
+        ],
+        "auroc_ci_hi": [
+          0.934,
+          0.933,
+          0.933,
+          0.93,
+          0.922
+        ]
+      },
+      {
+        "site": "LATE",
+        "lineage": "L2",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.972,
+          0.972,
+          0.971,
+          0.969,
+          0.958
+        ],
+        "auroc_ci_lo": [
+          0.958,
+          0.958,
+          0.956,
+          0.953,
+          0.941
+        ],
+        "auroc_ci_hi": [
+          0.985,
+          0.985,
+          0.984,
+          0.983,
+          0.975
+        ]
+      },
+      {
+        "site": "LATE",
+        "lineage": "L3",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.976,
+          0.976,
+          0.976,
+          0.974,
+          0.965
+        ],
+        "auroc_ci_lo": [
+          0.963,
+          0.963,
+          0.963,
+          0.961,
+          0.95
+        ],
+        "auroc_ci_hi": [
+          0.987,
+          0.987,
+          0.987,
+          0.985,
+          0.978
+        ]
+      },
+      {
+        "site": "LATE",
+        "lineage": "L4",
+        "alpha": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "auroc": [
+          0.923,
+          0.923,
+          0.921,
+          0.918,
+          0.909
+        ],
+        "auroc_ci_lo": [
+          0.898,
+          0.898,
+          0.896,
+          0.892,
+          0.882
+        ],
+        "auroc_ci_hi": [
+          0.947,
+          0.947,
+          0.945,
+          0.943,
+          0.935
+        ]
+      }
+    ],
+    "note": "every group loses ≤ 0.024 AUROC at α = 1"
+  },
+  "panel_b": {
+    "title": "Effect of the full lesion (α = 1)",
+    "xlabel": "Δ AUROC at α = 1 vs α = 0  (95% CI)",
+    "null_line": 0.0,
+    "rows": [
+      {
+        "site": "PROMPT",
+        "lineage": "L1",
+        "label": "PROMPT · L1",
+        "d_auroc": -0.002,
+        "ci_lo": -0.006,
+        "ci_hi": 0.001
+      },
+      {
+        "site": "PROMPT",
+        "lineage": "L2",
+        "label": "PROMPT · L2",
+        "d_auroc": -0.024,
+        "ci_lo": -0.04,
+        "ci_hi": -0.009
+      },
+      {
+        "site": "PROMPT",
+        "lineage": "L3",
+        "label": "PROMPT · L3",
+        "d_auroc": -0.02,
+        "ci_lo": -0.036,
+        "ci_hi": -0.005
+      },
+      {
+        "site": "PROMPT",
+        "lineage": "L4",
+        "label": "PROMPT · L4",
+        "d_auroc": -0.004,
+        "ci_lo": -0.009,
+        "ci_hi": -0.001
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L1",
+        "label": "EARLY · L1",
+        "d_auroc": -0.008,
+        "ci_lo": -0.011,
+        "ci_hi": -0.004
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L2",
+        "label": "EARLY · L2",
+        "d_auroc": -0.008,
+        "ci_lo": -0.011,
+        "ci_hi": -0.004
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L3",
+        "label": "EARLY · L3",
+        "d_auroc": -0.003,
+        "ci_lo": -0.005,
+        "ci_hi": -0.0
+      },
+      {
+        "site": "EARLY",
+        "lineage": "L4",
+        "label": "EARLY · L4",
+        "d_auroc": -0.009,
+        "ci_lo": -0.013,
+        "ci_hi": -0.005
+      },
+      {
+        "site": "LATE",
+        "lineage": "L1",
+        "label": "LATE · L1",
+        "d_auroc": -0.015,
+        "ci_lo": -0.021,
+        "ci_hi": -0.008
+      },
+      {
+        "site": "LATE",
+        "lineage": "L2",
+        "label": "LATE · L2",
+        "d_auroc": -0.014,
+        "ci_lo": -0.021,
+        "ci_hi": -0.007
+      },
+      {
+        "site": "LATE",
+        "lineage": "L3",
+        "label": "LATE · L3",
+        "d_auroc": -0.011,
+        "ci_lo": -0.018,
+        "ci_hi": -0.006
+      },
+      {
+        "site": "LATE",
+        "lineage": "L4",
+        "label": "LATE · L4",
+        "d_auroc": -0.015,
+        "ci_lo": -0.021,
+        "ci_hi": -0.008
+      }
+    ]
+  }
+}

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Activation-based safety readouts produce zero false alarms on 24 graded no-op edits while the logit baseline produces 11. The refusal direction is decodable but causally inert at the prompt site.">
+<title>Specificity and Causality Audits for Activation-Based Safety Readouts</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f7f5;
+  --surface: #fff;
+  --text: #1c1c1c;
+  --text-2: #4a4a4a;
+  --text-3: #707070;
+  --accent: #1a6b5a;
+  --border: #d4d4d4;
+  --border-light: #eaeaea;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --measure: 70ch;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); }
+a:hover { text-decoration: underline; }
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 1000;
+  border-radius: 0 0 4px 4px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Layout */
+.page-layout {
+  display: flex;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.side-nav {
+  position: sticky;
+  top: 2rem;
+  width: 170px;
+  flex-shrink: 0;
+  height: fit-content;
+  padding-top: 3rem;
+  padding-right: 2rem;
+}
+
+.side-nav ol {
+  list-style: none;
+  border-left: 1px solid var(--border);
+}
+
+.side-nav a {
+  display: block;
+  padding: 5px 0 5px 14px;
+  font-size: 0.8rem;
+  color: var(--text-3);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  transition: color 0.15s, border-color 0.15s;
+  line-height: 1.35;
+}
+.side-nav a:hover { color: var(--text); text-decoration: none; }
+.side-nav a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+
+.content-col {
+  flex: 1;
+  min-width: 0;
+  padding: 2.5rem 0 3rem;
+}
+
+main { max-width: var(--measure); }
+
+section { margin-bottom: 3.5rem; }
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 1.25rem;
+  padding-top: 0.25rem;
+}
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 0.4rem;
+}
+p { margin-bottom: 1rem; }
+
+/* Hero */
+.tldr {
+  font-size: 1.025rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.hero-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.hero-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Contributions */
+.contributions-grid { display: grid; gap: 1.5rem; }
+.contribution {
+  border-left: 3px solid var(--accent);
+  padding: 0.9rem 0 0.9rem 1.2rem;
+}
+.contribution h3 { margin-bottom: 0.3rem; }
+.contribution p {
+  color: var(--text-2);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Method figure */
+.method-fig { margin: 1.5rem 0 2rem; }
+.method-fig img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 2px;
+}
+.method-fig figcaption {
+  font-size: 0.84rem;
+  color: var(--text-3);
+  margin-top: 0.7rem;
+  line-height: 1.5;
+}
+
+/* Results */
+.result-block {
+  margin-bottom: 2.25rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.result-block:last-child { border-bottom: none; padding-bottom: 0; }
+.result-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.result-num {
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.result-num .unit {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+/* Gallery */
+.gallery-grid { display: grid; gap: 2rem; }
+.gallery-item {
+  cursor: pointer;
+  border: 1px solid var(--border-light);
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.15s;
+}
+.gallery-item:hover,
+.gallery-item:focus-visible { border-color: var(--border); }
+.gallery-item img { width: 100%; height: auto; display: block; }
+.gallery-item figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.84rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox-inner {
+  max-width: 96vw;
+  max-height: 92vh;
+  position: relative;
+}
+.lightbox-inner img {
+  max-width: 100%;
+  max-height: 84vh;
+  display: block;
+  border-radius: 2px;
+}
+.lightbox-caption {
+  color: #bbb;
+  font-size: 0.84rem;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+  max-width: 80ch;
+}
+.lightbox-close {
+  position: absolute;
+  top: -2.25rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  font-family: var(--font);
+}
+.lightbox-close:hover { color: #ddd; }
+.lightbox-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Limitations */
+.limitations-list { list-style: none; }
+.limitations-list li { margin-bottom: 1.15rem; }
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0 3rem;
+  max-width: var(--measure);
+}
+footer p {
+  font-size: 0.85rem;
+  color: var(--text-3);
+  margin-bottom: 0.5rem;
+}
+.citation-block {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  padding: 1rem;
+  border-radius: 2px;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.5;
+  margin-top: 1rem;
+  color: var(--text-2);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .side-nav {
+    position: sticky;
+    top: 0;
+    width: auto;
+    padding: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 100;
+    flex-shrink: 1;
+  }
+  .page-layout { display: block; }
+  .side-nav ol {
+    display: flex;
+    overflow-x: auto;
+    border-left: none;
+    padding: 0.5rem 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .side-nav a {
+    white-space: nowrap;
+    padding: 4px 12px;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    margin-left: 0;
+  }
+  .side-nav a.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent);
+  }
+  .content-col { padding: 1.5rem 0 2.5rem; }
+  h1 { font-size: 1.75rem; }
+  .result-num { font-size: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  .hero-links { gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="page-layout">
+  <nav class="side-nav" aria-label="Section navigation">
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#contributions">Contributions</a></li>
+      <li><a href="#method">Method</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#figures">Figures</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+    </ol>
+  </nav>
+
+  <div class="content-col">
+    <main id="main">
+
+      <section id="overview">
+        <h1>Specificity and Causality Audits for Activation-Based Safety Readouts</h1>
+        <p class="tldr">
+          Can you tell whether a language model is safe by reading its internal activations,
+          without running a full behavioural benchmark? We tested 32 candidate readouts against
+          model modifications that provably do not change safety behaviour. On 24 such no-op edits
+          across three model families, mid-layer activation readouts produced zero false alarms;
+          the standard logit-gap baseline produced 11 (McNemar <i>p</i>&nbsp;=&nbsp;0.001). A causal
+          intervention grid on Qwen3-4B then showed that the refusal direction is linearly readable
+          from activations but removing it at any single site does not change the model's judged
+          refusal: it rewrites its refusal in different words. No second-order readout survived
+          blind held-out confirmation at the pre-registered bar, and the effective rank of the score
+          matrix (7.2) rules out reducing all readouts to a single number.
+        </p>
+        <div class="hero-links">
+          <a href="https://cdn.jsdelivr.net/gh/ai-inventor-papers/ai-invention-f8532e-safety-only-checks-output-when-warned@main/paper.pdf">Read the paper (PDF)</a>
+          <a href="https://github.com/ai-inventor-papers/ai-invention-f8532e-safety-only-checks-output-when-warned">Code repository</a>
+        </div>
+      </section>
+
+      <section id="contributions">
+        <h2>Contributions</h2>
+        <div class="contributions-grid">
+          <div class="contribution">
+            <h3>Activation readouts have far fewer false alarms than the logit baseline</h3>
+            <p>
+              On 24 behaviourally graded no-op edits spanning numerical precision, identity
+              transforms, non-safety adaptation and head-only edits, geometric activation readouts
+              produce zero false alarms while the final-layer logit gap produces 11 (exact McNemar
+              <i>p</i>&nbsp;=&nbsp;0.001). On the core 15-pair panel, mid-layer readouts fire on
+              at most 3 no-ops; the logit baseline fires on 6&ndash;8.
+            </p>
+          </div>
+          <div class="contribution">
+            <h3>The refusal direction is decodable but causally inert at the prompt site</h3>
+            <p>
+              In a 6-band &times; 3-site causal grid, removing the refusal direction at the last
+              prompt token does not change judged refusal in any of 18 cells
+              (max&nbsp;|effect|&nbsp;=&nbsp;0.056, TOST
+              <i>p</i>&nbsp;&lt;&nbsp;10<sup>&minus;23</sup>). The model rewrites its refusal in
+              different words. The causal lever is over-refusal on benign-borderline prompts.
+            </p>
+          </div>
+          <div class="contribution">
+            <h3>Abliteration both rotates and shrinks the refusal representation</h3>
+            <p>
+              Global removal of the refusal direction at band B4 reduces instruct refusal from
+              0.92 to 0.67; SafeRL resists with a difference-in-differences of +0.23
+              [0.08,&nbsp;0.38]. The cross-model cosine drops from 0.999 at B1 to 0.31 at B5,
+              and N1 and N6 drop by 71% and 57% from instruct to the abliterated checkpoint.
+            </p>
+          </div>
+          <div class="contribution">
+            <h3>Second-order readouts index trade-off position, not safety level</h3>
+            <p>
+              Fifteen candidate readouts are screened on 48 checkpoints; none of 11 survivors
+              passes blind held-out confirmation. Every readout sign is inverted relative to its
+              registered prediction: they track where a model sits on the
+              refusal&ndash;permissiveness spectrum, not a safety level per se. The effective
+              rank of the score matrix is 7.2, ruling out a one-coordinate summary.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="method">
+        <h2>Method</h2>
+        <figure class="method-fig">
+          <img src="figures/fig_overview_v0.jpg"
+               alt="Flowchart of the three-experiment design: Experiment 1 grades parent-child model pairs as NOOP or EFFECTIVE then scores 32 readouts for false alarms and sensitivity; Experiment 2 runs a 6-band by 3-site causal grid on Qwen3-4B variants; Experiment 3 screens 15 second-order readouts on 48 checkpoints and tests survivors on 12 blind held-out checkpoints.">
+          <figcaption>
+            Overview of the three-experiment design. Experiment 1 (left): parent checkpoints are
+            modified, each pair is behaviourally graded, then 32 candidate readouts are scored.
+            Experiment 2 (centre): a causal intervention grid tests whether removing the refusal
+            direction changes judged refusal. Experiment 3 (right): 15 second-order readouts are
+            screened and tested on a blind held-out panel.
+          </figcaption>
+        </figure>
+
+        <p>
+          All three experiments share the same behavioural grading pipeline. Each checkpoint is
+          evaluated on 85 harmful prompts and 83 benign prompts with an LLM judge (Gemini 2.5 Flash
+          Lite; split-half reliability 0.96 for harmful compliance, 0.94 for over-refusal).
+          Behavioural labels are frozen before any readout is computed, enforced by a SHA-256 hash
+          chain.
+        </p>
+
+        <h3>Experiment 1: Specificity Audit</h3>
+        <p>
+          Parent&ndash;child model pairs are constructed across three families (Qwen3-0.6B,
+          Llama-3.2-1B, Falcon3-1B) with modifications in four categories: numerical precision
+          (8 pairs), identity transforms (2), non-safety adaptation (2) and head-only edits (3).
+          Behavioural grading yields 15 no-ops and 9 effective changes. For each pair, 32 candidate
+          readouts are computed from residual-stream activations, logits, weights and text outputs. A
+          readout fires a false alarm if its paired-bootstrap CI excludes zero in the expected
+          direction on a no-op pair.
+        </p>
+
+        <h3>Experiment 2: Causal Intervention Grid</h3>
+        <p>
+          Three Qwen3-4B variants (Instruct, SafeRL, abliterated) are tested in a grid crossing
+          six depth bands (B1&ndash;B6, each one-sixth of the 36-layer stack) with three
+          intervention sites: last prompt token (P), first decode positions (D'), and the early
+          response window (E). Each cell runs five arms including a matched random control. A cell
+          counts as causal only if the treatment differs from the random control after
+          Holm&ndash;Bonferroni correction at &alpha;&nbsp;=&nbsp;0.05 over all 18 cells.
+        </p>
+
+        <h3>Experiment 3: Second-Order Readout Screen</h3>
+        <p>
+          Fifteen candidates measuring write-handle redundancy (W1&ndash;W8), dimensionless geometry
+          (G1&ndash;G4) and competing mechanisms (A1&ndash;A3) are screened on 48 checkpoints from
+          7 lineages. Four are dropped for collinearity with the logit baseline. The remaining 11
+          are tested on 12 blind held-out checkpoints from 7 non-overlapping lineages. Confirmation
+          requires the candidate's correlation with over-refusal to exceed the logit baseline by a
+          margin whose CI excludes zero.
+        </p>
+      </section>
+
+      <section id="results">
+        <h2>Results</h2>
+
+        <div class="result-block">
+          <div class="result-label">Experiment 1 &mdash; Specificity</div>
+          <div class="result-num">0 vs 11 <span class="unit">false alarms on 24 no-op edits (McNemar <i>p</i> = 0.001)</span></div>
+          <p>
+            Geometric activation readouts produce zero false alarms on the pooled 24-pair set; the
+            logit-gap baseline produces 11. On the core 15-pair panel, the best activation readouts
+            fire on at most 3 no-ops, while the logit gap fires on 6&ndash;8 out of 15. The
+            weight-space cosine B7 fires on 9 of 15: every dtype cast triggers it.
+          </p>
+        </div>
+
+        <div class="result-block">
+          <div class="result-label">Displacement mechanism</div>
+          <div class="result-num">6.2&times; <span class="unit">displacement ratio (logit 0.150 vs activation 0.024 null SD)</span></div>
+          <p>
+            The logit gap operates at the decision boundary where small perturbations produce large
+            score changes. Mid-layer activation readouts measure the geometry of the representation
+            space, which is more stable under numerical-precision and identity modifications.
+            Final-layer logits amplify implementation-irrelevant variation.
+          </p>
+        </div>
+
+        <div class="result-block">
+          <div class="result-label">Experiment 2 &mdash; Causality</div>
+          <div class="result-num">0.056 <span class="unit">max |effect| on judged refusal (below MDE of 0.067)</span></div>
+          <p>
+            Removing the refusal direction at any single site produces no causal cells for judged
+            refusal on harmful prompts across all 18 cells, for both the instruct and SafeRL models
+            (TOST <i>p</i>&nbsp;&lt;&nbsp;10<sup>&minus;23</sup>). A keyword refusal proxy drops
+            from 0.79 to 0.15 under the intervention, which would appear as a successful jailbreak
+            under keyword-based evaluation. The LLM judge finds no change: the model replaces its
+            refusal phrasing, not its policy.
+          </p>
+        </div>
+
+        <div class="result-block">
+          <div class="result-label">The causal lever is over-refusal</div>
+          <div class="result-num">&minus;0.146 <span class="unit">sole Holm&ndash;Bonferroni survivor (N6 at band B5, site P)</span></div>
+          <p>
+            The single surviving cell targets over-refusal on benign-borderline prompts, not
+            compliance with harmful requests. Over-refusal drops by 0.12&ndash;0.19 at bands
+            B4&ndash;B5 in both models. Neither model shows a causal cell for judged refusal on
+            harmful prompts.
+          </p>
+        </div>
+
+        <div class="result-block">
+          <div class="result-label">SafeRL redundancy</div>
+          <div class="result-num">+0.229 <span class="unit">difference-in-differences [0.083, 0.375]</span></div>
+          <p>
+            Global removal of the refusal direction at band B4 reduces instruct refusal from 0.917
+            to 0.667. SafeRL resists. In the abliterated checkpoint, the cross-model direction
+            cosine drops from 0.999 at B1 to 0.306 at B5, and N1 and N6 drop by 71% and 57% from
+            instruct to abliterated, consistent with a representation that is both rotated and
+            shrunk.
+          </p>
+        </div>
+
+        <div class="result-block">
+          <div class="result-label">Experiment 3 &mdash; Second-order screen</div>
+          <div class="result-num">0 / 11 <span class="unit">pass the registered confirmation bar</span></div>
+          <p>
+            Of 15 candidates, 4 are dropped for collinearity. None of the remaining 11 passes the
+            registered rule on 12 blind held-out checkpoints. W3 achieves
+            &rho;&nbsp;=&nbsp;&minus;0.94 against over-refusal (n&nbsp;=&nbsp;6); G4 achieves
+            &rho;&nbsp;=&nbsp;&minus;0.82 (n&nbsp;=&nbsp;12). The minimum detectable effect at
+            n&nbsp;=&nbsp;12 is 0.73, exceeding every observed margin. Every readout sign is
+            inverted relative to registration: they track trade-off position, not safety level.
+          </p>
+        </div>
+
+        <div class="result-block">
+          <div class="result-label">Score-matrix dimensionality</div>
+          <div class="result-num">7.2 <span class="unit">effective rank (entropy-based; 5.3 participation-based)</span></div>
+          <p>
+            The 15-candidate &times; 48-checkpoint score matrix has an effective rank that rules
+            out a one-coordinate summary. The leading singular vector's cosine with the logit
+            baseline is 0.64, below the 0.80 threshold for a one-coordinate interpretation.
+            An honest estimate of the panel size needed for reliable ranking is 30&ndash;150
+            checkpoints, depending on the true effect size.
+          </p>
+        </div>
+      </section>
+
+      <section id="figures">
+        <h2>Figures</h2>
+        <div class="gallery-grid">
+
+          <figure class="gallery-item" tabindex="0" role="button"
+                  aria-label="Enlarge: Method Overview">
+            <img src="figures/fig_overview_v0.jpg"
+                 alt="Flowchart of the three-experiment design: Experiment 1 grades model pairs and scores 32 readouts; Experiment 2 runs a 6-band by 3-site causal grid; Experiment 3 screens 15 second-order readouts on 48 checkpoints.">
+            <figcaption>
+              <strong>Figure 1.</strong> Overview of the three-experiment design. Experiment 1
+              (left): parent checkpoints are modified, each pair is behaviourally graded as NOOP or
+              EFFECTIVE, then 32 candidate readouts are scored for false alarms and sensitivity.
+              Experiment 2 (centre): a 6-band &times; 3-site causal intervention grid tests whether
+              removing the refusal direction changes judged refusal. Experiment 3 (right): 15
+              second-order readouts are screened on 48 checkpoints and tested on a blind held-out
+              panel.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item" tabindex="0" role="button"
+                  aria-label="Enlarge: False Alarm vs Sensitivity">
+            <img src="figures/fig_specificity_v0.png"
+                 alt="Scatter plot of false alarm count versus sensitivity for 32 readouts. Activation readouts cluster at 0 to 3 false alarms; logit baselines scatter across 5 to 8; weight-space readout B7 sits at 9.">
+            <figcaption>
+              <strong>Figure 2.</strong> False-alarm rate versus sensitivity for all 32 candidate
+              readouts on the specificity panel. Each point is one readout; colour indicates readout
+              class (blue&nbsp;= activation, orange&nbsp;= logit, green&nbsp;= weight,
+              pink&nbsp;= text/card). Activation readouts cluster in the low-false-alarm region
+              (0&ndash;3/15); logit baselines scatter across 5&ndash;8/15; the weight-space cosine
+              B7 has the most false alarms (9/15). No readout achieves both zero false alarms and
+              high sensitivity.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item" tabindex="0" role="button"
+                  aria-label="Enlarge: Displacement Comparison">
+            <img src="figures/fig_displacement_v0.png"
+                 alt="Horizontal bar chart comparing median no-op displacement. Four logit variants range from 0.092 to 0.178 null standard deviations; the activation readout median sits at 0.024, a 6.2-times ratio.">
+            <figcaption>
+              <strong>Figure 3.</strong> Median no-op displacement (in null standard deviations)
+              for each readout class. The logit baseline operates 6.2&times; further from zero than
+              the median activation readout, explaining its higher false-alarm rate. Error bars show
+              interquartile range across readouts within each class.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item" tabindex="0" role="button"
+                  aria-label="Enlarge: Causal Grid Heatmap">
+            <img src="figures/fig_causal_grid_v0.png"
+                 alt="Two heatmaps of over-refusal effect sizes across a 6-band by 3-site causal grid. Left: Qwen3-4B-Instruct. Right: Qwen3-4B-SafeRL. Strongest effects at bands B4 and B5 site P.">
+            <figcaption>
+              <strong>Figure 4.</strong> Effect sizes for arm F on over-refusal (benign-borderline
+              prompts) across the 6-band &times; 3-site causal grid. Left: Qwen3-4B-Instruct.
+              Right: Qwen3-4B-SafeRL. Negative values (blue) indicate reduced over-refusal. The
+              strongest effects concentrate at bands B4&ndash;B5, site P, but no cell survives
+              Holm&ndash;Bonferroni correction for judged refusal on harmful prompts.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item" tabindex="0" role="button"
+                  aria-label="Enlarge: Probe Survival Under Lesion">
+            <img src="figures/fig_probe_v0.png"
+                 alt="Left: line chart of probe AUROC under increasing lesion strength alpha, with AUROC near ceiling across all read-site and layer combinations. Right: forest plot of delta AUROC at alpha equals 1, all near zero.">
+            <figcaption>
+              <strong>Figure 5.</strong> Probe AUROC and projection gap under rank-one directional
+              lesion at increasing strength &alpha;. At &alpha;&nbsp;=&nbsp;1 the projection gap
+              drops by a factor of 4,700&times;, yet the cross-validated probe AUROC remains near
+              ceiling. The safety representation spans multiple dimensions; removing one direction
+              does not remove the information the probe reads.
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <section id="limitations">
+        <h2>Limitations</h2>
+        <ul class="limitations-list">
+          <li>
+            <strong>Scale.</strong> The specificity audit uses three families at 0.6&ndash;1.7B
+            parameters. Larger models may have different false-alarm profiles. The 15 no-ops span
+            four categories of deployment-relevant modifications but do not cover every possible
+            perturbation.
+          </li>
+          <li>
+            <strong>Underpowered comparisons.</strong> The per-readout false-alarm comparison on
+            the core 15-pair panel (4/12 vs 1/12 on non-degenerate pairs) has a minimum attainable
+            <i>p</i> of 0.0625. The pooled 24-pair comparison is powered (McNemar
+            <i>p</i>&nbsp;=&nbsp;0.001) but pools across an extended set. The second-order
+            readout screen's minimum detectable effect (0.73) exceeds every observed margin.
+          </li>
+          <li>
+            <strong>Single architecture for the causal grid.</strong> The causal experiment uses
+            only Qwen3-4B. The decodable-but-inert finding may not generalise to architectures
+            with different layer counts or attention patterns.
+          </li>
+          <li>
+            <strong>Judge limitations.</strong> All behavioural outcomes depend on an LLM judge
+            with split-half reliability of 0.96 (harmful compliance) and 0.94 (over-refusal). The
+            keyword proxy and the judge disagree substantially
+            (&kappa;&nbsp;=&nbsp;0.50 for instruct,
+            &kappa;&nbsp;&asymp;&nbsp;0 for SafeRL).
+          </li>
+          <li>
+            <strong>No surviving candidate.</strong> No readout passes the full pre-registered
+            selection rule at the tested panel sizes. At
+            n&nbsp;=&nbsp;10&ndash;12, the registered bar is unattainable for the observed effect
+            sizes.
+          </li>
+          <li>
+            <strong>Probe ceiling.</strong> The probe AUROC is at ceiling (1.000) in the
+            unperturbed control, so its survival under the lesion is uninformative about whether
+            the lesion removed safety-relevant information.
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>
+        <a href="https://cdn.jsdelivr.net/gh/ai-inventor-papers/ai-invention-f8532e-safety-only-checks-output-when-warned@main/paper.pdf">Paper (PDF)</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/ai-inventor-papers/ai-invention-f8532e-safety-only-checks-output-when-warned">Code repository</a>
+      </p>
+<pre class="citation-block">@article{safety-readout-audits-2026,
+  title  = {Specificity and Causality Audits for
+            Activation-Based Safety Readouts},
+  year   = {2026},
+  url    = {https://github.com/ai-inventor-papers/
+            ai-invention-f8532e-safety-only-checks-output-when-warned}
+}</pre>
+    </footer>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Figure viewer">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" aria-label="Close figure viewer">&times;</button>
+    <p class="lightbox-caption" id="lb-cap"></p>
+  </div>
+</div>
+
+<script>
+(function() {
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.side-nav a');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        navLinks.forEach(function(l) { l.classList.remove('active'); });
+        var t = document.querySelector('.side-nav a[href="#' + e.target.id + '"]');
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(function(s) { observer.observe(s); });
+
+  var lb = document.getElementById('lightbox');
+  var lbInner = lb.querySelector('.lightbox-inner');
+  var lbCap = document.getElementById('lb-cap');
+  var closeBtn = lb.querySelector('.lightbox-close');
+  var lastFocus = null;
+  var lbImg = null;
+
+  function openLB(item) {
+    lastFocus = item;
+    var img = item.querySelector('img');
+    var cap = item.querySelector('figcaption');
+    lbImg = document.createElement('img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbInner.insertBefore(lbImg, lbCap);
+    lbCap.textContent = cap ? cap.textContent : '';
+    lb.style.display = 'flex';
+    requestAnimationFrame(function() { lb.classList.add('open'); });
+    closeBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLB() {
+    lb.classList.remove('open');
+    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(function() {
+      lb.style.display = 'none';
+      if (lbImg && lbImg.parentNode) lbImg.parentNode.removeChild(lbImg);
+      lbImg = null;
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }, rm ? 0 : 200);
+  }
+
+  lb.style.display = 'none';
+
+  document.querySelectorAll('.gallery-item').forEach(function(item) {
+    item.addEventListener('click', function() { openLB(item); });
+    item.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(item); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLB);
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLB(); });
+  lb.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
+  });
+})();
+</script>
+</body>
+</html>

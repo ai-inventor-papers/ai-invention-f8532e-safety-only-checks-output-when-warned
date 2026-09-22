@@ -1,0 +1,20 @@
+{
+ "RandInit-gemma-3-1b-it_SMOKE": {
+  "n_hidden_states": 27,
+  "num_hidden_layers": 26,
+  "L_plus_1_ok": true,
+  "shape_ok": true,
+  "d": 1152,
+  "final_hidden_is_post_norm_rel_err": 0.002450232394039631,
+  "final_hidden_logit_corr": 0.9999986266738864,
+  "renormed_rel_err": 0.002450232394039631,
+  "final_hidden_is_post_norm": true,
+  "final_norm_module": "Gemma3RMSNorm",
+  "norm_module_types": [
+   "Gemma3RMSNorm"
+  ],
+  "mean_subtracting_layernorm": false,
+  "final_logit_softcapping": null,
+  "model_type": "gemma3_text"
+ }
+}

@@ -1,0 +1,15 @@
+entries:
+  - path: .venv_gpu/
+    delete: regenerable
+    source: "uv venv .venv_gpu --python 3.12 && uv pip install --python .venv_gpu/bin/python torch==2.9.1 --index-url https://download.pytorch.org/whl/cu128 && uv pip install --python .venv_gpu/bin/python transformers==5.17.0 accelerate==1.15.0 numpy==2.5.3 scipy==1.18.1 pandas==3.0.6 loguru==0.7.3 aiohttp==3.12.15 safetensors==0.8.0 scikit-learn==1.9.1 matplotlib==3.11.2"
+  - path: .venv/
+    delete: regenerable
+    source: "uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu && uv pip install --python .venv/bin/python transformers==5.17.0 accelerate==1.15.0 numpy==2.5.3 scipy==1.18.1 pandas==3.0.6 loguru==0.7.3 aiohttp==3.12.15 safetensors==0.8.0 scikit-learn==1.9.1 matplotlib==3.11.2"
+  - path: .venv_ams/
+    delete: regenerable
+    source: "leftover environment of the confirm-panel work moved to prior_session_confirm_panel/ (see prior_session_confirm_panel/pyproject.toml): uv venv .venv_ams --python 3.12 && uv pip install --python .venv_ams/bin/python -r <(uv export --project prior_session_confirm_panel --no-hashes)"
+  - path: "**/__pycache__/"
+    delete: regenerable
+    source: "created automatically by python on import"
+  - path: prior_session_confirm_panel/
+    keep: a different plan's session-1 outputs (confirm panel) found in this workspace and moved aside in session 2; 87 MB incl. 53 MB synthetic scorer fixtures, kept for provenance

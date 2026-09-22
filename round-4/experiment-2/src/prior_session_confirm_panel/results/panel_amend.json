@@ -1,0 +1,18 @@
+{
+ "utc": "2026-09-21T16:31:53.890489Z",
+ "amendments": [
+  {
+   "type": "exclude",
+   "repo": "openbmb/MiniCPM4-0.5B",
+   "rule": "e4 (trust_remote_code repo tried once; failure -> excluded with its reason)",
+   "evidence": "results/arch_precheck.json: ImportError(\"cannot import name 'is_torch_fx_available' from 'transformers.utils.import_utils' (/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_4/gen_art/gen_art_experiment_2/.venv/l",
+   "stage": "pre-generation architecture check on a random-init copy (no trained weights, no activations of any panel checkpoint)"
+  },
+  {
+   "type": "noop_parent_replacement",
+   "old": "openbmb/MiniCPM4-0.5B",
+   "new": "baidu/ERNIE-4.5-0.3B-PT",
+   "rule": "draw step (3): the eligible role-'instruct' repos in rank-key order, first of each new family until 4 families; with MiniCPM4 ineligible the next new family in rank-key order is ernie (baidu/ERNIE-4.5-0.3B-PT, key 64166d77...)"
+  }
+ ]
+}

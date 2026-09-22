@@ -1,0 +1,30 @@
+[project]
+name = "causal-depth-site-grid"
+version = "0.4.0"
+description = "Causal depth-band x site intervention grid on Qwen3-4B vs Qwen3-4B-SafeRL (projection-out of the request axis F, the benign-twin axis N6, matched random controls), judged generation + forward-only readouts"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch==2.9.1",
+    "transformers==5.17.0",
+    "accelerate==1.15.0",
+    "safetensors==0.8.0",
+    "numpy==2.5.3",
+    "scipy==1.18.1",
+    "pandas==3.0.6",
+    "scikit-learn==1.9.1",
+    "matplotlib==3.11.2",
+    "loguru==0.7.3",
+    "aiohttp==3.12.15",
+]
+
+# CUDA 12.8 wheels for torch (the experiment ran on an NVIDIA L4); remove this block for a CPU-only install
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[tool.uv]
+package = false

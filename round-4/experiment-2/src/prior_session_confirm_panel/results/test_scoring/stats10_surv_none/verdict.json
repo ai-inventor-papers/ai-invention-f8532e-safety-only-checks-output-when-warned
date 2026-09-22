@@ -1,0 +1,17 @@
+{
+ "utc": "2026-09-21T16:37:54.740067Z",
+ "confirm_table_sha256": "ce1b9610e56ad21c2ab9b9667afcef70bcf8df5790b5d113d3b5a4da86f150b1",
+ "survivor_glob": "results/test_scoring/surv_none/*/survivor.json",
+ "survivor_files": [
+  {
+   "path": "results/test_scoring/surv_none/results/survivor.json",
+   "sha256": "77fc685cd05d5fe3b83fe2390830548975daa2d9fd5582df7709688be906718b",
+   "parsed_survivor": "NONE",
+   "content_head": "{\"id\": \"NONE\"}"
+  }
+ ],
+ "n": 10,
+ "panel_power_status": "UNDERPOWERED_CONFIRMATION",
+ "verdict": "DEFERRED",
+ "reason": "NO_SURVIVOR (no survivor.json found, or survivor NONE/null/absent)"
+}

@@ -1,0 +1,266 @@
+{
+ "amd--AMD-OLMo-1B-SFT": {
+  "cmp_vs_features_json": {
+   "C7": [
+    0.57712890625,
+    0.57712890625,
+    0.0
+   ],
+   "C13_peak_d": [
+    0.5160507486551543,
+    0.5160507486551543,
+    0.0
+   ],
+   "BL1": [
+    0.21863842010498047,
+    0.21863842010498047,
+    0.0
+   ],
+   "B3": [
+    4.958562175473015,
+    4.958562175473015,
+    0.0
+   ],
+   "B7": [
+    0.9994156723939167,
+    0.9994156723939167,
+    0.0
+   ],
+   "BL1_hard": [
+    0.7443242311477661,
+    0.7443242311477661,
+    0.0
+   ],
+   "C11": [
+    0.4339099603978907,
+    0.4339099603978907,
+    0.0
+   ]
+  },
+  "N1": 0.4112963265480403,
+  "N2": 0.39405517757862396,
+  "null_N1": {
+   "mean": 0.12151066117836891,
+   "sd": 0.3301114627985589,
+   "p05": -0.27915665291257546,
+   "p95": 0.5572409028520767,
+   "n": 20
+  },
+  "N1_null_mean_over_sd": 0.3680897965440156,
+  "consistency": {
+   "C7": 0.0,
+   "C13_peak_d": -4.440892098500626e-16,
+   "C13": -2.220446049250313e-16,
+   "BL1_easy": 5.960464477539063e-08,
+   "BL1_hard": 0.0,
+   "N4_onset_vs_C4": 0.0,
+   "N4_peak_vs_C13_peak_f": 0.0,
+   "l_star_vs_h2_extras": 0,
+   "N8_vs_C11": 0.0,
+   "N2_k0_minus_N1": -5.551115123125783e-17
+  },
+  "elapsed_s": 33.13991618156433,
+  "timing": {
+   "candidates_compute_all_s": 10.286275625228882,
+   "engine_build_s": 0.318340539932251
+  },
+  "status_not_ok": {
+   "N5": "NOT_RUN:no perturbation pass available",
+   "N5_BL1": "NOT_RUN:no perturbed r_refusal/r_control available",
+   "N9": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N10": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)",
+   "AMS_REIMPL": "NOT_RUN:ams_reimpl.json absent",
+   "REGEX": "NOT_RUN:card_regex.json absent",
+   "REGEX_NAMEFREE": "NOT_RUN:card_regex.json absent",
+   "GREEDY_REFUSAL": "NOT_RUN:greedy_refusal.json absent",
+   "GREEDY_REFUSAL_companion": "NOT_RUN:greedy_refusal.json absent"
+  },
+  "l_star": 16,
+  "l_star_cf": 16,
+  "B7_proj": 0.4164960924626366,
+  "norm": {
+   "model_type": "olmo",
+   "model_type_source": "name_heuristic",
+   "one_plus_gamma": false,
+   "mean_subtracting_norm": true,
+   "rule": "effective final-norm scale = gamma"
+  }
+ },
+ "LiquidAI--LFM2-700M": {
+  "cmp_vs_features_json": {
+   "C7": [
+    0.6787060546874999,
+    0.6787060546874999,
+    0.0
+   ],
+   "C13_peak_d": [
+    2.017081269329449,
+    2.017081269329449,
+    0.0
+   ],
+   "BL1": [
+    6.703561782836914,
+    6.703561782836914,
+    0.0
+   ],
+   "B3": [
+    6.7709850912618945,
+    6.7709850912618945,
+    0.0
+   ],
+   "B7": [
+    0.5078951281401464,
+    0.5078951281401464,
+    0.0
+   ],
+   "BL1_hard": [
+    2.8529371857643127,
+    2.8529371857643127,
+    0.0
+   ],
+   "C11": [
+    0.6244756481824466,
+    0.6244756481824466,
+    0.0
+   ]
+  },
+  "N1": 2.017081269329448,
+  "N2": 2.0181331521181853,
+  "null_N1": {
+   "mean": 0.13889724915011134,
+   "sd": 1.01635653956729,
+   "p05": -1.2928835291140424,
+   "p95": 1.6187872372680292,
+   "n": 20
+  },
+  "N1_null_mean_over_sd": 0.13666193283829936,
+  "consistency": {
+   "C7": 0.0,
+   "C13_peak_d": -8.881784197001252e-16,
+   "C13": -3.3306690738754696e-16,
+   "BL1_easy": 2.781550092478824e-07,
+   "BL1_hard": 0.0,
+   "N4_onset_vs_C4": 0.0,
+   "N4_peak_vs_C13_peak_f": 0.0,
+   "l_star_vs_h2_extras": 0,
+   "N8_vs_C11": 0.0,
+   "N2_k0_minus_N1": 8.881784197001252e-16
+  },
+  "elapsed_s": 3.459226608276367,
+  "timing": {
+   "candidates_compute_all_s": 2.4782307147979736,
+   "engine_build_s": 0.20078754425048828
+  },
+  "status_not_ok": {
+   "N5": "NOT_RUN:no perturbation pass available",
+   "N5_BL1": "NOT_RUN:no perturbed r_refusal/r_control available",
+   "N9": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N10": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)",
+   "AMS_REIMPL": "NOT_RUN:ams_reimpl.json absent",
+   "REGEX": "NOT_RUN:card_regex.json absent",
+   "REGEX_NAMEFREE": "NOT_RUN:card_regex.json absent",
+   "GREEDY_REFUSAL": "NOT_RUN:greedy_refusal.json absent",
+   "GREEDY_REFUSAL_companion": "NOT_RUN:greedy_refusal.json absent"
+  },
+  "l_star": 12,
+  "l_star_cf": 11,
+  "B7_proj": 0.5078951281401464,
+  "norm": {
+   "model_type": "lfm2",
+   "model_type_source": "name_heuristic",
+   "one_plus_gamma": false,
+   "mean_subtracting_norm": false,
+   "rule": "effective final-norm scale = gamma"
+  }
+ },
+ "tiiuae--Falcon3-1B-Instruct": {
+  "cmp_vs_features_json": {
+   "C7": [
+    0.6838845486111111,
+    0.6838845486111111,
+    0.0
+   ],
+   "C13_peak_d": [
+    2.1803614327561958,
+    2.1803614327561958,
+    0.0
+   ],
+   "BL1": [
+    6.198978424072266,
+    6.198978424072266,
+    0.0
+   ],
+   "B3": [
+    7.894908711845577,
+    7.894908711845577,
+    0.0
+   ],
+   "B7": [
+    0.6170579008609793,
+    0.6170579008609793,
+    0.0
+   ],
+   "BL1_hard": [
+    3.2491870641708376,
+    3.2491870641708376,
+    0.0
+   ],
+   "C11": [
+    0.4082773502032687,
+    0.4082773502032687,
+    0.0
+   ]
+  },
+  "N1": 2.1504618762014984,
+  "N2": 2.148268637720854,
+  "null_N1": {
+   "mean": -0.09552460045565031,
+   "sd": 1.0513424518432235,
+   "p05": -1.8768665011974794,
+   "p95": 1.6133242833414763,
+   "n": 20
+  },
+  "N1_null_mean_over_sd": -0.09085964358061989,
+  "consistency": {
+   "C7": 0.0,
+   "C13_peak_d": 1.7763568394002505e-15,
+   "C13": -8.326672684688674e-16,
+   "BL1_easy": 1.1920928955078125e-07,
+   "BL1_hard": 0.0,
+   "N4_onset_vs_C4": 0.0,
+   "N4_peak_vs_C13_peak_f": 0.0,
+   "l_star_vs_h2_extras": 0,
+   "N8_vs_C11": 0.0,
+   "N2_k0_minus_N1": 0.0
+  },
+  "elapsed_s": 5.025368928909302,
+  "timing": {
+   "candidates_compute_all_s": 3.937666416168213,
+   "engine_build_s": 0.3008542060852051
+  },
+  "status_not_ok": {
+   "N5": "NOT_RUN:no perturbation pass available",
+   "N5_BL1": "NOT_RUN:no perturbed r_refusal/r_control available",
+   "N9": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N10": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)",
+   "AMS_REIMPL": "NOT_RUN:ams_reimpl.json absent",
+   "REGEX": "NOT_RUN:card_regex.json absent",
+   "REGEX_NAMEFREE": "NOT_RUN:card_regex.json absent",
+   "GREEDY_REFUSAL": "NOT_RUN:greedy_refusal.json absent",
+   "GREEDY_REFUSAL_companion": "NOT_RUN:greedy_refusal.json absent"
+  },
+  "l_star": 15,
+  "l_star_cf": 17,
+  "B7_proj": 0.6170579008609793,
+  "norm": {
+   "model_type": "llama",
+   "model_type_source": "name_heuristic",
+   "one_plus_gamma": false,
+   "mean_subtracting_norm": false,
+   "rule": "effective final-norm scale = gamma"
+  }
+ }
+}

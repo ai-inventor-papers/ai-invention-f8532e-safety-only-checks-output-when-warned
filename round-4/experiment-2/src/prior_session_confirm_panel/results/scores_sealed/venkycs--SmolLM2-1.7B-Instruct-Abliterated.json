@@ -1,0 +1,750 @@
+{
+ "tag": "venkycs--SmolLM2-1.7B-Instruct-Abliterated",
+ "root": "/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/harvest",
+ "utc": "2026-09-21T16:42:23.692546Z",
+ "L": 24,
+ "d": 2048,
+ "l_star": 4,
+ "l_star_cf": 7,
+ "values": {
+  "N1": 0.361451012661211,
+  "N2": 0.3619317723610465,
+  "N3": 0.0654973039222042,
+  "N4_onset": 1.0416666666666667,
+  "N4_peak": 1.0,
+  "N4_width": 0.9583333333333334,
+  "N5": null,
+  "N5_BL1": null,
+  "N6": 0.45139829352025285,
+  "N7": 0.1615126163583167,
+  "N8": null,
+  "N9": null,
+  "N10": null,
+  "N11": 0.11847685296290766,
+  "N12": "DEFERRED",
+  "BL1_easy": -0.0252685546875,
+  "BL1_hard": -0.0665856361389161,
+  "BL1_truelogit": -0.027477483735068198,
+  "AMS_REIMPL": null,
+  "C7": 0.6146419270833334,
+  "C13_peak_d": 0.5323822963055411,
+  "B7": 0.9788428941757404,
+  "B7_proj": 0.9788428941757404,
+  "REGEX": null,
+  "REGEX_NAMEFREE": null,
+  "GREEDY_REFUSAL": null,
+  "GREEDY_REFUSAL_companion": null,
+  "B3": 0.6311789524808097,
+  "C11": null,
+  "C13": 0.47529325990003,
+  "C13_peak_f": 1.0,
+  "X2": 0.00613356478386089,
+  "X10_abs": 1.362710863325425,
+  "N1_at_lstar_cf": 0.40808608564638293,
+  "N2_R_share": 0.0022255796544547084,
+  "BL1_truelogit_hard": -0.07166574701495199
+ },
+ "status": {
+  "N1": "OK",
+  "N2": "OK",
+  "N3": "OK",
+  "N4_onset": "OK",
+  "N4_peak": "OK",
+  "N4_width": "OK",
+  "N5": "NOT_RUN:no perturbation pass available",
+  "N5_BL1": "NOT_RUN:no perturbed r_refusal/r_control available",
+  "N6": "OK",
+  "N7": "OK",
+  "N8": "NOT_RUN:A_c11.npy absent",
+  "N9": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+  "N10": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+  "N11": "OK",
+  "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)",
+  "BL1_easy": "OK",
+  "BL1_hard": "OK",
+  "BL1_truelogit": "OK",
+  "AMS_REIMPL": "NOT_RUN:ams_reimpl.json absent",
+  "C7": "OK",
+  "C13_peak_d": "OK",
+  "B7": "OK",
+  "B7_proj": "OK",
+  "REGEX": "NOT_RUN:card_regex.json absent",
+  "REGEX_NAMEFREE": "NOT_RUN:card_regex.json absent",
+  "GREEDY_REFUSAL": "NOT_RUN:greedy_refusal.json absent",
+  "GREEDY_REFUSAL_companion": "NOT_RUN:greedy_refusal.json absent",
+  "B3": "OK",
+  "C11": "NAN:non-finite",
+  "C13": "OK",
+  "C13_peak_f": "OK",
+  "X2": "OK",
+  "X10_abs": "OK",
+  "N1_at_lstar_cf": "OK",
+  "N2_R_share": "OK",
+  "BL1_truelogit_hard": "OK"
+ },
+ "null": {
+  "N1": {
+   "mean": -0.17374975066111,
+   "sd": 0.35686090652769453,
+   "p05": -0.4347755138961849,
+   "p95": 0.4219731875674456,
+   "n": 20
+  },
+  "N2": {
+   "mean": -0.1740649039808612,
+   "sd": 0.35716763597438933,
+   "p05": -0.43534657719658076,
+   "p95": 0.4226487007241136,
+   "n": 20
+  },
+  "N3": {
+   "mean": 0.07574443748801181,
+   "sd": 0.022437347235342277,
+   "p05": 0.02481177844082667,
+   "p95": 0.10358819416175713,
+   "n": 20
+  },
+  "N4_onset": {
+   "mean": 1.041666666666667,
+   "sd": 2.278129578503827e-16,
+   "p05": 1.0416666666666667,
+   "p95": 1.0416666666666667,
+   "n": 20
+  },
+  "N4_peak": {
+   "mean": 0.34375000000000006,
+   "sd": 0.43760441527594973,
+   "p05": 0.041666666666666664,
+   "p95": 1.0,
+   "n": 20
+  },
+  "N4_width": {
+   "mean": 0.6945192146444582,
+   "sd": 0.43957206255061376,
+   "p05": 0.03650902686372439,
+   "p95": 0.9583333333333334,
+   "n": 7
+  },
+  "N6": {
+   "mean": 0.5529428928194934,
+   "sd": 0.2822080242475581,
+   "p05": 0.16795529393411535,
+   "p95": 1.125211025559284,
+   "n": 20
+  },
+  "N7": {
+   "mean": -0.1276430126746322,
+   "sd": 0.2653740561119717,
+   "p05": -0.36408053398304435,
+   "p95": 0.3059309462644388,
+   "n": 20
+  },
+  "N8": {
+   "mean": null,
+   "sd": null,
+   "p05": null,
+   "p95": null,
+   "n": 0
+  },
+  "N9": {
+   "mean": null,
+   "sd": null,
+   "p05": null,
+   "p95": null,
+   "n": 0
+  },
+  "N10": {
+   "mean": null,
+   "sd": null,
+   "p05": null,
+   "p95": null,
+   "n": 0
+  },
+  "N11": {
+   "mean": 0.11605249680054783,
+   "sd": 0.022657796712453108,
+   "p05": 0.07378421075660235,
+   "p95": 0.1294629499769269,
+   "n": 20
+  },
+  "BL1_easy": {
+   "mean": 0.015147968133290668,
+   "sd": 0.048425138819374096,
+   "p05": -0.05705964962641383,
+   "p95": 0.08115737040837621,
+   "n": 20
+  },
+  "BL1_hard": {
+   "mean": 0.0019662034511566118,
+   "sd": 0.021861533876720553,
+   "p05": -0.037023506164550614,
+   "p95": 0.03189539790153487,
+   "n": 20
+  },
+  "BL1_truelogit": {
+   "mean": 0.016875223871299472,
+   "sd": 0.05181759091147078,
+   "p05": -0.05749450332483112,
+   "p95": 0.08620441395063742,
+   "n": 20
+  },
+  "C7": {
+   "mean": 0.4443595377604166,
+   "sd": 0.10717441570162202,
+   "p05": 0.3749807942708333,
+   "p95": 0.6262145182291667,
+   "n": 20
+  },
+  "C13_peak_d": {
+   "mean": -0.07856865608768174,
+   "sd": 0.3897531517078235,
+   "p05": -0.37345085911222997,
+   "p95": 0.5354932097432241,
+   "n": 20
+  }
+ },
+ "kcurve": {
+  "N1": {
+   "4": {
+    "mean": 0.021259779441522977,
+    "p05": -0.4805719716807709,
+    "p95": 0.5234392185277724,
+    "n": 20
+   },
+   "8": {
+    "mean": 0.041569035956903186,
+    "p05": -0.46332391825116565,
+    "p95": 0.44055512549546094,
+    "n": 20
+   },
+   "16": {
+    "mean": 0.11624393439024486,
+    "p05": -0.41259420298705474,
+    "p95": 0.41468012434764445,
+    "n": 20
+   },
+   "32": {
+    "mean": 0.2180183823873961,
+    "p05": -0.3890691478196328,
+    "p95": 0.41347531664656856,
+    "n": 20
+   }
+  },
+  "N2": {
+   "4": {
+    "mean": 0.0216827630204774,
+    "p05": -0.48078917997051296,
+    "p95": 0.5238850013954118,
+    "n": 20
+   },
+   "8": {
+    "mean": 0.04113776261609603,
+    "p05": -0.4642094450564469,
+    "p95": 0.44037843201247506,
+    "n": 20
+   },
+   "16": {
+    "mean": 0.11707106407336028,
+    "p05": -0.4127537678705874,
+    "p95": 0.4152349207467482,
+    "n": 20
+   },
+   "32": {
+    "mean": 0.21912731845373137,
+    "p05": -0.38459246516570117,
+    "p95": 0.413980323317932,
+    "n": 20
+   }
+  },
+  "N3": {
+   "4": {
+    "mean": 0.08356642365116944,
+    "p05": 0.020625790818801285,
+    "p95": 0.13722796130346596,
+    "n": 20
+   },
+   "8": {
+    "mean": 0.07281292426162433,
+    "p05": 0.03999452827348365,
+    "p95": 0.1077534156404466,
+    "n": 20
+   },
+   "16": {
+    "mean": 0.06690828313238535,
+    "p05": 0.026556133529126297,
+    "p95": 0.08645115032636304,
+    "n": 20
+   },
+   "32": {
+    "mean": 0.05885872660799322,
+    "p05": 0.002769227107526185,
+    "p95": 0.08569355849261794,
+    "n": 20
+   }
+  },
+  "N6": {
+   "4": {
+    "mean": 2.450824511284605,
+    "p05": 1.3280809824790405,
+    "p95": 3.7375737471517505,
+    "n": 20
+   },
+   "8": {
+    "mean": 1.7492856473887421,
+    "p05": 0.9927389334590222,
+    "p95": 2.177458005150098,
+    "n": 20
+   },
+   "16": {
+    "mean": 1.317747333431039,
+    "p05": 0.8331400970646128,
+    "p95": 2.004373430140298,
+    "n": 20
+   },
+   "32": {
+    "mean": 0.9268697455999166,
+    "p05": 0.6026021522511853,
+    "p95": 1.3938291068362894,
+    "n": 20
+   }
+  },
+  "N7": {
+   "4": {
+    "mean": 0.60150948178193,
+    "p05": 0.03020120788244135,
+    "p95": 1.14641716661148,
+    "n": 20
+   },
+   "8": {
+    "mean": 0.3552989763867826,
+    "p05": -0.09844634692534415,
+    "p95": 0.7048730421225704,
+    "n": 20
+   },
+   "16": {
+    "mean": 0.2539282558672459,
+    "p05": 0.029913389201893514,
+    "p95": 0.43804234056309843,
+    "n": 20
+   },
+   "32": {
+    "mean": 0.17011310060228582,
+    "p05": -0.06455383084465167,
+    "p95": 0.3081286890586611,
+    "n": 20
+   }
+  },
+  "N11": {
+   "4": {
+    "mean": 0.09976962778306911,
+    "p05": 0.04942679789148213,
+    "p95": 0.12950764576085616,
+    "n": 20
+   },
+   "8": {
+    "mean": 0.10910603762505038,
+    "p05": 0.0653288623575897,
+    "p95": 0.13647121249801958,
+    "n": 20
+   },
+   "16": {
+    "mean": 0.10361062412201005,
+    "p05": 0.04841197359763319,
+    "p95": 0.1265985468429204,
+    "n": 20
+   },
+   "32": {
+    "mean": 0.09577743126563878,
+    "p05": 0.02332607376018887,
+    "p95": 0.1288821397477404,
+    "n": 20
+   }
+  }
+ },
+ "curves": {
+  "hard_d_by_layer": [
+   null,
+   0.322170663301235,
+   0.34052043556330225,
+   0.34005431474723985,
+   0.361451012661211,
+   0.3938864252258523,
+   0.40847847832273076,
+   0.40808608564638293,
+   0.4271502057050069,
+   0.44253564058993095,
+   0.4532491889116138,
+   0.4611069920257676,
+   0.4752932599000662,
+   0.480471736876389,
+   0.48793776744627276,
+   0.49068614763271257,
+   0.49530694173777656,
+   0.5029477874888492,
+   0.507056579820444,
+   0.5103702793842636,
+   0.512344617376286,
+   0.5146457811688546,
+   0.5223010638815105,
+   0.5255197947532121,
+   0.5323822963055188
+  ],
+  "hard_auroc_by_layer": [
+   0.5,
+   0.58609375,
+   0.59046875,
+   0.58640625,
+   0.58859375,
+   0.60140625,
+   0.60390625,
+   0.6040625,
+   0.60453125,
+   0.6125,
+   0.6153125,
+   0.6190625,
+   0.6221875,
+   0.62390625,
+   0.625625,
+   0.6265625,
+   0.62921875,
+   0.6309375,
+   0.63203125,
+   0.63234375,
+   0.6340625,
+   0.635,
+   0.63765625,
+   0.63859375,
+   0.641875
+  ],
+  "hard_tpr5_by_layer": [
+   null,
+   0.0125,
+   0.0375,
+   0.0875,
+   0.1,
+   0.1,
+   0.0875,
+   0.075,
+   0.025,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125,
+   0.0125
+  ],
+  "hard_fisher_by_layer": [
+   null,
+   0.05189696814597886,
+   0.05797708351811055,
+   0.05781846848910744,
+   0.06532341727690746,
+   0.07757325798860046,
+   0.08342733362642679,
+   0.08326712664909348,
+   0.09122864911691488,
+   0.09791889659617026,
+   0.1027174136245179,
+   0.10630982904752563,
+   0.11295184145321599,
+   0.11542654496850697,
+   0.11904163245022649,
+   0.12038644773931612,
+   0.12266448326681458,
+   0.12647823846996428,
+   0.12855318756960316,
+   0.13023891103938565,
+   0.1312485034772265,
+   0.13243014003745032,
+   0.1363992006658789,
+   0.1380855273387291,
+   0.14171545470976865
+  ],
+  "easy_insample_d_by_layer": [
+   null,
+   0.5834214451799231,
+   0.9415311195584126,
+   1.133281706949899,
+   1.195894186769983,
+   1.143396556767315,
+   1.080237975959624,
+   1.062742018011834,
+   1.003846230330195,
+   0.9639013244952428,
+   0.928706864401123,
+   0.9019390521372103,
+   0.8782279079969558,
+   0.8448069308123044,
+   0.8189963891233158,
+   0.8031732917748389,
+   0.7654813392852442,
+   0.7393964922296089,
+   0.7273180938914195,
+   0.7006696400253186,
+   0.6897982304482952,
+   0.6646103568892333,
+   0.6416138721247759,
+   0.6270464840496235,
+   0.6060317457781783
+  ],
+  "n11_layers": [
+   10,
+   19
+  ],
+  "easy_insample_d_by_layer_official_f32": [
+   null,
+   0.583421397692472,
+   0.9415310052938637,
+   1.133281848617776,
+   1.19589400581519,
+   1.1433965899498142,
+   1.0802381987782996,
+   1.0627417568804658,
+   1.003846285509465,
+   0.9639014214745704,
+   0.9287066448974564,
+   0.9019388778238927,
+   0.8782275875528174,
+   0.8448068093202005,
+   0.8189964281157682,
+   0.8031732413551618,
+   0.7654815078624464,
+   0.7393966154486425,
+   0.7273182611087348,
+   0.700669709110202,
+   0.6897982103202834,
+   0.6646102878625093,
+   0.64161413507698,
+   0.6270465959808553,
+   0.606031899525795
+  ],
+  "easy_crossfit_d_by_layer": [
+   null,
+   0.3980888190618089,
+   0.6004315623350323,
+   0.6173505471610714,
+   0.6311789524808097,
+   0.6443848010482042,
+   0.647705823137208,
+   0.6483973568205024,
+   0.6253323915870526,
+   0.6191901981910736,
+   0.6266219513825138,
+   0.5873847424479256,
+   0.6032335905465563,
+   0.5810842551547227,
+   0.5441550038516244,
+   0.5159234659886514,
+   0.5197405865998136,
+   0.509072066630707,
+   0.4890282446440938,
+   0.47049628353969447,
+   0.4701117115957539,
+   0.4744949960742559,
+   0.48480779735766477,
+   0.479116430086284,
+   0.4372367951415513
+  ],
+  "hard_crossfit_auroc_by_layer_c4screen": [
+   0.5,
+   0.56375,
+   0.56671875,
+   0.56171875,
+   0.56265625,
+   0.57140625,
+   0.5728125,
+   0.57515625,
+   0.5853125,
+   0.59234375,
+   0.5971875,
+   0.6003125,
+   0.61046875,
+   0.6171875,
+   0.6146875,
+   0.60984375,
+   0.61953125,
+   0.6215625,
+   0.6196875,
+   0.626875,
+   0.63203125,
+   0.63328125,
+   0.6303125,
+   0.634375,
+   0.64375
+  ]
+ },
+ "readout_class": {
+  "N1": "activation",
+  "N2": "activation",
+  "N3": "activation",
+  "N4_onset": "activation",
+  "N4_peak": "activation",
+  "N4_width": "activation",
+  "N5": "activation",
+  "N5_BL1": "logit",
+  "N6": "activation",
+  "N7": "activation",
+  "N8": "activation",
+  "N9": "activation",
+  "N10": "activation",
+  "N11": "activation",
+  "N12": "activation",
+  "BL1_easy": "logit",
+  "BL1_hard": "logit",
+  "BL1_truelogit": "logit",
+  "AMS_REIMPL": "activation",
+  "C7": "activation",
+  "C13_peak_d": "activation",
+  "B7": "weight",
+  "B7_proj": "weight",
+  "REGEX": "text",
+  "REGEX_NAMEFREE": "text",
+  "GREEDY_REFUSAL": "text",
+  "GREEDY_REFUSAL_companion": "text",
+  "B3": "activation",
+  "C11": "activation",
+  "C13": "activation",
+  "C13_peak_f": "activation",
+  "X2": "weight(+activation axis)",
+  "X10_abs": "weight",
+  "N1_at_lstar_cf": "activation",
+  "N2_R_share": "activation",
+  "BL1_truelogit_hard": "logit"
+ },
+ "n5_perturbations_used": [],
+ "n5_detail": {},
+ "n5_perturbations_found": [],
+ "norm_info": {
+  "model_type": "llama",
+  "model_type_source": "name_heuristic",
+  "one_plus_gamma": false,
+  "mean_subtracting_norm": false,
+  "rule": "effective final-norm scale = gamma"
+ },
+ "R_info": {
+  "k_requested": 8,
+  "k_used": 8,
+  "n_WU_ref_rows": 44,
+  "gamma_file": true,
+  "scale_rule": "effective final-norm scale = gamma"
+ },
+ "b7_proj_info": {
+  "mandated_null_vectors": [],
+  "diag": {
+   "abs_cos_vmin_with_all_ones_per_block": [
+    0.010659243683206315,
+    0.021966648529246652,
+    0.02259687778986577,
+    0.022200686845144625,
+    0.02242714943999722,
+    0.022407607543784545,
+    0.022512658745389755,
+    0.02220338416164018,
+    0.021974919682853443,
+    0.022923575496136363,
+    0.022709569029425773,
+    0.022169096885653748,
+    0.022236614609926934,
+    0.02246438546496128,
+    0.022550080312011195,
+    0.022975527610094394,
+    0.022721066115302876,
+    0.023555148845521685,
+    0.022405704813477305,
+    0.0228465465986065,
+    0.021926739279494026,
+    0.02268092682230029,
+    0.022274415759270985,
+    0.02228149968505727
+   ],
+   "n_blocks_abs_cos_gt_0.99": 0,
+   "n_blocks": 24,
+   "max_abs_coord_of_vmin_per_block": [
+    0.2973101746797075,
+    0.1483626221028608,
+    0.1470877675442872,
+    0.14763617537093077,
+    0.1480923741171896,
+    0.14794538892272496,
+    0.14729784436196838,
+    0.14919836789012292,
+    0.14793060719637247,
+    0.14728757710793206,
+    0.14719690366209368,
+    0.14784319719833258,
+    0.14816810187064727,
+    0.1471337228282275,
+    0.14841319646245318,
+    0.148071021186814,
+    0.14866966007062965,
+    0.148003295236603,
+    0.14750462753213817,
+    0.14655971528299871,
+    0.1461722104358307,
+    0.14672990143923811,
+    0.14570642998685002,
+    0.14811091136431048
+   ]
+  },
+  "rule": "model_type=llama: no mean-subtracting norm -> no architecture-mandated null direction -> nothing projected out; B7_proj == B7"
+ },
+ "n9": {
+  "has_D_dec": false,
+  "n_valid": null,
+  "d_prompt_n9": null
+ },
+ "notes": {},
+ "consistency_engine_minus_verbatim": {
+  "C7": 0.0,
+  "C13_peak_d": -2.2315482794965646e-14,
+  "C13": 3.6193270602780103e-14,
+  "BL1_easy": -7.947285984855057e-08,
+  "BL1_hard": 0.0,
+  "N4_onset_vs_C4": 0.0,
+  "N4_peak_vs_C13_peak_f": 0.0,
+  "l_star_vs_h2_extras": 0,
+  "N2_k0_minus_N1": -5.551115123125783e-17
+ },
+ "candidates_h2": {
+  "h2_error": null,
+  "h2_primary_axis": "diff_in_means",
+  "h2_l_star": 4
+ },
+ "definitions": {
+  "l_star": "iteration-2 rule: h2/score_ckpt._axis_for_labels on the 96 EASY rows (diff-in-means, use_probe_axis=False): argmax over l of in-sample EASY Cohen's d (float32 projections, as in iteration 2). Null / k-curve / bootstrap draws re-choose it with the same rule in float64 (Engine.evaluate).",
+  "l_star_cf": "argmax over l of EASY cross-fitted held-out Cohen's d (numerics.crossfit_diffmeans_scores per layer, 5 folds, seed = candidates.SEED); companion only (N1_at_lstar_cf = N1 evaluated there).",
+  "N2": "R = span(QR-orthonormalised first 8 rows of WU_ref, each multiplied elementwise by the effective final-norm scale: gamma for RMSNorm/LayerNorm, (1+gamma) for zero-centred RMSNorm (model_type gemma*, qwen3_next, qwen3_5*); gamma.npy is the raw final-norm weight (ones when the norm is parameter-free). Rank-deficient columns (|R_ii| < 1e-8 max) dropped. EASY fit rows and HARD rows projected onto R-perp at l_star, axis refit there (= unit(P m)), HARD Cohen's d.",
+  "N3": "numerics.fisher_ratio (ddof=1 variances) of the HARD projections on the R-perp axis at l_star.",
+  "N4": "onset = C4 rule on the per-layer EASY own-axis HARD TPR@5%FPR (first l>=1 with >= 0.5, /L; (L+1)/L if never); peak = (argmax over l>=1 of the HARD d curve)/L (= candidates C13_peak_f); width = full width at half maximum of the HARD d curve over l>=1, measured on the contiguous run containing the peak with linear interpolation of the two half-max crossings (clipped at l=1 / l=L when the run reaches the edge), /L. NaN when the peak d <= 0.",
+  "N5": "mean over available perturbations p in {notemplate, sysprompt, fp32} of |N1(p) - N1| / null SD(N1); N1(p) refits the EASY axis on the perturbed A_prompt at the CANONICAL l_star. Sources: harvest/<tag>/A_prompt_<p>.npy (+ r_refusal_<p>.npy / r_control_<p>.npy), else for sysprompt/fp32 the variant dir harvest/<tag>__NOOP_<p>/ (A_prompt.npy, r_refusal.npy, r_control.npy). N5_BL1 = same drift of BL1_easy (iteration-2 lens: EASY contrast of r_refusal - r_control at layer L) in BL1_easy null-SD units.",
+  "N6": "s_b = cohens_d(HARD y=0 projections, EASY y=0 projections) on u_{l_star}; the EASY y=0 reference is the FIT negatives (all 48 for the real value; the k/2 fit negatives in a k-curve draw; the resampled ones in a bootstrap draw).",
+  "N7": "s_h - s_b, s_h = cohens_d(HARD y=1, EASY y=0) on the same axis and reference.",
+  "N8": "Spearman(A_c11 at lay(0.5) projected on the EASY axis u_lay(0.5), severity) = candidates C11.",
+  "N9": "Cohen's d (16 HARD y=1 vs 16 HARD y=0 of prereg_subsets n9_subset_stim_idx) of the per-prompt mean projection of D_dec over the dec_meta n_valid valid generated positions, at l_star on u_{l_star}; prompts with n_valid = 0 are dropped (counted in n9_dropped).",
+  "N10": "d_prompt - N9; d_prompt = Cohen's d of the same 32 prompts' A_prompt projections (same layer/axis).",
+  "N11": "mean over l in [ceil(0.4L), floor(0.8L)] of fisher_ratio of HARD projections on the per-layer EASY axis.",
+  "N12": "DEFERRED (sibling screen's frozen two-feature combination; applied in stats if weights appear).",
+  "BL1_easy": "candidates/iteration-2 BL1_REFLOGIT (verbatim). Null: EASY labels permuted.",
+  "BL1_hard": "candidates BL1_hard (verbatim). Null: HARD labels permuted (EASY labels play no role in it).",
+  "BL1_truelogit": "iteration-3 extra_analyses.bl1_truelogit(...)['easy'] (single final norm, model's own logits).",
+  "B7_proj": "B7 after projecting architecture-mandated null directions out of every block's write Gram (b7_diagnostic.least_vec logic, generalised to an orthonormal set Q: G' = PGP + QQ^T tr(G)/d). Mandated set = {1/sqrt(d)} for mean-subtracting LayerNorm families (olmo v1, stablelm, gpt_neox, gpt2, opt, bloom, phi(1/2), falcon(legacy), mpt, gptj, codegen, persimmon, starcoder2); empty otherwise, in which case B7_proj == B7 exactly (nothing to remove). Per-block |cos(vmin, 1/sqrt(d))| is recorded for every model as the diagnostic.",
+  "nulls": "20 draws; EASY labels permuted within EASY (48/48 re-split), whole pipeline re-run (axis, l_star, scoring with TRUE HARD labels); BL1_hard permutes HARD labels. Weights/text rows: no null.",
+  "kcurve": "k in {4,8,16,32} EASY prompts (k/2 per class, without replacement), 20 draws, whole pipeline on those k prompts; mean/p05/p95; no max over k.",
+  "weights_inherited": "a __NOOP_* variant dir without weight summaries inherits its parent's B7/B7_proj (identical weights by construction); flagged in status_note."
+ },
+ "timing": {
+  "candidates_compute_all_s": 10.601310014724731,
+  "engine_build_s": 0.590770959854126
+ },
+ "elapsed_s": 12.966813087463379
+}

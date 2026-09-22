@@ -1,0 +1,30 @@
+17:58:22|INFO   |torch 2.9.1+cpu, threads 2, cuda False, cgroup mem (7.674228736, 16.0), hook_hash d327a7be
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 98/311 [00:00<00:00, 677.36it/s]Loading weights:  53%|█████▎    | 166/311 [00:00<00:00, 440.99it/s]Loading weights:  69%|██████▉   | 214/311 [00:00<00:00, 400.42it/s]Loading weights:  86%|████████▌ | 267/311 [00:00<00:00, 416.85it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 481.78it/s]
+17:59:44|INFO   |loaded Qwen/Qwen3-0.6B in 10.5s  L=28 d=1024 eos=[151643, 151645]
+17:59:44|INFO   |[time] smoke: load Qwen/Qwen3-0.6B: 81.9s
+18:00:18|INFO   |[time] smoke: twin pass (16 prompts): 6.7s
+18:00:19|INFO   |smoke: N6 best layer 10 (d=14.70); cos(F,N6) at l*: -0.573
+18:00:27|INFO   |[time] smoke: decodability items (16): 7.8s
+18:00:38|INFO   |[time] smoke: prefill eval (16 items, 1 chunks): 11.0s
+18:00:38|INFO   |smoke: eval prefix caches 108 MB; cgroup mem 9.24 GB
+18:00:39|INFO   |smoke: arm0 16 rows in 2s (0.096s/row); cgroup mem 9.38 GB
+18:01:41|INFO   |[time] smoke: hook check (a) stacked, 16 tokens: 61.9s
+18:01:59|INFO   |[time] smoke: hook check (a) hooks removed: 17.7s
+18:01:59|INFO   |smoke: hook checks {"a_arm0_in_stacked_pass_equals_hooks_removed": {"n_items": 8, "greedy16_identical_rows": 8, "max_abs_dlogit_step1": 0.0, "pass": true, "note": "arm-0 rows share a batch with active F/R/N6 rows; any cross-row leak would change them"}, "b_residual_along_direction_after_projection": {"max_ratio_by_layer": {"9": 0.00016867081285454333, "10": 0.0001404452050337568, "11": 0.00012876394612248987, "12": 
+18:02:02|INFO   |smoke: P_B1_grid1 80 rows in 3s (0.042s/row); cgroup mem 9.92 GB
+18:02:12|INFO   |smoke: P_B2_grid1 80 rows in 10s (0.120s/row); cgroup mem 9.92 GB
+18:02:16|INFO   |smoke: P_B3_grid1 80 rows in 5s (0.056s/row); cgroup mem 9.77 GB
+18:02:20|INFO   |smoke: P_B4_grid1 80 rows in 4s (0.044s/row); cgroup mem 9.84 GB
+18:02:23|INFO   |smoke: P_B5_grid1 80 rows in 3s (0.036s/row); cgroup mem 9.85 GB
+18:02:26|INFO   |smoke: P_B6_grid1 80 rows in 3s (0.036s/row); cgroup mem 9.86 GB
+18:02:29|INFO   |[time] smoke: prefill gen (8 items, 1 chunks): 3.5s
+18:02:29|INFO   |smoke: gen prefix caches 47 MB; cgroup mem 9.85 GB
+18:02:57|INFO   |smoke: gen 24 rows in 28s (1.148s/row); cgroup mem 10.09 GB
+18:03:07|INFO   |judge batch: 12/12 unique judged (12 parsed); ledger $0.0005
+18:03:07|INFO   |smoke: generation judged: {'n_records': 24, 'n_unique': 12, 'n_cache_hits': 0, 'n_api_calls_made': 12, 'n_parsed': 24, 'n_na': 0, 'n_proxy': 0, 'ledger_usd_before': 0.0, 'ledger_usd_after': 0.000503, 'model_used': 'google/gemini-2.5-flash-lite', 'model_switch': None, 'stopped_for_budget': False}
+18:03:17|INFO   |[time] smoke: prefill arc (8 items, 1 chunks): 9.6s
+18:03:17|INFO   |smoke: arc prefix caches 106 MB; cgroup mem 10.30 GB
+18:03:23|INFO   |smoke: arc arm0 8 rows in 7s (0.855s/row); cgroup mem 10.28 GB
+18:03:46|INFO   |smoke: arc arms 144 rows in 23s (0.156s/row); cgroup mem 10.85 GB
+18:03:46|INFO   |smoke: ARC arm-0 acc 0.250, letter-format 0.375
+18:03:47|INFO   |DONE

@@ -1,0 +1,17 @@
+18:09:58|INFO   |torch 2.9.1+cpu, threads 2, cuda False, cgroup mem (15.013691392, 16.0), hook_hash d327a7be
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 11703.63it/s]
+18:11:28|INFO   |loaded Qwen/Qwen3-0.6B in 9.1s  L=28 d=1024 eos=[151643, 151645]
+18:11:28|INFO   |[time] smoke: load Qwen/Qwen3-0.6B: 90.2s
+18:12:33|INFO   |[time] smoke: prefill gen_sites (8 items, 1 chunks): 13.1s
+18:12:33|INFO   |smoke: gen_sites prefix caches 47 MB; cgroup mem 15.93 GB
+18:14:14|INFO   |smoke: gen_sites pass 72 rows done (101s); cgroup mem 15.72 GB
+18:14:23|INFO   |judge batch: 27/27 unique judged (27 parsed); ledger $0.0016
+18:14:23|INFO   |smoke: gen_sites checks {"E_tokens_1_to_5_identical_to_arm0": {"n": 32, "identical": 32, "pass": true}, "Dprime_token1_changed_frac": 0.3125, "edit_steps_seen_by_site": {"Dprime": [0, 1, 2, 3, 4, 5, 6, 7], "E": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, "expected_steps": {"Dprime": [0, 1, 2, 3, 4, 5, 6, 7], "E": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "P": [0]}, "resid_ratio_max_after_projection": 0.0003889109066221863, "resid_pass": true, "arm0_tok1_vs_gen_P": null, "note": "E cannot change tokens 1-5 by construction (first edited INPUT is token 5); steps in E beyond a row's EOS are not seen"}
+18:14:24|INFO   |smoke: gen_sites judged {'n_records': 72, 'n_unique': 36, 'n_cache_hits': 32, 'n_api_calls_made': 27, 'n_parsed': 72, 'n_na': 0, 'n_proxy': 0, 'ledger_usd_before': 0.000503, 'ledger_usd_after': 0.001632, 'model_used': 'google/gemini-2.5-flash-lite', 'model_switch': None, 'stopped_for_budget': False} in 101s
+18:14:33|INFO   |[time] smoke: prefill gen_Pdraws (8 items, 1 chunks): 9.3s
+18:14:33|INFO   |smoke: gen_Pdraws prefix caches 47 MB; cgroup mem 15.76 GB
+18:16:03|INFO   |smoke: gen_Pdraws pass 56 rows done (90s); cgroup mem 15.89 GB
+18:16:14|INFO   |judge batch: 5/5 unique judged (5 parsed); ledger $0.0018
+18:16:14|INFO   |smoke: gen_Pdraws checks {"E_tokens_1_to_5_identical_to_arm0": {"n": 0, "identical": 0, "pass": true}, "Dprime_token1_changed_frac": null, "edit_steps_seen_by_site": {"P": [0]}, "expected_steps": {"Dprime": [0, 1, 2, 3, 4, 5, 6, 7], "E": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "P": [0]}, "resid_ratio_max_after_projection": 0.0003178112383466214, "resid_pass": true, "arm0_tok1_vs_gen_P": null, "note": "E cannot change tokens 1-5 by construction (first edited INPUT is token 5); steps in E beyond a row's EOS are not seen"}
+18:16:14|INFO   |smoke: gen_Pdraws judged {'n_records': 56, 'n_unique': 22, 'n_cache_hits': 50, 'n_api_calls_made': 5, 'n_parsed': 56, 'n_na': 0, 'n_proxy': 0, 'ledger_usd_before': 0.001632, 'ledger_usd_after': 0.001841, 'model_used': 'google/gemini-2.5-flash-lite', 'model_switch': None, 'stopped_for_budget': False} in 90s
+18:16:16|INFO   |DONE

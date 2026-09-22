@@ -1,0 +1,100 @@
+18:42:34|INFO   |CUDA NVIDIA L4: free 23.3 / 23.7 GB; per-process cap 0.62; KV budget 3.0 GB
+18:42:34|INFO   |torch 2.9.1+cu128, device cuda, cgroup mem (23.804780544, 61.999996928), hook_hash 6e406f7f
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 40/311 [00:00<00:00, 397.91it/s]Loading weights:  54%|█████▍    | 168/311 [00:00<00:00, 915.06it/s]Loading weights:  95%|█████████▌| 297/311 [00:00<00:00, 1082.06it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 994.45it/s] 
+18:44:52|INFO   |loaded Qwen/Qwen3-0.6B in 10.0s on cuda  L=28 d=1024 eos=[151643, 151645]
+18:44:52|INFO   |[time] smoke: load Qwen/Qwen3-0.6B: 137.6s
+18:44:54|INFO   |[time] smoke: twin pass (16 prompts): 0.0s
+18:44:54|INFO   |smoke: N6 best layer 22 (d=14.54); cos(F,N6) at l*: -0.573
+18:44:55|INFO   |[time] smoke: decodability items (16): 0.3s
+18:44:56|INFO   |[time] smoke: prefill eval (16 items, 1 chunks): 1.1s
+18:44:56|INFO   |smoke: eval prefix caches 108 MB; max prompt len 60
+18:44:56|INFO   |smoke: arm0 16 rows in 1s (0.0338s/row)
+18:44:57|INFO   |[time] smoke: hook check, active spec, 16 tokens: 0.9s
+18:44:59|INFO   |smoke: hook checks {"hook_hash": "6e406f7f", "device": "cuda", "a1_noop_hooks_equal_hooks_removed": {"n_rows": 40, "greedy16_identical_all_rows": true, "max_abs_dlogit_step1": 0.0, "pass": true, "note": "hooks registered with an inactive spec vs hooks removed, identical batch"}, "a2_arm0_rows_unaffected_by_active_rows": {"n_items": 8, "max_abs_dlogit_step1": 0.0, "greedy16_identical_rows": 8, "pass": true, "note": "arm-0 rows share the batch with active F/R/N6 rows; any cross-row leak changes their step-1 logits (
+18:44:59|INFO   |smoke: P_B1_grid1 80 rows in 0s (0.0011s/row)
+18:44:59|INFO   |smoke: P_B2_grid1 80 rows in 0s (0.0015s/row)
+18:44:59|INFO   |smoke: P_B3_grid1 80 rows in 0s (0.0016s/row)
+18:44:59|INFO   |smoke: P_B4_grid1 80 rows in 0s (0.0019s/row)
+18:45:00|INFO   |smoke: P_B5_grid1 80 rows in 0s (0.0021s/row)
+18:45:00|INFO   |smoke: P_B6_grid1 80 rows in 0s (0.0017s/row)
+18:45:00|INFO   |[time] smoke: prefill gen (8 items, 1 chunks): 0.5s
+18:45:00|INFO   |smoke: gen prefix caches 47 MB; max prompt len 52
+18:45:01|INFO   |smoke: gen 24 rows in 1s (0.0253s/row)
+18:45:01|INFO   |[time] smoke: prefill genP (16 items, 1 chunks): 0.6s
+18:45:01|INFO   |smoke: genP prefix caches 108 MB; max prompt len 60
+18:45:05|INFO   |smoke: genP_B3 generated 176 rows in 3s; steps_pass True resid_pass True tok1_changed {'F': 0.3125, 'N6': 0.0625, 'N6perp': 0.0625, 'RF': 0.0625, 'RN6': 0.16666666666666666, 'POS': 0.375}
+18:45:05|INFO   |smoke: judge backlog 1 jobs
+18:45:05|INFO   |judge batch: 1/1 unique judged (1 parsed); ledger $0.0019
+18:45:05|INFO   |smoke: gen_P judged 24 recs, api 1, cache 23, NA 0, proxy 0, ledger $0.0019
+18:45:07|INFO   |smoke: genP_B4 generated 176 rows in 2s; steps_pass True resid_pass True tok1_changed {'F': 0.4375, 'N6': 0.3125, 'N6perp': 0.25, 'RF': 0.0625, 'RN6': 0.125, 'POS': 0.75}
+18:45:07|INFO   |smoke: judge backlog 1 jobs
+18:45:08|INFO   |[time] smoke: prefill genDprime (16 items, 1 chunks): 0.6s
+18:45:08|INFO   |smoke: genDprime prefix caches 108 MB; max prompt len 60
+18:45:10|INFO   |smoke: genDprime_B3 generated 144 rows in 2s; steps_pass True resid_pass True tok1_changed {'F': 0.375, 'N6': 0.0, 'RFo': 0.22916666666666666, 'RN6o': 0.14583333333333334}
+18:45:10|INFO   |smoke: judge backlog 2 jobs
+18:45:12|INFO   |smoke: genDprime_B4 generated 144 rows in 2s; steps_pass True resid_pass True tok1_changed {'F': 0.375, 'N6': 0.25, 'RFo': 0.2916666666666667, 'RN6o': 0.3125}
+18:45:12|INFO   |smoke: judge backlog 3 jobs
+18:45:12|INFO   |[time] smoke: prefill genE (16 items, 1 chunks): 0.1s
+18:45:12|INFO   |smoke: genE prefix caches 108 MB; max prompt len 60
+18:45:12|INFO   |judge batch: 40/40 unique judged (40 parsed); ledger $0.0036
+18:45:13|INFO   |smoke: genP_B3 judged 176 recs, api 40, cache 70, NA 0, proxy 0, ledger $0.0036
+18:45:14|INFO   |smoke: genE_B3 generated 144 rows in 2s; steps_pass False resid_pass True tok1_changed {'F': 0.0, 'N6': 0.0, 'RFo': 0.0, 'RN6o': 0.0}
+18:45:14|INFO   |smoke: judge backlog 3 jobs
+18:45:16|INFO   |smoke: genE_B4 generated 144 rows in 2s; steps_pass False resid_pass True tok1_changed {'F': 0.0, 'N6': 0.0, 'RFo': 0.0, 'RN6o': 0.0}
+18:45:16|INFO   |smoke: judge backlog 4 jobs
+18:45:16|INFO   |[time] smoke: prefill arc (8 items, 1 chunks): 0.1s
+18:45:16|INFO   |smoke: arc prefix caches 106 MB; max prompt len 116
+18:45:17|INFO   |smoke: arc arm0 8 rows in 0s (0.0362s/row)
+18:45:17|INFO   |smoke: arc arms 432 rows in 1s (0.0022s/row)
+18:45:18|INFO   |smoke: ARC arm-0 acc 0.250, letter-format 0.375
+18:45:18|INFO   |[time] smoke: prefill eval (16 items, 1 chunks): 0.4s
+18:45:18|INFO   |smoke: eval prefix caches 108 MB; max prompt len 60
+18:45:18|INFO   |smoke: P_B1_grid2 80 rows in 0s (0.0037s/row)
+18:45:18|INFO   |smoke: P_B2_grid2 80 rows in 0s (0.0021s/row)
+18:45:19|INFO   |smoke: P_B3_grid2 80 rows in 0s (0.0020s/row)
+18:45:19|INFO   |smoke: P_B4_grid2 80 rows in 0s (0.0017s/row)
+18:45:19|INFO   |smoke: P_B5_grid2 80 rows in 0s (0.0025s/row)
+18:45:19|INFO   |smoke: P_B6_grid2 80 rows in 0s (0.0031s/row)
+18:45:19|INFO   |smoke: P_B1_grid3 80 rows in 0s (0.0011s/row)
+18:45:20|INFO   |smoke: P_B2_grid3 80 rows in 0s (0.0021s/row)
+18:45:20|INFO   |smoke: P_B3_grid3 80 rows in 0s (0.0021s/row)
+18:45:20|INFO   |smoke: P_B4_grid3 80 rows in 0s (0.0020s/row)
+18:45:20|INFO   |smoke: P_B5_grid3 80 rows in 0s (0.0020s/row)
+18:45:21|INFO   |smoke: P_B6_grid3 80 rows in 0s (0.0027s/row)
+18:45:22|INFO   |[time] smoke: prefill stimro (32 items, 1 chunks): 0.9s
+18:45:22|INFO   |smoke: stimro prefix caches 125 MB; max prompt len 35
+18:45:22|INFO   |judge batch: 28/28 unique judged (28 parsed); ledger $0.0047
+18:45:22|INFO   |smoke: genP_B4 judged 176 recs, api 28, cache 147, NA 0, proxy 0, ledger $0.0047
+18:45:22|INFO   |smoke: stimro 608 rows in 1s (0.0013s/row)
+18:45:23|INFO   |[time] smoke: prefill decodgen (16 items, 1 chunks): 0.1s
+18:45:23|INFO   |smoke: decodgen prefix caches 105 MB; max prompt len 58
+18:45:23|INFO   |[time] smoke: prefill arm0tok (16 items, 1 chunks): 0.1s
+18:45:23|INFO   |smoke: arm0tok prefix caches 108 MB; max prompt len 60
+18:45:24|INFO   |smoke: arm0 tokens 16 rows in 1s (0.0393s/row)
+18:45:25|INFO   |smoke: spanD_B1 96 rows in 0s (0.0027s/row)
+18:45:25|INFO   |smoke: spanD_B2 96 rows in 0s (0.0014s/row)
+18:45:25|INFO   |smoke: spanD_B3 96 rows in 0s (0.0016s/row)
+18:45:25|INFO   |smoke: spanD_B4 96 rows in 0s (0.0013s/row)
+18:45:25|INFO   |smoke: spanD_B5 96 rows in 0s (0.0019s/row)
+18:45:26|INFO   |smoke: spanD_B6 96 rows in 0s (0.0023s/row)
+18:45:26|INFO   |smoke: spanE_B1 96 rows in 0s (0.0026s/row)
+18:45:26|INFO   |smoke: spanE_B2 96 rows in 0s (0.0022s/row)
+18:45:26|INFO   |smoke: spanE_B3 96 rows in 0s (0.0019s/row)
+18:45:27|INFO   |smoke: spanE_B4 96 rows in 0s (0.0020s/row)
+18:45:27|INFO   |smoke: spanE_B5 96 rows in 0s (0.0018s/row)
+18:45:27|INFO   |smoke: spanE_B6 96 rows in 0s (0.0017s/row)
+18:45:27|INFO   |[time] smoke: prefill gsm (4 items, 1 chunks): 0.1s
+18:45:27|INFO   |smoke: gsm prefix caches 44 MB; max prompt len 97
+18:45:28|INFO   |smoke: gsm_P_B3 acc by arm {'0': 0.0, 'F': 0.0, 'RF': 0.0}
+18:45:28|INFO   |judge batch: 46/46 unique judged (46 parsed); ledger $0.0067
+18:45:29|INFO   |smoke: genDprime_B3 judged 144 recs, api 46, cache 95, NA 0, proxy 0, ledger $0.0067
+18:45:30|INFO   |smoke: gsm_E_B4 acc by arm {'0': 0.0, 'F': 0.0, 'RFo': 0.0}
+18:45:31|INFO   |model smoke done; judge backlog 2 jobs
+18:45:31|INFO   |waiting for the judge worker to drain ...
+18:45:40|INFO   |judge batch: 43/43 unique judged (43 parsed); ledger $0.0085
+18:45:41|INFO   |smoke: genDprime_B4 judged 144 recs, api 43, cache 100, NA 0, proxy 0, ledger $0.0085
+18:45:41|INFO   |judge batch: 13/13 unique judged (13 parsed); ledger $0.0090
+18:45:42|INFO   |smoke: genE_B3 judged 144 recs, api 13, cache 127, NA 0, proxy 0, ledger $0.0090
+18:45:48|INFO   |judge batch: 33/33 unique judged (33 parsed); ledger $0.0104
+18:45:48|INFO   |smoke: genE_B4 judged 144 recs, api 33, cache 110, NA 0, proxy 0, ledger $0.0104
+18:45:48|INFO   |DONE

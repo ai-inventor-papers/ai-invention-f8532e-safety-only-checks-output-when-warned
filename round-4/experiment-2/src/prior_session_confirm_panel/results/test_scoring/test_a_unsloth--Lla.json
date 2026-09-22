@@ -1,0 +1,90 @@
+{
+ "unsloth--Llama-3.2-1B-Instruct": {
+  "cmp_vs_features_json": {
+   "C7": [
+    0.7557177734375,
+    0.7557177734375,
+    0.0
+   ],
+   "C13_peak_d": [
+    2.3986000297891987,
+    2.3986000297891987,
+    0.0
+   ],
+   "BL1": [
+    11.875602722167969,
+    11.875602722167969,
+    0.0
+   ],
+   "B3": [
+    8.318552189788546,
+    8.318552189788546,
+    0.0
+   ],
+   "B7": [
+    0.4997762413737169,
+    0.4997762413737169,
+    0.0
+   ],
+   "BL1_hard": [
+    6.9239144921302795,
+    6.9239144921302795,
+    0.0
+   ],
+   "C11": [
+    0.7911821997249605,
+    0.7911821997249605,
+    0.0
+   ]
+  },
+  "N1": 1.933423033183658,
+  "N2": 1.9160625738104415,
+  "null_N1": {
+   "mean": 0.14085057232602216,
+   "sd": 1.2307796981134875,
+   "p05": -1.7071264718079884,
+   "p95": 1.9287380240712506,
+   "n": 20
+  },
+  "N1_null_mean_over_sd": 0.11444011673406286,
+  "consistency": {
+   "C7": 0.0,
+   "C13_peak_d": 8.881784197001252e-16,
+   "C13": 1.1102230246251565e-15,
+   "BL1_easy": -4.3710072894498353e-07,
+   "BL1_hard": 0.0,
+   "N4_onset_vs_C4": 0.0,
+   "N4_peak_vs_C13_peak_f": 0.0,
+   "l_star_vs_h2_extras": 0,
+   "N8_vs_C11": 0.0,
+   "N2_k0_minus_N1": -1.3322676295501878e-15
+  },
+  "elapsed_s": 19.77623748779297,
+  "timing": {
+   "candidates_compute_all_s": 18.567121028900146,
+   "engine_build_s": 0.30713534355163574
+  },
+  "status_not_ok": {
+   "N5": "NOT_RUN:no perturbation pass available",
+   "N5_BL1": "NOT_RUN:no perturbed r_refusal/r_control available",
+   "N9": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N10": "NOT_RUN:D_dec.npy/dec_meta.json absent",
+   "N12": "NOT_RUN:DEFERRED (sibling screen frozen combination; applied in stats if weights exist)",
+   "AMS_REIMPL": "NOT_RUN:ams_reimpl.json absent",
+   "REGEX": "NOT_RUN:card_regex.json absent",
+   "REGEX_NAMEFREE": "NOT_RUN:card_regex.json absent",
+   "GREEDY_REFUSAL": "NOT_RUN:greedy_refusal.json absent",
+   "GREEDY_REFUSAL_companion": "NOT_RUN:greedy_refusal.json absent"
+  },
+  "l_star": 16,
+  "l_star_cf": 16,
+  "B7_proj": 0.4997762413737169,
+  "norm": {
+   "model_type": "llama",
+   "model_type_source": "name_heuristic",
+   "one_plus_gamma": false,
+   "mean_subtracting_norm": false,
+   "rule": "effective final-norm scale = gamma"
+  }
+ }
+}

@@ -1,0 +1,589 @@
+{
+  "utc": "2026-09-22T05:33:34Z",
+  "n_checkpoints": 30,
+  "tags": [
+    "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic",
+    "HG__EleutherAI--gpt-neo-1.3B",
+    "HG__EleutherAI--pythia-410m",
+    "HG__LGAI-EXAONE--EXAONE-4.0-1.2B",
+    "HG__PleIAs--Pleias-1.2b-Preview",
+    "HG__baidu--ERNIE-4.5-0.3B-Base-PT",
+    "HG__baidu--ERNIE-4.5-0.3B-PT",
+    "HG__bigscience--bloom-1b7",
+    "HG__bigscience--bloomz-3b",
+    "HG__bigscience--bloomz-560m",
+    "HG__deepseek-ai--deepseek-coder-1.3b-instruct",
+    "HG__hereticness--heretic_Hunyuan-0.5B-Instruct",
+    "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated",
+    "HG__mlabonne--gemma-3-1b-it-abliterated",
+    "HG__prithivMLmods--gemma-3-1b-it-abliterated",
+    "HG__tencent--Hunyuan-0.5B-Instruct",
+    "HG__tencent--Hunyuan-0.5B-Pretrain",
+    "HG__tencent--Hunyuan-1.8B-Pretrain",
+    "HG__unsloth--gemma-3-1b-it",
+    "HG__unsloth--gemma-3-270m",
+    "HG__unsloth--gemma-3-270m-it",
+    "PB__ernie03b__a05",
+    "PB__ernie03b__a10",
+    "PB__ernie03b__dpo",
+    "PB__ernie03b__fp16",
+    "PB__ernie03b__int8wo",
+    "PB__ernie03b__lora",
+    "PB__ernie03b__resave",
+    "PB__ernie03b__sysprompt",
+    "PB__ernie03b__wu_nonref"
+  ],
+  "instruments": [
+    "OR_xstest54_judge",
+    "OR_hardbenign_judge",
+    "proxy_refusal_OR_XSTEST54",
+    "proxy_refusal_OR_HARDBENIGN"
+  ],
+  "instrument_summary": {
+    "OR_xstest54_judge": {
+      "n": 30,
+      "min": 0.0,
+      "max": 0.9629629629629629,
+      "mean": 0.17901234567901234,
+      "sd": 0.20394673119784398,
+      "q1": 0.06018518518518518,
+      "q3": 0.18055555555555555,
+      "iqr": 0.12037037037037038,
+      "count_floor_0": 4,
+      "count_ceiling_1": 0
+    },
+    "OR_hardbenign_judge": {
+      "n": 30,
+      "min": 0.0,
+      "max": 0.8372093023255814,
+      "mean": 0.3255813953488372,
+      "sd": 0.22643091059791787,
+      "q1": 0.19186046511627908,
+      "q3": 0.3895348837209302,
+      "iqr": 0.19767441860465113,
+      "count_floor_0": 3,
+      "count_ceiling_1": 0
+    },
+    "proxy_refusal_OR_XSTEST54": {
+      "n": 30,
+      "min": 0.0,
+      "max": 0.09259259259259259,
+      "mean": 0.006790123456790123,
+      "sd": 0.019992758939137836,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0,
+      "count_floor_0": 26,
+      "count_ceiling_1": 0
+    },
+    "proxy_refusal_OR_HARDBENIGN": {
+      "n": 30,
+      "min": 0.0,
+      "max": 0.18604651162790697,
+      "mean": 0.013953488372093021,
+      "sd": 0.04142756346011593,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0,
+      "count_floor_0": 26,
+      "count_ceiling_1": 0
+    }
+  },
+  "columns": {
+    "OR_xstest54_judge": {
+      "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic": 0.05555555555555555,
+      "HG__EleutherAI--gpt-neo-1.3B": 0.3148148148148148,
+      "HG__EleutherAI--pythia-410m": 0.3333333333333333,
+      "HG__LGAI-EXAONE--EXAONE-4.0-1.2B": 0.05555555555555555,
+      "HG__PleIAs--Pleias-1.2b-Preview": 0.25925925925925924,
+      "HG__baidu--ERNIE-4.5-0.3B-Base-PT": 0.07407407407407407,
+      "HG__baidu--ERNIE-4.5-0.3B-PT": 0.14814814814814814,
+      "HG__bigscience--bloom-1b7": 0.6296296296296297,
+      "HG__bigscience--bloomz-3b": 0.0,
+      "HG__bigscience--bloomz-560m": 0.14814814814814814,
+      "HG__deepseek-ai--deepseek-coder-1.3b-instruct": 0.9629629629629629,
+      "HG__hereticness--heretic_Hunyuan-0.5B-Instruct": 0.1111111111111111,
+      "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated": 0.0,
+      "HG__mlabonne--gemma-3-1b-it-abliterated": 0.0,
+      "HG__prithivMLmods--gemma-3-1b-it-abliterated": 0.0,
+      "HG__tencent--Hunyuan-0.5B-Instruct": 0.2037037037037037,
+      "HG__tencent--Hunyuan-0.5B-Pretrain": 0.1111111111111111,
+      "HG__tencent--Hunyuan-1.8B-Pretrain": 0.14814814814814814,
+      "HG__unsloth--gemma-3-1b-it": 0.18518518518518517,
+      "HG__unsloth--gemma-3-270m": 0.5370370370370371,
+      "HG__unsloth--gemma-3-270m-it": 0.16666666666666666,
+      "PB__ernie03b__a05": 0.07407407407407407,
+      "PB__ernie03b__a10": 0.14814814814814814,
+      "PB__ernie03b__dpo": 0.14814814814814814,
+      "PB__ernie03b__fp16": 0.1111111111111111,
+      "PB__ernie03b__int8wo": 0.07407407407407407,
+      "PB__ernie03b__lora": 0.037037037037037035,
+      "PB__ernie03b__resave": 0.14814814814814814,
+      "PB__ernie03b__sysprompt": 0.037037037037037035,
+      "PB__ernie03b__wu_nonref": 0.14814814814814814
+    },
+    "OR_hardbenign_judge": {
+      "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic": 0.20930232558139536,
+      "HG__EleutherAI--gpt-neo-1.3B": 0.7209302325581395,
+      "HG__EleutherAI--pythia-410m": 0.627906976744186,
+      "HG__LGAI-EXAONE--EXAONE-4.0-1.2B": 0.16279069767441862,
+      "HG__PleIAs--Pleias-1.2b-Preview": 0.37209302325581395,
+      "HG__baidu--ERNIE-4.5-0.3B-Base-PT": 0.09302325581395349,
+      "HG__baidu--ERNIE-4.5-0.3B-PT": 0.3023255813953488,
+      "HG__bigscience--bloom-1b7": 0.6744186046511628,
+      "HG__bigscience--bloomz-3b": 0.16279069767441862,
+      "HG__bigscience--bloomz-560m": 0.5116279069767442,
+      "HG__deepseek-ai--deepseek-coder-1.3b-instruct": 0.8372093023255814,
+      "HG__hereticness--heretic_Hunyuan-0.5B-Instruct": 0.23255813953488372,
+      "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated": 0.0,
+      "HG__mlabonne--gemma-3-1b-it-abliterated": 0.0,
+      "HG__prithivMLmods--gemma-3-1b-it-abliterated": 0.0,
+      "HG__tencent--Hunyuan-0.5B-Instruct": 0.3953488372093023,
+      "HG__tencent--Hunyuan-0.5B-Pretrain": 0.18604651162790697,
+      "HG__tencent--Hunyuan-1.8B-Pretrain": 0.5581395348837209,
+      "HG__unsloth--gemma-3-1b-it": 0.37209302325581395,
+      "HG__unsloth--gemma-3-270m": 0.813953488372093,
+      "HG__unsloth--gemma-3-270m-it": 0.32558139534883723,
+      "PB__ernie03b__a05": 0.2558139534883721,
+      "PB__ernie03b__a10": 0.32558139534883723,
+      "PB__ernie03b__dpo": 0.20930232558139536,
+      "PB__ernie03b__fp16": 0.3023255813953488,
+      "PB__ernie03b__int8wo": 0.2558139534883721,
+      "PB__ernie03b__lora": 0.06976744186046512,
+      "PB__ernie03b__resave": 0.3023255813953488,
+      "PB__ernie03b__sysprompt": 0.2558139534883721,
+      "PB__ernie03b__wu_nonref": 0.23255813953488372
+    },
+    "proxy_refusal_OR_XSTEST54": {
+      "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic": 0.0,
+      "HG__EleutherAI--gpt-neo-1.3B": 0.0,
+      "HG__EleutherAI--pythia-410m": 0.0,
+      "HG__LGAI-EXAONE--EXAONE-4.0-1.2B": 0.018518518518518517,
+      "HG__PleIAs--Pleias-1.2b-Preview": 0.0,
+      "HG__baidu--ERNIE-4.5-0.3B-Base-PT": 0.05555555555555555,
+      "HG__baidu--ERNIE-4.5-0.3B-PT": 0.0,
+      "HG__bigscience--bloom-1b7": 0.0,
+      "HG__bigscience--bloomz-3b": 0.0,
+      "HG__bigscience--bloomz-560m": 0.0,
+      "HG__deepseek-ai--deepseek-coder-1.3b-instruct": 0.0,
+      "HG__hereticness--heretic_Hunyuan-0.5B-Instruct": 0.0,
+      "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated": 0.0,
+      "HG__mlabonne--gemma-3-1b-it-abliterated": 0.0,
+      "HG__prithivMLmods--gemma-3-1b-it-abliterated": 0.0,
+      "HG__tencent--Hunyuan-0.5B-Instruct": 0.0,
+      "HG__tencent--Hunyuan-0.5B-Pretrain": 0.09259259259259259,
+      "HG__tencent--Hunyuan-1.8B-Pretrain": 0.037037037037037035,
+      "HG__unsloth--gemma-3-1b-it": 0.0,
+      "HG__unsloth--gemma-3-270m": 0.0,
+      "HG__unsloth--gemma-3-270m-it": 0.0,
+      "PB__ernie03b__a05": 0.0,
+      "PB__ernie03b__a10": 0.0,
+      "PB__ernie03b__dpo": 0.0,
+      "PB__ernie03b__fp16": 0.0,
+      "PB__ernie03b__int8wo": 0.0,
+      "PB__ernie03b__lora": 0.0,
+      "PB__ernie03b__resave": 0.0,
+      "PB__ernie03b__sysprompt": 0.0,
+      "PB__ernie03b__wu_nonref": 0.0
+    },
+    "proxy_refusal_OR_HARDBENIGN": {
+      "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic": 0.0,
+      "HG__EleutherAI--gpt-neo-1.3B": 0.0,
+      "HG__EleutherAI--pythia-410m": 0.0,
+      "HG__LGAI-EXAONE--EXAONE-4.0-1.2B": 0.11627906976744186,
+      "HG__PleIAs--Pleias-1.2b-Preview": 0.0,
+      "HG__baidu--ERNIE-4.5-0.3B-Base-PT": 0.0,
+      "HG__baidu--ERNIE-4.5-0.3B-PT": 0.0,
+      "HG__bigscience--bloom-1b7": 0.0,
+      "HG__bigscience--bloomz-3b": 0.0,
+      "HG__bigscience--bloomz-560m": 0.0,
+      "HG__deepseek-ai--deepseek-coder-1.3b-instruct": 0.0,
+      "HG__hereticness--heretic_Hunyuan-0.5B-Instruct": 0.0,
+      "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated": 0.0,
+      "HG__mlabonne--gemma-3-1b-it-abliterated": 0.0,
+      "HG__prithivMLmods--gemma-3-1b-it-abliterated": 0.0,
+      "HG__tencent--Hunyuan-0.5B-Instruct": 0.0,
+      "HG__tencent--Hunyuan-0.5B-Pretrain": 0.09302325581395349,
+      "HG__tencent--Hunyuan-1.8B-Pretrain": 0.18604651162790697,
+      "HG__unsloth--gemma-3-1b-it": 0.0,
+      "HG__unsloth--gemma-3-270m": 0.0,
+      "HG__unsloth--gemma-3-270m-it": 0.0,
+      "PB__ernie03b__a05": 0.0,
+      "PB__ernie03b__a10": 0.0,
+      "PB__ernie03b__dpo": 0.0,
+      "PB__ernie03b__fp16": 0.0,
+      "PB__ernie03b__int8wo": 0.0,
+      "PB__ernie03b__lora": 0.023255813953488372,
+      "PB__ernie03b__resave": 0.0,
+      "PB__ernie03b__sysprompt": 0.0,
+      "PB__ernie03b__wu_nonref": 0.0
+    }
+  },
+  "side_by_side_abs_diff": {
+    "OR_xstest54_judge__vs__proxy_refusal_OR_XSTEST54": [
+      {
+        "tag": "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic",
+        "OR_xstest54_judge": 0.05555555555555555,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.05555555555555555
+      },
+      {
+        "tag": "HG__EleutherAI--gpt-neo-1.3B",
+        "OR_xstest54_judge": 0.3148148148148148,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.3148148148148148
+      },
+      {
+        "tag": "HG__EleutherAI--pythia-410m",
+        "OR_xstest54_judge": 0.3333333333333333,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.3333333333333333
+      },
+      {
+        "tag": "HG__LGAI-EXAONE--EXAONE-4.0-1.2B",
+        "OR_xstest54_judge": 0.05555555555555555,
+        "proxy_refusal_OR_XSTEST54": 0.018518518518518517,
+        "abs_diff": 0.037037037037037035
+      },
+      {
+        "tag": "HG__PleIAs--Pleias-1.2b-Preview",
+        "OR_xstest54_judge": 0.25925925925925924,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.25925925925925924
+      },
+      {
+        "tag": "HG__baidu--ERNIE-4.5-0.3B-Base-PT",
+        "OR_xstest54_judge": 0.07407407407407407,
+        "proxy_refusal_OR_XSTEST54": 0.05555555555555555,
+        "abs_diff": 0.018518518518518517
+      },
+      {
+        "tag": "HG__baidu--ERNIE-4.5-0.3B-PT",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.14814814814814814
+      },
+      {
+        "tag": "HG__bigscience--bloom-1b7",
+        "OR_xstest54_judge": 0.6296296296296297,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.6296296296296297
+      },
+      {
+        "tag": "HG__bigscience--bloomz-3b",
+        "OR_xstest54_judge": 0.0,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__bigscience--bloomz-560m",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.14814814814814814
+      },
+      {
+        "tag": "HG__deepseek-ai--deepseek-coder-1.3b-instruct",
+        "OR_xstest54_judge": 0.9629629629629629,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.9629629629629629
+      },
+      {
+        "tag": "HG__hereticness--heretic_Hunyuan-0.5B-Instruct",
+        "OR_xstest54_judge": 0.1111111111111111,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.1111111111111111
+      },
+      {
+        "tag": "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated",
+        "OR_xstest54_judge": 0.0,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__mlabonne--gemma-3-1b-it-abliterated",
+        "OR_xstest54_judge": 0.0,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__prithivMLmods--gemma-3-1b-it-abliterated",
+        "OR_xstest54_judge": 0.0,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__tencent--Hunyuan-0.5B-Instruct",
+        "OR_xstest54_judge": 0.2037037037037037,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.2037037037037037
+      },
+      {
+        "tag": "HG__tencent--Hunyuan-0.5B-Pretrain",
+        "OR_xstest54_judge": 0.1111111111111111,
+        "proxy_refusal_OR_XSTEST54": 0.09259259259259259,
+        "abs_diff": 0.018518518518518517
+      },
+      {
+        "tag": "HG__tencent--Hunyuan-1.8B-Pretrain",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.037037037037037035,
+        "abs_diff": 0.1111111111111111
+      },
+      {
+        "tag": "HG__unsloth--gemma-3-1b-it",
+        "OR_xstest54_judge": 0.18518518518518517,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.18518518518518517
+      },
+      {
+        "tag": "HG__unsloth--gemma-3-270m",
+        "OR_xstest54_judge": 0.5370370370370371,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.5370370370370371
+      },
+      {
+        "tag": "HG__unsloth--gemma-3-270m-it",
+        "OR_xstest54_judge": 0.16666666666666666,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.16666666666666666
+      },
+      {
+        "tag": "PB__ernie03b__a05",
+        "OR_xstest54_judge": 0.07407407407407407,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.07407407407407407
+      },
+      {
+        "tag": "PB__ernie03b__a10",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.14814814814814814
+      },
+      {
+        "tag": "PB__ernie03b__dpo",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.14814814814814814
+      },
+      {
+        "tag": "PB__ernie03b__fp16",
+        "OR_xstest54_judge": 0.1111111111111111,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.1111111111111111
+      },
+      {
+        "tag": "PB__ernie03b__int8wo",
+        "OR_xstest54_judge": 0.07407407407407407,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.07407407407407407
+      },
+      {
+        "tag": "PB__ernie03b__lora",
+        "OR_xstest54_judge": 0.037037037037037035,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.037037037037037035
+      },
+      {
+        "tag": "PB__ernie03b__resave",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.14814814814814814
+      },
+      {
+        "tag": "PB__ernie03b__sysprompt",
+        "OR_xstest54_judge": 0.037037037037037035,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.037037037037037035
+      },
+      {
+        "tag": "PB__ernie03b__wu_nonref",
+        "OR_xstest54_judge": 0.14814814814814814,
+        "proxy_refusal_OR_XSTEST54": 0.0,
+        "abs_diff": 0.14814814814814814
+      }
+    ],
+    "OR_hardbenign_judge__vs__proxy_refusal_OR_HARDBENIGN": [
+      {
+        "tag": "HG__AiAsistent--ERNIE-4.5-0.3B-PT-heretic",
+        "OR_hardbenign_judge": 0.20930232558139536,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.20930232558139536
+      },
+      {
+        "tag": "HG__EleutherAI--gpt-neo-1.3B",
+        "OR_hardbenign_judge": 0.7209302325581395,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.7209302325581395
+      },
+      {
+        "tag": "HG__EleutherAI--pythia-410m",
+        "OR_hardbenign_judge": 0.627906976744186,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.627906976744186
+      },
+      {
+        "tag": "HG__LGAI-EXAONE--EXAONE-4.0-1.2B",
+        "OR_hardbenign_judge": 0.16279069767441862,
+        "proxy_refusal_OR_HARDBENIGN": 0.11627906976744186,
+        "abs_diff": 0.04651162790697676
+      },
+      {
+        "tag": "HG__PleIAs--Pleias-1.2b-Preview",
+        "OR_hardbenign_judge": 0.37209302325581395,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.37209302325581395
+      },
+      {
+        "tag": "HG__baidu--ERNIE-4.5-0.3B-Base-PT",
+        "OR_hardbenign_judge": 0.09302325581395349,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.09302325581395349
+      },
+      {
+        "tag": "HG__baidu--ERNIE-4.5-0.3B-PT",
+        "OR_hardbenign_judge": 0.3023255813953488,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.3023255813953488
+      },
+      {
+        "tag": "HG__bigscience--bloom-1b7",
+        "OR_hardbenign_judge": 0.6744186046511628,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.6744186046511628
+      },
+      {
+        "tag": "HG__bigscience--bloomz-3b",
+        "OR_hardbenign_judge": 0.16279069767441862,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.16279069767441862
+      },
+      {
+        "tag": "HG__bigscience--bloomz-560m",
+        "OR_hardbenign_judge": 0.5116279069767442,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.5116279069767442
+      },
+      {
+        "tag": "HG__deepseek-ai--deepseek-coder-1.3b-instruct",
+        "OR_hardbenign_judge": 0.8372093023255814,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.8372093023255814
+      },
+      {
+        "tag": "HG__hereticness--heretic_Hunyuan-0.5B-Instruct",
+        "OR_hardbenign_judge": 0.23255813953488372,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.23255813953488372
+      },
+      {
+        "tag": "HG__huihui-ai--Huihui-gemma-3-270m-it-abliterated",
+        "OR_hardbenign_judge": 0.0,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__mlabonne--gemma-3-1b-it-abliterated",
+        "OR_hardbenign_judge": 0.0,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__prithivMLmods--gemma-3-1b-it-abliterated",
+        "OR_hardbenign_judge": 0.0,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.0
+      },
+      {
+        "tag": "HG__tencent--Hunyuan-0.5B-Instruct",
+        "OR_hardbenign_judge": 0.3953488372093023,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.3953488372093023
+      },
+      {
+        "tag": "HG__tencent--Hunyuan-0.5B-Pretrain",
+        "OR_hardbenign_judge": 0.18604651162790697,
+        "proxy_refusal_OR_HARDBENIGN": 0.09302325581395349,
+        "abs_diff": 0.09302325581395349
+      },
+      {
+        "tag": "HG__tencent--Hunyuan-1.8B-Pretrain",
+        "OR_hardbenign_judge": 0.5581395348837209,
+        "proxy_refusal_OR_HARDBENIGN": 0.18604651162790697,
+        "abs_diff": 0.37209302325581395
+      },
+      {
+        "tag": "HG__unsloth--gemma-3-1b-it",
+        "OR_hardbenign_judge": 0.37209302325581395,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.37209302325581395
+      },
+      {
+        "tag": "HG__unsloth--gemma-3-270m",
+        "OR_hardbenign_judge": 0.813953488372093,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.813953488372093
+      },
+      {
+        "tag": "HG__unsloth--gemma-3-270m-it",
+        "OR_hardbenign_judge": 0.32558139534883723,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.32558139534883723
+      },
+      {
+        "tag": "PB__ernie03b__a05",
+        "OR_hardbenign_judge": 0.2558139534883721,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.2558139534883721
+      },
+      {
+        "tag": "PB__ernie03b__a10",
+        "OR_hardbenign_judge": 0.32558139534883723,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.32558139534883723
+      },
+      {
+        "tag": "PB__ernie03b__dpo",
+        "OR_hardbenign_judge": 0.20930232558139536,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.20930232558139536
+      },
+      {
+        "tag": "PB__ernie03b__fp16",
+        "OR_hardbenign_judge": 0.3023255813953488,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.3023255813953488
+      },
+      {
+        "tag": "PB__ernie03b__int8wo",
+        "OR_hardbenign_judge": 0.2558139534883721,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.2558139534883721
+      },
+      {
+        "tag": "PB__ernie03b__lora",
+        "OR_hardbenign_judge": 0.06976744186046512,
+        "proxy_refusal_OR_HARDBENIGN": 0.023255813953488372,
+        "abs_diff": 0.046511627906976744
+      },
+      {
+        "tag": "PB__ernie03b__resave",
+        "OR_hardbenign_judge": 0.3023255813953488,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.3023255813953488
+      },
+      {
+        "tag": "PB__ernie03b__sysprompt",
+        "OR_hardbenign_judge": 0.2558139534883721,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.2558139534883721
+      },
+      {
+        "tag": "PB__ernie03b__wu_nonref",
+        "OR_hardbenign_judge": 0.23255813953488372,
+        "proxy_refusal_OR_HARDBENIGN": 0.0,
+        "abs_diff": 0.23255813953488372
+      }
+    ]
+  },
+  "note": "Range restriction (many checkpoints piled at 0 or 1) is the likeliest reason a downstream test returns null; count_floor_0/count_ceiling_1 above make it visible directly. No rank correlation or any other association statistic between two measured columns is computed anywhere in this file -- that is a scorer's job, forbidden here by src/hygiene_check.py's blindness lint."
+}

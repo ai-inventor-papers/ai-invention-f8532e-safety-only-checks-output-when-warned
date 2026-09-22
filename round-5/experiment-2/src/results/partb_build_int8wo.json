@@ -1,0 +1,33 @@
+{
+  "arm": "int8wo",
+  "parent_repo": "baidu/ERNIE-4.5-0.3B-PT",
+  "parent_revision_sha": "b565cf6caebdb7a1eadf00100857b1ed5e044f12",
+  "utc": "2026-09-22T00:39:56Z",
+  "parent_weight_sha_full": "3a551b6545279a381151db1d920f8a124534dc648ae4075057941496ec405bb2",
+  "edit": {
+    "n_linear_quantized": 127,
+    "tie_kept": true
+  },
+  "t_edit_s": 2.7868409156799316,
+  "tie": {
+    "config_tie_word_embeddings": true,
+    "storage_shared": true,
+    "lm_head_present": true
+  },
+  "weight_fingerprint": "548aa1046779f4d16c4f1d582333f2e1342714e3971a5039c77dc3c5af639246",
+  "weight_sha_full": "f2cd814847e054d881f4c92b1700863bb8747739c9f51f8fa9dd47f06ba7833f",
+  "weights_differ_from_parent": true,
+  "verify": {
+    "reload_weight_sha_full_equal": true,
+    "reload_tie": {
+      "config_tie_word_embeddings": true,
+      "storage_shared": true,
+      "lm_head_present": true
+    },
+    "weight_fingerprint": "548aa1046779f4d16c4f1d582333f2e1342714e3971a5039c77dc3c5af639246",
+    "weight_sha_full": "f2cd814847e054d881f4c92b1700863bb8747739c9f51f8fa9dd47f06ba7833f"
+  },
+  "t_build_s": 76.18626523017883,
+  "tag": "PB__ernie03b__int8wo",
+  "weights_location": "private/partb/int8wo/ (deleted before the artifact finishes)"
+}

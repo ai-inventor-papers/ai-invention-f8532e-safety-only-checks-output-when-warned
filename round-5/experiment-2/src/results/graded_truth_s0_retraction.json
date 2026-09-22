@@ -1,0 +1,13 @@
+{
+ "utc": "2026-09-22T00:23:59Z",
+ "retracts_chain_record": 3,
+ "retracted_payload": "results/graded_truth_s0.json",
+ "reason": "Smoke stub written to exercise the ORDER GATE during acceptance testing. Its labels are NOT authoritative and it gates nothing.",
+ "why_not_deleted": "logs/chain.jsonl is append-only and record 4 already commits to record 3s chain_sha256. Deleting the payload or the record would invalidate every later record. The file stays frozen on disk so the chain verifies.",
+ "enforcement": [
+  "src/hygiene_check.py order_gate_audit() refuses graded_truth_s0.json as a gate source",
+  "judgeflow.order_gate_ok() requires a committed graded_truth_s<N>.json with N >= 1",
+  "any array harvested against the stub is deleted and re-harvested under a real commit"
+ ],
+ "real_staged_commits_begin_at": "s1"
+}

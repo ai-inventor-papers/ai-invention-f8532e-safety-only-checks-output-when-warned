@@ -1,0 +1,15 @@
+{
+ "utc": "2026-09-22T00:21:33Z",
+ "python": "3.12.14",
+ "torch": "2.9.1+cu128",
+ "torch_cuda_available": true,
+ "cuda_device_name": "NVIDIA RTX 2000 Ada Generation",
+ "cuda_total_mib": 15947,
+ "transformers": "5.17.0",
+ "numpy": "2.5.3",
+ "nvidia_smi": "NVIDIA RTX 2000 Ada Generation, 16380 MiB, 580.159.04",
+ "declared_vram_budget_mib": 7500,
+ "memory_fraction": 0.45787545787545786,
+ "lease_ceiling_mib": 15800,
+ "note": "Plan assumed a 23,034 MiB L4 shared by three artifacts; this pod has a single idle 16,380 MiB RTX 2000 Ada. The 7.5 GB declaration is KEPT; the lease ceiling is recomputed against the real card. See deviation D02."
+}

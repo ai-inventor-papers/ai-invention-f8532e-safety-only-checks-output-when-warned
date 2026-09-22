@@ -1,0 +1,33 @@
+{
+  "arm": "resave",
+  "parent_repo": "baidu/ERNIE-4.5-0.3B-PT",
+  "parent_revision_sha": "b565cf6caebdb7a1eadf00100857b1ed5e044f12",
+  "utc": "2026-09-22T00:41:09Z",
+  "parent_weight_sha_full": "3a551b6545279a381151db1d920f8a124534dc648ae4075057941496ec405bb2",
+  "edit": {
+    "note": "no edit; safetensors round trip only"
+  },
+  "t_edit_s": 2.6226043701171875e-06,
+  "tie": {
+    "config_tie_word_embeddings": true,
+    "storage_shared": true,
+    "lm_head_present": true
+  },
+  "weight_fingerprint": "c9103e3f542c9c3c5b36530fde1bd547b63b8ea0bd4aa70ce93c81b0989300c5",
+  "weight_sha_full": "3a551b6545279a381151db1d920f8a124534dc648ae4075057941496ec405bb2",
+  "weights_differ_from_parent": false,
+  "verify": {
+    "reload_weight_sha_full_equal": true,
+    "reload_tie": {
+      "config_tie_word_embeddings": true,
+      "storage_shared": true,
+      "lm_head_present": true
+    },
+    "weight_fingerprint": "c9103e3f542c9c3c5b36530fde1bd547b63b8ea0bd4aa70ce93c81b0989300c5",
+    "weight_sha_full": "3a551b6545279a381151db1d920f8a124534dc648ae4075057941496ec405bb2"
+  },
+  "resave_bit_identical_to_parent": true,
+  "t_build_s": 7.857406139373779,
+  "tag": "PB__ernie03b__resave",
+  "weights_location": "private/partb/resave/ (deleted before the artifact finishes)"
+}

@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/a2mBzI8D6phP+V4BBLnFvrzy0P8</id>
+  <title>arXiv Query: search_query=&amp;id_list=2606.15980,2609.18471,2609.04721,2606.10154,2607.21063,2606.29581,2406.12935,2606.29441&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-21T16:00:30Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2606.15980,2609.18471,2609.04721,2606.10154,2607.21063,2606.29581,2406.12935,2606.29441" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>8</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2406.12935v2</id>
+    <title>ChatBug: A Common Vulnerability of Aligned LLMs Induced by Chat Templates</title>
+    <updated>2025-01-07T04:42:20Z</updated>
+    <link href="https://arxiv.org/abs/2406.12935v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.12935v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) are expected to follow instructions from users and engage in conversations. Techniques to enhance LLMs' instruction-following capabilities typically fine-tune them using data structured according to a predefined chat template. Although chat templates are shown to be effective in optimizing LLM performance, their impact on safety alignment of LLMs has been less understood, which is crucial for deploying LLMs safely at scale.
+  In this paper, we investigate how chat templates affect safety alignment of LLMs. We identify a common vulnerability, named ChatBug, that is introduced by chat templates. Our key insight to identify ChatBug is that the chat templates provide a rigid format that need to be followed by LLMs, but not by users. Hence, a malicious user may not necessarily follow the chat template when prompting LLMs. Instead, malicious users could leverage their knowledge of the chat template and accordingly craft their prompts to bypass safety alignments of LLMs. We develop two attacks to exploit the ChatBug vulnerability. We demonstrate that a malicious user can exploit the ChatBug vulnerability of eight state-of-the-art (SOTA) LLMs and effectively elicit unintended responses from these models. Moreover, we show that ChatBug can be exploited by existing jailbreak attacks to enhance their attack success rates. We investigate potential countermeasures to ChatBug. Our results show that while adversarial training effectively mitigates the ChatBug vulnerability, the victim model incurs significant performance degradation. These results highlight the trade-off between safety alignment and helpfulness. Developing new methods for instruction tuning to balance this trade-off is an open and critical direction for future research</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-17T03:03:34Z</published>
+    <arxiv:comment>This paper is accepted to AAAI 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Fengqing Jiang</name>
+    </author>
+    <author>
+      <name>Zhangchen Xu</name>
+    </author>
+    <author>
+      <name>Luyao Niu</name>
+    </author>
+    <author>
+      <name>Bill Yuchen Lin</name>
+    </author>
+    <author>
+      <name>Radha Poovendran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.10154v1</id>
+    <title>Quality Is Not a Safety Proxy Under Quantization</title>
+    <updated>2026-06-08T20:33:49Z</updated>
+    <link href="https://arxiv.org/abs/2606.10154v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.10154v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Quantized checkpoints are often screened first with quality metrics and only later, if at all, with direct safety tests. This paper audits that shortcut on a matched 51-row matrix spanning 6 models, 4 families, a 7-level GGUF ladder, and AWQ/GPTQ INT4 checkpoints. In this matrix the shortcut fails: all 36 quality-safety pairings split direction across models, and 9 hidden-danger rows plus 1 near-hidden-danger row show quality stable or improved while refusal falls by 12-68 percentage points. Seven of the 11 AWQ/GPTQ rows are hidden-danger. A four-probe mechanistic follow-up over the 17 Hugging Face-backed FP16/AWQ/GPTQ cells does not rescue it: entropy, refusal-direction, and calibration probes are weak or null separators of dangerous rows, and although probe-identified safety-associated neurons absorb 1.39$\times$ more quantization error overall ($p &lt; 5 \times 10^{-7}$), the effect is not regime-specific. Claude Sonnet 4 relabels 11,470 items in a predefined stratified set, agrees with the primary gemma3:12b judge on 89.9\% of rows ($κ= 0.873$, 95\% CI [0.866, 0.881]), and changes 0/10 hidden-danger cells. A calibrated study-internal behavioral screen -- the Refusal Template Stability Index (RTSI), built from four refusal-template drift features and calibrated on this matrix -- routes 10/10 hidden- or near-hidden-danger rows to direct safety testing (Wilson 95\% CI lower bound 0.72) while leaving 23 of 45 non-baseline rows in a low-risk bucket under both in-sample scoring and row-level leave-one-out validation; on the same matrix, the best single-feature baselines (unique-prefix-rate-delta, raw refusal-rate delta) recover 9/10 and 8/10 respectively at matched bucket size, and cross-stack transfer requires recalibration. For the quantized checkpoints, model families, and safety outcomes studied here, retained quality cannot waive direct safety evaluation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-08T20:33:49Z</published>
+    <arxiv:comment>21 pages, 6 figures. Preprint</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sahil Kadadekar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.29441v1</id>
+    <title>Closing the Activation-Cone Blind Spot: Response-Time Probing and Unified Defense</title>
+    <updated>2026-06-28T15:05:12Z</updated>
+    <link href="https://arxiv.org/abs/2606.29441v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.29441v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Inference-time safety methods for large language models have proliferated, yet no systematic comparison exists. We evaluate five defense paradigms (no defense, static steering, CAST, AlphaSteer, probe-gated) across seven instruction-tuned models (7-31B) and five attack types (GCG, AutoDAN, DeepInception, prefilling, intent laundering). Our central finding: prompt-time activation defenses are structurally blind to prefilling attacks. AlphaSteer achieves 0% attack success on GCG, AutoDAN, and intent laundering but 50% on prefilling. We prove a corollary: any defense that gates intervention on a single layer's activation alignment with a benign reference (cone, subspace, or null-space) is blind to attacks that craft activations to lie inside that reference, whether checked at prompt time or per token. As its constructive contrapositive we introduce response-time probing: a linear probe on the model's hidden state at the first generated tokens, with AUROC 0.97-1.00 across all seven models. Combined with a halt, it cuts prefilling attack success to 0/40 on every model with 0% benign false positives, outperforming Llama Guard 3. Cross-template generalisation depends on probe depth, so we scope the claim to the canonical prefilling-template family. Composing the response-halt with AlphaSteer's null-space steering gives an orthogonal split (the halt catches prefilling, AlphaSteer catches semantic attacks), reaching defense success 0.983 on Mistral and 0.994 on Llama and dominating both components. We further show MMLU fails to capture steering's true utility cost, which appears as behavioral hedging rather than factual loss, and that diverse negative training sets cut probe false positives from 80-100% to near zero. Code, attacks, per-sample results, and the judge prompt are released.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.ET" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-28T15:05:12Z</published>
+    <arxiv:comment>27 pages, 12 figures, 18 tables. Code and data: https://github.com/bassrehab/response-time-probing</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Subhadip Mitra</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.21063v1</id>
+    <title>QuantiBias: Benchmarking Quantization-Induced Bias in LLMs</title>
+    <updated>2026-07-23T08:56:11Z</updated>
+    <link href="https://arxiv.org/abs/2607.21063v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.21063v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Almost every large language model that reaches a broad audience is quantized: trained in full precision, then compressed for efficiency. This step is assumed harmless and its safety is rarely re-checked. We find its principal side effect is increased bias that standard safety evaluation misses. Holding the model, its training, and the prompts fixed, a quantized model still refuses harmful requests, still avoids over-refusing benign prompts, and still selects the unbiased multiple-choice answer. Yet asked an open-ended question, the same model volunteers stereotypes in all eight languages we probe, in roughly one in four open-ended answers under an independent judge (~24% to ~27% across the compression ladder): it passes every standard check and still reaches users measurably more biased. The selective gap is a robust finding; whether open-ended bias further increases with compression is less certain, sensitive to the judge that scores it. We address both with \textbf{QuantiBias}, a benchmark that pairs a generative, multilingual stereotype probe with the refusal and multiple-choice controls that isolate open-ended generation, contrasts each build with and without reasoning, and rates the content severity of what it generates. Across two backbone models (Qwen and Gemma), a five-family screen, and eight benchmarks, quantizers allocate their extra precision by capability data that carries no bias-prevention signal, and reasoning before answering roughly halves the effect on some families while doing nothing on others. A quantized build must be re-evaluated for open-ended bias, not only on the short-form safeguards it already passes.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-23T08:56:11Z</published>
+    <arxiv:comment>Benchmark protocol on Hugging Face: https://huggingface.co/datasets/emilioferrara/quantibias</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Emilio Ferrara</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.18471v1</id>
+    <title>First Token Matters: Understanding Safety Collapse in Large Reasoning Models</title>
+    <updated>2026-09-16T11:06:22Z</updated>
+    <link href="https://arxiv.org/abs/2609.18471v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.18471v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Reasoning Models (LRMs) exhibit strong problem-solving abilities, yet their safety alignment often degrades when handling harmful queries. Existing approaches to improving safety largely rely on additional training or preference optimization, while offering limited understanding of the internal mechanisms behind safety failures. In this work, we investigate this failure through a token-level positional analysis of refusal dynamics and identify a localized vulnerability at the onset of reasoning, which we term Onset Refusal Collapse (ORC). We find that the refusal-related signal of LRMs drops sharply at the first generated token under harmful queries, which is associated with unsafe response generation. Motivated by this finding, we propose SafeToken, a lightweight inference-time intervention that injects a learned continuous safety anchor precisely at reasoning onset. Despite updating only a single token embedding, SafeToken effectively mitigates ORC, improves safety on harmful-query benchmarks, and largely preserves reasoning utility. These results suggest that safety failures in LRMs can arise from a transient breakdown at the critical transition from understanding to generation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-16T11:06:22Z</published>
+    <arxiv:comment>18 pages, 7 figures, 10 tables. Includes appendices. Accepted at CICAI 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yizheng Yang</name>
+    </author>
+    <author>
+      <name>Haining Yu</name>
+    </author>
+    <author>
+      <name>Yuechen Wang</name>
+    </author>
+    <author>
+      <name>Yikai Hou</name>
+    </author>
+    <author>
+      <name>Xing Fu</name>
+    </author>
+    <author>
+      <name>Jinbo Yang</name>
+    </author>
+    <author>
+      <name>Tianqing Zhu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.29581v2</id>
+    <title>The Joint Effect of Quantization and Sampling Temperature on LLM Safety Alignment: A Factorial Analysis</title>
+    <updated>2026-07-15T10:24:21Z</updated>
+    <link href="https://arxiv.org/abs/2606.29581v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.29581v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern LLM deployments often combine quantization with higher sampling temperatures to reduce cost, latency, or repetition, yet safety evaluations usually treat these as fixed implementation details. We test whether models that are safe at FP16 with greedy decoding remain safe after quantization and stochastic sampling, or whether the two factors amplify each other. We evaluate 8 instruction-tuned models from five families across 3 precisions and 6 temperatures, covering 144 configurations on 7 harmfulness benchmarks and generating about 2.0 million responses, which are scored by a six-judge safety ensemble. Contrary to concerns that low-bit deployment erodes alignment, we find that standard quantization is approximately safety-neutral: for 7 of 8 models, AWQ INT4 keeps attack success within about 1.6 percentage points of FP16 or lowers it, with clear degradation only for SmolLM3-3B (34.5% to 44.1%). However, the larger risk comes from sampling: higher temperatures sharply increase decision instability, with DFR reaching 41.9% at T = 1.0, even when average ASR changes only modestly. The two factors do not compound: our Compound Degradation Index remains sub-additive (-0.071 to +0.018), indicating that quantization partially offsets rather than amplifies temperature-induced degradation. Finally, a per-benchmark breakdown shows that single-benchmark evaluation badly understates risk: several models scoring 0% on AdvBench exceed 80% on ManyHarm. Standard INT4/INT8 quantization can therefore be reasonable for well-aligned models, but safety claims should report multi-sample stability across multiple benchmarks rather than rely on a single benchmark at greedy decoding.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-28T19:52:25Z</published>
+    <arxiv:comment>11 pages, 5 Figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hari Prasad</name>
+    </author>
+    <author>
+      <name>Ritam Pal</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.15980v2</id>
+    <title>Do Activation Monitors Survive Model Updates? Benchmarking, Predicting, and Repairing Activation-Monitor Staleness</title>
+    <updated>2026-06-18T23:56:29Z</updated>
+    <link href="https://arxiv.org/abs/2606.15980v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.15980v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Activation monitors -- lightweight probes trained on a language model's internal representations -- are an increasingly common layer in deployment safety stacks. Deployed models however are rarely static: they are quantized, fine-tuned, adapted with LoRA, or served with merged adapters while the monitor remains frozen. We present the first systematic test of whether this implicit contract holds: whether activation monitors trained on a base model remain reliable after these routine model updates. Across multiple safety-relevant monitors, model depths, update families, and open-weight models, we find a sharp split: quantization-style updates largely preserve frozen probe performance, while fine-tuning-style updates frequently make probes stale. Fragility is highly monitor-dependent, with privacy/PII probes most affected and refusal-compliance probes comparatively stable, showing that retraining a behavior need not stale its corresponding monitor. QLoRA is especially damaging despite NF4 quantization alone being relatively benign, suggesting that quantization becomes riskier when combined with adaptation. We further show that degradation is predictable from pre-deployment features, enabling revalidation budgets to be triaged toward the monitors most likely to fail. Finally, we test repair strategies and find that cheap label-free activation realignment repairs every repair-relevant stale cell, with none requiring score calibration, few-label heads, or labeled retraining. These results suggest that fine-tuning should trigger activation-monitor revalidation by default, with prediction triaging which monitors to check first and label-free realignment as the default repair.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-14T19:07:22Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Evan Duan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.04721v1</id>
+    <title>Locating and Steering Refusal Beyond Attention</title>
+    <updated>2026-09-04T04:45:53Z</updated>
+    <link href="https://arxiv.org/abs/2609.04721v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.04721v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Where inside a language model does refusal live, and does that place change when the architecture does? In a transformer, refusal is governed by a single direction in the residual stream, a finding that safety and interpretability tooling now depend on. State-space models (SSMs) route information through a recurrent update instead of attention, sharing no token-mixing mechanism with a transformer. Does the same safety representation survive this shift, or must it be rediscovered per architecture? It survives. A single rigid rotation, which can only reorient a space and not reshape it, aligns one model's representation space with another's, so the two genuinely share the representation. A harm probe trained on a transformer then flags an SSM's harmful inputs, and removing the aligned direction makes a model answer attacks it would otherwise refuse, while a random direction of the same size does far less. What is architecture-specific is not where the direction is steered but where it must be read. Each layer computes a fresh output that is then added into the residual stream, and harm is cleanly readable at this output, the write site, before the addition. A control that holds the intervention's strength fixed shows that what matters is where the direction is estimated, not where it is applied. Applied through a detector-triggered gate, this direction lowers jailbreak success in all four architecture families we test (SSM, transformer, recurrent, hybrid), and on the SSM it holds against an attacker that tunes its prompt against the defense. The gate only matches a trivial rule that returns a fixed refusal whenever the same detector fires, so what transfers across architectures is the direction itself, not defense strength. Safety tooling built on refusal therefore ports to a new architecture by re-estimating the direction at that architecture's write site, not by rebuilding it.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-04T04:45:53Z</published>
+    <arxiv:comment>33 pages, 6 figures, 26 tables; 10-page main text plus technical appendix</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Preethi Carmel Bosco</name>
+    </author>
+    <author>
+      <name>Gopalakrishnan Srinivasan</name>
+    </author>
+  </entry>
+</feed>

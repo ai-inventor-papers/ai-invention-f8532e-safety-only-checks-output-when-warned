@@ -1,0 +1,94 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2606.15980
+Type: HTML
+Pattern: quantiz|dtype|template|chat format (48 matches in 50391 chars)
+
+--- Content ---
+
+2046:...vation Monitors Survive Model Updates? Benchmarking, Predicting, and Repairing Activation-Monitor Staleness
+
+Evan Duan 
+
+###### Abstract
+
+Activation monitors — lightweight probes trained on a language model’s internal representations — are an increasingly common layer in deployment safety stacks. Deployed models however are rarely static: they are quantized, fine-tuned, adapted with LoRA, or served with merged adapters while the monitor remains frozen. We present the first systematic test of whether this implicit contract holds: whether activation monitors trained on a base model remain reliable after these routine model updates. Across multiple safety-relevant monitors, model depths, update families, and open-weight models, we find a sharp split: quantization-style updates largely preserve frozen probe performance, while fine-tuning-style updates frequently make probes stale. Fragility is highly monitor-dependent, with privacy/PII probes most affected and refusal-compliance probes comparatively stable, showing that retraining a behavior need not stale its corresponding monitor. QLoRA is especially damaging despite NF4 quantization alone being relatively benign, suggesting that quantization becomes riskier when combined with adaptation. We further show that degradation is predictable from pre-deployment features, enabling revalidation budgets to be triaged toward the monitors most likely to fail. Finally, we test repair strategies and find that cheap label-free activation realignment repairs every repair-relevant stale cell, wit...
+--
+3672:...ng. These results suggest that fine-tuning should trigger activation-monitor revalidation by default, with prediction triaging which monitors to check first and label-free realignment as the default repair.
+
+University of Michigan
+
+evanduan@umich.edu
+
+Figure 1: Update-family split in monitor staleness. Median Δ\DeltaAUC and big-drop rates separate quantization-flat updates from fine-tune-hot updates. Dashed line: Δ\DeltaAUC ≤−0.05\leq-0.05 big-drop threshold; error bars: Wilson 95% CIs. Figure 2: Overview of the activation-monitor maintenance pipeline. We benchmark whether probes trained on base-model activations remain reliable after model updates by freezing the base probe and re-evaluating it on...
+--
+4946:...Azaria and Mitchell 2023; Goldowsky-Dill et al. 2025). Probes are cheaper than a second guard model, add little latency, and read internal model state rather than only sampled text, which output-level guardrails cannot do, thus its appeal (Inan et al. 2023; Han et al. 2024).
+
+Deployed models, however, are moving targets. The same checkpoint may be quantized for cheaper serving, customized with parameter-efficient fine-tuning, served with runtime adapters, merged with those adapters, or adapted on an already-quantized base (Hu et al. 2022; Dettmers et al. 2022; Dettmers et al. 2023; Frantar et al. 2023; Lin et al. 2024; Xiao et al. 2023). In each case, the deployed model changes while the activation monitor, trained once on base-model activations, remains frozen. The implicit contract is that the representation read by the probe remains stable under these upd...
+--
+6133:... predictable in advance from information available before post-update evaluation; and (iv) whether stale monitors can be cheaply repaired.
+
+We answer these questions with a benchmark-and-maintenance pipeline. We train linear probes on base-model activations from Gemma-2-2B-it and Qwen2.5-7B-Instruct, freeze them, and re-evaluate them across twelve quantization, LoRA, merged-LoRA, and QLoRA update conditions, yielding 2,520 eligible update cells. We then test whether staleness can be predicted from pre-deployment metadata and base-side probe/activation features, and whether stale monitors can be repaired through a cost-ordered ladder from label-free activation realignment to labeled retraining.
+
+Four findings emerge. First, fragility is strongly monitor-dependent: big-drop rates range from 57.1% for privacy/PII to 7.9% for refusal-compliance. Second, update family dominates staleness: quantization has low big-drop rates of 0.83–3.33% and no operational failures, while LoRA-family updates produce 43.2–53.8% big-drop rates and a 13.75% operational-failure rate. Third, staleness is predictable before post-update evaluation: learned predictors beat the strongest lookup baseline in three of four leave-group-out settings, including leave-upd...
+--
+7609:...ibration, few-label heads, or retraining. Our contributions are:
+
+  * •
+
+We systematically evaluate frozen safety probes under routine model-side updates across 2 models, 4 monitors, 12 update conditions, 6 layers, and 5 seeds, yielding 2,520 eligible update cells with fixed degradation criteria.
+
+  * •
+
+We identify a structured staleness pattern: quantization is largely flat, fine-tuning is often hot, runtime and merged adapters degrade nearly identically, and monitor fragility varies by 7×\times, with privacy/PII most fragile.
+
+  * •
+
+We show that degradation is predictable before post-update evaluation: learned predictors using pre-deployment features outperform strong group-mean baselines, incl...
+--
+9908:.... 2024). This makes them easier to reuse across models, but prevents them from directly reading pre-output internal states. Activation monitors provide that internal access, but are tied to the representation geometry of a specific checkpoint.
+
+#### Model-side updates and safety degradation.
+
+Modern deployment pipelines often change models through quantization and parameter-efficient fine-tuning. Quantization methods such as LLM.int8, NF4/QLoRA, GPTQ, AWQ, and SmoothQuant reduce serving cost while preserving task performance (Dettmers et al. 2022; Dettmers et al. 2023; Frantar et al. 2023; Lin et al. 2024; Xiao et al. 2023), while LoRA and QLoRA enable lightweight customization (Hu et al. 2022; Dettmers et al. 2023). These updates can also affect ...
+--
+13067:...l-information positives and no-labeled-PII negatives; refusal-compliance uses XSTest (Röttger et al. 2023), contrasting safe prompts that resemble unsafe requests with genuinely unsafe prompts while preserving its natural size to avoid cross-source style confounds; and high-stakes is a controlled synthetic monitor with matched low- and high-stakes templates over the same topic domains. Each monitor uses up to 1,000 examples, balanced 500/500 by class when possible, with a 70/30 train/test split, exact-duplicate removal, and grouped splits for shared templates or pair identities.
+
+Update family |  Update types |  Models covered  
+---|---|---  
+Quantization |  bnb INT8, bnb NF4 |  Gemma + Qwen  
+Weight-only quant |  GPTQ, AWQ |  Qwen only  
+Activation-aware quant |  W8A8/SmoothQuant |  Qwen only  
+LoRA |  alpaca/general, safety, privacy |  Gemma + Qwen  
+Merged LoRA |  merged versions |  Gemma + Qwen  
+QLoRA |  safety QLoRA |  Gemma + Qwen  
+Table 2: Update conditions and backend coverage. The designed grid contains twelve post-base update conditions.
+
+Update conditions. We evaluate twelve post-base update conditions, with per-model backend coverage summarized in Table 2. Quantization includes bitsandbytes INT8 and NF4 (Dettmers et al. 2022; Dettmers et al. 2023), weight-only GPTQ and AWQ (Frantar et al. 2023; Lin et al. 2024), and activation-aware SmoothQuant-style W8A8 (Xiao et al. 2023). Fine-tuning includes three rank-16 LoRA adapters (Hu et al. 2022) for general instruction following, refusal/safety behavior, and privacy/PII-removal rewriting, their merged counterparts, and a QLoRA safety adapter served on an NF4-quantized base (Dettmers et al. 2023). Safety and privacy fine-tuning data are disjoint from the corresponding monitor datasets, with verbatim-overlap checks to avoid train-on-test leakage.
+
+Probes. Monitors are implemented as linear logistic probes on residual-stream activations at the final non-padding token of the chat-formatted prompt, read at layers ...
+--
+15201:... of the training split (seeds 0–4). Probes are trained only on base-model activations and are frozen thereafter: every update condition is evaluated by re-extracting activations from the updated model and scoring them with the unchanged probe.
+
+Update family |  nn |  Median Δ\DeltaAUC |  Big-drop rate |  Operational failure  
+---|---|---|---|---  
+Quantization |  480 |  -0.0021 |  1.46% |  0.00%  
+Weight-only quant |  240 |  -0.0059 |  3.33% |  0.00%  
+Activation-aware quant |  120 |  -0.0062 |  0.83% |  0.00%  
+LoRA |  720 |  -0.0374 |  43.33% |  13.75%  
+Merged LoRA |  720 |  -0.0381 |  43.19% |  13.75%  
+QLoRA |  240 |  -0.0571 |  53.75% |  13.75%  
+Table 3: Probe degradation summarized by updat...
+--
+16931:...etween the base and updated model; we additionally record recall at 1% and 5% false-positive rate and expected calibration error. The full grid is 2 models ×\times 4 monitors ×\times 12 update conditions ×\times 6 layers ×\times 5 seeds = 2,880 designed update cells, of which 2,520 completed (the remainder are the logged Gemma cells lacking public quantized checkpoints); all completed cells passed the base-quality eligibility gate fixed before the full-scale run (Table 1)
+
+## Benchmarking Activation Monitor Staleness
+
+In this section, we systematically benchmarks activation-monitor staleness under routine model updates. We first define the frozen-probe evaluation protocol and degradation criteria, ...
+--
+18053:...nary safety-relevant labels together with a probe hh trained on {(ϕℓM​(xi),yi):i∈Dtrain}\\{(\phi_{\ell}^{M}(x_{i}),y_{i}):i\in D_{\mathrm{train}}\\}. An update is an operator UU mapping MM to an updated model M′=U⁡(M)M^{\prime}=U(M) with the same architecture and tokenizer interface, so layer indices remain aligned, but altered weights or numerics—quantization, adapter insertion, adapter merging, or quantized-base adaptation. The persistence question is whether hh, trained on ϕℓM\phi_{\ell}^{M} and frozen, remains accurate when composed with ϕℓM′\phi_{\ell}^{M^{\prime}}.
+
+#### Benchmark Cells.
+
+The unit of evaluation is a cell c=(model,monitor,update,layer,seed)c=(\text{model},\text{monitor},\text{...
+--
+[28 more matches not shown]

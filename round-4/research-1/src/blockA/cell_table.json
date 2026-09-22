@@ -1,0 +1,474 @@
+{
+  "rows": [
+    {
+      "paper": "AMS (Activation-based Model Scanner)",
+      "arxiv_id": "2608.05578",
+      "url": "https://arxiv.org/pdf/2608.05578",
+      "title": "Detecting Safety Training Modification in Language Models via Activation Analysis",
+      "authors_if_confirmed": "Glen Messenger (Google Cloud, Google LLC)",
+      "date": "2026-06/08 (also published IEEE Access, LinkedIn confirms 'my paper is now published in IEEE Access: Detecting Safety Training Modification in Language Models via Activation Analysis' -> same paper as the 'Messenger 2026 IEEE Access' row requested in the brief; repo: github.com/GoogleCloudPlatform/activation-model-scanner)",
+      "cells": {
+        "C1": {
+          "verdict": "PARTIAL",
+          "quote": "Quantization robustness measurements (FP16/INT8/INT4 on Llama-3.1-8B-Instruct) were performed in an earlier round of validation and are reported separately in Section VIII-C; they did not undergo the bootstrap or LOOCV analysis applied to the 14-model",
+          "url": "https://arxiv.org/pdf/2608.05578",
+          "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ",
+          "positive_control": "n/a (matched: 20/20 hits); second quote: 'Maximum drift across concepts was 4.4% (harmful content at INT4: 5.42σ vs. 5.67σ at FP16). We also verified that a CRITICAL model (Dolphin-2.9) remains CRITICAL at INT4' -- a genuine no-op/false-alarm test, but on ONE model only, run as a separate earlier-round experiment excluded from the main 14-model bootstrap/LOOCV panel, so it is present-but-not-per-checkpoint."
+        },
+        "C2": {
+          "verdict": "OPEN",
+          "quote": "No matches found for pattern: XSTest|OR-Bench|over.?refus|false refus",
+          "url": "https://arxiv.org/pdf/2608.05578",
+          "regex": "XSTest|OR-Bench|over.?refus|false refus",
+          "positive_control": "Same URL, pattern 'quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ' returns 20 matches, and pattern 'steer|ablat|patch|causal|random direction' returns 11 matches, confirming the fetch/grep pipeline worked on this document; README grep 'XSTest|OR-Bench|over.?refus|false refus|logit|first.token|refusal probability' also 0/13 matches on raw.githubusercontent.com README.md."
+        },
+        "C3": {
+          "verdict": "OPEN",
+          "quote": "DPO on harmful-comply pairs that adjusts output-layer logits without rewriting middle-layer features; targeted fine-tuning of the final transformer block or lm_head; or instruction-following over-fitting that conditions the model to suppress refusal tokens at decode time",
+          "url": "https://arxiv.org/pdf/2608.05578",
+          "regex": "logit|first.token|refusal probability",
+          "positive_control": "This is the only 'logit' hit (1/1) and it is a hypothesized mechanism for an undetectable evasion class (iv), not an implemented logit/first-token baseline compared against AMS's activation readout."
+        },
+        "C4": {
+          "verdict": "OPEN",
+          "quote": "detecting class (iv) likely requires either output-layer-aware probing (examining lm_head and final-block parameters), token-level decoding analysis (measuring how the model treats refusal tokens at generation time), or direct behavioral evaluation. We treat this as the principal open problem motivated by the present work.",
+          "url": "https://arxiv.org/pdf/2608.05578",
+          "regex": "decode|generation time|generated token|open problem",
+          "positive_control": "n/a (6/6 hits); AMS's own Tier 1/Tier 2 activations are taken on a forward pass over contrastive prompts, not at generated tokens; the paper explicitly names decode-time token analysis as an unsolved open problem, i.e. it names C4 as future work rather than closing it."
+        },
+        "C5": {
+          "verdict": "OPEN",
+          "quote": "Activation steering [4] adds steering vectors at inference time to modify behavior; AMS measures existing direction vectors at scan time to assess modification. The relationship is dual: steering tells us a direction is causally active, AMS tells us how stable that direction is across model variants.",
+          "url": "https://arxiv.org/pdf/2608.05578",
+          "regex": "steer|ablat|patch|causal|random direction",
+          "positive_control": "n/a (11/11 hits, but all are related-work citations of Turner/Zou/Arditi or descriptions of abliteration attacks being detected, not a causal steering/ablation test AMS itself runs on its own readout direction with a random/orthogonal control)."
+        }
+      },
+      "notes": "Tier 2 'identity verification' compares a candidate model's per-layer direction vector and separation σ against a stored baseline from the SAME model family/identity, thresholds: cosine similarity >0.7 (README) / >0.8 (paper Table II uses same wording 'DIRECTION SIMILARITY <0.8 ... TRIGGERS A VERIFICATION FAILURE'), separation drift <20%. The quantization robustness experiment (FP16/INT8/INT4 on Llama-3.1-8B-Instruct, max drift 4.4%, CRITICAL model stays CRITICAL at INT4) is the single clearest no-op/false-alarm control found in the whole survey, but it is explicitly a separate, earlier-round, single-model validation excluded from the main 14-model bootstrapped panel -- i.e. present but not per-checkpoint. README additionally documents CLI flags --load-8bit/--load-4bit for scanning quantized models directly, corroborating that quantization is an operationally supported but only lightly validated axis."
+    },
+    {
+      "paper": "N-GLARE",
+      "arxiv_id": "2511.14195",
+      "url": "https://arxiv.org/pdf/2511.14195",
+      "title": "N-GLARE: A Non-Generative, Latent Representation-Efficient LLM Safety Evaluator",
+      "authors_if_confirmed": "unconfirmed from fetched text (ACL 2026 long / aclanthology.org/2026.acl-long.1334)",
+      "date": "2025-11 (v1) / ACL 2026",
+      "cells": {
+        "C1": {
+          "verdict": "OPEN",
+          "quote": "No matches found for pattern: quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ",
+          "url": "https://arxiv.org/pdf/2511.14195",
+          "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ",
+          "positive_control": "Same URL, pattern 'XSTest|OR-Bench|over.?refus|false refus|Refusal Rate|RR' returns 49 matches, confirming successful fetch of this 75k-char PDF text."
+        },
+        "C2": {
+          "verdict": "OPEN",
+          "quote": "Refusal Rate. This metric is based on refusal-style keyword matching. A model response is counted as a refusal if it contains typical refusal patterns such as “I’m sorry”, “I cannot comply”, “I refuse to answer”, or similar formulations.",
+          "url": "https://arxiv.org/pdf/2511.14195",
+          "regex": "XSTest|OR-Bench|over.?refus|false refus|Refusal Rate|RR",
+          "positive_control": "n/a (49/49 hits). Fig 6/7 track 'Unsafe Rate' (UR) and 'Refusal Rate' (RR) jointly across Forward/Inverse DPO training steps as SURFACE behavioral ground-truth compared against the latent JSS proxy; RR here is refusal on the harmful/jailbreak red-teaming prompt stream used to gauge whether safety training persists, not a benign-prompt over-refusal benchmark (no XSTest/OR-Bench/PHTest anywhere in the paper, 0 matches). This settles the brief's key question for row 1b: RR is defined on the harmful/attack side, not benign side, so Fig 7's UR/RR-vs-JSS coupling is NOT an over-refusal (C2) result."
+        },
+        "C3": {
+          "verdict": "OPEN",
+          "quote": "Figure 9 also shows that mid-stage elevation corresponds to increased refusal probability, while late-stage decline coincides with jailbreak success.",
+          "url": "https://arxiv.org/pdf/2511.14195",
+          "regex": "logit|first.token|refusal probability|keyword",
+          "positive_control": "n/a (3/3 hits). 'Refusal probability' here is a narrative description of what elevated APT angle/ANM signifies, not a computed logit-based or first-token-probability baseline compared against the JSS activation readout; the only quantitative comparison baseline used is the keyword-matched Refusal Rate (behavioral), not a logit-derived probability."
+        },
+        "C4": {
+          "verdict": "OPEN",
+          "quote": "hidden states of the last token across all layers at the decision-making cross-section immediately preceding the next assistant response generation",
+          "url": "https://arxiv.org/pdf/2511.14195",
+          "regex": "decode|generated token|teacher.forc|last.token|prompt token",
+          "positive_control": "n/a (4/4 hits). This is exactly the excluded case in the brief's C4 definition: activations are read at the LAST PROMPT TOKEN, immediately BEFORE generation begins, not at the model's own generated tokens."
+        },
+        "C5": {
+          "verdict": "OPEN",
+          "quote": "Existing representation analysis work primarily uses such directions at the prompt level, for example to steer individual generations or to classify the risk of a specific input. However, these techniques are typically model-specific and do not directly provide a model-level safety indicator",
+          "url": "https://arxiv.org/pdf/2511.14195",
+          "regex": "steer|ablat|patch|causal|random direction",
+          "positive_control": "n/a (6/6 hits, all related-work citations of RepE/steering literature, plus a report that 'After ablating safety alignment (manually jailbroken variants), accuracy [of stage classification] collapses to ~0.5' -- this ablates the TRAINING (jailbreak fine-tuning), not the JSS readout direction itself via a random/orthogonal-controlled causal intervention)."
+        }
+      },
+      "notes": "N-GLARE's APT trajectories are collected turn-by-turn across a dialogue, always at each turn's last (pre-generation) prompt token, never at the model's own decoded tokens. Its safety indicator (JSS, a Jensen-Shannon-divergence-based trajectory separability score) is validated by rank correlation (Kendall's tau) against red-teaming ground truth and by tracking UR/RR co-evolution under DPO, but never against quantization/dtype/template/re-download/non-safety-finetune no-ops, never against a logit-based baseline, and never causally (no steering/ablation test of the JSS direction with a control)."
+    },
+    {
+      "paper": "RAS / SafeVec",
+      "arxiv_id": "2606.25750",
+      "url": "https://arxiv.org/pdf/2606.25750",
+      "title": "RAS: Measuring LLM Safety Through Refusal Alignment",
+      "authors_if_confirmed": "Chang-Chieh Huang, Yan-Lun Chen, Chia-Mu Yu, Wei-Bin Lee",
+      "date": "2026-06-24",
+      "cells": {
+        "C1": {"verdict": "OPEN", "quote": "No matches found for pattern: quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ", "url": "https://arxiv.org/pdf/2606.25750", "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ", "positive_control": "Same URL, pattern 'decode|generated token|teacher.forc|last.token|prompt token' returns 4 matches, confirming the fetch worked."},
+        "C2": {"verdict": "OPEN", "quote": "No matches found for pattern: XSTest|OR-Bench|over.?refus|false refus", "url": "https://arxiv.org/pdf/2606.25750", "regex": "XSTest|OR-Bench|over.?refus|false refus", "positive_control": "Same URL, pattern 'steer|ablat|patch|causal|random direction' returns 2 matches, confirming the fetch worked."},
+        "C3": {"verdict": "OPEN", "quote": "No matches found for pattern: logit|first.token|refusal probability", "url": "https://arxiv.org/pdf/2606.25750", "regex": "logit|first.token|refusal probability", "positive_control": "Same URL, pattern 'quantiz|...' etc all attempted and the abstract/HTML fetch succeeded (7598 chars), confirming access; RAS/SafeVec never mentions logits at all."},
+        "C4": {"verdict": "OPEN", "quote": "We extract last-token residual-stream activations at each decoder layer. Output-level ASR is evaluated separately using HEx-PHI prompts", "url": "https://arxiv.org/pdf/2606.25750", "regex": "decode|generated token|teacher.forc|last.token|prompt token", "positive_control": "n/a (4/4 hits). Both Stage-1 reference-direction extraction and target scoring read the LAST (prompt) TOKEN's residual activation, never a decode-site/generated-token activation."},
+        "C5": {"verdict": "OPEN", "quote": "Recent work shows that refusal is encoded and can be manipulated in activation space (Arditi et al., 2024). Rather than steering model behavior, we use refusal alignment as a safety evaluation signal.", "url": "https://arxiv.org/pdf/2606.25750", "regex": "steer|ablat|patch|causal|random direction", "positive_control": "n/a (2/2 hits, one is the explicit disclaimer above, the other a references-list citation of Turner et al.'s steering paper)."}
+      },
+      "notes": "RAS/SafeVec is OPEN on all five criteria: no quantization/no-op false-alarm testing, no over-refusal benchmark, no logit baseline, last-prompt-token (not decode-site) readout, and an explicit statement that it deliberately does not steer/causally test the direction it measures."
+    },
+    {
+      "paper": "Aligned Probing",
+      "arxiv_id": "2503.13390",
+      "url": "https://arxiv.org/pdf/2503.13390",
+      "title": "Aligned Probing: Relating Toxic Behavior and Model Internals",
+      "authors_if_confirmed": "Andreas Waldis, Vagrant Gautam, Anne Lauscher, Dietrich Klakow, Iryna Gurevych (TACL 2026, aclanthology.org/2026.tacl-1.14)",
+      "date": "2025-03-17 (v1) / 2025-09-23 (v2) / TACL 2026",
+      "cells": {
+        "C1": {
+          "verdict": "CLOSED",
+          "quote": "This analysis reveals neglectable differences for the behavioral (a.) and internal (b.) perspective. These results demonstrate behavioral and internal evaluations in the context of toxicity remain valid under model quantization, enabling more efficient experiments with smaller hardware requirements.",
+          "url": "https://arxiv.org/pdf/2503.13390",
+          "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ",
+          "positive_control": "n/a (10/10 hits). 'Case Study 3: Model Quantization' compares the Full, Half and Four-Bit precision variants of the pre-trained OLMo model, on BOTH the behavioral output AND the internal-representation (probe) readout, and reports the readout is stable under this genuine no-op edit -- this is the closest true no-op/expression-only false-alarm control found in the whole survey. Caveat: this is a TOXICITY readout, on a single model (OLMo) with 3 precision variants, not a refusal/safety-specific readout tested across many checkpoints."
+        },
+        "C2": {"verdict": "OPEN", "quote": "No matches found for pattern: XSTest|OR-Bench|over.?refus|false refus", "url": "https://arxiv.org/pdf/2503.13390", "regex": "XSTest|OR-Bench|over.?refus|false refus", "positive_control": "Same URL, pattern 'quantiz|...' returns 10 matches and 'steer|ablat|patch|causal|random direction' returns 9 matches, confirming the fetch worked."},
+        "C3": {"verdict": "OPEN", "quote": "No matches found for pattern: logit|first.token|refusal probability", "url": "https://arxiv.org/pdf/2503.13390", "regex": "logit|first.token|refusal probability", "positive_control": "Same URL, 'decode|generated token|teacher.forc|last.token|prompt token' returns 0 matches too, and 'quantiz' returns 10 -- confirms this is a topic gap (toxicity probing of general given-input representations), not a fetch failure."},
+        "C4": {"verdict": "OPEN", "quote": "No matches found for pattern: decode|generated token|teacher.forc|last.token|prompt token", "url": "https://arxiv.org/pdf/2503.13390", "regex": "decode|generated token|teacher.forc|last.token|prompt token", "positive_control": "Same URL, 'random|control condition|orthogonal' returns 4 matches (probe selectivity control with shuffled labels), confirming the fetch worked."},
+        "C5": {
+          "verdict": "PARTIAL",
+          "quote": "To establish whether this connection between the internal and behavioral perspectives is causal, we perform layer-wise interventions. Specifically, we measure model toxicity when skipping one layer at a time, approximating the impact of information encoded at that layer.",
+          "url": "https://arxiv.org/pdf/2503.13390",
+          "regex": "steer|ablat|patch|causal|random direction",
+          "positive_control": "n/a (9/9 hits). This is a genuine causal intervention (layer-skip ablation) on toxicity-relevant internals, with a random-label probe-selectivity control reported separately (line ~74454: 'we train and evaluate every probe once with the true label ... and once where we randomly shuffle the labels'), but it is layer-skipping, not steering/ablating a specific readout DIRECTION against a random/orthogonal-direction control, so scored PARTIAL rather than CLOSED."
+        }
+      },
+      "notes": "Not a refusal/jailbreak-safety metric paper -- it studies TOXICITY (Perspective-API-style attributes) via probing 20+ OLMo/Llama/Mistral models, with 4 case studies (DPO detoxification, multi-prompt eval, quantization, pre-training dynamics). Its quantization case study is the single strongest true no-op false-alarm precedent found for an activation-based readout in this whole survey, and its causal layer-skip test is the strongest true causal precedent among the 'canonical' safety-metric-adjacent papers (1a-1c), even though the topic is toxicity, not refusal, and coverage is per-model-family rather than per-checkpoint-panel."
+    },
+    {
+      "paper": "Item Response Theory for AI Safety",
+      "arxiv_id": "2608.05086",
+      "url": "https://arxiv.org/pdf/2608.05086",
+      "title": "Item Response Theory for AI Safety",
+      "authors_if_confirmed": "Joshua Fonseca Rivera, Neil Shah, David Demitri Africa, Konstantinos Voudouris",
+      "date": "2026-08-05",
+      "cells": {
+        "C1": {
+          "verdict": "OPEN",
+          "quote": "provider routing, quantization, inference backends, and silent serving changes can alter behavior under the same model identifier",
+          "url": "https://arxiv.org/pdf/2608.05086",
+          "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ",
+          "positive_control": "n/a (3/3 hits). Quantization is named as a motivating REAL-drift scenario their audit is meant to CATCH via item-level ability estimates and retained-response checks, not as a benign no-op that they empirically confirm does NOT trigger a false alarm; no executed quantization experiment is reported."
+        },
+        "C2": {
+          "verdict": "CLOSED (behavioral, not activation-based -- see notes)",
+          "quote": "we fit IRT models to eight safety benchmarks (5,255 items, 192 models) covering harmful compliance, over-refusal, and truthfulness ... OR-Bench-Hard (Cui et al. 2024) over-refusal LLM judge 1,318",
+          "url": "https://arxiv.org/pdf/2608.05086",
+          "regex": "XSTest|OR-Bench|over.?refus|false refus",
+          "positive_control": "n/a (25/25 hits). OR-Bench-Hard is one of the 8 calibration benchmarks and 'refusal strictness' is one of the 3 extracted latent factors -- but the whole method is purely BEHAVIORAL/output-level (no hidden states used anywhere), so this does not satisfy the activation-readout framing of C1-C5 even though the benchmark itself is present."
+        },
+        "C3": {"verdict": "OPEN", "quote": "Δθ vs genuine baseline (logits) ... Uniform sandbagging changes the estimated ability by a median of +1.69 log-its", "url": "https://arxiv.org/pdf/2608.05086", "regex": "logit|first.token|refusal probability|activation|hidden state|internal representation", "positive_control": "n/a (3/3 hits). 'Logits' here means log-odds units of the fitted IRT ability scale (psychometrics), not the LM's own next-token logits/first-token refusal probability; no activation/hidden-state term appears anywhere in the paper."},
+        "C4": {"verdict": "OPEN", "quote": "n/a", "url": "https://arxiv.org/pdf/2608.05086", "regex": "activation|hidden state|internal representation", "positive_control": "0 matches for any internal-representation term across the whole paper -- IRT for AI Safety is a purely behavioral/psychometric method operating on binary item scores, never on model internals."},
+        "C5": {"verdict": "OPEN", "quote": "n/a", "url": "https://arxiv.org/pdf/2608.05086", "regex": "steer|ablat|patch|causal|random direction", "positive_control": "no steering/ablation vocabulary found; the paper's only causal-flavored claim is about detecting sandbagging/API model swaps via ability-drift, not a direction-level causal test."}
+      },
+      "notes": "Confirmed: title is exactly 'Item Response Theory for AI Safety'; it fits IRT models to 8 BEHAVIORAL safety benchmarks (5,255 items, 192 models -- largest such psychometric analysis to date), recovering 3 latent factors (refusal strictness, truthfulness, contextual harm), and uses the fitted model to (i) characterize benchmark redundancy, (ii) compress evaluation to ~10 adaptively-chosen items (97-99% cost cut), and (iii) audit individual models/detect sandbagging and silent API model swaps via ability drift. Over-refusal (OR-Bench-Hard) IS one of its 8 benchmarks and IS explicitly named as one of the 3 orthogonal safety factors -- but this is entirely at the BEHAVIORAL/output level; the paper never touches model internals, so it cannot close C3/C4/C5 as defined, and is best used as a FRAMING paper for measurement invariance / construct validity of model-level safety scores (see framing section)."
+    },
+    {
+      "paper": "When Behavioral Safety Evaluation Fails: A Representation-Level Perspective",
+      "arxiv_id": "2606.08044",
+      "url": "https://arxiv.org/pdf/2606.08044",
+      "title": "When Behavioral Safety Evaluation Fails: A Representation-Level Perspective",
+      "authors_if_confirmed": "Enyi Jiang, Anders Gjølbye, Yibo Jacky Zhang, Sanmi Koyejo",
+      "date": "2026-06-06 (v1) / 2026-08-04 (v2)",
+      "cells": {
+        "C1": {
+          "verdict": "OPEN",
+          "quote": "The construction also targets a single trained direction, and whether it survives routine operations like quantization is untested. Future work should pursue more realistic attacks, stronger diagnostics, and objectives that close this gap.",
+          "url": "https://arxiv.org/pdf/2606.08044",
+          "regex": "quantiz|dtype|GGUF|chat.template",
+          "positive_control": "n/a (1/1 hit, and it is the paper's own limitations section explicitly naming quantization robustness as UNTESTED -- a direct admission of this exact gap)."
+        },
+        "C2": {
+          "verdict": "CLOSED",
+          "quote": "Benign answer rate is 0.96 for every Gemma and Llama model and 0.96-1.00 on Qwen, over-refusal is its small complement (0.04, or 0.00 for the Qwen base), and the factual spot-check is 7/7 for every model.",
+          "url": "https://arxiv.org/pdf/2606.08044",
+          "regex": "over-refusal|benign answer rate",
+          "positive_control": "n/a (7/7 hits). Over-refusal is measured per model (base vs 'dissociated' adversarially-constructed twin) across all 3 families/6 models as one of 5 static-audit behavioral outcomes (Table 5, Figure 8) -- explicitly used to show static audits are blind to the injected latent vulnerability."
+        },
+        "C3": {"verdict": "OPEN", "quote": "so fθ(x) are the next-token logits and πθ = softmax fθ the induced distribution", "url": "https://arxiv.org/pdf/2606.08044", "regex": "logit|first.token", "positive_control": "n/a (1/1 hit) -- this is a generic notation definition for the model, not an implemented logit/first-token refusal-probability baseline compared to the activation-based LVS readout."},
+        "C4": {
+          "verdict": "OPEN",
+          "quote": "a strong fixed probe on clean activations cannot tell it from the base",
+          "url": "https://arxiv.org/pdf/2606.08044",
+          "regex": "clean activations|static latent prob",
+          "positive_control": "The static probe operates on 'clean activations' (unperturbed forward pass, implicitly prompt-side per standard refusal-probing convention as in Arditi et al. 2024, which this paper cites); no explicit generated-token/decode-time readout phrase was found in a targeted grep, so scored OPEN rather than PARTIAL for lack of positive evidence."
+        },
+        "C5": {
+          "verdict": "CLOSED",
+          "quote": "targeted layer-wise latent perturbations with matched random controls, and activation steering along a harmful direction (Section 4), applied symmetrically to the base, dissociated, and harmful models and compared against the static audits' verdicts",
+          "url": "https://arxiv.org/pdf/2606.08044",
+          "regex": "matched random control|steering|activation patching",
+          "positive_control": "n/a. Extensive causal battery: PGD-style bounded latent attacks with a same-ball random-direction control ('A random control draws δ uniformly from the same ball, so any gap between targeted and random perturbations isolates directed reachability from generic perturbability'), directional steering along the harmful-minus-base direction, and activation patching with a base-into-base control and harmful-into-base reference -- reported in Table 1 (e.g. steering compliance 0.00->0.96 base->dissociated on Gemma vs matched random staying ≤12%)."
+        }
+      },
+      "notes": "This paper's central contribution is exactly the 'audit gap' framing: static behavioral+probe audits (including over-refusal) certify a model identical to its safety-aligned base, while soft interventions (PGD with matched-random control, directional steering, activation patching with control) reveal 54-86% harmful compliance is latently reachable. Extremely strong C2+C5 precedent, but the authors themselves flag quantization robustness of their own construction as untested (C1 OPEN by their own admission), and no logit baseline or explicit decode-site protocol is used (C3/C4 OPEN)."
+    },
+    {
+      "paper": "Perfect Detection, Failed Control: The Geometry of Knowing vs. Steering in Language Models",
+      "arxiv_id": "2606.24952",
+      "url": "https://arxiv.org/pdf/2606.24952",
+      "title": "Perfect Detection, Failed Control: The Geometry of Knowing vs. Steering in Language Models",
+      "authors_if_confirmed": "Cosimo Galeone, Anna Ettorre, Minsu Park, Giuseppe Ettorre, Daniele Ligorio",
+      "date": "2026-06-23",
+      "cells": {
+        "C1": {"verdict": "OPEN", "quote": "No matches found for pattern: quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ", "url": "https://arxiv.org/pdf/2606.24952", "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ", "positive_control": "Same URL, 'steer|ablat|patch|causal|random direction' returns 66 matches, confirming the fetch worked."},
+        "C2": {
+          "verdict": "PARTIAL",
+          "quote": "Real obscure (N=20): genuine but uncommon facts the model may not know confidently ... used to test whether the intervention causes over-refusal on hard but real questions.",
+          "url": "https://arxiv.org/pdf/2606.24952",
+          "regex": "XSTest|OR-Bench|over.?refus|false refus",
+          "positive_control": "n/a (2/2 hits). A genuine, explicit over-refusal false-positive stress test is run as a side-effect check on the hallucination-detection intervention ('0 false refusals on the 50 real questions'), but it targets factual-obscurity false refusals, not harmful-request over-refusal, and uses a custom stimulus set, not XSTest/OR-Bench."
+        },
+        "C3": {
+          "verdict": "CLOSED",
+          "quote": "The unembedding matrix Wlm_head maps each residual-stream vector to token logits, so the row for a token is the residual-space direction that promotes that token. ... dHP = normalize(mean(Wlm_head[ti ∈A]) −mean(Wlm_head[tj ∈B]))",
+          "url": "https://arxiv.org/pdf/2606.24952",
+          "regex": "logit|first.token|refusal probability",
+          "positive_control": "n/a (9/9 hits). A hand-picked, logit/lm_head-derived direction (built from first-generated-token identities, e.g. 'Unfortunately' vs 'The') is directly compared, geometrically (cosine) and causally (steering), against the data-driven activation (difference-in-means) direction -- exactly the C3 comparison, including for the direction 'producing a refusal'."
+        },
+        "C4": {"verdict": "OPEN", "quote": "we collect residual-stream activations h at the last prompt token for a set of inputs from each condition, then subtract the means", "url": "https://arxiv.org/pdf/2606.24952", "regex": "decode|generated token|teacher.forc|last.token|prompt token", "positive_control": "n/a (6/6 hits). All directions (detection and hand-picked) are built from the LAST PROMPT TOKEN residual, before generation, not from the model's own decoded tokens."},
+        "C5": {
+          "verdict": "CLOSED",
+          "quote": "the hand-picked detection direction (Section 2.2), used as an intervention, only partially works — at α = 15 on L20–25, fabrication on the 100 fake entities drops from ~70% to ~40% (p < 0.001), with 0 false refusals on the 50 real questions",
+          "url": "https://arxiv.org/pdf/2606.24952",
+          "regex": "steer|ablat|patch|causal|random direction",
+          "positive_control": "n/a. This paper's entire contribution is a systematic causal test (steering) of detection directions across 4 models/3 families/1B-9B scale, reporting a robust detection-vs-control cosine gap (0.12-0.20) and directly testing 'whether this cosine predicts steerability' -- the single strongest, most rigorous causal-validity precedent found in this survey, including an explicit angle to the direction that 'produces a refusal' (cos=0.12, ~83deg from the fake-entity detector)."
+        }
+      },
+      "notes": "Not a safety-metric/scanner paper -- its object of study is hallucination/JSON-formatting detection-vs-control geometry across Gemma/Llama/Qwen (1B-9B). It is nonetheless the single strongest C3+C5 precedent in this whole survey: a logit-derived (lm_head) direction is built and compared, both geometrically and causally (steering with dose-response + false-positive check), against an activation-derived (difference-in-means) direction, including an explicit measurement of the angle to the direction 'producing a refusal' (cos=0.12, i.e. detecting-is-not-controlling for refusal too). No quantization/no-op testing and no decode-site (all last-prompt-token) readout."
+    },
+    {
+      "paper": "Has This Checkpoint Been Abliterated? A Two-Signal Audit and Its Failure Map",
+      "arxiv_id": "2607.01854",
+      "url": "https://arxiv.org/pdf/2607.01854",
+      "title": "Has This Checkpoint Been Abliterated? A Two-Signal Audit and Its Failure Map",
+      "authors_if_confirmed": "Gabriel Hurtado",
+      "date": "2026-07-02 (v1) / 2026-08-18 (v2)",
+      "cells": {
+        "C1": {
+          "verdict": "PARTIAL",
+          "quote": "On a 273-checkpoint registry spanning Qwen, DeepSeek-distilled Qwen, Llama, and Gemma, their z-sum separates 57 public abliterations from 37 benign fine-tunes, merges, and instruction-tunes at AUROC 0.95 ... a Youden-calibrated threshold transfers to held-out families at balanced accuracy 0.89 (FPR 0.11), missing only 4 of 57.",
+          "url": "https://arxiv.org/pdf/2607.01854",
+          "regex": "false positive|false alarm|benign|quantiz|fine-tun|LoRA|merge",
+          "positive_control": "n/a (63/63 hits). A public 273-checkpoint registry with 37 benign fine-tunes/merges/instruction-tunes as HARD NEGATIVES is a strong per-checkpoint false-alarm control matching the brief's 'non-safety fine-tune' clause almost exactly, with FPR reported (0.11). Second key quote: 'the weight energy ... over-flags benign low-rank edits (§4)' -- an explicit false-alarm failure mode of one of the two signals. However, no dtype/quantization cast, chat-template swap, or re-download no-op is tested, so this is PARTIAL rather than fully CLOSED against the brief's precise C1 definition."
+        },
+        "C2": {"verdict": "OPEN", "quote": "No matches found for pattern: XSTest|OR-Bench|over.?refus|false refus", "url": "https://arxiv.org/pdf/2607.01854", "regex": "XSTest|OR-Bench|over.?refus|false refus", "positive_control": "Same URL, 'false positive|false alarm|benign|quantiz|fine-tun|LoRA|merge' returns 63 matches, confirming the fetch worked."},
+        "C3": {"verdict": "OPEN", "quote": "the reported ρ is read on a disjoint held-out split ... The regularizers preserve behavior: Lretain is the benign-prompt logit KL to the base", "url": "https://arxiv.org/pdf/2607.01854", "regex": "logit|first.token|refusal probability", "positive_control": "n/a (1/1 hit). This logit-KL term is a training regularizer used inside the paper's OWN adversarial attack construction (Section 5, the white-box failure mode), not a logit-based detector baseline compared against the activation-gap readout."},
+        "C4": {
+          "verdict": "OPEN",
+          "quote": "In reasoning-distilled models the refusal decision migrates into the generated chain-of-thought (Yamaguchi et al., 2025) and is suppressed only at the final tokens (Yin et al., 2025), which a last-token gap cannot see and which chain-of-thought jailbreaks exploit",
+          "url": "https://arxiv.org/pdf/2607.01854",
+          "regex": "decode|generated token|teacher.forc|last.token|prompt token",
+          "positive_control": "n/a (3/3 hits). The activation gap ρ is explicitly built from 'mean last-token residual activations at layer l over harmful/benign prompts' (prompt-side), and the paper itself names this as a limitation relative to decode-time/generated-token signals it cannot see."
+        },
+        "C5": {"verdict": "OPEN", "quote": "A trained linear probe on raw activations, a multi-family attack, same-axis or human label adjudication, and a layer-band ablation are left to future work.", "url": "https://arxiv.org/pdf/2607.01854", "regex": "steer|ablat|patch|causal|random direction", "positive_control": "n/a (1/1 hit) -- the paper's own future-work list explicitly names layer-band ablation as NOT YET DONE."}
+      },
+      "notes": "Also directly benchmarks AMS: 'AMS (Messenger, 2026) flags collapse of harmful/benign activation separation; we benchmark its Tier-1 absolute-σ scan; its Tier-2 mode compares a candidate against a trusted baseline ... Empirically, Tier-1 absolute-thresholding misses an abliterated Qwen2.5-1.5B sibling that Tier-2 reference-verification catches.' The strongest C1 (benign-fine-tune/merge false-alarm) precedent found besides Aligned Probing's quantization case study, but explicitly not tested for quantization/dtype/template/re-download, and explicitly not tested causally (C5 named future work) or at decode-site (C4 explicitly named a blind spot)."
+    },
+    {
+      "paper": "Closing the Activation-Cone Blind Spot: Response-Time Probing and Unified Defense",
+      "arxiv_id": "2606.29441",
+      "url": "https://arxiv.org/pdf/2606.29441",
+      "title": "Closing the Activation-Cone Blind Spot: Response-Time Probing and Unified Defense",
+      "authors_if_confirmed": "Subhadip Mitra",
+      "date": "2026-06-28",
+      "cells": {
+        "C1": {
+          "verdict": "PARTIAL",
+          "quote": "diverse negative training sets reduce out-of-distribution false positive rates from 80–91 100% to 0–1%, a finding applicable to all safety probing work",
+          "url": "https://arxiv.org/pdf/2606.29441",
+          "regex": "quantiz|XSTest|OR-Bench|over.?refus|false positive|logit|first.token",
+          "positive_control": "n/a (3/3 hits). This is a genuine false-positive-rate robustness result for the probe, but about probe TRAINING-DISTRIBUTION coverage of benign PROMPTS, not about the model itself undergoing a dtype/quantization/re-download/non-safety-finetune no-op -- so PARTIAL, not CLOSED, against the brief's C1 definition."
+        },
+        "C2": {"verdict": "OPEN", "quote": "n/a (no XSTest/OR-Bench/over-refusal benchmark named)", "url": "https://arxiv.org/pdf/2606.29441", "regex": "XSTest|OR-Bench|over.?refus", "positive_control": "The 'benign false positives' reported ('0% benign false positives' for the halt) are the response-halt firing rate on benign prompts, i.e. a false-trigger-rate metric, not scoring against a standard over-refusal benchmark like XSTest/OR-Bench/PHTest."},
+        "C3": {"verdict": "OPEN", "quote": "n/a", "url": "https://arxiv.org/pdf/2606.29441", "regex": "logit|first.token", "positive_control": "no logit-based baseline compared against the response-time probe was found in the grepped sections."},
+        "C4": {
+          "verdict": "CLOSED",
+          "quote": "we introduce response-time probing as the corollary's constructive contrapositive: a linear probe on the model's hidden state at the first few generated tokens (mean-pooled over N = 5 in headline results, N = 1 sufficient; App. V), training-distribution AUROC 0.97–1.00 across all seven models.",
+          "url": "https://arxiv.org/pdf/2606.29441",
+          "regex": "first generated token|decode|generation time|hidden state at the",
+          "positive_control": "n/a (3/3 hits). This is a clean, explicit decode-site readout: activations at the model's OWN generated tokens (N=1 or N=5 first generated tokens), not the last prompt token and not teacher-forced -- the cleanest C4 match among the 'canonical' rows 1a-1f."
+        },
+        "C5": {
+          "verdict": "PARTIAL",
+          "quote": "any defense that gates intervention on a single layer's activation alignment with a benign reference (cone, subspace, or null-space) is blind to attacks that craft activations to lie inside that reference",
+          "url": "https://arxiv.org/pdf/2606.29441",
+          "regex": "steer|ablat|random direction|orthogonal",
+          "positive_control": "n/a (155/155 hits, extensive: 5 defense paradigms including static steering, CAST, AlphaSteer's null-space steering are systematically compared across 7 models/5 attacks). This is a rich causal/steering comparison of EXISTING defenses, but no explicit random-direction-controlled ablation of the response-time PROBE's own readout direction was located in the grepped excerpts, so scored PARTIAL rather than CLOSED."
+        }
+      },
+      "notes": "Cleanest decode-site (C4) precedent found among rows 1a-1f: a linear probe read at the model's own first few generated tokens, AUROC 0.97-1.00 across 7 models, motivated by a formal 'structural blindness' corollary about prompt-time/single-layer activation gating. Evaluated across 7 instruction-tuned models (7-31B), not a large per-checkpoint panel, and not validated against quantization/dtype/re-download no-ops (C1 only PARTIAL via a probe-training-data robustness result)."
+    },
+    {
+      "paper": "Jorak (reference-free abliteration/decensoring detector)",
+      "arxiv_id": "n/a (GitHub project, no arXiv preprint found)",
+      "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+      "title": "JORAK — métriques (guide complet)",
+      "authors_if_confirmed": "JolanMc (GitHub handle)",
+      "date": "docs dated 2026-06-26 scans; repo active as of 2026-09",
+      "cells": {
+        "C1": {
+          "verdict": "OPEN",
+          "quote": "les 7 ERROR étant des échecs de chargement (architectures non supportées, modèles gated, GGUF)",
+          "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+          "regex": "quantiz|int8|int4|fp16|bf16|dtype|GGUF|AWQ|GPTQ|Tier",
+          "positive_control": "n/a (1/1 hit for quantization-family pattern). GGUF appears only as a loading-FAILURE case (unsupported format), not as a tested no-op/false-alarm condition; there is a base-model negative control ('Vrai négatif: aucun faux positif sur la base' -- true negative, no false positive on the base) but no dtype/quantization/chat-template/re-download sweep."
+        },
+        "C2": {
+          "verdict": "PARTIAL",
+          "quote": "behavioral_over_refusal — sur-refus du harmless (dégât) ... Un fine-tune propre n'abîme pas les requêtes bénignes; une ablation furtive (norm-preserving) laisse une cicatrice: le modèle refuse à tort des prompts inoffensifs.",
+          "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+          "regex": "XSTest|OR-Bench|over.?refus|sur-refus|sur.refus|false refus|faux positif",
+          "positive_control": "n/a (19/19 hits). A per-model `behavioral_over_refusal` metric (threshold ≥0.2) IS computed and used as part of the verdict logic (the 'evasive_ablation' trap), but it is generated on custom 'harmless' probes rather than XSTest/OR-Bench, and it is a BEHAVIORAL (generation+keyword) signal, not an activation readout, so PARTIAL against the brief's activation-readout framing."
+        },
+        "C3": {
+          "verdict": "OPEN",
+          "quote": "2. Écart de logit de refus. Différence de logit entre tokens de refus (« I cannot ») et de compliance sur prompts harmful → signal comportemental continu, plus fin que le matching de chaîne binaire (is_refusal).",
+          "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md",
+          "regex": "logit|first.token|probabilit",
+          "positive_control": "n/a (2/2 hits). This is listed under proposed future extensions ('pistes') to soften/refine detection of the mlabonne-style stealthy case, not an implemented, currently-scored metric -- i.e. a logit-gap baseline is PROPOSED but not yet run."
+        },
+        "C4": {"verdict": "OPEN", "quote": "② ACTIVATIONS | 1 forward (GPU utile) | exécuter le modèle | l'axe de refus est-il encore vivant dans les activations ?", "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md", "regex": "génér|decode|token g", "positive_control": "n/a (6/6 hits). Plan ② (ACTIVATIONS) is a single forward pass over prompts (not decode-site); Plan ③ (BEHAVIORAL) does greedy generation but only for a keyword refusal check on the OUTPUT TEXT, not an activation readout at the generated tokens -- the two are never combined into a decode-site activation readout."},
+        "C5": {"verdict": "OPEN", "quote": "n/a", "url": "https://raw.githubusercontent.com/JolanMc/Jorak/main/docs/METRICS.md", "regex": "steer|ablat|patch|causal|aléatoire|random", "positive_control": "62/62 hits, all describing the WEIGHT-SPACE ablation-detection signal itself (SVD alignment of u_min vectors, with a 'random-like' floor baseline 1/sqrt(n) for an unmodified model) -- not a causal steering/ablation TEST of the activation readout's own direction with a random/orthogonal control."}
+      },
+      "notes": "A community (non-arXiv) French-documented tool combining 3 independent measurement planes (① weight-space SVD alignment / ② single-forward-pass activation separation / ③ behavioral generation+keyword refusal, including an over-refusal veto signal). Over-refusal IS part of its verdict logic as a behavioral confirmation/veto, and a refusal-logit-gap metric is explicitly proposed as a future refinement, but neither is combined into a decode-site causal activation readout, and no quantization/dtype/template/re-download no-op sweep is documented."
+    }
+  ],
+  "new_work": [
+    {
+      "paper": "First Token Matters: Understanding Safety Collapse in Large Reasoning Models",
+      "arxiv_id": "2609.18471",
+      "url": "https://arxiv.org/pdf/2609.18471",
+      "title": "First Token Matters: Understanding Safety Collapse in Large Reasoning Models",
+      "authors_if_confirmed": "Yizheng Yang, Haining Yu, Yuechen Wang, Yikai Hou, Xing Fu, Jinbo Yang, Tianqing Zhu",
+      "date": "2026-09-16 (v1)",
+      "cells": {
+        "C1": {"verdict": "OPEN", "quote": "No matches found for pattern: quantiz|dtype|checkpoint", "url": "https://arxiv.org/pdf/2609.18471", "regex": "quantiz|dtype|checkpoint", "positive_control": "Same URL, 'logit\\b' returns 8 matches and the main over-refusal/steering patterns return dozens of hits, confirming the fetch worked; no quantization/no-op robustness test appears anywhere."},
+        "C2": {
+          "verdict": "CLOSED",
+          "quote": "we measure over-refusal using the XSTest dataset [28], employing DeepSeek-Chat [4] to evaluate whether the model improperly refuses to answer benign queries or comply with harmful queries.",
+          "url": "https://arxiv.org/pdf/2609.18471",
+          "regex": "XSTest|OR-Bench|over.?refus|false refus",
+          "positive_control": "n/a. Over-refusal (XS column) is reported per model/method in the main results table (Table 4) alongside safety and utility metrics."
+        },
+        "C3": {
+          "verdict": "CLOSED",
+          "quote": "we use Logit Lens to trace the rank evolution of typical refusal tokens, such as “I” ... and “Sorry,” as well as affirmative tokens ... The attribution target is defined as the final-token logit difference between the two label tokens “Sure” and “I”.",
+          "url": "https://arxiv.org/pdf/2609.18471",
+          "regex": "logit\\b",
+          "positive_control": "n/a (8/8 hits). A Logit-Lens/logit-difference baseline (token rank evolution of 'I'/'Sorry' vs 'Okay'/'Sure' through the unembedding) is used to independently corroborate and explain the activation-based Refusal Projection Strength finding (Onset Refusal Collapse) -- a genuine logit-vs-activation-readout comparison."
+        },
+        "C4": {
+          "verdict": "CLOSED",
+          "quote": "We project the hidden states of each generated token onto V and track the resulting Refusal Projection Strength: St = (1/L) Σ (h_{l,t} · v_l), where L is the total number of layers and higher St indicates stronger refusal-related activation.",
+          "url": "https://arxiv.org/pdf/2609.18471",
+          "regex": "generated token|Token Position \\(0 = First Generated Token\\)",
+          "positive_control": "n/a. The paper's central finding, Onset Refusal Collapse, is defined and measured explicitly at the model's OWN generated tokens (t=0 is the first generated token; the readout is tracked across positive AND negative relative token positions spanning both prompt and generated tokens, isolating the sharp drop exactly at generation onset) -- a clean, explicit decode-site activation readout."
+        },
+        "C5": {
+          "verdict": "CLOSED",
+          "quote": "Table 1: Attack Success Rate (ASR) on JailbreakBench-Behavior under steering with refusal vectors. NS denotes Negative Steering, and PS denotes Positive Steering. Model Before NS PS / R1-8B 45% 75% 21% / R1-7B 59% 87% 27%",
+          "url": "https://arxiv.org/pdf/2609.18471",
+          "regex": "steer|ablat|patch|causal|random direction",
+          "positive_control": "n/a. Direct causal steering (negative/positive) of the refusal vector at the identified onset produces a large two-sided ASR swing (e.g. 45%->75% vs 45%->21% for R1-8B), and a further 'direct intervention that injects the refusal direction at the first generated token' reduces ASR, confirming the onset-localized readout is causally load-bearing."
+        }
+      },
+      "notes": "The single closest work to the target 'empty cell' found in this entire survey: it CLOSES C2 (XSTest over-refusal, per-model), C3 (Logit Lens baseline vs. activation-based Refusal Projection Strength), C4 (a textbook decode-site readout -- activations explicitly read AT the model's own generated tokens, tracked across the prompt/generation boundary) and C5 (causal steering, two-sided, of the identified direction). It is evaluated on only 2 reasoning-model checkpoints (DeepSeek-R1-Distill-Llama-8B, R1-Qwen-7B) plus their IT counterparts -- not a broad per-checkpoint panel -- and, crucially, NEVER tests C1 (no quantization/dtype/chat-template/re-download/non-safety-fine-tune no-op anywhere in the paper). This exact C1 gap, even in the strongest work found, is the clearest evidence for the target invention's novelty."
+    },
+    {
+      "paper": "Locating and Steering Refusal Beyond Attention",
+      "arxiv_id": "2609.04721",
+      "url": "https://arxiv.org/pdf/2609.04721",
+      "title": "Locating and Steering Refusal Beyond Attention",
+      "authors_if_confirmed": "Preethi Carmel Bosco, Gopalakrishnan Srinivasan (IIT Madras)",
+      "date": "2026-09-04",
+      "cells": {
+        "C1": {"verdict": "OPEN", "quote": "No matches found for pattern: quantiz|dtype|fp16|bf16|int8|int4", "url": "https://arxiv.org/pdf/2609.04721", "regex": "quantiz|dtype|fp16|bf16|int8|int4", "positive_control": "Same URL, the combined C2-C5 pattern returns 94 matches across a 185k-char PDF, confirming the fetch worked."},
+        "C2": {
+          "verdict": "CLOSED",
+          "quote": "Table 1: Experimental setup at a glance. The minimal-pair corpus is matched to XSTest in template and length. Over-refusal is measured on XSTest’s benign-but-spicy prompts (safe requests worded to sound harmful).",
+          "url": "https://arxiv.org/pdf/2609.04721",
+          "regex": "XSTest|OR-Bench|over.?refus",
+          "positive_control": "n/a. Over-refusal is measured per architecture/site both in-distribution (XSTest benign-but-spicy) and out-of-distribution (OR-Bench-hard, e.g. 'the gate over-refuses 46.3% and detect-then-refuse 47.5%, at a 21% false-positive rate')."
+        },
+        "C3": {"verdict": "OPEN", "quote": "No matches found for pattern: logit lens|unembedding|lm_head|refusal probability", "url": "https://arxiv.org/pdf/2609.04721", "regex": "logit lens|unembedding|lm_head|refusal probability", "positive_control": "Same URL, quantization/over-refusal/steering patterns all return dozens of matches, confirming the fetch worked; no logit-based baseline is used."},
+        "C4": {
+          "verdict": "PARTIAL",
+          "quote": "What is architecture-specific is not where the direction is steered but where it must be read. Each layer computes a fresh output that is then added into the residual stream, and harm is cleanly readable at this output, the write site, before the addition.",
+          "url": "https://arxiv.org/pdf/2609.04721",
+          "regex": "write site|per generated token",
+          "positive_control": "'whether the gate is checked once at prompt time or per generated token' shows the deployed GATE operates per generated token at inference, but the direction itself is estimated/read from a component's 'write site' within a layer (a spatial locus), not explicitly shown to be read from the model's own DECODED tokens as opposed to the prompt -- so scored PARTIAL, not CLOSED."
+        },
+        "C5": {
+          "verdict": "CLOSED",
+          "quote": "Reading it in one architecture, mapping it into another, and removing it there (Transferred) raises attack success as much as removing the target’s own direction (Native), while an orthogonalized random direction through the same map (Random) does not, in all six transfer directions.",
+          "url": "https://arxiv.org/pdf/2609.04721",
+          "regex": "random direction|matched random",
+          "positive_control": "n/a. Extensive matched-random-direction controls throughout (Table 4: 'a matched random direction through the same map does much less'; Fig/Table on write-site steering: 'the time-mix write point steers attack success to 17.5% against 82.5% for a matched random direction')."
+        }
+      },
+      "notes": "A cross-architecture (transformer/SSM/RWKV/hybrid) mechanistic-interpretability paper repurposed as an inference-time defense, not a safety-metric/scanner paper. Closes C2 and C5 with strong evidence (XSTest+OR-Bench-hard over-refusal; systematic random-direction controls across 6 transfer directions and 4 architecture families), but only 1-2 checkpoints per architecture family (not a broad per-checkpoint panel), no quantization/no-op testing (C1 OPEN) and no logit baseline (C3 OPEN)."
+    }
+  ],
+  "framing": [
+    {
+      "title": "Item Response Theory for AI Safety (arXiv:2608.05086)",
+      "url": "https://arxiv.org/pdf/2608.05086",
+      "relevance": "Directly frames model-level safety scores as needing measurement-invariance/construct-validity treatment (factor analysis recovers 3 latent axes incl. refusal strictness and over-refusal; used to audit individual models for drift/sandbagging/API swaps) -- but purely behavioral, never touches activations.",
+      "quote": "aggregated benchmark scores are hard to trust and interpret, because benchmarks duplicate one another, correlate heavily, and models may sandbag when they detect evaluation."
+    },
+    {
+      "title": "Perfect Detection, Failed Control: The Geometry of Knowing vs. Steering in Language Models (arXiv:2606.24952)",
+      "url": "https://arxiv.org/pdf/2606.24952",
+      "relevance": "Directly frames the detection-vs-control gap for internal readouts, including an explicit measurement of the angle between a detection direction and 'the direction producing a refusal' (cos=0.12) -- foundational caution for any activation-readout-based safety metric that assumes detectability implies causal relevance.",
+      "quote": "the model detects fake entities with perfect linear separability (AUC = 1.000 from layer 5), yet that direction sits at cos = 0.12 (about 83 degrees) from the direction producing a refusal"
+    },
+    {
+      "title": "Over-Refusal and Representation Subspaces: A Mechanistic Analysis of Task-Conditioned Refusal in Aligned LLMs (arXiv:2603.27518)",
+      "url": "https://arxiv.org/abs/2603.27518",
+      "relevance": "Shows over-refusal directions are task-dependent, high-dimensional and geometrically distinct from the single global harmful-refusal direction from early layers onward -- directly relevant to why a single-direction safety readout can conflate refusal alignment with over-refusal risk.",
+      "quote": "harmful-refusal directions are task-agnostic and can be captured by a single global vector, whereas over-refusal directions are task-dependent: they reside within the benign task-representation clusters, vary across tasks, and span a higher-dimensional subspace."
+    },
+    {
+      "title": "Measuring the Wrong Thing: Internal Harmfulness Scores Anti-Rank Successful Jailbreaks (arXiv:2608.09624)",
+      "url": "https://arxiv.org/abs/2608.09624",
+      "relevance": "A direct construct-validity/false-alarm warning for internal (prompt-level) safety scores: a wrapper/jailbreak that raises real harmful-generation rate can simultaneously LOWER the internal harmfulness-score AUROC, i.e. the internal readout can anti-correlate with the outcome it is meant to proxy -- a cautionary precedent for any activation-based safety metric's validity claims.",
+      "quote": "On Llama, wrapping raises harmful generation from 0.05 to 0.27 while harmful intent AUROC falls from 0.936 to 0.803, so the attacks grow more dangerous while the prompts look safer to the score."
+    },
+    {
+      "title": "The Refusal Residue: When Probes Catch Alignment Faking and When They Don't (arXiv:2607.13346)",
+      "url": "https://arxiv.org/html/2607.13346v1",
+      "relevance": "Model-conditional detectability of an internal refusal-adjacent signal (asymmetric refusal residue under monitored vs unmonitored compliance), with explicit leakage controls -- relevant methodological precedent for rigorous, control-heavy validation of any refusal-direction-based readout.",
+      "quote": "Both fakers show an asymmetric refusal residue: monitored compliance shifts toward refusal (d=0.32 Qwen, d=0.33 Llama, both p<0.0001), while refusal representations do not move (p=1.00)."
+    }
+  ],
+  "safe_completion_internal": {
+    "verdict": "NOT FOUND",
+    "evidence": "No paper found gives an internal (activation-based) readout specifically for a safe-completion-style model that declines without lexical refusal (OpenAI 2508.09224 style). Searches run: 'internal readout safe-completion model declines without refusal keywords activation probe', 'safe completion model internal representation refusal without generation 2026', 'safe completion model internal representation refusal'. Top hits were the OpenAI safe-completions blog post itself (behavioral training framing, no internal-readout follow-up found), plus unrelated over-refusal-mitigation papers (2511.19009, SafeConstellations 2026.acl-long.2056) that use representation STEERING to REDUCE over-refusal but do not build a safe-completion-specific internal detector."
+  },
+  "searches_run": [
+    "Aligned Probing Relating Toxic Behavior and Model Internals arxiv",
+    "Item Response Theory for AI Safety arxiv 2608.05086",
+    "Messenger 2026 IEEE Access detecting safety training modification activation",
+    "activation safety metric quantization robustness false positive",
+    "refusal direction chat template sensitivity",
+    "model-level safety score measurement invariance",
+    "over-refusal hidden states XSTest probe",
+    "OR-Bench internal representation over-refusal prediction",
+    "abliteration detection false alarm benign fine-tune",
+    "safe completion model internal representation refusal without generation 2026",
+    "refusal logit first token metric chat template",
+    "decode-time activation safety scan checkpoint",
+    "safe completion model internal representation refusal",
+    "activation-based model scanner false positive quantization",
+    "site:arxiv.org 2609 refusal direction",
+    "internal readout safe-completion model declines without refusal keywords activation probe",
+    "N-GLARE activation-based model scanner safety evaluation 2026"
+  ],
+  "verdict": {
+    "empty_cell": "OPEN",
+    "closer_if_any": "First Token Matters: Understanding Safety Collapse in Large Reasoning Models (arXiv:2609.18471, posted 2026-09-16)",
+    "reason": "Per the stated verdict rule, no single paper has both C1 (no-op/expression-only false-alarm control) and C2 (over-refusal) CLOSED simultaneously. The two strongest C1 precedents (Aligned Probing's OLMo quantization case study, CLOSED but for TOXICITY not refusal-safety and on 1 model; Hurtado's 273-checkpoint benign-fine-tune/merge hard-negative registry, PARTIAL) both have C2 OPEN (neither tests over-refusal at all). Conversely, the strongest C2+C3+C4+C5 paper found, arXiv:2609.18471 (posted 5 days before this search, Sep 2026), closes C2 (XSTest over-refusal), C3 (Logit Lens vs. activation readout), C4 (activations read explicitly at the model's own first generated token) and C5 (two-sided causal steering) all at once -- the single most complete precedent in the entire survey -- but it NEVER tests C1 (no quantization/dtype/chat-template/re-download/non-safety-fine-tune no-op anywhere in the paper), and it evaluates only 2 reasoning-model checkpoints rather than a broad per-checkpoint panel with an AMS-style stored-baseline comparison. AMS (2608.05578) itself, the canonical 'model-level activation safety scanner with a stored-baseline Tier-2 comparison', has C1 only PARTIAL (single-model quantization test, excluded from its main bootstrapped panel) and C2/C3/C4/C5 all OPEN (C4 is explicitly named the paper's own 'principal open problem'). No paper combines a per-checkpoint AMS-style baseline-verification scanner with a decode-site readout, a logit/first-token comparison baseline, an over-refusal outcome, AND a systematic no-op/false-alarm battery (dtype casts, quantization, chat-template swaps, re-downloads, non-safety fine-tunes) all at once -- the target invention's empty cell is confirmed OPEN."
+  }
+}

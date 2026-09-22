@@ -1,0 +1,920 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2606.24952
+Type: PDF
+Length: 55834 chars (truncated)
+
+--- Content ---
+
+Perfect Detection, Failed Control: The Geometry
+of Knowing vs. Steering in Language Models
+Cosimo Galeone · cosimo.galeone@alomana.com
+Anna Ettorre · anna.ettorre@alomana.com
+Minsu Park · minsu.park@alomana.com
+Giuseppe Ettorre · ge@alomana.com
+Daniele Ligorio · dl@alomana.com
+Alomana, Grottaglie, Italy
+Abstract
+A central aspiration of mechanistic interpretability is controllability: if we
+understand where a behavior is represented in a model’s activations, we should
+be able to modify it. This aspiration rests on a hidden premise — that the
+direction which detects a behavior and the direction which controls it are the
+same, or at least close. We ask whether this is true.
+We frame the question geometrically: what is the angle between the direction
+that best discriminates a behavior and the direction that best causes it? If
+detection implies control, the angle should be near 0◦. If not, the cosine between
+them quantifies what we call the detection-intervention gap.
+We study two contrasting behaviors on Gemma 2-2B-it. For output format
+(clean JSON vs markdown fencing), detection and control collapse onto a single
+axis: one and the same direction both classifies the behavior and, when added,
+flips it. Hallucination breaks the premise. The model detects whether an entity
+is real with perfect linear separability (AUC = 1.000 from layer 5), yet the
+direction carrying that signal sits at cos = 0.12 — about 83◦— from the
+direction that produces a refusal: a small, reproducible alignment, far from the
+cos ≈1 that “detection is control” would require. A detector built a second
+way, from activations with no chosen tokens, likewise fails to align with control
+(cos = −0.06).
+The gap generalizes. Across four models from three families and two scales (1B–
+9B), cos stays in [0.12, 0.20]; it is identical before and after instruction tuning
+(0.1197 vs 0.1200), so the geometry is laid down in pretraining. On Gemma
+2-2B-it, a 15◦rotation from the detection direction toward the intervention
+direction partially bridges the gap — 73% and 60% refusal on two held-out entity
+categories, at 1.8% false positives (N=115).
+It is tempting to read this cosine as a steerability diagnostic — high meaning
+the detection direction is itself a control knob, low meaning it is not. We test
+that reading, and it does not hold. Measured the same independent way, the
+cosine sits near the high-dimensional chance level for steerable and unsteerable
+1
+arXiv:2606.24952v1  [cs.CL]  23 Jun 2026
+
+behaviors alike; format’s apparent alignment comes only from using one vector
+in both roles. The reason is structural: detection is not a single direction but
+a high-dimensional class, and what separates the steerable case is functional —
+whether the control direction also works as a detector — not readable from a
+static angle. What the cosine is is a robust, weight-computable signature of the
+dissociation, invariant across four models — not a predictor of how steerable a
+behavior is.
+1. Introduction
+Recent work in mechanistic interpretability has demonstrated a striking ca-
+pability: find a direction in a model’s residual stream that corresponds to a
+behavior, and you can often steer that behavior by adding or ablating it. Arditi
+et al. (2024) showed that refusal is mediated by a single linear direction — the
+same difference-in-means direction that separates harmful from harmless prompts
+also removes refusal when ablated. Li et al. (2023) found truth-related directions
+by probing and added them at inference to increase honesty. Turner et al. (2023)
+formalized activation addition as a general steering paradigm. These results are
+often read as licensing a general inference: that the direction which detects a
+behavior is also the direction that controls it.
+We test the generality of this paradigm by asking a precise geometric question:
+what is the angle between the direction that best detects a behavior
+and the direction that best controls it? (Figure 1).
+If detection implies control, these directions should be aligned (cos ≈1). If the
+relationship is more complex, the angle between them characterizes the geometry
+of the detection-intervention gap.
+We study this on Gemma 2-2B-it (26 layers, 2304-dimensional residual stream),
+using two contrasting behaviors:
+1. Output format (markdown fencing vs clean JSON): a binary, directly
+observable rendering choice.
+2. Hallucination (fabricating answers about non-existent entities vs refus-
+ing): a behavior entangled with the model’s knowledge state.
+For format the angle is near 0◦— detection is control; for hallucination it is about
+83◦, the two directions nearly perpendicular. The rest of the paper establishes
+each case, asks why hallucination’s directions diverge, shows the divergence can
+be partly undone by rotating the intervention direction, and confirms the pattern
+across three model families. One thing this angle does not do, we should say up
+front, is serve as an a priori predictor of steerability: the cosine is a signature of
+the gap, not an oracle for it, and Section 8 makes that negative result precise.
+Whether this angle varies systematically across a broader range of behaviors
+— and what predicts where a given behavior falls — is a question we leave to
+2
+
+future work.
+Contributions
+1. A functional dissociation between knowing and steering.
+On
+hallucination, the model detects fake entities with perfect linear separability
+(AUC = 1.000 from layer 5), yet the detection direction barely steers
+behavior, and the direction that does steer (refusal) is itself only a weak
+detector. A cross-model double dissociation (Section 8) shows detecting
+and acting are separate faculties, not one computation that occasionally
+fails to connect (Sections 4, 8).
+2. The gap is weight-readable but not a steerability oracle. The cosine
+between detection and intervention is computable from the weights and
+consistent across four models (cos ∈[0.12, 0.20], a small but reproducible
+positive). It is tempting to read it as an a priori steerability test; we
+show it is not — detection is a high-dimensional class and steerability is a
+functional property, not one readable from a static angle (Section 8). The
+cosine is a signature of the dissociation, not a control dial.
+3. The gap is not a construction artifact. A detection direction built
+from activations, with no hand-chosen tokens, also fails to align with the
+intervention direction (Section 4.3).
+4. A mechanism for the gap. We trace it to the model’s output mapping,
+where a mechanism that copies the salient entity name dominates the
+epistemic signal — so steering the detection direction makes fabrication
+worse, not better (Sections 4.3, 5).
+5. A partial fix. Rotating 15◦from the detection direction toward the
+intervention direction partially recovers refusal — Type 2 from 13% to
+60% — on a held-out stress test (Section 6).
+6. Generality. The gap holds across four models and two scales (1B–9B) and
+is already present before instruction tuning, placing its origin in pretraining
+(Section 7).
+2. Methods
+All experiments use inference-time analysis with PyTorch forward hooks on
+Gemma 2-2B-it (Gemma Team, 2024), float16. No fine-tuning or training is
+performed. Cross-model experiments use Llama-3.2-1B-Instruct (Dubey et al.,
+2024), Qwen-2.5-1.5B-Instruct (Qwen Team, 2025), Gemma 2-9B-it (Gemma
+Team, 2024), and the Gemma 2-2B base model (Gemma Team, 2024).
+The central quantity we measure is the cosine between a direction that detects a
+behavior and the direction that controls it. A direction can be built two ways:
+3
+
+data-driven, from differences in activations between two conditions (difference-
+in-means, Section 2.1), or hand-picked, by reading the lm_head rows of tokens
+typical of a behavior (Section 2.2). We build the detection direction both ways;
+the intervention (refusal) direction is hand-picked from lm_head alone. We
+test whether a direction is causally relevant by adding it to the residual stream
+and measuring the behavioral change (Section 2.5), and we localize where in the
+network the signal lives (Section 2.3). All analysis is at inference time — we
+observe and steer the model without updating any weights. Figure 1 lays out
+the full pipeline.
+Figure 1: The method in one view. From the last-token residual state h
+we build two directions: a detection direction — whether the model internally
+registers an entity as fake, obtainable either from activations (difference-in-means)
+or from the output vocabulary (lm_head) — and an intervention direction
+(refusal), read from lm_head alone. We then measure the cosine between them
+(the paper’s central quantity) and steer by adding a direction to h during
+generation.
+2.1 Data-driven directions (difference-in-means)
+To find the direction that distinguishes two behavioral conditions, we collect
+residual-stream activations h at the last prompt token for a set of inputs from each
+condition, then subtract the means. This difference-in-means (DiM) approach —
+used by Arditi et al. (2024) for refusal and by Zou et al. (2023) for representation
+engineering — requires no human judgment and captures whatever linear signal
+best separates the two conditions.
+dDiM = normalize (mean(hcondition A) −mean(hcondition B))
+We evaluate detection quality with a logistic regression probe trained on the
+same activations: an AUC of 1.000 means the two conditions are perfectly
+linearly separable at that layer — the model’s internal state already encodes the
+distinction without any ambiguity.
+4
+
+2.2 Hand-picked directions (from the output vocabulary)
+Rather than deriving a direction from activations, we read it from the model’s
+output weights (Turner et al., 2023; Zou et al., 2023). The unembedding matrix
+Wlm_head maps each residual-stream vector to token logits, so the row for a
+token is the residual-space direction that promotes that token. A single token’s
+row, though, mostly points along what is common to all tokens; to isolate a
+behavioral axis we take a contrast — the average row of tokens typical of one
+response, minus the average row of tokens typical of the opposite response. This
+is why each hand-picked direction needs two token sets, a promoted set A and
+a contrasted set B:
+dHP = normalize (mean(Wlm_head[ti ∈A]) −mean(Wlm_head[tj ∈B]))
+The intuition: the first token the model emits already betrays where a response
+is heading — a cautious opener like “Unfortunately” precedes a non-answer,
+a confident “The” precedes a committed claim. We build two such directions.
+The detection direction (hand-picked) promotes cautious openers U = {“I”,
+“Unfortunately”, “There”, “It”, “This”} and contrasts confident or fabricating
+ones C = {“The”, “In”, “Paris”, “Tokyo”, “1”}; the set C is not arbitrary — “The”
+and “In” are the most frequent first tokens when the model fabricates (“The
+capital of Norlandia is. . . ”), and “Paris”, “Tokyo” are entity names it states
+outright, all read off its own output distribution. The intervention direction
+— because it promotes refusal tokens, this is the refusal direction of Arditi et
+al. (2024) — promotes refusal openers R = {“No”, “cannot”, “doesn’t”, “I”}
+and contrasts compliant ones O = {“The”, “Yes”, “is”, “It”}.
+2.3 Detecting the fake/real distinction
+To gauge how readily the model separates fake from real entities, we read out
+the distinction six independent ways, spanning supervised probes and label-free
+readouts (results in Section 4.1):
+• Linear probe (supervised): logistic regression on the residual stream at
+each layer, leave-one-out cross-validated and reported as AUC, following
+standard probing methodology (Belinkov, 2022).
+• Single attention head (supervised): the output of one head (L9 H2)
+scored for fake vs real.
+• Logit lens — top-5 entropy (unsupervised): we project the residual
+stream at each layer through the unembedding matrix to read the model’s
+evolving next-token prediction; the entropy of its top-5 tokens measures
+predictive uncertainty.
+• Single MLP neuron (unsupervised): the activation of one neuron (N578,
+L15), read directly.
+• SAE feature (unsupervised): one feature (F15356) of the Gemma Scope
+sparse autoencoder (Google DeepMind, 2024) — a dictionary that decom-
+5
+
+poses activations into monosemantic features — that fires selectively on
+unrecognized entity names.
+• Embedding norm (unsupervised): the L2 norm of the entity token’s
+input embedding, lower for unknown entities — a label-free signal available
+before any computation.
+All six are passive measurements: they show which layers carry the distinction,
+not whether that signal causally drives behavior.
+2.4 Activation transplant
+We capture the full residual stream from a “source” forward pass (a prompt
+that produces the desired behavior) and inject it into a “target” forward pass at
+specific layers. If the target adopts the source’s behavior while preserving its
+own content, the behavior is an overlay — a separable signal that rides on top
+of the content computation and can be transplanted cleanly.
+2.5 Causal intervention protocol
+To test whether a candidate direction d causally governs a behavior, we add
+α · d to the residual stream at target layers during generation and measure
+behavioral change. The scalar α controls the intervention strength. To rule out
+confounds, we run two controls: 100 random directions at matched norm, and 10
+semantically irrelevant token-pair directions. A direction is considered causally
+relevant only if its effect significantly exceeds both control baselines.
+2.6 Signal decomposition
+At each layer, we decompose the residual stream update into attention and MLP
+contributions using hooks at pre-feedforward and post-feedforward positions,
+then project each contribution onto a candidate direction to measure how much
+each sublayer carries the behavioral signal. Gemma 2’s four layernorms per layer
+allow clean decomposition (Appendix A.5).
+2.7 Stimuli
+General set (N=100).
+The main stimulus set consists of 50 fake-entity
+questions across four thematic categories (capitals, science, culture, geography)
+and 50 matched real-entity controls. All fake entities are clearly non-existent by
+name (e.g., “What is the capital of Norlandia?”). This set is used for detection
+experiments (Section 4.1), the geometric bottleneck analysis (Section 4.3), and
+signal decomposition (Section 5). The full list is in Appendix A.3.
+Stress test (N=115). Section 6.3 uses a harder, separate set designed to
+probe the limits of the ROT-15◦intervention (the rotated intervention direction
+introduced in Section 6). We fixed these categories from each stimulus’s structural
+properties, before any intervention experiment. To test whether the intervention
+generalizes beyond easy cases, we split the stimuli by difficulty:
+6
+
+• Type 1 fake (N=30): entities with obviously invented names, where
+the phonology alone signals non-existence (e.g., “What is the capital of
+Karvistan?”).
+• Type 2 fake (N=30): fabricated facts phrased around plausible-sounding
+dates, numbers, or institutions (e.g., “Who signed the Treaty of Valmora?”).
+No phonological signal marks these as fake — only world knowledge would
+reveal them.
+• Real easy (N=25): well-known real-world facts with unambiguous answers
+(e.g., “What is the capital of France?”).
+• Real obscure (N=20): genuine but uncommon facts the model may not
+know confidently (e.g., “What is the capital of Nauru?”), used to test
+whether the intervention causes over-refusal on hard but real questions.
+• Real tricky-sounding (N=10): real entities whose names superficially
+resemble invented ones (e.g., “What is the capital of Vanuatu?”), the
+primary false-positive stress test.
+Format set. Format experiments use 32 arithmetic queries with matched
+fencing/no-fencing prompts (e.g., “What is 73+28?”), intentionally trivial to
+isolate the behavioral signal from content complexity.
+3. Format: Where Detection Equals Control
+We first establish the positive case — a behavior where detection and intervention
+are geometrically aligned.
+When asked to produce JSON, Gemma 2-2B-it wraps output in markdown code
+fences 100% of the time. Adding an explicit anti-fencing prompt produces clean
+JSON 100% of the time.
+3.1 The format direction
+Logit lens analysis — projecting the residual stream at each layer through the
+unembedding matrix to read the model’s evolving token prediction (Section
+2.3) — reveals the decision between { and ``` occurs at layers 20–25, with peak
+divergence at layer 24. The format direction:
+dformat = normalize(Wlm_head[‘{’] −Wlm_head[‘```’])
+3.2 One axis both detects and controls
+For format, detection and intervention are the same direction — not two
+directions that happen to align, but one vector doing both jobs. The lm_head
+format direction (Section 3.1) detects: projecting the last-token residual onto it
+separates fencing from clean output. And it controls: adding dformat at L20–25
+with α = 3.5 eliminates fencing on 100% of queries — a sharp sigmoid (100%
+7
+
+fencing below α = 2.5, 0% above α = 3.5), 100% valid JSON, 100% correct
+answers, at an intervention magnitude of 0.6% of the activation norm. The
+direction that separates fencing from clean output is, literally, the one that
+removes it.
+A caveat on what this does not show: a data-driven direction built from fencing
+vs non-fencing activations is a different vector, near-orthogonal to this one —
+the two constructions do not coincide. What makes format the aligned case is
+that a single output-vocabulary direction serves both roles, not that independent
+constructions agree. (This matters later: for hallucination no single direction
+does both, and Section 8 shows why a cosine between separately-built directions
+is not, by itself, a steerability test.)
+Controls: 0/100 random directions and 0/10 irrelevant token-pair directions
+affect fencing.
+3.3 The transplant test
+Activations from a clean-JSON forward pass injected into a fencing forward pass
+at L20–25 eliminate fencing 10/10 times across Gemma 2-2B and Gemma 3-1B.
+Format is a substitutable activation pattern — the same content is rendered
+in either format by swapping a localized state.
+3.4 Key observation
+Format behaves as an overlay: an output-rendering choice imposed on top of
+content, separable enough to be swapped wholesale (Section 3.3) and carried by
+a single axis that both detects and controls it (Section 3.2). This is the aligned
+baseline: detection and intervention are not two close directions but one and the
+same. Section 4 turns to hallucination, where they are two genuinely different
+directions and the same setup gives a very different answer.
+4. Hallucination: Where Detection and Control Diverge
+4.1 The model detects its own uncertainty by every method
+The model separates fake from real entities by every detector we apply (Section
+2.3). All succeed:
+8
+
+Detector
+Type
+Where
+Performance
+Logit lens (top-5 entropy)
+Unsupervised
+Layer 25
+AUC = 0.913
+Linear probe
+Supervised
+Layer 5+
+AUC = 1.000
+Single MLP neuron (N578)
+Unsupervised
+Layer 15
+Accuracy = 88%
+SAE feature (F15356)
+Unsupervised
+Layer 22
+88% fake / 0% real
+Embedding norm
+Unsupervised
+Input
+Accuracy = 83%
+Single attention head (L9 H2)
+Supervised
+Layer 9
+AUC = 1.000
+The signal is graded, not binary: beyond telling fake from real, the model
+separates obscure real entities from common ones (L9 H2, AUC = 0.993), so its
+detector tracks how well it knows an entity, not merely whether the entity exists.
+We are not the first to see this. Kadavath et al. (2022) found that language models
+broadly represent calibrated uncertainty about their own knowledge, and Azaria
+& Mitchell (2023) showed that internal activations classify model-generated
+falsehoods with near-perfect accuracy. Our contribution relative to both is
+the systematic measurement of the causal gap: perfect detection coexisting
+with failed intervention. One might worry that a probe in 2304 dimensions
+separates on prompt-surface features rather than epistemic state. That it also
+separates two classes of real entities — common from obscure, surface-matched
+and differing only in how well the model knows them — argues against a purely
+superficial cut.
+4.2 Intervention: detection directions are weak or backfire
+Data-driven (DiM): Difference-in-means achieves AUC = 1.000 for detection
+— the model’s own activations separate fake from real perfectly, with no human
+input. But DiM goes in the wrong direction for intervention: applying it
+reduces refusals, increasing fabrication. DiM top tokens are semantically mixed,
+capturing prompt-structure differences rather than the behavioral mechanism.
+Hand-picked (HP): The hand-picked detection direction (Section 2.2), used as
+an intervention, only partially works — at α = 15 on L20–25, fabrication on
+the 100 fake entities drops from ~70% to ~40% (p < 0.001), with 0 false refusals
+on the 50 real questions (the set is N=150: 50 Type 1 + 50 Type 2 fake + 50
+real). That even the detection direction, pushed directly, recovers only part of
+the behavior is exactly what the near-orthogonality predicts; the intervention
+direction has stronger causal power.
+Other methods that fail: - SAE feature amplification (F15356, up to 50×):
+no change in refusal (small collateral — 2 real answers lost). - Neuron ablation
+(top 500 discriminative neurons at L15): no behavioral change.
+The core pattern: detection succeeds by every method tested; only output-
+vocabulary directions have causal power, and even they are limited.
+9
+
+4.3 The geometric bottleneck
+We measure the cosine between a detection direction and the intervention
+direction. Detection, though, is not a single direction but an equivalence class:
+the hand-picked and the data-driven (DiM) detection directions both separate
+fake from real at AUC ≈1, yet are nearly orthogonal to each other (cos = 0.11,
+about 83◦) — a whole family of directions detects, not one. We therefore measure
+the gap to the intervention direction for both of them:
+cos(ddet, dref) = 0.12,
+cos(dDiM, dref) = −0.06
+Both are far from the cos ≈1 that alignment would require. The two values are
+not, however, the same measurement, and it is worth being precise about their
+scale: in 2304 dimensions two unrelated directions sit at cos ≈1/
+√
+2304 = 0.02
+by chance. The HP–HP value of 0.12 is a small but reproducible positive — about
+6× that floor, and consistent across models (§7); the cross-method −0.06 is
+essentially at the floor. So neither approaches alignment, but only the first is
+a real (if weak) signal — and §8 shows why neither, on its own, serves as a
+steerability test. This is the central result: every detection direction we
+construct is far from aligned with the intervention direction. The
+first cosine compares two directions read from lm_head; the second compares a
+direction derived purely from activations — no lm_head, no hand-chosen tokens
+— against the intervention direction. That an lm_head-free construction yields
+the same near-zero result rules out the most natural concern: that the gap is an
+artifact of lm_head geometry or token selection. Two further checks corroborate
+it:
+1. Cross-model convergence. Three different lm_head matrices with three
+different tokenizers (SentencePiece, BPE×2) all yield cos ∈[0.12, 0.20]
+(Section 7.1). If the measurement were an artifact of token selection, it
+would not converge across unrelated vocabularies.
+2. Base model replication. cos = 0.1197 (base) vs 0.1200 (instruction-
+tuned) — the same geometry in the same lm_head, before and after
+alignment (Section 7.5).
+Why the detection signal doesn’t produce refusal:
+The quantities below are projections of the last-prompt-token residual stream at
+L25 onto a unit-norm direction — the signed component of the activation along
+that direction, in the model’s native activation units. We call the difference
+between the mean projection for fake vs real entities the gap.
+The detection gap between fake and real entities at L25 is +49.8 — an enormous
+signal, 6.9× the mean gap of 2000 random unit directions. But the refusal gap
+along the same axis is only −24.9, in the wrong direction.
+1. The entity-copy mechanism dominates. Logit lens at L25: for “Capi-
+tal of Norlandia?” the model predicts the entity fragment ‘Nor’ with ~99%
+10
+
+probability; for real questions it predicts ‘The’ with comparable confidence.
+The detection component is a small slice of the residual: the part orthogo-
+nal to the detection direction — dominated by the entity copy, though not
+only entity copy — is roughly an order of magnitude larger (median ~12×
+across the fake set). This domination is not specific to fakes — it holds,
+even more strongly, for real entities, so it is a general property of the output
+mapping rather than a signature of the failure case; the detection direction
+is simply a thin slice of what drives the output. The amplification of the
+salient entity token is related to the copy-suppression motif characterized
+in GPT-2 by McDougall et al. (2023); here the mechanism operates in the
+opposite direction, amplifying rather than suppressing entity copies at late
+layers.
+2. The detection direction actively harms refusal tokens. Decomposing
+logit contributions on fake entities, the detection direction pushes down on
+refusal tokens (e.g. “fictional”) and up on fabrication openers (“The”). The
+direction that perfectly detects the fake entity pushes the output toward
+fabrication.
+3. Removing the detection component doesn’t change predictions.
+With the detection projection removed from the residual stream, “Norlandia”
+still maps to ‘Nor’ with essentially unchanged probability. The detection
+signal is invisible to the output mapping.
+5. Signal Autopsy: Where the Detection Signal Lives
+5.1 MLP dominates attention
+We decompose the residual stream layer-by-layer into attention and MLP contri-
+butions, projecting each onto the detection direction.
+Cumulative gap (fake −real projection on detection direction): - MLP: +42.3
+- Attention: +7.5 - Ratio: MLP carries 5.66× more signal
+The MLP contribution is spread across the late layers (L18–L25 each add roughly
++5 to +7 to the gap); no single layer dominates. Attention mildly opposes the
+signal at L17 (−0.92) and L21 (−0.76), but never strongly. This MLP dominance
+is consistent with Geva et al. (2023), who showed that factual association retrieval
+in autoregressive models is driven primarily by mid-layer MLP computations;
+our finding extends this to the encoding of epistemic uncertainty about entity
+existence.
+5.2 Attention at L17+ is dispensable
+We perform franken-forward experiments, zeroing attention output at specific
+layers:
+11
+
+Condition
+Fake refuse (baseline 60%)
+Real correct (baseline 100%)
+Kill
+L17+L21
+(fighters)
+60%
+100%
+Kill L20-25
+(late)
+65%
+100%
+MLP-only
+L13-25
+5% (destroyed)
+0% (destroyed)
+MLP-only
+L17-25
+75%
+95%
+Attention through L16 is essential for text coherence. From L17 onward, it is
+dispensable — removing it actually improves honesty by +15 percentage points
+with minimal degradation of real answers.
+5.3 Per-layer signal is too small for gating
+We attempted to build a self-intervention gate: read the MLP output at one
+layer, project onto the detection direction, use the value to modulate attention
+at later layers. 9 conditions tested, all equal to baseline.
+Root cause: the detection gap at any single MLP layer output is ~0.01 — far
+too small to use as a gate. The cumulative gap of ~50 exists only as the sum
+across all layers. No single layer is a reliable thermometer.
+6. Bridging the Gap: The 15◦Rotation
+6.1 Method
+Since the detection direction (ddet) and the intervention direction (dref) are
+nearly orthogonal (cos = 0.12), we can rotate from the detection direction toward
+the intervention direction using Gram-Schmidt orthogonalization:
+drot(θ) = cos θ · ddet + sin θ · dref⊥
+where dref⊥is the component of the intervention direction orthogonal to the
+detection direction.
+6.2 Exploratory sweep
+We sweep θ from 0◦to 90◦on a curated subset of 20 fake + 20 real entities.
+Every row below has α = 15 applied — the sweep compares rotation angles
+against each other, not intervention vs no-intervention. The no-intervention
+12
+
+baseline on this curated subset is 60% refusal (12/20), not the 85% in the 0◦
+row (which already has α = 15):
+θ
+Fake refuse (N=20)
+Real correct (N=20)
+0◦(pure detection)
+85%
+100%
+15◦
+90%
+100%
+30◦
+85%
+95%
+45◦
+90%
+95%
+60◦
+85%
+100%
+90◦(pure refusal⊥)
+80%
+100%
+At N=20, most cell differences are within sampling noise (1–2 samples). This
+sweep is underpowered to distinguish specific angles — it serves to show that
+the range is broadly effective and to select 15◦as a candidate for validation,
+balancing 97% detection sensitivity (cos 15◦= 0.966) with 26% action component
+(sin 15◦= 0.259).
+6.3 Validation on held-out hard cases
+We validate ROT-15◦at α = 15 on the stress test (N=115: 30 Type 1 fake, 30
+Type 2 fake, 55 real split into easy/obscure/tricky-sounding; see §2.7 for category
+definitions), distinct from the sweep set.
+Group
+Baseline (no intervention)
+ROT-15◦α = 15
+Type 1 (obvious fake)
+40% refuse
+73% refuse
+Type 2 (subtle fake — dates, numbers)
+13% refuse
+60% refuse
+Real easy (N=25)
+100% correct
+100% correct
+Real obscure (N=20)
+100% correct
+95% correct
+Real tricky-sounding (N=10)
+60% correct
+60% correct
+False positives
+0/55
+1/55 (1.8%)
+The baselines differ from the sweep (Section 6.2) because this is a harder stimulus
+set: Type 1 entities include cases that the model already partially refuses (40%
+baseline), while Type 2 entities (fabricated dates, numbers) are nearly always
+accepted (13% baseline). The sweep used curated “easy” fakes where even the
+pure detection direction achieves 85%.
+Type 2 hallucinations — where the model invents dates, numbers, and people
+with full confidence — go from 13% to 60% refusal. The single false positive
+(Bosch/Garden of Earthly Delights) is an arguably borderline case.
+At α = 10: zero false positives, Type 1 40%→57%, Type 2 13%→33%.
+13
+
+6.4 Interpretation
+A 15◦rotation in 2304-dimensional space partially bridges the gap between
+detecting and acting on hallucination: it recovers much of the refusal behavior
+(Type 2: 13%→60%) but not all, and the sweep (Section 6.2) is underpowered
+to pin the angle down precisely. Still, the model has all the information needed
+to refuse — the bottleneck is that this information lives along a direction nearly
+orthogonal to the intervention direction.
+7. Cross-Model Replication
+7.1 Four-model triangulation
+We replicate the lm_head bottleneck analysis — the same cos(ddet, dref) and gap-
+vs-random measurement of Sections 2 and 4.3, with both directions built from
+each model’s own lm_head — on Llama-3.2-1B-Instruct, Qwen-2.5-1.5B-Instruct,
+and Gemma 2-9B-it.
+Model
+Layers
+dim
+cos
+Signal ratio
+Behavior
+Gemma 2-2B-it
+26
+2304
+0.12
+6.9×
+Fabricates (~70%)
+Llama 3.2-1B
+16
+2048
+0.20
+12.5×
+Refuses (100%)
+Qwen 2.5-1.5B
+28
+1536
+0.16
+2.7×
+Mixed (40% refuse)
+Gemma 2-9B-it
+42
+3584
+0.13
+12.8×
+Fabricates
+cos = cos(ddet, dref), the cosine between detection and intervention directions.
+Signal ratio = gap between fake and real projections on the detection direction,
+relative to a random baseline.
+All four show near-orthogonality (cos ∈[0.12, 0.20]), corresponding to angles
+of 78◦–83◦between the detection and intervention directions. These are small
+values — but consistently above the chance floor (~0.02 in these dimensions, §4.3)
+and reproducible across unrelated tokenizers; it is this consistency of a small
+positive, not its magnitude, that is the invariant. Three different model families,
+three different tokenizers (SentencePiece, BPE×2), and two scales within the
+same family (2B vs 9B) confirm the pattern. The notably smaller gap/random
+ratio for Qwen (2.7× vs ~7–13× for Gemma and Llama) reflects Qwen’s larger
+residual norms absorbing the perturbation rather than a weaker detection signal
+— consistent with Qwen’s no-collapse behavior under large α (Section 7.4).
+7.2 Token alignment is universal
+Ranking the whole vocabulary by its alignment with the (fixed) detection
+direction, the top tokens are the same across all three models despite completely
+different tokenizers — and they are not the tokens the direction was built from:
+14
+
+• Favored (uncertainty): “Unfortunately”, “There”, “Sadly”, “It”, “I”,
+“Sorry”
+• Disfavored (confidence): “Paris”, “Tokyo”, numbers, city names
+Qwen additionally includes the Chinese-script equivalents of Paris and Tokyo
+among its disfavored tokens — the same semantic structure expressed through a
+different script and tokenizer. The direction encodes a language-modeling-level
+concept, not a tokenizer artifact.
+7.3 Causal power is bidirectional
+On Gemma 2-2B-it, ROT-15◦reaches 73% and 60% refusal on the held-out
+stress test (Section 6.3). Does the same direction — built from each model’s
+own lm_head — also have causal power on other families? On small exploratory
+sets (15 fake + 15 real per model), it does:
+Model
+Baseline fake refuse
+Best α
+Effect
+Real damage
+Llama 3.2-1B
+100%
+α = −1
+80% fabricate
+0/15
+Qwen 2.5-1.5B
+40%
+α = +5
+93% refuse
+0/15 FP
+In each case α is pushed toward the behavior the model does not default to:
+positive to induce refusal (Qwen, as for Gemma in Section 6.3), negative to
+induce fabrication (Llama). Llama already refuses everything, so the negative α
+selectively induces fabrication on fake entities while preserving real answers —
+the same direction steers behavior both ways, only from a different baseline.
+Llama diverges from the other models.
+Despite the same near-orthogonal
+geometry (cos = 0.20), it refuses fake entities by default — detection and action
+agree in outcome here, where on Gemma they come apart. We examine what
+this means for the central claim in the Discussion (Section 8).
+α magnitude does not transfer: Gemma needs α = 15, Llama needs |α| = 1,
+Qwen needs α = 5. The direction generalizes; the scale must be recalibrated per
+model.
+7.4 Collapse signatures are interpretable
+At excessive α: - Gemma: “Paris Paris Paris. . . ” (confidence token loop) -
+Llama: “TokTokTok. . . ” — “Tok” is the BPE prefix for “Tokyo” (entity-copy
+mechanism takes over) - Qwen: no collapse across entire tested range (large
+residual norms absorb the perturbation)
+The Llama collapse reveals the entity-copy mechanism (Section 4.3) in a different
+model: when the detection signal is ablated past the sweet spot, the entity-copy
+component becomes dominant, producing an interpretable behavioral collapse
+rather than random noise.
+15
+
+7.5 Instruction tuning leaves the lm_head geometry unchanged
+We measure cos(ddet, dref) on the Gemma 2-2B base model (no instruction
+tuning):
+Model
+cos(ddet, dref)
+Gemma 2-2B (base)
+0.1197
+Gemma 2-2B-it
+0.1200
+Difference: 0.0003. The instruction tuning does not touch the lm_head geometry.
+What alignment does change is where the activations land along the (fixed)
+detection direction. In the base model the ordering is backwards — real entities
+project further along it, as if more uncertain than the fakes (gap −23.2). In-
+struction tuning flips it the sensible way: now the fake entities are the ones that
+look uncertain (gap +49.8). The geometry is the same in both models; tuning
+leaves the axis untouched and moves the activations along it.
+The detection direction is multilingual already in pretraining: top favored
+tokens include “Unfortunately” (English, 0.809), “purtroppo” (Italian, 0.460),
+“malheureusement” (French). The concept is baked in by the language modeling
+objective.
+8. Discussion
+A consistent geometric pattern
+Our central finding is a precise geometric characterization of the detection-
+intervention gap. Across three families, three tokenizers, and two scales within
+the Gemma family (2B and 9B) — with and without instruction tuning — the
+angle between the detection and intervention directions consistently falls in the
+range of 78◦–83◦(cos ∈[0.12, 0.20]), and is robust to whether the detection
+direction is built from activations or from the output vocabulary.
+This consistency is what we would expect if the gap reflects an architectural
+regularity of autoregressive language modeling. The pretraining objective opti-
+mizes lm_head to predict the next token, not to map internal epistemic states
+to behaviorally appropriate outputs. The model learns to represent uncertainty
+(detection) and learns to produce tokens (action) as largely independent computa-
+tions. They share the same vector space but occupy nearly orthogonal subspaces
+within it. Whether this pattern holds for encoder-decoder architectures, models
+above 10B parameters, or non-factual behaviors remains an open question.
+16
+
+Detection and action are independent faculties
+The cos stays near zero across all four models — detection and intervention sit
+on nearly orthogonal directions, invariantly — yet the behavioral consequence
+varies along a spectrum. Gemma detects that an entity is fake (AUC = 1.000)
+and fabricates most of the time: detection with little corresponding action.
+Qwen sits in the middle, refusing about 40% and fabricating the rest. Llama,
+with the identical geometry (cos = 0.20), refuses fakes outright. The same
+near-orthogonal geometry coexists with outcomes from “almost always fabricate”
+to “always refuse”: the geometry does not determine the behavior.
+Llama sharpens this into a double dissociation. It cannot be routing its refusal
+through the detection direction — that direction is as orthogonal to refusal as
+Gemma’s — so its correct behavior must travel a separate path. We thus have
+detection without action (Gemma) and action that does not flow from detection
+(Llama), the standard pattern for showing two functions are genuinely distinct.
+The model on which our gap does not show up behaviorally is, in that sense,
+strong evidence that detecting and acting are separate computations, not one
+faculty that occasionally fails to connect.
+How Llama achieves this is open. Its refusal is selective — it answers real
+entities and refuses fake ones — so some fake/real signal does reach the refusal
+output; yet the detection direction we measure is orthogonal to that output.
+The routing must therefore run through a path our linear lm_head directions
+do not capture: a different detection direction (detection is a class of directions,
+not one — Section 4.3), or a non-linear, multi-step route. Localizing it is left to
+future work.
+The shortcut that fails: a weight-cosine is not a steerability oracle
+It is natural to hope this cosine doubles as an a priori steerability test — high
+cos (format) meaning the detection direction is itself a control knob, low cos
+(hallucination) meaning one should steer a rotated direction instead. We tested
+that reading and it does not hold, for three reasons that are themselves the
+result.
+First, alignment is the exceptional case, not a pole of a clean scale.
+Measured the same independent way — a data-driven detector against the
+intervention direction — the cosine sits near the high-dimensional chance level
+(≈1/
+√
+2304 = 0.02) for both format and hallucination.
+Format’s apparent
+cos ≈1 is not two constructions agreeing; it is one and the same vector used in
+both roles (Section 3.2).
+Second, detection is not a single direction but a class.
+The hand-
+picked and data-driven detectors both reach AUC ≈1 yet are themselves
+near-orthogonal (cos = 0.11; Section 4.3). “The” detection direction — the
+single object a one-number diagnostic presupposes — does not exist; detection
+occupies a subspace.
+17
+
+Third, what separates the steerable case from the unsteerable one is
+functional, not geometric. The test is whether the intervention direction —
+the one that steers — also works as a detector. For format it does: the same
+direction doubles as a near-perfect detector (AUC ≈1). For hallucination it
+does not (AUC ≈0.7) — and note this is the intervention (refusal) direction;
+the dedicated detection direction still separates fake from real at AUC = 1.000
+(§4.1). The model detects perfectly, but the direction that acts barely reads the
+behavior it is supposed to act on. That difference — whether the controlling
+direction also reads the behavior — is a fact about behavior under intervention,
+invisible to a static angle.
+What the cosine is is a robust, weight-computable signature of the dissoci-
+ation, invariant across four models (cos ∈[0.12, 0.20]) — a description of how
+far detection sits from control, not a predictor of how steerable a behavior is.
+The rotation of Section 6 is best read in the same spirit: evidence that the gap
+has geometric structure (it can be partly bridged — Type 2 refusal 13%→60%)
+rather than a turnkey fix, since it recovers only part of the behavior.
+Alignment and residual-stream geometry
+If the lm_head geometry is fixed by pretraining (cos difference of 0.0003 between
+base and IT), how does alignment training produce models that refuse unknown
+entities (Llama) vs fabricate (Gemma)? One interpretation consistent with
+our data is that alignment works by shifting residual-stream representations —
+moving where fake-entity activations land relative to the fixed lm_head geometry
+— rather than by modifying the geometry itself.
+Testing this directly would require comparing activation trajectories between
+base and instruction-tuned models across the full forward pass, which we leave
+to future work. What we can say is that α does not transfer across models
+(Gemma needs 15, Llama needs |1|, Qwen needs 5), consistent with each model’s
+residual stream starting at a different point relative to the same geometric
+bottleneck. Scale matters too: Gemma 2-9B-it reproduces the geometry (Section
+7.1, cos = 0.13) but resists steering — the same intervention is suppressed
+rather than amplified at 9B — so we report its geometry but not a comparable
+intervention. Whether larger models systematically damp this steering is left to
+future work.
+The entity-copy bottleneck
+In the output mapping, the residual orthogonal to detection — dominated
+by entity copy — outweighs the detection component by roughly an order of
+magnitude (median ~12× on fakes, and more on reals: the domination is general,
+not specific to the failure case; Section 4.3), which explains why the detection
+signal, despite being enormous (6.9× random), fails to influence behavior. The
+model’s output is dominated by a mechanism that copies the most salient entity
+token from the context — a pattern useful for factual recall but catastrophic for
+18
+
+unknown entities.
+We document this dominance but do not explain its emergence from pretraining.
+Why does entity copy outweigh the detection signal so heavily in the output,
+and would the ratio change for non-entity-centric questions? These are open
+questions for future work. The entity-copy mechanism is visible in all three
+models (the “TokTokTok” collapse on Llama), at strengths that vary by model.
+MLP as the signal carrier
+The signal autopsy (Section 5) reveals an asymmetric division of labor: MLP
+layers carry 5.66× more detection signal than attention, spread across the late
+layers rather than concentrated in one. Attention at L17+ can be entirely
+removed while improving honesty. The detection-action gap is not a coordination
+failure between attention and MLP — the signal is overwhelmingly in MLP,
+which feeds directly into the residual stream, yet the output mapping still ignores
+it.
+Limitations
+Sample sizes. Most experiments use 20–55 questions per condition. Effects are
+large and consistent, but replication at larger scale is warranted. The rotation
+sweep (Section 6.2, N=20) is underpowered for fine-grained angle selection; we
+use it as an exploratory step validated on the larger stress test (Section 6.3,
+N=115).
+Model families. Three families tested (Gemma, Llama, Qwen), all decoder-
+only transformers. Coverage extends from 1B to 9B parameters via Gemma
+2-2B-it and Gemma 2-9B-it (cos = 0.12 and 0.13 respectively). The consistent
+cos ∈[0.12, 0.20] across families and scales is strong but not universal: replication
+on models above 10B and on non-decoder architectures remains needed.
+Single behavior deep-dive. The geometric analysis focuses on hallucination
+about non-existent entities, with output format as a positive control. Other
+behaviors may exhibit different angular relationships; whether the angle varies
+systematically across a broader range of behaviors — from overlay to substrate
+— is left to future work.
+Entity-copy mechanism. The order-of-magnitude dominance of entity copy
+(median ~12× on fakes, larger on reals) is documented but unexplained, and is
+not specific to the failure case. Whether it is specific to entity-centric questions or
+a general property of the output mapping is untested. Explaining its emergence
+from pretraining is an open question.
+lm_head linearity. Our direction construction relies on lm_head rows, which
+assumes approximate linearity of the unembedding. This holds well at 1–3B
+parameters. Whether the orthogonality persists when measured via nonlinear
+probes on larger models is an open question — the gap could be even more
+pronounced if the unembedding is less faithful at scale.
+19
+
+Stimulus difficulty tiers.
+The Type 1/Type 2 and easy/obscure/tricky-
+sounding categories in the stress test (Section 6.3) are pre-specified and based on
+structural properties of the stimuli, not on model behavior. However, the bound-
+ary between tiers is not always sharp — a human judge might reasonably classify
+some stimuli differently. The reported per-tier results should be interpreted as
+indicative of a difficulty gradient rather than as hard category boundaries. The
+aggregate false-positive rate (1/55) is unaffected by this concern.
+Non-identifiability. Steering vectors have large equivalence classes. We tested
+5 direction variants per behavior and found the separability contrast invariant
+across effective directions, but cannot rule out that some untested direction
+breaks the pattern.
+9. Related Work
+Arditi et al. (2024) demonstrated that refusal is mediated by a single direction
+on Llama 7B/13B — an aligned case where detection ≈control. Kazemi et
+al. (2026) refined this to single-neuron granularity: suppressing one MLP neuron
+suffices to bypass safety alignment across 7 models from 1.7B to 70B (91.7%
+attack success on JailbreakBench, no training required). Crucially, the same
+neuron serves as a near-perfect harmful-prompt detector (AUROC ≈Llama-
+Guard-3-8B) — an instance where detection ≈intervention at the finest possible
+grain. Our finding that the angular relationship is ~83◦for hallucination on
+Gemma 2-2B provides the complementary negative case — detection and control
+occupying nearly orthogonal subspaces even where detection is perfect.
+Li et al. (2023) showed truth-telling directions from probing can increase
+honesty. Our results suggest this works when the probed direction also functions
+as the causal one (overlay) but fails when it does not (substrate) — though we
+find (Section 8) that a static cosine does not by itself predict which case applies.
+Turner et al. (2023) formalized activation addition for behavioral steering,
+building on Subramani et al. (2022), who first extracted latent steering
+vectors from language models. Zou et al. (2023) proposed representation
+engineering as a general framework. Our geometric analysis characterizes the
+two regimes these approaches meet — overlay (detection and control on a single
+axis) and substrate (near-orthogonal) — while showing (Section 8) that the
+regime is not reliably read off a single weight-cosine.
+Marks & Tegmark (2024) characterized the geometry of truth representations.
+Our work extends geometric analysis to the relationship between detection
+and intervention directions, finding that high-quality truth detection does not
+guarantee steering effectiveness.
+Park et al. (2023) and Hernandez et al. (2023) provide theoretical and
+empirical support for the linear representation hypothesis — that features
+are encoded as approximately linear directions in the residual stream. Our
+20
+
+direction construction (Section 2.2) relies on this assumption. The consistency
+of cos ∈[0.12, 0.20] across three architectures with different tokenizers provides
+further empirical support for the approximate linearity of the unembedding.
+Burns et al. (2023) discovered latent knowledge via unsupervised probing
+(CCS). Our finding that perfect probing accuracy coexists with zero intervention
+effectiveness provides a mechanism for why latent knowledge remains latent:
+the routing from knowledge to behavior fails when detection and action occupy
+orthogonal subspaces.
+Azaria & Mitchell (2023) showed that internal activations classify model-
+generated false statements with near-perfect accuracy — an independent confir-
+mation of the detection side of our finding. We add the causal counterpart: that
+this internal signal does not propagate to the output action.
+Rimsky et al. (2024) applied contrastive activation addition to steer Llama
+2 on safety-relevant behaviors, finding that single directions effectively control
+outputs across a range of alignment-relevant settings. Their results are consistent
+with our format case (overlay: a single direction both detects and controls). Our
+hallucination case (cos ≈0.12) identifies the failure mode where single-direction
+steering is insufficient — the detection direction is nearly orthogonal to the
+intervention direction.
+Meng et al. (2022) located factual associations in GPT via causal tracing. Our
+finding that factual knowledge is extremely robust to steering (α = 20 needed to
+degrade real answers, vs α = 3.5 for format) is consistent with their finding that
+facts are stored in MLP weights.
+Heimersheim & Nanda (2024) recommended best practices for activation
+patching, noting that path-patching and ablation can give different results.
+Our own circuit-level ablations confirm this: heads identified by path patching
+as carrying the “known entity?” signal increase fabrication when ablated —
+detection̸ = intervention at the circuit level.
+Kaplan et al. (2026) showed that fine-tuning encourages hallucinations through
+a forgetting mechanism. Our wo

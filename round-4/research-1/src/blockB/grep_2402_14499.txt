@@ -1,0 +1,106 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2402.14499v2
+Type: HTML
+Pattern: system prompt|template|format|refusal rate (49 matches in 48652 chars)
+
+--- Content ---
+
+729:...nload PDF") [ ](javascript:toggleNavTOC\(\); "Toggle navigation") [ ](javascript:toggleReadingMode\(\); "Disable reading mode, show header and footer")
+
+  1. Abstract
+  2. 1 Introduction
+  3. 2 Related Work
+     1. MCQ Evaluation
+     2. Selection Bias
+  4. 3 Experiments
+     1. Data
+     2. Prompt Format
+     3. Models
+     4. First-Token Evaluation
+     5. Text Output Evaluation
+  5. 4 Results
+     1. 4.1 Mismatch
+        1. OpinionQA
+        2. MMLU
+     2. 4.2 Refusal Rate
+     3. 4.3 Answer Consistency
+  6. 5 Conclusion
+  7. References
+  8. A Appendix
+     1. A.1 Decoding Temperature
+     2. A.2 Model Output Annotation
+     3. A.3 Dataset Statistics
+     4. A.4 Classifier
+        1. String Matching
+        2. Few shot learning
+        3. Finetuning
+     5. A.5 Optio...
+--
+2687:...nse styles such as starting with "Sure" or refusing to answer. Consequently, MCQ evaluation is not indicative of model behaviour when interacting with users. But by how much? We evaluate how aligned first-token evaluation is with the text output along several dimensions, namely final option choice, refusal rate, choice distribution and robustness under prompt perturbation. Our results show that the two approaches are severely misaligned _on all dimensions_ , reaching mismatch rates over 60%. Models heavily fine-tuned on conversational or safety data are especially impacted. Crucially, models remain misaligned even when we increasingly constrain prompts, i.e., force them to start with an option letter or example template. Our findings i) underscore the importance of inspecting the text output as well and ii) caution against relying solely on first-token evaluation. 11 1 We release experimental results and trained classifiers at <https://github.com/mainlp/MCQ-Mismatch>.
+
+## 1 Introduction
+
+Multiple Choice Questions (MCQ) are one of the most popular evaluation formats for understanding the capabilities of Large Language Models (LLMs), such as commonsense reasoning Bisk et al. (2020); Sap et al. (2019); Sakaguchi et al. (2021); Zellers et al. (2019); Clark et al. (2018); Talmor et al. (2019) and truthfulness Lin et al. (2022). They are also an important part of aggregated evaluation benchmarks such as MMLU Hendrycks et al. (2021), BIG-bench bench authors (2023) and HELM Liang et al. (2022), where MCQ is the most common setting. Recently, this format was also adopted to evaluate moral beliefs Scherrer et al. (2023), or opinions on public issues Santurkar et al. (2023); Durmus et al. (2023) encoded in LLMs.
+
+The most common way to evaluate MCQ accuracy is to look at the model’s first token prediction Santurkar et al. (2023); Hendrycks et al. (20...
+--
+5170:...liability of first-token evaluation.
+
+Figure 1: Example of LLM’s _mismatch_ between first-token probability prediction (“C”) and text output (“A”).
+
+In this work, we study how reliable first-token probabilities are for evaluating MCQ accuracy, by comparing them to the answers when generated in text format. We show that the first-token evaluation is not faithful to text output: it often does not match the text output’s answer (e.g., over 60%60\% mismatch for Llama2-7b-Chat). We also measure the refusal rate, sensitivity to the prompt formulation and the impact of decoding temperature across six instruction-tuned models to better understand the characteristics of the two evaluation methods. Our findings suggest that it is imperative to go beyond the first-token evaluation setting and inspect the text o...
+--
+6708:...mpting, when the task is not “challenging to translate into direct probability measurement”. When it comes to challenging tasks such as multitask knowledge testing and survey questions, our work shows the issue of combining the probability measurement (first-token evaluation) and the prompting (MCQ format). In contemporaneous research, Lyu et al. (2024) also highlighted the misalignment between the text-based and probability-based evaluation. Their study, however, focused mainly on the final accuracy difference. Our work investigates further into the instance-level difference under diverse prompt se...
+--
+7747:...ction bias in text answers. Contemporaneously, Wang et al. (2024) systematically investigates the selection bias of the two approaches.
+
+## 3 Experiments
+
+#### Data
+
+We evaluated the models on two datasets: MMLU Hendrycks et al. (2021) and OpinionQA Santurkar et al. (2023). OpinionQA was curated by formatting the survey questions from Pew Research Center22 2 <https://www.pewresearch.org/> into a prompt format. Given that numerous questions in the OpinionQA dataset do not pertain to public opinion but rather to personal information, we have curated a subset of 414 questions specifically focused on soliciting views about public issues.
+
+Constraint | General Instruction Prompt  
+---|---  
+Low |  Please read the multiple-choice question below carefully and select ONE of the listed options.  
+Medium |  Please read the multiple...
+--
+8663:... a single letter.  
+High |  Please read the multiple-choice question below carefully and select ONE of the listed options and start your answer with a single letter.  
+Example |  Please read the multiple-choice question below carefully and select ONE of the listed options. Here is an example of the format:   
+Question: Question 1   
+A. Option 1   
+B. Option 2   
+C. Option 3   
+Answer: C  
+Table 1: Instruction prompt of different constraint levels. The options for Example template are literally Option 1, not actual options. Low and Example are taken from Santurkar et al. (2023), Medium and High are our variants.
+
+#### Prompt Format
+
+Each question consists of a General Instruction, a Question, and a set of Answer Options, as shown in Figure 1. To investigate the impact of the general instruction on the instruction following ability of the model, we design general instructions of different constraint levels, as shown in Table 1. The Low Constraint and Example Template instructions directly inherit from the two instruction templates used in Santurkar et al. (2023). To evaluate the model’s response consistency and mitigate selection bias, each question is presented ten times with the answer options shuffled in a different order for each iteration. We compare the mismatch rate in each order and take the averaged mismatch rate i...
+--
+11926:...7b-Instruct-v0.2 on annotated responses from the model we evaluated in Section 3. We manually annotated 2070 response samples generated by all the evaluated models except Mistral-7b-v0.1 (414 samples per model). Responses from Mistral-7b-Instruct-v0.1 were not annotated since the answers follow the format well and can be easily mapped to the options. We apply QLoRA Dettmers et al. (2024) for parameter-efficient-finetuning (PEFT) using the official huggingface PEFT library Mangrulkar et al. (2022) with the default training parameter. Table 8 shows examples of the model response of different models wi...
+--
+12903:...in Table 2. Our parameter-efficient-fine-tuned (PEFT) classifier achieved 99% accuracy. The annotation details, the annotated dataset statistics (label distribution), and the classifier training are shown in Appendix A.2, A.3 and A.4.
+
+## 4 Results
+
+### 4.1 Mismatch
+
+Figure 2:  (a) Mismatch and (b) Refusal rate of different models under the instruction of different constraint levels. The light colour in the mismatch rate indicates the portion of mismatch due to refusal. Results are averaged across 10 runs. 
+
+To assess the alignment between the first token and text output evaluation, we measure the ratio o...
+--
+14063:...ce of the mismatch, we also plot the portion of mismatch due to refusal, as shown with light color (and further described in Section 4.2). The refusal is an important factor for mismatch, however, there is still a considerable amount of mismatch due to non-safety reasons.
+
+Surprisingly, the Example Template leads to a higher mismatch rate than High Constraint instruction in five models out of six, especially for Mistral-7b-Instruct-V0.1 and Llama2-70b-Chat, which show good instruction following ability and low mismatch rate under other general instructions. This is probably due to the fact that it follows the literal pattern in the example where the answer is given as ‘C’. To test this hypothesis, we count the choice distribution from the Llama2-70b-Chat model under the Example Template instruction. In Figure 3(a), the first token evaluation selects ‘C’ about 85%85\% of the time (compared to 32.1%32.1\% with High constraint, see Figure 7), whereas the classified text output is more evenly distributed. This shows that the first token log probability gets shifted to the token ‘C’ su...
+--
+15396:...swer with “A/B/C”, which was also used by Santurkar et al. (2023), and show the choice distribution in Figure 3(b). Compared to Figure 3(a), the distribution shifted from ‘C’ to ‘A’ and ‘B’ for both first-token evaluation and the classified text output. This shows the substantial impact the example template has on the model’s response. It also suggests that the few-shot templates used in objective tasks are not suitable for subjective tasks since there are no “correct” examples. It is generally not a good instruction format for evaluating the model on public opinion questions.
+
+Figure 3: Result distribution of first token and text output based on example template with (a) "Answer: C" and (b) "Answer: A/B/C".
+
+#### MMLU
+
+As a measure of the impact of the mismatch issue on objective datasets, we measure the mismatch rate and accuracy discrepancy on MMLU with a general instruction of Middle constraint, as shown in Table 3. Similar to the result on OpinionQA, L...
+--
+[24 more matches not shown]

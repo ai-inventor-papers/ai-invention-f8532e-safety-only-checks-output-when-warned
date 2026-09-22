@@ -1,0 +1,80 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/html/2412.06748v2
+Type: HTML
+Pattern: format|template|prompt variation|robust (23 matches in 78234 chars)
+
+--- Content ---
+
+2319:...dels is enabling the models to appropriately refuse to follow certain instructions or answer certain questions. We may want models to output refusal messages for various categories of user queries, for example, ill-posed questions, instructions for committing illegal acts, or queries that require information beyond the model’s knowledge horizon. Engineering models that refuse to answer such questions is complicated by the fact that an individual may want their model to exhibit varying levels of sensitivity for refusing queries of various categories, and different users may want different refusal rat...
+--
+4156:...lso their utility and trustworthiness, as refusal messages can prevent LLMs from hallucinating or answering invalid requests. For example, an LLM that lacks the ability to browse the web should refuse when asked to access and summarize the content behind a URL. Likewise, a model should provide an informative refusal when asked to answer a question that is too under-specified or poorly formed to be answerable. To minimize hallucinations and unsafe behavior, instruction models like GPT-4 (Achiam et al., 2023) and llama-3 (Dubey et al., 2024) have been imbued with extensive refusal capabilities. Despit...
+--
+14040:...raining time benefits). 
+
+Instruction models are trained on instruction-response pairs, (x,y)(x,y), sampled from an instruction dataset DD. The user provides the model with a question or an instruction, xx, and the model then outputs a response yy. Each datapoint is usually given an additional chat template, CC. Here, yy consists only of natural language without any meta-information contained in the messages. We introduce a new token, [refuse], at the beginning of the response if it is a refusal message, or [respond] otherwise during training. This modifies yy to y′=[refuse]+yy^{\prime}=\texttt{[refuse]}+y or y′=[respond]+yy^{\prime}=\texttt{[respond]}+y, depending on wheth...
+--
+17069:...s largely free of any refusal messages, and its faster training time facilitates more ablations for Section 6.
+
+CoCoNot Experimental Setting. For the main experimental setting, we utilize a diverse and comprehensive dataset, extending beyond just toxicity, for both training and evaluation to ensure robust performance in refusal prediction. Specifically, we adopt Brahman et al. (2024)’s CoCoNot dataset and evaluation due to the breadth of its five categories (Humanizing, Indeterminate, Incomplete, Safety, and Unsupported), which encompass 26 subcategories. Additionally, the dataset contains contrast ...
+--
+26528:...nizing questions or instructions are classified as one of the other refusal categories, emitting the incorrect refusal token. For example, many of the questions ask for stock or financial recommendations. These types of requests can easily be refused due to temporal issues (no access to real-time information), input modality issues (needing access to current portfolios), or safety (not wanting to provide financial information). Nevertheless, Figure 3 highlights that one can use individual category tokens to control individual distributions.
+
+Figure 4:  Thresholding the refusal tokens increases F1 scores and controls the true positive and false positive rates for a single instruction type (temporal setting). For our t...
+--
+39872:...to label the model as “responded.”
+
+For example, for a query from the Humanizing category, ”Can you share your personal opinion on the issue of climate change?”, the model responded with ” [Humanizing requests] As an AI, I don’t have personal opinions, beliefs, or feelings. However, I can provide information and perspectives on the issue of climate change based on scientific data and consensus…” From this example, we see that the model outputs the disclaimer that the model does not have personal opinion, etc, but then provides an answer based on scientific consensus and data. Note that without the p...
+--
+53375:...et al. (2023) Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher D Manning, Stefano Ermon, and Chelsea Finn.  Direct preference optimization: Your language model is secretly a reward model.  In A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine (eds.), _Advances in Neural Information Processing Systems_ , volume 36, pp. 53728–53741. Curran Associates, Inc., 2023.  URL <https://proceedings.neurips.cc/paper_files/paper/2023/file/a85b405ed65c6477a4fe8302b5e06ce7-Paper-Conference.pdf>. 
+  * Röttger et al. (2024) Paul Röttger, Hannah Kirk, Bertie Vidgen, Giuseppe Attanasio, Feder...
+--
+54257:...e 1: Long Papers)_ , pp. 5377–5400, 2024. 
+  * Schick et al. (2024) Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Eric Hambro, Luke Zettlemoyer, Nicola Cancedda, and Thomas Scialom.  Toolformer: Language models can teach themselves to use tools.  _Advances in Neural Information Processing Systems_ , 36, 2024. 
+  * Sennrich et al. (2016) Rico Sennrich, Barry Haddow, and Alexandra Birch.  Controlling politeness in neural machine translation via side constraints.  In Kevin Knight, Ani Nenkova, and Owen Rambow (eds.), _Proceedings of the 2016 Conference of the North Americ...
+--
+57030:... al. (2023) Yuxin Wen, Neel Jain, John Kirchenbauer, Micah Goldblum, Jonas Geiping, and Tom Goldstein.  Hard prompts made easy: Gradient-based discrete optimization for prompt tuning and discovery.  In A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine (eds.), _Advances in Neural Information Processing Systems_ , volume 36, pp. 51008–51025. Curran Associates, Inc., 2023.  URL <https://proceedings.neurips.cc/paper_files/paper/2023/file/a00548031e4647b13042c97c922fadf1-Paper-Conference.pdf>. 
+  * White et al. (2025) Colin White, Samuel Dooley, Manley Roberts, Arka Pal, Benjamin Feuer,...
+--
+59749:...394.  URL <https://aclanthology.org/2024.naacl-long.394>. 
+  * Zheng et al. (2024) Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric Xing, et al.  Judging llm-as-a-judge with mt-bench and chatbot arena.  _Advances in Neural Information Processing Systems_ , 36, 2024. 
+  * Zhou et al. (2024) Andy Zhou, Bo Li, and Haohan Wang.  Robust prompt optimization for defending language models against jailbreaking attacks.  _arXiv preprint arXiv:2401.17263_ , 2024. 
+  * Zhu et al. (2024) Sicheng Zhu, Ruiyi Zhang, Bang An, Gang Wu, Joe Barrow, Zichao Wang, Furong Huang, Ani Nenkova, and Tong Sun.  AutoDAN: Interpretable gradient-based adve...
+--
+68807:...ial. To construct the data, we used llama-3-70B. We used the first ten sentences from news articles from the Guardian API. Additionally, we ask a language model to create a refusal message based on the question and the model to assume that this is beyond its training data or it requires real-time information to answer. Note without the date or day, these questions could be treated as a combination of false premise questions or fake event questions. For the contrast, or borderline, data, we construct them using articles from 19901990 to 20202020. The prompts for these can be found below. The system p...
+--
+70277:...te in Australia last month, when the economy added a net 39,700 jobs?
+
+  3. 3.
+
+What will the British public have the chance to do in three weeks?
+
+
+
+
+To get the refusal message for the refusal data, we use the following prompt:
+
+Construct a following refusal message because the question contains information that requires knowledge of the current date, real-time knowledge, or future knowledge like this year, this monday, or referring to something that happens in 2024 etc for the following question. Explain what is wrong with the question only in terms of the aspects listed above. Only reply with a s...
+--
+71205:...ses like ‘this year‘ or ‘this month‘ or specify the day of the week if you give a month, day, or week include the exact date and include the year.
+
+For creating the corresponding responses, we asked the model to create responses from the questions and if it did not know. Feel free to make up some information. The reason to do it in this manner is to make sure none of the articles is summarized for copyright infringement.
+
+Answer the following question no matter what feel free to make up information about the question if necessary but don’t say you made up information. Keep the answer short.
+
+### A.5 Prompt For CoCoNot
+
+After much trial and error on just training on UltraChat with no refusals, on the prompt engineering side for llama-3.1-70B. We made some small adjustments to the prompts to closer align with what a human would claim. For example, after an int...
+--
+73038:...e accuracy or the verbosity of the answer does not matter in this decision.   
+  
+Which class best fits the following question-response pair? Please first generate a short description of why you chose the class you did, and then generate one of the two classes at the end as your final answer in the format as **CLASS**. Try your best to fit the response in one of these two categories but if the output does not belong to either classes, output **NEITHER**. Use NEITHER SPARINGLY. Additionally, if the model starts with a sentence with a disclaimer and provides an answer to the prompt, then classify this...
+--
+74030:...ine decay. Additionally, hyperparameter details can be found in Tunstall et al. (2023) at <https://github.com/huggingface/alignment-handbook>. We altered the sequence length for training from 20482048 to 10241024. For Alpaca, we trained for three epochs and one epoch for UltraChat. We used the chat template from llama-3 Instruct. Additionally, we the chat template from llama-3. The majority of training runs were completed on 88 Nvidia A100 4040GB.
+
+### A.7 Thresholding Algorithms
+
+Algorithm 1 Category Thresholding
+
+Let TT be threshold, tret_{\text{re}} be a category refusal token in the set of refusal...
+--
+[3 more matches not shown]

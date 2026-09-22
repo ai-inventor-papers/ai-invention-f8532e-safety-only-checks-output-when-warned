@@ -1,0 +1,75 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+URL: https://arxiv.org/pdf/2609.18471
+Type: PDF
+Pattern: XSTest|over-refus (6 matches in 52671 chars)
+
+--- Content ---
+
+15140:...dding is trained using the standard causal language modeling loss with a batch size of
+8. We train for 15 epochs on R1-8B and 20 epochs on R1-7B, utilizing the AdamW optimizer with a learning rate of
+5 × 10−3.
+Evaluation.
+We evaluate performance across four dimensions: safety, jailbreak robustness, over-refusal, and utility.
+For safety, we employ StrongReject [29] and AdvBench [46], utilizing Llama-Guard-3-8B [5] as an automated
+evaluator to classify the safety of the generated responses. To assess robustness against jailbreak attacks, we utilize
+GCG [2] using HarmBench [20] and WildJailbreak [14]. Furthermore, we measure over-refusal using the XSTest
+dataset [28], employing DeepSeek-Chat [4] to evaluate whether the model improperly refuses to answer benign queries
+or comply with harmful queries. For utility, we report results on MMLU [9], MATH500 [17], AIME2024 [18] and
+GPQA-Diamond [27].
+4.2.2
+Main Results
+We conducted a comparative analysis of different defense mechanisms, evaluating their performance across both safety
+and utility benchmarks. The quantitative results are presented in Table 4.
+5
+
+First Token Matters: Safety Collapse in LRMs
+A PREPRINT
+Table 4: Evaluation results on safety, jailbreak, over-refusal, and utility benchmarks. Lower is better for safety-
+related metrics (↓), and higher is better for utility metrics (↑). SR, Adv., WJ, XS, SC, SP, and ST denote StrongReject,
+AdvBench, WildJailbreak, XSTest, SafeChain, SafePath, and SafeToken, respectively.
+Method Par.
+SR Adv. GCG WJ
+XS MMLU MATH AIME GPQA
+R1-8B
+Orig.
+–
+37.3 35.0
+62.0 50.8 5.2
+69.9
+75.2
+40.0
+46.0
+SC
+8B
+33.6 22.3
+43.5 37.3 3.6
+66.5
+72.6
+30.0
+42.4
+Pref.
+–
+10.5 9.0
+25.3 29.8 22.4
+63.0
+67.4
+33.3
+41.4
+SP
+8B
+2.6
+8.1
+6.5
+0.8 74.8
+58.2
+72.8
+2...
+--
+30590:...kland, Jackson Petty, Richard Yuanzhe Pang, Julien Dirani, Julian
+Michael, and Samuel R Bowman. Gpqa: A graduate-level google-proof q&a benchmark. In First conference on
+language modeling, 2024.
+[28] Paul Röttger, Hannah Rose Kirk, Bertie Vidgen, Giuseppe Attanasio, Federico Bianchi, and Dirk Hovy. Xstest: A
+test suite for identifying exaggerated safety behaviours in large language models. arXiv preprint arXiv:2308.01263,
+2023.
+[29] Alexandra Souly, Qingyuan Lu, Dillon Bowen, Tu Trinh, Elvis Hsieh, Sana Pandey, Pieter Abbeel, Justin
+Svegliato, Scott Emmons, Olivia Watkins, and Sam Toyer. A strongrej...

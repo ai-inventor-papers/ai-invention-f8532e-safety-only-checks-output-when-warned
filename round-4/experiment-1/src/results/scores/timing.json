@@ -1,0 +1,19 @@
+{
+ "per_checkpoint": {
+  "HG__tiiuae--Falcon3-1B-Base": {
+   "load_s": 0.8258755207061768,
+   "bundle_s": 19.889095067977905,
+   "n_draws": 1000,
+   "ms_per_draw": 19.889095067977905
+  },
+  "F3__ref": {
+   "load_s": 0.784494161605835,
+   "bundle_s": 18.59842848777771,
+   "n_draws": 1000,
+   "ms_per_draw": 18.59842848777771
+  }
+ },
+ "mean_ms_per_checkpoint_draw": 19.243761777877808,
+ "projected_wall_time_s_for_40_pairs_B1000": 38.487523555755615,
+ "note": "projection assumes ~1 unique checkpoint per pair on average is an UNDER-estimate for 40 real pairs sharing parents; see report for the real per-checkpoint number and a corrected 40-pair/B=1000 projection"
+}

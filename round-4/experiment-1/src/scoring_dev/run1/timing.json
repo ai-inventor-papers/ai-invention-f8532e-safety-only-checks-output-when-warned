@@ -1,0 +1,67 @@
+{
+ "per_checkpoint": {
+  "Qwen--Qwen3-0.6B": {
+   "load_s": 1.0214242935180664,
+   "bundle_s": 14.007216930389404,
+   "n_draws": 200,
+   "ms_per_draw": 70.03608465194702
+  },
+  "huihui-ai--Huihui-Qwen3-0.6B-abliterated-v2": {
+   "load_s": 0.4671764373779297,
+   "bundle_s": 11.928567886352539,
+   "n_draws": 200,
+   "ms_per_draw": 59.642839431762695
+  },
+  "Vikhrmodels--Vikhr-Llama-3.2-1B-Instruct": {
+   "load_s": 0.6831600666046143,
+   "bundle_s": 16.097406148910522,
+   "n_draws": 200,
+   "ms_per_draw": 80.48703074455261
+  },
+  "Vikhrmodels--Vikhr-Llama-3.2-1B-Instruct-abliterated": {
+   "load_s": 0.8510892391204834,
+   "bundle_s": 47.31549334526062,
+   "n_draws": 200,
+   "ms_per_draw": 236.5774667263031
+  },
+  "unsloth--Llama-3.2-1B-Instruct": {
+   "load_s": 4.462429523468018,
+   "bundle_s": 84.28124260902405,
+   "n_draws": 200,
+   "ms_per_draw": 421.40621304512024
+  },
+  "mylesgoose--Llama-3.2-1B-Instruct-abliterated2": {
+   "load_s": 25.228257179260254,
+   "bundle_s": 56.86928987503052,
+   "n_draws": 200,
+   "ms_per_draw": 284.3464493751526
+  },
+  "amd--AMD-OLMo-1B-SFT": {
+   "load_s": 0.8643069267272949,
+   "bundle_s": 15.376546859741211,
+   "n_draws": 200,
+   "ms_per_draw": 76.88273429870605
+  },
+  "amd--AMD-OLMo-1B-SFT-DPO": {
+   "load_s": 1.3897924423217773,
+   "bundle_s": 48.27106595039368,
+   "n_draws": 200,
+   "ms_per_draw": 241.35532975196838
+  },
+  "Qwen--Qwen3-4B": {
+   "load_s": 4.493248701095581,
+   "bundle_s": 82.89739632606506,
+   "n_draws": 200,
+   "ms_per_draw": 414.4869816303253
+  },
+  "mlabonne--Qwen3-4B-abliterated": {
+   "load_s": 12.158279657363892,
+   "bundle_s": 113.10341668128967,
+   "n_draws": 200,
+   "ms_per_draw": 565.5170834064484
+  }
+ },
+ "mean_ms_per_checkpoint_draw": 245.07382130622864,
+ "projected_wall_time_s_for_40_pairs_B1000": 2450.7382130622864,
+ "note": "projection assumes ~1 unique checkpoint per pair on average is an UNDER-estimate for 40 real pairs sharing parents; see report for the real per-checkpoint number and a corrected 40-pair/B=1000 projection"
+}

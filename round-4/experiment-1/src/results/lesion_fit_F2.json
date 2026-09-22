@@ -1,0 +1,68 @@
+{
+ "fk": "F2",
+ "l_abl": 7,
+ "table": [
+  {
+   "layer": 5,
+   "refusal_logmass_drop": 0.08193536306498572,
+   "kl_dolly": 0.05004393681883812,
+   "passes_kl": true
+  },
+  {
+   "layer": 6,
+   "refusal_logmass_drop": 0.17451311851618811,
+   "kl_dolly": 0.05174793675541878,
+   "passes_kl": true
+  },
+  {
+   "layer": 7,
+   "refusal_logmass_drop": 0.4049658944713883,
+   "kl_dolly": 0.06900963187217712,
+   "passes_kl": true
+  },
+  {
+   "layer": 8,
+   "refusal_logmass_drop": 0.6395646801101975,
+   "kl_dolly": 0.144780233502388,
+   "passes_kl": false
+  },
+  {
+   "layer": 9,
+   "refusal_logmass_drop": 0.656447397719603,
+   "kl_dolly": 0.7790594100952148,
+   "passes_kl": false
+  },
+  {
+   "layer": 10,
+   "refusal_logmass_drop": 0.1270200332510285,
+   "kl_dolly": 2.414947032928467,
+   "passes_kl": false
+  },
+  {
+   "layer": 11,
+   "refusal_logmass_drop": 0.019839322369080037,
+   "kl_dolly": 1.3345966339111328,
+   "passes_kl": false
+  }
+ ],
+ "pre_edit_mean_abs_proj_by_layer": [
+  0.05170798301696777,
+  0.12252648174762726,
+  0.15884974598884583,
+  0.39857861399650574,
+  0.6937168836593628,
+  1.0007392168045044,
+  2.2861647605895996,
+  1.4068629741668701,
+  0.9194517731666565,
+  0.8789580464363098,
+  0.6066964864730835,
+  0.7098672389984131,
+  0.8559257388114929,
+  0.9674228429794312,
+  1.1180800199508667,
+  6.42210578918457
+ ],
+ "kl_filter_failed": false,
+ "baseline_refusal_logmass": -0.0005514154327102005
+}

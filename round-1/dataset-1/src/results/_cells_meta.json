@@ -1,0 +1,21 @@
+{
+  "placebo_pool": {
+    "rule": "admissible placebo candidates are the benign actions of the four DEED families (homonyms, figurative_language, safe_targets, safe_contexts), which name ordinary everyday acts; the two Tier-B families are excluded because their benign slots are explanatory acts ABOUT a harmful topic ('defining murder') and so are not safety-irrelevant",
+    "n_admissible": 100,
+    "n_total_benign_actions": 150,
+    "rejected_alternative": "requiring disjointness from the ENTIRE harmful action vocabulary admitted only 2 of 150 candidates and collapsed the factor to two phrases; sharing a verb with a harmful action is not itself disqualifying, since 'killing weeds' is benign and the hazardous edit often preserves the verb too"
+  },
+  "placebo_calibration": {
+    "median_edit_benign_to_hazardous": 4.0,
+    "median_edit_benign_to_placebo": 5.0,
+    "ratio": 1.25,
+    "within_10_percent": false,
+    "note": "per-item distances ship as metadata_levenshtein_to_benign_prefix so a downstream lane can regress on them instead of subtracting a constant"
+  },
+  "qc_fail_items": [],
+  "slot_width_tokens": {
+    "median": 8.0,
+    "min": 4,
+    "max": 17
+  }
+}

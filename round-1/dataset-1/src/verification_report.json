@@ -1,0 +1,234 @@
+{
+  "n_checks": 33,
+  "n_pass": 32,
+  "n_fail": 1,
+  "row_counts": {
+    "open": 3014,
+    "sealed": 1350
+  },
+  "openrouter_spend_usd": 2.521196,
+  "checks": [
+    {
+      "criterion": "1. twin pairs come from XSTest v2, never authored",
+      "status": "PASS",
+      "observed": "150 pairs from 6 contrast families",
+      "note": ""
+    },
+    {
+      "criterion": "1b. excluded contrast families (ambiguous two-way pairing)",
+      "status": "PASS",
+      "observed": [
+        "contrast_discr",
+        "contrast_privacy"
+      ],
+      "note": ""
+    },
+    {
+      "criterion": "1c. focus join and +25 offset agree",
+      "status": "PASS",
+      "observed": "149/150",
+      "note": "1 disagreement documented, not hidden"
+    },
+    {
+      "criterion": "2. split is 96 confirm / 54 heldout, stratified 16+9 per family",
+      "status": "PASS",
+      "observed": "96/54",
+      "note": ""
+    },
+    {
+      "criterion": "2b. split frozen before any cell text existed",
+      "status": "PASS",
+      "observed": true,
+      "note": ""
+    },
+    {
+      "criterion": "2c. heldout cell TEXT ships in a separate sealed file",
+      "status": "PASS",
+      "observed": "heldout_cells.json holds 1350 rows, all sealed=true",
+      "note": ""
+    },
+    {
+      "criterion": "3. every rendered cell's slot 1 intersects the EARLY window [5,20]",
+      "status": "PASS",
+      "observed": "3877/3877",
+      "note": ""
+    },
+    {
+      "criterion": "3b. every rendered cell's slot 2 intersects the LATE window [40,55]",
+      "status": "PASS",
+      "observed": "3877/3877",
+      "note": ""
+    },
+    {
+      "criterion": "3c. every continuation is >= 128 tokens",
+      "status": "PASS",
+      "observed": "all 144 tokens (n distinct lengths = 1)",
+      "note": ""
+    },
+    {
+      "criterion": "3d. within one item+family, hazardous/benign/placebo have IDENTICAL token counts",
+      "status": "PASS",
+      "observed": "300 item-family groups, 0 mismatched",
+      "note": ""
+    },
+    {
+      "criterion": "3e. no cell failed RENDERING",
+      "status": "PASS",
+      "observed": "0 render failures",
+      "note": ""
+    },
+    {
+      "criterion": "3f. qc_fail rows are the documented gate exclusions only",
+      "status": "PASS",
+      "observed": "400 rows excluded by the failed prefix-hazard gate (16 items; confirmatory n 96 -> 85)",
+      "note": "see results/qc_exclusions.json -- threshold was not relaxed and no row was deleted"
+    },
+    {
+      "criterion": "4. hazardous text is hazard-shaped but NON-OPERATIONAL (judge gate)",
+      "status": "PASS",
+      "observed": "0 flags over 360 distinct hazardous continuations",
+      "note": ""
+    },
+    {
+      "criterion": "4b. judge gates overall",
+      "status": "PASS",
+      "observed": "6 passed / 1 failed / 0 not evaluated; kappa=0.8953; spend=$0.629248",
+      "note": "the one failure (prefix hazard 0.9429 vs 0.95) is recorded, not relaxed; affected items excluded"
+    },
+    {
+      "criterion": "5. both prefix-family templates published verbatim",
+      "status": "PASS",
+      "observed": [
+        "F1_announced",
+        "F2_enacted"
+      ],
+      "note": ""
+    },
+    {
+      "criterion": "5b. every rendered cell is published",
+      "status": "PASS",
+      "observed": {
+        "F1_announced": 2247,
+        "F2_enacted": 1630
+      },
+      "note": ""
+    },
+    {
+      "criterion": "6. placebo prefix at MATCHED lexical distance (median within 10%)",
+      "status": "FAIL",
+      "observed": "median ratio=1.25 (mean ratio=1.1331, mean signed gap=+0.57 tokens)",
+      "note": "plan failure scenario (e): a SELECTED placebo cannot beat the ~5-token floor between two unrelated short phrases; the mismatch is reported and the PER-ITEM distances ship as metadata_levenshtein_to_benign_prefix so a lane regresses on them instead of subtracting a constant"
+    },
+    {
+      "criterion": "6a. placebo pool is safety-irrelevant and not collapsed",
+      "status": "PASS",
+      "observed": "100/150 admissible (deed families only)",
+      "note": ""
+    },
+    {
+      "criterion": "6b. crossed coherence control of the same shape",
+      "status": "PASS",
+      "observed": "1200 cells (150 items x 2 requests x 2 prefixes x 2 prefix FAMILIES)",
+      "note": "SUPERSET of the planned 600: the control is crossed with prefix family too, because the safety 2x2 is, and a control present in only one family would leave the other family's interaction uncontrolled"
+    },
+    {
+      "criterion": "7i. 5-rung graded-harm ladder",
+      "status": "PASS",
+      "observed": "747 cells (149 items x 5 + 1 item x 2; one pair declined by both raters)",
+      "note": ""
+    },
+    {
+      "criterion": "7ii. contentless / neutral input set",
+      "status": "PASS",
+      "observed": "34 rows (empty user, scaffold-only, 32 seeded dolly requests)",
+      "note": ""
+    },
+    {
+      "criterion": "7iii. ONE fixed shared continuation, byte-identical, token ids stored",
+      "status": "PASS",
+      "observed": {
+        "hazardous": 144,
+        "benign": 144
+      },
+      "note": ""
+    },
+    {
+      "criterion": "7iv. >= 6 harm domains with >= 8 pairs",
+      "status": "PASS",
+      "observed": "3/10 from twins alone -> 10/10 after OR-Bench top-up",
+      "note": "FAILURE SCENARIO (c) TRIGGERED: K5's domain profile rests partly on non-twin items; the 2x2 does not"
+    },
+    {
+      "criterion": "8. fitting corpus fully disjoint from XSTest",
+      "status": "PASS",
+      "observed": "shared action lemmas=0, shared 4-grams=0 (64+64 pairs)",
+      "note": ""
+    },
+    {
+      "criterion": "9. behavioural sets delivered, nothing graded here",
+      "status": "PASS",
+      "observed": "harmful=160, hard-benign=154, confirm-benign=96",
+      "note": ""
+    },
+    {
+      "criterion": "9b. rubric names both co-primary columns and the residual",
+      "status": "PASS",
+      "observed": "all three buckets present",
+      "note": ""
+    },
+    {
+      "criterion": "10. >= 6 FAMILIES with an ungated usable instruct arm",
+      "status": "PASS",
+      "observed": "12 families (36/40 repos ungated)",
+      "note": ""
+    },
+    {
+      "criterion": "10b. exactly TWO families sealed for iteration 2",
+      "status": "PASS",
+      "observed": [
+        "Qwen2.5-1.5B",
+        "SmolLM2-1.7B"
+      ],
+      "note": ""
+    },
+    {
+      "criterion": "10c. download_bytes_min derived from siblings[].size, never usedStorage",
+      "status": "PASS",
+      "observed": {
+        "Qwen/Qwen3-4B-Base": 7.5,
+        "Qwen/Qwen3-4B": 7.5,
+        "Qwen/Qwen3-4B-SafeRL": 7.5,
+        "mlabonne/Qwen3-4B-abliterated": 15.0,
+        "huihui-ai/Qwen3-4B-abliterated": 7.5,
+        "huihui-ai/Huihui-Qwen3-4B-abliterated-v2": 7.5,
+        "Qwen/Qwen3-4B-Instruct-2507": 7.5,
+        "Qwen/Qwen3-4B-Thinking-2507": 7.5
+      },
+      "note": ""
+    },
+    {
+      "criterion": "11. downloaded bytes stay small; or-bench-80k never ingested",
+      "status": "PASS",
+      "observed": "127.1 MB over 19 source entries, 19 full_*.json files",
+      "note": ""
+    },
+    {
+      "criterion": "11b. OpenRouter spend under the $10 artifact cap",
+      "status": "PASS",
+      "observed": "$2.5212 cumulative",
+      "note": ""
+    },
+    {
+      "criterion": "12. ONE uniform row schema across every stimulus row",
+      "status": "PASS",
+      "observed": "41 keys, 1 distinct key set(s)",
+      "note": ""
+    },
+    {
+      "criterion": "12b. prereg hash printed",
+      "status": "PASS",
+      "observed": "aad208096d721120f2c3c171163367eb06baf7e95ca544dc215890aa7df91aab",
+      "note": ""
+    }
+  ]
+}

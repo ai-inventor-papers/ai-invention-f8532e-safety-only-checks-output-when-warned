@@ -1,7 +1,0 @@
-{
- "utc": "2026-09-22T01:39:35Z",
- "retracted_payload": "results/graded_truth_s901.json",
- "reason": "PB__ernie03b__fp16 was generated with LEFT-PADDED batch-16 generation BEFORE the per-tag padding guard existed. The T4 selftest later showed left-padded batched generation corrupts outputs on some architectures (gemma-3: 0/8 rows identical to batch 1; pythia last-token states shifted 10-290%). Its labels are therefore UNCERTIFIED. It is regenerated under the guard and committed under a new stage.",
- "why_not_deleted": "logs/chain.jsonl is append-only; later records commit to this one.",
- "applies_to": "the whole payload"
-}

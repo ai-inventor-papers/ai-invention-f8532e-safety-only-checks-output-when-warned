@@ -1,8 +1,0 @@
-03:42:51 | INFO    | PASS  T1a_X2_normalisation  {'mean': 0.9983799161328124, 'sd': 0.041646685547772254, 'tolerance': 0.05}
-03:42:51 | INFO    | PASS  T1b_gram_identities  {'rel_sigma_min': 2.7691141375309e-15, 'rel_quadratic_form': 0.0, 'rel_full_spectrum': 4.373667216941334e-15}
-03:42:51 | INFO    | PASS  T1c_X3_closed_form  {'rel_mean': 0.0, 'rel_second_moment': 0.0}
-03:42:51 | INFO    | PASS  T1d_rmsnorm_jacobian  {'max_rel_err': 2.997896940131128e-05, 'tolerance': 0.001}
-03:42:51 | INFO    | PASS  T1f_auroc_tpr  {'auroc_perfect': 1.0, 'auroc_noise': 0.50435, 'tpr1_perfect': 1.0, 'tpr1_noise': 0.01}
-03:42:51 | INFO    | PASS  T1g_x2_rank1_deletion  {'write_mass_before': 0.9253254352637277, 'write_mass_after': 2.7156033529209098e-17, 'cos_vmin_u0': 0.9999999999999998}
-03:42:51 | INFO    | PASS  T1e_marchenko_pastur  {}
-03:42:51 | INFO    | T1: 7/7 pass -> /ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_2/gen_art/gen_art_experiment_1/results/t1_unit_tests.json

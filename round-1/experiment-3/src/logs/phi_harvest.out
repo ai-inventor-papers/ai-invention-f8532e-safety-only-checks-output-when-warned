@@ -1,29 +1,0 @@
-/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_1/gen_art/gen_art_experiment_3/.venv_phi/lib/python3.12/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
-  warnings.warn(
-23:22:03 | INFO    | harvest order: phi/instruct | phi/abliterated
-23:22:03 | INFO    | === HARVEST microsoft/Phi-4-mini-instruct (fam=phi role=instruct L=32 H=3072 sealed=False) ===
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.56it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  3.06it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.97it/s]
-23:22:38 | INFO    |   band layers (1-idx): 15..22 of 32; instruct=True
-23:22:44 | INFO    |   r_content: split-half cos=0.960  held-out AUROC=1.000
-23:22:46 | INFO    |   |cos(r_content, r_request)| = 0.340
-23:22:46 | INFO    |   2x2 built (fixed continuations: haz=77tok ben=78tok); match_fail=0
-23:22:54 | INFO    |   K1 (null-SD units): O=2.50 CB=2.60 A=-1.60 T=2.58
-23:22:55 | INFO    |   K2 prior=1.16 slope=0.34 rungs=[11.919, 16.127, 15.525, 16.096, 15.742]
-23:22:55 | INFO    |   K4 tau=41.2 tokens plateau=4.240 peak=7.301
-23:22:59 | INFO    |   K5 mean_gain=2.71 dispersion=0.15 over 10 domains
-23:23:42 | INFO    |   baselines: B1=3.0 B2=1.00 B3=0.94 B4=1.968 B5=60.95 B7=0.454
-23:23:42 | INFO    | === DONE microsoft/Phi-4-mini-instruct in 98.9s -> microsoft__Phi-4-mini-instruct.json ===
-23:23:43 | INFO    | === HARVEST lunahr/Phi-4-mini-instruct-abliterated (fam=phi role=abliterated L=32 H=3072 sealed=False) ===
-Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:11<00:11, 11.15s/it]Fetching 2 files: 100%|██████████| 2/2 [00:14<00:00,  7.23s/it]Fetching 2 files: 100%|██████████| 2/2 [00:14<00:00,  7.23s/it]
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 33.88it/s]
-23:24:05 | INFO    |   band layers (1-idx): 15..22 of 32; instruct=True
-23:24:08 | INFO    |   r_content: split-half cos=0.958  held-out AUROC=1.000
-23:24:09 | INFO    |   |cos(r_content, r_request)| = 0.423
-23:24:09 | INFO    |   2x2 built (fixed continuations: haz=77tok ben=78tok); match_fail=0
-23:24:15 | INFO    |   K1 (null-SD units): O=2.33 CB=2.64 A=-0.81 T=2.62
-23:24:16 | INFO    |   K2 prior=1.01 slope=0.35 rungs=[10.319, 13.804, 13.142, 14.564, 13.626]
-23:24:16 | INFO    |   K4 tau=48.1 tokens plateau=5.193 peak=7.481
-23:24:20 | INFO    |   K5 mean_gain=2.76 dispersion=0.13 over 10 domains
-23:25:09 | INFO    |   baselines: B1=1.0 B2=0.35 B3=0.26 B4=0.649 B5=63.58 B7=0.321
-23:25:09 | INFO    | === DONE lunahr/Phi-4-mini-instruct-abliterated in 86.0s -> lunahr__Phi-4-mini-instruct-abliterated.json ===
-23:25:09 | INFO    | harvest driver done: 2 checkpoints

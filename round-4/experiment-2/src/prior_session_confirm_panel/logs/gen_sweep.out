@@ -1,56 +1,0 @@
-16:07:07 | INFO    | generation: 40 runs (0 already done), 90 items, batch 45
-Fetching 10 files:   0%|          | 0/10 [00:00<?, ?it/s]Fetching 10 files:  10%|█         | 1/10 [00:00<00:05,  1.53it/s]Fetching 10 files:  70%|███████   | 7/10 [00:01<00:00,  6.55it/s]Fetching 10 files:  80%|████████  | 8/10 [00:02<00:00,  3.64it/s]Fetching 10 files: 100%|██████████| 10/10 [00:11<00:00,  1.69s/it]Fetching 10 files: 100%|██████████| 10/10 [00:11<00:00,  1.11s/it]
-Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:00,  6.71it/s]Fetching 6 files:  33%|███▎      | 2/6 [00:00<00:01,  3.48it/s]Fetching 6 files:  83%|████████▎ | 5/6 [00:01<00:00,  2.82it/s]Fetching 6 files: 100%|██████████| 6/6 [00:04<00:00,  1.01it/s]Fetching 6 files: 100%|██████████| 6/6 [00:04<00:00,  1.33it/s]
-Loading weights:   0%|          | 0/293 [00:00<?, ?it/s]Loading weights:   1%|▏         | 4/293 [00:00<00:12, 22.88it/s]Loading weights:   6%|▌         | 18/293 [00:00<00:03, 70.08it/s]Loading weights:  10%|█         | 30/293 [00:00<00:03, 84.33it/s]Loading weights:  14%|█▎        | 40/293 [00:00<00:02, 85.57it/s]Loading weights:  18%|█▊        | 54/293 [00:00<00:02, 99.62it/s]Loading weights:  25%|██▍       | 72/293 [00:00<00:01, 111.18it/s]Loading weights:  29%|██▊       | 84/293 [00:00<00:01, 107.12it/s]Loading weights:  32%|███▏      | 95/293 [00:01<00:02, 81.50it/s] Loading weights:  39%|███▉      | 114/293 [00:01<00:01, 105.11it/s]Loading weights:  45%|████▌     | 132/293 [00:01<00:01, 115.56it/s]Loading weights:  49%|████▉     | 145/293 [00:01<00:01, 107.60it/s]Loading weights:  54%|█████▎    | 157/293 [00:01<00:01, 90.68it/s] Loading weights:  59%|█████▊    | 172/293 [00:01<00:01, 97.87it/s]Loading weights:  63%|██████▎   | 186/293 [00:01<00:01, 95.10it/s]Loading weights:  70%|██████▉   | 204/293 [00:02<00:00, 109.06it/s]Loading weights:  74%|███████▎  | 216/293 [00:02<00:00, 110.53it/s]Loading weights:  78%|███████▊  | 228/293 [00:02<00:00, 111.02it/s]Loading weights:  82%|████████▏ | 240/293 [00:02<00:00, 94.43it/s] Loading weights:  86%|████████▌ | 252/293 [00:02<00:00, 94.64it/s]Loading weights:  89%|████████▉ | 262/293 [00:02<00:00, 94.90it/s]Loading weights:  94%|█████████▍| 276/293 [00:02<00:00, 98.80it/s]Loading weights:  99%|█████████▉| 291/293 [00:05<00:00, 14.82it/s]Loading weights: 100%|██████████| 293/293 [00:05<00:00, 53.05it/s]
-16:10:16 | INFO    |     gen 45/90 batch 88s (steps 140, shrink=True, total 88s)
-16:12:40 | INFO    |     gen 90/90 batch 143s (steps 140, shrink=True, total 231s)
-16:12:40 | INFO    | DONE bigscience--bloom-1b1: gen 231s, 12435 new tokens (53.8 tok/s), load 86s, dl 15s, decoder greedy_shrink
-16:12:40 | INFO    | TIME RULE after 1 runs: s/param 2.17e-07, projection 246 min vs budget 257 min; dropped now ['deepseek-ai--deepseek-coder-1.3b-instruct__NOOP_fp32', 'openbmb--MiniCPM4-0.5B__NOOP_fp32', 'tiiuae--Falcon-H1-0.5B-Instruct__NOOP_fp32', 'tencent--Hunyuan-0.5B-Instruct__NOOP_fp32', 'DavidAU--gemma-3-1b-it-heretic-extreme-uncensored-abliterated', 'unsloth--gemma-3-270m', 'tiiuae--Falcon-H1-0.5B-Base', 'lunahr--gemma-3-1b-it-abliterated', 'h2oai--h2o-danube3-500m-chat', 'EleutherAI--pythia-410m', 'LGAI-EXAONE--EXAONE-4.0-1.2B']
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]
-Loading weights:   0%|          | 0/293 [00:00<?, ?it/s][AFetching 9 files:  11%|█         | 1/9 [00:00<00:03,  2.44it/s]
-Loading weights:   1%|▏         | 4/293 [00:00<00:32,  8.81it/s][A
-Loading weights:  12%|█▏        | 36/293 [00:00<00:03, 77.98it/s][AFetching 9 files:  33%|███▎      | 3/9 [00:00<00:01,  4.71it/s]Fetching 9 files:  78%|███████▊  | 7/9 [00:00<00:00, 10.33it/s]
-Loading weights:  18%|█▊        | 52/293 [00:00<00:03, 66.36it/s][A
-Loading weights:  22%|██▏       | 64/293 [00:01<00:03, 67.15it/s][A
-Loading weights:  26%|██▌       | 76/293 [00:01<00:02, 74.21it/s][A
-Loading weights:  30%|███       | 88/293 [00:01<00:02, 69.56it/s][A
-Loading weights:  34%|███▍      | 100/293 [00:01<00:02, 74.70it/s][A
-Loading weights:  38%|███▊      | 112/293 [00:01<00:02, 67.97it/s][A
-Loading weights:  43%|████▎     | 126/293 [00:01<00:02, 74.15it/s][A
-Loading weights:  49%|████▉     | 144/293 [00:02<00:01, 84.72it/s][A
-Loading weights:  52%|█████▏    | 153/293 [00:02<00:02, 68.67it/s][A
-Loading weights:  59%|█████▊    | 172/293 [00:02<00:01, 81.58it/s][A
-Loading weights:  63%|██████▎   | 184/293 [00:02<00:01, 68.96it/s][A
-Loading weights:  68%|██████▊   | 198/293 [00:02<00:01, 76.50it/s][A
-Loading weights:  74%|███████▎  | 216/293 [00:02<00:00, 94.94it/s][A
-Loading weights:  77%|███████▋  | 227/293 [00:03<00:00, 97.43it/s][A
-Loading weights:  81%|████████  | 238/293 [00:03<00:00, 98.80it/s][A
-Loading weights:  87%|████████▋ | 256/293 [00:03<00:00, 99.40it/s][A
-Loading weights:  91%|█████████▏| 268/293 [00:03<00:00, 93.56it/s][A
-Loading weights:  96%|█████████▌| 280/293 [00:03<00:00, 98.88it/s][A
-Loading weights:  99%|█████████▉| 291/293 [00:07<00:00,  9.93it/s][ALoading weights: 100%|██████████| 293/293 [00:07<00:00, 39.26it/s]
-Fetching 9 files: 100%|██████████| 9/9 [00:13<00:00,  2.13s/it]Fetching 9 files: 100%|██████████| 9/9 [00:13<00:00,  1.50s/it]
-16:14:50 | INFO    |     gen 45/90 batch 119s (steps 140, shrink=True, total 119s)
-16:16:49 | INFO    |     gen 90/90 batch 120s (steps 140, shrink=True, total 239s)
-16:16:49 | INFO    | DONE bigscience--bloomz-1b1: gen 239s, 2657 new tokens (11.1 tok/s), load 10s, dl 0s, decoder greedy_shrink
-16:17:16 | INFO    | generation: 40 runs (2 already done), 90 items, batch 45
-16:17:16 | INFO    | TIME RULE after 2 runs: s/param 2.21e-07, projection 242 min vs budget 253 min; dropped now []
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 239.62it/s]
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files:  11%|█         | 1/9 [00:00<00:03,  2.05it/s]Fetching 9 files:  78%|███████▊  | 7/9 [00:00<00:00, 12.19it/s]Fetching 9 files: 100%|██████████| 9/9 [00:06<00:00,  1.04it/s]Fetching 9 files: 100%|██████████| 9/9 [00:06<00:00,  1.33it/s]
-Loading weights:   0%|          | 0/340 [00:00<?, ?it/s]Loading weights:  21%|██        | 70/340 [00:00<00:00, 485.31it/s]Loading weights:  36%|███▌      | 122/340 [00:00<00:00, 491.17it/s]Loading weights:  51%|█████     | 172/340 [00:00<00:00, 475.91it/s]Loading weights:  65%|██████▍   | 220/340 [00:00<00:00, 427.22it/s]Loading weights:  78%|███████▊  | 265/340 [00:00<00:00, 417.16it/s]Loading weights:  95%|█████████▍| 322/340 [00:00<00:00, 463.30it/s]Loading weights: 100%|██████████| 340/340 [00:00<00:00, 481.62it/s]
-16:26:15 | INFO    |     gen 45/90 batch 444s (steps 140, shrink=True, total 444s)
-16:35:45 | INFO    |     gen 90/90 batch 570s (steps 140, shrink=True, total 1014s)
-16:35:45 | INFO    | DONE unsloth--gemma-3-1b-pt: gen 1014s, 12600 new tokens (12.4 tok/s), load 90s, dl 4s, decoder greedy_shrink
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files:  11%|█         | 1/9 [00:07<00:56,  7.07s/it]Fetching 9 files:  67%|██████▋   | 6/9 [00:07<00:02,  1.12it/s]
-Loading weights:   0%|          | 0/340 [00:00<?, ?it/s][A
-Loading weights:  16%|█▋        | 56/340 [00:00<00:00, 292.41it/s][A
-Loading weights:  35%|███▌      | 119/340 [00:00<00:00, 412.36it/s][A
-Loading weights:  48%|████▊     | 164/340 [00:00<00:00, 334.23it/s][A
-Loading weights:  59%|█████▉    | 200/340 [00:00<00:00, 269.88it/s][A
-Loading weights:  68%|██████▊   | 230/340 [00:00<00:00, 274.15it/s][ALoading weights: 100%|██████████| 340/340 [00:00<00:00, 393.78it/s]
-Fetching 9 files: 100%|██████████| 9/9 [00:08<00:00,  1.32it/s]Fetching 9 files: 100%|██████████| 9/9 [00:08<00:00,  1.01it/s]
-16:36:18 | INFO    | generation: 39 runs (3 already done), 90 items, batch 45
-16:36:18 | INFO    | TIME RULE after 3 runs: s/param 4.74e-07, projection 289 min vs budget 234 min; dropped now ['baidu--ERNIE-4.5-0.3B-PT__NOOP_fp32', 'tiiuae--Falcon-H1-0.5B-Instruct__NOOP_fp32', 'tencent--Hunyuan-0.5B-Instruct__NOOP_fp32', 'DavidAU--gemma-3-1b-it-heretic-extreme-uncensored-abliterated', 'unsloth--gemma-3-270m', 'tiiuae--Falcon-H1-0.5B-Base', 'lunahr--gemma-3-1b-it-abliterated', 'h2oai--h2o-danube3-500m-chat', 'EleutherAI--pythia-410m', 'LGAI-EXAONE--EXAONE-4.0-1.2B', 'bigscience--bloom-560m', 'Zyphra--Zamba2-1.2B', 'baidu--ERNIE-4.5-0.3B-Base-PT', 'prithivMLmods--gemma-3-1b-it-abliterated', 'bigscience--bloomz-560m', 'Zyphra--Zamba2-1.2B-instruct']
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 293.71it/s]
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 123.10it/s]
-Loading weights:   0%|          | 0/340 [00:00<?, ?it/s]Loading weights:  28%|██▊       | 96/340 [00:00<00:00, 753.16it/s]Loading weights:  51%|█████     | 172/340 [00:00<00:00, 520.48it/s]Loading weights:  67%|██████▋   | 228/340 [00:00<00:00, 533.58it/s]Loading weights:  84%|████████▎ | 284/340 [00:00<00:00, 510.24it/s]Loading weights: 100%|██████████| 340/340 [00:00<00:00, 604.95it/s]

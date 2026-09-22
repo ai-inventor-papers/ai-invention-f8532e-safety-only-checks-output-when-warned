@@ -1,9 +1,0 @@
-{
- "test": "T7_scoring_byte_identical",
- "tag": "Qwen--Qwen3-0.6B",
- "n_null": 5,
- "n_boot": 20,
- "pass": true,
- "bytes": 8103,
- "note": "two independent from-scratch scorings of the same harvest caches: real values, shuffled-label bands, bootstrap CIs and escape flags compared as canonical JSON"
-}

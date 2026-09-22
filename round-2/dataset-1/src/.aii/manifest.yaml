@@ -1,7 +1,0 @@
-entries:
-  - path: .venv/
-    delete: redownloadable
-    source: "./install.sh"
-  - path: "**/__pycache__/"
-    delete: regenerable
-    source: "regenerated automatically on the next run of ./rebuild.sh"

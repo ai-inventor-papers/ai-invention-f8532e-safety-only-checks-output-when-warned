@@ -1,41 +1,0 @@
-00:45:44|INFO   |partb run  WS=/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2
-00:45:58|INFO   |GPU NVIDIA RTX 2000 Ada Generation 15947 MiB; declared 7500 MiB
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 745.58it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 43/164 [00:00<00:00, 403.26it/s]Loading weights:  54%|█████▎    | 88/164 [00:00<00:00, 403.84it/s]Loading weights:  79%|███████▊  | 129/164 [00:00<00:00, 371.43it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 428.76it/s]
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.27it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.26it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 52/164 [00:00<00:00, 516.25it/s]Loading weights:  75%|███████▌  | 123/164 [00:00<00:00, 583.10it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 613.18it/s]
-00:47:05|INFO   |chain: committed partb_build_a05.json as record 15 (2c63b09c202a)
-00:47:05|INFO   |BUILD DONE a05 (67s): tie={'config_tie_word_embeddings': True, 'storage_shared': True, 'lm_head_present': True} differs_from_parent=True
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 329.62it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 8311.07it/s]
-00:47:34|INFO   |  lora step 25/200 loss 2.869 (0.32s/step)
-00:47:40|INFO   |  lora step 50/200 loss 2.015 (0.29s/step)
-00:47:48|INFO   |  lora step 75/200 loss 1.521 (0.29s/step)
-00:47:54|INFO   |  lora step 100/200 loss 1.967 (0.28s/step)
-00:48:01|INFO   |  lora step 125/200 loss 1.306 (0.28s/step)
-00:48:07|INFO   |  lora step 150/200 loss 1.354 (0.28s/step)
-00:48:14|INFO   |  lora step 175/200 loss 2.071 (0.27s/step)
-00:48:21|INFO   |  lora step 200/200 loss 1.844 (0.27s/step)
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 288.73it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 7384.02it/s]
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.45it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.45it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 52/164 [00:00<00:00, 514.60it/s]Loading weights:  76%|███████▌  | 124/164 [00:00<00:00, 632.01it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 653.41it/s]
-00:48:31|INFO   |chain: committed partb_build_lora.json as record 16 (1445f4fd2f13)
-00:48:31|INFO   |BUILD DONE lora (86s): tie={'config_tie_word_embeddings': True, 'storage_shared': True, 'lm_head_present': True} differs_from_parent=True
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 743.89it/s]
-00:48:31|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:48:41|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:48:51|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:49:01|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 9478.78it/s]
-00:49:27|INFO   |  dpo step 25/100 loss 0.5044 margin +0.4474 (0.59s/step)
-00:49:42|INFO   |  dpo step 50/100 loss 0.2979 margin +1.4585 (0.59s/step)
-00:49:57|INFO   |  dpo step 75/100 loss 0.4526 margin +0.6696 (0.59s/step)
-00:50:11|INFO   |  dpo step 100/100 loss 0.2382 margin +1.9067 (0.58s/step)
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 806.37it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 8489.03it/s]
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.30it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.30it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 60/164 [00:00<00:00, 468.56it/s]Loading weights:  76%|███████▌  | 124/164 [00:00<00:00, 477.76it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 580.92it/s]
-00:50:19|INFO   |chain: committed partb_build_dpo.json as record 17 (c6777d559696)
-00:50:19|INFO   |BUILD DONE dpo (108s): tie={'config_tie_word_embeddings': True, 'storage_shared': True, 'lm_head_present': True} differs_from_parent=True
-[W922 00:50:20.245185194 AllocatorConfig.cpp:28] Warning: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead (function operator())

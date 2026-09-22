@@ -1,27 +1,0 @@
-17:08:49|INFO   |SKIP F1__ref (gens exist)
-Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 637.74it/s]
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   6%|▌         | 19/311 [00:00<00:01, 176.22it/s]Loading weights:  12%|█▏        | 37/311 [00:00<00:01, 167.83it/s]Loading weights:  17%|█▋        | 54/311 [00:00<00:01, 133.84it/s]Loading weights:  24%|██▍       | 74/311 [00:00<00:01, 142.65it/s]Loading weights:  34%|███▍      | 107/311 [00:00<00:01, 186.65it/s]Loading weights:  41%|████      | 127/311 [00:00<00:01, 155.83it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 358.37it/s]
-17:10:23|INFO   |F1__int8wo: built in 75s; sanity {"variant": "int8wo", "max_abs_logit_diff": 1.1875, "mean_abs_logit_diff": 0.1600777506828308, "first_token_agreement": 0.96875, "bitwise_identical": false, "pass_fp_rule": false, "weight_fingerprint": "d1298b574051736772090873eb2791c068466abf091f245e110a2ff900b328bb"}
-17:11:18|INFO   |    chunk 1/4: 55s (P=22, steps 96, total 55s)
-17:12:26|INFO   |    chunk 2/4: 68s (P=27, steps 96, total 123s)
-17:13:36|INFO   |    chunk 3/4: 71s (P=34, steps 96, total 193s)
-17:15:33|INFO   |    chunk 4/4: 117s (P=87, steps 96, total 310s)
-17:15:33|INFO   |DONE F1__int8wo: gen 310s, 15236 tok (49.1 tok/s), total 405s
-Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 242.84it/s]
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   9%|▉         | 28/311 [00:00<00:01, 271.14it/s]Loading weights:  18%|█▊        | 56/311 [00:00<00:01, 192.57it/s]Loading weights:  25%|██▍       | 77/311 [00:00<00:01, 175.72it/s]Loading weights:  60%|██████    | 187/311 [00:00<00:00, 434.12it/s]Loading weights:  75%|███████▍  | 233/311 [00:00<00:00, 355.67it/s]Loading weights:  87%|████████▋ | 272/311 [00:00<00:00, 308.03it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 347.12it/s]
-17:18:27|INFO   |    lesion cand l=8: drop -0.180 KL 3.2440
-17:18:57|INFO   |    lesion cand l=9: drop +0.206 KL 2.0933
-17:19:13|INFO   |    lesion cand l=10: drop +0.307 KL 0.5535
-17:19:28|INFO   |    lesion cand l=11: drop +0.127 KL 0.1268
-17:19:44|INFO   |    lesion cand l=12: drop +0.018 KL 0.1701
-17:20:01|INFO   |    lesion cand l=13: drop +0.399 KL 0.5882
-17:20:18|INFO   |    lesion cand l=14: drop -0.190 KL 0.0633
-17:20:36|INFO   |    lesion cand l=15: drop +0.323 KL 1.0225
-17:20:52|INFO   |    lesion cand l=16: drop +0.195 KL 0.1108
-17:21:09|INFO   |    lesion cand l=17: drop +0.061 KL 0.3164
-17:21:25|INFO   |    lesion cand l=18: drop +0.481 KL 0.3355
-17:21:42|INFO   |    lesion cand l=19: drop +0.731 KL 0.5704
-17:21:59|INFO   |    lesion cand l=20: drop +0.229 KL 0.8308
-17:21:59|INFO   |  lesion F1: l_abl=14 (13 cands, 381s)
-Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 484.63it/s]
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   6%|▋         | 20/311 [00:00<00:01, 188.85it/s]Loading weights:  13%|█▎        | 39/311 [00:00<00:02, 134.80it/s]Loading weights:  17%|█▋        | 54/311 [00:00<00:01, 132.15it/s]Loading weights:  58%|█████▊    | 179/311 [00:00<00:00, 493.46it/s]Loading weights:  76%|███████▌  | 235/311 [00:00<00:00, 322.57it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 350.98it/s]

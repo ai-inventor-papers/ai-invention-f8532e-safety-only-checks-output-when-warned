@@ -1,31 +1,0 @@
-00:41:45|INFO   |partb run  WS=/ai-inventor/aii_data/runs/run_YqmEFECOIR3D/3_invention_loop/iter_5/gen_art/gen_art_experiment_2
-00:42:07|INFO   |GPU NVIDIA RTX 2000 Ada Generation 15947 MiB; declared 7500 MiB
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 785.09it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 7458.64it/s]
-Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 602.14it/s]
-00:43:09|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:43:19|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:43:29|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:43:39|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 7310.80it/s]
-00:43:52|INFO   |  lesion cand l=5: drop -0.297  KL 0.7375
-00:43:53|INFO   |  lesion cand l=6: drop -0.192  KL 0.1360
-00:43:53|INFO   |  lesion cand l=7: drop -0.440  KL 0.6069
-00:43:53|INFO   |  lesion cand l=8: drop +0.117  KL 0.5299
-00:43:53|INFO   |  lesion cand l=9: drop -0.214  KL 0.3134
-00:43:53|INFO   |  lesion cand l=10: drop -0.125  KL 0.2990
-00:43:53|INFO   |  lesion cand l=11: drop -0.206  KL 0.1772
-00:43:53|INFO   |  lesion cand l=12: drop -0.085  KL 0.7064
-00:43:54|INFO   |  lesion cand l=13: drop +0.039  KL 0.3011
-00:43:54|INFO   |chain: committed partb_lesion_table.json as record 13 (e6a40cfa450f)
-00:43:54|WARNING|DEVIATION D11: Part-B lesion: no candidate passed KL<0.1 with a positive refusal drop
-00:43:54|INFO   |lesion: picked l=8 drop +0.117 KL 0.5299 failed=True (45s)
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.07it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.07it/s]
-Loading weights:   0%|          | 0/164 [00:00<?, ?it/s]Loading weights:  29%|██▉       | 48/164 [00:00<00:00, 432.44it/s]Loading weights:  68%|██████▊   | 112/164 [00:00<00:00, 533.65it/s]Loading weights: 100%|██████████| 164/164 [00:00<00:00, 592.70it/s]
-00:44:01|INFO   |chain: committed partb_build_a10.json as record 14 (1462afbd2b26)
-00:44:01|INFO   |BUILD DONE a10 (114s): tie={'config_tie_word_embeddings': True, 'storage_shared': True, 'lm_head_present': True} differs_from_parent=True
-00:44:01|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:44:11|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:44:21|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:44:31|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
-00:44:41|INFO   |lease: waiting for 7500 MiB (ceiling 15800, artifact cap 7500, blocked_by_own_artifact=True)
